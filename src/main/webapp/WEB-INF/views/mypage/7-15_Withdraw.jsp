@@ -90,9 +90,9 @@
 						<!-- 취소, 신청 버튼 -->
 						<div class="d-flex flex-row justify-content-center">
 							<a class="btn btn-outline-dark me-1 col-1" id="cancel"
-								href="7-13_TutorHandsListGet.html" role="button">취소</a> <a
+								href="/mypage/tutorHands/withdraw" role="button">취소</a> <a
 								class="btn btn-dark ms-1 col-1" id="apply" type="submit"
-								href="7-16_WithdrawCompleted.html">신청</a>
+								href="/mypage/withdraw/completed">신청</a>
 						</div>
 
 					</div>

@@ -39,5 +39,5 @@ function withdrawalbt() {
 }
 
 function newPage()  {
-window.location.href = '7-09_UnregisterCompleted.html'
+window.location.href = '/mypage/unregister/completed'
 }

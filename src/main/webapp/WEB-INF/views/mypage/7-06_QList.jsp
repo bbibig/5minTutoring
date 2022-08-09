@@ -31,16 +31,16 @@
 				<ul class="list-group mb-2 bg-dark text-white">
 					<li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
 				</ul>
-				 <div class="list-group">
+                <div class="list-group">
                     <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4">기본
                         정보</a>
                     <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4">손들기
                         내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4 fw-bold">나의
+                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
                         질문글</a>
                     <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
                         커뮤니티</a>
-                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
+                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1
                         문의하기</a>
                     <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
                         탈퇴</a>
@@ -64,7 +64,7 @@
 							안내해드리겠습니다.
 						</p>
 						<div class="d-grid col-2 mx-auto">
-							<a class="btn btn-dark btn-lg" href="6-01_Inquiry.html"
+							<a class="btn btn-dark btn-lg" href="/inquiry/inquiryForm"
 								role="button">문의하기</a>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 							<i class="col-1 fas fa-q fa-2x"
 								style="color: rgb(56, 105, 239); text-align: center;"></i>
 							<div class="col-9">
-								<a href="7-07_Q.html" class="fs-5 fw-bold">문의합니다.</a>
+								<a href="/mypage/question" class="fs-5 fw-bold">문의합니다.</a>
 								<div class="fs-6">2022-07-21</div>
 							</div>
 							<div class="col-2 state1">답변대기</div>
@@ -87,7 +87,7 @@
 							<i class="col-1 fas fa-q fa-2x"
 								style="color: rgb(56, 105, 239); text-align: center;"></i>
 							<div class="col-9">
-								<a href="7-07_QandA.html" class="fs-5 fw-bold">문의합니다.</a>
+								<a href="/mypage/qAndA" class="fs-5 fw-bold">문의합니다.</a>
 								<div class="fs-6">2022-07-21</div>
 							</div>
 							<div class="col-2 state2">답변완료</div>
@@ -98,7 +98,7 @@
 							<i class="col-1 fas fa-q fa-2x"
 								style="color: rgb(56, 105, 239); text-align: center;"></i>
 							<div class="col-9">
-								<a href="#" class="fs-5 fw-bold">문의합니다.</a>
+								<a href="/mypage/qAndA" class="fs-5 fw-bold">문의합니다.</a>
 								<div class="fs-6">2022-07-21</div>
 							</div>
 							<div class="col-2 state2">답변완료</div>
@@ -108,10 +108,13 @@
 					</div>
 					<!--문의리스트 end-->
 
+
 				</div>
 
 			</div>
 			<!--End main contents card(박스)-->
+
+
 
 		</div>
 		<!-- End main contents -->
