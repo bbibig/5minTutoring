@@ -124,7 +124,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-primary">과외중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -135,7 +135,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -146,7 +146,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -157,7 +157,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -168,7 +168,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
