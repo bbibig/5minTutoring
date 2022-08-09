@@ -11,9 +11,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="/totorHome">튜터</a></li>
-          <li><a class="nav-link scrollto d-xs-none" href="#">커뮤니티</a></li>
-          <li><a class="getstarted scrollto" style="margin-left: 700px;" href="/homeLogin">로그인</a></li>
+          <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="/login/login">튜터</a></li>
+          <li><a class="nav-link scrollto d-xs-none" href="/login/login">커뮤니티</a></li>
+          <li><a class="getstarted scrollto" style="margin-left: 700px;" href="/login/login">로그인</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle" style="margin-left:150px"></i>
       </nav><!-- .navbar -->
