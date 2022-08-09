@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class FaqController {
 
-	@RequestMapping("/faqList")		// 각자 정하기
+	@RequestMapping	
 	public String faq() {
 		log.trace("5_faq 자주 묻는 질문 테스트");
 		
