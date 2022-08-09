@@ -1,6 +1,8 @@
 package org.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.NoArgsConstructor;
@@ -13,14 +15,14 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class LoginController {
 	
-	@RequestMapping("/login")
+	@PostMapping("/login")
 	public String login() {
 		log.trace("login() invoked.");
 		
 		return "login/1-02_login";
 	}
 	
-	@RequestMapping("/selectAccount")
+	@GetMapping("/selectAccount")
 	public String selectAccount() {
 		log.trace("selectAccount() invoked.");
 		
@@ -48,14 +50,14 @@ public class LoginController {
 		return "login/1-01_homeLogin";
 	}
 	
-	@RequestMapping("/sendMail")
+	@PostMapping("/sendMail")
 	public String sendMail() {
 		log.trace("sendMail() invoked.");
 		
 		return "login/1-05_sendMail";
 	}
 	
-	@RequestMapping("/completeSignup")
+	@GetMapping("/completeSignup")
 	public String completeSignup() {
 		log.trace("completeSignup() invoked.");
 		
@@ -63,7 +65,7 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping("/signupReq")
+	@GetMapping("/signupReq")
 	public String signupReq() {
 		log.trace("signupReq() invoked.");
 		

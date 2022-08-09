@@ -27,8 +27,8 @@
 
                 <!-- 뒤로가기 -->
                 <div class="page-back">
-                <a href="#">
-                    <img src="assets/img/back.png" alt="">
+                <a href="/hand/buyHands">
+                    <img src="${path}/resources/img/back.png" alt="">
                 </a>
                 </div>
 
@@ -68,7 +68,7 @@
                     <tbody class="table-body">
                         <tr>
                             <td class="product-info-data">
-                            <img src="assets/img/buy_hands.png">손들기 30개
+                            <img src="${path}/resources/img/buy_hands.png">손들기 30개
                             </td>
                                                 
                             <td class="product-info-data">
@@ -97,6 +97,10 @@
                     </tr>
                     </tbody>
                 </table>
+                
+                <a href="#">
+                <button class="payBtn" type="" >결제하기</button>
+                </a>
 
                 </section>
 

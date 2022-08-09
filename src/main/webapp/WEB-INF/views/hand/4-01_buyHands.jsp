@@ -28,7 +28,7 @@
                 <!-- 뒤로가기 -->
                 <div class="page-back">
                 <a href="#">
-                    <img src="assets/img/back.png" alt="">
+                    <img src="${path}/resources/img/back.png" alt="">
                 </a>
                 </div>
 
@@ -45,11 +45,11 @@
                 <div>
 
                     <!-- 상품1 -->
-                    <a  href="#">
+                    <a  href="/hand/payPage">
                     <div class="buy-link">
 
                         <span>
-                            <img src="assets/img/buy_hands.png" alt="">
+                            <img src="${path}/resources/img/buy_hands.png" alt="">
                         </span>
                 
                         <span class="price-txt">
@@ -62,11 +62,11 @@
                     </div>
                     </a>
                     <!-- 상품2 -->
-                    <a  href="#">
+                    <a  href="/hand/payPage">
                     <div class="buy-link">
             
                         <span>
-                        <img src="assets/img/buy_hands.png" alt="">
+                        <img src="${path}/resources/img/buy_hands.png" alt="">
                         </span>
                 
                         <span class="price-txt">
@@ -82,11 +82,11 @@
                     
             
                     <!-- 상품3 -->
-                    <a  href="#">
+                    <a  href="/hand/payPage">
                     <div class="buy-link">
             
                         <span>
-                        <img src="assets/img/buy_hands.png" alt="">
+                        <img src="${path}/resources/img/buy_hands.png" alt="">
                         </span>
                 
                         <span class="price-txt">
@@ -102,11 +102,11 @@
 
             
                     <!-- 상품4 -->
-                    <a  href="#">
+                    <a  href="/hand/payPage">
                     <div class="buy-link">
             
                         <span>
-                        <img src="assets/img/buy_hands.png" alt="">
+                        <img src="${path}/resources/img/buy_hands.png" alt="">
                         </span>
                 
                         <span class="price-txt">
@@ -122,11 +122,11 @@
 
             
                     <!-- 상품5 -->
-                    <a  href="#">
+                    <a  href="/hand/payPage">
                     <div class="buy-link">
             
                         <span>
-                        <img src="assets/img/buy_hands.png" alt="">
+                        <img src="${path}/resources/img/buy_hands.png" alt="">
                         </span>
                 
                         <span class="price-txt">
@@ -142,11 +142,11 @@
 
             
                     <!-- 상품6 -->
-                    <a  href="#">
+                    <a  href="/hand/payPage">
                     <div class="buy-link">
             
                         <span>
-                        <img src="assets/img/buy_hands.png" alt="">
+                        <img src="${path}/resources/img/buy_hands.png" alt="">
                         </span>
                 
                         <span class="price-txt">

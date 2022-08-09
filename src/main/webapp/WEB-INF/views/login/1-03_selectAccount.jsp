@@ -10,6 +10,7 @@
             <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
+            <link href="${path}/resources/css/1-03_signin_stu_or_tutor.css" rel="stylesheet">
             <!-- ========================================================= -->
 
             <title>오분과외</title>
@@ -49,7 +50,7 @@
                         </p>
                 
                         <!-- 버튼 -->
-                        <a href="1-04_studentSignUp.html">
+                        <a href="/login/signUp_student">
                         <button class="moveTosigninBtn" type=""  ><strong>학생</strong> 회원가입</button>
                         </a>
                     </div>
@@ -70,7 +71,7 @@
                         </p>
                 
                         <!-- 버튼 -->
-                        <a href="1-04_tuterSignUp.html">
+                        <a href="/login/signUp_tutor">
                         <button class="moveTosigninBtn" type=""  ><strong>튜터</strong> 회원가입</button>
                         </a>
                 
