@@ -13,12 +13,12 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class InquiryController {
 	
-	@RequestMapping("/inquiryform")
+	@RequestMapping("/inquiryForm")
 	public String inquiry() {
 		log.trace("6_inquiry 1:1문의하기");
 		
 		return "inquiry/6_Inquiry";
-	} // String inquriy
+	} // String inquiry
 	
 
 }

@@ -15,7 +15,7 @@ public class FaqController {
 
 	@RequestMapping("/faqList")		// 각자 정하기
 	public String faq() {
-		log.trace("5_faq 자주 묻는 질문");
+		log.trace("5_faq 자주 묻는 질문 테스트");
 		
 		return "faq/5_FAQ";
 	} // String faq

@@ -37,7 +37,7 @@
 				</div>
 				<div class="d-flex flex-row justify-content-center">
 					<a class="btn btn-outline-dark me-1 col-1"
-						href="7-14_TutorHandsListWithdraw.html" role="button">확인</a>
+						href="/mypage/tutorHands/withdraw" role="button">확인</a>
 				</div>
 				<!-- <div class="row justify-content-md-center">
         <ul class="col-md-auto" style="margin-top: 10px; padding-left: 50px">

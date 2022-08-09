@@ -9,8 +9,8 @@
 
           <div class="foot-link">
             <ul>
-              <li><a href="/homeST">자주 묻는 질문(FAQ)</a></li>
-              <li><a href="#">문의하기</a></li>
+              <li><a href="/faq/faqList">자주 묻는 질문(FAQ)</a></li>
+              <li><a href="/inquiry/inquiryForm">문의하기</a></li>
             </ul>
           </div>
 

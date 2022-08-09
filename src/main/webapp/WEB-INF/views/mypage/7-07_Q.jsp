@@ -35,11 +35,11 @@
                         정보</a>
                     <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4">손들기
                         내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4 fw-bold">나의
+                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
                         질문글</a>
                     <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
                         커뮤니티</a>
-                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
+                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1
                         문의하기</a>
                     <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
                         탈퇴</a>
@@ -96,7 +96,7 @@
 					<!-- </div> -->
 
 					<div class="d-grid col-1 mx-auto" style="margin-top: 15px;">
-						<a class="btn btn-dark btn-md" href="7-06_QList.html"
+						<a class="btn btn-dark btn-md" href="/mypage/qList"
 							role="button">목록</a>
 					</div>
 

@@ -31,18 +31,20 @@
 				<ul class="list-group mb-2 bg-dark text-white">
 					<li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
 				</ul>
-				<div class="list-group">
-					<a href="#" class="list-group-item list-group-item-action px-lg-4">기본
-						정보</a> <a href="#"
-						class="list-group-item list-group-item-action px-lg-4">손들기 내역</a>
-					<a href="#" class="list-group-item list-group-item-action px-lg-4">나의
-						질문글</a> <a href="#"
-						class="list-group-item list-group-item-action px-lg-4">나의 커뮤니티</a>
-					<a href="#" class="list-group-item list-group-item-action px-lg-4">1:1
-						문의하기</a> <a href="#"
-						class="list-group-item list-group-item-action px-lg-4 fw-bold">회원
-						탈퇴</a>
-				</div>
+                <div class="list-group">
+                    <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4">기본
+                        정보</a>
+                    <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4">손들기
+                        내역</a>
+                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
+                        질문글</a>
+                    <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
+                        커뮤니티</a>
+                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
+                        문의하기</a>
+                    <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4 fw-bold">회원
+                        탈퇴</a>
+                </div>
 			</div>
 			<!-- End main nav -->
 
