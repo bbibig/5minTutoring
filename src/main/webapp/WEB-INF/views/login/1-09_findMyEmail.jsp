@@ -10,6 +10,7 @@
             <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
+            <link href="${path}/resources/css/1-09-12_findMy.css" rel="stylesheet">
             <!-- ========================================================= -->
 
             <title>오분과외</title>
@@ -40,7 +41,7 @@
                     <strong>휴대 전화 번호 인증</strong>으로 가입한 계정을 찾을 수 있습니다.
                     </p>
 
-                    <a href="1-02_login.html">
+                    <a href="#">
                     <button class="moveTologinBtn" type="">인증하고 계정찾기</button>
                     </a>
                 </div>

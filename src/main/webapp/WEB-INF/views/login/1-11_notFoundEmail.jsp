@@ -10,6 +10,7 @@
             <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
+            <link href="${path}/resources/css/1-09-12_findMy.css" rel="stylesheet">
             <!-- ========================================================= -->
 
             <title>오분과외</title>
@@ -40,7 +41,7 @@
                     일치하는 정보가 존재하지 않습니다.
                     </p>
 
-                    <a href="#">
+                    <a href="/login/selectAccount">
                     <button class="moveTologinBtn" type="" >회원가입하기</button>
                     </a>
                 </div>

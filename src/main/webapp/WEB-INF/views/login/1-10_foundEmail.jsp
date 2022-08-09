@@ -10,6 +10,7 @@
             <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
+            <link href="${path}/resources/css/1-09-12_findMy.css" rel="stylesheet">
             <!-- ========================================================= -->
 
             <title>오분과외</title>
@@ -41,7 +42,7 @@
                     <strong>abcdefg@naver.com</strong>
                     </p>
 
-                    <a href="1-02_login.html">
+                    <a href="/login/login">
                     <button class="moveTologinBtn" type="" >이 계정으로 로그인 하기</button>
                     </a>
                 </div>

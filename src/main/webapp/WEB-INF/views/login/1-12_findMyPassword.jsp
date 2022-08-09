@@ -10,6 +10,7 @@
             <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
+            <link href="${path}/resources/css/1-09-12_findMy.css" rel="stylesheet">
             <!-- ========================================================= -->
 
             <title>오분과외</title>
@@ -50,7 +51,6 @@
 
                     <a>
                     <button class="moveTologinBtn" type="submit"  onclick="findmypwbt()">인증하고 비밀번호 찾기</button>
-                    <!-- <button class="moveTologinBtn" type="submit"  onclick="findmypwNotfoundbt()">인증하고 비밀번호 찾기</button> -->
                     </a>
 
                 </div>

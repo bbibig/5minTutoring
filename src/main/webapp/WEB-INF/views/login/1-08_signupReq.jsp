@@ -10,6 +10,7 @@
             <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
+            <link href="${path}/resources/css/1-05-06-08_signup.css" rel="stylesheet">
             <!-- ========================================================= -->
 
             <title>오분과외</title>
@@ -42,7 +43,7 @@
                         </p>
                     
                         <!-- 버튼 -->
-                        <a href="1-02_login.html">
+                        <a href="/login/login">
                         <button class="moveTologinBtn" type=""  >로그인 페이지로 이동</button>
                         </a>
 

@@ -54,9 +54,9 @@
 
                     <!-- 이메일/비번찾기 회원가입 -->
                     <div class="sign-in-more-action">
-                        <a href="1-10_findMyEmail _login.html">이메일 찾기</a>
-                        <a href="1-12_findMyPassword.html">비밀번호 찾기</a>
-                        <a href="1-03_signin_stu_or_tutor.html">회원가입</a>
+                        <a href="/login/foundEmail">이메일 찾기</a>
+                        <a href="/login/notFoundEmail">비밀번호 찾기</a>
+                        <a href="/login/findMyPassword">회원가입</a>
                     </div>
 
                     <!-- 구분선 -->
@@ -69,15 +69,15 @@
 
                         <!-- 네이버 로그인 -->
                         <span class="ico-sns-loin-naver">
-                            <a href="javascript:loginWithNaver();">
-                                <img src="${path}/resources/naver_logo.png" alt="naver_logo">
+                            <a href="#">
+                                <img src="${path}/resources/img/naver_logo.png" alt="naver_logo">
                             </a>
                         </span>
 
                         <!-- 카카오 로그인 -->
                         <span class="ico-sns-loin-kakao">
-                            <a href="javascript:loginWithKakao();">
-                                <img src="${path}/resources/kakao_logo.png" alt="kakao_logo">
+                            <a href="#">
+                                <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">
                             </a>
                         </span>
 
