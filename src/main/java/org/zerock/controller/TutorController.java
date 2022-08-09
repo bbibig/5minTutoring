@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class TutorController {
 	
-	@RequestMapping("/tutorMain")
+	@GetMapping("/tutorMain")
 	public String tpMain() {
 		log.trace("2-01_tpMain <<< 튜터페이지 메인");
 		
@@ -23,7 +24,7 @@ public class TutorController {
 	
 	@RequestMapping("/info")
 	public String tutorinfo() {
-		log.trace("tutorinfo()invoked.");
+		log.trace("tutorinfo()invoked");
 		
 		return "tutor/2-02_tutorpage_info";
 	}//tutor info
@@ -42,7 +43,7 @@ public class TutorController {
 		return "tutor/2-04_tutorpage_reviewlist";
 	}//tutor reviewList
 	
-	@RequestMapping("/ask")
+	@GetMapping("/ask")
 	public String ask() {
 		log.trace("2-05_ask <<< 튜터에게 질문하기");
 		
@@ -50,7 +51,7 @@ public class TutorController {
 	} // ask
 	
 	
-	@RequestMapping("/writeAnswer")
+	@GetMapping("/writeAnswer")
 	public String writeAnswer() {
 		log.trace("2-06_writeAnswer <<< 답변 작성하기 - 튜터");
 		
@@ -58,7 +59,7 @@ public class TutorController {
 	} // writeAnswer
 	
 	
-	@RequestMapping("/watchAnswer")
+	@GetMapping("/watchAnswer")
 	public String watchAnswer() {
 		log.trace("2-07_watchAnswer <<< 답변 보기 - 학생, 튜터");
 		
@@ -74,7 +75,7 @@ public class TutorController {
 	}//tutor tutoring
 	
 	
-	@RequestMapping("/tutoringAsk")
+	@GetMapping("/tutoringAsk")
 	public String tutoringAsk() {
 		log.trace("2-09_tutoringAsk <<< 과외하기 질문");
 		

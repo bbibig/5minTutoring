@@ -50,22 +50,21 @@
             <div class="left-nav" id="left-navigation"> <!--좌측섹션 nav!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
               <ul class="nav nav-pills nav-stacked flex-column">
                 <li class="nav-item mt-3">
-                  <a class="nav-link nav-tabs active" aria-current="page" href="/tutor/info" >튜터정보</a>
+                  <a class="nav-link active" aria-current="page" href="#">튜터정보</a>
                 </li>
-                <li class="nav-item nav-tabs mt-3">
-                  <a class="nav-link" href="/tutor/writeReview" >학생리뷰</a>
+                <li class="nav-item mt-3">
+                  <a class="nav-link " href="#">학생리뷰</a>
                 </li>
-                <li class="nav-item nav-tabs mt-3">
-                  <a class="nav-link" href="/tutor/ask" >튜터에게 질문하기</a>
+                <li class="nav-item mt-3">
+                  <a class="nav-link" href="#">튜터에게 질문하기</a>
                 </li>
-                <li class="nav-item nav-tabs  mt-3">
-                  <a class="nav-link" href="/tutor/tutoring" >튜터에게 과외받기</a>
+                <li class="nav-item mt-3">
+                  <a class="nav-link" href="#">튜터에게 과외받기</a>
                 </li>
               </ul>
-
             </div> <!--좌측섹션 nav end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-            
-          </div> <!--좌측섹션 end!!!-->
+
+          </div> <!--좌측섹션 end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
           <div class="right-section col-9"> <!--우측 섹션!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--> 
             <div class="headers d-flex flex-column">  <!--우측섹션 header!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->

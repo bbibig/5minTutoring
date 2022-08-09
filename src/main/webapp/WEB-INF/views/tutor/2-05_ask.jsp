@@ -43,25 +43,25 @@
 	                        </div>
 	                    </div>
 	
-											<div class="left-nav" id="left-navigation"> <!--좌측섹션 nav!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-												<ul class="nav nav-pills nav-stacked flex-column">
-													<li class="nav-item mt-3">
-														<a class="nav-link nav-tabs active" aria-current="page" href="/tutor/info" >튜터정보</a>
-													</li>
-													<li class="nav-item nav-tabs mt-3">
-														<a class="nav-link" href="/tutor/writeReview" >학생리뷰</a>
-													</li>
-													<li class="nav-item nav-tabs mt-3">
-														<a class="nav-link" href="/tutor/ask" >튜터에게 질문하기</a>
-													</li>
-													<li class="nav-item nav-tabs  mt-3">
-														<a class="nav-link" href="/tutor/tutoring" >튜터에게 과외받기</a>
-													</li>
-												</ul>
-					
-											</div> <!--좌측섹션 nav end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-											
-										</div> <!--좌측섹션 end!!!-->
+	                    <div class="left-nav" id="left-navigation">
+	                        <ul class="nav nav-pills nav-stacked flex-column">
+	                            <li class="nav-item mt-3">
+	                                <a class="nav-link nav-tabs active" aria-current="page" href="info">튜터정보</a>
+	                            </li>
+	                            <li class="nav-item nav-tabs mt-3">
+	                                <a class="nav-link" href="reviewList">학생리뷰</a>
+	                            </li>
+	                            <li class="nav-item nav-tabs mt-3">
+	                                <a class="nav-link" href="ask">튜터에게 질문하기</a>
+	                            </li>
+	                            <li class="nav-item nav-tabs  mt-3">
+	                                <a class="nav-link" href="tutoring">튜터에게 과외받기</a>
+	                            </li>
+	                        </ul>
+	
+	                    </div>
+	                </div>
+	                <!--좌측섹션 end!!!-->
 	
 	                <div class="right-section col-9">
 	                    <div class="headers d-flex justify-content-between">

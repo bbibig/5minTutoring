@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class CommunityController {
 	}//communityPage
 	
 	
-	@RequestMapping("/post")
+	@GetMapping("/post")
 	public String communityPost() {
 		log.trace("3-03_communityPost <<< 커뮤니티 게시글");
 		
