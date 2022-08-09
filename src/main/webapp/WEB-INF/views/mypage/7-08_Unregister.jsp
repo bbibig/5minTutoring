@@ -98,7 +98,7 @@
 							<div class="col-2">
 
 								<a>
-									<button class="moveTologinBtn p-1 ms-2" type="submit"
+									<button class="unregisterBtn p-1 ms-2" type="submit"
 										onclick="withdrawalbt()">탈퇴하기</button>
 								</a>
 								<!-- <button type="submit" class="btn btn-dark ms-3" data-bs-toggle="modal" data-bs-target="#withdrawal">
