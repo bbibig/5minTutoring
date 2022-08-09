@@ -8,7 +8,7 @@
   <head>
      <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
       <jsp:include page="../htmlHead.jsp" flush="true" />
-      <link href="${path}/resources/css/3-01_cummunity.css" rel="stylesheet">
+      <link href="${path}/resources/css/3-01_community.css" rel="stylesheet">
       <!-- ========================================================= -->
 
     <title>튜터페이지-커뮤니티</title>

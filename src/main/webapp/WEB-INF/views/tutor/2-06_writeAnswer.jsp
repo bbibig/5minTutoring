@@ -111,39 +111,48 @@
 	                        <!-- <h2 class="fas fa-q ask_title">. 일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십!</h2> -->
 	                        <h2 class="fas fa-q ask_title">. ㅁㅁ이 무엇인가요??</h2>
 	                        <div class="student_info d-flex">
-	                            <div class="sPic">
+	                            
+														<div class="sPic">
 	                                <img src="/resources/img/profile.png" alt="튜터프로필">
-	                            </div>
-	                            <div class="Sname">가나다</div>
-	                            <div>&nbsp;학생</div>
-	                            <div class="date">&nbsp;2022-03-01</div>
-	                            <div class="hamburger-button col-8 d-flex justify-content-end">
-	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
-	                                        aria-expanded="false">
-	                                        <i class="bi bi-list fs-4"></i>
-	                                    </button>
-	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#community_revise">수정</a>
-	                                        </li>
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#delete">삭제</a>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
+														</div>
+
+														<div class="Sname">가나다</div>
+	                            
+															<div>&nbsp;학생</div>
+	                           
+																<div class="date">&nbsp;2022-03-01</div>
+	                            
+																	<div class="hamburger-button col-8 d-flex justify-content-end">
+																		
+																		<div class="dropdown">
+																					
+																			<button class="btn pt-0" type="button" data-bs-toggle="dropdown"aria-expanded="false">
+																							<i class="bi bi-list fs-4"></i>
+																			</button>
+
+																			<ul class="dropdown-menu">
+																				<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#community_revise">수정</a></li>
+																				<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>
+																			</ul>
+
+																		</div>
+
+																	</div>
+
+																</div>
+
 	                        <div class="ask_content">
 	                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate qui totam sapiente.
 	                            Consectetur neque, vitae nemo impedit, numquam sit ex officia autem recusandae qui quia
 	                            temporibus non minima corrupti enim sequi quos porro eum omnis itaque velit veritatis est
 	                            debitis maiores. Similique saepe autem, rem doloribus tempora soluta quo quas!
 	                        </div>
-	                    </div>
+
+	                    	</div>
 	
 	                </div>
 	            </div>
+
 	            <div class="row">
 	                <div class="col-lg-9 answer">
 	                    <div class="Tutor_info d-flex">
