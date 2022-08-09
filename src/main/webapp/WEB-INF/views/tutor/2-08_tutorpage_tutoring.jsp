@@ -52,16 +52,16 @@
             <div class="left-nav" id="left-navigation"> <!--좌측섹션 nav!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
               <ul class="nav nav-pills nav-stacked flex-column">
                 <li class="nav-item mt-3">
-                  <a class="nav-link nav-tabs active" aria-current="page" href="#" >튜터정보</a>
+                  <a class="nav-link nav-tabs active" aria-current="page" href="/tutor/info" >튜터정보</a>
                 </li>
                 <li class="nav-item nav-tabs mt-3">
-                  <a class="nav-link" href="#" >학생리뷰</a>
+                  <a class="nav-link" href="/tutor/writeReview" >학생리뷰</a>
                 </li>
                 <li class="nav-item nav-tabs mt-3">
-                  <a class="nav-link" href="#" >튜터에게 질문하기</a>
+                  <a class="nav-link" href="/tutor/ask" >튜터에게 질문하기</a>
                 </li>
                 <li class="nav-item nav-tabs  mt-3">
-                  <a class="nav-link" href="#" >튜터에게 과외받기</a>
+                  <a class="nav-link" href="/tutor/tutoring" >튜터에게 과외받기</a>
                 </li>
               </ul>
 
@@ -124,7 +124,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-primary">과외중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -135,7 +135,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -146,7 +146,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -157,7 +157,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
@@ -168,7 +168,7 @@
               <div class="list-box"> <!--===========================리스트박스===============================-->
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
+                  <div class="col-8" id="tutoring-title"><a href="tutor/2-09_tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
                   <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
                 </div>
