@@ -84,11 +84,3 @@
 </body>
 
 </html>
-
-<!-- ======= footer + js  ======= -->
-<jsp:include page="../footer.jsp" flush="true" />
-<!-- ============================= -->
-
-</body>
-
-</html>
