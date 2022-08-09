@@ -19,7 +19,8 @@ public class AdminController {
 		
 		return "admin/8-00_adminLogin";
 	}
-	
+//	@GetMapping("/student")
+//	@PostMapping("/student")
 	@RequestMapping("/student")
 	public String adminMemberStrudent() {
 		log.info("회원리스트 - 학생 페이지");
