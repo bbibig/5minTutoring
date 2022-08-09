@@ -43,7 +43,7 @@
                         </p>
                     
                         <!-- 버튼 -->
-                        <a href="/login/login">
+                        <a href="/login">
                         <button class="moveTologinBtn" type=""  >로그인 페이지로 이동</button>
                         </a>
 

@@ -14,8 +14,8 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class LoginController {
 	
-	@RequestMapping
-//	@PostMapping("/login")
+
+	@GetMapping
 	public String login() {
 		log.trace("login() invoked.");
 		
@@ -48,21 +48,6 @@ public class LoginController {
 		log.trace("loginHome() invoked.");
 		
 		return "login/1-01_homeLogin";
-	}
-	
-	@RequestMapping("/sendMail")
-//	@PostMapping("/sendMail")
-	public String sendMail() {
-		log.trace("sendMail() invoked.");
-		
-		return "login/1-05_sendMail";
-	}
-	
-	@GetMapping("/completeSignup")
-	public String completeSignup() {
-		log.trace("completeSignup() invoked.");
-		
-		return "login/1-06_completeSignup";
 	}
 	
 	
