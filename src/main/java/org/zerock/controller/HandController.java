@@ -22,7 +22,9 @@ public class HandController {
 		return "hand/4-01_buyHands";
 	}
 	
-	@PostMapping("/payPage")
+	
+	@RequestMapping("/payPage")
+//	@PostMapping("/payPage")
 	public String payPage() {
 		log.trace("payPage() invoked.");
 		
