@@ -42,7 +42,7 @@
                     <strong>abcdefg@naver.com</strong>
                     </p>
 
-                    <a href="/login/login">
+                    <a href="/login">
                     <button class="moveTologinBtn" type="" >이 계정으로 로그인 하기</button>
                     </a>
                 </div>
