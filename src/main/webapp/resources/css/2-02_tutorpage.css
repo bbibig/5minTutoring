@@ -1,0 +1,26 @@
+.tutor-career{
+  background-color:#FAFAFA;
+  border:1px solid #EFEFEF;
+  padding:15px 15px 20px 15px;
+  margin: 20px 0px;
+  border-radius:3px;
+  height: 100px;
+}
+
+.introduction{
+  background-color:#FAFAFA;
+  border:1px solid #EFEFEF;
+  padding:15px 15px 20px 15px;
+  margin: 20px 0px;
+  border-radius:3px;
+  height: 300px;
+}
+
+.introduction-text{
+  height: 200px;
+  padding: 20px 0px;
+}
+
+#validationDefault04{
+  resize: none;
+}

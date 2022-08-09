@@ -1,0 +1,17 @@
+### Eclipse ###
+.metadata
+.settings/
+target/
+.project
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_tests/
+
+### Java ###
+# Compiled class file
+*.class
+*.classpath

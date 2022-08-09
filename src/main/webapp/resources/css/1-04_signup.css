@@ -1,0 +1,50 @@
+.bir_yy,.bir_mm,.bir_dd{
+    width: 140px;
+    display: table-cell;
+}
+.bir_yy+.bir_mm, .bir_mm+.bir_dd{
+    padding-left: 10px;
+}
+.school,.grade{
+    width: 210px;
+    display: table-cell;
+}
+.school{
+    padding-right: 10px;
+}
+.grade{
+    padding-left: 10px;
+}
+.form-group,.form-control,.form-select{
+    margin-top: 10px;
+}
+#loginBtn{
+    height: 45px;
+    color: white;
+    /* background-color: #343646; */
+    background-color: #4154f1;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+#loginBtn:hover,#loginBtn:focus {
+    color: #fff;
+    background: #5969f3;
+}
+.form-group .waring{
+    color: red !important;
+    animation: warning .3s ease;
+    animation-iteration-count: 3;
+}
+#userinfoModal ul{
+    list-style: none;
+    
+}
+#userinfoModal li{
+    margin-top: 10px;
+    padding: 2px;
+}
+#userinfoModal h5{
+    font-weight: bold;
+    /* letter-spacing: 5px; */
+}

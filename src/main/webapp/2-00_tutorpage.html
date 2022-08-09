@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="assets/css/header_footer_yunjeong.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- 튜터페이지 CSS -->
+    <link rel="stylesheet" href="assets/css/2-00_tutorpage_baseform.css"><!--기본폼-->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet">
+
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/56e5bc0e60.js" crossorigin="anonymous"></script>
+
+    <title>튜터페이지 기본폼</title>
+    
+    <script>
+      // 글쓰기 팝업 
+      function writePopup() {
+          window.open("배지현_writePopup.html", "질문하기_팝업", "width=800, height=650 left=400, top=50");
+      }
+    </script>
+
+  </head>
+  <body>
+    <!---===========Header=============-->
+    <header id="header" class="header fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center">
+  
+        <a href="main.html" class="logo d-flex align-items-center img-fluid animated ">
+          <!-- <img src="assets/img/logo.png" alt="" > -->
+          <img src="assets/img/5mtutoring.png" alt="">
+        </a>
+  
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="#">튜터</a></li>
+            <li><a class="nav-link scrollto d-xs-none" href="#">커뮤니티</a></li>
+            <li><a class="getstarted scrollto" style="margin-left: 700px;" href="#">로그인</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"style="margin-left:150px"></i>
+        </nav><!-- .navbar -->
+  
+      </div>
+    </header><!-- End Header -->
+  
+
+    <!-- ======= Section ======= -->
+    <section class="d-flex">
+      <div class="container">
+        <div class="row">
+          
+           <!--좌측섹션!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+          <div class="left-section col-3"> 
+            
+            <div class="card d-flex flex-column align-items-center text-center"> <!-- 프로필 카드영역==>프로필사진+이름+한줄소개+대표과목+누적답변+평점-->
+              
+              <div class="profile-image"> <!--프로필카드-프로필사진!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                <img src="/assets/img/profile.png" alt="Admin" class="rounded-circle" width="150">
+              </div><!--프로필카드-프로필사진 end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+              
+              <div class="tutorname_introduction">
+                <h4>홍길동</h4>
+                <p class="text-secondary mb-1">한줄소개: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quasi!</p>
+              </div>
+              
+              <div class="emblem d-flex flex-row">
+                <div class="emblem-circle rounded-circle "><br>대표과목<br>수학</div>
+                <div class="emblem-circle rounded-circle "><br>누적답변<br>00개</div>
+                <div class="emblem-circle rounded-circle "><br>평점<br>00점</div>
+              </div>
+
+            </div>  <!-- 프로필 카드영역==>프로필사진+이름+한줄소개+대표과목+누적답변+평점  end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+            <div class="left-nav" id="left-navigation"> <!--좌측섹션 nav!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+              <ul class="nav nav-pills nav-stacked flex-column">
+                <li class="nav-item mt-3">
+                  <a class="nav-link nav-tabs active" aria-current="page" href="#" >튜터정보</a>
+                </li>
+                <li class="nav-item nav-tabs mt-3">
+                  <a class="nav-link" href="#" >학생리뷰</a>
+                </li>
+                <li class="nav-item nav-tabs mt-3">
+                  <a class="nav-link" href="#" >튜터에게 질문하기</a>
+                </li>
+                <li class="nav-item nav-tabs  mt-3">
+                  <a class="nav-link" href="#" >튜터에게 과외받기</a>
+                </li>
+              </ul>
+
+            </div> <!--좌측섹션 nav end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            
+          </div> <!--좌측섹션 end!!!-->
+
+          <!--우측 섹션!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--> 
+          <div class="right-section col-9"> 
+
+            <!--우측섹션 header!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <div class="headers d-flex flex-row align-items-center justify-content-between"> 
+              <div class="head-line"><h2><strong>튜터에게 질문하기</strong></h2></div>
+              
+              <div class="edit-button d-flex flex-column">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tutor-info-edit">
+                  수정
+                </button>
+              </div>
+              
+            </div><!--우측섹션 header end !!!!!!-->
+
+            <!--============================여기서부터 넣으시면 됩니다.=========================================-->
+
+
+
+
+
+            <!--============================여기서부터 넣으시면 됩니다.=========================================-->
+
+
+          </div> <!--우측섹션 end!!!!!!-->
+
+
+
+        </div> <!--전체 row end-->
+          
+       
+          
+        
+      </div> <!--섹션 전체 컨테이너 end-->
+    
+    </section>
+    <!-- End section -->  
+    
+
+    <!-- ======= Footer ======= -->
+    <footer class="main-footer">
+  
+    <div class="container">
+      
+      <div class="footer-content">
+  
+        <img src="assets/img/hand.png" alt="">
+  
+        <div class="foot-link">
+          <ul>
+            <li><a href="#">자주 묻는 질문(FAQ)</a></li>
+            <li><a href="#">문의하기</a></li>
+          </ul>
+        </div>
+        
+        <div class="foot-info">
+          <ul>
+            <li>법인명: 오분과외 주식회사</li>
+            <li>사업자 등록번호: 144-81-25874</li>
+            <li>대표자명: 문희철</li>
+            <li>개인정보보호책임 : 이윤정</li>
+            <li>통신판매업신고 : 2019-서울강남-02231호</li>
+          </ul>
+        </div>
+  
+      </div>
+  
+      <hr>
+  
+      <p>&copy; Copyright <strong><span>2022 5mtutor</span></strong>. All Rights Reserved</p>
+    </div>
+  
+    </footer>
+    <!-- End Footer -->
+  
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

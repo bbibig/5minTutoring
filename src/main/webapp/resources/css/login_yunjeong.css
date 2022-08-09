@@ -1,0 +1,386 @@
+
+/*--------------------------------------------------------------
+
+# 1. Login & sign in
+
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+# 1-02. Login Section
+--------------------------------------------------------------*/
+
+.container {
+  display: block;
+}
+.form-signin {
+  margin: 10% auto 5% auto;
+  padding: 60px;
+  width: 450px;
+  text-align: center;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+  box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+}
+.form-signin h1 {
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 30px;
+  color: #333333;
+}
+.form-signin img {
+  width: 130px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.form-signin hr {
+  margin: 35px 0;
+  color: #b5b7c7
+}
+.loginBtn button{
+  margin-top: 25px;
+  width: 330px;
+  height: 50px;
+  color: white;
+  /* background-color: #343646; */
+  background-color: #4154f1;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+}
+.loginBtn :hover, .loginBtn:focus:hover {
+  color: #fff;
+  background: #5969f3;
+}
+.sign-in-more-action{
+  margin-top: 25px;
+}
+.sign-in-more-action a{
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #535353;
+}
+/* 간편로그인 */
+.sns-l p {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #535353;
+}
+.sns-l img {
+  margin: 0 10px;
+  width: 40px;
+}
+
+/*--------------------------------------------------------------
+# 1-03_signin_stu_or_tutor Section
+--------------------------------------------------------------*/
+.buy-link-a {
+  margin: 10px;
+}
+
+
+.signin-stu-or-tutor  {
+  margin: 10% auto 5% auto;
+  padding: 30px 60px;
+  width: 800px;
+  text-align: center;
+}
+.signin-stu-or-tutor h1 {
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 42px;
+}
+.signin-stu-or-tutor img {
+  width: 130px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.spanbox {
+  display: inline;
+  margin: 0;
+  padding: 10px;
+  width: 300px;
+}
+.signin-stu {
+  padding: 35px;
+  display: inline-block;
+  width: 300px;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+ }
+ .signin-tutor {
+   padding: 35px;
+   display: inline-block;
+   width: 300px;
+   background-color: #f8f9fc;
+   border-radius: 20px;
+ }
+.signin-txt {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+.signin-stu-or-tutor strong {
+ font-weight: 600;
+}
+.moveTosigninBtn {
+  margin-top: 20px;
+  width: 180px;
+  height: 50px;
+  color: white;
+  background-color: #4154f1;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+.moveTosigninBtn:hover, .moveTosigninBtn:focus:hover {
+  color: #fff;
+  background: #5969f3;
+}
+
+
+
+/*--------------------------------------------------------------
+# 1-05~12. Confirm-findMy Section
+--------------------------------------------------------------*/
+
+.title {
+ margin-top: 26px;
+ font-size: 26px;
+ font-weight: 500;
+ line-height: 40px;
+}
+
+.txt {
+ margin-top: 20px;
+ font-size: 16px;
+ font-weight: 400;
+ line-height: 25px;
+ color: #535353;
+}
+.moveTologinBtn {
+  margin-top: 10px;
+  width: 250px;
+  height: 50px;
+
+  color: white;
+  /* background-color: #343646; */
+  background-color: #4154f1;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+.moveTologinBtn:hover, .moveTologinBtn:focus:hover {
+  color: #fff;
+  background: #5969f3;
+}
+
+
+
+/* sign-up-confirm */
+.sign-up-confirm{
+  text-align: center;
+  margin: 10% auto 5% auto;
+  padding: 80px 10px;
+  width: 800px;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+  box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+
+}
+.sign-up-confirm img {
+  margin-bottom: 10px;
+  width: 80px;
+}
+.confirm-content {
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #535353;
+}
+
+
+/* findMy */
+.findMy {
+  margin: 10% auto 5% auto;
+  padding: 80px 10px;
+  width: 800px;
+  text-align: center;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+  box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+}
+.findMy img {
+  width: 80px;
+}
+.findMy-content {
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #535353;
+}
+.findMy-email {
+  margin-top: 30px;
+  width: 250px;
+  height: 50px;
+  background-color: #fefefe;
+  border: solid 1px rgb(134, 134, 134);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+
+
+
+/*--------------------------------------------------------------
+
+# 4. Buy hands
+
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+# 4-01. buy hands Section
+--------------------------------------------------------------*/
+
+/*---------------*/
+/* 뒤로가기 버튼 */
+.page-back img{
+  float: right;
+  display: block;
+  width: 35px;
+}
+/*---------------*/
+
+.buy-hands  {
+  margin: 10% auto 5% auto;
+  padding: 30px 60px;
+  width: 1000px;
+  text-align: center;
+}
+.buy-hands h1 {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.buy-link {
+  margin: 5px;
+  padding: 30px;
+  display: inline-block;
+  width: 380px;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+ }
+.buy-link span {
+  display: inline-block;
+}
+ .buy-link img {
+  width: 50px;
+  margin-right: 5px;
+}
+ .buy-link p {
+  margin: 0; 
+  font-size: 18px;
+  font-weight: 600;
+  color: #666666;
+ }
+ .buy-link i {
+   margin: 0 10px;
+ }
+ .buy-link strong {
+   font-size: 20px;
+   font-weight: 900;
+   color: #333333;
+ }
+
+
+/*--------------------------------------------------------------
+# 4-02. Pay page Section
+--------------------------------------------------------------*/
+
+/* 공통 */
+.pay-page {
+  margin: 10% auto 5% auto;
+  padding: 30px 60px;
+  width: 1000px;
+}
+.pay-page h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.pay-table {
+  width: 880px;
+  margin-bottom: 50px;
+}
+.pay-table tr {
+  border: solid 1px #dadada;
+}
+.pay-table td {
+  margin: 10px;
+  border: solid 1px #dadada;
+}
+.table-body{
+  text-align: center;
+  font-size: 16px;
+}
+
+/* 구매자정보 */
+.buyer-info-title {
+  padding: 10px;
+  width: 100px;
+
+  border: solid 1px #dadada;
+  background-color: #f0f0f0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+.buyer-info-txt {
+  padding: 10px;
+  border: solid 1px #dadada;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* 상품정보 */
+.product-info-title {
+  padding: 10px;
+  background-color: #f0f0f0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.product-info-data{
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#product-info img {
+  width: 50px;
+  margin-right: 5px;
+}
+
+/* 총 금액 */
+.total-amount-title {
+  padding: 15px;
+  background-color: #f0f0f0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.total-amount-txt {
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 400;
+}

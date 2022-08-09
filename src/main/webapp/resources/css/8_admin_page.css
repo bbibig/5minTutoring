@@ -1,0 +1,344 @@
+/*--------------------------------------------------------------
+# 1-02. admin-login Section
+--------------------------------------------------------------*/
+
+.container {
+    display: block;
+  }
+.admin-login {
+    margin: 15% auto 10% auto;
+    padding: 60px;
+    width: 450px;
+    text-align: center;
+    background-color: #f8f9fc;
+    border-radius: 20px;
+    box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+  }
+.admin-login h1 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #333333;
+  }
+  .admin-login img {
+    width: 130px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  .admin-login hr {
+    margin: 35px 0;
+    color: #b5b7c7
+  }
+  .loginBtn button{
+    margin-top: 25px;
+    width: 330px;
+    height: 50px;
+    color: white;
+    /* background-color: #343646; */
+    background-color: #4154f1;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+  }
+  .loginBtn :hover, .loginBtn:focus:hover {
+    color: #fff;
+    background: #5969f3;
+  }
+
+
+/*--------------------------------------------------------------
+# 8-02~. manage card Section
+--------------------------------------------------------------*/
+
+.container {
+  display: block;
+}
+
+h3 {
+  margin-bottom: 25px;
+}
+  
+
+/* nav list */
+.list-group {
+  border-radius: 10px;
+}
+.list-group a{
+  padding: 15px;
+  font-size: 18px;
+
+  background-color: #fefefe;
+}
+.list-group a:hover{
+  color: #fefefe;
+  background-color: #4154f1;
+  }
+
+
+/* ----------------- */
+/*        Tap        */
+/* ----------------- */
+
+.ad-search ul {
+  padding: 0;
+}
+.ad-search li{
+  display: inline;
+  list-style: none;
+}
+
+/* tap */
+.manage-tap {
+  float: left;
+  margin-bottom: 20px;
+}
+.manage-tap a{
+  font-size: 14px;
+  font-weight: 400;
+}
+.manage-tap a:hover{
+  font-weight: bold;
+}
+
+.bg-blue{
+  background: #4154f1;
+  color: #fff;
+}
+.bg-dark{
+  background: #333333;
+  color: #fff;
+}
+.btn-dark {
+  color: #fefefe;
+  background: #333333;
+}
+
+
+/* signup-confirm tap*/
+.tutor-head-title ul {
+  margin: 0;
+  padding: 0;
+}
+.tutor-head-title li{
+  display: inline-block;
+}
+.tutor-head-title h3 {
+  margin-right: 550px;
+}
+.signup-confirm-tap {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Select/Search */
+.select-search ul{
+  margin-left: 550px;
+  padding: 0;
+  display: inline-block;
+}
+select{
+  padding: 0px;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  border-radius: 3px;
+}
+.btn-search {
+  /* padding: 3px 10px; */
+  width: 80px;
+  height: 40px;
+  color: #fefefe;
+  background-color: #4154f1;
+  font-size: 16px;
+  border: none;
+  border-radius: 3px;
+}
+
+/* sales-info */
+.sales-info ul{
+  margin-left: 600px;
+  padding: 0;
+  display: inline-block;
+}
+.sales-info li{
+  display: inline-block;
+}
+.sales-info a{
+  color: #333333;
+}
+
+
+/* content list */
+.bg-card{
+  clear: both;
+  height: 450px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+}
+.container tbody tr:hover {
+  background-color: #fefefe;
+}
+.card th{
+  padding-top: 15px;
+  color: #333333;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 40px;
+  text-align: center;
+}
+.card td{
+  padding: 10px;
+  color: #333333;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: center;
+}
+.card a {
+  color: #333333;
+}
+.card a:hover{
+  color: #a3a3a3;
+}
+
+
+/* drop info */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none; 
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 160px;
+  border : 1px solid rgb(197, 197, 197);
+  border-radius : 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  right: 0;
+  z-index : 1;
+  cursor : pointer;
+
+  width :100px;
+  color : #333333;
+  font-size : 14px;
+  font-weight: 400;
+}
+
+.dropdown-content a {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+
+.dropdown-content a:hover {
+  color: #333333;
+  background-color: #f7f7f7
+}
+
+
+/* inquiry content */
+
+/* 제목&내용 전체박스 */
+.question, .answer{
+  border: solid 1px rgb(204, 204, 204);
+  margin: 20px 0;
+  width: 90%;
+  border-radius: 5px;
+}
+
+/* 문의/답변 글제목 */
+.titlebox{
+  clear: both;
+  line-height: 40px;
+  padding: 15px 0;
+}
+
+/* 문의/답변 내용 글상자 */
+.question .contentbox, .answer .contentbox {
+  background-color: #ececec81;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+/* 문의/답변 내용 */
+.content {
+  margin: 25px;
+  display: inline-block;
+  word-break: break-all;
+}
+
+/* 목록으로 버튼 */
+.btn-list {
+  clear: both;
+  float: right;
+  display: inline;
+  margin: 15px 0;
+  width: 150px;
+  height: 40px;
+  color: white;
+  
+  background-color: #333333;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+.btn-list:hover, .btn-list:focus:hover {
+  color: #fff;
+  background: #505050;
+}
+
+/* ========================================== */
+/*            자주묻는 질문 (8-5)             */
+/* ========================================== */
+
+#aside_title {
+  margin-bottom: 0px;
+}
+
+
+#exampleFormControlTextarea1 {
+  resize: none;
+}
+
+
+.faq_write {
+  text-align: end;
+  margin-bottom: 10px;
+}
+
+
+.accordion-body{
+  padding: 1rem 10px;
+}
+
+/* 수정삭제 버튼 */
+.sidebutton {
+  padding: 0;
+  font-size: 9pt;
+}
+
+.sidebutton button {
+  padding: 0px;
+  border-style: none;
+  background-color: white;
+}
+
+
+
+ /* ck-editor 속성 설정 */
+ .ck-content {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ck-editor__editable { 
+  height: 350px; 
+}
+
+.ck-editor__main {
+  padding: 0;
+}

@@ -1,0 +1,129 @@
+
+/* 기존 css에 추가  */
+
+.header {
+
+    box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+  }
+
+.ft_h3 {
+  font-weight: bold;
+  color: #012970;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+div.row.gy-4 {
+  padding-top: 50px;
+}
+
+a {
+  color: black;
+}
+
+
+/* ================================ */
+/*              footer              */
+/* ================================ */
+
+/* ====light==== */
+
+.main-footer {
+  padding: 60px;
+  background-color: #fefefe;
+  box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+}
+.main-footer img {
+  float: left;
+  margin-right: 30px;
+  width: 50px;
+}
+.footer-content{
+  margin: 0 auto;
+}
+.foot-link li{
+  display: inline;
+  margin-right: 30px;
+  font-size: 17px;
+  font-weight: 600;
+}
+.foot-link a{
+  color: #333333;
+}
+.foot-link a:hover {
+  color: #4154f1;
+  text-decoration: none;
+}
+.foot-info {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+.foot-info li {
+  display: inline-block;
+  margin-right: 30px;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 400;
+}
+.main-footer hr {
+  clear: both;
+  color: #cdcdcd;
+}
+.main-footer p {
+  margin-top: 10px;
+  float: right;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 400;
+} 
+
+/* ====dark==== */
+/* .main-footer {
+  padding: 60px;
+  background-color: #333333;
+  box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+}
+.main-footer img {
+  float: left;
+  margin-right: 30px;
+  width: 50px;
+}
+.footer-content{
+  margin: 0 auto;
+}
+.foot-link li{
+  display: inline-block;
+  margin-right: 55px;
+  font-size: 17px;
+  font-weight: 600;
+}
+.foot-link a{
+  color: #f8f9fc;
+}
+.foot-link a:hover {
+  color: #cfd4ff;
+  text-decoration: none;
+}
+.foot-info {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+.foot-info li {
+  display: inline-block;
+  margin-right: 30px;
+  color: #f8f9fc;
+  font-size: 13px;
+  font-weight: 400;
+}
+.main-footer hr {
+  clear: both;
+  color: #f8faff;
+}
+.main-footer p {
+  margin-top: 10px;
+  float: right;
+  color: #f8f9fc;
+  font-size: 13px;
+  font-weight: 400;
+} */

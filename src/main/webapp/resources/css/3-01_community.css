@@ -1,0 +1,82 @@
+.banner{
+  height: 100px;
+  background-color: #333333;
+  color: whitesmoke;
+}
+section{
+  padding: 5px;
+}
+
+.coummunity-board{
+  width: 1200px;
+  margin: 30px auto;
+}
+
+#write-button{
+  padding: 0px;
+  width: 100px;
+}
+
+#search-button{
+  width: 100px;
+}
+
+#filter-box{
+  padding-bottom: 30px;
+  border-bottom: solid 2px gray;
+}
+
+.question_comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 66px;
+  height: 66px;
+  border-radius: 100px;
+  border: 1px solid #dee2e6;
+}
+
+.heart-button{
+  border: none;
+  background-color: white;
+}
+
+#coummunity-box{
+  color: black;
+  border-bottom: solid 1px gray;
+  padding-bottom: 10px;
+}
+
+.info {
+  margin: 10px 0 0 57%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.info .red {
+    color: red;
+}
+
+.modal-body {
+    padding-top: 0;
+}
+
+form div {
+    padding: 5px 10px;
+    font-weight: 600;
+}
+
+/* ck-editor 속성 설정 */
+.ck-content {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ck-editor__editable { 
+    height: 350px; 
+}
+
+.ck-editor__main {
+    padding: 0;
+}

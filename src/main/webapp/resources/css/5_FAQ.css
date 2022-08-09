@@ -1,0 +1,32 @@
+
+/* 자주문는질문(FAQ) 제목 */
+#faqtitle {
+    padding: 15px 0 50px 0;
+}
+
+/* FAQ 목록 전체를 감싸는 박스 */
+#faq {
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.6);
+}
+
+/* 질문제목 모서리 조정 */
+.accordion-button{
+    border-radius: 5px !important;
+    /* border-color: aliceblue !important; */
+}
+
+/* 목록들 사이 간격 조정 */
+.accordion-item {
+    margin: 10px 0;
+}
+
+.accordion-item button {
+    font-size: 13pt;
+    /* font-weight: bold; */
+}
+
+
+
+

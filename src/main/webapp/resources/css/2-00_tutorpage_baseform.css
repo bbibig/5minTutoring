@@ -1,0 +1,34 @@
+.card{
+  width: 300px;
+}
+
+.profile-image{
+  margin: 10px 0px;
+}
+
+.tutorname_introduction{
+  margin: 10px 0px;
+}
+
+.emblem{
+  margin: 10px 0px;
+}
+
+.emblem-circle{
+  border: solid 1px gray;
+  width: 60px;
+  height: 60px;
+  font-size: 12px;
+  margin: 0px 20px;
+}
+
+.left-nav{
+  margin-top: 50px;
+}
+
+#left-navigation .nav-link:hover {
+  color: #fff;
+  background-color: #0d6efd;
+}
+
+   

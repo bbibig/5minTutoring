@@ -1,0 +1,55 @@
+body{
+    width: auto;
+}
+.user{
+    text-align: center;
+    width: 280px;
+}
+.user ul{
+    padding: 15px;
+    padding-bottom: 0px;
+    list-style: none;
+    border: 1px rgb(0, 0, 0) solid;
+}
+#user1{
+    border-bottom: rgb(201, 198, 198) 1px solid;
+    padding-bottom: 10px;
+}
+.userinfo{
+    font-weight: bold;
+    font-size: 1.25em;
+    letter-spacing: 5px;
+}
+.user li{
+    background-color: rgb(235, 235, 235);
+    margin: 15px;
+    padding: 2px;
+}
+.school li{
+    display: inline-block;
+    width: 40%;
+    margin-top: 0px;
+}
+.school li:nth-of-type(1){
+    margin-right: 10px;
+}
+.school li:nth-of-type(2){
+    margin-left: 5px;
+}
+.btn{
+    width: 100px;
+    height: 30px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+#userinfoModal ul{
+    list-style: none;
+}
+#userinfoModal li{
+    margin-top: 10px;
+    padding: 2px;
+}
+#userinfoModal h5{
+    font-weight: bold;
+    /* letter-spacing: 5px; */
+}

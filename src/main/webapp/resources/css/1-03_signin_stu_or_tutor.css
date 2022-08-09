@@ -1,0 +1,69 @@
+
+/*--------------------------------------------------------------
+# 1-03_signin_stu_or_tutor Section
+--------------------------------------------------------------*/
+.buy-link-a {
+  margin: 10px;
+}
+
+
+.signin-stu-or-tutor  {
+  margin: 10% auto 5% auto;
+  padding: 30px 60px;
+  width: 800px;
+  text-align: center;
+}
+.signin-stu-or-tutor h1 {
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 42px;
+}
+.signin-stu-or-tutor img {
+  width: 130px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.spanbox {
+  display: inline;
+  margin: 0;
+  padding: 10px;
+  width: 300px;
+}
+.signin-stu {
+  padding: 35px;
+  display: inline-block;
+  width: 300px;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+ }
+ .signin-tutor {
+   padding: 35px;
+   display: inline-block;
+   width: 300px;
+   background-color: #f8f9fc;
+   border-radius: 20px;
+ }
+.signin-txt {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+.signin-stu-or-tutor strong {
+ font-weight: 600;
+}
+.moveTosigninBtn {
+  margin-top: 20px;
+  width: 180px;
+  height: 50px;
+  color: white;
+  background-color: #4154f1;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+.moveTosigninBtn:hover, .moveTosigninBtn:focus:hover {
+  color: #fff;
+  background: #5969f3;
+}
+

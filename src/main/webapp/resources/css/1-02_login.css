@@ -1,0 +1,67 @@
+
+/*--------------------------------------------------------------
+# 1-02. Login Section
+--------------------------------------------------------------*/
+
+.container {
+  display: block;
+}
+.form-signin {
+  margin: 10% auto 5% auto;
+  padding: 60px;
+  width: 450px;
+  text-align: center;
+  background-color: #f8f9fc;
+  border-radius: 20px;
+  box-shadow: 5px 5px 18px rgba(218, 217, 226, 0.49);
+}
+.form-signin h1 {
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 30px;
+  color: #333333;
+}
+.form-signin img {
+  width: 130px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.form-signin hr {
+  margin: 35px 0;
+  color: #b5b7c7
+}
+.loginBtn button{
+  margin-top: 25px;
+  width: 330px;
+  height: 50px;
+  color: white;
+  /* background-color: #343646; */
+  background-color: #4154f1;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+}
+.loginBtn :hover, .loginBtn:focus:hover {
+  color: #fff;
+  background: #5969f3;
+}
+.sign-in-more-action{
+  margin-top: 25px;
+}
+.sign-in-more-action a{
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #535353;
+}
+/* 간편로그인 */
+.sns-l p {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #535353;
+}
+.sns-l img {
+  margin: 0 10px;
+  width: 40px;
+}

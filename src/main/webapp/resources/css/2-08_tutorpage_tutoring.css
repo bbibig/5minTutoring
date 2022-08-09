@@ -1,0 +1,47 @@
+.headers{
+  border-bottom: solid 1px gray;
+  
+}
+
+.badge{
+  width: 60px;
+  height: 20px;
+}
+
+#tutoring-title{
+ line-height: 20px;
+ height: 20px;
+}
+
+.info {
+  margin: 10px 0 0 57%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.info .red {
+  color: red;
+}
+
+.modal-body {
+  padding-top: 0;
+}
+
+form div {
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+/* ck-editor 속성 설정 */
+.ck-content {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ck-editor__editable { 
+  height: 350px; 
+}
+
+.ck-editor__main {
+  padding: 0;
+}

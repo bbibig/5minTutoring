@@ -1,0 +1,104 @@
+/* main title */
+h2 {
+    font-size: 35px;
+    display: inline-block;
+    padding-bottom: 20px;
+
+}
+
+#ask_bt {
+    float: right;
+    border-radius: 5px;
+    border-style: none;
+    color: #fff;
+    background-color: #007aff;
+    padding: 8px;
+    margin-right: 5px;
+}
+
+/* ask card */
+.ask_card {
+    border: 2px solid rgb(160, 160, 160);
+    border-radius: 10px;
+    margin-bottom: 10%;
+}
+
+.Sname {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sPic {
+    display: inline-block;
+}
+
+.student_info .sPic img {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 8px 30px 8px 20px;
+}
+
+.student_info {
+    border-bottom: 2px solid rgb(160, 160, 160);
+}
+
+.ask_title {
+    position: relative;
+    padding: 15px 15px;
+    padding-bottom: 50px;
+}
+
+.answer_ok {
+    position: absolute;
+    bottom: 7%;
+    left: 68%;
+    border: 2px solid #53a3f8;
+    border-radius: 10px;
+    padding: 3px;
+    font-size: 13px;
+    width: 28%;
+    text-align: center;
+}
+
+/* 답변 완료 예시: 나중에 이벤트 처리할거임. */
+.ex {
+    color: #fff;
+    background-color:#007aff;
+    border: 2px solid #007aff;
+}
+
+/* modal */
+.info {
+    margin: 10px 0 0 57%;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.info .red {
+    color: red;
+}
+
+.modal-body {
+    padding-top: 0;
+}
+
+form div {
+    padding: 5px 10px;
+    font-weight: 600;
+}
+
+/* ck-editor 속성 설정 */
+.ck-content {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ck-editor__editable { 
+    height: 350px; 
+}
+
+.ck-editor__main {
+    padding: 0;
+}

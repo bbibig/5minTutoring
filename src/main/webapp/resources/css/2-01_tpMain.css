@@ -1,0 +1,212 @@
+/* tutor구분 */
+h1 div {
+    float: left;
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 30px;
+    padding-bottom: 10px;
+}
+
+h1 div:first-child {
+    color: #333333;
+    margin-right: 1rem;
+}
+
+/* PROFILE */
+.tutorProfile {
+    padding: 0 0 40px;
+    background: #f9f9f9;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 5px 5px 5px rgb(233, 233, 233);
+    border-radius: 10%;
+}
+
+.tutorProfile:hover {
+    border-bottom: 5px solid #aaaaaa;
+}
+
+.tutorProfile .tPic {
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.tutorProfile .tPic::before {
+    content: "";
+    width: 100%;
+    height: 130%;
+    background: #dcecf8;
+    position: absolute;
+    bottom: 135%;
+    right: 0;
+    left: 0;
+    opacity: 1;
+    transform: scale(3);
+    transition: all 0.3s linear 0s;
+}
+
+.tutorProfile:hover .tPic::before {
+    height: 100%;
+    background: #383838;
+}
+
+.tutorProfile .tPic::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffffff00;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.3s linear 0s;
+}
+
+.tutorProfile:hover .tPic::after {
+    background: #ff822e;
+}
+
+.tutorProfile .tPic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.9s ease 0s;
+    box-shadow: 0 0 0 14px #f7f5ec;
+    transform: scale(0.7);
+    position: relative;
+    z-index: 2;
+}
+
+.tutorProfile:hover .tPic img {
+    box-shadow: 0 0 0 14px #f7f5ec;
+    transform: scale(0.7);
+}
+
+.tutorProfile .Tname {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 700;
+    color: #4e5052;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+.tutorProfile span:nth-of-type(1){
+    font-size: 16px;
+    font-weight: 600;
+    color: #4e5052;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.tutorProfile .post {
+    display: block;
+    font-size: 15px;
+    color: #4e5052;
+    text-transform: capitalize;
+    margin-bottom: 3px;
+}
+
+.tutorProfile .more {
+    width: 100%;
+    padding-top: 10px;
+    margin: 0;
+    background: #2f2f2f;
+    position: absolute;
+    bottom: -100px;
+    transition: all 0.5s ease 0s;
+}
+
+.tutorProfile:hover .more {
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+}
+
+.tutorProfile .more a {
+    display: block;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    font-size: 15px;
+    color: #fff;
+    transition: all 0.3s ease 0s;
+}
+
+.tutorProfile .more a:hover {
+    color: #2f2f2f;
+    background: #f7f5ec;
+}
+
+/* slide 버튼 */
+.carousel-control-prev-icon, .carousel-control-next-icon  {
+    background-color: #929292;
+    width: 30px;
+    height: 30px;
+}
+
+.carousel-control-prev {
+    position: relative;
+    left: -10%;
+    top: -40%;
+}
+
+.carousel-control-next {
+    position: relative;
+    right: -95%;
+    top: -50%;
+}
+
+.adjust_pre {
+    position: relative;
+    left: -10%;
+    top: -120px;
+}
+
+.adjust_nex {
+    position: relative;
+    right: -95%;
+    top: -150px;
+}
+
+/* 검색 정렬 */
+.subject_bt {
+    color: rgb(138, 138, 138);
+    width: 6%;
+    float: left;
+    border-radius: 5px;
+    border-style: none;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.selected {
+    background-color:#ff822e;
+    color: #fff;
+}
+
+#search_bt, #sort {
+    display: inline;
+    float: right;
+    margin-left: 10px;
+    
+}
+
+#sort {
+    margin-left: 10%;
+}
+
+#search_bt {
+    color: #0d6efd;
+    border-radius: 5px;
+    border-style: none;
+}
+
+

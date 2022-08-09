@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="assets/css/header_footer_yunjeong.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- 튜터페이지 CSS -->
+    <link rel="stylesheet" href="assets/css/2-00_tutorpage_baseform.css"><!--기본폼-->
+    <link rel="stylesheet" href="assets/css/3-01_community.css"> <!--커뮤니티.css-->
+
+    <!-- Page overriding CSS -->
+    <link rel="stylesheet" href="/assets/css/tutorpage_tutorinformation.css">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet">
+
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/56e5bc0e60.js" crossorigin="anonymous"></script>
+
+    <!--부트스트랩 아이콘-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <title>튜터페이지-커뮤니티</title>
+    
+  </head>
+  <body>
+    <header id="header" class="header fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center">
+  
+        <a href="main.html" class="logo d-flex align-items-center img-fluid animated ">
+          <!-- <img src="assets/img/logo.png" alt="" > -->
+          <img src="assets/img/5mtutoring.png" alt="">
+        </a>
+  
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="#">튜터</a></li>
+            <li><a class="nav-link scrollto d-xs-none" href="#">커뮤니티</a></li>
+            <li><a class="getstarted scrollto" style="margin-left: 700px;" href="#">로그인</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"style="margin-left:150px"></i>
+        </nav><!-- .navbar -->
+  
+      </div>
+    </header><!-- End Header -->
+    
+    <!-- ======= Section ======= -->
+    <section class="">
+      <div class="container">
+        <div class="row">         <!--===============================배너================================-->
+          <div class="banner">
+            <p style="line-height: 50px">&nbsp;&nbsp;&nbsp;커뮤니티</p>
+          </div>                 
+        </div> <!--===============================배너================================-->
+
+        <div class="coummunity-board"> <!--====================게시판(1.게시판 필터/검색/글쓰기 + 2.게시글) ==================================-->
+          
+          <div class="row d-flex flex-row" id="filter-box"> <!--============================1.게시판 필터/검색/글쓰기========================================-->
+
+            <div class="col-1 d-flex flex-row align-items-center">
+              <span class="badge text-dark fs-6">View&nbsp;&nbsp;</span>
+            </div>
+            
+            <div class="col-4 d-flex flex-row align-items-center">
+              <ul class="d-flex flex-row mb-0 ps-0 ">
+                <li class="list-unstyled text-dark ms-5"><a href="#"><span class="text-dark">최신순</span></a></li>
+                <li class="list-unstyled ms-5"><a href="#"><span class="text-dark">낮은평점순</span></a></li>
+                <li class="list-unstyled ms-5"><a href="#"><span class="text-dark">높은평점순</span></a></li>
+              </ul>
+            </div>
+
+            <div class="col-7">
+              <div class="row d-flex flex-row justify-content-end">
+                <form class="d-flex col-5"> 
+                  <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search"> 
+                  <button class="btn btn-primary" type="submit" id="search-button">검색</button> 
+                </form>
+  
+                <button id="write-button" type="submit" class="btn btn-dark col-2" data-bs-toggle="modal" data-bs-target="#community-write">
+                  글쓰기
+                </button>
+
+                <!--====================================글쓰기 모달=================================================-->
+                <div class="modal fade" id="community-write">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"># 글쓰기</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          
+                          <div class="modal-body">
+                              <form>
+                                  <div class="mb-3">
+                                      <label for="recipient-name" class="col-form-label">제목</label>
+                                      <input type="text" class="form-control" id="askTitle" placeholder="제목을 입력해주세요.">
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="message-text" class="col-form-label">내용</label>
+                                      <textarea class="form-control" id="askContent" placeholder="내용을 입력해주세요."></textarea>
+                                  </div>
+                              </form>
+                          </div>
+
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
+                              <button type="button" class="btn btn-primary col-2">저장</button>
+                          </div>
+
+                      </div>
+
+                  </div>
+
+                </div><!--====================================글쓰기 모달=================================================-->
+
+                
+              </div>  
+
+            </div>
+          </div> <!--============================1.게시판 필터/검색/글쓰기 end ========================================-->
+
+          <!--============================ 2.게시글 ========================================-->
+          <div class="board mt-5">
+            
+            <div class="row d-flex flex-column">  
+
+              <a href="" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+                <div class="board-box">
+                <div class="row">
+                  
+                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
+
+                    <div class="title">
+                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+                    </div>
+
+                    <div class="content">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
+                    </div>
+
+                    <div class="user_date d-flex flex-row">
+                      <div class="user">
+                        <strong>홍길동</strong>
+                      </div>
+                      <div class="date ms-4">
+                        2022-01-1
+                      </div>
+                    </div>
+                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+                  
+
+                  
+                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
+
+                    <div class="question_comment">
+                      <span class="comment_count">0</span>
+                      <span class="comment_decription">답변</span>
+                    </div>
+
+                    <div class="heart d-flex mt-4">
+                      <button class="heart-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+
+                        <span class="heart-count ms-1">0</span>
+
+                      </button>
+
+                    </div>
+
+                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
+                  
+                  
+                </div>
+                
+                </div>
+              </a><!--===============================================커뮤니티 박스end============================================-->
+
+              <a href="" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+                <div class="board-box">
+                <div class="row">
+                  
+                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
+
+                    <div class="title">
+                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+                    </div>
+
+                    <div class="content">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
+                    </div>
+
+                    <div class="user_date d-flex flex-row">
+                      <div class="user">
+                        <strong>홍길동</strong>
+                      </div>
+                      <div class="date ms-4">
+                        2022-01-1
+                      </div>
+                    </div>
+                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+                  
+
+                  
+                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
+
+                    <div class="question_comment">
+                      <span class="comment_count">0</span>
+                      <span class="comment_decription">답변</span>
+                    </div>
+
+                    <div class="heart d-flex mt-4">
+                      <button class="heart-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+
+                        <span class="heart-count ms-1">0</span>
+
+                      </button>
+
+                    </div>
+
+                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
+                  
+                  
+                </div>
+                
+                </div>
+              </a><!--===============================================커뮤니티 박스end============================================-->
+
+              <a href="" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+                <div class="board-box">
+                <div class="row">
+                  
+                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
+
+                    <div class="title">
+                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+                    </div>
+
+                    <div class="content">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
+                    </div>
+
+                    <div class="user_date d-flex flex-row">
+                      <div class="user">
+                        <strong>홍길동</strong>
+                      </div>
+                      <div class="date ms-4">
+                        2022-01-1
+                      </div>
+                    </div>
+                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+                  
+
+                  
+                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
+
+                    <div class="question_comment">
+                      <span class="comment_count">0</span>
+                      <span class="comment_decription">답변</span>
+                    </div>
+
+                    <div class="heart d-flex mt-4">
+                      <button class="heart-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+
+                        <span class="heart-count ms-1">0</span>
+
+                      </button>
+
+                    </div>
+
+                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
+                  
+                  
+                </div>
+                
+                </div>
+              </a><!--===============================================커뮤니티 박스end============================================-->
+
+              <a href="" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+                <div class="board-box">
+                <div class="row">
+                  
+                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
+
+                    <div class="title">
+                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+                    </div>
+
+                    <div class="content">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
+                    </div>
+
+                    <div class="user_date d-flex flex-row">
+                      <div class="user">
+                        <strong>홍길동</strong>
+                      </div>
+                      <div class="date ms-4">
+                        2022-01-1
+                      </div>
+                    </div>
+                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+                  
+
+                  
+                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
+
+                    <div class="question_comment">
+                      <span class="comment_count">0</span>
+                      <span class="comment_decription">답변</span>
+                    </div>
+
+                    <div class="heart d-flex mt-4">
+                      <button class="heart-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+
+                        <span class="heart-count ms-1">0</span>
+
+                      </button>
+
+                    </div>
+
+                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
+                  
+                  
+                </div>
+                
+                </div>
+              </a><!--===============================================커뮤니티 박스end============================================-->
+
+              <a href="" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+                <div class="board-box">
+                <div class="row">
+                  
+                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
+
+                    <div class="title">
+                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+                    </div>
+
+                    <div class="content">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
+                    </div>
+
+                    <div class="user_date d-flex flex-row">
+                      <div class="user">
+                        <strong>홍길동</strong>
+                      </div>
+                      <div class="date ms-4">
+                        2022-01-1
+                      </div>
+                    </div>
+                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+                  
+
+                  
+                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
+
+                    <div class="question_comment">
+                      <span class="comment_count">0</span>
+                      <span class="comment_decription">답변</span>
+                    </div>
+
+                    <div class="heart d-flex mt-4">
+                      <button class="heart-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+
+                        <span class="heart-count ms-1">0</span>
+
+                      </button>
+
+                    </div>
+
+                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
+                  
+                  
+                </div>
+                
+                </div>
+              </a><!--===============================================커뮤니티 박스end============================================-->
+           
+            </div>
+
+          </div><!--============================ 2.게시글 end========================================-->
+
+          <div class="page-button d-flex flex-row justify-content-center mt-3"> <!---======================페이지 버튼 end =======================-->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div> <!---======================페이지 버튼 end =========================-->
+          
+        </div> <!--====================게시판(1.게시판 필터/검색/글쓰기 + 2.게시글) end ==================================-->
+
+        
+        
+       
+        
+      </div> <!--섹션 전체 컨테이너 end-->
+    
+    </section><!-- End section -->
+      
+    
+  
+  
+  
+   <!-- ======= Footer ======= -->
+   <footer class="main-footer">
+  
+    <div class="container">
+      
+      <div class="footer-content">
+  
+        <img src="assets/img/hand.png" alt="">
+  
+        <div class="foot-link">
+          <ul>
+            <li><a href="#">자주 묻는 질문(FAQ)</a></li>
+            <li><a href="#">문의하기</a></li>
+          </ul>
+        </div>
+        
+        <div class="foot-info">
+          <ul>
+            <li>법인명: 오분과외 주식회사</li>
+            <li>사업자 등록번호: 144-81-25874</li>
+            <li>대표자명: 문희철</li>
+            <li>개인정보보호책임 : 이윤정</li>
+            <li>통신판매업신고 : 2019-서울강남-02231호</li>
+          </ul>
+        </div>
+  
+      </div>
+  
+      <hr>
+  
+      <p>&copy; Copyright <strong><span>2022 5mtutor</span></strong>. All Rights Reserved</p>
+    </div>
+  
+  </footer>
+  <!-- End Footer -->
+  
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/ko.js"></script>
+    <script>
+        ClassicEditor.create(document.querySelector('#askContent'), {
+            language: "ko"
+        });
+    </script>    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    
+  </body>
+</html>
