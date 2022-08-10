@@ -112,7 +112,7 @@
 	
 	                    <div class="row">
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card">
+	                            <div class="ask_card" onclick="location.href='watchAnswer';">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
@@ -130,7 +130,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card">
+	                            <div class="ask_card" onclick="location.href='watchAnswer';">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
@@ -145,7 +145,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card">
+	                            <div class="ask_card" onclick="location.href='watchAnswer';">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
@@ -162,7 +162,7 @@
 	                    </div>
 	                    <div class="row">
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card">
+	                            <div class="ask_card" onclick="location.href='watchAnswer';">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
@@ -177,7 +177,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card">
+	                            <div class="ask_card" onclick="location.href='watchAnswer';">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
@@ -192,7 +192,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card">
+	                            <div class="ask_card" onclick="location.href='watchAnswer';">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
