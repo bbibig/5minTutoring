@@ -19,7 +19,7 @@
 
         <body>
             <!-- ======= header : 로그인 후 ======= -->
-            <jsp:include page="../header.jsp" flush="true" />
+			<jsp:include page="../header_login.jsp" flush="true" />
             <!-- ======= header ======= -->
             
              <!-- ======= Section ======= -->
