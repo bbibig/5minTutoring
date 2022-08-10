@@ -85,30 +85,55 @@
                             </div>
                         </div>
 
+                        
                         <div class="container answer">
                             <!--답변하기 전체박스-->
-
+            
                             <div class="titlebox row">
-                                <!--제목상자-->
-                                <div class="col-1 fs-2 fw-bold">A.</div>
-                                <div class="col-9 fs-4 fw-bold">답변입니다.</div>
-                                <div class="col-2">2022-07-21</div>
+                            <!--제목상자-->
+                            <div class="col-1 fs-2 fw-bold">A.</div>
+                            <div class="col-9 fs-4 fw-bold">답변입니다.</div>
+                            <div class="col-2">2022-07-21</div>
                             </div>
-                            <div class="contentbox">
-                                <!-- 문의 내용 글상자(회색) -->
-
-                                <div class="content fs-6">
-                                    <!-- 문의 내용 -->
-                                    문의하신 글에 대한 답변입니다. 감사합니다.
+            
+                            <div class="col-lg-12 answer">
+                
+                            <form action="#">
+                                <!-- <textarea name="text" id="answerWrite"></textarea> -->
+                                <div class="text-box">                              
+                                    <textarea class="form-control" placeholder="" id="floatingTextarea1" style="height: 150px" required></textarea>
                                 </div>
+                            </form>
+            
                             </div>
-                        </div>
-
+            
+                        <!-- CKEditor5 CDN 연결 및 언어 설정 -->
+                        <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+                        <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/ko.js"></script>
+                        <script>
+                            ClassicEditor.create(document.querySelector('#answerWrite'), {
+                                language: "ko"
+                            });
+                        </script>
+                    </div>
+            
                         <!-- 목록으로 버튼 -->
-
-                        <a href="/admin/answerBoard_NO">
-                            <button class="btn-list" type="">목록으로</button>
-                        </a>
+                        <div class="buttonlist d-flex flex-row justify-content-end">
+                            <ul>
+                            <li>
+                                <a href="#">
+                                <button class="btn-inquiry" type="" >목록으로</button>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <button class="btn-inquiry" type="submit" >답변등록</button>
+                                </a>
+                            </li>
+                            </ul>
+                        </div>
+            
+                            
 
                         <!--End main contents card(박스)-->
                     </div>

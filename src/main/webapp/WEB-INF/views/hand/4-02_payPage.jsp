@@ -26,11 +26,11 @@
             <div class="container">
 
                 <!-- 뒤로가기 -->
-                <div class="page-back">
+                <!-- <div class="page-back">
                 <a href="/hand/buyHands">
                     <img src="${path}/resources/img/back.png" alt="">
                 </a>
-                </div>
+                </div> -->
 
                 <!-- 손들기 구매하기 -->
                 <section class="pay-page">
@@ -98,9 +98,9 @@
                     </tbody>
                 </table>
                 
-                <a href="#">
-                <button class="payBtn" type="" >결제하기</button>
-                </a>
+
+                <button type="submit" class="payBtn">결제하기</button>
+
 
                 </section>
 

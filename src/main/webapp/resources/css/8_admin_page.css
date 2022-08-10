@@ -271,7 +271,7 @@ select{
 }
 
 /* 목록으로 버튼 */
-.btn-list {
+.btn-inquiry {
   clear: both;
   float: right;
   display: inline;
@@ -286,10 +286,24 @@ select{
   font-size: 16px;
 }
 
-.btn-list:hover, .btn-list:focus:hover {
+.btn-inquiry:hover, .btn-inquiry:focus:hover {
   color: #fff;
   background: #505050;
 }
+.buttonlist {
+  clear: both;
+  float: right;
+}
+.buttonlist li {
+  /* float: right; */
+  display: inline-block;
+}
+
+.text-box textarea{
+  border: 1px solid #c8c8c8;
+  resize: none;
+}
+
 
 /* ========================================== */
 /*            자주묻는 질문 (8-5)             */

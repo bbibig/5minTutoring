@@ -26,11 +26,11 @@
             <div class="container">
 
                 <!-- 뒤로가기 -->
-                <div class="page-back">
+                <!-- <div class="page-back">
                 <a href="#">
                     <img src="${path}/resources/img/back.png" alt="">
                 </a>
-                </div>
+                </div> -->
 
                 <!-- 손들기 구매하기 -->
                 <section class="buy-hands">

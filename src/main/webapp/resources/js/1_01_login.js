@@ -14,6 +14,7 @@ function findmypwbt() {
         icon: 'success',      // Alert 타입
         confirmButtonText: '로그인하러 가기',
         confirmButtonAriaLabel: '',
+<<<<<<< HEAD
         // showCloseButton: true
     }).then((result)=>{
         if(result.isConfirmed){
@@ -27,6 +28,13 @@ function loginPage(){
     window.location.href='/login'
 }
 
+=======
+        showCloseButton: true
+    }).then(function(){
+        window.location.href="login/1-02_login"
+      });
+};//login
+>>>>>>> dfd5f00 (hand 뒤로가기 삭제, admin 문의하기 글 작성폼)
 
 function findmypwNotfoundbt() {
     Swal.fire({
