@@ -54,13 +54,8 @@
 
                     <!-- 이메일/비번찾기 회원가입 -->
                     <div class="sign-in-more-action">
-<<<<<<< HEAD
-                        <a href="/login/foundEmail">이메일 찾기</a>
-                        <a href="/login/notFoundEmail">비밀번호 찾기</a>
-=======
                         <a href="/login/findMyEmail">이메일 찾기</a>
                         <a href="/login/findMyPassword">비밀번호 찾기</a>
->>>>>>> a774113 (edit logincontroller, login.jsp, login.js)
                         <a href="/login/selectAccount">회원가입</a>
                     </div>
 
