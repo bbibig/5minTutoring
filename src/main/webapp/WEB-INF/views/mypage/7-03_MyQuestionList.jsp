@@ -65,32 +65,32 @@
             <tbody>
               <tr>
                 <th scope="row">1</th>
-                <td colspan="2"><a href="#">질문글 제목입니다.</a></td>
+                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">2</th>
-                <td colspan="2"><a href="#">질문글 제목입니다.</a></td>
+                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">3</th>
-                <td colspan="2"><a href="#">질문글 제목입니다.</a></td>
+                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">4</th>
-                <td colspan="2"><a href="#">질문글 제목입니다.</a></td>
+                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">5</th>
-                <td colspan="2"><a href="#">질문글 제목입니다.</a></td>
+                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">6</th>
-                <td colspan="2"><a href="#">질문글 제목입니다.</a></td>
+                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
             </tbody>

@@ -70,27 +70,27 @@
             <tbody>
               <tr>
                 <th scope="row">1</th>
-                <td colspan="2"><a href="#">커뮤니티 제목입니다.</a></td>
+                <td colspan="2"><a href="/community/post">커뮤니티 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">2</th>
-                <td colspan="2"><a href="#">커뮤니티 제목입니다.</a></td>
+                <td colspan="2"><a href="/community/post">커뮤니티 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">3</th>
-                <td colspan="2"><a href="#">커뮤니티 제목입니다.</a></td>
+                <td colspan="2"><a href="/community/post">커뮤니티 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">4</th>
-                <td colspan="2"><a href="#">커뮤니티 제목입니다.</a></td>
+                <td colspan="2"><a href="/community/post">커뮤니티 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
               <tr>
                 <th scope="row">5</th>
-                <td colspan="2"><a href="#">커뮤니티 제목입니다.</a></td>
+                <td colspan="2"><a href="/community/post">커뮤니티 제목입니다.</a></td>
                 <td class=>2022-08-01</td>
               </tr>
             </tbody>
