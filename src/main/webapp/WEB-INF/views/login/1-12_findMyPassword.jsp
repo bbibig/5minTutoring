@@ -48,10 +48,8 @@
 
                     </div>
 
-
-                    <a>
                     <button class="moveTologinBtn" type="submit"  onclick="findmypwbt()">인증하고 비밀번호 찾기</button>
-                    </a>
+                   
 
                 </div>
 
