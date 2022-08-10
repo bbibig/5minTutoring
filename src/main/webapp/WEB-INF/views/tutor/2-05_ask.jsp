@@ -5,6 +5,7 @@
 		<!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
 			<jsp:include page="../htmlHead.jsp" flush="true" />
 			<link href="/resources/css/1-02_login.css" rel="stylesheet">
+			<link href="/resources/css/2-00_tutorpage_baseform.css" rel="stylesheet">
 		<!-- ========================================================= -->
 		
 	    <!-- CSS 추가 -->
