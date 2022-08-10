@@ -122,42 +122,6 @@
 
 	<!-- ======= End Hero Section ======= -->
 
-	<!--=========================================모달==================================================-->
-
-
-	<div class="modal fade" id="withdrawal" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content d-flex flex-column justify-content-center">
-
-				<div class="modal-body">
-					<div class="pop-up-body d-flex flex-column align-items-center">
-
-						<div class="warnning-img">
-							<i class="bi bi-exclamation-circle" style="font-size: 5rem"></i>
-						</div>
-
-						<p class="my-3 ">
-							<strong class="fs-4">회원탈퇴를 하시겠습니까?</strong>
-						</p>
-
-						<div class="pop-up-button-box d-flex flex-row align-self-center">
-							<button type="button" class="btn btn-outline-primary"
-								data-bs-dismiss="modal">취소</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="btn btn-outline-primary">확인</button>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-	</div>
-
 
 	<!-- ============= 공통 footer + js ======================== -->
 	<jsp:include page="../footer.jsp" flush="true" />

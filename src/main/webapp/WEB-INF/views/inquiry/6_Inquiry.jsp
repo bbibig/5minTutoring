@@ -63,8 +63,8 @@
 						<div class="row">
 							<div class="d-flex flex-row justify-content-center">
 								<a class="btn btn-outline-dark me-1" href="/mypage/qList"
-									role="button">목록으로</a> <input class="btn btn-dark ms-1"
-									type="submit" value="문의하기">
+									role="button">목록으로</a> 
+								<input class="btn btn-dark ms-1" type="submit" value="문의하기" href="/mypage/qList">
 							</div>
 						</div>
 
