@@ -64,7 +64,7 @@
 							안내해드리겠습니다.
 						</p>
 						<div class="d-grid col-2 mx-auto">
-							<a class="btn btn-dark btn-lg" href="/inquiry/inquiryForm"
+							<a class="btn btn-dark btn-lg" href="/inquiry"
 								role="button">문의하기</a>
 						</div>
 					</div>

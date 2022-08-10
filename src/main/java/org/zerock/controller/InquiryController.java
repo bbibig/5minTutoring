@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @NoArgsConstructor
 
-@RequestMapping("/inquiry")	//기본URI(Base URI)
+@RequestMapping("/inquiry")	 // post방식
 @Controller
 public class InquiryController {
 	

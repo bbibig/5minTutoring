@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class MypageController {
 		return "mypage/7-02_TutorPage";
 	}// tutorPage
 	
-	@RequestMapping("/myQuestion")
+	@RequestMapping("/myQuestion")		
 	public String myQuestion() {
 		log.trace("7-03_MyQuestionList");
 		
@@ -49,35 +50,35 @@ public class MypageController {
 		return "mypage/7-05_CommunityC";
 	}// communityComments
 	
-	@RequestMapping("/qList")
+	@GetMapping("/qList")	// GET
 	public String qList() {
 		log.trace("7-06_QList");
 		
 		return "mypage/7-06_QList";
 	}// qList
 	
-	@RequestMapping("/question")
+	@GetMapping("/question") // GET
 	public String question() {
 		log.trace("7-07_Q");
 		
 		return "mypage/7-07_Q";
 	}// question
 	
-	@RequestMapping("/qAndA")
+	@GetMapping("/qAndA")	// GET
 	public String qAndA() {
 		log.trace("7-07_QandA");
 		
 		return "mypage/7-07_QandA";
 	}// qAndA
 	
-	@RequestMapping("/unregister")
+	@RequestMapping("/unregister")	// POST
 	public String unregister() {
 		log.trace("7-08_Unregister");
 		
 		return "mypage/7-08_Unregister";
 	}// unregister
 	
-	@RequestMapping("/unregister/completed")
+	@GetMapping("/unregister/completed")	// GET
 	public String unregisterCompleted() {
 		log.trace("7-09_UnregisterCompleted");
 		
@@ -119,14 +120,14 @@ public class MypageController {
 		return "mypage/7-14_TutorHandsListWithdraw";
 	}// tutorHandsWithdraw
 	
-	@RequestMapping("/withdraw")
+	@RequestMapping("/withdraw")	// POST
 	public String withdraw() {
 		log.trace("7-15_Withdraw");
 		
 		return "mypage/7-15_Withdraw";
 	}// withdraw
 	
-	@RequestMapping("/withdraw/completed")
+	@GetMapping("/withdraw/completed")	// GET
 	public String withdrawCompleted() {
 		log.trace("7-16_WithdrawCompleted");
 		

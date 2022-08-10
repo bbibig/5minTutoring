@@ -9,13 +9,13 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @NoArgsConstructor
 
-@RequestMapping("/faq")	//기본URI(Base URI) 부모폴더 이름
+@RequestMapping("/faq")	
 @Controller
 public class FaqController {
 
 	@RequestMapping	
 	public String faq() {
-		log.trace("5_faq 자주 묻는 질문 테스트");
+		log.trace("5_faq 자주 묻는 질문");
 		
 		return "faq/5_FAQ";
 	} // String faq
