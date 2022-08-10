@@ -24,8 +24,8 @@ function findmypwbt() {
 }; //login
 
 function loginPage(){
-    window.location.href='/login'
-}
+    window.location.href="login/1-02_login.jsp"
+};
 
 
 function findmypwNotfoundbt() {
