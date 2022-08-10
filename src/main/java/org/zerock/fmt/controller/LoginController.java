@@ -63,4 +63,34 @@ public class LoginController {
 	}
 	
 
+	
+	@GetMapping("/findMyEmail")
+	public String findMyEmail() {
+		log.trace("findMyEmail() invoked.");
+		
+		return "login/1-09_findMyEmail";
+	}
+	
+	@GetMapping("/foundEmail")
+	public String foundEmail() {
+		log.trace("signupReq() invoked.");
+		
+		return "login/1-10_foundEmail";
+	}
+	
+	@GetMapping("/notFoundEmail")
+	public String notFoundEmail() {
+		log.trace("notFoundEmail() invoked.");
+		
+		return "login/1-11_notFoundEmail";
+	}
+	
+	@GetMapping("/findMyPassword")
+	public String findMyPassword() {
+		log.trace("findMyPassword() invoked.");
+		
+		return "login/1-12_findMyPassword";
+	}
+	
+
 }//end class
