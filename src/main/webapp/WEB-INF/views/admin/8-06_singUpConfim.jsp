@@ -106,7 +106,7 @@
                                         <td class="dropdown">
                                             <a href="" class="dropbtn">abcde@gmail.com</a>
                                             <div class="dropdown-content" id="myDropdown2">
-                                                <a href="#" onclick="openUserPop()" >회원 정보 조회</a>
+                                               <a href="#" onclick="openTutorPop()">회원 정보 조회</a>
                                             </div>
                                         </td>
 

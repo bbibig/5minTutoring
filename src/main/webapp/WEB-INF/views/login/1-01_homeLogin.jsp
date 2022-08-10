@@ -48,7 +48,7 @@
             </section><!-- End Hero -->
 
             <!-- ============= 공통 footer + js =============== -->
-            <jsp:include page="../footer.jsp" flush="true" />
+             <jsp:include page="../footer_before.jsp" flush="true" />
             <!-- ============================================== -->
         </body>
 

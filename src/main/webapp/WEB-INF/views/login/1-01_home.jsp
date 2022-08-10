@@ -51,8 +51,8 @@
 
 
 
-      <!-- ============= 공통 footer + js =============== -->
-      <jsp:include page="../footer.jsp" flush="true" />
+      <!-- ============= 로그인 전 풋터 =============== -->
+       <jsp:include page="../footer_before.jsp" flush="true" />
       <!-- ============================================== -->
     </body>
 

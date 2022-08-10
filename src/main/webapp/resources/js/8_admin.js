@@ -110,6 +110,14 @@ function openUserPop() {
         "width=310, height=400, left=1000, top=100, status=0 location=0",
         scrollbars = "no");
 }//openUserPop;
+
 function closeUserPop() {
     popup = window.close();
 }//closeUserPop
+
+//튜터승인 정보 조회
+function openTutorPop() {
+    popup = window.open("/admin/tutorInfo", "이거뭐지?",
+        "width=310, height=400, left=1000, top=100, status=0 location=0",
+        scrollbars = "no");
+}//openUserPop;
