@@ -182,9 +182,9 @@
             </section>
             <!-- End Hero -->
             
-            <!-- ============= 공통 footer + js =============== -->
+            <!-- ============= 로그인 전 풋터 아 헷갈린다고요 지금... =============== -->
              <jsp:include page="../footer_before.jsp" flush="true" />
-            <script src="${path}/resources/js/1-04_signUp.js"></script>
+            <script src="${path}/resources/js/1_01_login.js"></script>
             <!-- ============================================== -->
 
         </body>

@@ -48,7 +48,8 @@
             </section><!-- End Hero -->
 
             <!-- ============= 공통 footer + js =============== -->
-             <jsp:include page="../footer_before.jsp" flush="true" />
+            <jsp:include page="../footer.jsp" flush="true" />
+            <script src="${path}/resources/js/1_01_login.js"></script>
             <!-- ============================================== -->
         </body>
 
