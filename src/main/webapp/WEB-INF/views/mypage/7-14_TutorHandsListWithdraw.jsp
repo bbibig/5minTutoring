@@ -58,7 +58,7 @@
           <a href="/mypage/tutorHands/withdraw" class="btn bg-blue">출금 내역</a>
 
           <span class="float-end">
-            <form action="#" method="get" onsubmit="return dateCheck();">
+            <form action="/mypage/tutorHands/withdraw" method="get" onsubmit="return dateCheck();">
               <input type="date" name="dateFrom" id="dateFrom" required>
               -
               <input type="date" name="dateTo" id="dateTo" required>

@@ -61,7 +61,7 @@
           <a href="/mypage/studentHands/buy" class="btn btn-dark">구매 내역</a>
 
           <span class="float-end">
-            <form action="#" method="get" onsubmit="return dateCheck();">
+            <form action="/mypage/studentHands/use" method="get" onsubmit="return dateCheck();">
               <input type="date" name="dateFrom" id="dateFrom" required>
               -
               <input type="date" name="dateTo" id="dateTo" required>
