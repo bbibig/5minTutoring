@@ -15,35 +15,35 @@ import lombok.extern.log4j.Log4j2;
 public class MypageController {
 	
 	
-	@RequestMapping("/studentPage")
+	@RequestMapping("/studentPage")		//POST
 	public String studentPage() {
 		log.trace("7-01_StudentPage");
 		
 		return "mypage/7-01_StudentPage";
 	}// studentPage
 	
-	@RequestMapping("/tutorPage")
+	@RequestMapping("/tutorPage")		//POST
 	public String tutorPage() {
 		log.trace("7-02_TutorPage");
 		
 		return "mypage/7-02_TutorPage";
 	}// tutorPage
 	
-	@RequestMapping("/myQuestion")		
+	@GetMapping("/myQuestion")			//GET	
 	public String myQuestion() {
 		log.trace("7-03_MyQuestionList");
 		
 		return "mypage/7-03_MyQuestionList";
 	}// myQuestion
 	
-	@RequestMapping("/community/write")
+	@GetMapping("/community/write")		//GET	
 	public String communityWrite() {
 		log.trace("7-04_CommunityW");
 		
 		return "mypage/7-04_CommunityW";
 	}// communityWrite
 	
-	@RequestMapping("/community/comments")
+	@GetMapping("/community/comments")		//GET	
 	public String communityComments() {
 		log.trace("7-05_CommunityC");
 		
@@ -85,35 +85,35 @@ public class MypageController {
 		return "mypage/7-09_UnregisterCompleted";
 	}// unregisterCompleted
 	
-	@RequestMapping("/studentHands/use")
+	@GetMapping("/studentHands/use")		//Get
 	public String studentHandsUse() {
 		log.trace("7-10_StudentHandsListUse");
 		
 		return "mypage/7-10_StudentHandsListUse";
 	}// studentHandsUse
 	
-	@RequestMapping("/studentHands/buy")
+	@GetMapping("/studentHands/buy")		//GET
 	public String studentHandsBuy() {
 		log.trace("7-11_StudentHandsListBuy");
 		
 		return "mypage/7-11_StudentHandsListBuy";
 	}// studentHandsBuy
 	
-	@RequestMapping("/studentHands/buy/detail")
+	@GetMapping("/studentHands/buy/detail")		//GET
 	public String studentHandsBuyDetail() {
 		log.trace("7-12_StudentHandsListBuyD");
 		
 		return "mypage/7-12_StudentHandsListBuyD";
 	}// studentHandsBuyDetail
 	
-	@RequestMapping("/tutorHands/get")
+	@GetMapping("/tutorHands/get")		//GET
 	public String tutorHandsGet() {
 		log.trace("7-13_TutorHandsListGet");
 		
 		return "mypage/7-13_TutorHandsListGet";
 	}// tutorHandsGet
 	
-	@RequestMapping("/tutorHands/withdraw")
+	@GetMapping("/tutorHands/withdraw")		//GET
 	public String tutorHandsWithdraw() {
 		log.trace("7-14_TutorHandsListWithdraw");
 		
