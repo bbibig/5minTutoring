@@ -16,9 +16,9 @@
     
   </head>
   <body>
-    <!-- ======= header : 로그인 후 ======= -->
-    <jsp:include page="../header.jsp" flush="true" />
-    <!-- ======= header ======= -->
+     <!-- ============= 공통 Header : 로그인 후 =================== -->
+	    <jsp:include page="../header_login.jsp" flush="true" />
+     <!-- ========================================================= -->
   
     <!-- ======= Section ======= -->
     <section class="d-flex">
