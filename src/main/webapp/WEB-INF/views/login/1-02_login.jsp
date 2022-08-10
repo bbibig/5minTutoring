@@ -56,7 +56,7 @@
                     <div class="sign-in-more-action">
                         <a href="/login/foundEmail">이메일 찾기</a>
                         <a href="/login/notFoundEmail">비밀번호 찾기</a>
-                        <a href="/login/findMyPassword">회원가입</a>
+                        <a href="/login/selectAccount">회원가입</a>
                     </div>
 
                     <!-- 구분선 -->

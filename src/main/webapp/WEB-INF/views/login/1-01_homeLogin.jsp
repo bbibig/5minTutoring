@@ -10,7 +10,7 @@
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <!-- ========================================================= -->
 
-            <title>메인(튜터 로그인 후)</title>
+            <title>메인(로그인후)</title>
 
         </head>
 

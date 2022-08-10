@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class LoginController {
 	
-
+	//로그인화면
 	@GetMapping
 	public String login() {
 		log.trace("login() invoked.");
@@ -22,6 +22,7 @@ public class LoginController {
 		return "login/1-02_login";
 	}
 	
+	//회원가입 선택 
 	@GetMapping("/selectAccount")
 	public String selectAccount() {
 		log.trace("selectAccount() invoked.");
@@ -29,6 +30,7 @@ public class LoginController {
 		return "login/1-03_selectAccount";
 	}
 	
+	//회원가입폼 - 학생
 	@RequestMapping("/signUp_student")
 	public String signUp_student() {
 		log.trace("signUp_student() invoked.");
@@ -36,6 +38,7 @@ public class LoginController {
 		return "login/1-04_signUpStudent";
 	}
 	
+	//회원가입폼 - 튜터
 	@RequestMapping("/signUp_tutor")
 	public String signUp_tutor() {
 		log.trace("signUp_tutor() invoked.");
@@ -43,6 +46,7 @@ public class LoginController {
 		return "login/1-04_signUpTutor";
 	}
 	
+	//로그인 후 메인화면
 	@RequestMapping("/home")
 	public String loginHome() {
 		log.trace("loginHome() invoked.");
