@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 public class CommunityController {
 
 	
-	@RequestMapping
+	@GetMapping
 	public String communityPage() {
 		log.trace("communityPage()invoked");
 		

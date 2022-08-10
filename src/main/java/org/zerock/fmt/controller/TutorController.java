@@ -22,21 +22,21 @@ public class TutorController {
 	} // tpMain
 	
 	
-	@RequestMapping("/info")
+	@GetMapping("/info")
 	public String tutorinfo() {
 		log.trace("tutorinfo()invoked");
 		
 		return "tutor/2-02_tutorpage_info";
 	}//tutor info
 	
-	@RequestMapping("/writeReview")
+	@GetMapping("/writeReview")
 	public String writeReview() {
 		log.trace("writeReview()invoked");
 		
 		return "tutor/2-03_tutorpage_writereview";
 	}//tutor writeReview
 	
-	@RequestMapping("/reviewList")
+	@GetMapping("/reviewList")
 	public String reviewList() {
 		log.trace("reviewList()invoked");
 		
@@ -67,7 +67,7 @@ public class TutorController {
 	} // watchAnswer
 	
 	
-	@RequestMapping("/tutoring")
+	@GetMapping("/tutoring")
 	public String tutoring() {
 		log.trace("tutoring()invoked");
 		
