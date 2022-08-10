@@ -12,11 +12,7 @@ function findmypwbt() {
         title: 'abcdefg@gmail.com' ,
         text: '이 주소로 임시 비밀번호가 전송 되었습니다.',
         icon: 'success',      // Alert 타입
-<<<<<<< HEAD
-        confirmButtonText: '<a href="/login">로그인하러 가기</a>',
-=======
         confirmButtonText: '로그인하러 가기',
->>>>>>> 5187491 (login js)
         confirmButtonAriaLabel: '',
         // showCloseButton: true
     }).then((result)=>{

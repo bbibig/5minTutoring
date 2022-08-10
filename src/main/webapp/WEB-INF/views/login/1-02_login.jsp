@@ -54,13 +54,8 @@
 
                     <!-- 이메일/비번찾기 회원가입 -->
                     <div class="sign-in-more-action">
-<<<<<<< HEAD
                         <a href="/login/findMyEmail">이메일 찾기</a>
                         <a href="/login/findMyPassword">비밀번호 찾기</a>
-=======
-                        <a href="/login/foundEmail">이메일 찾기</a>
-                        <a href="/login/1-12_findMyPassword">비밀번호 찾기</a>
->>>>>>> 5187491 (login js)
                         <a href="/login/selectAccount">회원가입</a>
                     </div>
 
