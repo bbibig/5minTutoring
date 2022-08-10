@@ -44,6 +44,7 @@
       crossorigin="anonymous"></script>
     <!-- alert javascript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- js -->
     <script src="${path}/resources/js/main.js"></script>
