@@ -120,7 +120,6 @@
                                             <a href="#" class="dropbtn">abcde@gmail.com</a>
                                             <div class="dropdown-content" id="myDropdown1">
                                                 <a href="#" onclick="openUserPop()">회원 정보 조회</a>
-                                                <a href="/mypage/tutorPage">마이페이지</a> 
                                             </div>
                                         </td>
 
@@ -134,7 +133,6 @@
                                             <a href="#" class="dropbtn">abcde@gmail.com</a>
                                             <div class="dropdown-content" id="myDropdown2">
                                                 <a href="#" onclick="openUserPop()">회원 정보 조회</a>
-                                                <a href="/mypage/tutorPage">마이페이지</a> 
                                             </div>
                                         </td>
 
@@ -148,7 +146,6 @@
                                             <a href="#" class="dropbtn">abcde@gmail.com</a>
                                             <div class="dropdown-content" id="myDropdown3">
                                                 <a href="#" onclick="openUserPop()">회원 정보 조회</a>
-                                                <a href="/mypage/tutorPage">마이페이지</a> 
                                             </div>
                                         </td>
 
@@ -162,7 +159,6 @@
                                             <a href="#" class="dropbtn">abcde@gmail.com</a>
                                             <div class="dropdown-content" id="myDropdown4">
                                                 <a href="#" onclick="openUserPop()" >회원 정보 조회</a>
-                                                <a href="/mypage/tutorPage">마이페이지</a> 
                                             </div>
                                         </td>
 
@@ -176,7 +172,6 @@
                                             <a href="#" class="dropbtn">abcde@gmail.com</a>
                                             <div class="dropdown-content" id="myDropdown5">
                                                 <a href="#" onclick="openUserPop()" >회원 정보 조회</a>
-                                                <a href="/mypage/tutorPage">마이페이지</a> 
                                             </div>
                                         </td>
 
