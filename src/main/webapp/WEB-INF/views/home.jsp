@@ -39,21 +39,58 @@
               </div>
             </div>
             <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-              <img src="resources/img/teaching.png" class="img-fluid animated" alt="" width="500px"
-
-
-                height="500px">
+              <img src="resources/img/teaching.png" class="img-fluid animated" alt="" width="500px" height="500px">
             </div>
           </div>
         </div>
 
       </section><!-- End Hero -->
 
+      <footer class="main-footer">
+        <div class="container">
+          <div class="footer-content">
+            <img src="${path}/resources/img/hand.png" alt="" />
 
+            <div class="foot-link">
+              <ul>
+                <li><a href="/login">자주 묻는 질문(FAQ)</a></li>
+                <li><a href="/login">문의하기</a></li>
+              </ul>
+            </div>
 
-      <!-- ============= 공통 footer + js =============== -->
-      <jsp:include page="footer.jsp" flush="true" />
-      <!-- ============================================== -->
+            <div class="foot-info">
+              <ul>
+                <li>법인명: 오분과외 주식회사</li>
+                <li>사업자 등록번호: 144-81-25874</li>
+                <li>대표자명: 문희철</li>
+                <li>개인정보보호책임 : 이윤정</li>
+                <li>통신판매업신고 : 2019-서울강남-02231호</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr />
+
+          <p>
+            &copy; Copyright <strong><span>2022 5mtutor</span></strong>. All Rights Reserved
+          </p>
+        </div>
+      </footer>
+
+      <!-- ======= JS ======= -->
+
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+          class="bi bi-arrow-up-short"></i></a>
+
+      <!-- Option 1: Bootstrap Bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+      <!-- alert javascript -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+      <!-- js -->
+      <script src="${path}/resources/js/main.js"></script>
     </body>
 
     </html>
