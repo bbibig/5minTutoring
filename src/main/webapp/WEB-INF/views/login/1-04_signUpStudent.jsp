@@ -34,7 +34,7 @@
 
                             <div class="login_form">
 
-                                <form action="#" method="" enctype="text/plain" class="needs-validation" novalidate>
+                                <form action="#" method="post" enctype="text/plain" class="needs-validation" novalidate>
 
                                     <div class="form-group">
                                         <label for="email">이메일</label>

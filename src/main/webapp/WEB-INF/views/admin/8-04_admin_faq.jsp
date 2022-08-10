@@ -96,7 +96,8 @@
                                                 <!-- ▼수정삭제 버튼 -->
                                                 <div class="col-1 sidebutton" style="text-align: center;">
                                                     <div>
-                                                        <button type="submit">수정</button> | </button>삭제</button>
+                                                        <button type="submit">수정</button> | 
+                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,7 +124,8 @@
                                                 <!-- ▼수정삭제 버튼 -->
                                                 <div class="col-1 sidebutton" style="text-align: center;">
                                                     <div>
-                                                        <button type="submit">수정</button> | </button>삭제</button>
+                                                        <button type="submit">수정</button> | 
+                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +153,8 @@
                                                 <!-- ▼수정삭제 버튼 -->
                                                 <div class="col-1 sidebutton" style="text-align: center;">
                                                     <div>
-                                                        <button type="submit">수정</button> | </button>삭제</button>
+                                                        <button type="submit">수정</button> | 
+                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,8 +181,8 @@
                                                 <!-- ▼수정삭제 버튼 -->
                                                 <div class="col-1 sidebutton" style="text-align: center;">
                                                     <div>
-                                                        <button type="submit">수정</button> | <button class="deleteBtn"
-                                                            type="submit" onclick="deletebt()">삭제</button>
+                                                        <button type="submit">수정</button> | 
+                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,8 +209,8 @@
                                                 <!-- ▼수정삭제 버튼 -->
                                                 <div class="col-1 sidebutton" style="text-align: center;">
                                                     <div>
-                                                        <button type="submit">수정</button> | <button class="deleteBtn"
-                                                            type="submit" onclick="deletebt()">삭제</button>
+                                                        <button type="submit">수정</button> | 
+                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -244,6 +247,7 @@
                 <!-- End Section -->
 
                 <!--====================================글쓰기 모달=================================================-->
+                
                 <div class="modal fade" id="community-write">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
