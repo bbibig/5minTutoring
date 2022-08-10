@@ -6,7 +6,7 @@
 <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center">
 
-      <a href="/" class="logo d-flex align-items-center img-fluid animated ">
+      <a href="/login/home" class="logo d-flex align-items-center img-fluid animated ">
         <img src="${path}/resources/img/5mtutoring.png" alt=""></a>
 
       <nav id="navbar" class="navbar">
