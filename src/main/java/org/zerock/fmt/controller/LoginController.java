@@ -54,7 +54,7 @@ public class LoginController {
 		return "login/1-01_homeLogin";
 	}
 	
-	
+	// 튜터 회원가입 요청
 	@GetMapping("/signupReq")
 	public String signupReq() {
 		log.trace("signupReq() invoked.");
@@ -63,7 +63,7 @@ public class LoginController {
 	}
 	
 
-	
+	// 이메일 찾기
 	@GetMapping("/findMyEmail")
 	public String findMyEmail() {
 		log.trace("findMyEmail() invoked.");
@@ -71,6 +71,7 @@ public class LoginController {
 		return "login/1-09_findMyEmail";
 	}
 	
+	// 이메일 찾기 - 성공
 	@GetMapping("/foundEmail")
 	public String foundEmail() {
 		log.trace("signupReq() invoked.");
@@ -78,6 +79,7 @@ public class LoginController {
 		return "login/1-10_foundEmail";
 	}
 	
+	// 이메일 찾기 - 실패
 	@GetMapping("/notFoundEmail")
 	public String notFoundEmail() {
 		log.trace("notFoundEmail() invoked.");
@@ -85,6 +87,7 @@ public class LoginController {
 		return "login/1-11_notFoundEmail";
 	}
 	
+	// 비밀번호 찾기
 	@GetMapping("/findMyPassword")
 	public String findMyPassword() {
 		log.trace("findMyPassword() invoked.");
