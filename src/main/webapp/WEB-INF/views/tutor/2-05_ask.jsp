@@ -50,7 +50,7 @@
 	                                <a class="nav-link nav-tabs active" aria-current="page" href="info">튜터정보</a>
 	                            </li>
 	                            <li class="nav-item nav-tabs mt-3">
-	                                <a class="nav-link" href="reviewList">학생리뷰</a>
+	                                <a class="nav-link" href="writeReview">학생리뷰</a>
 	                            </li>
 	                            <li class="nav-item nav-tabs mt-3">
 	                                <a class="nav-link" href="ask">튜터에게 질문하기</a>

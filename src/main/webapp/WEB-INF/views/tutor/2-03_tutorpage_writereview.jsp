@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="write-button align-self-end">
-                  <input class="btn btn-dark my-2 col-push-4" type="submit" value="등록">
+                  <a class="btn btn-dark my-2 col-push-4" type="submit" href="/tutor/reviewList">등록</a>
                 </div>
 
             </div><!-- 리뷰 작성 박스 end-->
