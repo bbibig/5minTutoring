@@ -1,10 +1,4 @@
-.bir_yy,.bir_mm,.bir_dd{
-    width: 140px;
-    display: table-cell;
-}
-.bir_yy+.bir_mm, .bir_mm+.bir_dd{
-    padding-left: 10px;
-}
+
 .school,.grade{
     width: 210px;
     display: table-cell;

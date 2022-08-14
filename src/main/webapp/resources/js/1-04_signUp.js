@@ -6,9 +6,7 @@ let password = document.querySelector("#password")
 let passwordCheck = document.querySelector("#passwordCheck");
 let nickName = document.querySelector("#nickName")
 let userName = document.querySelector("#userName")
-let yy = document.querySelector("#yy")
-let mm = document.querySelector("#mm")
-let dd = document.querySelector("#dd")
+let yy = document.querySelector("#user_birth")
 let gender = document.querySelector("#gender") 
 let phone = document.querySelector("#phone")
 let school = document.querySelector("#school")
@@ -88,7 +86,7 @@ userName.addEventListener("input",function(){
 
 yy.addEventListener("input",function(){
   let inputData = this.value;
-  isvalid = inputData.length===4;
+  isvalid = inputData.length===8;
 
   if(!isvalid){
     this.classList.remove("is-valid");
@@ -97,33 +95,7 @@ yy.addEventListener("input",function(){
     this.classList.remove("is-invalid");
     this.classList.add("is-valid");
   }//if-else
-})////yy 
-
-mm.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length > 0;
-
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////mm 
-
-dd.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length >=1;
-
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////dd 
+})////user_birth 
 
 gender.addEventListener("input",function(){
   let inputData = this.value;

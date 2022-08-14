@@ -38,14 +38,14 @@
 
                                     <div class="form-group">
                                         <label for="email">이메일</label>
-                                        <input type="email" class="form-control" id="email" data-kv="email"
+                                        <input type="email" class="form-control" id="user_email" data-kv="email"
                                             placeholder="example@email.com" required>
                                         <div class="invalid-feedback">이메일을 입력해주세요.</div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="password">비밀번호</label>
-                                        <input type="password" class="form-control" id="password" value
+                                        <input type="password" class="form-control" id="user_pw" value
                                             data-kv="password" spellcheck="false" placeholder="영문 숫자 포함8~15자로 입력하세요."
                                             required>
                                         <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label for="nickName">닉네임</label>
                                         <div class="nick">
-                                            <input type="text" class="form-control" id="nickName"
+                                            <input type="text" class="form-control" id="user_nick"
                                                 placeholder="영문 한글 숫자 2~10자" onclick="" required
                                                 style="width:73%;float:left">
                                             <button type="button" class="btn btn-outline-primary mt-2"
@@ -73,7 +73,7 @@
 
                                     <div class="form-group mt-2">
                                         <label for="userName">이름</label>
-                                        <input type="text" class="form-control" id="userName" required>
+                                        <input type="text" class="form-control" id="user_name" required>
                                         <div class="invalid-feedback">이름을 입력해주세요.</div>
                                     </div>
 
@@ -81,12 +81,12 @@
                                         <label for="userbrith">생년월일</label>
                                         <div class="bir_yy">
                                             <span class="ps_box">
-                                                <input type="text" class="form-control" id="yy" placeholder="년(4자)"
-                                                    maxlength="4" required>
+                                                <input type="text" class="form-control" id="user_birth" 
+                                                placeholder="ex)20220815" maxlength="8" required>
                                             </span>
                                             <div class="invalid-feedback"></div>
                                         </div>
-                                        <div class="bir_mm">
+                                        <!-- <div class="bir_mm">
                                             <span class="ps_box">
                                                 <select class="form-select" id="mm" required>
                                                     <option> </option>
@@ -112,14 +112,14 @@
                                                     maxlength="2" required>
                                             </span>
                                             <div class="invalid-feedback"></div>
-                                        </div>
+                                        </div>-->
 
-                                    </div>
+                                    </div> 
                                     <!--생년월일-->
 
                                     <div class="form-group">
                                         <label for="gender">성별 </label>
-                                        <select class="form-select" id="gender" required>
+                                        <select class="form-select" id="user_gender" required>
                                             <option selected> </option>
                                             <option value="남자"> 남자 </option>
                                             <option value="여자"> 여자 </option>
@@ -130,7 +130,7 @@
                                     <div class="form-group">
                                         <label for="phone">휴대전화</label>
                                         <div>
-                                            <input type="text" class="form-control" id="phone"
+                                            <input type="text" class="form-control" id="user_phone"
                                                 style="width:75%;float:left">
                                             <button type="button" class="btn btn-outline-primary mt-2"
                                                 style="float: right">
@@ -143,7 +143,7 @@
                                         <div class="school">
                                             <span class="ps_box">
                                                 <label for="schoolGrade"> 학교 </label>
-                                                <select class="form-select" id="school" required>
+                                                <select class="form-select" id="st_school" required>
                                                     <option> </option>
                                                     <option value="중"> 중학교</option>
                                                     <option value="고">고등학교</option>
@@ -154,7 +154,7 @@
                                         <div class="grade">
                                             <span class="ps_box">
                                                 <label for="schoolGrade"> 학년</label>
-                                                <select class="form-select" id="grade" required>
+                                                <select class="form-select" id="st_grade" required>
                                                     <option> </option>
                                                     <option value="1">1학년</option>
                                                     <option value="2">2학년</option>
