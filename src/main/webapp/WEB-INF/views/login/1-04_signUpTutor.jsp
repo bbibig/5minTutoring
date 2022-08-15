@@ -38,7 +38,7 @@
 
                             <div class="form-group">
                                 <label for="email">이메일</label>
-                                <input type="email" class="form-control" id="user_eamil" data-kv="email"
+                                <input type="email" class="form-control" id="user_email" data-kv="email"
                                     placeholder="example@email.com" required="required" autofocus="autofocus"
                                     maxlength="25">
                                 <div class="invalid-feedback">이메일을 입력해주세요.</div>
@@ -78,36 +78,12 @@
 
                             <div class="form-group">
                                 <label for="userbrith">생년월일</label>
-                                <div class="bir_yy">
+                                <div class="birth">
                                     <span class="ps_box">
-                                        <input type="text" class="form-control" id="user_birth" 
-                                        placeholder="ex)20220815" maxlength="8">
+                                        <input type="text" class="form-control" id="user_birth" placeholder="년(4자)"
+                                            maxlength="4">
                                     </span>
                                 </div>
-                                <!-- <div class="bir_mm">
-                                    <span class="ps_box">
-                                        <select class="form-select" id="mm">
-                                            <option selected>월</option>
-                                            <option value="1">1월</option>
-                                            <option value="2">2월</option>
-                                            <option value="3">3월</option>
-                                            <option value="4">4월</option>
-                                            <option value="5">5월</option>
-                                            <option value="6">6월</option>
-                                            <option value="7">7월</option>
-                                            <option value="8">8월</option>
-                                            <option value="9">9월</option>
-                                            <option value="10">10월</option>
-                                            <option value="11">11월</option>
-                                            <option value="12">12월</option>
-                                        </select>
-                                    </span>
-                                </div>
-                                <div class="bir_dd">
-                                    <span class="ps_box">
-                                        <input type="text" class="form-control" id="dd" placeholder="일" maxlength="2">
-                                    </span>
-                                </div> -->
                             </div>
                             <!--생년월일-->
 
@@ -156,7 +132,7 @@
                             <div class="form-group mt-2">
                                 <form action="#" method="post" enctype="multipart/form-data">
                                     <label for="formFile" class="form-label">재학/졸업증명서 첨부</label>
-                                    <input class="form-control" type="file" id="tt_certificate">
+                                    <input class="form-control" type="file" id="tt_caetificate">
                                     <div class="invalid-feedback">증명서를 첨부해주세요.</div>
                                 </form>
                             </div>

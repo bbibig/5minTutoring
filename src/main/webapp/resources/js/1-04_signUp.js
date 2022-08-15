@@ -1,16 +1,16 @@
 
 let isvalid=false;
 
-let eamil = document.querySelector("#email");
-let password = document.querySelector("#password")
+let eamil = document.querySelector("#user_email");
+let password = document.querySelector("#user_pw")
 let passwordCheck = document.querySelector("#passwordCheck");
-let nickName = document.querySelector("#nickName")
-let userName = document.querySelector("#userName")
-let yy = document.querySelector("#user_birth")
-let gender = document.querySelector("#gender") 
-let phone = document.querySelector("#phone")
-let school = document.querySelector("#school")
-let grade = document.querySelector("#grade")
+let nickName = document.querySelector("#user_nick")
+let userName = document.querySelector("#user_name")
+let birth = document.querySelector("#user_birth")
+let gender = document.querySelector("#user_gender") 
+let phone = document.querySelector("#user_phone")
+let school = document.querySelector("#st_school")
+let grade = document.querySelector("#st_grade")
 let tutorFile = document.querySelector("#tutor_signFile")
 
 
@@ -84,7 +84,7 @@ userName.addEventListener("input",function(){
 })////userName 
 
 
-yy.addEventListener("input",function(){
+birth.addEventListener("input",function(){
   let inputData = this.value;
   isvalid = inputData.length===8;
 
@@ -156,10 +156,14 @@ function login() {
     text: '5분과외 회원가입이 완료되었습니다.', 
     icon: 'success',      
     confirmButtonColor: '#3085d6',
-  }).then(function(){
-    document.location.href="/login/home"
-  });
+  })
+  // .then(function(){
+  //   document.location.href="/login/home"
+  // });
 };//login
+
+// --------------------------------------------------------------------
+
 
 function loginTutor() {
   Swal.fire({
