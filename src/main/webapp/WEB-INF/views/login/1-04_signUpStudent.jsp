@@ -46,14 +46,10 @@
 
                                     <div class="form-group">
                                         <label for="password">비밀번호</label>
-<<<<<<< HEAD
+
                                         <input type="password" class="form-control" id="user_pw" value
-                                            data-kv="password" spellcheck="false" placeholder="영문 숫자 포함8~15자로 입력하세요."
-=======
-                                        <input type="password" class="form-control" id="user_pw" value data-kv="password" 
-                                        spellcheck="false" placeholder="영문 숫자 포함8~15자로 입력하세요."
->>>>>>> 383a85e (UserVO/Mapper/Service)
-                                            required>
+                                            data-kv="password" spellcheck="false" placeholder="영문 숫자 포함8~15자로 입력하세요.">
+
                                         <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
                                     </div>
 
