@@ -41,7 +41,11 @@ public class LoginController {
 	}
 	
 	//회원가입폼 - 학생
+<<<<<<< HEAD
 	@GetMapping("/signUp_student")
+=======
+	@RequestMapping("/signUp_student")		// POST
+>>>>>>> 9b2293d (yyyyy)
 	public String signUp_student() {
 		log.trace("학생 회원가입 폼");	
 		return "login/1-04_signUpStudent";
@@ -61,7 +65,7 @@ public class LoginController {
 	
 	
 	//회원가입폼 - 튜터
-	@RequestMapping("/signUp_tutor")
+	@RequestMapping("/signUp_tutor")		// POST
 	public String signUp_tutor() {
 		log.trace("signUp_tutor() invoked.");
 		
