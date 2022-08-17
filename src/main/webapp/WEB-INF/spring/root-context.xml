@@ -16,9 +16,9 @@
 
 		<!-- 1. JDBC 연결정보 속성들에 값 설정-->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202204131245_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP" />
-		<property name="username" value="admin" />
-		<property name="password" value="Oracle12345678" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
+		<property name="username" value="ADMIN" />
+		<property name="password" value="Oracle1234567" />
 
 		<!-- 2. Connection Pool의 작동방식과 관련된 속성들에 값 설정 -->
 		<property name="maximumPoolSize" value="10" />
@@ -53,9 +53,9 @@
 
 		<property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 
-		<property name="url" value="jdbc:log4jdbc:oracle:thin:@db202204131245_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP" />
-		<property name="username" value="admin" />
-		<property name="password" value="Oracle12345678" />
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@db20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
+		<property name="username" value="ADMIN" />
+		<property name="password" value="Oracle1234567" />
 
 		<property name="poolMaximumActiveConnections" value="5" />
 		<property name="poolMaximumIdleConnections" value="2" />

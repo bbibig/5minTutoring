@@ -14,13 +14,13 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@NoArgsConstructor
+//@NoArgsConstructor
 
 @RequestMapping("/login")	//기본URI(Base URI)
 @Controller
 public class LoginController {
 	
-	@Setter(onMethod_ = @Autowired)
+//	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
 //------------------------------------------------------------//
 	
@@ -41,11 +41,11 @@ public class LoginController {
 	}
 	
 	//회원가입폼 - 학생
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	@GetMapping("/signUp_student")
-=======
+//=======
 	@RequestMapping("/signUp_student")		// POST
->>>>>>> 9b2293d (yyyyy)
+//>>>>>>> 9b2293d (yyyyy)
 	public String signUp_student() {
 		log.trace("학생 회원가입 폼");	
 		return "login/1-04_signUpStudent";
