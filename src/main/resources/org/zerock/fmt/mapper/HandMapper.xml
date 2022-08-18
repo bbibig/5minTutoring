@@ -6,6 +6,26 @@
 
 <mapper namespace="org.zerock.fmt.mapper.HandMapper">
 
-    
+    <!-- 구매하기 - 구매정보조회 -->
+    <select id="buyPayPage" parameterType="org.zerock.fmt.domain.BuyVO">
+      SELECT 
+      	b_number,
+        user_name, 
+        user_phone, 
+        tbl_user.user_email,
+        tbl_buy.h_number,
+        h_name,
+        h_price,
+        b_count, 
+        b_price
+        
+      FROM 
+        tbl_user, tbl_buy, tbl_hand
+      WHERE 
+        tbl_user.user_email = tbl_buy.user_email 
+        AND tbl_buy.h_number = tbl_hand.h_number
+    </select>
+
+
 </mapper>
         

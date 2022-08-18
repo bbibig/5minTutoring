@@ -9,6 +9,7 @@ public class HandVO {
 	private String h_name;			// 상품명
 	private Integer h_price;		// 상품금액
 	private Integer h_count;		// 상품 개수
+	
 
 	
 }//end class
