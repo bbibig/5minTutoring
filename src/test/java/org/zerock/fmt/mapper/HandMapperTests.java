@@ -15,8 +15,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.BuyVO;
+import org.zerock.fmt.domain.BuyDTO;
 import org.zerock.fmt.domain.HandVO;
+import org.zerock.fmt.domain.UserDTO;
+import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.HandException;
 
 import lombok.NoArgsConstructor;
@@ -84,6 +86,35 @@ public class HandMapperTests {
 //		log.info("\t+ payPage: {}", payPage);
 	}//getPayPage
 	
+	@Test
+	@Order(4)
+	@DisplayName("4. payPage1 TEST ")
+	void payPage1() throws HandException {
+		log.trace(" payPage1 손들기 구매페이지 테스트");
+		
+		String user_email = "STemail_1";
+		Integer h_number = 2;
+		
+		BuyDTO buyTest = this.handMapper.payPage1(user_email, h_number);
+		
+		log.info("\t + buyTEST : {}", buyTest);
+	}//payPage
+	
+	@Test
+	@Order(4)
+	@DisplayName("4. payPage2 TEST ")
+	void payPage2() throws HandException {
+		log.trace(" payPage2 손들기 구매페이지 테스트");
+		//결론 : DTO, VO로 넣었더니 파라미터를 못찾는다.. 말이되나 
+		UserVO user = new UserVO("STemail_1", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+//		user.setUser_email("STemail_1");
+		
+		HandVO hand = new HandVO(2, "손들기30개", 6600, null);
+		
+		BuyDTO buyTest = this.handMapper.payPage2(user, hand);
+		
+		log.info("\t + buyTEST : {}", buyTest);
+	}//payPage
 	
 	
 	

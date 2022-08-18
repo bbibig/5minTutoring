@@ -26,6 +26,27 @@
         AND tbl_buy.h_number = tbl_hand.h_number
     </select>
 
+    <!-- 구매페이지 test -->
+      <select id="payPage1" resultType="org.zerock.fmt.domain.BuyDTO">
+        SELECT 
+            u.*,
+            h.* 
+        FROM (SELECT USER_EMAIL, USER_NAME, USER_PHONE 
+              FROM tbl_user)u, 
+            TBL_HAND h
+        WHERE u.USER_EMAIL = #{user_email}
+        AND h.H_NUMBER = #{h_number}
+      </select>
 
+      <select id="payPage2" resultType="org.zerock.fmt.domain.BuyDTO">
+        SELECT 
+            u.*,
+            h.* 
+        FROM (SELECT USER_EMAIL, USER_NAME, USER_PHONE 
+              FROM tbl_user)u, 
+            TBL_HAND h
+        WHERE u.USER_EMAIL = #{user_email}
+        AND h.H_NUMBER = #{h_number}
+      </select>
 </mapper>
         

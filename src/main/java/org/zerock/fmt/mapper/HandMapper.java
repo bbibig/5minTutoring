@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.zerock.fmt.domain.BuyVO;
+import org.zerock.fmt.domain.BuyDTO;
 import org.zerock.fmt.domain.HandVO;
+import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.HandException;
 
 public interface HandMapper {
@@ -25,8 +26,17 @@ public interface HandMapper {
 	// 이름, 전화번호, 구매상품, 수량, 상품금액, 총금액
 	// user_name, user_phone, h_name, b_count, h_price, b_price
 //	public abstract BuyVO getPayPage(BuyVO payPage) throws HandException;
-	public abstract BuyVO getPayPage(@Param("b_number")BuyVO payPage) throws HandException;
-
+//	public abstract BuyVO getPayPage(@Param("b_number")BuyVO payPage) throws HandException;
+	
+	//-- test 1
+	public abstract BuyDTO payPage1(@Param("user_email")String user_email, 
+								   @Param("h_number") Integer h_number) throws HandException;
+	
+	//-- test 2
+	public abstract BuyDTO payPage2(@Param("user_email") UserVO user, 
+									@Param("h_number")HandVO hand)throws HandException;
+	
+	
 	// 보유손들기 조회
 	// 이메일, 손들기,
 	// user_email, hands_wallet

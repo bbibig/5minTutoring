@@ -1,8 +1,12 @@
 package org.zerock.fmt.domain;
 
+import lombok.Data;
 import lombok.Value;
 
 @Value
+@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class HandVO {
 	
 	private Integer h_number;		// 상품번호
