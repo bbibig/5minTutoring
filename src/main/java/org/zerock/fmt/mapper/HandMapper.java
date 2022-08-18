@@ -14,7 +14,7 @@ public interface HandMapper {
 	public abstract List<HandVO> selectAllHands() throws HandException;
 	
 	// 상품별 조회
-	@Select("SELECT * FROM tbl_hand WHERE {h_number}=#{h_number}")
+	@Select("SELECT * FROM tbl_hand WHERE h_number=#{h_number}")
 	public abstract HandVO selectHand(@Param("h_number") Integer hNum )throws HandException;
 
 }//end 

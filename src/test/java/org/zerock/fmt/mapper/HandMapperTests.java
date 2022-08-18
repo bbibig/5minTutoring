@@ -17,7 +17,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.HandVO;
 import org.zerock.fmt.exception.HandException;
-import org.zerock.fmt.exception.UserException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,16 +35,16 @@ import lombok.extern.log4j.Log4j2;
 public class HandMapperTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private HandMapper mapper;
+	private HandMapper handMapper;
 
 	@Test
 	@Order(1)
 	@DisplayName("  selectAllHands  ")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectAllHands() throws UserException, HandException {
+	void selectAllHands() throws HandException {
 		log.trace("selectAllHands() invoked. 전체 상품 조회");
 		
-		List<HandVO> list = this.mapper.selectAllHands();
+		List<HandVO> list = this.handMapper.selectAllHands();
 		list.forEach(log::info);
 	}//selectAllHands
 	
@@ -53,10 +52,10 @@ public class HandMapperTests {
 	@Order(2)
 	@DisplayName("  selectHand  ")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectHand() throws UserException, HandException {
+	void selectHand() throws HandException {
 		log.trace("selectHand() invoked. 상품별 조회");
 		
-		HandVO hand = this.mapper.selectHand(2);
+		HandVO hand = this.handMapper.selectHand(2);
 		log.info("\t+ hand: {}", hand);
 	}//selectAllHands
 	
