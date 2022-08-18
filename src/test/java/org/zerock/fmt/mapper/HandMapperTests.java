@@ -68,20 +68,20 @@ public class HandMapperTests {
 	void getPayPage() throws HandException {
 		log.trace("getPayPage() invoked. 구매하기 구매정보조회");
 		
-//		BuyVO payPage = this.handMapper.getPayPage(payPage);
+//		BuyVO payPage = this.handMapper.getPayPage(payPage.getB_number());
 		
-		BuyVO payPage = new BuyVO(
-								1, 
-								"name_1", 
-								"000-0000-0001",
-								"STemail_1", 
-								2, 
-								"손들기30개", 
-								6600,  
-								2, 
-								13200);
-		
-		log.info("\t+ payPage: {}", payPage);
+//		BuyVO payPage = new BuyVO(
+//								1, 
+//								"name_1", 
+//								"000-0000-0001",
+//								"STemail_1", 
+//								2, 
+//								"손들기30개", 
+//								6600,  
+//								2, 
+//								13200);
+//		
+//		log.info("\t+ payPage: {}", payPage);
 	}//getPayPage
 	
 	

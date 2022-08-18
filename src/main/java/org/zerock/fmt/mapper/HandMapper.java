@@ -25,7 +25,7 @@ public interface HandMapper {
 	// 이름, 전화번호, 구매상품, 수량, 상품금액, 총금액
 	// user_name, user_phone, h_name, b_count, h_price, b_price
 //	public abstract BuyVO getPayPage(BuyVO payPage) throws HandException;
-	public abstract BuyVO getPayPage(@Param("b_number")Integer bno) throws HandException;
+	public abstract BuyVO getPayPage(@Param("b_number")BuyVO payPage) throws HandException;
 
 	// 보유손들기 조회
 	// 이메일, 손들기,
