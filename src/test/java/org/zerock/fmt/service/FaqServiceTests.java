@@ -40,15 +40,15 @@ public class FaqServiceTests {
 	//1. 자주묻는 질문 목록 전체 조회 테스트
 	@Test
 	@Order(1)
-	@DisplayName("1. testGetList")
+	@DisplayName("1. testGetFaqList")
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
-	void testGetList() throws DAOException, ServiceException {
-		log.trace("testGetList(), 자주묻는 질문 리스트 전체 조회");
+	void testGetFaqList() throws ServiceException {
+		log.trace("testGetFaqList(), 자주묻는 질문 리스트 전체 조회");
 		
-		List<FaqVO> list = this.service.getList();
+		List<FaqVO> list = this.service.getFaqList();
 		list.forEach(e -> log.info(e));
 		
-	}//testGetList()
+	}//testGetFaqList()
 
 }// end class
 

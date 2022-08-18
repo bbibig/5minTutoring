@@ -9,6 +9,6 @@ import org.zerock.fmt.exception.ServiceException;
 public interface FaqService {
 	
 	//1. 자주묻는 질문 목록 전체 조회
-	public abstract List<FaqVO> getList() throws ServiceException;
+	public abstract List<FaqVO> getFaqList() throws ServiceException;
 
 }// end interface

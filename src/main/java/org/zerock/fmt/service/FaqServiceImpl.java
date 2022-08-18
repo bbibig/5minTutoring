@@ -25,10 +25,10 @@ public class FaqServiceImpl implements FaqService {
 	
 	
 	@Override
-	public List<FaqVO> getList() throws ServiceException {
+	public List<FaqVO> getFaqList() throws ServiceException {
 		log.trace("getList() 자주묻는 질문 리스트 전체 조회 서비스 메소드 호출");
 		
-		try { return this.mapper.selectAllList(); } 
+		try { return this.mapper.selectAllFaqList(); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 
 	}// getList()

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.FaqMapper">
+
+	<!-- 자주묻는 질문과 답 생성 -->
+    <insert id="insertFaq">
+        INSERT INTO tbl_faq 
+        VALUES ( faq_num.NEXTVAL, #{ad_id}, #{faq_title}, #{faq_content} )
+        <!-- faq_number는 일단 시퀀스로 생성해 봤습니다. -->
+    </insert>
+    
+    <!-- 자주묻는 질문과 답 수정 -->
+    <update id="updateFaq">
+    	UPDATE tbl_faq 
+    	SET ad_id = #{ad_id},
+    		faq_title = #{faq_title},
+    		faq_content = #{faq_content}
+    	WHERE faq_number = #{faq_number}
+    </update>
+
+</mapper>

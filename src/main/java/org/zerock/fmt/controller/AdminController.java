@@ -109,7 +109,7 @@ public class AdminController {
 		
 		//jsp화면에 어떻게 구현할지 테스트 중입니다!
 		try {
-			List<FaqVO> list = this.service.getList();
+			List<FaqVO> list = this.service.getFaqList();
 			model.addAttribute("_FAQLIST_",list);
 			
 			return "admin/8-04_admin_faq";
