@@ -92,8 +92,8 @@ public class HandMapperTests {
 	void payPage1() throws HandException {
 		log.trace(" payPage1 손들기 구매페이지 테스트");
 		
-		String user_email = "STemail_1";
-		Integer h_number = 2;
+		String user_email = "STemail_2";
+		Integer h_number = 1;
 		
 		BuyDTO buyTest = this.handMapper.payPage1(user_email, h_number);
 		

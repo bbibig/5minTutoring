@@ -14,6 +14,8 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class HandController {
 	
+	
+	
 	@GetMapping("/buyHands")
 	public String buyHands() {
 		log.trace("buyHands() invoked.");

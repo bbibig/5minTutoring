@@ -91,8 +91,8 @@ public class UserMapperTests {
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void updateUser() throws UserException {
 		
-		UserVO user = new UserVO("n2","1111","1111","11111","20220815","여자","01000","고등","1학년",null,null,null,null,
-				null,null,null,null,null,null);
+		UserVO user = new UserVO("n2","1111","1111","11111","20220815","여자","01000","고등","1학년"
+								,null,null,null,null, null,null,null,null,null,null);
 		Boolean updateResult = this.mapper.updateUser(user);
 		if(updateResult) {
 			log.info("\t + updateResult : {}", updateResult);
@@ -119,7 +119,7 @@ public class UserMapperTests {
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void stopUser() throws UserException {
 
-		UserVO user = new UserVO("t1", "t1", "t1", "t1", "20220000", "남자", "010",
+		UserVO user = new UserVO("STemail_5", "t1", "t1", "t1", "20220000", "남자", "010",
 				null, null, "재학", "국어", "file:c", null, null, null, null, null, null, null);
 		Boolean updateResult = this.mapper.stopUser(user);
 		

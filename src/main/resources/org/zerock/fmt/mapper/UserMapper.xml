@@ -52,11 +52,14 @@
 
     <!-- 튜터가입승인 -->
     <update id="approveTutor">
-        UPDATE tbl_user
-        SET pass='Accept'
+        UPDATE tbl_user 
+        
+        SET 손들기 = 손들기 + #{구매개수}
+        
         WHERE user_email=#{user_email}
     </update>
 
+    <!-- 유저활동정지 -->
     <update id="stopUser">
         UPDATE tbl_user
         SET user_status='STOP',
