@@ -1,10 +1,18 @@
 package org.zerock.fmt.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.fmt.domain.FaqVO;
+import org.zerock.fmt.exception.ControllerException;
+import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.FaqService;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -13,6 +21,10 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
+	
+	@Setter(onMethod_= @Autowired)
+	private FaqService service;
+	
 
 	@RequestMapping
 	public String adminLogin() {
@@ -92,10 +104,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/adminFAQ")
-	public String adminFAQ() {
+	public String adminFAQ(Model model) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용)");
 		
-		return "admin/8-04_admin_faq";
+		//jsp화면에 어떻게 구현할지 테스트 중입니다!
+		try {
+			List<FaqVO> list = this.service.getFaqList();
+			model.addAttribute("_FAQLIST_",list);
+			
+			return "admin/8-04_admin_faq";
+		} catch (ServiceException e) {
+			throw new ControllerException(e);
+		}// try-catch
 	}
 	
 	@RequestMapping("/sale/sell")

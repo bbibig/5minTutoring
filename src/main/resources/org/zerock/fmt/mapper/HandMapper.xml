@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.HandMapper">
+
+    <!-- 구매하기 - 구매정보조회 -->
+    <select id="buyPayPage" parameterType="org.zerock.fmt.domain.BuyVO">
+      SELECT 
+      	b_number,
+        user_name, 
+        user_phone, 
+        tbl_user.user_email,
+        tbl_buy.h_number,
+        h_name,
+        h_price,
+        b_count, 
+        b_price
+        
+      FROM 
+        tbl_user, tbl_buy, tbl_hand
+      WHERE 
+        tbl_user.user_email = tbl_buy.user_email 
+        AND tbl_buy.h_number = tbl_hand.h_number
+        AND b_number = #{b_number}
+    </select>
+
+    <!-- 구매페이지 test -->
+      <select id="payPage1" resultType="org.zerock.fmt.domain.BuyDTO">
+        SELECT 
+            u.*,
+            h.* 
+        FROM (SELECT USER_EMAIL, USER_NAME, USER_PHONE 
+              FROM tbl_user)u, 
+            TBL_HAND h
+        WHERE u.USER_EMAIL = #{user_email}
+        AND h.H_NUMBER = #{h_number}
+      </select>
+
+      <select id="payPage2" resultType="org.zerock.fmt.domain.BuyDTO">
+        SELECT 
+            u.*,
+            h.* 
+        FROM (SELECT USER_EMAIL, USER_NAME, USER_PHONE 
+              FROM tbl_user)u, 
+            TBL_HAND h
+        WHERE u.USER_EMAIL = #{user_email}
+        AND h.H_NUMBER = #{h_number}
+      </select>
+</mapper>
+        
