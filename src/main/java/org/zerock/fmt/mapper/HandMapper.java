@@ -8,6 +8,7 @@ import org.zerock.fmt.domain.BuyDTO;
 import org.zerock.fmt.domain.HandVO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.HandException;
+import org.zerock.fmt.exception.UserException;
 
 public interface HandMapper {
 
@@ -40,25 +41,16 @@ public interface HandMapper {
 	// 보유손들기 조회
 	// 이메일, 손들기,
 	// user_email, hands_wallet
-	public abstract HandVO selectMyHands() throws HandException;
+	@Select("SELECT user_email, hands_wallet FROM tbl_user WHERE user_email=#{user_email}")
+	public abstract UserVO getMyHands(@Param("user_email")String myWallet) throws UserException;
 	
 	
 	
-	// == insert == 
-	
-	
-	// 보유손들기 추가
-	// user_email, hands_wallet
-	public abstract HandVO addMyHands() throws HandException;
 
-	
 	// == update == 
-	
-	
-	// == delete ==
-	// 보유손들기 사용
 	// user_email, hands_wallet
-	public abstract HandVO deleteMyHands() throws HandException;
+	public abstract Integer updateMyHands(@Param("hands_wallet")Integer myWallet) throws UserException;
+	
 
 	
 }//end 
