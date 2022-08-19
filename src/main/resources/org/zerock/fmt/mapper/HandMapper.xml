@@ -24,6 +24,7 @@
       WHERE 
         tbl_user.user_email = tbl_buy.user_email 
         AND tbl_buy.h_number = tbl_hand.h_number
+        AND b_number = #{b_number}
     </select>
 
     <!-- 구매페이지 test -->
