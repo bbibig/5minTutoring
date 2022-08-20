@@ -2,9 +2,10 @@ package org.zerock.fmt.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ServiceException;
 
@@ -34,24 +36,106 @@ public class UserServiceTests {
 
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
-	
-	@BeforeAll
-	void beforeAll(){
-		assertNotNull(this.userService);
-		log.info("\t + this.userService : {}", this.userService);
-	}
+
 	
 	@Test
 	@Order(1)
+	@DisplayName("getAllUser 전체회원조회")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void joinStudent() throws ServiceException {
+	void getAllUser() throws ServiceException {
+		log.info("getAllUserTest");
+		
+		List<UserVO> list = this.userService.getAllUser();
+		assertNotNull(list);
+		list.forEach(log::info);
+	}//getAllUserTest
+	
+	
+	@Test
+	@Order(2)
+	@DisplayName("getUserInfo 회원정보조회")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void getUserInfo() throws ServiceException {
+		log.trace("getUserInfo");
+		
+		String user_email = "STemail_3";
+		UserVO vo = this.userService.getUserInfo(user_email);
+		assertNotNull(vo);
+		log.info("\t + vo : {}", vo );
+		
+	}//getUserInfo
+	
+	
+	@Test
+	@Order(3)
+	@DisplayName("singUpStrudent 학생회원가입")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void singUpStrudent() throws ServiceException {
+		log.trace("singUpStrudent");
 
-		UserVO newUser = new UserVO("2", "1", "1", "1", "1010", "남자", "010", "st1", "st1", 
-				null, null, null, null, null, null, null, null, null, null);
-		if(this.userService.joinStudent(newUser)) {
-			log.info("service:학생추가 성공"+newUser);
-		} else {
-			log.info("학생 회원가입 실패");
-		}//if-else 
-	}//joinStudent
+		UserDTO newStudent = new UserDTO("st@email_1", "1111","nick","name","20020202","여자","01022222222",
+											"중학생","1학년",null,null,null,null);
+		Boolean Result = this.userService.singUpStrudent(newStudent);
+		log.info("\t + Result : {}", Result);
+		
+	}//singUpStrudent
+	
+	
+	@Test
+	@Order(4)
+	@DisplayName("singUPTutor 튜터회원가입")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void singUPTutor() throws ServiceException {
+		log.trace("singUPTutor");
+		
+		UserDTO newTutor = new UserDTO("tt@email_6","1111","nick2","name2","20020202","남자","11111111111",
+										null,null,"졸업생","수학","file:name",null);
+		Boolean Result = this.userService.singUPTutor(newTutor);
+		log.info("\t + Result : {}", Result);
+		
+	}//singUPTutor
+	
+	@Test
+	@Order(5)
+	@DisplayName("updateUser 유저정보수정")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void updateUser() throws ServiceException {
+		log.trace("updateUser");
+		
+		UserDTO user = new UserDTO();
+		user.setUser_email("STemail_2");
+		user.setUser_pw("변경11");
+		user.setSt_grade("1학년");
+		Boolean Result = this.userService.updateUser(user);
+		log.info("\t + Result : {}", Result);
+		
+	}//updateUser
+	
+	
+	@Test
+	@Order(6)
+	@DisplayName("tutorPass 튜터 승인 확인")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void tutorPass() throws ServiceException {
+		log.trace("tutorPass");
+		
+		String user_email = "TTemail_1";
+		Boolean Result = this.userService.tutorPass(user_email);
+		log.info("\t + Result : {}", Result);
+		
+	}//tutorPass
+	
+	
+	@Test
+	@Order(7)
+	@DisplayName("userStatus 유저 탈퇴->정지")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void userStatus() throws ServiceException {
+		log.trace("userStatus");
+		
+		String user_email = "TTemail_5";
+		Boolean Result = this.userService.userStatus(user_email);
+		log.info("\t + Result : {}", Result);
+		
+	}//userStatus
 }//end class

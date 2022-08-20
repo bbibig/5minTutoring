@@ -7,10 +7,10 @@
 <mapper namespace="org.zerock.fmt.mapper.UserMapper">
 
     <!-- 학생회원가입 -->
-    <insert id="joinStudent" parameterType="org.zerock.fmt.domain.UserVO">
+    <insert id="insertStudent" parameterType="org.zerock.fmt.domain.UserDTO">
         INSERT INTO tbl_user
             (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
-            st_school, st_grade, user_group)
+            st_school, st_grade, USER_GROUP)
 
         VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name}, #{user_birth}, 
                 #{user_gender}, #{user_phone}, 
@@ -18,7 +18,7 @@
     </insert>
 
     <!-- 튜터회원가입 -->
-    <insert id="joinTutor">
+    <insert id="insertTutor" parameterType="org.zerock.fmt.domain.UserDTO" >
         INSERT INTO tbl_user
             (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
             tt_school, tt_subject, tt_certificate, user_group, pass)
@@ -26,9 +26,8 @@
         VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name}, #{user_birth}, 
                 #{user_gender}, #{user_phone}, 
                 #{tt_school}, #{tt_subject}, #{tt_certificate},
-                'Tutor','Wait')
+                'Tutor' ,'Wait')
     </insert>
-
 
     <!-- 정보수정 -->
     <update id="updateUser">
@@ -50,40 +49,28 @@
         WHERE user_email = #{user_email}
     </update>
 
-    <!-- 튜터가입승인 -->
-    <update id="approveTutor">
-        UPDATE tbl_user 
-        
-        SET 손들기 = 손들기 + #{구매개수}
-        
-        WHERE user_email=#{user_email}
-    </update>
-
     <!-- 유저활동정지 -->
-    <update id="stopUser">
+    <update id="updateUserStop">
         UPDATE tbl_user
         SET user_status='STOP',
             withdrawal_date=CURRENT_DATE
         WHERE 
             user_email=#{user_email}
     </update>
+    
 
     
 </mapper>
+    <!-- <insert id="insertStudent" parameterType="org.zerock.fmt.domain.UserDTO">
+        INSERT INTO tbl_user
+            (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
+            st_school, st_grade, 
+            tt_school, tt_subject, tt_certificate, tt_depart, user_group)
 
-    <!-- 회원가입 1-->
-    <!-- <insert id="insertUser">
-        INSERT INTO tbl_user2
-                (user_email, user_pw, user_nick, user_name, 
-                user_gender, user_birth, user_phone, user_group,
-                st_school,st_grade, tt_school, tt_subject, tt_depart, tt_certificate)
-        
-        VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name},
-               #{user_gender}, to_date(#{user_birth}, 'yyyy/mm/dd'), #{user_phone}, #{user_group},
-               
-               #{st_school,jdbcType=VARCHAR}, #{st_grade,jdbcType=VARCHAR}, 
-               #{tt_school,jdbcType=VARCHAR}, #{tt_subject,jdbcType=VARCHAR},
-               #{tt_depart,jdbcType=VARCHAR}, #{tt_certificate,jdbcType=VARCHAR})
+        VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name}, #{user_birth}, 
+                #{user_gender}, #{user_phone}, 
+                #{st_school}, #{st_grade}, 
+                #{tt_school, jdbcType=VARCHAR}, #{tt_subject,jdbcType=VARCHAR},
+                #{tt_certificate,jdbcType=VARCHAR}, #{tt_depart,jdbcType=VARCHAR}, 'Student')
     </insert> -->
-
         

@@ -11,7 +11,7 @@
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-04_signup.css" rel="stylesheet">
             <!-- ========================================================= -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 		  
             <title>회원가입(학생)</title>
 
@@ -35,11 +35,11 @@
 
                             <div class="login_form">
 
-                                <form action="/login/signUp_student" method="post" enctype="text/plain" class="needs-validation" novalidate>
+                                <form action="/login/signUp_student" method="post" class="needs-validation" novalidate>
 
                                     <div class="form-group">
                                         <label for="email">이메일</label>
-                                        <input type="email" class="form-control" id="user_email" data-kv="email"
+                                        <input type="email" class="form-control" name="user_email" id="user_email" data-kv="email"
                                             placeholder="example@email.com" required>
                                         <div class="invalid-feedback">이메일을 입력해주세요.</div>
                                     </div>
@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <label for="password">비밀번호</label>
 
-                                        <input type="password" class="form-control" id="user_pw" value
+                                        <input type="password" class="form-control" name="user_pw" id="user_pw" 
                                             data-kv="password" spellcheck="false" placeholder="영문 숫자 포함8~15자로 입력하세요.">
 
                                         <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
@@ -55,7 +55,7 @@
 
                                     <div class="form-group">
                                         <label for="passwordCheck">비밀번호 재확인</label>
-                                        <input type="password" class="form-control" id="passwordCheck" value
+                                        <input type="password" class="form-control" id="passwordCheck"
                                             data-kv="passwordCheck" spellcheck="false" required>
                                         <div class="invalid-feedback">비밀번호와 맞지 않습니다.</div>
                                     </div>
@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label for="nickName">닉네임</label>
                                         <div class="nick">
-                                            <input type="text" class="form-control" id="user_nick"
+                                            <input type="text" class="form-control" name="user_nick" id="user_nick"
                                                 placeholder="영문 한글 숫자 2~10자" onclick="" required
                                                 style="width:73%;float:left">
                                             <button type="button" class="btn btn-outline-primary mt-2"
@@ -75,7 +75,7 @@
 
                                     <div class="form-group mt-2">
                                         <label for="userName">이름</label>
-                                        <input type="text" class="form-control" id="user_name" required>
+                                        <input type="text" class="form-control" name="user_name" id="user_name" required>
                                         <div class="invalid-feedback">이름을 입력해주세요.</div>
                                     </div>
 
@@ -83,7 +83,7 @@
                                         <label for="userbrith">생년월일</label>
                                         <div class="bir_yy">
                                             <span class="ps_box">
-                                                <input type="text" class="form-control" id="user_birth" placeholder="ex)20220815"
+                                                <input type="text" class="form-control" name="user_birth" id="user_birth" placeholder="ex)20220815"
                                                     maxlength="8" required>
                                             </span>
                                             <div class="invalid-feedback"></div>
@@ -92,7 +92,7 @@
 
                                     <div class="form-group">
                                         <label for="gender">성별 </label>
-                                        <select class="form-select" id="user_gender" required>
+                                        <select class="form-select" name="user_gender" id="user_gender" required>
                                             <option selected> </option>
                                             <option value="남자"> 남자 </option>
                                             <option value="여자"> 여자 </option>
@@ -103,7 +103,7 @@
                                     <div class="form-group">
                                         <label for="phone">휴대전화</label>
                                         <div>
-                                            <input type="text" class="form-control" id="user_phone"
+                                            <input type="text" class="form-control" name="user_phone" id="user_phone"
                                                 style="width:75%;float:left">
                                             <button type="button" class="btn btn-outline-primary mt-2"
                                                 style="float: right">
@@ -116,10 +116,10 @@
                                         <div class="school">
                                             <span class="ps_box">
                                                 <label for="schoolGrade"> 학교 </label>
-                                                <select class="form-select" id="st_school" required>
+                                                <select class="form-select" name="st_school" id="st_school" required>
                                                     <option> </option>
-                                                    <option value="중"> 중학교</option>
-                                                    <option value="고">고등학교</option>
+                                                    <option value="중학생"> 중학교</option>
+                                                    <option value="고등학생">고등학교</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -127,11 +127,11 @@
                                         <div class="grade">
                                             <span class="ps_box">
                                                 <label for="schoolGrade"> 학년</label>
-                                                <select class="form-select" id="st_grade" required>
+                                                <select class="form-select" name="st_grade" id="st_grade" required>
                                                     <option> </option>
-                                                    <option value="1">1학년</option>
-                                                    <option value="2">2학년</option>
-                                                    <option value="3">3학년</option>
+                                                    <option value="1학년">1학년</option>
+                                                    <option value="2학년">2학년</option>
+                                                    <option value="3학년">3학년</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -152,6 +152,7 @@
 
                     </div>
                     <!--row-->
+                  </div>
             </section>
             <!-- End Hero -->
             

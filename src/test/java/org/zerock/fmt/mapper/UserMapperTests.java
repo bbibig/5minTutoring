@@ -1,8 +1,11 @@
 package org.zerock.fmt.mapper;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -15,8 +18,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
-import org.zerock.fmt.exception.UserException;
+import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,64 +41,77 @@ public class UserMapperTests {
 	@Setter(onMethod_= {@Autowired})
 	private UserMapper mapper;
 
+	@BeforeAll
+	void beforeAll() {
+		assertNotNull(this.mapper);
+		log.info("\t+ mapper : {}", this.mapper);
+	}
+	
+	
 	@Test
 	@Order(1)
-	@DisplayName("  selectAllUser  ")
+	@DisplayName("selectAllUser")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectAllUser() throws UserException {
-		log.trace("selectAllUser. 전체 회원 조회");
-		
+	void selectAllUser() throws DAOException {
+		log.info("selectAllUser");
 		List<UserVO> list = this.mapper.selectAllUser();
 		list.forEach(log::info);
+		
 	}//selectAllUser
+	
 	
 	@Test
 	@Order(2)
+	@DisplayName("  selectUser  ")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void userInfo() throws UserException {
-		log.trace("userInfo:특정 회원 조회");
+	void selectUser() throws DAOException {
+		log.trace("selectUser:특정 회원 조회");
 		
-		UserVO user = this.mapper.userInfo("email_5");
+		UserVO user = this.mapper.selectUser("STemail_4");
 		log.info("\t + user : {}", user);
 		
 	}//userInfo
 	
 	@Test
 	@Order(3)
+	@DisplayName("insertStudent 학생회원가입 ")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void joinStudent() throws UserException {
-		UserVO newStudent = new UserVO("te1","p","n","n","20220815","여자","01000","고등","1학년",null,null,null,null,
-							"Student",null,null,null,null,null);
-		if(this.mapper.joinStudent(newStudent)) {
+	void insertStudent() throws DAOException {
+		
+		UserDTO newStudent = new UserDTO("STemail", "pass1","nick1","name1","19900430","여자","01000000000",
+										"고등학생","3학년",null,null,null,null);
+		if(this.mapper.insertStudent(newStudent) == 1) {
 			log.info("학생회원가입완료");
-		}//if
+		} else log.info("회원가입안됨");
 		
 	}//joinStudent
 	
 	@Test
 	@Order(4)
+	@DisplayName("insertTutor 튜터회원가입")
 	@Timeout(value = 5, unit =TimeUnit.SECONDS)
-	void joinTutor() throws UserException {
+	void insertTutor() throws DAOException {
 		
-		UserVO newTutor = new UserVO("t3", "t1", "t1", "t1", "20220000", "남자", "010",
-				null, null, "재학", "국어", "file:c", null, null, null, null, null, null, null);
-		Boolean insertResult = this.mapper.joinTutor(newTutor);
-		if(insertResult) {
+		UserDTO newTutor = new UserDTO("newTT1","pw1-1","nick1-1","nameTT","19900000","남자","01011111111",
+										null,null, "재학중","국어","file:name",null);
+		Integer insertResult = this.mapper.insertTutor(newTutor);
+		if(insertResult==1) {
 			log.info("\t + insertResult : {}", insertResult);
 			log.info("튜터 가입 완료 -> 메일 송신 필요");
-		}//if
+		} else log.info("회원가입안됨");
 		
 	}//joinTutor
 	
 	@Test
 	@Order(5)
+	@DisplayName("updateUser 마이페이지 정보수정")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void updateUser() throws UserException {
+	void updateUser() throws DAOException {
 		
-		UserVO user = new UserVO("n2","1111","1111","11111","20220815","여자","01000","고등","1학년"
-								,null,null,null,null, null,null,null,null,null,null);
-		Boolean updateResult = this.mapper.updateUser(user);
-		if(updateResult) {
+		UserDTO user = new UserDTO("STemail_5","pw변경","nick변경","name변경",null,null,null,
+				null,null, null, null, null ,null);
+		Integer updateResult = this.mapper.updateUser(user);
+		if(updateResult==1) {
 			log.info("\t + updateResult : {}", updateResult);
 			log.info("회원정보 수정완료");
 		}//if
@@ -102,31 +119,34 @@ public class UserMapperTests {
 	
 	@Test
 	@Order(6)
+	@DisplayName("updateTutorPass 튜터 가입 승인")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void approveTutor() throws UserException {
+	void updateTutorPass() throws DAOException {
 		
-		UserVO tutor = new UserVO("t1", "t1", "t1", "t1", "20220000", "남자", "010",
-				null, null, "재학", "국어", "file:c", null, null, null, null, null, null, null);
-		boolean updateResult = this.mapper.approveTutor(tutor);
-		if(updateResult) {
+//		UserDTO tutor = new UserDTO("TTemail_4","pw","nick","name",null,null,null,
+//									null,null, null, null, null ,null,null);
+		String user_email = "TTemail_4";
+		Integer updateResult = this.mapper.updateTutorPass(user_email);
+		if(updateResult==1) {
 			log.info("\t + updateResult : {}", updateResult);
 			log.info("튜터 승인 완료");
-		}//if
+		} else log.info("테스트실패");
 	}//approveTutor
 	
 	@Test
 	@Order(7)
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void stopUser() throws UserException {
+	void stopUser() throws DAOException {
 
-		UserVO user = new UserVO("STemail_5", "t1", "t1", "t1", "20220000", "남자", "010",
-				null, null, "재학", "국어", "file:c", null, null, null, null, null, null, null);
-		Boolean updateResult = this.mapper.stopUser(user);
+//		UserDTO user = new UserDTO("STemail_5","pw변경","nick변경","name변경",null,null,null,
+//				null,null, null, null, null ,null,null);
+		String user_email = "STemail_4";
+		Integer updateResult = this.mapper.updateUserStop(user_email);
 		
-		if(updateResult) {
+		if(updateResult==1) {
 			log.info("\t updateResult : {}", updateResult);
 			log.info("활동정지 완료");
-		};//if
+		} else log.info("테스트실패");
 		
 	}//stopUser
 }//end class
