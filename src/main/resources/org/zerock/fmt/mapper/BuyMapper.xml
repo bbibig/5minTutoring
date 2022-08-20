@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.BuyMapper">
+  
+    <!-- 구매페이지 test -->
+      <select id="payPage" resultType="org.zerock.fmt.domain.BuyDTO">
+        SELECT 
+            u.*,
+            h.* 
+        FROM (SELECT USER_EMAIL, USER_NAME, USER_PHONE 
+              FROM tbl_user)u, 
+            TBL_HAND h
+        WHERE u.USER_EMAIL = #{user_email}
+        AND h.H_NUMBER = #{h_number}
+      </select>
+
+</mapper>
+        

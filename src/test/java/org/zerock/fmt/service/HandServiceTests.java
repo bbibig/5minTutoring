@@ -1,9 +1,8 @@
-package org.zerock.fmt.mapper;
+package org.zerock.fmt.service;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.HandVO;
-import org.zerock.fmt.exception.DAOException;
+import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,37 +25,37 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {
-		"file:src/main/webapp/WEB-INF/spring/root-context.xml"
-		})
+@ContextConfiguration(locations="file:src/main/webapp/WEB-INF/spring/root-context.xml")
+
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
-public class HandMapperTests {
+public class HandServiceTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private HandMapper handMapper;
-
+	private HandService handService;
+		
 	@Test
 	@Order(1)
-	@DisplayName("  selectAllHands  ")
-	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectAllHands() throws DAOException {
-		log.trace("selectAllHands() invoked. 전체 상품 조회");
+	@Timeout(value=5, unit = TimeUnit.SECONDS)
+	void getAllHands() throws ServiceException {
+		log.info("getAllHands() invoked.");
 		
-		List<HandVO> list = this.handMapper.selectAllHands();
+		List<HandVO> list = this.handService.getAllHands();
 		list.forEach(log::info);
-	}//selectAllHands
+
+	} // getAllHands
+	
 	
 	@Test
 	@Order(2)
-	@DisplayName("  selectHand  ")
-	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectHand() throws DAOException {
-		log.trace("selectHand() invoked. 상품별 조회");
+	@Timeout(value=5, unit = TimeUnit.SECONDS)
+	void getHand() throws ServiceException {
+		log.info("getHand() invoked.");
 		
-		HandVO hand = this.handMapper.selectHand(2);
+		HandVO hand = this.handService.getHand(3);
 		log.info("\t+ hand: {}", hand);
-	}//selectAllHands
+		
+	} // getHand
 	
 	
-}//end class
+} // end class

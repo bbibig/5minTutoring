@@ -1,0 +1,51 @@
+package org.zerock.fmt.service;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.BuyDTO;
+import org.zerock.fmt.exception.ServiceException;
+
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
+@NoArgsConstructor
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/root-context.xml")
+
+@TestInstance(Lifecycle.PER_CLASS)
+@TestMethodOrder(OrderAnnotation.class)
+public class BuyServiceTests {
+	
+	@Setter(onMethod_= {@Autowired})
+	private BuyService buyService;
+
+	@Test
+	@Timeout(value=5, unit = TimeUnit.SECONDS)
+	void getPayPage() throws ServiceException {
+		log.info("getPayPage() invoked.");
+		
+		String user_email = "STemail_1";
+		Integer h_number = 2;
+		
+		BuyDTO buyTest = this.buyService.getPayPage(user_email, h_number);
+		
+		log.info("\t+ buyTest: {}", buyTest);
+		
+	} // getPayPage
+	
+	
+	
+} // end class

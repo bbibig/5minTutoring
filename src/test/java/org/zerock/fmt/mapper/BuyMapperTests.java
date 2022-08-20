@@ -1,9 +1,8 @@
 package org.zerock.fmt.mapper;
 
-import java.util.List;
+
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.HandVO;
+import org.zerock.fmt.domain.BuyDTO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -29,34 +28,30 @@ import lombok.extern.log4j.Log4j2;
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/spring/root-context.xml"
 		})
+
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
-public class HandMapperTests {
+public class BuyMapperTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private HandMapper handMapper;
-
+	private BuyMapper buyMapper;
+	
 	@Test
 	@Order(1)
-	@DisplayName("  selectAllHands  ")
-	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectAllHands() throws DAOException {
-		log.trace("selectAllHands() invoked. 전체 상품 조회");
+	@Timeout(value=5, unit = TimeUnit.SECONDS)
+	void payPage() throws DAOException {
+		log.trace("payPage() invoked.");
 		
-		List<HandVO> list = this.handMapper.selectAllHands();
-		list.forEach(log::info);
-	}//selectAllHands
-	
-	@Test
-	@Order(2)
-	@DisplayName("  selectHand  ")
-	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectHand() throws DAOException {
-		log.trace("selectHand() invoked. 상품별 조회");
+		String user_email = "STemail_1";
+		Integer h_number = 2;
 		
-		HandVO hand = this.handMapper.selectHand(2);
-		log.info("\t+ hand: {}", hand);
-	}//selectAllHands
+		BuyDTO buyTest = this.buyMapper.payPage(user_email, h_number);
+		
+		log.info("\t+ buyTest : {}", buyTest);
+	} // payPage
 	
 	
-}//end class
+	
+	
+	
+} // end class
