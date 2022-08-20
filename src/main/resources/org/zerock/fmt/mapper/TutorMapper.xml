@@ -16,8 +16,7 @@
         SET
             tp_career = #{tp_career},
             tp_title = #{tp_title},
-            tp_comment =#{tp_comment},
-            update_ts = CURRENT_DATE
+            tp_comment =#{tp_comment}
         WHERE tp_number = #{tp_number}
     </update>
 
