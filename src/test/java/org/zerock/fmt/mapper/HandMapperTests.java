@@ -17,10 +17,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.BuyDTO;
 import org.zerock.fmt.domain.HandVO;
-import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.HandException;
-import org.zerock.fmt.exception.UserException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -121,7 +120,7 @@ public class HandMapperTests {
 	@Order(5)
 	@DisplayName("  updateMyHands  ")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void updateMyHands() throws UserException {
+	void updateMyHands() throws DAOException {
 		log.trace("updateMyHands() invoked. 보유손들기 수정");
 		
 		Integer myWallet = this.handMapper.updateMyHands(30);

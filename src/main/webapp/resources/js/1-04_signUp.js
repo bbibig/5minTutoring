@@ -173,9 +173,10 @@ function loginTutor() {
     '인증메일이 발송되었습니다.',
     icon: 'success',   
     confirmButtonColor: '#3085d6',
-  }).then(function(){
-    document.location.href="/"
-  });
+  })
+  // .then(function(){
+  //   document.location.href="/"
+  // });
 };//login
 
 function checkNickName() {

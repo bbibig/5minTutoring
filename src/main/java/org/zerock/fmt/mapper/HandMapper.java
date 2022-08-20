@@ -5,11 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.BuyDTO;
-
 import org.zerock.fmt.domain.HandVO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.HandException;
-import org.zerock.fmt.exception.UserException;
 
 public interface HandMapper {
 
@@ -43,14 +42,13 @@ public interface HandMapper {
 	// 이메일, 손들기,
 	// user_email, hands_wallet
 	@Select("SELECT user_email, hands_wallet FROM tbl_user WHERE user_email=#{user_email}")
-	public abstract UserVO getMyHands(@Param("user_email")String myWallet) throws UserException;
-	
+	public abstract UserVO getMyHands(@Param("user_email")String myWallet) throws DAOException;
 	
 	
 
 	// == update == 
 	// user_email, hands_wallet
-	public abstract Integer updateMyHands(@Param("hands_wallet")Integer myWallet) throws UserException;
+	public abstract Integer updateMyHands(@Param("hands_wallet")Integer myWallet) throws DAOException;
 	
 
 	

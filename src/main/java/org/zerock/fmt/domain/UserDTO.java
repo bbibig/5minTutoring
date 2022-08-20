@@ -25,6 +25,6 @@ public class UserDTO {
 	private String tt_certificate; 	//첨부파일
 	private String tt_depart;		//학과
 
-	private String user_group;		//학생or튜터 신분
+//	private String user_group;		//학생or튜터 신분
 		
 }//end class
