@@ -1,10 +1,18 @@
 package org.zerock.fmt.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.fmt.domain.UserDTO;
+import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.ControllerException;
+import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.MypageService;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -14,13 +22,31 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class MypageController {
 	
+	@Setter(onMethod_= @Autowired)
+	private MypageService service;
 	
-	@RequestMapping("/studentPage")		//POST
-	public String studentPage() {
-		log.trace("7-01_StudentPage");
+	
+	@GetMapping("/studentPage")
+	public String studentPage(String user_email, Model model) throws ControllerException{
+		log.trace("7-01_StudentPage, 기본정보 조회(학생)");
 		
-		return "mypage/7-01_StudentPage";
+		try {
+			UserVO vo = this.service.getUserInfo(user_email);
+			model.addAttribute("_USERINFO_", vo);
+			
+			return "mypage/7-01_StudentPage";
+		} catch (ServiceException e) {
+			throw new ControllerException(e);
+		}// try-catch
+
 	}// studentPage
+	
+//	@RequestMapping("/studentPage")
+//	public String studentPage() throws ControllerException{
+//		log.trace("7-01_StudentPage, 기본정보 조회(학생)");
+//
+//		return "mypage/7-01_StudentPage";
+//	}// studentPage	
 	
 	@RequestMapping("/tutorPage")		//POST
 	public String tutorPage() {
