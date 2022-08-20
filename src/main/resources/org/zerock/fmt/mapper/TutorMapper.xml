@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.TutorMapper">
+
+    <select id="selectTCardInfo">
+        SELECT user_name, tp_title, tp_subject, tp_accu_answer, tp_average
+        FROM tbl_tutor_page
+    </select>
+    
+    <update id="updateTInfo">
+        UPDATE tbl_tutor_page
+        SET
+            tp_career = #{tp_career},
+            tp_title = #{tp_title},
+            tp_comment =#{tp_comment}
+        WHERE tp_number = #{tp_number}
+    </update>
+
+
+</mapper>

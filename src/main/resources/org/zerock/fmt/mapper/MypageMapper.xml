@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.MypageMapper">
+    
+    <!-- ============<<UPDATE>>============ -->
+    <!-- 기본정보 수정(학생) -->
+    <update id="updateStudentInfo">
+		UPDATE tbl_user
+		SET user_pw = #{user_pw},
+		    st_school = #{st_school}, 
+		    st_grade = #{st_grade}
+		WHERE user_email = #{user_email}
+    </update>
+    
+    <!-- 기본정보 수정(튜터) -->
+    <update id="updateTutorInfo">
+		UPDATE tbl_user
+		SET user_pw = #{user_pw}
+		WHERE user_email = #{user_email}
+    </update>
+
+</mapper>

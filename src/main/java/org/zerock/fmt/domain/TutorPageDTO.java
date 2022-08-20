@@ -1,9 +1,14 @@
 package org.zerock.fmt.domain;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
-public class TutorPageVO {
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Data
+public class TutorPageDTO {
 	
 	private Integer tp_number;
 	private String user_email;
@@ -12,7 +17,7 @@ public class TutorPageVO {
 	private String tp_comment;
 	private Integer tp_accu_answer;	// 누적 답변
 	private Double tp_average;
-	// 아래 2개 컬럼 테이블에 임의로 추가함..고민중..
+
 	private String tp_subject; 	
 	private String user_name;
 
