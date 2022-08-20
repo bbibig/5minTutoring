@@ -53,11 +53,7 @@
 
 		<property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 
-<<<<<<< HEAD
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@db20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
-=======
-		<property name="url" value="jdbc:log4jdbc:oracle:thin:@dbdb20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
->>>>>>> a59f9ba (update)
 		<property name="username" value="ADMIN" />
 		<property name="password" value="Oracle1234567" />
 
