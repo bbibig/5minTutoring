@@ -6,7 +6,7 @@
 
 <mapper namespace="org.zerock.fmt.mapper.TutorMapper">
 
-    <select id="selectTCardInfo">
+    <select id="selectTCardInfo" resultMap="TCardMap">
         SELECT user_name, tp_title, tp_subject, tp_accu_answer, tp_average
         FROM tbl_tutor_page
     </select>
@@ -19,6 +19,5 @@
             tp_comment =#{tp_comment}
         WHERE tp_number = #{tp_number}
     </update>
-
 
 </mapper>

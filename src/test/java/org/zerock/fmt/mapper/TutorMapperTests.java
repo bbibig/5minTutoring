@@ -91,9 +91,7 @@ public class TutorMapperTests {
 		log.trace("튜터 정보 수정");
 		
 		TutorPageDTO newInfo = new TutorPageDTO(
-			1, null, "현직 수학 강사", "안녕하세요.", "진심을 다해 가르칩니다.",
-			null, null, null, null
-		);
+			3, "현직 수학 강사", "안녕하세요.", "진심을 다해 가르칩니다.");
 		log.info("\t + newInfo: {}", newInfo);
 		
 		int affectedLines = this.tutorMapper.updateTInfo(newInfo);
