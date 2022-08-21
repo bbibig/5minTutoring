@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="org.zerock.fmt.mapper.CommunityMapper">
+
+        <insert id="insert" parameterType="java.util.Map">
+            INSERT INTO test_community (title, content, writer)
+            VALUES (#{title}, #{content}, #{writer})
+        </insert>
+    
+        <update id="update">
+            UPDATE test_community
+            SET 
+                title = #{title},
+                content = #{content},
+                writer = #{writer},
+                update_ts = CURRENT_DATE
+            WHERE 
+            	bno = #{bno}     
+        </update>
+
+        
+        <insert id="insertSelectKey">
+            <selectKey keyProperty="bno" order="BEFORE" resultType="int">
+                SELECT ISEQ$$_93926.nextval FROM dual
+            </selectKey>
+
+            INSERT INTO tbl_board(title, content, writer)
+            VALUES (#{bno}, #{title}, #{content}, #{writer})
+        </insert>
+    	
+    	
+    </mapper>    
