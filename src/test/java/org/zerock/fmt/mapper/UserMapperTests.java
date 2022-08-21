@@ -78,7 +78,7 @@ public class UserMapperTests {
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void insertStudent() throws DAOException {
 		
-		UserDTO newStudent = new UserDTO("STemail", "pass1","nick1","name1","19900430","여자","01000000000",
+		UserDTO newStudent = new UserDTO("학생테스트1", "pass1","nick1","name1","19900430","여자","01000000000",
 										"고등학생","3학년",null,null,null,null);
 		if(this.mapper.insertStudent(newStudent) == 1) {
 			log.info("학생회원가입완료");
@@ -149,4 +149,48 @@ public class UserMapperTests {
 		} else log.info("테스트실패");
 		
 	}//stopUser
+	
+	@Test
+	@Order(8)
+	@Timeout(value = 10, unit = TimeUnit.SECONDS)
+	void updateHandGet() throws DAOException {
+		
+		Integer h_count = 30;
+		String user_email = "STemail_4";
+		
+		int updateResult = this.mapper.updateHandGet(h_count, user_email);
+		
+		if(updateResult==1) {
+			log.info("\t updateResult : {}", updateResult);
+			log.info("테스트 성공");
+		} else log.info("테스트실패");
+		
+	}//updateHandGet
+	
+	@Test
+	@Order(9)
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void updateHandUse() throws DAOException {
+		
+		Integer h_count = 3;
+		String user_email = "STemail_3";
+		Integer updateResult = this.mapper.updateHandUse(h_count, user_email);
+		if(updateResult==1) {
+			log.info("\t updateResult : {}", updateResult);
+			log.info("테스트 성공");
+		} else log.info("테스트실패");
+	}//updateHandUse
+	
+
+	
+//	@Test
+//	@Order(9)
+//	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+//	void insertTutorInfo() throws DAOException {
+//		
+//		String user_email ="Temail_2";
+//		Integer Result = this.mapper.insertTutorInfo(user_email);
+//		log.info("\t + Result : {}", Result);
+//		
+//	}//insertTutorInfo
 }//end class

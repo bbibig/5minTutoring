@@ -24,9 +24,6 @@ public class UserServiceImpl implements UserService, InitializingBean{
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper userMapper;
 	
-//	@Setter(onMethod_ = @Autowired)
-//	private FileUtils fileUtils;
-	
 //------------------------------------------------------------
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -100,6 +97,24 @@ public class UserServiceImpl implements UserService, InitializingBean{
 		try { return this.userMapper.updateUserStop(user_email)==1; }
 		catch(Exception e) { throw new ServiceException(e); }
 	}//userStatus
+
+	@Override
+	public boolean updateHandGet(Integer h_count, String user_email) throws ServiceException {
+		log.trace("updateHandGet() 손들기 구매, 손들기 획득");
+
+		try{ return this.userMapper.updateHandGet(h_count, user_email)==1;}
+		catch(Exception e) { throw new ServiceException(e); }
+		
+	}//updateHandGet
+
+	@Override
+	public boolean updateHandUse(Integer h_count, String user_email) throws ServiceException {
+		log.trace("updateHandUse() 손들기 사용(차감)");
+		
+		try{ return this.userMapper.updateHandGet(h_count, user_email)==1;}
+		catch( Exception e) { throw new ServiceException(e); }
+		
+	}//updateHandUse
 
 
 //------------------------------------------------------------

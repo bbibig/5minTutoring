@@ -138,4 +138,33 @@ public class UserServiceTests {
 		log.info("\t + Result : {}", Result);
 		
 	}//userStatus
+	
+	@Test
+	@Order(8)
+	@DisplayName("updateHandGet 손들기 구매, 획득")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void updateHandGet() throws ServiceException {
+		log.trace("updateHandGet");
+		
+		Integer h_count = 3;
+		String user_email ="TTtest@gmail.com";
+		boolean Result = this.userService.updateHandGet(h_count, user_email);
+		log.info("\t + Result : {}", Result);
+		
+	}//updateHandGet
+	
+	
+	@Test
+	@Order(9)
+	@DisplayName("updateHandUse 손들기 사용")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void updateHandUse() throws ServiceException {
+		log.trace("updateHandUse");
+		
+		Integer h_count = 3;
+		String user_email = "학생테스트";
+		Boolean Result = this.userService.updateHandUse(h_count, user_email);
+		log.info("\t + Result : {}", Result);
+		
+	}//updateHandUse
 }//end class
