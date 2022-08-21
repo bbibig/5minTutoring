@@ -11,7 +11,7 @@
 즉각적인 답변을 얻을 수 있는 커뮤니티 제작을 목표로 하였습니다. 
 
 
-## 사용 기술
+## :pushpin:사용 기술
 
 - OS : Window
 - Back-End : Java, Spring Framework, Mybatis 
@@ -20,7 +20,7 @@
 - IDE : Ecilpse 2022-09, SQL Developer 
 - WAS : Apache Tomcat
 
-## 구현 기능
+## :pushpin:구현 기능
 1. 몰라..나중에 추가함........ 
 2.
 3. 
