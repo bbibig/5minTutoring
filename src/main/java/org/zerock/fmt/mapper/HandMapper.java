@@ -10,6 +10,7 @@ import org.zerock.fmt.exception.DAOException;
 public interface HandMapper {
 
 
+	// SELECT
 	// 구매하기 - 전체 상품 조회
 	@Select("SELECT * FROM tbl_hand")
 	public abstract List<HandVO> selectAllHands() throws DAOException;

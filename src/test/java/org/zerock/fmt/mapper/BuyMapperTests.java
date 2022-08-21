@@ -38,18 +38,44 @@ public class BuyMapperTests {
 	
 	@Test
 	@Order(1)
-	@Timeout(value=5, unit = TimeUnit.SECONDS)
-	void payPage() throws DAOException {
-		log.trace("payPage() invoked.");
+	@Timeout(value=10, unit = TimeUnit.SECONDS)
+	void selectPayPage() throws DAOException {
+		log.trace("selectPayPage() invoked.");
 		
 		String user_email = "STemail_1";
 		Integer h_number = 2;
 		
-		BuyDTO buyTest = this.buyMapper.payPage(user_email, h_number);
+		BuyDTO payPage = this.buyMapper.selectPayPage(user_email, h_number);
 		
-		log.info("\t+ buyTest : {}", buyTest);
-	} // payPage
+		log.info("\t+ payPage : {}", payPage);
+	} // selectPayPage
 	
+	@Test
+	@Order(2)
+	@Timeout(value=10, unit = TimeUnit.SECONDS)
+	void insertBuyHands() throws DAOException {
+		log.trace("insertBuyHands() invoked.");
+		
+		BuyDTO buyHands = new BuyDTO("test@gmail.com", 4, 1, 19800);
+	
+		log.info("\t+ buyHands: {}", buyHands);
+		
+		int affectedLines = this.buyMapper.insertBuyHands(buyHands);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+		
+	} // insertBuyHands
+	
+	@Test
+	@Order(3)
+	@Timeout(value = 10, unit = TimeUnit.SECONDS)
+	void selectMyPayPage() throws DAOException {
+		log.trace("selectMyPayPage() invoked.");
+		
+		BuyDTO myPayPage = this.buyMapper.selectMyPayPage(5);
+		
+		log.info("\t+ myPayPage: {}", myPayPage);
+	} // selectMyPayPage
 	
 	
 	

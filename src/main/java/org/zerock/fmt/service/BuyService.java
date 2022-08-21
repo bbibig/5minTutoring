@@ -9,4 +9,13 @@ public interface BuyService {
 	public abstract BuyDTO getPayPage(String user_email, Integer h_number) throws ServiceException;
 	
 	
+	// 마이페이지 - 구매내역 조회
+	public abstract BuyDTO gettMyPayPage(Integer bNum ) throws ServiceException;
+	
+	
+	// 구매하기
+	public abstract Integer buyHands(BuyDTO buyHands) throws ServiceException;
+	
+	
+	
 } // end class

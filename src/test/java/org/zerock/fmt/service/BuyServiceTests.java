@@ -40,12 +40,36 @@ public class BuyServiceTests {
 		String user_email = "STemail_1";
 		Integer h_number = 2;
 		
-		BuyDTO buyTest = this.buyService.getPayPage(user_email, h_number);
+		BuyDTO payPage = this.buyService.getPayPage(user_email, h_number);
 		
-		log.info("\t+ buyTest: {}", buyTest);
+		log.info("\t+ payPage: {}", payPage);
 		
 	} // getPayPage
 	
+	@Test
+	@Timeout(value=10, unit = TimeUnit.SECONDS)
+	void buyHands() throws ServiceException {
+		log.info("buyHands() invoked.");
+		
+		BuyDTO buyHands = new BuyDTO("test@gmail.com", 4, 1, 19800);
+		
+		log.info("\t+ buyHands: {}", buyHands);
+		
+		int affectedLines = this.buyService.buyHands(buyHands);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+		
+	} // buyHands
+	
+	@Test
+	@Timeout(value = 10, unit = TimeUnit.SECONDS)
+	void getMyPayPage() throws ServiceException {
+		log.trace("selectMyPayPage() invoked.");
+		
+		BuyDTO myPayPage = this.buyService.gettMyPayPage(5);
+		
+		log.info("\t+ myPayPage: {}", myPayPage);
+	} // getMyPayPage
 	
 	
 } // end class

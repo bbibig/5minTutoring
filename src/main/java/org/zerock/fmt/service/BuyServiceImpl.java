@@ -24,10 +24,32 @@ public class BuyServiceImpl implements BuyService{
 	public BuyDTO getPayPage(String user_email, Integer h_number) throws ServiceException {
 		
 		try {			
-			return this.buyMapper.payPage(user_email, h_number);
+			return this.buyMapper.selectPayPage(user_email, h_number);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		}
 	}
 
+
+	@Override
+	public Integer buyHands(BuyDTO buyHands) throws ServiceException {
+		
+		try {
+			return this.buyMapper.insertBuyHands(buyHands);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+
+	@Override
+	public BuyDTO gettMyPayPage(Integer bNum) throws ServiceException {
+		
+		try {
+			return this.buyMapper.selectMyPayPage(bNum);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 } // end class

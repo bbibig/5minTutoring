@@ -6,8 +6,8 @@
 
 <mapper namespace="org.zerock.fmt.mapper.BuyMapper">
   
-    <!-- 구매페이지 test -->
-      <select id="payPage" resultType="org.zerock.fmt.domain.BuyDTO">
+    <!-- 구매하기 - 구매 정보 조회 -->
+      <select id="selectPayPage" resultType="org.zerock.fmt.domain.BuyDTO">
         SELECT 
             u.*,
             h.* 
@@ -18,5 +18,18 @@
         AND h.H_NUMBER = #{h_number}
       </select>
 
+      <select id="">
+
+      </select>
+
+      <insert id="insertBuyHands" parameterType="org.zerock.fmt.domain.BuyDTO">
+        
+                
+        INSERT INTO tbl_buy
+            (USER_EMAIL, H_NUMBER, B_COUNT, B_PRICE)
+        VALUES
+            ( #{user_email}, #{h_number}, #{b_count}, #{b_price} )
+
+      </insert>
 </mapper>
         
