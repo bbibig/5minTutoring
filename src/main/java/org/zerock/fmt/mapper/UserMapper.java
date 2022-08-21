@@ -9,7 +9,6 @@ import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
 
-
 public interface UserMapper {
 
 	//-------------- SELECT 
@@ -17,7 +16,7 @@ public interface UserMapper {
 	@Select("SELECT * FROM tbl_user")
 	public abstract List<UserVO> selectAllUser() throws DAOException;
 	
-	//회원 정보조회
+	//회원 정보조회 + 손들기 개수 조회
 	@Select("SELECT * FROM tbl_user WHERE user_email=#{user_email}")
 	public abstract UserVO selectUser(@Param("user_email") String user_email) throws DAOException;
 	
@@ -28,6 +27,9 @@ public interface UserMapper {
 
 	//튜터 가입 
 	public abstract Integer insertTutor(UserDTO newTutor) throws DAOException;
+	
+	//튜터테이블(튜터정보)
+//	public abstract Integer insertTutorInfo(@Param("user_email") String user_email);
 	
 	//++카카오 가입
 	//++네이버 가입
@@ -43,6 +45,18 @@ public interface UserMapper {
 	
 	//회원탈퇴 - 마이페이지(정지)
 	public abstract Integer updateUserStop(@Param("user_email")String user_email) throws DAOException;
+	
+	
+	//-------------- 손들기 UPDATE 
+	
+	//손들기 구매(학생) + 획득(튜터) -> 개수 추가
+	public abstract Integer updateHandGet(@Param("h_count") Integer h_count,
+										@Param("user_email")String user_email) throws DAOException;
+	//손들기 사용-> 개수 차감
+	public abstract Integer updateHandUse(@Param("h_count") Integer h_count,
+										@Param("user_email")String user_email) throws DAOException;
+	
+	
 	
 	
 	//-------------- DELETE 

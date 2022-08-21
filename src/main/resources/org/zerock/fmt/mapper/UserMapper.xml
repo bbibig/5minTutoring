@@ -17,6 +17,15 @@
                 #{st_school}, #{st_grade}, 'Student')
     </insert>
 
+    <!-- 튜터회원가입:테스트 -->
+    <!-- <insert id="insertTutorInfo" parameterType="org.zerock.fmt.domain.UserDTO">
+        INSERT ALL
+        INTO T_TUTOR VALUES(USER_EMAIL, TT_SCHOOL, TT_SUBJECT, TT_CERTIFICATE, TT_DEPART)
+        SELECT USER_EMAIL, TT_SCHOOL, TT_SUBJECT, TT_CERTIFICATE, TT_DEPART
+        FROM t_user
+        WHERE USER_EMAIL= #{user_email}
+    </insert> -->
+
     <!-- 튜터회원가입 -->
     <insert id="insertTutor" parameterType="org.zerock.fmt.domain.UserDTO" >
         INSERT INTO tbl_user
@@ -57,9 +66,22 @@
         WHERE 
             user_email=#{user_email}
     </update>
-    
 
-    
+    <!-- 손들기 구매(학생), 획득(튜터) -->
+    <update id="updateHandGet">
+        UPDATE  tbl_user
+        SET HANDS_WALLET = HANDS_WALLET + #{h_count}
+        WHERE user_email= #{user_email}
+    </update>
+    <!-- 손들기 사용(차감) -->
+    <update id="updateHandUse">
+        UPDATE  tbl_user
+        SET HANDS_WALLET = HANDS_WALLET - #{h_count}
+        WHERE user_email= #{user_email}
+    </update>
+
+
+
 </mapper>
     <!-- <insert id="insertStudent" parameterType="org.zerock.fmt.domain.UserDTO">
         INSERT INTO tbl_user

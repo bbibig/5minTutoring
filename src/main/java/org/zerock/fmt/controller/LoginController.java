@@ -1,6 +1,5 @@
 package org.zerock.fmt.controller;
 
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -9,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.UserService;
