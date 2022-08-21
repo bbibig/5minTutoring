@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zerock.fmt.mapper.TutorMapper">
 
-    <select id="selectTCardInfo" resultMap="TCardMap">
-        SELECT user_name, tp_title, tp_subject, tp_accu_answer, tp_average
-        FROM tbl_tutor_page
+	<select id="selectAllTInfo" resultType="org.zerock.fmt.domain.TutorPageVO">
+		SELECT
+			tp_number,
+			tp_career,
+			tp_title,
+			tp_comment,
+			tp_accu_answer,
+			tp_average,
+			tt_subject,
+			tt_school,
+			tbl_user.user_name
+		FROM tbl_user, tbl_tutor_page
+		WHERE tbl_user.user_email = tbl_tutor_page.user_email
+		AND tp_number = #{tp_number}
+	</select>
+
+    <select id="selectRecentTCard" resultType="org.zerock.fmt.domain.TutorPageVO">
+        SELECT
+		    tp_number,
+		    tp_career,
+		    tp_title,	
+		    tp_comment,
+		    tp_accu_answer,	
+		    tp_average,
+		    tt_subject, 
+		    tt_school,
+		    tbl_user.user_name
+		FROM tbl_user, tbl_tutor_page
+		WHERE tbl_user.user_email = tbl_tutor_page.user_email
+		ORDER BY tp_number DESC
+		OFFSET 0 ROW
+		FETCH NEXT 12 ROWS ONLY
     </select>
     
-    <update id="updateTInfo">
-        UPDATE tbl_tutor_page
-        SET
-            tp_career = #{tp_career},
-            tp_title = #{tp_title},
-            tp_comment =#{tp_comment}
-        WHERE tp_number = #{tp_number}
-    </update>
+	<insert id="insertIntroInfo">
+		INSERT INTO tbl_tutor_page
+		(
+			tp_number,
+			user_email,
+		    tp_career,
+		    tp_title,	
+		    tp_comment
+		)
+		VALUES
+		(
+			tPage_sequence.NEXTVAL,
+			#{user_email},
+			#{tp_career},
+			#{tp_title},
+			#{tp_comment}
+		)
+	</insert>
+
+	<update id="updateTInfo">
+		UPDATE tbl_tutor_page
+		SET
+			tp_career = #{tp_career},
+			tp_title = #{tp_title},
+			tp_comment = #{tp_comment}
+		WHERE tp_number = #{tp_number}
+	</update>
 
 </mapper>

@@ -58,40 +58,61 @@ public class TutorMapperTests {
 	@Order(1)
 	@DisplayName("1. TutorMapper.selectAllTInfo() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
-	void testSelectAllInfo() throws DAOException {
+	void testSelectAllTInfo() throws DAOException {
 		log.trace("튜터페이지 전체 정보 조회");
 		
-		List<TutorPageVO> list = this.tutorMapper.selectAllTInfo();
+		int tp_number = 6;
 		
-		Objects.requireNonNull(list);
-		list.forEach(log::info);
+		TutorPageVO tutorPageVO = this.tutorMapper.selectAllTInfo(tp_number);
+		
+		Objects.requireNonNull(tutorPageVO);
+		log.info("\t + tutorPageVO: {}", tutorPageVO);
+		
 	} // testSelectAllInfo
 	
 	
 //	@Disabled
 	@Test
 	@Order(2)
-	@DisplayName("2. TutorMapper.selectTCardInfo() test.")
+	@DisplayName("2. TutorMapper.selectRecentTCard() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
-	void testSelectTCardInfo() throws DAOException {
-		log.trace("튜터카드 정보 조회");
+	void testSelectRecentTCard() throws DAOException {
+		log.trace("튜터카드 최신순 조회");
 		
-		List<TutorPageVO> list = this.tutorMapper.selectTCardInfo();
+		List<TutorPageVO> list = this.tutorMapper.selectRecentTCard();
 		
 		assertNotNull(list);
 		list.forEach(log::info);
-	} // testSelectTCardInfo
+	} // testSelectRecentTCard
 	
 	
 //	@Disabled
 	@Test
 	@Order(3)
-	@DisplayName("3. TutorMapper.updateTInfo() test.")
-	void testUpdateTInfo() throws DAOException {
-		log.trace("튜터 정보 수정");
+	@DisplayName("3. TutorMapper.insertIntroInfo() test.")
+	void testInsertIntroInfo() throws DAOException {
+		log.trace("튜터 소개 입력");
 		
 		TutorPageDTO newInfo = new TutorPageDTO(
-			3, "현직 수학 강사", "안녕하세요.", "진심을 다해 가르칩니다.");
+			null, "test@gmail.com", "수학강사 3년 경력", "안녕하세요.", "진심을 다해 가르칩니다.");
+		log.info("\t + newInfo: {}", newInfo);
+		
+		int affectedLines = this.tutorMapper.insertIntroInfo(newInfo);
+		log.info("\t + affectedLines: {}", affectedLines);
+		
+		assert affectedLines == 1;
+		
+	} // insertIntroInfo
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("4. TutorMapper.updateTInfo() test.")
+	void testUpdateTInfo() throws DAOException {
+		log.trace("튜터 소개 수정");
+		
+		TutorPageDTO newInfo = new TutorPageDTO(
+				7, null, "수학과외 5년", "안녕하세요.", "진심을 다해 가르칩니다.");
 		log.info("\t + newInfo: {}", newInfo);
 		
 		int affectedLines = this.tutorMapper.updateTInfo(newInfo);
