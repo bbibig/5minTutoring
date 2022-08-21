@@ -17,11 +17,9 @@
 		<!-- 1. JDBC 연결정보 속성들에 값 설정-->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
-<<<<<<< HEAD
+
 		<property name="username" value="ADMIN" />
-=======
-		<property name="username" value="admin" />
->>>>>>> 1b2eccf (community maaper)
+
 		<property name="password" value="Oracle1234567" />
 
 		<!-- 2. Connection Pool의 작동방식과 관련된 속성들에 값 설정 -->
