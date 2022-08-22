@@ -28,8 +28,8 @@ public interface MypageMapper {
 	//1. 기본정보 수정(학생) + 프로필사진 추가 예정
 	public abstract boolean updateStudentInfo(UserDTO dto) throws DAOException;
 	
-	//1. 기본정보 수정(튜터) + 프로필사진 추가 예정
-		public abstract boolean updateTutorInfo(UserDTO dto) throws DAOException;
+	//2. 기본정보 수정(튜터) + 프로필사진 추가 예정
+	public abstract boolean updateTutorInfo(UserDTO dto) throws DAOException;
 	
 //	============<<DELETE>>============
 

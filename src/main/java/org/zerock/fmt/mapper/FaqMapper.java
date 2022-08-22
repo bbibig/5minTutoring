@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.zerock.fmt.domain.CriteriaFaq;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.exception.DAOException;
@@ -13,9 +14,16 @@ import org.zerock.fmt.exception.DAOException;
 public interface FaqMapper {
 	
 //	============<<SELECT>>============
-	//1. 자주묻는 질문과 답 목록 전체 조회(오름차순으로)
-	@Select("SELECT /*+ index_asc(tbl_faq)*/ * FROM tbl_faq")
-	public abstract List<FaqVO> selectAllFaqList() throws DAOException;
+	//1-1. 자주묻는 질문과 답 목록 전체 조회(내림차순으로)
+//	@Select("SELECT /*+ index_desc(tbl_faq)*/ * FROM tbl_faq")
+//	public abstract List<FaqVO> selectAllFaqList() throws DAOException;
+	
+	//1-2. 자주묻는 질문과 답 목록 전체 조회 페이징 처리(내림차순으로)
+	public abstract List<FaqVO> selectAllFaqList(CriteriaFaq cri) throws DAOException;
+	
+	//2. 자주묻는 질문과 답 목록 총 개수 조회
+	@Select("SELECT count(faq_number) FROM tbl_faq")
+	public abstract Integer getFaqTotalAmount() throws DAOException;
 	
 //	============<<INSERT>>============
 	//2. 자주묻는 질문과 답 생성

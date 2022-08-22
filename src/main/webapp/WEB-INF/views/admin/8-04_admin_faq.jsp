@@ -76,146 +76,41 @@
                             <div class="container card p-4">
                                 <!-- FAQ 리스트 -->
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                style="background-color: white;" data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                                aria-controls="flush-collapseOne">
-                                                Q. 질문입니다.
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body row">
-                                                <!-- ▼ 답변 영역  -->
-                                                <div class="col-11">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                        rows="3">A. 자주묻는 질문질문</textarea>
-                                                </div>
-                                                <!-- ▼수정삭제 버튼 -->
-                                                <div class="col-1 sidebutton" style="text-align: center;">
-                                                    <div>
-                                                        <button type="submit">수정</button> | 
-                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- 아코디언1 -->
+                                    
+                                    <c:forEach var="faq" items="${_FAQLIST_}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-headingOne">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    style="background-color: white;" data-bs-toggle="collapse"
+                                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                                    aria-controls="flush-collapseOne">
+                                                    Q. ${faq.faq_title}
+                                                </button>
+                                            </h2>
+                                            
+                                            <form action="/admin/adminFAQModify" method="post">
+                                                <input type="hidden" name="faq_number" value="${faq.faq_number}">
 
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                style="background-color: white;" data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                                aria-controls="flush-collapseTwo">
-                                                Q. 질문입니다.
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body row">
-                                                <!-- ▼ 답변 영역  -->
-                                                <div class="col-11">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                        rows="3">A. 자주묻는 질문질문</textarea>
-                                                </div>
-                                                <!-- ▼수정삭제 버튼 -->
-                                                <div class="col-1 sidebutton" style="text-align: center;">
-                                                    <div>
-                                                        <button type="submit">수정</button> | 
-                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
+                                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                    <div class="accordion-body row">
+                                                        <!-- ▼ 답변 영역  -->
+                                                        <div class="col-11">
+                                                            <textarea name="faq_content" class="form-control" id="exampleFormControlTextarea1"
+                                                                rows="3">A. ${faq.faq_content}</textarea>
+                                                        </div>
+                                                        <!-- ▼수정삭제 버튼 -->
+                                                        <div class="col-1 sidebutton" style="text-align: center;">
+                                                            <div>
+                                                                <button type="submit">수정</button> | 
+                                                                <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- 아코디언2 -->
-
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                style="background-color: white;" data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapseThree" aria-expanded="false"
-                                                aria-controls="flush-collapseThree">
-                                                Q. 질문입니다.
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingThree"
-                                            data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body row">
-                                                <!-- ▼ 답변 영역  -->
-                                                <div class="col-11">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                        rows="3">A. 자주묻는 질문질문</textarea>
-                                                </div>
-                                                <!-- ▼수정삭제 버튼 -->
-                                                <div class="col-1 sidebutton" style="text-align: center;">
-                                                    <div>
-                                                        <button type="submit">수정</button> | 
-                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- 아코디언3 -->
-
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingFour">
-                                            <button class="accordion-button collapsed" type="button"
-                                                style="background-color: white;" data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapseFour" aria-expanded="false"
-                                                aria-controls="flush-collapseFour">
-                                                Q. 질문입니다.
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseFour" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body row">
-                                                <!-- ▼ 답변 영역  -->
-                                                <div class="col-11">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                        rows="3">A. 자주묻는 질문질문</textarea>
-                                                </div>
-                                                <!-- ▼수정삭제 버튼 -->
-                                                <div class="col-1 sidebutton" style="text-align: center;">
-                                                    <div>
-                                                        <button type="submit">수정</button> | 
-                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- 아코디언4 -->
-
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingFive">
-                                            <button class="accordion-button collapsed" type="button"
-                                                style="background-color: white;" data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapseFive" aria-expanded="false"
-                                                aria-controls="flush-collapseFive">
-                                                Q. 질문입니다.
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseFive" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body row">
-                                                <!-- ▼ 답변 영역  -->
-                                                <div class="col-11">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                        rows="3">A. 자주묻는 질문질문</textarea>
-                                                </div>
-                                                <!-- ▼수정삭제 버튼 -->
-                                                <div class="col-1 sidebutton" style="text-align: center;">
-                                                    <div>
-                                                        <button type="submit">수정</button> | 
-                                                        <button class="deleteBtn" type="submit" onclick="deletebt()">삭제</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- 아코디언5 -->
+                                            </form>
+                                        </div> <!-- 아코디언1 -->
+                                    </c:forEach>
 
                                 </div> <!-- FAQ리스트 -->
 
@@ -225,13 +120,13 @@
 
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center p-5">
-                                <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/adminFAQ?currPage=1">&laquo;</a>
                                 </li>
-                                <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-                                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.cri.currPage - 1}">&lt;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.cri.currPage}">${_FAQPAGENATION_.cri.currPage}</a>
                                 </li>
-                                <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-                                <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.realEndPage}">&raquo;</a>
                                 </li>
                             </ul>
                         </nav>
@@ -247,11 +142,8 @@
                 <!-- End Section -->
 
                 <!--====================================글쓰기 모달=================================================-->
-<<<<<<< HEAD
-                
-=======
-              
->>>>>>> cabaaba (package rename)
+
+
                 <div class="modal fade" id="community-write">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">

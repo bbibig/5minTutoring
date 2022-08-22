@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaFaq;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.exception.DAOException;
@@ -37,15 +38,30 @@ public class FaqMapperTests {
 	private FaqMapper mapper;
 	
 	
-	//1. 자주묻는 질문과 답 목록 전체 조회 테스트
+//	//1-1. 자주묻는 질문과 답 목록 전체 조회 테스트
+//	@Test
+//	@Order(1)
+//	@DisplayName("1. testSelectAllFaqList")
+//	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+//	void testSelectAllFaqList() throws DAOException {
+//		log.trace("testSelectAllFaqList(), 자주묻는 질문 리스트 전체 조회");
+//		
+//		List<FaqVO> list = this.mapper.selectAllFaqList();
+//		list.forEach(e -> log.info(e));
+//		
+//	}//testSelectAllFaqList()
+	
+	//1-2. 자주묻는 질문과 답 목록 전체 조회 테스트
 	@Test
-	@Order(1)
-	@DisplayName("1. testSelectAllFaqList")
+	@Order(5)
+	@DisplayName("5. testSelectAllFaqList")
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testSelectAllFaqList() throws DAOException {
-		log.trace("testSelectAllFaqList(), 자주묻는 질문 리스트 전체 조회");
+		log.trace("testSelectAllFaqList(), 자주묻는 질문 리스트 전체 조회(페이징처리)");
 		
-		List<FaqVO> list = this.mapper.selectAllFaqList();
+		CriteriaFaq cri = new CriteriaFaq();
+		
+		List<FaqVO> list = this.mapper.selectAllFaqList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testSelectAllFaqList()
@@ -94,6 +110,19 @@ public class FaqMapperTests {
 		log.info("\t+ 4. 자주묻는 질문과 답 삭제 결과: {}", result);
 		
 	}//testDeleteFaq()
+	
+	//5. 자주묻는 질문과 답 목록 개수 조회 테스트
+	@Test
+	@Order(5)
+	@DisplayName("5. testetFaqTotal")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetFaqTotalAmount() throws DAOException {
+		log.trace("testDeleteFaq(), 자주묻는 질문과 답 목록 총 개수 조회");
+		
+		Integer faqTotalAmount = this.mapper.getFaqTotalAmount();
+		log.info("\t+ 자주묻는 질문과 답 목록 총 개수: {}", faqTotalAmount);
+		
+	}//testGetFaqTotalAmount()
 
 }// end class
 
