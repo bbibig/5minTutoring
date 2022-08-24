@@ -1,22 +1,43 @@
 package org.zerock.fmt.controller;
 
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.fmt.domain.TutorPageVO;
+import org.zerock.fmt.exception.ControllerException;
+import org.zerock.fmt.service.TutorService;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@NoArgsConstructor
+@AllArgsConstructor
 
 @RequestMapping("/tutor")
 @Controller
-public class TutorController {
+public class TutorController implements InitializingBean {
+	
+	private TutorService tutorService;
 	
 	@GetMapping("/tutorMain")
-	public String tpMain() {
+	public String tpMain(Model model) throws ControllerException {
 		log.trace("2-01_tpMain <<< 튜터페이지 메인");
+		log.info("\t + model: {}", model);
+		
+		try {
+			List<TutorPageVO> recentList = this.tutorService.getRecentTCard();
+			recentList.forEach(log::trace);
+			
+			model.addAttribute("_RECENT_LIST_", recentList);
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
 		
 		return "tutor/2-01_tpMain";
 	} // tpMain
@@ -80,7 +101,17 @@ public class TutorController {
 		log.trace("2-09_tutoringAsk <<< 과외하기 질문");
 		
 		return "tutor/2-09_tutoringAsk";
-	} // tutoringAsk
+	}
+
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		log.info("의존성 주입 완료");
+		
+		Objects.requireNonNull(this.tutorService);
+		log.trace("\t + this.tutorService: {}", tutorService);
+		
+	} // afterPropertiesSet
 	
 	
 	
