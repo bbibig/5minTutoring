@@ -109,6 +109,7 @@ public class AdminController {
 		return "admin/8-03_answerBoard_comment";
 	}
 	
+	
 	@GetMapping("/adminFAQ")
 	public String adminFAQ(CriteriaFaq cri, Model model) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용)");
@@ -124,23 +125,45 @@ public class AdminController {
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}// try-catch
-	}
+	}// adminFAQ(R)
+	
+	@PostMapping("/adminFAQCreate")
+	public String adminFAQCreate(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		log.info("자주 묻는 질문(관리자용) 생성");
+		
+		try {
+			if(this.faqService.createFaq(dto)) { rttrs.addFlashAttribute("_FAQRESULT_", "FAQ생성 성공"); } 
+			else { rttrs.addFlashAttribute("_FAQRESULT_", "FAQ생성 오류"); } //if - else
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		
+		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
+	}// adminFAQ(C)
 	
 	@PostMapping("/adminFAQModify")
 	public String adminFAQModify(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 수정");
 		
 		try {
-			if(this.faqService.updateFaq(dto)) {
-				rttrs.addFlashAttribute("_RESULT_", "성공");
-			} else {
-				rttrs.addFlashAttribute("_RESULT_", "오류");
-			} //if - else
+			if(this.faqService.updateFaq(dto)) { rttrs.addFlashAttribute("_FAQRESULT_", "FAQ수정 성공"); } 
+			else { rttrs.addFlashAttribute("_FAQRESULT_", "FAQ수정 오류"); } //if - else
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}
+	}// adminFAQ(U)
 	
+	@PostMapping("/adminFAQRemove")
+	public String adminFAQRemove(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		log.info("자주 묻는 질문(관리자용) 삭제");
+		
+		try {
+			if(this.faqService.removeFaq(dto)) { rttrs.addFlashAttribute("_FAQRESULT_", "FAQ삭제 성공"); } 
+			else { rttrs.addFlashAttribute("_FAQRESULT_", "FAQ삭제 오류"); } //if - else
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		
+		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
+	}// adminFAQ(D)
+	
+
 	@RequestMapping("/sale/sell")
 	public String adminSale() {
 		log.info("매출관리 페이지");

@@ -27,6 +27,11 @@
     /* font-weight: bold; */
 }
 
+/* 버튼 배경색 */   
+.bg-blue{
+    background: #4154f1;
+    color: #fff;
+}
 
 
 
