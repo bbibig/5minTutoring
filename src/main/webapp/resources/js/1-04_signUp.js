@@ -1,183 +1,259 @@
 
+$('#signupBtn').on('click', function(){
+  if(email_V&&pw_V&&pwcheck_V&&nickName_V&&UserName_V&&birth_V&&
+     gender_V&&phone_V&&stSchool_V&&stGrade_V){
+      let formObj = $('form');
+      formObj.attr('action','/login/signUp_student');
+      formObj.attr('method','POST');
+      formObj.submit();
 
+      Swal.fire({
+        title: "회원가입완료!",
+        text: "5분과외 회원가입이 완료되었습니다.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '회원가입실패',
+        text: '회원가입 양식을 다시 확인해주세요.',
+        confirmButtonColor: "#3085d6",
+        timer: 1500,
+      })
+    }//if-else
+});//학생 가입 버튼
 
+$('#signupTTBtn').on('click', function(){
+  if(email_V&&pw_V&&pwcheck_V&&nickName_V&&UserName_V&&birth_V&&
+    gender_V&&phone_V&&ttSchool_V&&ttSubject_V&&file_V){
+      let formObj = $('form');
+      formObj.attr('action','/login/signUp_tutor');
+      formObj.attr('method','POST');
+      formObj.attr('enctype','multipart/form-data');
+      formObj.submit();
+      console.log("왜안날라가요");
 
+      Swal.fire({
+        title: "회원가입 신청완료!",
+        html: "인증메일이 발송되었습니다.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        timer: 1500,
+      });;//-- sweetAlert
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '회원가입실패',
+        text: '회원가입 양식을 다시 확인해주세요.',
+        confirmButtonColor: "#3085d6",
+        timer: 1500,
+      })
+    }//if-else
+});//튜터 가입 버튼
 
-// let isvalid=false;
+let email_V = false;
+let pw_V = false;
+let pwcheck_V = false;
+let nickName_V = false;
+let UserName_V = false;
+let birth_V = false;
+let gender_V = false;
+let phone_V = false;
+let stSchool_V = false;
+let stGrade_V = false;
+let ttSchool_V = false;
+let ttSubject_V= false;
+let file_V = false;
 
-// let eamil = document.querySelector("#user_email");
-// let password = document.querySelector("#user_pw")
-// let passwordCheck = document.querySelector("#passwordCheck");
-// let nickName = document.querySelector("#user_nick")
-// let userName = document.querySelector("#user_name")
-// let birth = document.querySelector("#user_birth")
-// let gender = document.querySelector("#user_gender") 
-// let phone = document.querySelector("#user_phone")
-// let school = document.querySelector("#st_school")
-// let grade = document.querySelector("#st_grade")
-// // let tutorFile = document.querySelector("#tutor_signFile")
+// 이메일 유효성
+let emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+$("#user_email").on("input", function () {
+  let vaildCheck = emailRegExp.test(this.value);
+  if (!vaildCheck) {
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    email_V =false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    email_V =true;
+  } //if-else
+});////email
 
+//패스워드 유효성
+let pwRegExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/;
+$("#user_pw").on("input",function(){
+  let vaildCheck = pwRegExp.test(this.value);
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    pw_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    pw_V = true;
+  }//if-else
+});///password
 
-// eamil.addEventListener("input",function(){
-//   let emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+$("#pwcheck").on("input",function(){
+  let pw = $("#user_pw").val();
+  let pwc = $("#pwcheck").val();
+  if(!(pw==pwc)){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    pwcheck_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    pwcheck_V = true;
+  }//if-else
+});////pwcheck
 
-//   let inputData = this.value;
-//   console.log(inputData);
-//   // isvalid = inputData.length >= 5 && inputData.length <=10;
-//   if(!emailRegExp.test(inputData)){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//     return false;
-//   }//if-else
-//   return true;
-// })////email 
+//닉네임 유효성
+let nickRegExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9._ -]{2,10}$/;
+$("#user_nick").on("input",function(){
+  let vaildCheck = nickRegExp.test(this.value);
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    nickName_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    nickName_V = true;
+  }//if-else
+});////nickName
 
-// password.addEventListener("input",function(){
-//   let inputData = this.value;
-//   isvalid = inputData.length >= 5 && inputData.length <=10;
+let nameRegExp = /^[가-힝a-zA-Z]{2,}$/;
+$("#user_name").on("input",function(){
+  let vaildCheck = nameRegExp.test(this.value);
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    UserName_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    UserName_V = true;
+  }//if-else
+});////userName
 
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////password 
+$("#user_birth").on("input",function(){
+  let vaildCheck = this.value.length===8;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    birth_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    birth_V = true;
+  }//if-else
+});////user_birth
 
-// passwordCheck.addEventListener("input",function(){
+$("#user_gender").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    gender_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    gender_V = true;
+  }//if-else
+});////gender
 
-//   let inputData = this.value;
+$("#user_phone").on("input",function(){
+  let vaildCheck = this.value.length===11;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    phone_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    phone_V = true;
+  }//if-else
+});////phone
 
-//   if(password.value!==passwordCheck.value){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////passwordCheck 
+$("#st_school").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    stSchool_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    stSchool_V = true;
+  }//if-else
+})////stSchool
 
-// nickName.addEventListener("input",function(){
+$("#st_grade").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    stGrade_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    stGrade_V = true;
+  }//if-else
+})////stGrade
 
-//   let inputData = this.value;
-//   isvalid = inputData.length >= 5 && inputData.length <=10;
+$("#tt_school").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    ttSchool_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    ttSchool_V = true;
+  }//if-else
+})////ttSchool
 
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////nickName 
+$("#tt_subject").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    ttSubject_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    ttSubject_V = true;
+  }//if-else
+})////ttSubject
 
-// userName.addEventListener("input",function(){
-
-//   let inputData = this.value;
-//   isvalid = inputData.length >= 5 && inputData.length <=10;
-
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////userName 
-
-
-// birth.addEventListener("input",function(){
-//   let inputData = this.value;
-//   isvalid = inputData.length===8;
-
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////user_birth 
-
-// gender.addEventListener("input",function(){
-//   let inputData = this.value;
-//   isvalid = inputData.length > 0;
-
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////school 
-
-// school.addEventListener("input",function(){
-//   let inputData = this.value;
-//   isvalid = inputData.length > 0;
-
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////school 
-
-// grade.addEventListener("input",function(){
-//   let inputData = this.value;
-//   isvalid = inputData.length > 0;
-
-//   if(!isvalid){
-//     this.classList.remove("is-valid");
-//     this.classList.add("is-invalid");
-//   } else {
-//     this.classList.remove("is-invalid");
-//     this.classList.add("is-valid");
-//   }//if-else
-// })////grade 
-
-
-//---------------------------- sweetAlert
-function login() {
-  Swal.fire({
-    title: '회원가입완료!', 
-    text: '5분과외 회원가입이 완료되었습니다.', 
-    icon: 'success',      
-    confirmButtonColor: '#3085d6',
-  })
-  // .then(function(){
-  //   document.location.href="/login/home"
-  // });
-};//login
+$("#file").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    file_V = false;
+    Swal.fire({
+      text: '증명서를 첨부해주세요.',
+      confirmButtonColor: "#3085d6",})
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    file_V = true;
+  }//if-else
+})////ttSubject
 
 // --------------------------------------------------------------------
 
-
-function loginTutor() {
-  Swal.fire({
-    title: '회원가입 신청완료!', 
-    html: 
-    '<strong>email@gmail.com로 </strong><br>'+
-    '인증메일이 발송되었습니다.',
-    icon: 'success',   
-    confirmButtonColor: '#3085d6',
-  })
-  // .then(function(){
-  //   document.location.href="/"
-  // });
-};//login
-
 function checkNickName() {
   Swal.fire({
-    title: '중복확인완료!', 
-    text: '해당 닉네임을 사용할 수 있습니다.', 
-    icon: 'success',      
-    confirmButtonColor: '#3085d6',
-  })
-};//checkNickName
+    title: "중복확인완료!",
+    text: "해당 닉네임을 사용할 수 있습니다.",
+    icon: "success",
+    confirmButtonColor: "#3085d6",
+  });
+} //checkNickName

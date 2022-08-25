@@ -34,11 +34,11 @@ public class FileServiceImpl implements FileService{
 
 	
 	@Override
-	public FileVO getFile(int fNO) throws ServiceException {
+	public FileVO getFile(String userEmail) throws ServiceException {
 		log.trace("getFile() service test");
 		
 		try{ 
-			FileVO filevo = this.fileMapper.selectFile(fNO); 
+			FileVO filevo = this.fileMapper.selectFile("newTT"); 
 			log.info("\t + FileVO : {}", filevo);
 			return filevo;
 		} catch(Exception e) { throw new ServiceException(e); }

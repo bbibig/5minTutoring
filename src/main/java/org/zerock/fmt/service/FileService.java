@@ -8,5 +8,6 @@ public interface FileService {
 
 	public abstract Integer createFiles(FileDTO file) throws ServiceException;
 	
-	public abstract FileVO getFile(int fNO) throws ServiceException;
+	public abstract FileVO getFile(String userEmail) throws ServiceException;
+
 }//end 

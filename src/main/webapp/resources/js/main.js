@@ -12,7 +12,7 @@ const scrollto = (el) => {
       behavior: 'smooth'
     })
   }
-  let backtotop = select('.back-to-top')
+let backtotop = select('.back-to-top')
   if (backtotop) {
     const toggleBacktotop = () => {
       if (window.scrollY > 100) {

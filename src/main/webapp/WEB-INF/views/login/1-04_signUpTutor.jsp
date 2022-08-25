@@ -12,6 +12,8 @@
     <jsp:include page="../htmlHead.jsp" flush="true" />
     <link href="${path}/resources/css/1-04_signup.css" rel="stylesheet">
     <!-- ========================================================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 
     <title>회원가입(튜터)</title>
 
@@ -38,23 +40,20 @@
 
                             <div class="form-group">
                                 <label for="email">이메일</label>
-                                <input type="email" class="form-control" name="user_email" id="user_email" data-kv="email"
-                                    placeholder="example@email.com" required="required" autofocus="autofocus"
-                                    maxlength="25">
+                                <input type="email" class="form-control" name="user_email" id="user_email" 
+                                    placeholder="example@email.com" required>
                                 <div class="invalid-feedback">이메일을 입력해주세요.</div>
                             </div>
 
                             <div class="form-group">
                                 <label for="password">비밀번호</label>
-                                <input type="password" class="form-control mt-1" name="user_pw" id="user_pw" data-kv="password"
-                                    spellcheck="false" placeholder="영문 숫자 포함8~15자로 입력하세요." required>
+                                <input type="password" class="form-control mt-1" name="user_pw" id="user_pw" placeholder="영문 숫자 포함8~15자로 입력하세요." required>
                                 <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
                             </div>
 
                             <div class="form-group">
                                 <label for="passwordCheck">비밀번호 재확인</label>
-                                <input type="password" class="form-control" id="passwordCheck" data-kv="passwordConfirm"
-                                    spellcheck="false" required>
+                                <input type="password" class="form-control" id="pwcheck" required>
                                 <div class="invalid-feedback">비밀번호와 맞지 않습니다.</div>
                             </div>
 
@@ -62,9 +61,8 @@
                                 <label for="nickName">닉네임</label>
                                 <div class="nick">
                                     <input type="text" class="form-control" name="user_nick" id="user_nick" placeholder="영문 한글 숫자 2~10자"
-                                        onclick="" required style="width:73%;float:left">
-                                    <button type="button" class="btn btn-outline-primary mt-2" style="float: right"
-                                        onclick="checkNickName()"> 중복체크</button>
+                                        style="width:73%;float:left">
+                                    <button type="button" class="btn btn-outline-primary mt-2" style="float: right"> 중복체크</button>
                                     <div style="clear: both"></div>
                                     <div class="invalid-feedback" style="clear: both">올바른 닉네임이 아닙니다.</div>
                                 </div>
@@ -79,28 +77,26 @@
                             <div class="form-group">
                                 <label for="userbrith">생년월일</label>
                                 <div class="birth">
-                                    <span class="ps_box">
-                                        <input type="text" class="form-control" name="user_birth" id="user_birth" placeholder="년(4자)"
-                                            maxlength="8">
+                                    <span class="birth_box">
+                                        <input type="text" class="form-control" name="user_birth" id="user_birth" placeholder="ex)20220815" maxlength="8" required>
                                     </span>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
-                            <!--생년월일-->
-
                             <div class="form-group">
                                 <label for="gender">성별 </label>
                                 <select class="form-select" name="user_gender" id="user_gender">
                                     <option value="남자"> 남자 </option>
                                     <option value="여자"> 여자 </option>
                                 </select>
+                                <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">휴대전화</label>
                                 <div>
-                                    <input type="text" class="form-control" name="user_phone" id="user_phone" style="width:75%;float:left">
-                                    <button type="button" class="btn btn-outline-primary mt-2" style="float: right">
-                                        인증하기</button>
+                                    <input type="text" class="form-control" name="user_phone" id="user_phone" style="width:75%;float:left" maxlength="11">
+                                    <button type="button" class="btn btn-outline-primary mt-2" style="float: right">인증하기</button>
                                     <div style="clear: both"></div>
                                 </div>
                             </div>
@@ -109,7 +105,8 @@
                                 <div class="school">
                                     <span class="ps_box">
                                         <label for="schoolGrade"> 대학교 </label>
-                                        <select class="form-select" name="tt_school" id="tt_school">
+                                        <select class="form-select" name="tt_school" id="tt_school" required>
+                                            <option> </option>
                                             <option value="재학">재학생</option>
                                             <option value="졸업">졸업생</option>
                                         </select>
@@ -119,32 +116,28 @@
                                 <div class="grade">
                                     <span class="ps_box">
                                         <label for="schoolGrade"> 대표과목</label>
-                                        <select class="form-select"name="tt_subject" id="tt_subject">
+                                        <select class="form-select"name="tt_subject" id="tt_subject" required>
+                                            <option> </option>
                                             <option value="Korean">국어</option>
                                             <option value="Englesh">영어</option>
                                             <option value="Math">수학</option>
                                         </select>
                                     </span>
                                 </div>
-                                <div style="clear: both"></div>
                             </div>
-                            <!--학과/학생-->
                             <div class="form-group mt-2">
                                 <!-- <form action="#" method="post" enctype="multipart/form-data"> -->
                                     <label for="formFile" class="form-label">재학/졸업증명서 첨부</label>
                                     <input class="form-control" type="file" name="file" id="file" multiple>
-                                    <!-- <div class="invalid-feedback">증명서를 첨부해주세요.</div> -->
-                                <!-- </form> -->
+                                    <div class="invalid-feedback">증명서를 첨부해주세요.</div>
                             </div>
 
                             <div class="d-grid gap-2 col-12 mx-auto">
                                 <br>
-                                <button class="btn btn-primary" id="loginBtn" type="submit" onclick="loginTutor()" >회원가입하기</button>
+                                <button class="btn btn-primary" id="signupTTBtn" type="button">회원가입하기</button>
                             </div>
                             <!--button-->
                         </form>
-
-
                     </div>
                     <!--login_form-->
                 </div>

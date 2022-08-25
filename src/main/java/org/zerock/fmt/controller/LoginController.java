@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +65,7 @@ public class LoginController implements InitializingBean{
 	public String signUpStudent(UserDTO DTO) throws ServiceException {
 	
 		try {
-			if( this.userService.singUpStrudent(DTO) ) {
+			if(this.userService.singUpStrudent(DTO)) { 
 				log.info("학생 회원가입 성공");
 			} else log.info("회원가입실패");
 			

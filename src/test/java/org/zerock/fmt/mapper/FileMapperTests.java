@@ -68,7 +68,8 @@ public class FileMapperTests {
 	void selectFileTest() throws DAOException {
 		log.trace("selectFile test");
 
-		FileVO filevo = this.fileMapper.selectFile(10);
+		String user_email = "newTT";
+		FileVO filevo = this.fileMapper.selectFile(user_email);
 		log.info("\t + fileVO : {}", filevo);
 	}//selectFile
 }//end class

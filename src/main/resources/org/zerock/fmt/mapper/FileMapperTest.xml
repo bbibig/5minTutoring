@@ -11,8 +11,8 @@
       <!-- <selectKey resultType="int" order="BEFORE" keyProperty="fNo">
           SELECT MAX(fNo) FROM TEST_FILE
       </selectKey> -->
-        INSERT INTO TEST_FILE(FILENAME, UPLOADPATH, UUID, BOARD_NO, USER_EMAIL)  
-        VALUES (#{fileName}, #{uploadPath}, #{uuid}, #{boardNo,jdbcType=VARCHAR}, #{userEmail})
+        INSERT INTO TBL_TT_FILE(FILENAME, UPLOADPATH, UUID, USER_EMAIL)  
+        VALUES (#{fileName}, #{uploadPath}, #{uuid}, #{userEmail})
     </insert>
 
 </mapper>
