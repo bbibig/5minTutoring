@@ -34,7 +34,7 @@
                 <div class="col-md-4 offset-md-4 mt-3">
 
                     <div class="login_form">
-                        <form action="/login/signUp_tutor" method="post" class="needs-validation" novalidate>
+                        <form action="/login/signUp_tutor" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
 
                             <div class="form-group">
                                 <label for="email">이메일</label>
@@ -81,7 +81,7 @@
                                 <div class="birth">
                                     <span class="ps_box">
                                         <input type="text" class="form-control" name="user_birth" id="user_birth" placeholder="년(4자)"
-                                            maxlength="4">
+                                            maxlength="8">
                                     </span>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                             <div class="form-group mt-2">
                                 <!-- <form action="#" method="post" enctype="multipart/form-data"> -->
                                     <label for="formFile" class="form-label">재학/졸업증명서 첨부</label>
-                                    <input class="form-control" type="file" name="tt_caetificate" id="tt_caetificate">
+                                    <input class="form-control" type="file" name="file" id="file" multiple>
                                     <!-- <div class="invalid-feedback">증명서를 첨부해주세요.</div> -->
                                 <!-- </form> -->
                             </div>

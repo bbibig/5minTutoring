@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.FileMapperTest">
+
+    <insert id="insertFile" parameterType="org.zerock.fmt.domain.FileDTO">
+
+      <!-- <selectKey resultType="int" order="BEFORE" keyProperty="fNo">
+          SELECT MAX(fNo) FROM TEST_FILE
+      </selectKey> -->
+        INSERT INTO TEST_FILE(FILENAME, UPLOADPATH, UUID, BOARD_NO, USER_EMAIL)  
+        VALUES (#{fileName}, #{uploadPath}, #{uuid}, #{boardNo,jdbcType=VARCHAR}, #{userEmail})
+    </insert>
+
+</mapper>

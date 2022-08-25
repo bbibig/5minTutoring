@@ -30,11 +30,11 @@
     <insert id="insertTutor" parameterType="org.zerock.fmt.domain.UserDTO" >
         INSERT INTO tbl_user
             (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
-            tt_school, tt_subject, tt_certificate, user_group, pass)
+            tt_school, tt_subject, user_group, pass)
 
         VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name}, #{user_birth}, 
                 #{user_gender}, #{user_phone}, 
-                #{tt_school}, #{tt_subject}, #{tt_certificate},
+                #{tt_school}, #{tt_subject},
                 'Tutor' ,'Wait')
     </insert>
 

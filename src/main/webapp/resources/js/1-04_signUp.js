@@ -1,153 +1,147 @@
 
-let isvalid=false;
-
-let eamil = document.querySelector("#user_email");
-let password = document.querySelector("#user_pw")
-let passwordCheck = document.querySelector("#passwordCheck");
-let nickName = document.querySelector("#user_nick")
-let userName = document.querySelector("#user_name")
-let birth = document.querySelector("#user_birth")
-let gender = document.querySelector("#user_gender") 
-let phone = document.querySelector("#user_phone")
-let school = document.querySelector("#st_school")
-let grade = document.querySelector("#st_grade")
-let tutorFile = document.querySelector("#tutor_signFile")
 
 
-eamil.addEventListener("input",function(){
-  let emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-  let inputData = this.value;
-  isvalid = inputData.length >= 5 && inputData.length <=10;
-
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////email 
-
-password.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length >= 5 && inputData.length <=10;
-
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////password 
-
-passwordCheck.addEventListener("input",function(){
-
-  let inputData = this.value;
-
-  if(password.value!==passwordCheck.value){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////passwordCheck 
-
-nickName.addEventListener("input",function(){
-
-  let inputData = this.value;
-  isvalid = inputData.length >= 5 && inputData.length <=10;
-
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////nickName 
-
-userName.addEventListener("input",function(){
-
-  let inputData = this.value;
-  isvalid = inputData.length >= 5 && inputData.length <=10;
-
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////userName 
 
 
-birth.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length===8;
+// let isvalid=false;
 
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////user_birth 
+// let eamil = document.querySelector("#user_email");
+// let password = document.querySelector("#user_pw")
+// let passwordCheck = document.querySelector("#passwordCheck");
+// let nickName = document.querySelector("#user_nick")
+// let userName = document.querySelector("#user_name")
+// let birth = document.querySelector("#user_birth")
+// let gender = document.querySelector("#user_gender") 
+// let phone = document.querySelector("#user_phone")
+// let school = document.querySelector("#st_school")
+// let grade = document.querySelector("#st_grade")
+// // let tutorFile = document.querySelector("#tutor_signFile")
 
-gender.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length > 0;
 
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////school 
+// eamil.addEventListener("input",function(){
+//   let emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
 
-school.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length > 0;
+//   let inputData = this.value;
+//   console.log(inputData);
+//   // isvalid = inputData.length >= 5 && inputData.length <=10;
+//   if(!emailRegExp.test(inputData)){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//     return false;
+//   }//if-else
+//   return true;
+// })////email 
 
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////school 
+// password.addEventListener("input",function(){
+//   let inputData = this.value;
+//   isvalid = inputData.length >= 5 && inputData.length <=10;
 
-grade.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length > 0;
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////password 
 
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////grade 
+// passwordCheck.addEventListener("input",function(){
 
-tutorFile.addEventListener("input",function(){
-  let inputData = this.value;
-  isvalid = inputData.length = 1;
+//   let inputData = this.value;
 
-  if(!isvalid){
-    this.classList.remove("is-valid");
-    this.classList.add("is-invalid");
-  } else {
-    this.classList.remove("is-invalid");
-    this.classList.add("is-valid");
-  }//if-else
-})////grade 
+//   if(password.value!==passwordCheck.value){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////passwordCheck 
+
+// nickName.addEventListener("input",function(){
+
+//   let inputData = this.value;
+//   isvalid = inputData.length >= 5 && inputData.length <=10;
+
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////nickName 
+
+// userName.addEventListener("input",function(){
+
+//   let inputData = this.value;
+//   isvalid = inputData.length >= 5 && inputData.length <=10;
+
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////userName 
+
+
+// birth.addEventListener("input",function(){
+//   let inputData = this.value;
+//   isvalid = inputData.length===8;
+
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////user_birth 
+
+// gender.addEventListener("input",function(){
+//   let inputData = this.value;
+//   isvalid = inputData.length > 0;
+
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////school 
+
+// school.addEventListener("input",function(){
+//   let inputData = this.value;
+//   isvalid = inputData.length > 0;
+
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////school 
+
+// grade.addEventListener("input",function(){
+//   let inputData = this.value;
+//   isvalid = inputData.length > 0;
+
+//   if(!isvalid){
+//     this.classList.remove("is-valid");
+//     this.classList.add("is-invalid");
+//   } else {
+//     this.classList.remove("is-invalid");
+//     this.classList.add("is-valid");
+//   }//if-else
+// })////grade 
+
 
 //---------------------------- sweetAlert
 function login() {

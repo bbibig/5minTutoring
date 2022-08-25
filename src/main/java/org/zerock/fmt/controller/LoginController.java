@@ -1,5 +1,6 @@
 package org.zerock.fmt.controller;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -8,24 +9,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.zerock.fmt.domain.FileDTO;
 import org.zerock.fmt.domain.UserDTO;
+import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.FileService;
 import org.zerock.fmt.service.UserService;
 
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-//@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor
 
-@RequestMapping("/login")	//기본URI(Base URI)
+@RequestMapping("/login")	
 @Controller
 public class LoginController implements InitializingBean{
 	
 	@Setter(onMethod_ = @Autowired)
-	private UserService userService;
+	private UserService userService;	//--- UserService
+
+	@Setter(onMethod_ = @Autowired)
+	private FileLoad fileupload;		//---- File관련 
+	
+	@Setter(onMethod_ = @Autowired)
+	private FileService fileservice;	//---- FileService
 //------------------------------------------------------------//
 	
 	//로그인화면
@@ -39,7 +49,6 @@ public class LoginController implements InitializingBean{
 	@GetMapping("/selectAccount")
 	public String selectAccount() {
 		log.trace("selectAccount() invoked.");
-		
 		return "login/1-03_selectAccount";
 	}
 	
@@ -59,7 +68,7 @@ public class LoginController implements InitializingBean{
 				log.info("학생 회원가입 성공");
 			} else log.info("회원가입실패");
 			
-			return "redirect:/login/home";
+			return "redirect:/login";
 			
 		} catch(Exception e) { throw new ServiceException(e); }
 	}//signUpStudent---2
@@ -73,19 +82,31 @@ public class LoginController implements InitializingBean{
 	}//signUp_tutor---1
 	
 	//튜터회원가입
-//	@RequestMapping(path="/signUp_tutor", method = RequestMethod.POST)
-//	public String signUpTutor(UserDTO DTO, List<MultipartFile> files) throws ServiceException {
-//		log.trace("튜터회원가입... 첨부파일 누가하자고했어요..");
-//		
-//		try {
-//			if( this.userService.singUPTutor(DTO) ) {
-//				log.info("튜터 회원가입 성공");
-//			} else log.info("회원가입실패");
-//			
-//			return "redirect:/login/home";
-//			
-//		} catch(Exception e) { throw new ServiceException(e); }
-//	}//signUpStudent---2
+	@PostMapping(path="/signUp_tutor")
+	public String signUpTutor(UserDTO DTO, List<MultipartFile> file) throws ControllerException {
+		log.trace("signUpTutor() invoked.");
+
+		try {
+			
+			boolean UserResult = this.userService.singUPTutor(DTO);
+			log.info("\t + 유저 회원가입 : {}", UserResult);
+			
+			//-------------------------------------------------
+			
+			List<FileDTO> fileDTO = this.fileupload.uploadFile(file, DTO.getUser_email());
+			log.info("\t + fileDTO : {}", fileDTO);
+			
+			//--------------------------------------------------
+			
+			for(FileDTO filedto : fileDTO) {
+				int fileResult = this.fileservice.createFiles(filedto);
+				log.info("\t + File Mapper insert : {}", fileResult);
+			}//for 
+				log.info("튜터 회원가입 성공");
+				
+			return "redirect:/";
+		} catch (Exception e) { throw new ControllerException(e); }
+	}// signUpStudent---2
 	
 	
 	//로그인 후 메인화면
