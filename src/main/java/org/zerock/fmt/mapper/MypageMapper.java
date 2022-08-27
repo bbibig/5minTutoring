@@ -13,7 +13,7 @@ import org.zerock.fmt.exception.DAOException;
 public interface MypageMapper {
 	
 //	============<<SELECT>>============
-	//1. 기본정보 조회(특정 회원) + 프로필사진 추가 예정
+	//1. 기본정보 조회(특정 회원) + 프로필사진 추가 예정 (UserMapper에 동일 기능 있음)
 	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_email}")
 	public abstract UserVO selectUser(@Param("user_email") String user_email) throws DAOException;
 	

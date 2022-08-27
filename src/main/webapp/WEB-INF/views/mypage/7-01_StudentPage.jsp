@@ -54,7 +54,7 @@
 
                 <!-- FROM -->
                 <div class="container card p-4 bg-card">
-                    <form action="#" method="get" onsubmit="return check();">
+                    <form action="/mypage/studentPageModify" method="post" id="userInfo">
                         <div class="row">
 
                             <div class="col-4">
@@ -66,33 +66,33 @@
                             </div>
 
                             <div class="col-4">
-
+                                <input type="hidden" name="user_email" value="${_USERINFO_.user_email}">
                                 <label for="user_nick">닉네임</label>
                                 <input type="text" class="form-control mb-3" id="user_nick" name="user_nick" readonly
-                                    value="닉네임">
+                                    value="${_USERINFO_.user_nick}">
                                 <label for="user_name">이름</label>
                                 <input type="text" class="form-control mb-3" id="user_name" name="user_name" readonly
-                                    value="이름">
+                                    value="${_USERINFO_.user_name}">
                                 <label for="user_gender">성별</label>
                                 <input type="text" class="form-control mb-3" id="user_gender" name="user_gender"
-                                    readonly value="성별">
+                                    readonly value="${_USERINFO_.user_gender}">
                                 <label for="user_phone">휴대전화</label>
                                 <input type="tel" class="form-control mb-3" id="user_phone" name="user_phone" readonly
-                                    value="휴대전화">
+                                    value="${_USERINFO_.user_phone}">
                                 <div class="row">
                                     <span class="col">
                                         <label for="st_school">중/고등학생</label>
                                         <select class="form-select mb-3" id="st_school" name="st_school">
-                                            <option>중학생</option>
-                                            <option>고등학생</option>
+                                            <option value="중학생" <c:if test="${_USERINFO_.st_school eq '중학생'}">selected</c:if> > 중학생</option>
+                                            <option value="고등학생" <c:if test="${_USERINFO_.st_school eq '고등학생'}">selected</c:if>> 고등학생</option>
                                         </select>
                                     </span>
                                     <span class="col">
                                         <label for="st_grade">학년</label>
                                         <select class="form-select mb-3" id="st_grade" name="st_grade">
-                                            <option>1학년</option>
-                                            <option>2학년</option>
-                                            <option>3학년</option>
+                                            <option value="1학년" <c:if test="${_USERINFO_.st_grade eq '1학년'}">selected</c:if> > 1학년</option>
+                                            <option value="2학년" <c:if test="${_USERINFO_.st_grade eq '2학년'}">selected</c:if> > 2학년</option>
+                                            <option value="3학년" <c:if test="${_USERINFO_.st_grade eq '3학년'}">selected</c:if> > 3학년</option>
                                         </select>
                                     </span>
                                 </div>
@@ -102,20 +102,21 @@
 
                             <div class="col-4" style="position: relative;">
 
-                                <label for="user_pw">현재 비밀번호</label>
-                                <input type="password" class="form-control" id="user_pw" name="user_pw" required
+                                <input type="hidden" id="hiddenpw" value="${_USERINFO_.user_pw}">
+                                <label for="user_Oldpw">현재 비밀번호</label>
+                                <input type="password" class="form-control" id="user_Oldpw" name="user_Oldpw" required
                                     placeholder="비밀번호를 입력해 주세요">
                                 <p id=check_1 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
-                                <label for="user_newpw">비밀번호 변경</label>
-                                <input type="password" class="form-control mb-3" id="user_newpw" name="user_newpw"
+                                <label for="user_newPw">비밀번호 변경</label>
+                                <input type="password" class="form-control mb-3" id="user_newPw" name="user_newPw"
                                     required placeholder="새로운 비밀번호를 입력해 주세요">
-                                <label for="user_newpw2">비밀번호 확인</label>
-                                <input type="password" class="form-control" id="user_newpw2" name="user_newpw2"
+                                <label for="user_pw">비밀번호 확인</label>
+                                <input type="password" class="form-control" id="user_pw" name="user_pw"
                                     required>
                                 <p id=check_2 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
-                                <button type="submit" class="btn bg-blue"
+                                <button type="button" class="btn bg-blue"
                                     style="position: absolute; right: 20px; bottom: 10px;" onclick="check()">
                                     저장</button>
                             </div>
@@ -138,7 +139,7 @@
     <!-- ======= footer + js  ======= -->
     <jsp:include page="../footer.jsp" flush="true" />
     <!-- ========유효성 체크========= -->
-    <script src="${path}/resources/js/7-01_mypage_sohee.js"></script>
+    <script src="${path}/resources/js/7-01_mypage.js"></script>
 </body>
 
 </html>

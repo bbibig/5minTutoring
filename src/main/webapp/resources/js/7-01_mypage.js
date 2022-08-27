@@ -64,37 +64,39 @@ realFile.addEventListener('change', getProfileImgFile)
 /* ============================= */
 
 function check() {
-    const pass0 = document.querySelector("#user_pw");
-    const pass1 = document.querySelector("#user_newpw");
-    const pass2 = document.querySelector("#user_newpw2");
+    let userForm = document.querySelector("#userInfo")
+
+    const datapw = document.querySelector("#hiddenpw").value;
+    const pass0 = document.querySelector("#user_Oldpw").value;    //현재 비밀번호
+    const pass1 = document.querySelector("#user_newPw").value;    //새로운 비밀번호
+    const pass2 = document.querySelector("#user_pw").value;       //새로운 비밀번호 확인(이값으로 파라미터 값 제출)
 
     const check1 = document.querySelector("#check_1").classList;
     const check2 = document.querySelector("#check_2").classList;
-    //현재 비밀번호 유효성
 
-    if (pass0.value !== "${현재비밀번호}") {
+    //현재 비밀번호 유효성
+    if (pass0 === datapw) {
+        check1.add("invisible");
+        check1.remove("visible");
+    } else {
         check1.add("visible");
         check1.remove("invisible");
         // 틀리면 제출 막음
-        // return false;
-    } else {
-        check1.add("invisible");
-        check1.remove("visible");
+        return false;
     }// if
 
     // 변경할비밀번호와 비밀번호 확인 유효성
-    if (pass1.value !== pass2.value) {
+    if ((pass1 === pass2) && (pass1 !== '') && (pass2 !== '')) {
+        check2.add("invisible");
+        check2.remove("visible");
+    } else {
         check2.add("visible");
         check2.remove("invisible");
 
         // 틀리면 제출 막음
         return false;
-    } else {
-        check2.add("invisible");
-        check2.remove("visible");
-
     }// check()
-
+    
     // 저장 버튼 누르면 확인
     Swal.fire({
         icon: 'warning',
@@ -106,8 +108,15 @@ function check() {
     }).then((result) => {
         // 저장확인 누르면 저장완료 창!
         if (result.isConfirmed) {
-            Swal.fire('수정 완료!', '', 'success')
-        }
-    })
+            Swal.fire({
+                icon: 'success',
+                text: '수정 완료!', 
+                confirmButtonText: '확인'
+            }).then(function(e) {
+                userForm.submit();
+            })// Swal.fire-then
+        }// if
+
+    })// Swal.fire-then
 
 }//check()
