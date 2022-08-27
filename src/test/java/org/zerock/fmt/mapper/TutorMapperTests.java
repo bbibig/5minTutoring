@@ -31,10 +31,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = { 
-	"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-	"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" 
-})
+@ContextConfiguration(locations = {"file:src/main/webapp/**/spring/**/*-context.xml"})
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

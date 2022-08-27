@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -27,7 +28,6 @@ public class TutorController implements InitializingBean {
 	@GetMapping("/tutorMain")
 	public String tpMain(Model model) throws ControllerException {
 		log.trace("2-01_tpMain <<< 튜터페이지 메인");
-		log.info("\t + model: {}", model);
 		
 		try {
 			List<TutorPageVO> recentList = this.tutorService.getRecentTCard();
@@ -42,13 +42,26 @@ public class TutorController implements InitializingBean {
 		return "tutor/2-01_tpMain";
 	} // tpMain
 	
-	
+
 	@GetMapping("/info")
-	public String tutorinfo() {
-		log.trace("tutorinfo()invoked");
+	public String tutorinfo(Model model) throws ControllerException {
+		log.trace("2-02_tutorpage_info <<< 튜터정보 페이지");
+		
+		try {
+			// Session에서 아이디 얻어오기? select를 id로 해야 할듯..
+			
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(21);
+			log.info("tutorInfo: {}", tutorInfo);
+			
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
 		
 		return "tutor/2-02_tutorpage_info";
 	}//tutor info
+	
 	
 	@GetMapping("/writeReview")
 	public String writeReview() {
@@ -63,6 +76,7 @@ public class TutorController implements InitializingBean {
 		
 		return "tutor/2-04_tutorpage_reviewlist";
 	}//tutor reviewList
+	
 	
 	@GetMapping("/ask")
 	public String ask() {

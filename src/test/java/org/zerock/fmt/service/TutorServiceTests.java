@@ -45,7 +45,7 @@ public class TutorServiceTests {
 		log.trace("injectionTest() invoked.");
 		
 		assertNotNull(this.tutorService);	
-		log.info("\t + 1. this.tutorService: {}", this.tutorService);
+		log.info("\t + this.tutorService: {}", this.tutorService);
 		
 	} // injectionTest
 	
