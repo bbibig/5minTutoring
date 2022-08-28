@@ -32,7 +32,7 @@ public class BuyServiceImpl implements BuyService{
 
 
 	@Override
-	public Integer buyHands(BuyDTO buyHands) throws ServiceException {
+	public Integer buy(BuyDTO buyHands) throws ServiceException {
 		
 		try {
 			return this.buyMapper.insertBuyHands(buyHands);
@@ -43,7 +43,7 @@ public class BuyServiceImpl implements BuyService{
 
 
 	@Override
-	public BuyDTO gettMyPayPage(Integer bNum) throws ServiceException {
+	public BuyDTO getMyPayPage(Integer bNum) throws ServiceException {
 		
 		try {
 			return this.buyMapper.selectMyPayPage(bNum);

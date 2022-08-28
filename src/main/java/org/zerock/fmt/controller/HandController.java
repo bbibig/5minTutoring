@@ -1,10 +1,22 @@
 package org.zerock.fmt.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.fmt.domain.BuyDTO;
+import org.zerock.fmt.domain.HandVO;
+import org.zerock.fmt.domain.UserDTO;
+import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.BuyService;
+import org.zerock.fmt.service.HandService;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -15,21 +27,72 @@ import lombok.extern.log4j.Log4j2;
 public class HandController {
 	
 	
+	@Setter(onMethod_= {@Autowired})
+	private HandService handService;
+	
+	@Setter(onMethod_= {@Autowired})
+	private BuyService buyService;
+	
 	
 	@GetMapping("/buyHands")
-	public String buyHands() {
+	public String buyHands(Model model) throws ServiceException {
 		log.trace("buyHands() invoked.");
 		
-		return "hand/4-01_buyHands";
-	}
+		try {
+			List<HandVO> list = this.handService.getAllHands();
+			list.forEach(log::trace);
+			
+			model.addAttribute("_BuyHands_", list);
+			
+			return "hand/4-01_buyHands";
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+		
+	} // buyHands
 	
 	
-	@RequestMapping("/payPage")
-//	@PostMapping("/payPage")
-	public String payPage() {
+
+	@GetMapping("/payPage")
+	public String payPage(UserDTO dto, Integer handVo, Model model) throws ServiceException {
 		log.trace("payPage() invoked.");
 		
-		return "hand/4-02_payPage";
-	}
+		try {
+			HandVO vo = this.handService.getHand(4);
+			
+			UserDTO user = new UserDTO();
+			
+			user.setUser_email("yune@naver.com");
+			user.setUser_name("이윤정");
+			user.setUser_phone("010-3333-3333");
+			
+			
+			model.addAttribute("_HandVO_", vo);
+			model.addAttribute("_UserDTO_", user);
+	//		model.addAttribute("_USER_", dto);
+			
+			log.info("\t+ _HandVO_: {}", vo);
+			log.info("\t+ _UserDTO_: {}", user);
+	//		log.info("\t+ USER:{}", dto);
+			
+			return "hand/4-02_payPage";
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+		
+	} // payPage
+	
+
+	@PostMapping("/payPage")
+	public void buy(BuyDTO dto) throws ServiceException {
+		
+		BuyDTO insertBuyHands = new BuyDTO("leey@gmail.com", 2, 1, 6600);
+		
+		int result = this.buyService.buy(dto);
+		
+		log.info("\t+ result: {}", result);
+		
+	} // buyHands
+	
 
 }//end class

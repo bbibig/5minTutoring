@@ -55,7 +55,7 @@ public class BuyServiceTests {
 		
 		log.info("\t+ buyHands: {}", buyHands);
 		
-		int affectedLines = this.buyService.buyHands(buyHands);
+		int affectedLines = this.buyService.buy(buyHands);
 		
 		log.info("\t+ affectedLines: {}", affectedLines);
 		
@@ -66,7 +66,7 @@ public class BuyServiceTests {
 	void getMyPayPage() throws ServiceException {
 		log.trace("selectMyPayPage() invoked.");
 		
-		BuyDTO myPayPage = this.buyService.gettMyPayPage(5);
+		BuyDTO myPayPage = this.buyService.getMyPayPage(5);
 		
 		log.info("\t+ myPayPage: {}", myPayPage);
 	} // getMyPayPage

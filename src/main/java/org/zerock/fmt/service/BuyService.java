@@ -10,11 +10,11 @@ public interface BuyService {
 	
 	
 	// 마이페이지 - 구매내역 조회
-	public abstract BuyDTO gettMyPayPage(Integer bNum ) throws ServiceException;
+	public abstract BuyDTO getMyPayPage(Integer bNum ) throws ServiceException;
 	
 	
 	// 구매하기
-	public abstract Integer buyHands(BuyDTO buyHands) throws ServiceException;
+	public abstract Integer buy(BuyDTO buyHands) throws ServiceException;
 	
 	
 	

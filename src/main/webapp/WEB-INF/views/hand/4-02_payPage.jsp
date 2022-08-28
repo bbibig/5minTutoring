@@ -22,15 +22,9 @@
 			<jsp:include page="../header_login.jsp" flush="true" />
             <!-- ======= header ======= -->
             
-             <!-- ======= Section ======= -->
+            <!-- ======= Section ======= -->
             <div class="container">
 
-                <!-- 뒤로가기 -->
-                <!-- <div class="page-back">
-                <a href="/hand/buyHands">
-                    <img src="${path}/resources/img/back.png" alt="">
-                </a>
-                </div> -->
 
                 <!-- 손들기 구매하기 -->
                 <section class="pay-page">
@@ -43,9 +37,9 @@
                     <thead class="table-head">
                     <tr>
                         <td class="buyer-info-title">이름</td>
-                        <td class="buyer-info-txt">이윤정</td>
+                        <td class="buyer-info-txt">${_UserDTO_.user_name}</td>
                         <td class="buyer-info-title">전화번호</td>
-                        <td class="buyer-info-txt">010-0000-0000</td>
+                        <td class="buyer-info-txt">${_UserDTO_.user_phone}</td>
                     </tr>
                     </thead>
 
@@ -68,18 +62,20 @@
                     <tbody class="table-body">
                         <tr>
                             <td class="product-info-data">
-                            <img src="${path}/resources/img/buy_hands.png">손들기 30개
+                            <img src="${path}/resources/img/buy_hands.png">
+                                ${_HandVO_.h_name}
                             </td>
                                                 
                             <td class="product-info-data">
                             수량  <input type="hidden" name="sell_price" value="3300">
-                            <input type="text" name="amount" value="1" size="3" max="10">
+                            <input type="text" name="amount" value="1" size="3" max="10" id="handCount">
                             <input type="button" value="+" name="add">
                             <input type="button" value="-" name="minus">
                             </td>
 
                             <td class="product-info-data">
-                            상품금액  <input type="text" name="sum" size="11" readonly>원
+                            <!-- 상품금액  <input type="text" name="sum" size="11" readonly>원 -->
+                            ${_HandVO_.h_price}원
                             </td>
                         </tr>
                     </tbody>
@@ -93,7 +89,7 @@
                     <tbody class="table-body">
                     <tr>
                         <td class="total-amount-title">총 금액</td>
-                        <td class="total-amount-txt">6600원</td>
+                        <td class="total-amount-txt">수량 x ${_HandVO_.h_price} 원</td>
                     </tr>
                     </tbody>
                 </table>
