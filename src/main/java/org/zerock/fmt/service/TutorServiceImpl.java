@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 public class TutorServiceImpl 
-	implements TutorService, InitializingBean, DisposableBean {
+	implements TutorService {
 	
 	@Setter(onMethod_= @Autowired)
 	private TutorMapper tutorMapper;
@@ -60,21 +60,5 @@ public class TutorServiceImpl
 		catch (DAOException e) { throw new ServiceException("비지니스가 예외가 발생했습니다."); }
 	} // updateTInfo
 
-//	----------------------------------------------
-	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.trace("tutorService Bean created.");
-		
-		Objects.requireNonNull(this.tutorMapper);
-		assert this.tutorMapper != null;
-		
-		log.info("\t + this.tutorMapper: {}", this.tutorMapper);
-	} // afterPropertiesSet
-	
-	@Override
-	public void destroy() throws Exception {
-		log.trace("tutorService Bean destoryed.");
-	} // destroy
 	
 } // end class
