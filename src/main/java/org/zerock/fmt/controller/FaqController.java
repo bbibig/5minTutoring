@@ -38,7 +38,7 @@ public class FaqController {
 			model.addAttribute("_FAQLIST_", list);
 			
 			PageFaqDTO pageDto = new PageFaqDTO(cri, this.faqService.getFaqTotal());
-			model.addAttribute("_FAQPAGENATION_",pageDto);
+			model.addAttribute("_FAQPAGENATION_", pageDto);
 			
 			return "faq/5_FAQ";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch

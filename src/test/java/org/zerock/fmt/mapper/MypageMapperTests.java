@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaFaq;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -93,10 +94,27 @@ public class MypageMapperTests {
 	void testSelectAllQuestionList() throws DAOException {
 		log.trace("testSelectAllQuestionList(), 마이페이지 나의 질문글 목록 조회");
 		
-		List<QuestionBardVO> list = mapper.selectAllQuestionList("test@gmail.com");
-		list.forEach(e -> log.info(list));
+		CriteriaFaq cri = new CriteriaFaq();
+		
+		List<QuestionBardVO> list = mapper.selectAllMyQuestionList(cri);
+		list.forEach(e -> log.info(e));
 		
 	}//testSelectAllQuestionList()
+	
+	//5. 나의 질문글 목록 총 개수
+	@Test
+	@Order(5)
+	@DisplayName("5. testGetMyQuestionTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyQuestionTotalAmount() throws DAOException {
+		log.trace("testSelectAllQuestionList(), 마이페이지 나의 질문글 목록 총 개수 조회");
+		
+		String user_email = "test@gmail.com";
+		
+		Integer amount = mapper.getMyQuestionTotalAmount();
+		log.info("\t + 나의 질문글 총 개수: {}", amount);
+		
+	}//testGetMyQuestionTotalAmount()
 
 
 }// end class

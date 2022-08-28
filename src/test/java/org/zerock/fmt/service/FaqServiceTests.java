@@ -116,7 +116,7 @@ public class FaqServiceTests {
 	}//testUpdateFaq()
 
 	
-	//5. 자주묻는 질문과 답 목록 전체 조회 테스트
+	//5. 자주묻는 질문과 답 목록 총 개수 조회 테스트
 //	@Disabled
 	@Test
 	@Order(5)

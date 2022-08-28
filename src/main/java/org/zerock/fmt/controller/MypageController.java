@@ -1,11 +1,16 @@
 package org.zerock.fmt.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.PageFaqDTO;
+import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -92,11 +97,20 @@ public class MypageController {
 	}// 기본정보 수정(튜터)
 	
 	
-	@GetMapping("/myQuestion")			//GET	
-	public String myQuestion() {
-		log.trace("7-03_MyQuestionList");
+	@GetMapping("/myQuestion")
+	public String myQuestion(CriteriaFaq cri, Model model) throws ControllerException {
+		log.trace("마이페이지 나의 질문글 목록 조회");
 		
-		return "mypage/7-03_MyQuestionList";
+		try {
+			List<QuestionBardVO> list = this.mypageService.getAllMyQuestionList(cri);
+			model.addAttribute("_MYQLIST_", list);
+			
+			PageFaqDTO pageDto = new PageFaqDTO(cri, this.mypageService.getMyQuestionTotalAmount());
+			model.addAttribute("_MYQLISTPAGENATION_", pageDto);
+						
+			return "mypage/7-03_MyQuestionList";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
 	}// myQuestion
 	
 	@GetMapping("/community/write")		//GET	

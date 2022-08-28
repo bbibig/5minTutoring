@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -63,36 +64,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
-                <td class=>2022-08-01</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
-                <td class=>2022-08-01</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
-                <td class=>2022-08-01</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
-                <td class=>2022-08-01</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
-                <td class=>2022-08-01</td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td colspan="2"><a href="/tutor/watchAnswer">질문글 제목입니다.</a></td>
-                <td class=>2022-08-01</td>
-              </tr>
+              <c:forEach var="myquestion" items="${_MYQLIST_}">
+                <tr>
+                  <th scope="row"> ${myquestion.qb_number} </th>
+                  <td colspan="2"><a href="/tutor/watchAnswer"> ${myquestion.qb_title} </a></td>
+                  <td> <fmt:formatDate value="${myquestion.qb_date}" pattern="yyyy-MM-dd" /> </td>
+                </tr>
+              </c:forEach>
             </tbody>
           </table>
 
@@ -101,11 +79,11 @@
 
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="/mypage/myQuestion?currPage=1">&laquo;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="/mypage/myQuestion?currPage=${_MYQLISTPAGENATION_.cri.currPage - 1}">&lt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/mypage/myQuestion?currPage=${_MYQLISTPAGENATION_.cri.currPage}">${_MYQLISTPAGENATION_.cri.currPage}</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="/mypage/myQuestion?currPage=${_MYQLISTPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="/mypage/myQuestion?currPage=${_MYQLISTPAGENATION_.realEndPage}">&raquo;</a></li>
           </ul>
         </nav>
 
