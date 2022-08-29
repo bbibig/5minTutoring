@@ -62,9 +62,11 @@
                                 <div class="nick">
                                     <input type="text" class="form-control" name="user_nick" id="user_nick" placeholder="영문 한글 숫자 2~10자"
                                         style="width:73%;float:left">
-                                    <button type="button" class="btn btn-outline-primary mt-2" style="float: right"> 중복체크</button>
+                                    <button type="button" class="btn btn-outline-primary mt-2" style="float: right" id="nickCheck"> 중복체크</button>
                                     <div style="clear: both"></div>
                                     <div class="invalid-feedback" style="clear: both">올바른 닉네임이 아닙니다.</div>
+                                    <div class="ni_input_re_1">사용 가능한 닉네임 입니다.</div>
+                                    <div class="ni_input_re_2">중복된 닉네임 입니다.</div>
                                 </div>
                             </div>
 
@@ -125,6 +127,13 @@
                                     </span>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="TTdepart">전공/학과</label>
+                                <input type="text" class="form-control" name="tt_depart" id="tt_depart" required>
+                                <div class="invalid-feedback">학과를 입력하세요.</div>
+                            </div>
+
                             <div class="form-group mt-2">
                                 <!-- <form action="#" method="post" enctype="multipart/form-data"> -->
                                     <label for="formFile" class="form-label">재학/졸업증명서 첨부</label>

@@ -2,8 +2,10 @@ package org.zerock.fmt.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
 public interface UserService {
@@ -14,6 +16,8 @@ public interface UserService {
 	public abstract UserVO getUserInfo(String user_email) throws ServiceException;
 	
 	public abstract Integer getNicCheck(String newNick) throws ServiceException;
+	
+	public abstract UserVO gettLoginUser(String user_email,String user_pw) throws ServiceException;
 	
 	//추가 
 	public abstract boolean singUpStrudent(UserDTO newStudent) throws ServiceException;

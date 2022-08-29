@@ -22,9 +22,12 @@
                         let findKey = $("#user_email");
                         
                         if(findKey.val() ==""){
-                            Swal.fire('Email을 입력하세요')
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Email을 입력하세요',
+                            })
                             return;
-                        }//if 
+                        }//이메일 미입력시 
                 
                         let user_email = findKey.val();
                         console.log(user_email);
@@ -94,7 +97,7 @@
                             <input type="email" class ="findMy-email" placeholder="이메일 계정 입력하기" id="user_email">
                         </div>
 
-                        <button class="moveTologinBtn" type="button" id="findPwBtn">인증하고 비밀번호 찾기</button>
+                        <button class="moveTologinBtn" type="button" id="findPwBtn">비밀번호 찾기</button>
                     </form>
 
                 </div>
