@@ -74,7 +74,7 @@ public class UserServiceTests {
 		log.trace("singUpStrudent");
 
 		UserDTO newStudent = new UserDTO("st@email_1", "1111","nick","name","20020202","여자","01022222222",
-											"중학생","1학년",null,null,null,null);
+											"중학생","1학년",null,null,null);
 		Boolean Result = this.userService.singUpStrudent(newStudent);
 		log.info("\t + Result : {}", Result);
 		
@@ -89,7 +89,7 @@ public class UserServiceTests {
 		log.trace("singUPTutor");
 		
 		UserDTO newTutor = new UserDTO("tt@email_6","1111","nick2","name2","20020202","남자","11111111111",
-										null,null,"졸업생","수학","file:name",null);
+										null,null,"졸업생","수학","file:name");
 		Boolean Result = this.userService.singUPTutor(newTutor);
 		log.info("\t + Result : {}", Result);
 		
