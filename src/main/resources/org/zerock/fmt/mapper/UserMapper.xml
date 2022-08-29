@@ -43,7 +43,6 @@
             <if test="st_grade !=null">     st_grade=#{st_grade},</if>
             <if test="tt_school !=null">    tt_school=#{tt_school},</if>
             <if test="tt_subject !=null">   tt_subject=#{tt_subject},</if>
-            <if test="tt_certificate !=null">tt_certificate=#{tt_certificate},</if>
             <if test="tt_depart !=null">    tt_depart=#{tt_depart}</if>
         </set>
         WHERE user_email = #{user_email}

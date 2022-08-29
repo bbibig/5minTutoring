@@ -20,7 +20,6 @@ public class UserVO {
 
 	private String tt_school;		//재학or졸업
 	private String tt_subject;		//과목
-//	private String tt_certificate; 	//첨부파일
 	private String tt_depart;		//학과
 
 	private String user_group;		//학생or튜터 신분
