@@ -34,7 +34,7 @@
               <li><a href="/tutor/info">튜터페이지</a></li>
               <li><a href="/mypage/studentPage">마이페이지</a></li>
               <li>
-                <a href="/">로그아웃<i class="fa-solid fa-arrow-right-from-bracket"></i> </a>
+                <a href="/login/logout">로그아웃<i class="fa-solid fa-arrow-right-from-bracket"></i> </a>
               </li>
             </ul>
 

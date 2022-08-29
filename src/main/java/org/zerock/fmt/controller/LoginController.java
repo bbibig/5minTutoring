@@ -186,7 +186,12 @@ public class LoginController{
 				return this.userService.getUserInfo(user_email).getUser_pw(); }
 		} catch ( Exception e) { throw new ControllerException(e); }
 	}
-//	---------------------------------------------------------
+//	------------------------------------------ 로그아웃 
+	
+	@GetMapping("/logout")
+	public void logout(RedirectAttributes rttrs)throws ControllerException{
+		log.trace("logOut() invoked.");
+	}//logout
 
 	// 튜터 회원가입 요청
 	@GetMapping("/signupReq")

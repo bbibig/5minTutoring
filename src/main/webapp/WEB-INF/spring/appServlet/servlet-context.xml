@@ -28,6 +28,22 @@
 			<mapping path="/login/Loginpost" />
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
+
+		<interceptor>
+			<mapping path="/login/logout" />
+			<beans:ref bean="logoutinterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<!-- <mapping path="/community/*" /> -->
+			<mapping path="/faq/*" />
+			<mapping path="/hand/*" />
+			<mapping path="/inquiry/*" />
+			<!-- <mapping path="/mypage/*" /> -->
+			<!-- <mapping path="/tutor/*" /> -->
+			<beans:ref bean="authInterceptor"/>
+			<!-- 기능별로 마무리되면 열어서 적용해주세요 -->
+		</interceptor>
 	</interceptors>
 	
 	<!-- 첨부파일전송 -->
