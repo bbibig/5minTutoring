@@ -66,7 +66,6 @@
                                                 style="width:73%;float:left">
                                             <button type="button" class="btn btn-outline-primary mt-2" style="float: right" id="nickCheck">
                                                 중복체크</button>
-                                                <!-- <a href="#" id="nickCheck">중복체크</a>  -->
                                             <div style="clear: both"></div>
                                             <div class="invalid-feedback" style="clear: both">올바른 닉네임이 아닙니다.</div>
                                             <div class="ni_input_re_1">사용 가능한 닉네임 입니다.</div>

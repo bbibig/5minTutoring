@@ -182,4 +182,16 @@ public class UserServiceTests {
 		
 		log.info("\t + result1 : {}, result2: {}", resutl1, result2);
 	}//selectNicCheck
+	
+	@Test
+	@Order(11)
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void gettLoginUser() throws ServiceException {
+		log.trace("selectLogin() invoked.");
+		
+		String user_email="TTemail_1";
+		String user_pw = "p";
+		UserVO vo = this.userService.gettLoginUser(user_email, user_pw);
+		log.info("\t+ vo : {}", vo );
+	}//selectLogin
 }//end class

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.UserMapper;
 
@@ -123,6 +124,15 @@ public class UserServiceImpl implements UserService{
 			 return this.userMapper.selectNicCheck(newNick);
 		} catch (Exception e) { throw new ServiceException(e); }
 	}//selectNicCheck
+
+	@Override
+	public UserVO gettLoginUser(String user_email, String user_pw) throws ServiceException {
+		log.trace("selectLogin() 로그인 유저 조회");
+		
+		try {
+			return this.userMapper.selectLogin(user_email, user_pw);
+		} catch ( Exception e) {throw new ServiceException(e); }//try-catch
+	}//selectLogin
 
 
 //------------------------------------------------------------

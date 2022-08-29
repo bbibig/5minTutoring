@@ -21,11 +21,11 @@
     <insert id="insertTutor" parameterType="org.zerock.fmt.domain.UserDTO" >
         INSERT INTO tbl_user
             (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
-            tt_school, tt_subject, user_group, pass)
+            tt_school, tt_subject, tt_depart, user_group, pass)
 
         VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name}, #{user_birth}, 
                 #{user_gender}, #{user_phone}, 
-                #{tt_school}, #{tt_subject},
+                #{tt_school}, #{tt_subject}, #{tt_depart},
                 'Tutor' ,'Wait')
     </insert>
 
@@ -47,6 +47,13 @@
         </set>
         WHERE user_email = #{user_email}
     </update>
+
+    <!-- 로그인 유저  -->
+    <select id="selectLogin" resultType="org.zerock.fmt.domain.UserVO">
+        SELECT * FROM TBL_USER
+        WHERE USER_EMAIL= #{user_email} AND USER_PW= #{user_pw}
+    </select>
+
 
     <!-- 유저활동정지 -->
     <update id="updateUserStop">
@@ -73,16 +80,3 @@
 
 
 </mapper>
-    <!-- <insert id="insertStudent" parameterType="org.zerock.fmt.domain.UserDTO">
-        INSERT INTO tbl_user
-            (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
-            st_school, st_grade, 
-            tt_school, tt_subject, tt_certificate, tt_depart, user_group)
-
-        VALUES(#{user_email}, #{user_pw}, #{user_nick}, #{user_name}, #{user_birth}, 
-                #{user_gender}, #{user_phone}, 
-                #{st_school}, #{st_grade}, 
-                #{tt_school, jdbcType=VARCHAR}, #{tt_subject,jdbcType=VARCHAR},
-                #{tt_certificate,jdbcType=VARCHAR}, #{tt_depart,jdbcType=VARCHAR}, 'Student')
-    </insert> -->
-        

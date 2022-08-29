@@ -1,5 +1,4 @@
 
-
 $('#nickCheck').on('click',function(){
   let newNick = $("#user_nick").val();
   let data = {newNick : newNick}
@@ -91,6 +90,7 @@ let stSchool_V = false;
 let stGrade_V = false;
 let ttSchool_V = false;
 let ttSubject_V= false;
+let ttDepart_V=false;
 let file_V = false;
 
 // 이메일 유효성
@@ -257,6 +257,19 @@ $("#tt_subject").on("input",function(){
   }//if-else
 })////ttSubject
 
+$("#tt_depart").on("input",function(){
+  let vaildCheck = this.value.length > 0;
+  if(!vaildCheck){
+    this.classList.remove("is-valid");
+    this.classList.add("is-invalid");
+    ttDepart_V = false;
+  } else {
+    this.classList.remove("is-invalid");
+    this.classList.add("is-valid");
+    ttDepart_V = true;
+  }//if-else
+})////ttDepart
+
 $("#file").on("input",function(){
   let vaildCheck = this.value.length > 0;
   if(!vaildCheck){
@@ -271,6 +284,6 @@ $("#file").on("input",function(){
     this.classList.add("is-valid");
     file_V = true;
   }//if-else
-})////ttSubject
+})////ttFile
 
 // ------------------------------------------------
