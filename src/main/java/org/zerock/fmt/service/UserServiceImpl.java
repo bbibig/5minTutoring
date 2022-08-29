@@ -1,9 +1,7 @@
 package org.zerock.fmt.service;
 
 import java.util.List;
-import java.util.Objects;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.UserDTO;
@@ -19,19 +17,19 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @Service
-public class UserServiceImpl implements UserService, InitializingBean{
+public class UserServiceImpl implements UserService{
 
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper userMapper;
 	
 //------------------------------------------------------------
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.info("\t proxy 객체 만들어졌습니까");
-		Objects.requireNonNull(this.userMapper);
-		log.info("\t + userMapper : {}", this.userMapper);
-		
-	}//afterPropertiesSet
+//	@Override
+//	public void afterPropertiesSet() throws Exception {
+//		log.info("\t proxy 객체 만들어졌습니까");
+//		Objects.requireNonNull(this.userMapper);
+//		log.info("\t + userMapper : {}", this.userMapper);
+//		
+//	}//afterPropertiesSet
 //------------------------------------------------------------
 
 	@Override
@@ -115,6 +113,16 @@ public class UserServiceImpl implements UserService, InitializingBean{
 		catch( Exception e) { throw new ServiceException(e); }
 		
 	}//updateHandUse
+
+	
+	@Override
+	public Integer getNicCheck(String newNick) throws ServiceException {
+		log.trace("selectNicCheck() 닉네임 중복 조회");
+		
+		try {			
+			 return this.userMapper.selectNicCheck(newNick);
+		} catch (Exception e) { throw new ServiceException(e); }
+	}//selectNicCheck
 
 
 //------------------------------------------------------------

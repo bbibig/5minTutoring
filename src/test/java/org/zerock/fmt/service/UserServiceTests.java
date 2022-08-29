@@ -167,4 +167,19 @@ public class UserServiceTests {
 		log.info("\t + Result : {}", Result);
 		
 	}//updateHandUse
+	
+	@Test
+	@Order(10)
+	@DisplayName("selectNicCheck 닉네임중복검사")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void testselectNicCheck() throws ServiceException {
+		log.trace("selectNicCheck");
+		
+		String nickName1 = "나는학생";
+		String nickName2 = "";
+		int resutl1 = this.userService.getNicCheck(nickName1);
+		int result2 = this.userService.getNicCheck(nickName2);
+		
+		log.info("\t + result1 : {}, result2: {}", resutl1, result2);
+	}//selectNicCheck
 }//end class

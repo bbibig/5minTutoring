@@ -1,4 +1,28 @@
 
+
+$('#nickCheck').on('click',function(){
+  let newNick = $("#user_nick").val();
+  let data = {newNick : newNick}
+  
+  $.ajax({
+    type:"post",
+    url:"/login/nick",
+    data:data,
+    success : function(result){
+      if(result!='fail'){
+        $('.ni_input_re_1').css("display","inline-block");
+        $('.ni_input_re_2').css("display","none");
+        Swal.fire('사용 가능한 닉네임 입니다.');
+      } else {
+        $('.ni_input_re_2').css("display","inline-block");
+        $('.ni_input_re_1').css("display","none");
+        Swal.fire('중복된 닉네임 입니다.');
+      }//if-else
+    }
+  });//ajax
+});//닉네임 중복체크 
+
+
 $('#signupBtn').on('click', function(){
   if(email_V&&pw_V&&pwcheck_V&&nickName_V&&UserName_V&&birth_V&&
      gender_V&&phone_V&&stSchool_V&&stGrade_V){
@@ -52,6 +76,8 @@ $('#signupTTBtn').on('click', function(){
       })
     }//if-else
 });//튜터 가입 버튼
+
+//----------------- 회원가입 유효성 검사 
 
 let email_V = false;
 let pw_V = false;
@@ -247,13 +273,4 @@ $("#file").on("input",function(){
   }//if-else
 })////ttSubject
 
-// --------------------------------------------------------------------
-
-function checkNickName() {
-  Swal.fire({
-    title: "중복확인완료!",
-    text: "해당 닉네임을 사용할 수 있습니다.",
-    icon: "success",
-    confirmButtonColor: "#3085d6",
-  });
-} //checkNickName
+// ------------------------------------------------

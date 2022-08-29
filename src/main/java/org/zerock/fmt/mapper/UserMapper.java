@@ -20,16 +20,16 @@ public interface UserMapper {
 	@Select("SELECT * FROM tbl_user WHERE user_email=#{user_email}")
 	public abstract UserVO selectUser(@Param("user_email") String user_email) throws DAOException;
 	
-	
+	//닉네임 중복검사 
+	@Select("SELECT COUNT(*) FROM tbl_user WHERE USER_NICK = #{user_nick}")
+	public abstract Integer selectNicCheck(@Param("user_nick")String newNick) throws DAOException;
+		
 	//-------------- INSERT 
 	//학생 가입
 	public abstract Integer insertStudent(UserDTO newStudent) throws DAOException;
 
 	//튜터 가입 
 	public abstract Integer insertTutor(UserDTO newTutor) throws DAOException;
-	
-	//튜터테이블(튜터정보)
-//	public abstract Integer insertTutorInfo(@Param("user_email") String user_email);
 	
 	//++카카오 가입
 	//++네이버 가입

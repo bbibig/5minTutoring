@@ -17,15 +17,6 @@
                 #{st_school}, #{st_grade}, 'Student')
     </insert>
 
-    <!-- 튜터회원가입:테스트 -->
-    <!-- <insert id="insertTutorInfo" parameterType="org.zerock.fmt.domain.UserDTO">
-        INSERT ALL
-        INTO T_TUTOR VALUES(USER_EMAIL, TT_SCHOOL, TT_SUBJECT, TT_CERTIFICATE, TT_DEPART)
-        SELECT USER_EMAIL, TT_SCHOOL, TT_SUBJECT, TT_CERTIFICATE, TT_DEPART
-        FROM t_user
-        WHERE USER_EMAIL= #{user_email}
-    </insert> -->
-
     <!-- 튜터회원가입 -->
     <insert id="insertTutor" parameterType="org.zerock.fmt.domain.UserDTO" >
         INSERT INTO tbl_user

@@ -13,6 +13,9 @@
             <!-- ========================================================= -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+
+            <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+            <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
             <title>회원가입(학생)</title>
 
         </head>
@@ -35,7 +38,7 @@
 
                             <div class="login_form">
 
-                                <form action="/login/signUp_student" method="post" class="needs-validation" novalidate>
+                                <form action="#" method="post" class="needs-validation" novalidate>
 
                                     <div class="form-group">
                                         <label for="email">이메일</label>
@@ -61,9 +64,13 @@
                                         <div class="nick">
                                             <input type="text" class="form-control" name="user_nick" id="user_nick" placeholder="한글 영문 숫자 2~10자" 
                                                 style="width:73%;float:left">
-                                            <button type="button" class="btn btn-outline-primary mt-2"style="float: right"> 중복체크</button>
+                                            <button type="button" class="btn btn-outline-primary mt-2" style="float: right" id="nickCheck">
+                                                중복체크</button>
+                                                <!-- <a href="#" id="nickCheck">중복체크</a>  -->
                                             <div style="clear: both"></div>
                                             <div class="invalid-feedback" style="clear: both">올바른 닉네임이 아닙니다.</div>
+                                            <div class="ni_input_re_1">사용 가능한 닉네임 입니다.</div>
+                                            <div class="ni_input_re_2">중복된 닉네임 입니다.</div>
                                         </div>
                                     </div>
 
@@ -127,12 +134,12 @@
                                         </div>
                                     </div>
                                     <!--학교/학년-->
+                                </form>
                                     <div class="d-grid gap-2 col-12 mx-auto">
                                         <br>
                                         <button class="btn btn-primary" id="signupBtn" type="button">회원가입하기</button>
                                     </div>
-                                </form>
-
+                                
                                 <!--button-->
 
                             </div>

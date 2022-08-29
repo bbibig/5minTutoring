@@ -12,6 +12,8 @@
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
             <link href="${path}/resources/css/1-09-12_findMy.css" rel="stylesheet">
             <!-- ========================================================= -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 
             <title>오분과외</title>
 
@@ -42,14 +44,13 @@
                     이메일을 통해 비밀번호 수정 링크가 전송됩니다.
                     </p>
 
-                    <div class="findMyEmailForm">
-                    
-                    <input type="email" class = "findMy-email" placeholder="이메일 계정 입력하기">
+                    <!-- <form action="#"> -->
+                        <div class="findMyEmailForm">
+                            <input type="email" class ="findMy-email" placeholder="이메일 계정 입력하기" name="user_email">
+                        </div>
 
-                    </div>
-
-                    <button class="moveTologinBtn" type="submit"  onclick="findmypwbt()">인증하고 비밀번호 찾기</button>
-                   
+                        <button class="moveTologinBtn" type="button" onclick="findmypwbt()">인증하고 비밀번호 찾기</button>
+                    <!-- </form> -->
 
                 </div>
 

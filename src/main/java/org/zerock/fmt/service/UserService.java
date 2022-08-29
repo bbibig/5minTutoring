@@ -13,6 +13,8 @@ public interface UserService {
 	
 	public abstract UserVO getUserInfo(String user_email) throws ServiceException;
 	
+	public abstract Integer getNicCheck(String newNick) throws ServiceException;
+	
 	//추가 
 	public abstract boolean singUpStrudent(UserDTO newStudent) throws ServiceException;
 	

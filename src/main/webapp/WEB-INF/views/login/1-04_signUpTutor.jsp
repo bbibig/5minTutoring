@@ -118,9 +118,9 @@
                                         <label for="schoolGrade"> 대표과목</label>
                                         <select class="form-select"name="tt_subject" id="tt_subject" required>
                                             <option> </option>
-                                            <option value="Korean">국어</option>
-                                            <option value="Englesh">영어</option>
-                                            <option value="Math">수학</option>
+                                            <option value="국어">국어</option>
+                                            <option value="영어">영어</option>
+                                            <option value="수학">수학</option>
                                         </select>
                                     </span>
                                 </div>

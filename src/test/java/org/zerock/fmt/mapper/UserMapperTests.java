@@ -59,7 +59,6 @@ public class UserMapperTests {
 		
 	}//selectAllUser
 	
-	
 	@Test
 	@Order(2)
 	@DisplayName("  selectUser  ")
@@ -67,7 +66,7 @@ public class UserMapperTests {
 	void selectUser() throws DAOException {
 		log.trace("selectUser:특정 회원 조회");
 		
-		UserVO user = this.mapper.selectUser("STemail_4");
+		UserVO user = this.mapper.selectUser("STemail_5");
 		log.info("\t + user : {}", user);
 		
 	}//userInfo
@@ -181,16 +180,23 @@ public class UserMapperTests {
 		} else log.info("테스트실패");
 	}//updateHandUse
 	
-
+	@Test
+	@Order(10)
+	@DisplayName("회원가입 닉네임 중복검사")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void testselectNicCheck() throws DAOException {
+		log.trace("selectNicCheck");
+		
+		String nick1 = "나는학생";
+		int Result1 = this.mapper.selectNicCheck(nick1);
+		log.info("\t + Result1 : {}", Result1);
+		
+		String nick2 = "닉네";
+		int Result2 = this.mapper.selectNicCheck(nick2);
+		log.info("\t + Result2 : {}", Result2);
+		
+	}//selectNicCheck
 	
-//	@Test
-//	@Order(9)
-//	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-//	void insertTutorInfo() throws DAOException {
-//		
-//		String user_email ="Temail_2";
-//		Integer Result = this.mapper.insertTutorInfo(user_email);
-//		log.info("\t + Result : {}", Result);
-//		
-//	}//insertTutorInfo
+	
+	
 }//end class

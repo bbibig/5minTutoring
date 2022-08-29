@@ -17,7 +17,7 @@ public interface HandMapper {
 	
 	// 구매하기 - 상품별 조회
 	@Select("SELECT * FROM tbl_hand WHERE h_number=#{h_number}")
-	public abstract HandVO selectHand(@Param("h_number") Integer hNum)throws DAOException;
+	public abstract HandVO selectHand(@Param("h_number")Integer hNum)throws DAOException;
 	
 	
 } // end class

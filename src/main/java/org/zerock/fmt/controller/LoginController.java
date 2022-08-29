@@ -6,10 +6,10 @@ import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.fmt.domain.FileDTO;
 import org.zerock.fmt.domain.UserDTO;
@@ -21,13 +21,14 @@ import org.zerock.fmt.service.UserService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @NoArgsConstructor
 
 @RequestMapping("/login")	
 @Controller
-public class LoginController implements InitializingBean{
+public class LoginController{
 	
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;	//--- UserService
@@ -68,9 +69,7 @@ public class LoginController implements InitializingBean{
 			if(this.userService.singUpStrudent(DTO)) { 
 				log.info("학생 회원가입 성공");
 			} else log.info("회원가입실패");
-			
 			return "redirect:/login";
-			
 		} catch(Exception e) { throw new ServiceException(e); }
 	}//signUpStudent---2
 	
@@ -109,6 +108,21 @@ public class LoginController implements InitializingBean{
 		} catch (Exception e) { throw new ControllerException(e); }
 	}// signUpStudent---2
 	
+	@PostMapping("/nick")
+	@ResponseBody
+	public String nickCheckPost(String newNick) throws ControllerException{
+		log.trace("nickCheckPost : 닉네임중복체크");
+		try{ 
+			int result = this.userService.getNicCheck(newNick);
+			log.info("\t + result : {} ", result);
+			if(result != 0) {
+				return "fail";
+			} else {
+				return "success";
+			}
+		} catch( Exception e) { throw new ControllerException(e); }
+		
+	}//nickCheckPost
 	
 	//로그인 후 메인화면
 	@RequestMapping("/home")
@@ -159,12 +173,9 @@ public class LoginController implements InitializingBean{
 		return "login/1-12_findMyPassword";
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.trace("afterPropertiesSet() invoked.");
-		
-		Objects.requireNonNull(this.userService);
-		log.info("\t + userService: {}", this.userService);
+	@PostMapping("findMyPassword")
+	public void findMyPassword(String user_email) {
+	
 		
 	}
 	
