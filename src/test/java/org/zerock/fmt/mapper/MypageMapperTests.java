@@ -61,7 +61,7 @@ public class MypageMapperTests {
 		log.trace("TestselectUser(), 마이페이지 기본정보 수정(학생)");
 		
 		UserDTO dto = new UserDTO("test1@gmail.com", "변경1234", "닉네임", "학생이름", "20040101", "여자",
-								   "01012345678", "고등학생", "3학년", null, null, null, null);
+								   "01012345678", "고등학생", "3학년", null, null, null);
 		
 		boolean result = mapper.updateStudentInfo(dto);
 		log.info("\t+ 기본정보 수정결과: {}", result);
@@ -78,7 +78,7 @@ public class MypageMapperTests {
 		log.trace("TestselectUser(), 마이페이지 기본정보 수정(튜터)");
 		
 		UserDTO dto = new UserDTO("TTtest1@gmail.com", "변경1234", "닉네임", "튜터이름", "19940101", "여자",
-								   "01012345678", null, null, "졸업", "국어", "file:파일경로", "국어국문학과");
+								   "01012345678", null, "졸업", "국어", "file:파일경로", "국어국문학과");
 		
 		boolean result = mapper.updateTutorInfo(dto);
 		log.info("\t+ 기본정보 수정결과: {}", result);

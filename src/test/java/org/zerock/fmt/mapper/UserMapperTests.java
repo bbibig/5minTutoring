@@ -78,7 +78,7 @@ public class UserMapperTests {
 	void insertStudent() throws DAOException {
 		
 		UserDTO newStudent = new UserDTO("학생테스트1", "pass1","nick1","name1","19900430","여자","01000000000",
-										"고등학생","3학년",null,null,null,null);
+										"고등학생","3학년",null,null,null);
 		if(this.mapper.insertStudent(newStudent) == 1) {
 			log.info("학생회원가입완료");
 		} else log.info("회원가입안됨");
@@ -92,7 +92,7 @@ public class UserMapperTests {
 	void insertTutor() throws DAOException {
 		
 		UserDTO newTutor = new UserDTO("newTT1","pw1-1","nick1-1","nameTT","19900000","남자","01011111111",
-										null,null, "재학중","국어","file:name",null);
+										null,null, "재학중","국어","file:name");
 		Integer insertResult = this.mapper.insertTutor(newTutor);
 		if(insertResult==1) {
 			log.info("\t + insertResult : {}", insertResult);
@@ -107,7 +107,7 @@ public class UserMapperTests {
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void updateUser() throws DAOException {
 		
-		UserDTO user = new UserDTO("STemail_5","pw변경","nick변경","name변경",null,null,null,
+		UserDTO user = new UserDTO("STemail_5","pw변경","nick변경","name변경",null,null,
 				null,null, null, null, null ,null);
 		Integer updateResult = this.mapper.updateUser(user);
 		if(updateResult==1) {
