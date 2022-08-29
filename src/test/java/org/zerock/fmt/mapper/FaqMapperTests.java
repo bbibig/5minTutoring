@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.exception.DAOException;
@@ -59,7 +59,7 @@ public class FaqMapperTests {
 	void testSelectAllFaqList() throws DAOException {
 		log.trace("testSelectAllFaqList(), 자주묻는 질문 리스트 전체 조회(페이징처리)");
 		
-		CriteriaFaq cri = new CriteriaFaq();
+		CriteriaMyPage cri = new CriteriaMyPage();
 		
 		List<FaqVO> list = this.mapper.selectAllFaqList(cri);
 		list.forEach(e -> log.info(e));

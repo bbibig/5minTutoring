@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
-import org.zerock.fmt.domain.PageFaqDTO;
+import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.FaqService;
@@ -111,14 +111,14 @@ public class AdminController {
 	
 	
 	@GetMapping("/adminFAQ")
-	public String adminFAQ(CriteriaFaq cri, Model model) throws ControllerException {
+	public String adminFAQ(CriteriaMyPage cri, Model model) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용)");
 		
 		try {
 			List<FaqVO> list = this.faqService.getFaqList(cri);
 			model.addAttribute("_FAQLIST_",list);
 			
-			PageFaqDTO pageDto = new PageFaqDTO(cri, this.faqService.getFaqTotal());
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.faqService.getFaqTotal());
 			model.addAttribute("_FAQPAGENATION_",pageDto);
 			
 			return "admin/8-04_admin_faq";
@@ -128,7 +128,7 @@ public class AdminController {
 	}// adminFAQ(R)
 	
 	@PostMapping("/adminFAQCreate")
-	public String adminFAQCreate(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String adminFAQCreate(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 생성");
 		
 		try {
@@ -140,7 +140,7 @@ public class AdminController {
 	}// adminFAQ(C)
 	
 	@PostMapping("/adminFAQModify")
-	public String adminFAQModify(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String adminFAQModify(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 수정");
 		
 		try {
@@ -152,7 +152,7 @@ public class AdminController {
 	}// adminFAQ(U)
 	
 	@PostMapping("/adminFAQRemove")
-	public String adminFAQRemove(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String adminFAQRemove(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 삭제");
 		
 		try {

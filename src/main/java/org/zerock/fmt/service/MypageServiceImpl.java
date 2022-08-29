@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -29,17 +30,28 @@ public class MypageServiceImpl implements MypageService {
 
 	//1. 기본정보 조회
 	@Override
-	public UserVO getUserInfo(String user_email) throws ServiceException {
+	public UserVO getUserInfo(UserDTO dto) throws ServiceException {
 		log.trace("getUserInfo() 기본정보 조회");
 		
-		try { return this.mapper.selectUser(user_email); } 
+		try { return this.mapper.selectUser(dto); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 
 	}// getList()
 	
-	//2. 나의 질문글 목록 조회 페이징 처리(내림차순으로)
+	//1-2 기본정보 수정 테스트
 	@Override
-	public List<QuestionBardVO> getAllMyQuestionList(CriteriaFaq cri) throws ServiceException {
+	public boolean modifyUserInfo(UserDTO dto) throws ServiceException {
+		log.trace("modifyUserInfo() 기본정보 수정");
+		
+		try { return this.mapper.updateUserInfo(dto); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+	}// modifyUserInfo()
+	
+	
+	//2-1. 나의 질문글 목록 조회 페이징 처리(내림차순으로)
+	@Override
+	public List<QuestionBardVO> getAllMyQuestionList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("getAllMyQuestionList() 나의 질문글 목록 조회");
 		
 		try { return this.mapper.selectAllMyQuestionList(cri); }
@@ -47,12 +59,33 @@ public class MypageServiceImpl implements MypageService {
 		
 	}// getAllMyQuestionList
 
-	//3. 나의 질문글 목록 총 개수 획득
+	//2-2. 나의 질문글 목록 총 개수 획득
 	@Override
-	public int getMyQuestionTotalAmount() throws ServiceException {
+	public int getMyQuestionTotalAmount(String user_email) throws ServiceException {
 		log.trace("getMyQuestionTotalAmount() 나의 질문글 목록 총 개수 조회");
 		
-		try { return this.mapper.getMyQuestionTotalAmount(); } 
+		try { return this.mapper.getMyQuestionTotalAmount(user_email); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+	}// getMyQuestionTotalAmount
+	
+	
+	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
+	@Override
+	public List<CommentVO> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException {
+		log.trace("getAllMyQuestionList() 나의 댓글 목록 조회");
+		
+		try { return this.mapper.selectAllMyCommentList(cri); }
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+	}// getAllMyCommentList
+
+	//4-2. 나의 댓글 목록 총 개수 획득
+	@Override
+	public int getMyCommentTotalAmount(String user_email) throws ServiceException {
+		log.trace("getMyQuestionTotalAmount() 나의 댓글 목록 총 개수 조회");
+		
+		try { return this.mapper.getMyCommentTotalAmount(user_email); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 		
 	}// getMyQuestionTotalAmount

@@ -7,9 +7,9 @@ import lombok.ToString;
 //자주묻는 질문 목록과 답 페이징 처리
 @ToString
 @Getter
-public class PageFaqDTO {
+public class PageMyPageDTO {
 
-	private CriteriaFaq cri;
+	private CriteriaMyPage cri;
 	
 	private int totalAmount;		// 총 레코드 건수
 
@@ -24,7 +24,7 @@ public class PageFaqDTO {
 	
 	
 	
-	public PageFaqDTO(CriteriaFaq cri, int totalAmount) {
+	public PageMyPageDTO(CriteriaMyPage cri, int totalAmount) {
 		this.cri = cri;
 		
 		this.totalAmount = totalAmount;

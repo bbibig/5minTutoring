@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.exception.DAOException;
@@ -28,7 +28,7 @@ public class FaqServiceImpl implements FaqService {
 	
 	//1. 자주묻는 질문과 답 목록 전체 조회
 	@Override
-	public List<FaqVO> getFaqList(CriteriaFaq cri) throws ServiceException {
+	public List<FaqVO> getFaqList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("getList() 자주묻는 질문 리스트 전체 조회(페이징) 서비스 메소드 호출");
 		
 		try { return this.mapper.selectAllFaqList(cri); } 

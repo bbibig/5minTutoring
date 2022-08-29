@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.exception.DAOException;
@@ -19,7 +19,7 @@ public interface FaqMapper {
 //	public abstract List<FaqVO> selectAllFaqList() throws DAOException;
 	
 	//1-2. 자주묻는 질문과 답 목록 전체 조회 페이징 처리(내림차순으로)
-	public abstract List<FaqVO> selectAllFaqList(CriteriaFaq cri) throws DAOException;
+	public abstract List<FaqVO> selectAllFaqList(CriteriaMyPage cri) throws DAOException;
 	
 	//2. 자주묻는 질문과 답 목록 총 개수 조회
 	@Select("SELECT count(faq_number) FROM tbl_faq")
