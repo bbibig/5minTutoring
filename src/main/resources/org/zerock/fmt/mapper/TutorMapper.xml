@@ -4,6 +4,7 @@
 
 <mapper namespace="org.zerock.fmt.mapper.TutorMapper">
 
+<<<<<<< HEAD
 	<select id="selectAllTInfo" resultType="org.zerock.fmt.domain.TutorPageVO">
 		SELECT
 			tp_number,
@@ -37,6 +38,12 @@
 		OFFSET 0 ROW
 		FETCH NEXT 12 ROWS ONLY
     </select>
+=======
+    <!-- <select id="selectTCardInfo" resultMap="TCardMap">
+        SELECT user_name, tp_title, tp_subject, tp_accu_answer, tp_average
+        FROM tbl_tutor_page
+    </select> -->
+>>>>>>> 9a6cc11 (community update)
     
 	<insert id="insertIntroInfo">
 		INSERT INTO tbl_tutor_page

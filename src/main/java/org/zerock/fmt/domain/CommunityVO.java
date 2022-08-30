@@ -3,14 +3,12 @@ package org.zerock.fmt.domain;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@AllArgsConstructor
-@NoArgsConstructor
 
-@Data
-public class CommunityDTO {
+@Value
+public class CommunityVO {
 	private Integer fb_number;
 	private String user_email;
 	private String fb_title;

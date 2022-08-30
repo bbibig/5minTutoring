@@ -7,19 +7,18 @@
     <mapper namespace="org.zerock.fmt.mapper.CommunityMapper">
 
         <insert id="insert" parameterType="java.util.Map">
-            INSERT INTO test_community (title, content, writer)
-            VALUES (#{title}, #{content}, #{writer})
+            INSERT INTO tbl_community (fb_number, fb_title, fb_content, user_email)
+            VALUES (FB_NUM.nextval, #{fb_title}, #{fb_content}, #{user_email})
         </insert>
     
         <update id="update">
-            UPDATE test_community
+            UPDATE tbl_community
             SET 
-                title = #{title},
-                content = #{content},
-                writer = #{writer},
-                update_ts = CURRENT_DATE
+                fb_title = #{fb_title},
+                fb_content = #{fb_content},
+                fb_date = CURRENT_DATE
             WHERE 
-            	bno = #{bno}     
+            	fb_number = #{fb_number}     
         </update>
 
         
@@ -28,7 +27,7 @@
                 SELECT ISEQ$$_93926.nextval FROM dual
             </selectKey>
 
-            INSERT INTO tbl_board(title, content, writer)
+            INSERT INTO tbl_community(title, content, writer)
             VALUES (#{bno}, #{title}, #{content}, #{writer})
         </insert>
     	
