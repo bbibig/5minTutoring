@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.fmt.common.SharedScopeKeys;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.PageMyPageDTO;
@@ -46,15 +47,9 @@ public class MypageController {
 		log.trace("마이페이지 기본정보 조회(학생)");
 		
 		try {
-			//유저정보가 session scope에 "user"키로 vo값으로 올려져 있다면,
-//			UserVO vo = (UserVO) session.getAttribute("user");
-			//======테스트====================================//
-			UserDTO vo = new UserDTO();
-			vo.setUser_email("test@gmail.com");
-			//================================================//
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
-			
 			model.addAttribute("_USERINFO_", userInfo);
 			
 			return "mypage/7-01_StudentPage";
@@ -79,19 +74,13 @@ public class MypageController {
 	
 	
 	@GetMapping("/tutorPage")
-	public String tutorPage(Model model) throws ControllerException{
+	public String tutorPage(Model model, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 조회(튜터)");
 		
 		try {
-			//유저정보가 session scope에 "user"키로 vo값으로 올려져 있다면,
-//			UserVO vo = (UserVO) session.getAttribute("user");
-			//======테스트====================================//
-			UserDTO vo = new UserDTO();
-			vo.setUser_email("test@gmail.com");
-			//================================================//
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
-
 			model.addAttribute("_USERINFO_", userInfo);
 			
 			return "mypage/7-02_TutorPage";
@@ -120,15 +109,8 @@ public class MypageController {
 		log.trace("마이페이지 나의 질문글 목록 조회");
 		
 		try {
-			//유저정보가 session scope에 "user"키로 vo값으로 올려져 있다면,
-//			UserVO vo = (UserVO) session.getAttribute("user");
-//			cri.setUser_email(vo.getUser_email());
-			//======테스트====================================//
-			UserDTO dto = new UserDTO(); dto.setUser_email("test@gmail.com");
-			session.setAttribute("user", dto);
-			UserDTO vo = (UserDTO) session.getAttribute("user");
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
-			//================================================//
 			
 			List<QuestionBardVO> list = this.mypageService.getAllMyQuestionList(cri);
 			model.addAttribute("_MYQLIST_", list);
@@ -153,15 +135,8 @@ public class MypageController {
 		log.trace("마이페이지 나의 댓글 목록 조회");
 		
 		try {
-			//유저정보가 session scope에 "user"키로 vo값으로 올려져 있다면,
-//			UserVO vo = (UserVO) session.getAttribute("user");
-//			cri.setUser_email(vo.getUser_email());
-			//======테스트====================================//
-			UserDTO dto = new UserDTO(); dto.setUser_email("test@gmail.com");
-			session.setAttribute("user", dto);
-			UserDTO vo = (UserDTO) session.getAttribute("user");
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
-			//================================================//
 			
 			List<CommentVO> list = this.mypageService.getAllMyCommentList(cri);
 			model.addAttribute("_MYCOMMENT_", list);

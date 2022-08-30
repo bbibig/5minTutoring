@@ -109,7 +109,7 @@ public class AdminController {
 		return "admin/8-03_answerBoard_comment";
 	}
 	
-	
+//	관리자 FAQ ========================================================================================
 	@GetMapping("/adminFAQ")
 	public String adminFAQ(CriteriaMyPage cri, Model model) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용)");
@@ -125,7 +125,7 @@ public class AdminController {
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}// try-catch
-	}// adminFAQ(R)
+	}// adminFAQ(조회)
 	
 	@PostMapping("/adminFAQCreate")
 	public String adminFAQCreate(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
@@ -137,7 +137,7 @@ public class AdminController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}// adminFAQ(C)
+	}// adminFAQ(생성)
 	
 	@PostMapping("/adminFAQModify")
 	public String adminFAQModify(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
@@ -149,7 +149,7 @@ public class AdminController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}// adminFAQ(U)
+	}// adminFAQ(수정)
 	
 	@PostMapping("/adminFAQRemove")
 	public String adminFAQRemove(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
@@ -161,8 +161,8 @@ public class AdminController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}// adminFAQ(D)
-	
+	}// adminFAQ(삭제)
+//	===================================================================================================
 
 	@RequestMapping("/sale/sell")
 	public String adminSale() {
