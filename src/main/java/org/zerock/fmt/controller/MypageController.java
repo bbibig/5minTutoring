@@ -2,6 +2,7 @@ package org.zerock.fmt.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.common.SharedScopeKeys;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.QuestionBardVO;
@@ -42,8 +44,9 @@ public class MypageController {
 	
 //============================================================	
 	
+//=====기본정보===============================================	
 	@GetMapping("/studentPage")
-	public String studentPage(Model model, HttpSession session) throws ControllerException{
+	public String studentPage(Model model, HttpServletRequest request, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 조회(학생)");
 		
 		try {
@@ -51,6 +54,12 @@ public class MypageController {
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
 			model.addAttribute("_USERINFO_", userInfo);
+			
+			//현재 비밀번호 유효성 검사
+			String dbPw = vo.getUser_email();
+			String paramPw = request.getParameter("user_Oldpw");
+			if(dbPw.equals(paramPw)) { model.addAttribute("pwcheck", "true"); } 
+			else { model.addAttribute("pwcheck", "false"); } //if-else
 			
 			return "mypage/7-01_StudentPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
@@ -103,7 +112,7 @@ public class MypageController {
 		return "redirect:/mypage/tutorPage";
 	}// 기본정보 수정(튜터)
 	
-	
+//=====나의 질문글===============================================
 	@GetMapping("/myQuestion")
 	public String myQuestion(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 나의 질문글 목록 조회");
@@ -122,16 +131,29 @@ public class MypageController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// 나의 질문글 조회
-	
+
+//=====나의 커뮤니티===============================================
 	@GetMapping("/community/write")		//GET	
-	public String communityWrite() {
+	public String communityWrite(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 나의 커뮤니티 작성글 목록 조회");
 		
-		return "mypage/7-04_CommunityW";
-	}// communityWrite
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<CommunityVO> list = this.mypageService.getAllMyCommunityList(cri);
+			model.addAttribute("_MYCOMMUNITY_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyCommunityTotalAmount(vo.getUser_email()));
+			model.addAttribute("_MYCOMMUNITYPAGENATION_", pageDto);
+						
+			return "mypage/7-04_CommunityW";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
+	}// 나의 작성글
 	
 	@GetMapping("/community/comments")		//GET	
-	public String communityComments(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException{
+	public String communityComments(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 나의 댓글 목록 조회");
 		
 		try {

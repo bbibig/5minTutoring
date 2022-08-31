@@ -102,7 +102,8 @@
 
                             <div class="col-4" style="position: relative;">
 
-                                <input type="hidden" id="hiddenpw" value="${_USERINFO_.user_pw}">
+                                <!-- <input type="hidden" id="hiddenpw" value="${_USERINFO_.user_pw}"> -->
+                                <input type="hidden" id="pwcheck" value="${pwcheck}">
                                 <label for="user_Oldpw">현재 비밀번호</label>
                                 <input type="password" class="form-control" id="user_Oldpw" name="user_Oldpw" required
                                     placeholder="비밀번호를 입력해 주세요">

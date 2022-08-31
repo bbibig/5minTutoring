@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
@@ -106,6 +107,39 @@ public class MypageServiceTests {
 		log.info("\t+ 나의 질문글 총 개수: {}", result);
 		
 	}//testGetMyQuestionTotalAmount()
+	
+	
+	//3-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
+	@Test
+	@Order(5)
+	@DisplayName("5. testGetAllMyCommunityList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetAllMyCommunityList() throws ServiceException {
+		log.trace("TestGetUserInfo(), 나의 작성글 목록 조회 테스트");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		
+		List<CommunityVO> list = this.service.getAllMyCommunityList(cri);
+		list.forEach(e -> log.info(e));
+		
+	}//testGetAllMyCommunityList()
+	
+	//3-2. 나의 작성글 총 개수 획득
+	@Test
+	@Order(6)
+	@DisplayName("6. getMyCommunityTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getMyCommunityTotalAmount() throws ServiceException {
+		log.trace("TestGetUserInfo(), 나의 작성글 총 개수 획득 테스트");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		int result = this.service.getMyCommunityTotalAmount(dto.getUser_email());
+		log.info("\t+ 나의 작성글 총 개수: {}", result);
+		
+	}//getMyCommunityTotalAmount()
 	
 	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)

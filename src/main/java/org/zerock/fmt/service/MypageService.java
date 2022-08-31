@@ -3,6 +3,7 @@ package org.zerock.fmt.service;
 import java.util.List;
 
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
@@ -23,6 +24,14 @@ public interface MypageService {
 	
 	//2-2. 나의 질문글 목록 총 개수 획득
 	public abstract int getMyQuestionTotalAmount(String user_email) throws ServiceException;
+	
+	
+	//3-1. 나의 커뮤니티 작성글 목록 조회 페이징 처리(내림차순으로)
+	public abstract List<CommunityVO> getAllMyCommunityList(CriteriaMyPage cri) throws ServiceException;
+	
+	//3-2. 나의 커뮤니티 작성글 목록 총 개수 획득
+	public abstract int getMyCommunityTotalAmount(String user_email) throws ServiceException;
+	
 	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
 	public abstract List<CommentVO> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException;

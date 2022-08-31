@@ -60,7 +60,7 @@
               <tr>
                 <th scope="col">NO.</th>
                 <th scope="col" colspan="2" class="text-center">제목</th>
-                <th scope="col">작성일자</th>
+                <th scope="col" class="text-center">작성일자</th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@
                 <tr>
                   <th scope="row"> ${myquestion.qb_number} </th>
                   <td colspan="2"><a href="/tutor/watchAnswer"> ${myquestion.qb_title} </a></td>
-                  <td> <fmt:formatDate value="${myquestion.qb_date}" pattern="yyyy-MM-dd" /> </td>
+                  <td class="text-center"> <fmt:formatDate value="${myquestion.qb_date}" pattern="yyyy-MM-dd" /> </td>
                 </tr>
               </c:forEach>
             </tbody>

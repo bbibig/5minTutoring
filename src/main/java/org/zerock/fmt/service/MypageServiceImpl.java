@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
@@ -70,6 +71,27 @@ public class MypageServiceImpl implements MypageService {
 	}// getMyQuestionTotalAmount
 	
 	
+	//3-1. 나의 커뮤니티 작성글 목록 조회 페이징 처리(내림차순으로)
+	@Override
+	public List<CommunityVO> getAllMyCommunityList(CriteriaMyPage cri) throws ServiceException {
+		log.trace("getAllMyQuestionList() 나의 커뮤니티 작성글 목록 조회");
+		
+		try { return this.mapper.selectAllMyCommunitytList(cri); }
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+	}// getAllMyCommunityList
+
+	//3-2. 나의 커뮤니티 작성글 목록 총 개수 획득
+	@Override
+	public int getMyCommunityTotalAmount(String user_email) throws ServiceException {
+		log.trace("getMyCommunityTotalAmount() 나의 커뮤니티 작성글 총 개수 조회");
+		
+		try { return this.mapper.getMyCommunityTotalAmount(user_email); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+	}// getMyCommunityTotalAmount
+	
+	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
 	@Override
 	public List<CommentVO> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException {
@@ -83,7 +105,7 @@ public class MypageServiceImpl implements MypageService {
 	//4-2. 나의 댓글 목록 총 개수 획득
 	@Override
 	public int getMyCommentTotalAmount(String user_email) throws ServiceException {
-		log.trace("getMyQuestionTotalAmount() 나의 댓글 목록 총 개수 조회");
+		log.trace("getMyQuestionTotalAmount() 나의 댓글 총 개수 조회");
 		
 		try { return this.mapper.getMyCommentTotalAmount(user_email); } 
 		catch (DAOException e) { throw new ServiceException(e); }

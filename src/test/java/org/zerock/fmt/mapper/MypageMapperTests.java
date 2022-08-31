@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
@@ -43,16 +44,16 @@ public class MypageMapperTests {
 	//1. 기본정보 조회(특정 회원)
 	@Test
 	@Order(1)
-	@DisplayName("1. TestselectUser")
+	@DisplayName("1. testSelectUser")
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
-	void testSelectAllFaqList() throws DAOException {
-		log.trace("TestselectUser(), 마이페이지 기본정보 조회");
+	void testSelectUser() throws DAOException {
+		log.trace("testSelectUser(), 마이페이지 기본정보 조회");
 		UserDTO dto = new UserDTO();
 		dto.setUser_email("test@gmail.com");		
 		
 		UserVO vo = mapper.selectUser(dto);
 		log.info("\t+ 기본정보 조회 {}", vo);
-	}//TestselectUser()
+	}//testSelectUser()
 	
 	
 	//2. 기본정보 수정
@@ -63,8 +64,9 @@ public class MypageMapperTests {
 	void TestUpdateStudentInfo() throws DAOException {
 		log.trace("TestselectUser(), 마이페이지 기본정보 수정(학생)");
 		
-		UserDTO dto = new UserDTO("test1@gmail.com", "변경1234", "닉네임", "학생이름", "20040101", "여자",
-								   "01012345678", "고등학생", "3학년", null, null, null);
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		dto.setSt_grade("1학년");
 		
 		boolean result = mapper.updateUserInfo(dto);
 		log.info("\t+ 기본정보 수정결과: {}", result);
@@ -104,6 +106,38 @@ public class MypageMapperTests {
 		
 	}//testGetMyQuestionTotalAmount()
 	
+	//5. 나의 작성글 목록 조회
+	@Test
+	@Order(5)
+	@DisplayName("5. testSelectAllMyCommunitytList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testSelectAllMyCommunitytList() throws DAOException {
+		log.trace("testSelectAllMyCommentList(), 마이페이지 나의 작성글 목록 조회");
+
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		
+		List<CommunityVO> list = mapper.selectAllMyCommunitytList(cri);
+		list.forEach(e -> log.info(e));
+		
+	}//testSelectAllMyCommunitytList()
+	
+	//6. 나의 작성글 총 개수
+	@Test
+	@Order(6)
+	@DisplayName("6. testGetMyCommunityTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyCommunityTotalAmount() throws DAOException {
+		log.trace("testGetMyCommentTotalAmount(), 마이페이지 나의 작성글 총 개수 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		Integer amount = mapper.getMyCommunityTotalAmount(dto.getUser_email());
+		log.info("\t + 나의 작성글 총 개수: {}", amount);
+		
+	}//testGetMyCommunityTotalAmount()
+	
 	//7. 나의 댓글 목록 조회
 	@Test
 	@Order(7)
@@ -120,7 +154,7 @@ public class MypageMapperTests {
 		
 	}//testSelectAllMyCommentList()
 	
-	//6. 나의 댓글 목록 총 개수
+	//8. 나의 댓글 목록 총 개수
 	@Test
 	@Order(8)
 	@DisplayName("8. testGetMyCommentTotalAmount")
