@@ -1,11 +1,9 @@
 package org.zerock.fmt.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.TutorPageDTO;
@@ -33,7 +31,7 @@ public class TutorServiceImpl
 		log.trace("튜터페이지 전체 정보 조회");
 		
 		try { return this.tutorMapper.selectAllTInfo(tp_number); } 
-		catch (DAOException e) { throw new ServiceException("비지니스가 예외가 발생했습니다."); }
+		catch (DAOException e) { throw new ServiceException(e); }
 	} // getAllTInfo
 
 	@Override
@@ -41,15 +39,33 @@ public class TutorServiceImpl
 		log.trace("튜터카드 최신순 조회");
 		
 		try { return this.tutorMapper.selectRecentTCard(); } 
-		catch (DAOException e) { throw new ServiceException("비지니스가 예외가 발생했습니다."); }
+		catch (DAOException e) { throw new ServiceException(e); }
 	} // getTCardInfo
+	
+	@Override
+	public List<TutorPageVO> getSortedTCard(String subject, String searchType) throws ServiceException {
+		log.trace("튜터카드 정렬 검색, 과목: {}, 정렬: {}", subject, searchType);
+		
+		List<TutorPageVO> result;
+		try { result = this.tutorMapper.selectHighAnswerTcard(subject); }
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+		try {
+			if(searchType.equals("평점순")) {
+				result = this.tutorMapper.selectHighStarTcard(subject);
+			}
+			return result;
+			
+		} catch (DAOException e) { throw new ServiceException(e); }
+		
+	} // getSortedTCard
 	
 	@Override
 	public boolean createIntroInfo(TutorPageDTO tutorPagedto) throws ServiceException {
 		log.trace("튜터 소개 입력", tutorPagedto);
 
 		try { return this.tutorMapper.insertIntroInfo(tutorPagedto) == 1; } 
-		catch (DAOException e) { throw new ServiceException("비지니스가 예외가 발생했습니다."); }
+		catch (DAOException e) { throw new ServiceException(e); }
 	} // insertIntroInfo
 
 	@Override
@@ -57,8 +73,7 @@ public class TutorServiceImpl
 		log.trace("튜터 소개 수정", tutorPagedto);
 		
 		try { return this.tutorMapper.updateTInfo(tutorPagedto) == 1; } 
-		catch (DAOException e) { throw new ServiceException("비지니스가 예외가 발생했습니다."); }
+		catch (DAOException e) { throw new ServiceException(e); }
 	} // updateTInfo
 
-	
 } // end class

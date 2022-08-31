@@ -192,15 +192,11 @@ h1 div:first-child {
     color: #fff;
 }
 
-#search_bt, #sort {
+#search_bt, .sort {
     display: inline;
     float: right;
-    margin-left: 10px;
+    margin-left: 1%;
     
-}
-
-#sort {
-    margin-left: 10%;
 }
 
 #search_bt {

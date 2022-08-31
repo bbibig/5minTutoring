@@ -3,11 +3,12 @@ package org.zerock.fmt.controller;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -26,19 +27,28 @@ public class TutorController implements InitializingBean {
 	private TutorService tutorService;
 	
 	@GetMapping("/tutorMain")
-	public String tpMain(Model model) throws ControllerException {
+	public String tpMain(Model model, HttpServletRequest req) throws ControllerException {
 		log.trace("2-01_tpMain <<< 튜터페이지 메인");
 		
 		try {
+			// 신규 튜터
 			List<TutorPageVO> recentList = this.tutorService.getRecentTCard();
 			recentList.forEach(log::trace);
-			
 			model.addAttribute("_RECENT_LIST_", recentList);
 			
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
-		
+			// 추천 튜터
+			String subject = "국어";
+			String searchType = "누적답변순";
+			
+			if(req.getParameter("subject") != null) { subject = req.getParameter("subject"); }
+			if(req.getParameter("searchType") != null) { searchType = req.getParameter("searchType"); }
+			
+			List<TutorPageVO> tutorVO = this.tutorService.getSortedTCard(subject, searchType);
+			tutorVO.forEach(log::trace);
+			model.addAttribute("_SORTED_TUTOR_", tutorVO);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
+
 		return "tutor/2-01_tpMain";
 	} // tpMain
 	

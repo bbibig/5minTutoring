@@ -251,7 +251,6 @@
 	
 	    <!-- ============= 공통 footer + js =============== -->
 	    <jsp:include page="../footer.jsp" flush="true" />
-	    <script src="/resources/js/1_01_login.js"></script>
 	    <!-- ============================================== -->
 	
 	    <!-- CKEditor5 CDN 연결 및 언어 설정 -->

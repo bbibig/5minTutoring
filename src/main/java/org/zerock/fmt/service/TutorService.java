@@ -16,6 +16,9 @@ public interface TutorService {
 	// 튜터메인 페이지 튜터카드 (최신순 12개행 정렬) 
 	public abstract List<TutorPageVO> getRecentTCard() throws ServiceException;
 	
+	// 튜터메인 페이지 튜터카드 (과목, 누적답변순 or 평점순 12개행 정렬)
+	public abstract List<TutorPageVO> getSortedTCard(String subject, String searchType) throws ServiceException;
+	
 	// 튜터페이지 소개 정보 입력 (경력, 소개제목, 소개내용)
 	public abstract boolean createIntroInfo(TutorPageDTO tutorPagedto) throws ServiceException;
 	
