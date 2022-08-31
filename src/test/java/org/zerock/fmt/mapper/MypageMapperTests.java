@@ -15,7 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -46,13 +47,15 @@ public class MypageMapperTests {
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testSelectAllFaqList() throws DAOException {
 		log.trace("TestselectUser(), 마이페이지 기본정보 조회");
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");		
 		
-		UserVO vo = mapper.selectUser("test@gmail.com");
+		UserVO vo = mapper.selectUser(dto);
 		log.info("\t+ 기본정보 조회 {}", vo);
 	}//TestselectUser()
 	
 	
-	//2. 기본정보 수정(학생)
+	//2. 기본정보 수정
 	@Test
 	@Order(2)
 	@DisplayName("2. TestUpdateStudentInfo")
@@ -63,63 +66,78 @@ public class MypageMapperTests {
 		UserDTO dto = new UserDTO("test1@gmail.com", "변경1234", "닉네임", "학생이름", "20040101", "여자",
 								   "01012345678", "고등학생", "3학년", null, null, null);
 		
-		boolean result = mapper.updateStudentInfo(dto);
+		boolean result = mapper.updateUserInfo(dto);
 		log.info("\t+ 기본정보 수정결과: {}", result);
 		
 	}//TestUpdateStudentInfo()
 	
 	
-	//3. 기본정보 수정(튜터)
+	//3. 나의 질문글 목록 조회
 	@Test
 	@Order(3)
-	@DisplayName("3. TestupdateTutorInfo")
-	@Timeout(unit = TimeUnit.SECONDS, value = 10)
-	void TestupdateTutorInfo() throws DAOException {
-		log.trace("TestselectUser(), 마이페이지 기본정보 수정(튜터)");
-		
-		UserDTO dto = new UserDTO("TTtest1@gmail.com", "변경1234", "닉네임", "튜터이름", "19940101", "여자",
-								   "01012345678", null, "졸업", "국어", "file:파일경로", "국어국문학과");
-		
-		boolean result = mapper.updateTutorInfo(dto);
-		log.info("\t+ 기본정보 수정결과: {}", result);
-		
-	}//TestupdateTutorInfo()
-	
-	
-	//4. 나의 질문글 목록 조회
-	@Test
-	@Order(4)
-	@DisplayName("4. testSelectAllQuestionList")
+	@DisplayName("3. testSelectAllQuestionList")
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testSelectAllQuestionList() throws DAOException {
 		log.trace("testSelectAllQuestionList(), 마이페이지 나의 질문글 목록 조회");
 		
-		CriteriaFaq cri = new CriteriaFaq();
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
 		
 		List<QuestionBardVO> list = mapper.selectAllMyQuestionList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testSelectAllQuestionList()
 	
-	//5. 나의 질문글 목록 총 개수
+	//4. 나의 질문글 목록 총 개수
 	@Test
-	@Order(5)
-	@DisplayName("5. testGetMyQuestionTotalAmount")
+	@Order(4)
+	@DisplayName("4. testGetMyQuestionTotalAmount")
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testGetMyQuestionTotalAmount() throws DAOException {
 		log.trace("testSelectAllQuestionList(), 마이페이지 나의 질문글 목록 총 개수 조회");
 		
-		String user_email = "test@gmail.com";
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
 		
-		Integer amount = mapper.getMyQuestionTotalAmount();
+		Integer amount = mapper.getMyQuestionTotalAmount(dto.getUser_email());
 		log.info("\t + 나의 질문글 총 개수: {}", amount);
+		
+	}//testGetMyQuestionTotalAmount()
+	
+	//7. 나의 댓글 목록 조회
+	@Test
+	@Order(7)
+	@DisplayName("7. testSelectAllMyCommentList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testSelectAllMyCommentList() throws DAOException {
+		log.trace("testSelectAllMyCommentList(), 마이페이지 나의 댓글 목록 조회");
+
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		
+		List<CommentVO> list = mapper.selectAllMyCommentList(cri);
+		list.forEach(e -> log.info(e));
+		
+	}//testSelectAllMyCommentList()
+	
+	//6. 나의 댓글 목록 총 개수
+	@Test
+	@Order(8)
+	@DisplayName("8. testGetMyCommentTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyCommentTotalAmount() throws DAOException {
+		log.trace("testGetMyCommentTotalAmount(), 마이페이지 나의 댓글 목록 총 개수 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		Integer amount = mapper.getMyCommentTotalAmount(dto.getUser_email());
+		log.info("\t + 나의 댓글 총 개수: {}", amount);
 		
 	}//testGetMyQuestionTotalAmount()
 
 
 }// end class
-
-
 
 
 

@@ -83,7 +83,7 @@ public class CommuntyMapperTests {
 		
 	}//delete
 	
-	@Disabled
+//	@Disabled
 	@Test
 	@DisplayName("CommunityMapper.insert() test")
 	@Order(4)
@@ -91,7 +91,12 @@ public class CommuntyMapperTests {
 	void insert() throws DAOException {
 		log.trace(" insert() invoked.");
 		
-		CommunityDTO dto = new CommunityDTO(null, "이건제목", "이건내용", "이건작성자");
+		CommunityDTO dto = new CommunityDTO();
+		
+		dto.setFb_title("이건제목");
+		dto.setFb_content("이건내용");
+		dto.setUser_email("test@gmail.com");
+		
 		log.info("\t+ 1.dto: {}", dto);
 		
 		
@@ -110,7 +115,11 @@ public class CommuntyMapperTests {
 	void update() throws DAOException {
 		log.trace(" update() invoked.");
 		
-		CommunityDTO dto = new CommunityDTO(30, "제목수정", "내용수정", "작성자수정");
+		CommunityDTO dto = new CommunityDTO();
+		dto.setFb_number(1);
+		dto.setFb_title("제목수정");
+		dto.setFb_content("내용수정");
+		
 		log.info("\t+ 1.dto: {}", dto);
 		
 		
@@ -121,4 +130,5 @@ public class CommuntyMapperTests {
 		assert affectedLines == 1;
 		
 	}//insert
+	
 }//end class

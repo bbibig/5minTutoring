@@ -17,10 +17,3 @@
 //     // }
 // };//login
 
-// function loginbt() {
-//     Swal.fire({
-//         text: '아이디 또는 비밀번호가 일치하지 않습니다', // Alert 내용
-//         icon: 'warning',      // Alert 타입
-//         showCloseButton: true
-//     });
-// };//login

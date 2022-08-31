@@ -2,14 +2,19 @@ package org.zerock.fmt.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.fmt.domain.CriteriaFaq;
-import org.zerock.fmt.domain.PageFaqDTO;
+import org.zerock.fmt.common.SharedScopeKeys;
+import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.QuestionBardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -38,20 +43,21 @@ public class MypageController {
 //============================================================	
 	
 	@GetMapping("/studentPage")
-	public String studentPage(String user_email, Model model) throws ControllerException{
+	public String studentPage(Model model, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 조회(학생)");
 		
 		try {
-			UserVO vo = this.userService.getUserInfo(user_email);
-			//유저 정보는 세션에 올린 정보를 가져와야할것임(일단 requestscope에 올린 정보로 가져옴)
-			model.addAttribute("_USERINFO_", vo);
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			
+			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
+			model.addAttribute("_USERINFO_", userInfo);
 			
 			return "mypage/7-01_StudentPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// 기본정보조회(학생)
 	
-	@RequestMapping("/studentPageModify")
+	@PostMapping("/studentPageModify")
 	public String studentPage(UserDTO dto, RedirectAttributes rttrs) throws ControllerException{
 		log.trace("마이페이지 기본정보 수정(학생)");
 		
@@ -63,25 +69,26 @@ public class MypageController {
 			}//if-else
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
-		return "redirect:/mypage/studentPage?user_email=" + dto.getUser_email();
+		return "redirect:/mypage/studentPage";
 	}// 기본정보 수정(학생)
 	
 	
 	@GetMapping("/tutorPage")
-	public String tutorPage(String user_email, Model model) throws ControllerException{
+	public String tutorPage(Model model, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 조회(튜터)");
 		
 		try {
-			UserVO vo = this.userService.getUserInfo(user_email);
-			//유저 정보는 세션에 올린 정보를 가져와야할것임(일단 requestscope에 올린 정보로 가져옴)
-			model.addAttribute("_USERINFO_", vo);
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			
+			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
+			model.addAttribute("_USERINFO_", userInfo);
 			
 			return "mypage/7-02_TutorPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 	}// 기본정보 조회(튜터)
 	
-	@RequestMapping("/tutorPageModify")
+	@PostMapping("/tutorPageModify")
 	public String tutorPageModify(UserDTO dto, RedirectAttributes rttrs) throws ControllerException{
 		log.trace("마이페이지 기본정보 수정(튜터)");
 		
@@ -93,39 +100,54 @@ public class MypageController {
 			}//if-else
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
-		return "redirect:/mypage/tutorPage?user_email=" + dto.getUser_email();
+		return "redirect:/mypage/tutorPage";
 	}// 기본정보 수정(튜터)
 	
 	
 	@GetMapping("/myQuestion")
-	public String myQuestion(CriteriaFaq cri, Model model) throws ControllerException {
+	public String myQuestion(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 나의 질문글 목록 조회");
 		
 		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
 			List<QuestionBardVO> list = this.mypageService.getAllMyQuestionList(cri);
 			model.addAttribute("_MYQLIST_", list);
 			
-			PageFaqDTO pageDto = new PageFaqDTO(cri, this.mypageService.getMyQuestionTotalAmount());
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyQuestionTotalAmount(vo.getUser_email()));
 			model.addAttribute("_MYQLISTPAGENATION_", pageDto);
 						
 			return "mypage/7-03_MyQuestionList";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
-	}// myQuestion
+	}// 나의 질문글 조회
 	
 	@GetMapping("/community/write")		//GET	
 	public String communityWrite() {
-		log.trace("7-04_CommunityW");
+		log.trace("마이페이지 나의 커뮤니티 작성글 목록 조회");
 		
 		return "mypage/7-04_CommunityW";
 	}// communityWrite
 	
 	@GetMapping("/community/comments")		//GET	
-	public String communityComments() {
-		log.trace("7-05_CommunityC");
+	public String communityComments(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException{
+		log.trace("마이페이지 나의 댓글 목록 조회");
 		
-		return "mypage/7-05_CommunityC";
-	}// communityComments
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<CommentVO> list = this.mypageService.getAllMyCommentList(cri);
+			model.addAttribute("_MYCOMMENT_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyCommentTotalAmount(vo.getUser_email()));
+			model.addAttribute("_MYCOMMENTPAGENATION_", pageDto);
+						
+			return "mypage/7-05_CommunityC";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
+	}// 나의 댓글 조회
 	
 	@GetMapping("/qList")	// GET
 	public String qList() {

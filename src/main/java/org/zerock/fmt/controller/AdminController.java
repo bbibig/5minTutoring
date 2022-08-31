@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
-import org.zerock.fmt.domain.PageFaqDTO;
+import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.FaqService;
@@ -109,26 +109,26 @@ public class AdminController {
 		return "admin/8-03_answerBoard_comment";
 	}
 	
-	
+//	관리자 FAQ ========================================================================================
 	@GetMapping("/adminFAQ")
-	public String adminFAQ(CriteriaFaq cri, Model model) throws ControllerException {
+	public String adminFAQ(CriteriaMyPage cri, Model model) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용)");
 		
 		try {
 			List<FaqVO> list = this.faqService.getFaqList(cri);
 			model.addAttribute("_FAQLIST_",list);
 			
-			PageFaqDTO pageDto = new PageFaqDTO(cri, this.faqService.getFaqTotal());
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.faqService.getFaqTotal());
 			model.addAttribute("_FAQPAGENATION_",pageDto);
 			
 			return "admin/8-04_admin_faq";
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		}// try-catch
-	}// adminFAQ(R)
+	}// adminFAQ(조회)
 	
 	@PostMapping("/adminFAQCreate")
-	public String adminFAQCreate(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String adminFAQCreate(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 생성");
 		
 		try {
@@ -137,10 +137,10 @@ public class AdminController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}// adminFAQ(C)
+	}// adminFAQ(생성)
 	
 	@PostMapping("/adminFAQModify")
-	public String adminFAQModify(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String adminFAQModify(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 수정");
 		
 		try {
@@ -149,10 +149,10 @@ public class AdminController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}// adminFAQ(U)
+	}// adminFAQ(수정)
 	
 	@PostMapping("/adminFAQRemove")
-	public String adminFAQRemove(CriteriaFaq cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	public String adminFAQRemove(CriteriaMyPage cri, FaqDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.info("자주 묻는 질문(관리자용) 삭제");
 		
 		try {
@@ -161,8 +161,8 @@ public class AdminController {
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "redirect:/admin/adminFAQ?currPage="+ cri.getCurrPage();
-	}// adminFAQ(D)
-	
+	}// adminFAQ(삭제)
+//	===================================================================================================
 
 	@RequestMapping("/sale/sell")
 	public String adminSale() {

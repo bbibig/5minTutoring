@@ -29,7 +29,7 @@
                             <h2 data-aos="fade-up" data-aos-delay="400">오분과외에 대한 모든 것</h2><br>
                             <div data-aos="fade-up" data-aos-delay="600">
                                 <div class="text-center text-lg-start">
-                                    <a href="/login/login"
+                                    <a href="/login/"
                                         class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                                         <span>시작하기</span>
                                         <i class="bi bi-arrow-right"></i>

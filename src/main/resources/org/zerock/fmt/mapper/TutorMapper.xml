@@ -37,7 +37,6 @@
 		OFFSET 0 ROW
 		FETCH NEXT 12 ROWS ONLY
     </select>
-
     
     <select id="selectHighStarTcard" resultType="org.zerock.fmt.domain.TutorPageVO">
     	 SELECT

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.zerock.fmt.domain.CriteriaFaq;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqVO;
-import org.zerock.fmt.domain.PageFaqDTO;
+import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.FaqService;
@@ -30,14 +30,14 @@ public class FaqController {
 
 	
 	@GetMapping	
-	public String faq(CriteriaFaq cri, Model model) throws ControllerException {
+	public String faq(CriteriaMyPage cri, Model model) throws ControllerException {
 		log.trace("5_faq 자주 묻는 질문 목록 조회 (사용자)");
 		
 		try {
 			List<FaqVO> list = this.faqService.getFaqList(cri);
 			model.addAttribute("_FAQLIST_", list);
 			
-			PageFaqDTO pageDto = new PageFaqDTO(cri, this.faqService.getFaqTotal());
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.faqService.getFaqTotal());
 			model.addAttribute("_FAQPAGENATION_", pageDto);
 			
 			return "faq/5_FAQ";

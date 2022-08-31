@@ -91,8 +91,8 @@ public class UserMapperTests {
 	@Timeout(value = 5, unit =TimeUnit.SECONDS)
 	void insertTutor() throws DAOException {
 		
-		UserDTO newTutor = new UserDTO("newTT1","pw1-1","nick1-1","nameTT","19900000","남자","01011111111",
-										null,null, "재학중","국어","file:name");
+		UserDTO newTutor = new UserDTO("totor@han.net","1111111","튜터2","김한글","11111111","남자","0100000000",
+						null,null,"재학","국어","백수전공");
 		Integer insertResult = this.mapper.insertTutor(newTutor);
 		if(insertResult==1) {
 			log.info("\t + insertResult : {}", insertResult);
@@ -121,9 +121,6 @@ public class UserMapperTests {
 	@DisplayName("updateTutorPass 튜터 가입 승인")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void updateTutorPass() throws DAOException {
-		
-//		UserDTO tutor = new UserDTO("TTemail_4","pw","nick","name",null,null,null,
-//									null,null, null, null, null ,null,null);
 		String user_email = "TTemail_4";
 		Integer updateResult = this.mapper.updateTutorPass(user_email);
 		if(updateResult==1) {
@@ -137,8 +134,6 @@ public class UserMapperTests {
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void stopUser() throws DAOException {
 
-//		UserDTO user = new UserDTO("STemail_5","pw변경","nick변경","name변경",null,null,null,
-//				null,null, null, null, null ,null,null);
 		String user_email = "STemail_4";
 		Integer updateResult = this.mapper.updateUserStop(user_email);
 		
@@ -197,6 +192,17 @@ public class UserMapperTests {
 		
 	}//selectNicCheck
 	
+	@Test
+	@Order(11)
+	@Timeout(value = 3,unit = TimeUnit.SECONDS)
+	void testselectLoinn() throws DAOException {
+		log.trace("testselectLoinn");
+		String user_email = "student1@han.net";
+		UserVO vo1 = this.mapper.selectLogin(user_email, "1111111q");
+		UserVO vo2 = this.mapper.selectLogin(user_email, "11111");
+		log.info("\t + vo1 :{}, vo2: {}", vo1, vo2);
+	
+	}//selectlogin
 	
 	
 }//end class

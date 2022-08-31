@@ -23,6 +23,10 @@ public interface UserMapper {
 	//닉네임 중복검사 
 	@Select("SELECT COUNT(*) FROM tbl_user WHERE USER_NICK = #{user_nick}")
 	public abstract Integer selectNicCheck(@Param("user_nick")String newNick) throws DAOException;
+	
+	//로그인 
+	public abstract UserVO selectLogin(@Param("user_email")String user_email,
+									   @Param("user_pw")String user_pw) throws DAOException;
 		
 	//-------------- INSERT 
 	//학생 가입

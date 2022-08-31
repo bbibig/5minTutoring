@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -21,7 +23,27 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="org.zerock.fmt.controller" />
+	<interceptors>
+		<interceptor>
+			<mapping path="/login/Loginpost" />
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/login/logout" />
+			<beans:ref bean="logoutinterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<!-- <mapping path="/community/*" /> -->
+			<mapping path="/hand/*" />
+			<mapping path="/inquiry/*" />
+			<!-- <mapping path="/mypage/*" /> -->
+			<!-- <mapping path="/tutor/*" /> -->
+			<beans:ref bean="authInterceptor"/>
+			<!-- 기능별로 마무리되면 열어서 적용해주세요 -->
+		</interceptor>
+	</interceptors>
 	
 	<!-- 첨부파일전송 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -33,5 +55,9 @@
 		<beans:property name="uploadTempDir" value="file:///c:/temp"/>
 		<!-- 임시폴더지정 -->
 	</beans:bean>	
+
+	<!-- component-scan -->
+	<context:component-scan base-package="org.zerock.fmt.controller" />
+	<context:component-scan base-package="org.zerock.fmt.interceptor" />
 	
 </beans:beans>
