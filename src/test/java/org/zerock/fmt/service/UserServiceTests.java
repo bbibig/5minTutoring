@@ -15,6 +15,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.UserDTO;
@@ -77,6 +79,34 @@ public class UserServiceTests {
 											"중학생","1학년",null,null,null);
 		Boolean Result = this.userService.singUpStrudent(newStudent);
 		log.info("\t + Result : {}", Result);
+		
+	}//singUpStrudent
+	
+	@Test
+	@Order(3)
+	@DisplayName("singUpStrudent 학생회원가입")
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void singUpStrudentWithBCryptPassword() throws ServiceException {
+		log.trace("singUpStrudentWithBCryptPassword");
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@email.net");
+		dto.setUser_pw("bcpassword");
+		dto.setUser_nick("nickname11");
+		dto.setUser_name("김한글");
+		dto.setUser_birth("20220831");
+		dto.setUser_gender("남자");
+		dto.setUser_phone("0100000000");
+		dto.setSt_school("중학생");
+//		dto.
+		
+		String originpw = dto.getUser_pw();
+		String bcriptpw = encoder.encode(dto.getUser_pw());
+		log.info("\t + originpw : {}", originpw);
+		log.info("\t + bcryptpw : {}", bcriptpw);
+		
+		this.userService.singUpStrudent(dto);
 		
 	}//singUpStrudent
 	

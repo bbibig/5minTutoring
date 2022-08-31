@@ -3,6 +3,7 @@ package org.zerock.fmt.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -51,10 +52,18 @@ public class UserServiceImpl implements UserService{
 		
 	}//getUserInfo
 
+//	@Override
+//	public boolean singUpStrudent(UserDTO newStudent) throws ServiceException {
+//		log.trace("singUpStrudent() invoked.");
+//		
+//		try { return this.userMapper.insertStudent(newStudent)==1;}
+//		catch(Exception e) { throw new ServiceException(e);}
+//	}//singUpStrudent
+	
 	@Override
 	public boolean singUpStrudent(UserDTO newStudent) throws ServiceException {
 		log.trace("singUpStrudent() invoked.");
-		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		try { return this.userMapper.insertStudent(newStudent)==1;}
 		catch(Exception e) { throw new ServiceException(e);}
 	}//singUpStrudent

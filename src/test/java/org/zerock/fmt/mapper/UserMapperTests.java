@@ -66,7 +66,7 @@ public class UserMapperTests {
 	void selectUser() throws DAOException {
 		log.trace("selectUser:특정 회원 조회");
 		
-		UserVO user = this.mapper.selectUser("STemail_5");
+		UserVO user = this.mapper.selectUser("sd456@gmail.com");
 		log.info("\t + user : {}", user);
 		
 	}//userInfo
