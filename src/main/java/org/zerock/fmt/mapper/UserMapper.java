@@ -22,18 +22,18 @@ public interface UserMapper {
 	
 	//닉네임 중복검사 
 	@Select("SELECT COUNT(*) FROM tbl_user WHERE USER_NICK = #{user_nick}")
-	public abstract Integer selectNicCheck(@Param("user_nick")String newNick) throws DAOException;
+	public abstract int selectNicCheck(@Param("user_nick")String newNick) throws DAOException;
 	
-	//로그인 
-	public abstract UserVO selectLogin(@Param("user_email")String user_email,
-									   @Param("user_pw")String user_pw) throws DAOException;
+	//로그인
+	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_eamil}")
+	public abstract UserVO loginEmail(@Param("user_eamil")String user_email) throws DAOException;
 		
 	//-------------- INSERT 
 	//학생 가입
-	public abstract Integer insertStudent(UserDTO newStudent) throws DAOException;
+	public abstract int insertStudent(UserDTO newStudent) throws DAOException;
 
 	//튜터 가입 
-	public abstract Integer insertTutor(UserDTO newTutor) throws DAOException;
+	public abstract int insertTutor(UserDTO newTutor) throws DAOException;
 	
 	//++카카오 가입
 	//++네이버 가입
@@ -41,23 +41,26 @@ public interface UserMapper {
 	
 	//-------------- UPDATE 
 	//정보변경 - 마이페이지(정보수정용)
-	public abstract Integer updateUser(UserDTO user) throws DAOException;
+	public abstract int updateUser(UserDTO user) throws DAOException;
 	
 	//정보변경 - 어드민(튜터회원 승인용)
 	@Update("UPDATE tbl_user SET pass='Accept' WHERE user_email=#{user_email}")
-	public abstract Integer updateTutorPass(@Param("user_email")String user_email) throws DAOException;
+	public abstract int updateTutorPass(@Param("user_email")String user_email) throws DAOException;
 	
 	//회원탈퇴 - 마이페이지(정지)
-	public abstract Integer updateUserStop(@Param("user_email")String user_email) throws DAOException;
+	public abstract int updateUserStop(@Param("user_email")String user_email) throws DAOException;
+	
+	//비밀번호 변경(비밀번호찾기용)
+	public abstract int updatePW(UserDTO dto) throws DAOException;
 	
 	
 	//-------------- 손들기 UPDATE 
 	
 	//손들기 구매(학생) + 획득(튜터) -> 개수 추가
-	public abstract Integer updateHandGet(@Param("h_count") Integer h_count,
+	public abstract int updateHandGet(@Param("h_count") Integer h_count,
 										@Param("user_email")String user_email) throws DAOException;
 	//손들기 사용-> 개수 차감
-	public abstract Integer updateHandUse(@Param("h_count") Integer h_count,
+	public abstract int updateHandUse(@Param("h_count") Integer h_count,
 										@Param("user_email")String user_email) throws DAOException;
 	
 	

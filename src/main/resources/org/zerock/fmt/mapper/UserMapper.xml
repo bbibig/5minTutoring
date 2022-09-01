@@ -48,11 +48,11 @@
         WHERE user_email = #{user_email}
     </update>
 
-    <!-- 로그인 유저  -->
-    <select id="selectLogin" resultType="org.zerock.fmt.domain.UserVO">
-        SELECT * FROM TBL_USER
-        WHERE USER_EMAIL= #{user_email} AND USER_PW= #{user_pw}
-    </select>
+    <update id="updatePW">
+        UPDATE tbl_user  
+        SET user_pw = #{user_pw}
+        WHERE user_email = #{user_email}
+    </update>
 
 
     <!-- 유저활동정지 -->

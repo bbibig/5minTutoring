@@ -3,6 +3,9 @@ package org.zerock.fmt.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -173,19 +176,18 @@ public class LoginController{
 		log.trace("findMyPassword() invoked.");
 		return "login/1-12_findMyPassword";
 	}
-	@PostMapping("/findMyPassword")
-	@ResponseBody
-	public String findMyPassword(String user_email) throws ControllerException {
+	@PostMapping(path="/findMyPassword")
+	public ResponseEntity<String> findMyPassword(UserDTO dto) throws ControllerException {
 		log.trace("findMyPassword invoked.");
+		
 		try{ 
-			if( this.userService.getUserInfo(user_email)==null) {
-				log.info("\t + 정보없음");
-				return null;
-			} else { 
-				log.info("t + pw 전달.");
-				return this.userService.getUserInfo(user_email).getUser_pw(); }
+			String result = this.userService.findPassword(dto);
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Type", "text/html; charset=utf-8");
+			return new ResponseEntity<String>(result, header,HttpStatus.OK);
 		} catch ( Exception e) { throw new ControllerException(e); }
-	}
+	}//findMyPassword
+
 //	------------------------------------------ 로그아웃 
 	
 	@GetMapping("/logout")

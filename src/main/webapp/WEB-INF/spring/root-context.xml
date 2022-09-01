@@ -17,9 +17,7 @@
 		<!-- 1. JDBC 연결정보 속성들에 값 설정-->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
-
 		<property name="username" value="ADMIN" />
-
 		<property name="password" value="Oracle1234567" />
 
 		<!-- 2. Connection Pool의 작동방식과 관련된 속성들에 값 설정 -->
@@ -35,9 +33,7 @@
 	<bean id="hikariDataSource"
 		class="com.zaxxer.hikari.HikariDataSource" destroy-method="close" 
 		primary="false" >
-		
 		<description>HikariCP DataSource</description>
-
 		<constructor-arg ref="hikariConfig" />
 		<!-- ref : 생성자의 매개변수로 hikariConfig 빈을 사용 -->
 	</bean>
@@ -50,15 +46,11 @@
 		class="org.apache.ibatis.datasource.pooled.PooledDataSource"
 		destroy-method="forceCloseAll"
 		primary="true">
-
 		<description> Mybatis Pooled Data Source</description>
-
 		<property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@db20220618135707_high?TNS_ADMIN=C:/opt/OracleCloudWallet/PROJECT" />
 		<property name="username" value="ADMIN" />
 		<property name="password" value="Oracle1234567" />
-
 		<property name="poolMaximumActiveConnections" value="5" />
 		<property name="poolMaximumIdleConnections" value="2" />
 		<property name="poolPingEnabled" value="true" />
@@ -68,25 +60,16 @@
 	</bean>
 
 
-
 	<!-- ============== 3. Mybatis Configuration ===============-->
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" > 
 
-		<!-- Data Source 변경하여 테스트 -->
-<!-- 		<property name="dataSource" ref="hikariDataSource" /> -->
 		<property name="dataSource" ref="pooledDataSource" />
-		
-
-		<!-- classpath: = /WEB-INF/classes/ , Resource : String으로 직접 지정 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
-		
-		<!-- 위의 속성configLacation으로 마이바티스 설정파일의 위치를 등록하였으니, 
-		xml mapper파일의 등록, mapper inteface등록은 설정파일에서 해야한다. 빈즈 프로퍼티로 등록하지 말것  -->
-		<!-- <property name="mapperLocation" value="classpath:mappers/*.xml"/> -->
+
 	</bean>
 
-	
+
 	<context:component-scan base-package="org.zerock.fmt.service"/>
 	<mybatis-spring:scan base-package="org.zerock.fmt.mapper"/>
 

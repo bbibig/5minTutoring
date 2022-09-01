@@ -2,8 +2,12 @@ package org.zerock.fmt.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -15,13 +19,14 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,6 +44,8 @@ public class UserServiceTests {
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
 
+	@Setter(onMethod_ = @Autowired)
+	private UserMapper userMapper;
 	
 	@Test
 	@Order(1)
@@ -83,7 +90,7 @@ public class UserServiceTests {
 	}//singUpStrudent
 	
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("singUpStrudent 학생회원가입")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void singUpStrudentWithBCryptPassword() throws ServiceException {
@@ -99,15 +106,16 @@ public class UserServiceTests {
 		dto.setUser_gender("남자");
 		dto.setUser_phone("0100000000");
 		dto.setSt_school("중학생");
-//		dto.
+		dto.setSt_grade("1학년");
 		
 		String originpw = dto.getUser_pw();
 		String bcriptpw = encoder.encode(dto.getUser_pw());
 		log.info("\t + originpw : {}", originpw);
 		log.info("\t + bcryptpw : {}", bcriptpw);
+		dto.setUser_pw(bcriptpw);
 		
-		this.userService.singUpStrudent(dto);
-		
+		boolean result = this.userService.singUpStrudent(dto);
+		log.info("\t + result : {}", result );
 	}//singUpStrudent
 	
 	
@@ -216,12 +224,53 @@ public class UserServiceTests {
 	@Test
 	@Order(11)
 	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	@DisplayName("gettLoginUser 로그인하기")
 	void gettLoginUser() throws ServiceException {
 		log.trace("selectLogin() invoked.");
 		
-		String user_email="TTemail_1";
-		String user_pw = "p";
-		UserVO vo = this.userService.gettLoginUser(user_email, user_pw);
+		String user_email="test@email.net";
+		String user_pw = "bcpassword";
+		UserVO vo = this.userService.loginEmail(user_email);
 		log.info("\t+ vo : {}", vo );
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		if( encoder.matches(user_pw, vo.getUser_pw()) ){	//암호화비밀번호랑 같으면
+			log.info(" 로그인 성공 " );
+		} else { log.info("로그인실패"); }
+		
 	}//selectLogin
+	
+	@Test
+	@DisplayName("loginEmail 로그인정보 가져오기")
+	void testloginEmail() throws ServiceException {
+		log.trace("loginEmail 로그인 유저 확인");
+		String user_email="test@email.net";
+		UserVO vo = this.userService.loginEmail(user_email);
+		log.info("\t+ vo : {}", vo);
+	}//loginEmail
+	
+	@Test
+	@DisplayName("findPassword 비밀번호변경 ")
+	void findPassword() throws ServiceException, DAOException  {
+		log.trace("findPassword 비밀번호 랜덤 변경");
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("tutor2@gmail.com");
+		
+		UserVO vo = this.userService.loginEmail(dto.getUser_email());
+
+		if( vo==null ) {
+			//등록되지 않은 아이디 입니다. 
+		} else {
+			String newPw = "";
+			for(int i=0; i<12; i++) {
+				newPw += (char) ((Math.random() * 26) + 97);
+			}//랜덤비밀번호
+			
+			dto.setUser_pw(newPw);
+			int result = this.userMapper.updatePW(dto);
+			log.info("\t + 비밀번호 변경 result : {}", result);
+			//이메일발송
+			//임시비밀번호가 이메일로 발송되었습니다. 
+		}//if-else
+	}//findPassword
 }//end class

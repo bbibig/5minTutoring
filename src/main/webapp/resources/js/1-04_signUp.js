@@ -1,4 +1,5 @@
 
+
 $('#nickCheck').on('click',function(){
   let newNick = $("#user_nick").val();
   let data = {newNick : newNick}

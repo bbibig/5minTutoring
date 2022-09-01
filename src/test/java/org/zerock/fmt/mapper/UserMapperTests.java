@@ -1,11 +1,8 @@
 package org.zerock.fmt.mapper;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -41,11 +38,11 @@ public class UserMapperTests {
 	@Setter(onMethod_= {@Autowired})
 	private UserMapper mapper;
 
-	@BeforeAll
-	void beforeAll() {
-		assertNotNull(this.mapper);
-		log.info("\t+ mapper : {}", this.mapper);
-	}
+//	@BeforeAll
+//	void beforeAll() {
+//		assertNotNull(this.mapper);
+//		log.info("\t+ mapper : {}", this.mapper);
+//	}
 	
 	
 	@Test
@@ -191,18 +188,27 @@ public class UserMapperTests {
 		log.info("\t + Result2 : {}", Result2);
 		
 	}//selectNicCheck
-	
+
 	@Test
 	@Order(11)
-	@Timeout(value = 3,unit = TimeUnit.SECONDS)
-	void testselectLoinn() throws DAOException {
-		log.trace("testselectLoinn");
-		String user_email = "student1@han.net";
-		UserVO vo1 = this.mapper.selectLogin(user_email, "1111111q");
-		UserVO vo2 = this.mapper.selectLogin(user_email, "11111");
-		log.info("\t + vo1 :{}, vo2: {}", vo1, vo2);
+	@DisplayName("selectLogin 로그인하기 ")
+	void testselectLogin() throws DAOException{
+		log.trace("selectLogin() invoked.");
+		String user_email = "test@email.net";
+		UserVO vo = this.mapper.loginEmail(user_email);
+		log.info("\t + vo : {}", vo);
+	}//selectLogin
 	
-	}//selectlogin
-	
-	
+	@Test
+	@Order(12)
+	@DisplayName("updatePW 비밀번호변경")
+	void testupdatePW() throws DAOException {
+		log.trace("updatePW()invoked.");
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("TTemail_1");
+		dto.setUser_pw("qewqqrqw");
+		int result = this.mapper.updatePW(dto);
+		log.info("\t + result : {}", result);
+		
+	}//updatePW
 }//end class

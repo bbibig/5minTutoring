@@ -11,20 +11,23 @@
             <jsp:include page="../htmlHead.jsp" flush="true" />
             <link href="${path}/resources/css/1-02_login.css" rel="stylesheet">
             <!-- ========================================================= -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+
             <script>
-                $(function(){
+                $(function () {
 
                     let loginResult = '${_LOGIN_}';
-                    if(loginResult != null && loginResult.length>0){
+                    if (loginResult != null && loginResult.length > 0) {
                         Swal.fire({
-                        text: '아이디 또는 비밀번호가 일치하지 않습니다',
-                        icon: 'error', 
-                        showCloseButton: true
-                         });
+                            text: '아이디 또는 비밀번호가 일치하지 않습니다',
+                            icon: 'error',
+                            showCloseButton: true
+                        });
                     }//로그인 실패시 
                 });//jq
+
+
             </script>
 
             <title>오분과외</title>
@@ -50,13 +53,15 @@
 
                         <!-- 이메일 -->
                         <div class="form-floating">
-                            <input type="email" class="form-control" id="floatingInput" name="user_email" placeholder="name@example.com">
+                            <input type="email" class="form-control" id="floatingInput" name="user_email"
+                                placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
 
                         <!-- 비밀번호 -->
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" name="user_pw" placeholder="Password">
+                            <input type="password" class="form-control" id="floatingPassword" name="user_pw"
+                                placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
@@ -89,9 +94,54 @@
                         </span>
 
                         <!-- 카카오 로그인 -->
-                        <span class="ico-sns-loin-kakao">
+                        <span class="ico-sns-loin-kakao" id="kakao">
                             <a href="#">
                                 <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">
+                                <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+                                <script>
+                                    $('#kakao').on('click', function () {
+                                        console.log(1);
+
+                                        //카카오로그인
+                                        Kakao.init('de958c943b70794d33e58bbec3e2a1da'); //발급받은 키 중 javascript키를 사용해준다.
+                                        console.log(Kakao.isInitialized()); // sdk초기화여부판단
+                                        //카카오로그인
+                                        function kakaoLogin() {
+                                            Kakao.Auth.login({
+                                                // scope:'profile_nickname, profile_image, account_email, gender',
+                                                success: function (response) {
+                                                    Kakao.API.request({
+                                                        url: '/v2/user/me',
+                                                        success: function (response) {
+                                                            console.log(response)
+                                                        },
+                                                        fail: function (error) {
+                                                            console.log(error)
+                                                        },
+                                                    })
+                                                },
+                                                fail: function (error) {
+                                                    console.log(error)
+                                                },
+                                            })
+                                        }
+                                    });
+                                    //카카오로그아웃  
+                                    function kakaoLogout() {
+                                        if (Kakao.Auth.getAccessToken()) {
+                                            Kakao.API.request({
+                                                url: '/v1/user/unlink',
+                                                success: function (response) {
+                                                    console.log(response)
+                                                },
+                                                fail: function (error) {
+                                                    console.log(error)
+                                                },
+                                            })
+                                            Kakao.Auth.setAccessToken(undefined)
+                                        }
+                                    }
+                                </script>
                             </a>
                         </span>
 
@@ -103,7 +153,7 @@
             <!-- End Section -->
 
             <!-- ============= 로그인 전 풋터 아 헷갈린다고요 지금... =============== -->
-             <jsp:include page="../footer_before.jsp" flush="true" />
+            <jsp:include page="../footer_before.jsp" flush="true" />
             <script src="${path}/resources/js/1-04_signUp.js"></script>
             <!-- ============================================== -->
 
