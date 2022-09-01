@@ -18,7 +18,7 @@
       <nav id="navbar" class="navbar">
         <ul>
             
-          <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="/tutor/tutorMain">튜터</a></li>
+          <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="/tutor/main">튜터</a></li>
           <li><a class="nav-link scrollto d-xs-none" href="/community">커뮤니티</a></li>
           <li>
             <div class="hand" style="margin-left: 650px;">

@@ -25,53 +25,49 @@
       <div class="container">
         <div class="row">
           
-          <div class="left-section col-3">  <!--좌측섹션!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <!-- 프로필 카드 : 프로필사진 + 이름 + 한줄소개 + 대표과목 + 누적답변 + 평점 -->
+			<div class="left-section col-3">
+				<div class="card d-flex flex-column align-items-center text-center">
+					<div class="profile-image">
+						<img src="/resources/img/profile.png" alt="Admin" class="rounded-circle"
+							width="150">
+					</div>
+					<div class="tutorname_introduction">
+						<h4>${_TUTOR_INFO_.user_name}</h4>
+						<p class="text-secondary mb-1">${_TUTOR_INFO_.tp_title}</p>
+					</div>
+					<div class="emblem d-flex flex-row">
+						<div class="emblem-circle rounded-circle ">
+							<br>대표과목<br> ${_TUTOR_INFO_.tt_subject}
+						</div>
+						<div class="emblem-circle rounded-circle ">
+							<br>누적답변<br> ${_TUTOR_INFO_.tp_accu_answer}
+						</div>
+						<div class="emblem-circle rounded-circle ">
+							<br>평점<br> ${_TUTOR_INFO_.tp_average}
+						</div>
+					</div>
+				</div>
+	            <div class="left-nav" id="left-navigation">
+					<ul class="nav nav-pills nav-stacked flex-column">
+						<li class="nav-item mt-3"><a class="nav-link nav-tabs active" aria-current="page"
+								href="/tutor/info/?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
+						<li class="nav-item nav-tabs mt-3"><a class="nav-link"
+								href="/tutor/writeReview/?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
+						<li class="nav-item nav-tabs mt-3"><a class="nav-link" 
+								href="/tutor/ask/?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
+						<li class="nav-item nav-tabs  mt-3"><a class="nav-link"
+								href="/tutor/tutoring/?num=${_TUTOR_INFO_.tp_number}">튜터에게 과외받기</a></li>
+					</ul>
+				</div>
+          	</div>
+
+          <div class="right-section col-9"> 
             
-            <div class="card d-flex flex-column align-items-center text-center"> <!-- 프로필 카드영역==>프로필사진+이름+한줄소개+대표과목+누적답변+평점-->
-              
-              <div class="profile-image"> <!--프로필카드-프로필사진!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-                <img src="${path}/resources/img/profile.png" alt="Admin" class="rounded-circle" width="150">
-              </div><!--프로필카드-프로필사진 end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-              
-              <div class="tutorname_introduction">
-                <h4>홍길동</h4>
-                <p class="text-secondary mb-1">한줄소개: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quasi!</p>
-              </div>
-              
-              <div class="emblem d-flex flex-row">
-                <div class="emblem-circle rounded-circle "><br>대표과목<br>수학</div>
-                <div class="emblem-circle rounded-circle "><br>누적답변<br>??개</div>
-                <div class="emblem-circle rounded-circle "><br>평점<br>??점</div>
-              </div>
-
-            </div>  <!-- 프로필 카드영역==>프로필사진+이름+한줄소개+대표과목+누적답변+평점  end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
-            <div class="left-nav" id="left-navigation"> <!--좌측섹션 nav!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-              <ul class="nav nav-pills nav-stacked flex-column">
-                <li class="nav-item mt-3">
-                  <a class="nav-link nav-tabs active" aria-current="page" href="/tutor/info" >튜터정보</a>
-                </li>
-                <li class="nav-item nav-tabs mt-3">
-                  <a class="nav-link" href="/tutor/writeReview" >학생리뷰</a>
-                </li>
-                <li class="nav-item nav-tabs mt-3">
-                  <a class="nav-link" href="/tutor/ask" >튜터에게 질문하기</a>
-                </li>
-                <li class="nav-item nav-tabs  mt-3">
-                  <a class="nav-link" href="/tutor/tutoring" >튜터에게 과외받기</a>
-                </li>
-              </ul>
-
-            </div> <!--좌측섹션 nav end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-            
-          </div> <!--좌측섹션 end!!!-->
-
-          <div class="right-section col-9"> <!--우측 섹션!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--> 
-            
-            <div class="headers d-flex flex-column">  <!--우측섹션 header!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <div class="headers d-flex flex-column">  
               <div class="head-line"><h2>학생리뷰</h2></div>
               <div class="review-count text-end">후기 총??개</div>
-            </div><!--우측섹션 header end !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            </div>
 
             <div class="star-rating row d-flex flex-row justify-content-center"> <!--우측섹션 평균별점 & 프로그래스 바 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
                 

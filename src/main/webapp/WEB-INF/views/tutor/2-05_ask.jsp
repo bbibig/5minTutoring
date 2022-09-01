@@ -24,43 +24,42 @@
 	    <section class="d-flex">
 	        <div class="container">
 	            <div class="row">
-	                <div class="left-section col-3">
-	
-	                    <div class="card d-flex flex-column align-items-center text-center">
-	                        <div class="profile-image">
-	                            <img src="/resources/img/profile.png" alt="Admin" class="rounded-circle" width="150">
-	                        </div>
-	
-	                        <div class="tutorname_introduction">
-	                            <h4>홍길동</h4>
-	                            <p class="text-secondary mb-1">한줄소개: Lorem ipsum dolor sit, amet consectetur adipisicing
-	                                elit. Dolores, quasi!</p>
-	                        </div>
-	
-	                        <div class="emblem d-flex flex-row">
-	                            <div class="emblem-circle rounded-circle "><br>대표과목<br>수학</div>
-	                            <div class="emblem-circle rounded-circle "><br>누적답변<br>00개</div>
-	                            <div class="emblem-circle rounded-circle "><br>평점<br>00점</div>
-	                        </div>
-	                    </div>
-	
+				
+					<!-- 프로필 카드 : 프로필사진 + 이름 + 한줄소개 + 대표과목 + 누적답변 + 평점 -->
+					<div class="left-section col-3">
+						<div class="card d-flex flex-column align-items-center text-center">
+							<div class="profile-image">
+								<img src="/resources/img/profile.png" alt="Admin" class="rounded-circle"
+									width="150">
+							</div>
+							<div class="tutorname_introduction">
+								<h4>${_TUTOR_INFO_.user_name}</h4>
+								<p class="text-secondary mb-1">${_TUTOR_INFO_.tp_title}</p>
+							</div>
+							<div class="emblem d-flex flex-row">
+								<div class="emblem-circle rounded-circle ">
+									<br>대표과목<br> ${_TUTOR_INFO_.tt_subject}
+								</div>
+								<div class="emblem-circle rounded-circle ">
+									<br>누적답변<br> ${_TUTOR_INFO_.tp_accu_answer}
+								</div>
+								<div class="emblem-circle rounded-circle ">
+									<br>평점<br> ${_TUTOR_INFO_.tp_average}
+								</div>
+							</div>
+						</div>
 	                    <div class="left-nav" id="left-navigation">
-	                        <ul class="nav nav-pills nav-stacked flex-column">
-	                            <li class="nav-item mt-3">
-	                                <a class="nav-link nav-tabs active" aria-current="page" href="info">튜터정보</a>
-	                            </li>
-	                            <li class="nav-item nav-tabs mt-3">
-	                                <a class="nav-link" href="writeReview">학생리뷰</a>
-	                            </li>
-	                            <li class="nav-item nav-tabs mt-3">
-	                                <a class="nav-link" href="ask">튜터에게 질문하기</a>
-	                            </li>
-	                            <li class="nav-item nav-tabs  mt-3">
-	                                <a class="nav-link" href="tutoring">튜터에게 과외받기</a>
-	                            </li>
-	                        </ul>
-	
-	                    </div>
+							<ul class="nav nav-pills nav-stacked flex-column">
+								<li class="nav-item mt-3"><a class="nav-link nav-tabs active" aria-current="page"
+										href="/tutor/info/?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
+								<li class="nav-item nav-tabs mt-3"><a class="nav-link"
+										href="/tutor/writeReview/?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
+								<li class="nav-item nav-tabs mt-3"><a class="nav-link" 
+										href="/tutor/ask/?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
+								<li class="nav-item nav-tabs  mt-3"><a class="nav-link"
+										href="/tutor/tutoring/?num=${_TUTOR_INFO_.tp_number}">튜터에게 과외받기</a></li>
+							</ul>
+						</div>
 	                </div>
 	                <!--좌측섹션 end!!!-->
 	

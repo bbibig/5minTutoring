@@ -55,6 +55,7 @@
 		searchType = request.getParameter("searchType");
 	}
 %>
+			<!-- 신규 튜터 -->
 			<div class="row tutors">
 				<h1>
 					<div>신규 튜터</div>
@@ -81,8 +82,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring" class="fas fa-arrow-pointer"> 과외신청
-														바로가기</a>
+													<a href="tutoring/?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -109,8 +109,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring" class="fas fa-arrow-pointer"> 과외신청
-														바로가기</a>
+													<a href="tutoring/?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -138,8 +137,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring" class="fas fa-arrow-pointer"> 과외신청
-														바로가기</a>
+													<a href="tutoring/?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -161,24 +159,23 @@
 
 				<!-- ====================================================================================================== -->
 
+				<!-- 추천 튜터 -->
 				<h1>
 					<div>추천 튜터</div>
 				</h1>
 
-				<form action="/tutor/tutorMain" id="search">
+				<form action="/tutor/main" id="search">
 					<input id="search_bt" type="submit" value="검색"> 
 					<select name="searchType" class="sort">
 						<option value="누적답변순">누적답변순</option>
 						<option value="평점순" <% if(searchType.equals("평점순")) out.println("selected"); %>>평점순</option>
 					</select>
-					<!-- 하나만 selected? -->
 
 					<select name="subject" class="sort">
 						<option value="국어" <% if(subject.equals("국어")) out.println("selected"); %>>국어</option>
 						<option value="영어" <% if(subject.equals("영어")) out.println("selected"); %>>영어</option>
 						<option value="수학" <% if(subject.equals("수학")) out.println("selected"); %>>수학</option>
 					</select>
-
 				</form>
 				
 				<button class="subject_bt <% if(subject.equals("국어")) out.println("selected"); %>">국어</button>
@@ -187,9 +184,9 @@
 
 				<div class="col-md-12">
 					<div id="tutorCarousel_2" class="carousel slide" data-ride="carousel">
+					
 						<!-- Carousel items -->
 						<div class="carousel-inner">
-
 							<div class="carousel-item active">
 								<div class="row">
 									<c:forEach var="sortedT" items="${_SORTED_TUTOR_}" begin="0" end="3"
@@ -210,8 +207,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring" class="fas fa-arrow-pointer"> 과외신청
-														바로가기</a>
+													<a href="tutoring/?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -239,8 +235,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring" class="fas fa-arrow-pointer"> 과외신청
-														바로가기</a>
+													<a href="tutoring/?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -268,8 +263,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring" class="fas fa-arrow-pointer"> 과외신청
-														바로가기</a>
+													<a href="tutoring/?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -277,7 +271,6 @@
 								</div>
 							</div>
 						</div>
-						<!--.Carousel-->
 
 						<!-- controller 버튼 -->
 						<a class="carousel-control-prev adjust_pre" href="#tutorCarousel_2" role="button" data-slide="prev"> 

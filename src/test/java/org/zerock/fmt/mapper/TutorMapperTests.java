@@ -58,9 +58,9 @@ public class TutorMapperTests {
 	void testSelectAllTInfo() throws DAOException {
 		log.trace("튜터페이지 전체 정보 조회");
 		
-		int tp_number = 6;
+		String num = "50";
 		
-		TutorPageVO tutorPageVO = this.tutorMapper.selectAllTInfo(tp_number);
+		TutorPageVO tutorPageVO = this.tutorMapper.selectAllTInfo(num);
 		
 		Objects.requireNonNull(tutorPageVO);
 		log.info("\t + tutorPageVO: {}", tutorPageVO);

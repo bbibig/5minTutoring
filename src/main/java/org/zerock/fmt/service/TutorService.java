@@ -11,7 +11,7 @@ import org.zerock.fmt.exception.ServiceException;
 public interface TutorService {
 
 	// 튜터페이지 정보 조회
-	public abstract TutorPageVO getAllTInfo(@Param("tp_number") Integer tp_number) throws ServiceException;
+	public abstract TutorPageVO getAllTInfo(@Param("num") String tp_number) throws ServiceException;
 	
 	// 튜터메인 페이지 튜터카드 (최신순 12개행 정렬) 
 	public abstract List<TutorPageVO> getRecentTCard() throws ServiceException;

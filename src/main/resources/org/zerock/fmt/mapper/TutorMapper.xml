@@ -17,7 +17,7 @@
 			tbl_user.user_name
 		FROM tbl_user, tbl_tutor_page
 		WHERE tbl_user.user_email = tbl_tutor_page.user_email
-		AND tp_number = #{tp_number}
+		AND tp_number = #{num}
 	</select>
 
     <select id="selectRecentTCard" resultType="org.zerock.fmt.domain.TutorPageVO">

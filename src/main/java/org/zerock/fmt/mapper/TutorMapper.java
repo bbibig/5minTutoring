@@ -10,7 +10,7 @@ import org.zerock.fmt.exception.DAOException;
 public interface TutorMapper {
 
 	// 튜터페이지 정보 
-	public abstract TutorPageVO selectAllTInfo(@Param("tp_number") Integer tp_number) throws DAOException;
+	public abstract TutorPageVO selectAllTInfo(@Param("num") String tp_number) throws DAOException;
 	
 	// 신규 튜터 카드정보 (최신순 12개행 정렬)
 	public abstract List<TutorPageVO> selectRecentTCard() throws DAOException;

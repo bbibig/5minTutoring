@@ -57,7 +57,7 @@ public class TutorServiceTests {
 	void testGetAllTInfo() throws ServiceException {
 		log.trace("해당 튜터페이지의 전체 정보 조회");
 		
-		int tp_number = 7;
+		String tp_number = "50";
 		TutorPageVO tutorPageVO = this.tutorService.getAllTInfo(tp_number);
 		
 		Objects.requireNonNull(tutorPageVO);

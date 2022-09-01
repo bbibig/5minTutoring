@@ -27,7 +27,7 @@ public class TutorServiceImpl
 	private TutorMapper tutorMapper;
 	
 	@Override
-	public TutorPageVO getAllTInfo(@Param("tp_number") Integer tp_number) throws ServiceException {
+	public TutorPageVO getAllTInfo(@Param("num") String tp_number) throws ServiceException {
 		log.trace("튜터페이지 전체 정보 조회");
 		
 		try { return this.tutorMapper.selectAllTInfo(tp_number); } 

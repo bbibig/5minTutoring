@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.exception.ControllerException;
+import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.TutorService;
 
 import lombok.AllArgsConstructor;
@@ -22,11 +23,11 @@ import lombok.extern.log4j.Log4j2;
 
 @RequestMapping("/tutor")
 @Controller
-public class TutorController implements InitializingBean {
+public class TutorController {
 	
 	private TutorService tutorService;
 	
-	@GetMapping("/tutorMain")
+	@GetMapping("/main")
 	public String tpMain(Model model, HttpServletRequest req) throws ControllerException {
 		log.trace("2-01_tpMain <<< 튜터페이지 메인");
 		
@@ -54,43 +55,67 @@ public class TutorController implements InitializingBean {
 	
 
 	@GetMapping("/info")
-	public String tutorinfo(Model model) throws ControllerException {
+	public String tutorInfo(Model model,  HttpServletRequest req) throws ControllerException {
 		log.trace("2-02_tutorpage_info <<< 튜터정보 페이지");
 		
+		String tp_number = req.getParameter("num");
+		
 		try {
-			// Session에서 아이디 얻어오기? select를 id로 해야 할듯..
-			
-			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(21);
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
 			log.info("tutorInfo: {}", tutorInfo);
-			
 			model.addAttribute("_TUTOR_INFO_", tutorInfo);
 			
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
+		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-02_tutorpage_info";
-	}//tutor info
+	}// tutorInfo
 	
 	
 	@GetMapping("/writeReview")
-	public String writeReview() {
-		log.trace("writeReview()invoked");
+	public String writeReview(Model model,  HttpServletRequest req) throws ControllerException {
+		log.trace("2-03_writereview <<< 학생리뷰 작성 페이지");
 		
-		return "tutor/2-03_tutorpage_writereview";
-	}//tutor writeReview
+		String tp_number = req.getParameter("num");
+		
+		try {
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
+			log.info("tutorInfo: {}", tutorInfo);
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
+		
+		return "tutor/2-03_writereview";
+	} // writeReview
 	
 	@GetMapping("/reviewList")
-	public String reviewList() {
-		log.trace("reviewList()invoked");
+	public String reviewList(Model model,  HttpServletRequest req) throws ControllerException {
+		log.trace("2-04_reviewlist <<< 학생리뷰 목록 페이지");
 		
-		return "tutor/2-04_tutorpage_reviewlist";
-	}//tutor reviewList
+		String tp_number = req.getParameter("num");
+		
+		try {
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
+			log.info("tutorInfo: {}", tutorInfo);
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
+		
+		return "tutor/2-04_reviewlist";
+	} // reviewList
 	
 	
 	@GetMapping("/ask")
-	public String ask() {
+	public String ask(Model model,  HttpServletRequest req) throws ControllerException {
 		log.trace("2-05_ask <<< 튜터에게 질문하기");
+		
+		String tp_number = req.getParameter("num");
+		
+		try {
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
+			log.info("tutorInfo: {}", tutorInfo);
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-05_ask";
 	} // ask
@@ -113,11 +138,20 @@ public class TutorController implements InitializingBean {
 	
 	
 	@GetMapping("/tutoring")
-	public String tutoring() {
-		log.trace("tutoring()invoked");
+	public String tutoring(Model model, HttpServletRequest req) throws ControllerException {
+		log.trace("2-08_tutoring <<< 튜터에게 과외받기");
 		
-		return "tutor/2-08_tutorpage_tutoring";
-	}//tutor tutoring
+		String tp_number = req.getParameter("num");
+		
+		try {
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
+			log.info("tutorInfo: {}", tutorInfo);
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
+		
+		return "tutor/2-08_tutoring";
+	} // tutoring
 	
 	
 	@GetMapping("/tutoringAsk")
@@ -125,18 +159,6 @@ public class TutorController implements InitializingBean {
 		log.trace("2-09_tutoringAsk <<< 과외하기 질문");
 		
 		return "tutor/2-09_tutoringAsk";
-	}
+	} // tutoringAsk
 
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.info("의존성 주입 완료");
-		
-		Objects.requireNonNull(this.tutorService);
-		log.trace("\t + this.tutorService: {}", tutorService);
-		
-	} // afterPropertiesSet
-	
-	
-	
 } // end class
