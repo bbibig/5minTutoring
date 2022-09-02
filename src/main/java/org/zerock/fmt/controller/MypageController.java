@@ -46,7 +46,7 @@ public class MypageController {
 	
 //=====기본정보===============================================	
 	@GetMapping("/studentPage")
-	public String studentPage(Model model, HttpServletRequest request, HttpSession session) throws ControllerException{
+	public String studentPage(Model model, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 조회(학생)");
 		
 		try {
@@ -55,16 +55,23 @@ public class MypageController {
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
 			model.addAttribute("_USERINFO_", userInfo);
 			
-			//현재 비밀번호 유효성 검사
-			String dbPw = vo.getUser_email();
-			String paramPw = request.getParameter("user_Oldpw");
-			if(dbPw.equals(paramPw)) { model.addAttribute("pwcheck", "true"); } 
-			else { model.addAttribute("pwcheck", "false"); } //if-else
-			
 			return "mypage/7-01_StudentPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// 기본정보조회(학생)
+	
+	@PostMapping("/pwCheck")
+	public int pwCheck(UserDTO dto, HttpSession session) {
+		
+		UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+		String dbPw = vo.getUser_pw();
+		String paramPw = dto.getUser_pw();
+		
+		if(!dbPw.equals(paramPw)) { return 0; }	//DB 비밀번호와 parameter의 비밀번호가 다르면
+		else {return 1;}
+
+	}// 비밀번호 유효성 체크
+	
 	
 	@PostMapping("/studentPageModify")
 	public String studentPage(UserDTO dto, RedirectAttributes rttrs) throws ControllerException{
@@ -73,12 +80,10 @@ public class MypageController {
 		try {
 			if(this.userService.updateUser(dto)) {
 				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 성공");
-			} else {
-				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 오류");
-			}//if-else
+			}// if
+			return "redirect:/mypage/studentPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
-		return "redirect:/mypage/studentPage";
 	}// 기본정보 수정(학생)
 	
 	

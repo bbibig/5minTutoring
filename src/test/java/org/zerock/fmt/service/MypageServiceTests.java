@@ -13,6 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
@@ -173,6 +174,28 @@ public class MypageServiceTests {
 		log.info("\t+ 나의 댓글 총 개수: {}", result);
 		
 	}//testGetMyCommentTotalAmount()
+	
+	//5. 암호화
+	@Test
+	@Order(9)
+	@DisplayName("9. testSecurity")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testSecurity() throws ServiceException {
+		log.info("비밀번호 암호화");
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		String originPw1 = "pw123456";
+		String originPw2 = "pw123456";
+		String encodepw1 = encoder.encode(originPw1);
+		String encodepw2 = encoder.encode(originPw2);
+		
+		log.info("1. {}", originPw1);
+		log.info("2. {}", originPw2);
+		log.info("3. {}", encodepw1);
+		log.info("4. {}", encodepw2);
+		
+		
+	}//testSecurity()
 
 }// end class
 

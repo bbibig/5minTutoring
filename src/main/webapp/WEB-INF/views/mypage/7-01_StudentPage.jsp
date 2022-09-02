@@ -117,8 +117,8 @@
                                     required>
                                 <p id=check_2 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
-                                <button type="button" class="btn bg-blue"
-                                    style="position: absolute; right: 20px; bottom: 10px;" onclick="check()">
+                                <button type="button" id=pwcheck class="btn bg-blue"
+                                    style="position: absolute; right: 20px; bottom: 10px;">
                                     저장</button>
                             </div>
                         </div>

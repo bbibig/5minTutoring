@@ -131,3 +131,26 @@ function check() {
     })// Swal.fire-then
 
 }//check()
+
+$('#pwcheck').on('click', function(){
+
+    $.ajax({
+        url : "/mypage/pwCheck",
+        type : "POST",
+        dataType : "json",
+        data : $("#userInfo").serializeArray(),
+        success: function(data){
+            
+            if(data==0){
+                alert("패스워드가 틀렸습니다.");
+                return;
+            }else{
+                if(confirm("변경하시겠습니까?")){
+                    $("#userInfo").submit();
+                }
+                
+            }
+        }
+    })
+
+})// pwchck
