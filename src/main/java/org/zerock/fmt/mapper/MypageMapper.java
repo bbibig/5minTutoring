@@ -19,8 +19,10 @@ public interface MypageMapper {
 	//1. 기본정보 조회(특정 회원) + 프로필사진 추가 예정 (UserMapper에 동일 기능 있음)
 	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_email}")
 	public abstract UserVO selectUser(UserDTO dto) throws DAOException;
-//	public abstract UserVO selectUser(@Param("user_email") String user_email) throws DAOException;
 	
+	//1-2 회원 DB 비밀번호 조회
+	@Select("SELECT user_pw FROM tbl_user WHERE user_email = #{user_email}")
+	public abstract String selectUserDbPw(String user_email) throws DAOException;
 	
 	//2-1. 나의 질문글 목록 조회 페이징 처리(내림차순으로)
 	public abstract List<QuestionBardVO> selectAllMyQuestionList(CriteriaMyPage cri) throws DAOException;

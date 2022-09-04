@@ -13,6 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
@@ -56,6 +57,23 @@ public class MypageMapperTests {
 	}//testSelectUser()
 	
 	
+	//9. 회원 DB 비밀번호 조회
+	@Test
+	@Order(9)
+	@DisplayName("9. 회원 DB 비밀번호 조회")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testSelectUserDbPw() throws DAOException {
+		log.trace("회원 DB 비밀번호 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		String userDbPw = mapper.selectUserDbPw(dto.getUser_email());
+		log.info("\t+ 회원 DB 비밀번호");
+				
+	}//회원 DB 비밀번호 조회
+	
+	
 	//2. 기본정보 수정
 	@Test
 	@Order(2)
@@ -64,9 +82,13 @@ public class MypageMapperTests {
 	void TestUpdateStudentInfo() throws DAOException {
 		log.trace("TestselectUser(), 마이페이지 기본정보 수정(학생)");
 		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
 		UserDTO dto = new UserDTO();
 		dto.setUser_email("test@gmail.com");
-		dto.setSt_grade("1학년");
+		String paramPw = "pw1234";
+		String bcPw = encoder.encode(paramPw);
+		dto.setUser_pw(bcPw);		
 		
 		boolean result = mapper.updateUserInfo(dto);
 		log.info("\t+ 기본정보 수정결과: {}", result);

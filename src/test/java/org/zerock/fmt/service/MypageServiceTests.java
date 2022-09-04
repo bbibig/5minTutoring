@@ -13,7 +13,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
@@ -57,6 +56,22 @@ public class MypageServiceTests {
 		log.info("\t+ 기본정보: {}", vo);
 		
 	}//TestGetUserInfo()
+
+	//9. 회원 DB 비밀번호 조회
+	@Test
+	@Order(9)
+	@DisplayName("9. 회원 DB 비밀번호 조회")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetUserDbPw() throws ServiceException {
+		log.trace("회원 DB 비밀번호 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		String userDbPw = this.service.getUserDbPw(dto.getUser_email());
+		log.info("\t+ 회원 DB 비밀번호: {}", userDbPw);
+		
+	}//회원 DB 비밀번호 조회
 	
 	//1-1. 기본정보 테스트
 	@Test
@@ -175,27 +190,6 @@ public class MypageServiceTests {
 		
 	}//testGetMyCommentTotalAmount()
 	
-	//5. 암호화
-	@Test
-	@Order(9)
-	@DisplayName("9. testSecurity")
-	@Timeout(unit = TimeUnit.SECONDS, value = 10)
-	void testSecurity() throws ServiceException {
-		log.info("비밀번호 암호화");
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		String originPw1 = "pw123456";
-		String originPw2 = "pw123456";
-		String encodepw1 = encoder.encode(originPw1);
-		String encodepw2 = encoder.encode(originPw2);
-		
-		log.info("1. {}", originPw1);
-		log.info("2. {}", originPw2);
-		log.info("3. {}", encodepw1);
-		log.info("4. {}", encodepw2);
-		
-		
-	}//testSecurity()
 
 }// end class
 
