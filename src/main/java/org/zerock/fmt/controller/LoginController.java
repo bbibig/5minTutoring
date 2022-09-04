@@ -112,14 +112,10 @@ public class LoginController{
 		try {
 			boolean UserResult = this.userService.singUPTutor(DTO);
 			log.info("\t + 유저 회원가입 : {}", UserResult);
-			
-			//-------------------------------------------------
-			
+				
 			List<FileDTO> fileDTO = this.fileupload.uploadFile(file, DTO.getUser_email());
 			log.info("\t + fileDTO : {}", fileDTO);
-			
-			//--------------------------------------------------
-			
+						
 			for(FileDTO filedto : fileDTO) {
 				int fileResult = this.fileservice.createFiles(filedto);
 				log.info("\t + File Mapper insert : {}", fileResult);

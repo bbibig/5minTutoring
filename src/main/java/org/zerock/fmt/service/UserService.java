@@ -2,8 +2,10 @@ package org.zerock.fmt.service;
 
 import java.util.List;
 
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
 
@@ -11,9 +13,12 @@ import org.zerock.fmt.exception.ServiceException;
 
 public interface UserService {
 
-	//--------조회
+	//========조회
 	//모든유저조회
-	public abstract List<UserVO> getAllUser() throws ServiceException;
+	public abstract List<UserVO> getStudent(CriteriaAdmin cri) throws ServiceException;
+	public abstract List<UserVO> getTutor(CriteriaAdmin cri) throws ServiceException;
+	public abstract List<UserVO> getStopUser(CriteriaAdmin cri) throws ServiceException;
+	public abstract int userCount(String userGroup, String status) throws ServiceException;
 	
 	//유저정보조회
 	public abstract UserVO getUserInfo(String user_email) throws ServiceException;
@@ -28,14 +33,18 @@ public interface UserService {
 	//비밀번호찾기
 	public String findPassword(UserDTO user) throws ServiceException;
 	
-	//------- 추가
+	//승인대기튜터
+	public abstract List<UserVO> getWaitTutor(CriteriaAdmin cri) throws ServiceException;
+	public abstract int waitTutorCount() throws ServiceException;
+	
+	//========추가
 	//학생회원가입
 	public abstract boolean singUpStrudent(UserDTO newStudent) throws ServiceException;
 	
 	//튜터회원가입
 	public abstract boolean singUPTutor(UserDTO newTutor) throws ServiceException;
 	
-	//--------수정
+	//========수정
 	//유저정보수정
 	public abstract boolean updateUser(UserDTO user) throws ServiceException;
 	
@@ -46,7 +55,7 @@ public interface UserService {
 	public abstract boolean userStatus(String user_email) throws ServiceException;
 	
 	
-	//-------수정
+	//=======수정
 	//손들기 추가
 	public abstract boolean updateHandGet(Integer h_count, String user_email) throws ServiceException;
 	//손들기 차감

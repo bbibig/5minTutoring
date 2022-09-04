@@ -6,16 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.fmt.domain.AdminPageDTO;
+import org.zerock.fmt.domain.AdminVO;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
+import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.AdminService;
 import org.zerock.fmt.service.FaqService;
+import org.zerock.fmt.service.UserService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,34 +37,71 @@ public class AdminController {
 	
 	@Setter(onMethod_= @Autowired)
 	private FaqService faqService;
-	
 
-	@RequestMapping
-	public String adminLogin() {
-		log.info("어드민 로그인 페이지eeeeeeee");
+	@Setter(onMethod_ =@Autowired)
+	private AdminService adminService;
 		
+	@Setter(onMethod_ = @Autowired)
+	private UserService userService;
+	//--------------------------------------------- 어드민로그인
+	@GetMapping
+	public String adminLogin() {
+		log.info("어드민 Home");
 		return "admin/8-00_adminLogin";
 	}
-//	@GetMapping("/student")
-//	@PostMapping("/student")
-	@RequestMapping("/student")
-	public String adminMemberStrudent() {
+	@PostMapping
+	public String adminLogin(String ad_id,String ad_pw, Model model,RedirectAttributes rttrs) throws ControllerException {
+		log.info("어드민 로그인");
+		try {
+			
+			AdminVO admin = adminService.Login(ad_id, ad_pw);
+			rttrs.addFlashAttribute("_ADMIN_", admin);
+			if(admin == null) {
+				rttrs.addFlashAttribute("_ADMIN_RESULT_","관리자 계정이 없습니다.");
+				return "redirect:/admin";
+			} else {
+				rttrs.addFlashAttribute("_ADMIN_RESULT_","님, 로그인 하였습니다.");
+				return "redirect:/admin/student";
+			}
+		} catch (Exception e) { throw new ControllerException(e); }//try-catch
+	}//adminLogin
+	
+	//--------------------------------------------- 회원조회
+	@GetMapping("/student")
+	public String adminMemberStrudent(Model model, CriteriaAdmin cri) throws ControllerException {
 		log.info("회원리스트 - 학생 페이지");
-		
+		try {
+			List<UserVO> list = this.userService.getStudent(cri);
+			model.addAttribute("_USERLIST_",list);
+			log.info("\t + 1. 여기까지");
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount("Student", null));
+			log.info("\t+ Adpage : {}", Adpage);
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+		} catch (Exception e) {throw new ControllerException(e); }//try-catch
 		return "admin/8-01_managerST";
 	}
 	
-	@RequestMapping("/tutor")
-	public String adminMemberTutor() {
+	@GetMapping("/tutor")
+	public String adminMemberTutor(Model model,CriteriaAdmin cri) throws ControllerException {
 		log.info("회원리스트 - 튜터 페이지 ");
-		
+		try {
+			List<UserVO> list = this.userService.getTutor(cri);
+			model.addAttribute("_USERLIST_",list);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount("Tutor", null));
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+		}catch(Exception e) {throw new ControllerException(e); }//try-catch
 		return "admin/8-01_managerTT";
 	}
 	
-	@RequestMapping("/humenMember")
-	public String adminMemberTZ() {
+	@GetMapping("/humenMember")
+	public String adminMemberTZ(Model model,CriteriaAdmin cri) throws ControllerException {
 		log.info("회원리스트 - 탈퇴회원");
-		
+		try {
+			List<UserVO> list = this.userService.getStopUser(cri);
+			model.addAttribute("_USERLIST_",list);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount(null,"STOP"));
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+		}catch(Exception e) {throw new ControllerException(e); }//try-catch
 		return "admin/8-01_managerTZ";
 	}
 	
@@ -80,14 +124,22 @@ public class AdminController {
 		
 		return "admin/8-01_tutorInfo";
 	}
-	
-	@RequestMapping("/stator")
-	public String adminStator() {
+	//--------------------------------------------- 관리자조회
+	@GetMapping("/stator")
+	public String adminStator(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("관리자리스트");
 		
+		try {
+			List<AdminVO> list = this.adminService.adminList(cri);
+			model.addAttribute("_USERLIST_",list);
+			list.forEach(log::info);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.adminService.adminCount());
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+		}catch(Exception e) {throw new ControllerException(e); }//try-catch
 		return "admin/8-02_administrator";
 	}
 	
+	//--------------------------------------------- 문의게시판
 	@RequestMapping("/answerBoard_OK")
 	public String adminAnswerBoardOk() {
 		log.info("문의게시판(답변완료)");
@@ -178,10 +230,16 @@ public class AdminController {
 		return "admin/8-05_sale_withdrow";
 	}
 	
-	@RequestMapping("/signUp_comfim")
-	public String signUp_comfim() {
+	//--------------------------------------------- 튜터가입승인
+	@GetMapping("/signUp_comfim")
+	public String signUp_comfim(CriteriaAdmin cri,Model model) throws ControllerException {
 		log.info("튜터가입승인 페이지 ");
-		
+		try{
+			List<UserVO> list = this.userService.getWaitTutor(cri);
+			model.addAttribute("_USERLIST_",list);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.waitTutorCount());
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+		}catch(Exception e) {throw new ControllerException(e);}//try-catch
 		return "admin/8-06_singUpConfim";
 	}
 	
