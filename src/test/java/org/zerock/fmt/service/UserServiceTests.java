@@ -2,12 +2,8 @@ package org.zerock.fmt.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -22,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
@@ -51,14 +48,49 @@ public class UserServiceTests {
 	@Order(1)
 	@DisplayName("getAllUser 전체회원조회")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void getAllUser() throws ServiceException {
+	void getStudent() throws ServiceException {
 		log.info("getAllUserTest");
-		
-		List<UserVO> list = this.userService.getAllUser();
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
+		cri.setPagesPerPage(5);
+		List<UserVO> list = this.userService.getStudent(cri);
 		assertNotNull(list);
 		list.forEach(log::info);
-	}//getAllUserTest
+	}//getAllUser
 	
+	@Test
+	@DisplayName("getTutor")
+	void getTutor() throws ServiceException {
+		log.info("getAllUserTest");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
+		cri.setPagesPerPage(5);
+		List<UserVO> list = this.userService.getTutor(cri);
+		assertNotNull(list);
+		list.forEach(log::info);
+	}//getTutor
+	
+	@Test
+	@DisplayName("getStopUser")
+	void getStopUser() throws ServiceException {
+		log.info("getAllUserTest");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
+		cri.setPagesPerPage(5);
+		List<UserVO> list = this.userService.getStopUser(cri);
+		assertNotNull(list);
+		list.forEach(log::info);
+	}//getStopUser
+		
+	@Test
+	@DisplayName("userCount")
+	void userCount() throws DAOException {
+		int result = this.userMapper.userCount("Tutor", null);
+		log.info("\t + result : {}", result);
+	}//userCount
 	
 	@Test
 	@Order(2)
@@ -273,4 +305,25 @@ public class UserServiceTests {
 			//임시비밀번호가 이메일로 발송되었습니다. 
 		}//if-else
 	}//findPassword
+	
+	@Test
+	@DisplayName("getWaitTutor 승인 대기 튜터 리스트")
+	void getWaitTutor() throws DAOException {
+		log.trace("getWaitTutor 승인 대기 튜터 리스트");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(10);
+		cri.setCurrPage(2);
+		List<UserVO> list = this.userMapper.selectWaitTutor(cri);
+		list.forEach(log::info);
+	}//getWaitTutor
+	
+	@Test
+	@DisplayName("waitTutorCount 승인 대기 튜터 회원수")
+	void waitTutorCount() throws DAOException {
+		log.trace("waitTutorCount 승인 대기 튜터 회원수");
+		int result = this.userMapper.waitTutorCount();
+		log.info("\t + result : {}", result);
+		
+	}//waitTutorCount
+	
 }//end class

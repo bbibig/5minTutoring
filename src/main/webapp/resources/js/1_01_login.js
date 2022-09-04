@@ -1,19 +1,28 @@
+function kakaoLogin() {
 
+    $.ajax({
+        url: '/test/getKakao',
+        type: 'get',
+        async: false,
+        dataType: 'text',
+        success: function (res) {
+            location.href = res;
+        }
+    });//ajax
+};//kakao
 
-// function loginPage(){
-//     window.location.href="/login"
-// }
+$(document).ready(function () {
 
-// function findmypwNotfoundbt() {
-//     Swal.fire({
-//         title: '안내' ,
-//         text: '일치하는 정보가 없습니다.',
-//         icon: 'error',      // Alert 타입
-//         confirmButtonText: '확인',
-//         showCloseButton: true
-//     });
-//     // if(){
+    var kakaoInfo = '${kakaoInfo}';
 
-//     // }
-// };//login
+    if (kakaoInfo != "") {
+        var data = JSON.parse(kakaoInfo);
 
+        alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
+        alert(
+            "user : \n" + "email : "
+            + data['email']
+            + "\n nickname : "
+            + data['nickname']);
+    }
+});  

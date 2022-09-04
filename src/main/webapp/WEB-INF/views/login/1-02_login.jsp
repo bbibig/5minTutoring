@@ -13,7 +13,7 @@
             <!-- ========================================================= -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
-
+            <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
             <script>
                 $(function () {
 
@@ -27,6 +27,24 @@
                     }//로그인 실패시 
                 });//jq
 
+                function kakaoLogin() {
+                    Kakao.Auth.login({
+                        success: function (response) {
+                            Kakao.API.request({
+                                url: '/v2/user/me',
+                                success: function (response) {
+                                    kakaoLoginPro(response)
+                                },
+                                fail: function (error) {
+                                    console.log(error)
+                                },
+                            })
+                        },
+                        fail: function (error) {
+                            console.log(error)
+                        },
+                    })
+                }
 
             </script>
 
@@ -94,54 +112,10 @@
                         </span>
 
                         <!-- 카카오 로그인 -->
-                        <span class="ico-sns-loin-kakao" id="kakao">
-                            <a href="#">
-                                <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">
-                                <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-                                <script>
-                                    $('#kakao').on('click', function () {
-                                        console.log(1);
-
-                                        //카카오로그인
-                                        Kakao.init('de958c943b70794d33e58bbec3e2a1da'); //발급받은 키 중 javascript키를 사용해준다.
-                                        console.log(Kakao.isInitialized()); // sdk초기화여부판단
-                                        //카카오로그인
-                                        function kakaoLogin() {
-                                            Kakao.Auth.login({
-                                                // scope:'profile_nickname, profile_image, account_email, gender',
-                                                success: function (response) {
-                                                    Kakao.API.request({
-                                                        url: '/v2/user/me',
-                                                        success: function (response) {
-                                                            console.log(response)
-                                                        },
-                                                        fail: function (error) {
-                                                            console.log(error)
-                                                        },
-                                                    })
-                                                },
-                                                fail: function (error) {
-                                                    console.log(error)
-                                                },
-                                            })
-                                        }
-                                    });
-                                    //카카오로그아웃  
-                                    function kakaoLogout() {
-                                        if (Kakao.Auth.getAccessToken()) {
-                                            Kakao.API.request({
-                                                url: '/v1/user/unlink',
-                                                success: function (response) {
-                                                    console.log(response)
-                                                },
-                                                fail: function (error) {
-                                                    console.log(error)
-                                                },
-                                            })
-                                            Kakao.Auth.setAccessToken(undefined)
-                                        }
-                                    }
-                                </script>
+                        <span class="ico-sns-loin-kakao">
+                            <!-- 경로나중에수정할것!!! -->
+                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=f242881542c06c438c6f81728a868bf9&redirect_uri=http://localhost:8080/test/getKakao&response_type=code">
+                                <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">                             
                             </a>
                         </span>
 
