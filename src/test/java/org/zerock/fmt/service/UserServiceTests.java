@@ -326,4 +326,11 @@ public class UserServiceTests {
 		
 	}//waitTutorCount
 	
+	@Test
+	@DisplayName("certifiedPhoneNumber")
+	void certifiedPhoneNumber() {
+		log.trace("certifiedPhoneNumber 휴대폰인증문자보내기");
+		this.userService.certifiedPhoneNumber("01089814304", 1234);
+		log.info("\t+........");
+	}//certifiedPhoneNumber
 }//end class

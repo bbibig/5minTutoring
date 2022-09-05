@@ -219,21 +219,21 @@ public class AdminController {
 	@RequestMapping("/sale/sell")
 	public String adminSale() {
 		log.info("매출관리 페이지");
-		
+		//buy service
 		return "admin/8-05_sale_sell";
 	}
 	
 	@RequestMapping("/sale/withdrow")
 	public String adminWithDrow() {
 		log.info("출금 페이지");
-		
+		//Withdrawal sevice 
 		return "admin/8-05_sale_withdrow";
 	}
 	
 	//--------------------------------------------- 튜터가입승인
 	@GetMapping("/signUp_comfim")
 	public String signUp_comfim(CriteriaAdmin cri,Model model) throws ControllerException {
-		log.info("튜터가입승인 페이지 ");
+		log.trace("튜터가입승인 페이지 ");
 		try{
 			List<UserVO> list = this.userService.getWaitTutor(cri);
 			model.addAttribute("_USERLIST_",list);
@@ -242,6 +242,14 @@ public class AdminController {
 		}catch(Exception e) {throw new ControllerException(e);}//try-catch
 		return "admin/8-06_singUpConfim";
 	}
+	
+	@PostMapping("/signUp_comfim")
+	public String signUp_comfim(String user_email) {
+		log.trace("튜터가입승인");
+		log.info("\t+ user_eamil : {}", user_email);
+		
+		return "admin/8-06_singUpConfim";
+	}//signUp_comfim
 	
 	
 }//end class

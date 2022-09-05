@@ -60,4 +60,7 @@ public interface UserService {
 	public abstract boolean updateHandGet(Integer h_count, String user_email) throws ServiceException;
 	//손들기 차감
 	public abstract boolean updateHandUse(Integer h_count, String user_email) throws ServiceException;
+	
+	//=======
+	public abstract void certifiedPhoneNumber(String user_phone, int randomNumber);
 }//end 

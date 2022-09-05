@@ -231,8 +231,8 @@ public class UserMapperTests {
 	void testupdatePW() throws DAOException {
 		log.trace("updatePW()invoked.");
 		UserDTO dto = new UserDTO();
-		dto.setUser_email("TTemail_1");
-		dto.setUser_pw("qewqqrqw");
+		dto.setUser_email("test@gmail.com");
+		dto.setUser_pw("1111111q");
 		int result = this.mapper.updatePW(dto);
 		log.info("\t + result : {}", result);
 		

@@ -1,28 +1,66 @@
-function kakaoLogin() {
+// const CLIENT_ID = "f242881542c06c438c6f81728a868bf9";
+// const REDIRECT_URI = "http://localhost:8080/test/getKakao";
 
-    $.ajax({
-        url: '/test/getKakao',
-        type: 'get',
-        async: false,
-        dataType: 'text',
-        success: function (res) {
-            location.href = res;
+// export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+// import { KAKAO_AUTH_URL } from "../shared/OAuth";
+
+const naverLogin = new naver.LoginWithNaverId(
+    {
+        clientId: "m64F8j6rzmuQpJTdLytb", 
+        callbackUrl: "http://localhost:8080/test/naver",
+        isPopup:false,
+        callbackHandle:true
         }
-    });//ajax
-};//kakao
+    );
 
-$(document).ready(function () {
 
-    var kakaoInfo = '${kakaoInfo}';
+naverLogin.init();  //초기화
 
-    if (kakaoInfo != "") {
-        var data = JSON.parse(kakaoInfo);
+naverLogin.getLoginStatus(function (status) {
+if (status) {
+    const nickName=naverLogin.user.getNickName();
+    const age=naverLogin.user.getAge();
+    const birthday=naverLogin.user.getBirthday();
+    const email=naverLogin.user.getEmail();
+    console.log(naverLogin.user);
 
-        alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
-        alert(
-            "user : \n" + "email : "
-            + data['email']
-            + "\n nickname : "
-            + data['nickname']);
+    if(email===null||email===undefined ){
+        alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+        naverLogin.reprompt();
+        return ;  
+    }else{
+    console.log("callback 처리에 실패하였습니다.");
     }
-});  
+}
+});
+
+let testPopup;
+
+function openPopUp() {
+testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+
+function closePopUp(){
+    testPopUp.close();
+}
+
+function naverLogout() {
+    openPopUp();
+    setTimeout(function() {
+        closePopUp();
+        }, 1000);
+
+
+}
+
+function setLoginStatus(){
+
+    const message_area=document.getElementById('message');
+    message_area.innerHTML=`
+    <h3> Login 성공 </h3>
+    <div>user Nickname : ${naverLogin.user.nickname}</div>
+    <div>user Age(범위) : ${naverLogin.user.age}</div>
+    <div>user Birthday : ${naverLogin.user.birthday}</div>
+    `;
+}
