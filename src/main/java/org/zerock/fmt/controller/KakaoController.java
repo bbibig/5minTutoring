@@ -34,16 +34,16 @@ public class KakaoController {
 	private UserMapper mapper;
 	
 //	@ResponseBody 
-	@RequestMapping("/getKakao")
-	public String kakaoCallback(@RequestParam(value = "code", required = false) String code) throws Exception{
+	@RequestMapping("/kakao")
+	public void kakaoCallback(@RequestParam(value = "code", required = false) String code) throws Exception{
 		log.trace("kakaoCallback");
 
 		//1. 카카오 서버로부터 받는 인가 코드
 		log.info("\t + 1. code : {}", code);
 		
 		//2. 토큰얻어옴
-		String access_Token = getAccessToken(code);
-		log.info("\t + 2. access_Token : {}", access_Token);
+//		String access_Token = getAccessToken(code);
+//		log.info("\t + 2. access_Token : {}", access_Token);
 		
 		//3. 사용자정보 얻음 
 //		HashMap<String, Object> userInfo = getUserInfo(access_Token);
@@ -51,7 +51,7 @@ public class KakaoController {
 	    //일단 이메일만 얻어
 	    //log.info("\t + 3. userInfo-nick : {}", userInfo.get("nickname")); 
 	    
-		return "redirect:http://localhost:8080/login";
+//		return "/login";
 	}//getKakaoURL 
 		
     //토큰발급
