@@ -128,10 +128,21 @@
   font-size: 16px;
   font-weight: 400;
 }
+#sum_p_price {
+  margin-right: 30px;
+}
 
 #product-info img {
   width: 50px;
   margin-right: 5px;
+}
+
+.rowlist  {
+  display: inline-block;
+  /* float: left; */
+  text-align: center;
+  margin: 0;
+  padding: 12px 0;
 }
 
 /* 총 금액 */

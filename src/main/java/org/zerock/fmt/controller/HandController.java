@@ -54,26 +54,26 @@ public class HandController {
 	
 
 	@GetMapping("/payPage")
-	public String payPage(UserDTO dto, Integer handVo, Model model) throws ServiceException {
+	public String payPage(UserDTO dto, Integer h_number, Model model) throws ServiceException {
 		log.trace("payPage() invoked.");
 		
 		try {
-			HandVO vo = this.handService.getHand(4);
+			HandVO vo = this.handService.getHand(h_number);
 			
 			UserDTO user = new UserDTO();
 			
-			user.setUser_email("yune@naver.com");
-			user.setUser_name("이윤정");
-			user.setUser_phone("010-3333-3333");
+//			user.setUser_email("yune@naver.com");
+//			user.setUser_name("이윤정");
+//			user.setUser_phone("010-3333-3333");
 			
 			
 			model.addAttribute("_HandVO_", vo);
 			model.addAttribute("_UserDTO_", user);
-	//		model.addAttribute("_USER_", dto);
+			model.addAttribute("_USER_", dto);
 			
 			log.info("\t+ _HandVO_: {}", vo);
 			log.info("\t+ _UserDTO_: {}", user);
-	//		log.info("\t+ USER:{}", dto);
+			log.info("\t+ USER:{}", dto);
 			
 			return "hand/4-02_payPage";
 		} catch(Exception e) {
