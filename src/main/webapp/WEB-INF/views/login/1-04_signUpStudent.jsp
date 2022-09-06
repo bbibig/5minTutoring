@@ -22,7 +22,7 @@
                     console.log(phone);
                     $.ajax({
                         type:"GET",
-                        url:"/login/phoneCheck?user_phone=" + phone,
+                        url:"/login/phoneCheck?user_phone="+phone,
                         cache : false,
                         success:function(data){
                             if(data == "error"){

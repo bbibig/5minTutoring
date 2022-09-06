@@ -145,12 +145,12 @@
 
                     <!-- 카카오 로그인 -->
                     <span class="ico-sns-loin-kakao">
-                        <a onclick="kakaoLogout()" href="javascript:void(0)">
+                        <!-- <a onclick="kakaoLogin()" href="javascript:void(0)">
                             <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">        
-                        </a>
-                        <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=f242881542c06c438c6f81728a868bf9&redirect_uri=http://localhost:8080/test/kakao&response_type=code">
-                            <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">                             
                         </a> -->
+                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=f242881542c06c438c6f81728a868bf9&redirect_uri=http://localhost:8080/test/kakao&response_type=code">
+                            <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">                             
+                        </a>
 
                         
                     </span>
@@ -161,6 +161,7 @@
             </section>
         </div>
         <!-- End Section -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script>
             Kakao.init('de958c943b70794d33e58bbec3e2a1da'); //발급받은 키 중 javascript키를 사용해준다.
             console.log(Kakao.isInitialized()); // sdk초기화여부판단
@@ -183,7 +184,7 @@
                 })
             }
         </script>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        
         <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
         <!-- ============= 로그인 전 풋터 아 헷갈린다고요 지금... =============== -->
         <jsp:include page="../footer_before.jsp" flush="true" />

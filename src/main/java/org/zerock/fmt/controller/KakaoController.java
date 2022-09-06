@@ -9,11 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.mapper.UserMapper;
 
 import com.google.gson.JsonElement;
@@ -35,23 +36,29 @@ public class KakaoController {
 	
 //	@ResponseBody 
 	@RequestMapping("/kakao")
-	public void kakaoCallback(@RequestParam(value = "code", required = false) String code) throws Exception{
+	public String kakaoCallback(@RequestParam(value = "code", required = false) String code, 
+								HttpSession session) throws Exception{
 		log.trace("kakaoCallback");
 
 		//1. 카카오 서버로부터 받는 인가 코드
 		log.info("\t + 1. code : {}", code);
 		
 		//2. 토큰얻어옴
-//		String access_Token = getAccessToken(code);
-//		log.info("\t + 2. access_Token : {}", access_Token);
+		String access_Token = getAccessToken(code);
+		log.info("\t + 2. access_Token : {}", access_Token);
 		
 		//3. 사용자정보 얻음 
-//		HashMap<String, Object> userInfo = getUserInfo(access_Token);
-//	    log.info("\t + 3. userInfo-email : {}", userInfo.get("email"));
+		HashMap<String, Object> userInfo = getUserInfo(access_Token);
+	    log.info("\t + 3. userInfo : {}", userInfo);
+	    
+	    if(userInfo.get("email") != null) {
+	    	session.setAttribute("userid", userInfo.get("email"));
+	    	session.setAttribute("access_Token", access_Token);
+	    }
 	    //일단 이메일만 얻어
 	    //log.info("\t + 3. userInfo-nick : {}", userInfo.get("nickname")); 
 	    
-//		return "/login";
+		return "/login";
 	}//getKakaoURL 
 		
     //토큰발급
@@ -74,7 +81,7 @@ public class KakaoController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=f242881542c06c438c6f81728a868bf9");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8080/test/getKakao");     // 본인이 설정해 놓은 경로
+            sb.append("&redirect_uri=http://localhost:8080/test/kakao");     // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -114,7 +121,7 @@ public class KakaoController {
     }
 	
     //유저정보조회
-    public UserDTO getUserInfo (String access_Token) {
+    public HashMap<String,Object> getUserInfo (String access_Token) {
     	
         //  요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
@@ -122,7 +129,7 @@ public class KakaoController {
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("POST");
 
             //요청에 필요한 Header에 포함될 내용
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
@@ -141,7 +148,7 @@ public class KakaoController {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
-//            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
 //            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
@@ -165,7 +172,7 @@ public class KakaoController {
 //        } else {
 //        	return null;
 //        }
-        return null;
-//        return userInfo;//유저정보전달
+//        return null;
+        return userInfo;//유저정보전달
     }
 }//end class

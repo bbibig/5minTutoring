@@ -200,6 +200,7 @@ public class LoginController{
 		return "login/1-08_signupReq";
 	}
 
+//	------------------------------------------ 본인인증문자
 	@ResponseBody
 	@GetMapping("/phoneCheck")
 	public String sendSMS(@RequestParam("user_phone")String user_phone) { // 휴대폰 문자보내기

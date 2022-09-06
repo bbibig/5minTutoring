@@ -8,7 +8,7 @@
 const naverLogin = new naver.LoginWithNaverId(
     {
         clientId: "m64F8j6rzmuQpJTdLytb", 
-        callbackUrl: "http://localhost:8080/test/naver",
+        callbackUrl: "http://localhost:8080",
         isPopup:false,
         callbackHandle:true
         }
