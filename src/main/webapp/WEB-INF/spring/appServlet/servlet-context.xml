@@ -35,6 +35,11 @@
 		</interceptor>
 
 		<interceptor>
+			<mapping path="/admin/login" />
+			<beans:ref bean="adminLoginInterceptor"/>
+		</interceptor>
+
+		<interceptor>
 			<!-- <mapping path="/community/*" /> -->
 			<mapping path="/hand/*" />
 			<mapping path="/inquiry/*" />

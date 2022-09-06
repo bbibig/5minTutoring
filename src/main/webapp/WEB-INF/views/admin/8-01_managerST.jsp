@@ -22,6 +22,23 @@
             if (loginResult != null && loginResult.length > 0) {
                 alert(ADMIN + loginResult);
             }
+
+            $('a.prev, a.next').click(function(e){
+                e.preventDefault();
+
+                let formObj = $('#adPaginationFrom');
+                formObj.attr('action','/admin/student');
+                formObj.attr('method','get');
+
+                console.clear();
+                console.log('1. this : ', this );
+                console.log('2. $(this) : ', $(this));
+                formObj.find('input[name=currPage]').val( $(this).attr('href') );
+                console.log('3. $(this).attr("href")', $(this).attr('href'));
+                formObj.submit();
+
+            });//prev,next
+
         </script>
 
     </head>
@@ -84,19 +101,13 @@
                         <li>
                             <div class="select-search">
                                 <ul>
-                                    <li>
-                                        <form action=""></form>
+                                    <form action="">
                                         <select class="select-box" name="ad-search">
                                             <option>닉네임</option>
                                             <option>계정</option>
                                         </select>
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <button class="btn-search">검색</button>
-                                        </a>
-                                    </li>
+                                        <button class="btn-search">검색</button>
+                                    </form> 
                                 </ul>
                             </div>
                         </li>
@@ -124,7 +135,7 @@
                                         </div>
                                     </td>
                                     <td>${user.user_nick}</td>
-                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${user.user_join}" /></td>
+                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${user.user_join}"/></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -141,7 +152,7 @@
                         <ul class="pagination justify-content-center p-5">
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle prev" href="${_ADMINPAGINATION_.startPage - 1}" id="prev">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
@@ -152,7 +163,7 @@
                             <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li> -->
 
                             <c:if test="${_ADMINPAGINATION_.next}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle next" href="${_ADMINPAGINATION_.endPage + 1}" id="next">&raquo;</a></li>
                             </c:if>
 
                         </ul>
