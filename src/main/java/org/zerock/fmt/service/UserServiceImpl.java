@@ -1,19 +1,25 @@
 package org.zerock.fmt.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Log4j2
 @NoArgsConstructor
@@ -24,14 +30,37 @@ public class UserServiceImpl implements UserService{
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper userMapper;
 	
+	//----------------------------------------------------------- ADMIN
 	@Override
-	public List<UserVO> getAllUser() throws ServiceException {
+	public List<UserVO> getStudent(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllUser() invoked.");
 		
-		try{ return this.userMapper.selectAllUser();}
+		try{ return this.userMapper.selectStudent(cri);}
 		catch(Exception e) { throw new ServiceException(e); }
+	}//getStudent
+	
+	@Override
+	public List<UserVO> getTutor(CriteriaAdmin cri) throws ServiceException {
+		log.trace("getAllUser() invoked.");
 		
-	}//getAllUser
+		try{ return this.userMapper.selectTutor(cri);}
+		catch(Exception e) { throw new ServiceException(e); }
+	}//getTutor
+	
+	@Override
+	public List<UserVO> getStopUser(CriteriaAdmin cri) throws ServiceException {
+		log.trace("getAllUser() invoked.");
+		
+		try{ return this.userMapper.selectStopUser(cri);}
+		catch(Exception e) { throw new ServiceException(e); }
+	}//getStopUser
+	
+	@Override
+	public int userCount(String userGroup, String status) throws ServiceException {
+		log.trace(" userCount - 회원조회용" );
+		try { return this.userMapper.userCount(userGroup, status); }
+		catch(Exception e) { throw new ServiceException(e); }//try-catch
+	}//userCount
 
 	@Override
 	public UserVO getUserInfo(String user_email) throws ServiceException {
@@ -41,7 +70,9 @@ public class UserServiceImpl implements UserService{
 		catch(Exception e) { throw new ServiceException(e);}
 		
 	}//getUserInfo
-
+	
+	//============================================================== 회원가입
+	
 	@Override
 	public boolean singUpStrudent(UserDTO newStudent) throws ServiceException {
 		log.trace("singUpStrudent() invoked.");
@@ -66,6 +97,8 @@ public class UserServiceImpl implements UserService{
 		}catch(Exception e) { throw new ServiceException(e);}
 	}//singUPTutor
 
+	//----------------------------------------------------------- 유저정보수정
+	
 	@Override
 	public boolean updateUser(UserDTO user) throws ServiceException {
 		log.trace("updateUser() invoked");
@@ -75,16 +108,34 @@ public class UserServiceImpl implements UserService{
 		
 	}//updateUser
 
+	//----------------------------------------------------------- 승인대기튜터
+	
+	@Override
+	public List<UserVO> getWaitTutor(CriteriaAdmin cri) throws ServiceException {
+		log.trace("getWaitTutor() invoked.");
+		try{
+			List<UserVO> list = this.userMapper.selectWaitTutor(cri);
+			return list;
+		}catch(Exception e) {throw new ServiceException(e); } //try-catch
+	}//getWaitTutor
+	
+	@Override
+	public int waitTutorCount() throws ServiceException{
+		log.trace("waitTutorCount() invoked.");
+		try{ return this.userMapper.waitTutorCount();
+		}catch(Exception e) { throw new ServiceException(e);}//try-catch
+	}//waitTutorCount
 	
 	@Override
 	public boolean tutorPass(String user_email) throws ServiceException {
-		log.trace("tutorPass(0 invoked.");
+		log.trace("tutorPass() invoked.");
 		
 		try { return this.userMapper.updateTutorPass(user_email)==1;}
 		catch(Exception e) {throw new ServiceException(e);}
 	}//tutorPass
 	
-
+	//----------------------------------------------------------- 회원탈퇴 
+	
 	@Override
 	public boolean userStatus(String user_email) throws ServiceException {
 		log.trace("userStatus() invoked.");
@@ -93,6 +144,8 @@ public class UserServiceImpl implements UserService{
 		catch(Exception e) { throw new ServiceException(e); }
 	}//userStatus
 
+	//----------------------------------------------------------- 손들기 구매/사용
+	
 	@Override
 	public boolean updateHandGet(Integer h_count, String user_email) throws ServiceException {
 		log.trace("updateHandGet() 손들기 구매, 손들기 획득");
@@ -111,6 +164,7 @@ public class UserServiceImpl implements UserService{
 		
 	}//updateHandUse
 
+	//----------------------------------------------------------- 닉네임 중복
 	
 	@Override
 	public Integer getNicCheck(String newNick) throws ServiceException {
@@ -121,6 +175,7 @@ public class UserServiceImpl implements UserService{
 		} catch (Exception e) { throw new ServiceException(e); }
 	}//selectNicCheck
 
+	//----------------------------------------------------------- 로그인
 	@Override
 	public UserVO gettLoginUser(String user_email, String user_pw) throws ServiceException {
 		log.trace("selectLogin() 로그인 유저 조회2");
@@ -141,7 +196,10 @@ public class UserServiceImpl implements UserService{
 			return this.userMapper.loginEmail(user_email);
 		} catch ( Exception e) {throw new ServiceException(e); }//try-catch
 	}//selectLogin
-
+	
+	//----------------------------------------------------------- 비밀번호찾기 +
+	//----------------------------------------------------------- 임시비밀번호 메일전송 
+	
 	@Override
 	public String findPassword(UserDTO dto) throws ServiceException {
 		log.trace("findPassword() 비밀번호 찾기" );
@@ -176,7 +234,8 @@ public class UserServiceImpl implements UserService{
 		}catch(Exception e) {throw new ServiceException(e); }
 	}//findPassword
 
-	//----
+	//----------------------------------------------------------- 이메일전송
+	
 	public void sendEmail(UserDTO dto, String newPW) throws Exception{
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com"; 
@@ -216,8 +275,32 @@ public class UserServiceImpl implements UserService{
 			log.info("임시비밀번호로 메일전송");
 		} catch (Exception e) {
 			log.info("메일발송 실패 : " + e);
-		}
-	}//
+		}//try-catch 
+		
+	}//sendEmail
+
+	public void certifiedPhoneNumber(String user_phone, int randomNumber) {
+		String api_key = "NCSQIM5WH5W7SLEB";
+	    String api_secret = "CINAHABMCOGIMQXTOO1AHXITFXD7L0WT";
+	    Message coolsms = new Message(api_key, api_secret);
+
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", user_phone);    // 수신전화번호
+	    params.put("from", "01089814304");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+	    params.put("type", "SMS");
+	    params.put("text", "[5분과외] 인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
+	    params.put("app_version", "test app 1.2"); // application name and version
+
+	    try {
+	        JSONObject obj = (JSONObject) coolsms.send(params);
+	        System.out.println(obj.toString());
+	      } catch (CoolsmsException e) {
+	        System.out.println(e.getMessage());
+	        System.out.println(e.getCode());
+	      }
+	    
+	}//certifiedPhoneNumber
 
 //------------------------------------------------------------
 }//end class

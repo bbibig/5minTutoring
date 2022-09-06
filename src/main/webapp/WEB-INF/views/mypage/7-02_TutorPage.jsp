@@ -64,31 +64,33 @@
                 <input type="text" class="form-control mb-3" id="user_nick" name="user_nick" readonly
                   value="${_USERINFO_.user_nick}">
                 <label for="user_name">이름</label>
-                <input type="text" class="form-control mb-3" id="user_name" name="user_name" readonly value="${_USERINFO_.user_name}">
+                <input type="text" class="form-control mb-3" id="user_name" name="user_name" readonly
+                  value="${_USERINFO_.user_name}">
                 <label for="user_gender">성별</label>
-                <input type="text" class="form-control mb-3" id="user_gender" name="user_gender" readonly value="${_USERINFO_.user_gender}">
+                <input type="text" class="form-control mb-3" id="user_gender" name="user_gender" readonly
+                  value="${_USERINFO_.user_gender}">
                 <label for="user_phone">휴대전화</label>
-                <input type="tel" class="form-control mb-3" id="user_phone" name="user_phone" readonly value="${_USERINFO_.user_phone}">
+                <input type="tel" class="form-control mb-3" id="user_phone" name="user_phone" readonly
+                  value="${_USERINFO_.user_phone}">
 
               </div>
 
               <div class="col-4" style="position: relative;">
 
-                <input type="hidden" id="hiddenpw" value="${_USERINFO_.user_pw}">
-                <label for="user_Oldpw">현재 비밀번호</label>
-                <input type="password" class="form-control" id="user_Oldpw" name="user_Oldpw" required
+                <label for="user_pw">현재 비밀번호</label>
+                <input type="password" class="form-control" id="user_pw" name="user_pw" required
                   placeholder="비밀번호를 입력해 주세요">
                 <p id=check_1 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
                 <label for="user_newPw">비밀번호 변경</label>
                 <input type="password" class="form-control mb-3" id="user_newPw" name="user_newPw" required
                   placeholder="새로운 비밀번호를 입력해 주세요">
-                <label for="user_pw">비밀번호 확인</label>
-                <input type="password" class="form-control" id="user_pw" name="user_pw" required>
-                <p id=check_2 class="text-danger invisible mb-5">비밀번호가 일치하지 않습니다.</p>
+                <label for="user_newPw2">비밀번호 확인</label>
+                <input type="password" class="form-control" id="user_newPw2" name="user_newPw2" required>
+                <p id=check_2 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
                 <button type="button" class="btn bg-blue" style="position: absolute; right: 20px; bottom: 5px;"
-                  onclick="check()">
+                  onclick="pwCheck()">
                   저장</button>
               </div>
             </div>

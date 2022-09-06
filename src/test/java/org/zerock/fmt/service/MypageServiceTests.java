@@ -56,6 +56,22 @@ public class MypageServiceTests {
 		log.info("\t+ 기본정보: {}", vo);
 		
 	}//TestGetUserInfo()
+
+	//9. 회원 DB 비밀번호 조회
+	@Test
+	@Order(9)
+	@DisplayName("9. 회원 DB 비밀번호 조회")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetUserDbPw() throws ServiceException {
+		log.trace("회원 DB 비밀번호 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		String userDbPw = this.service.getUserDbPw(dto.getUser_email());
+		log.info("\t+ 회원 DB 비밀번호: {}", userDbPw);
+		
+	}//회원 DB 비밀번호 조회
 	
 	//1-1. 기본정보 테스트
 	@Test
@@ -173,6 +189,7 @@ public class MypageServiceTests {
 		log.info("\t+ 나의 댓글 총 개수: {}", result);
 		
 	}//testGetMyCommentTotalAmount()
+	
 
 }// end class
 

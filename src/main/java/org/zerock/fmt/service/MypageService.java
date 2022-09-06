@@ -15,10 +15,12 @@ public interface MypageService {
 	
 	//1. 기본정보 조회
 	public abstract UserVO getUserInfo(UserDTO dto) throws ServiceException;
-	
-	//1-1 기본정보 수정 테스트
+	public abstract String getUserDbPw(String user_email) throws ServiceException;
+		
+	//1-2 기본정보 수정 테스트
 	public abstract boolean modifyUserInfo(UserDTO dto) throws ServiceException;
 
+	
 	//2-1. 나의 질문글 목록 조회 페이징 처리(내림차순으로)
 	public abstract List<QuestionBoardVO> getAllMyQuestionList(CriteriaMyPage cri) throws ServiceException;
 	

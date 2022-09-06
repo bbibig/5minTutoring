@@ -375,18 +375,16 @@ function deletebt6() {
 //관리자로그인
 function loginbt() {
   Swal.fire({
-      text: '${이윤정}님 로그인되었습니다.',
+      text: '${_ADMIN_.ad_name}'+'님 로그인되었습니다.',
       icon: 'info',  
       showCloseButton: true
-  }).then(function(){
-    document.location.href="/admin/student";
   });
 };//login
 
 //관리자로그아웃
 function logout() {
   Swal.fire({
-      text: '${이윤정}님 로그아웃하시겠습니까?',
+      text: '로그아웃하시겠습니까?',
       icon: 'question',  
       showCloseButton: true
   }).then(function(){

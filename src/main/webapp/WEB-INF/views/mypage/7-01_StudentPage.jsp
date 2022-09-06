@@ -10,8 +10,8 @@
     <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
     <jsp:include page="../htmlHead.jsp" flush="true" />
     <!-- =======mypage 공통 CSS=================================== -->
-	<link href="${path}/resources/css/mypage.css" rel="stylesheet">
-	
+    <link href="${path}/resources/css/mypage.css" rel="stylesheet">
+
     <title>기본 정보(학생)</title>
 </head>
 
@@ -83,16 +83,21 @@
                                     <span class="col">
                                         <label for="st_school">중/고등학생</label>
                                         <select class="form-select mb-3" id="st_school" name="st_school">
-                                            <option value="중학생" <c:if test="${_USERINFO_.st_school eq '중학생'}">selected</c:if> > 중학생</option>
-                                            <option value="고등학생" <c:if test="${_USERINFO_.st_school eq '고등학생'}">selected</c:if>> 고등학생</option>
+                                            <option value="중학생" <c:if test="${_USERINFO_.st_school eq '중학생'}">selected
+                                                </c:if> > 중학생</option>
+                                            <option value="고등학생" <c:if test="${_USERINFO_.st_school eq '고등학생'}">selected
+                                                </c:if>> 고등학생</option>
                                         </select>
                                     </span>
                                     <span class="col">
                                         <label for="st_grade">학년</label>
                                         <select class="form-select mb-3" id="st_grade" name="st_grade">
-                                            <option value="1학년" <c:if test="${_USERINFO_.st_grade eq '1학년'}">selected</c:if> > 1학년</option>
-                                            <option value="2학년" <c:if test="${_USERINFO_.st_grade eq '2학년'}">selected</c:if> > 2학년</option>
-                                            <option value="3학년" <c:if test="${_USERINFO_.st_grade eq '3학년'}">selected</c:if> > 3학년</option>
+                                            <option value="1학년" <c:if test="${_USERINFO_.st_grade eq '1학년'}">selected
+                                                </c:if> > 1학년</option>
+                                            <option value="2학년" <c:if test="${_USERINFO_.st_grade eq '2학년'}">selected
+                                                </c:if> > 2학년</option>
+                                            <option value="3학년" <c:if test="${_USERINFO_.st_grade eq '3학년'}">selected
+                                                </c:if> > 3학년</option>
                                         </select>
                                     </span>
                                 </div>
@@ -101,24 +106,21 @@
                             </div>
 
                             <div class="col-4" style="position: relative;">
-
-                                <!-- <input type="hidden" id="hiddenpw" value="${_USERINFO_.user_pw}"> -->
-                                <input type="hidden" id="pwcheck" value="${pwcheck}">
-                                <label for="user_Oldpw">현재 비밀번호</label>
-                                <input type="password" class="form-control" id="user_Oldpw" name="user_Oldpw" required
+                                <label for="user_pw">현재 비밀번호</label>
+                                <input type="password" class="form-control" id="user_pw" name="user_pw" required
                                     placeholder="비밀번호를 입력해 주세요">
                                 <p id=check_1 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
                                 <label for="user_newPw">비밀번호 변경</label>
                                 <input type="password" class="form-control mb-3" id="user_newPw" name="user_newPw"
                                     required placeholder="새로운 비밀번호를 입력해 주세요">
-                                <label for="user_pw">비밀번호 확인</label>
-                                <input type="password" class="form-control" id="user_pw" name="user_pw"
+                                <label for="user_newPw2">비밀번호 확인</label>
+                                <input type="password" class="form-control" id="user_newPw2" name="user_newPw2"
                                     required>
                                 <p id=check_2 class="text-danger invisible">비밀번호가 일치하지 않습니다.</p>
 
                                 <button type="button" class="btn bg-blue"
-                                    style="position: absolute; right: 20px; bottom: 10px;" onclick="check()">
+                                    style="position: absolute; right: 20px; bottom: 10px;" onclick="pwCheck()">
                                     저장</button>
                             </div>
                         </div>

@@ -39,6 +39,15 @@ public class MypageServiceImpl implements MypageService {
 
 	}// getList()
 	
+	@Override
+	public String getUserDbPw(String user_email) throws ServiceException {
+		log.trace("회원 DB 비밀번호 조회");
+		
+		try { return this.mapper.selectUserDbPw(user_email); }
+		catch (DAOException e) { throw new ServiceException(e); }
+	}// 회원 DB 비밀번호 조회
+	
+	
 	//1-2 기본정보 수정 테스트
 	@Override
 	public boolean modifyUserInfo(UserDTO dto) throws ServiceException {

@@ -11,9 +11,15 @@
             <link href="${path}/resources/css/admin_header_footer.css" rel="stylesheet">
             <link href="${path}/resources/css/8_admin_page.css" rel="stylesheet">
             <!-- ========================================================= -->
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
             <title>ADMIN</title>
-
+            <script>
+                let loginResult = '${_RESULT_}';
+                if(loginResult!=null && loginResult.length>0){
+                    alert(loginResult);
+                }
+            </script>
         </head>
 
         <body>
@@ -34,28 +40,25 @@
             <div class="container">
 
                 <section class="admin-login">
-                    <form>
-
+                    <form action="/admin/login" method="post">
                         <div>
                             <img src="${path}/resources/img/5mtutoring_grey.png" alt="">
                         </div>
 
                         <div class="form-floating">
-                            <input type="id" class="form-control" id="floatingInput">
+                            <input type="id" class="form-control" name="ad_id">
                             <label for="floatingInput">id</label>
                         </div>
 
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword">
+                            <input type="password" class="form-control" name="ad_pw">
                             <label for="floatingPassword">Password</label>
                         </div>
 
+                        <a class="loginBtn" >
+                            <button type="submit"> 관리자 로그인</button>
+                        </a>
                     </form>
-
-                    <a class="loginBtn" >
-                        <button type="submit" onclick="loginbt()"> 관리자 로그인</button>
-                    </a>
-
                 </section>
             </div>
             <!-- End Section -->

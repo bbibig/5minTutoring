@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -112,14 +113,10 @@ public class LoginController{
 		try {
 			boolean UserResult = this.userService.singUPTutor(DTO);
 			log.info("\t + 유저 회원가입 : {}", UserResult);
-			
-			//-------------------------------------------------
-			
+				
 			List<FileDTO> fileDTO = this.fileupload.uploadFile(file, DTO.getUser_email());
 			log.info("\t + fileDTO : {}", fileDTO);
-			
-			//--------------------------------------------------
-			
+						
 			for(FileDTO filedto : fileDTO) {
 				int fileResult = this.fileservice.createFiles(filedto);
 				log.info("\t + File Mapper insert : {}", fileResult);
@@ -203,4 +200,14 @@ public class LoginController{
 		return "login/1-08_signupReq";
 	}
 
+//	------------------------------------------ 본인인증문자
+	@ResponseBody
+	@GetMapping("/phoneCheck")
+	public String sendSMS(@RequestParam("user_phone")String user_phone) { // 휴대폰 문자보내기
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+		this.userService.certifiedPhoneNumber(user_phone,randomNumber);
+		
+		return Integer.toString(randomNumber);
+	}
 }//end class

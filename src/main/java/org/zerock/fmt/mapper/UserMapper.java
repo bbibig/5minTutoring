@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
@@ -12,9 +13,13 @@ import org.zerock.fmt.exception.DAOException;
 public interface UserMapper {
 
 	//-------------- SELECT 
-	//전체 회원조회 - 어드민(회원관리용)
-	@Select("SELECT * FROM tbl_user")
-	public abstract List<UserVO> selectAllUser() throws DAOException;
+	//학생회원조회 - 어드민(회원관리용)
+	public abstract List<UserVO> selectStudent(CriteriaAdmin cri) throws DAOException;
+	public abstract List<UserVO> selectTutor(CriteriaAdmin cri) throws DAOException;
+	public abstract List<UserVO> selectStopUser(CriteriaAdmin cri) throws DAOException;
+	//총 회원 수 
+	public abstract int userCount(@Param("userGroup") String userGroup, 
+								  @Param("status") String status) throws DAOException; 
 	
 	//회원 정보조회 + 손들기 개수 조회
 	@Select("SELECT * FROM tbl_user WHERE user_email=#{user_email}")
@@ -27,7 +32,15 @@ public interface UserMapper {
 	//로그인
 	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_eamil}")
 	public abstract UserVO loginEmail(@Param("user_eamil")String user_email) throws DAOException;
+	
+	//튜터 승인 대기 리스트
+	public abstract List<UserVO> selectWaitTutor(CriteriaAdmin cri) throws DAOException;
+	
+	//튜터 승인 총 인원수 
+	@Select("SELECT count(*) FROM tbl_user WHERE pass='Wait'")
+	public abstract int waitTutorCount() throws DAOException;
 		
+	
 	//-------------- INSERT 
 	//학생 가입
 	public abstract int insertStudent(UserDTO newStudent) throws DAOException;
@@ -36,6 +49,9 @@ public interface UserMapper {
 	public abstract int insertTutor(UserDTO newTutor) throws DAOException;
 	
 	//++카카오 가입
+//	public UserDTO findKakao(HashMap<String, String> userInfo);
+	
+//	public void kakaoInsert(HashMap<String, String> userInfo);
 	//++네이버 가입
 	
 	

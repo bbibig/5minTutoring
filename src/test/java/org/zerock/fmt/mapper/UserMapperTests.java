@@ -1,5 +1,6 @@
 package org.zerock.fmt.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
@@ -37,25 +39,49 @@ public class UserMapperTests {
 
 	@Setter(onMethod_= {@Autowired})
 	private UserMapper mapper;
-
-//	@BeforeAll
-//	void beforeAll() {
-//		assertNotNull(this.mapper);
-//		log.info("\t+ mapper : {}", this.mapper);
-//	}
-	
 	
 	@Test
 	@Order(1)
 	@DisplayName("selectAllUser")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectAllUser() throws DAOException {
-		log.info("selectAllUser");
-		List<UserVO> list = this.mapper.selectAllUser();
+	void selectStudent() throws DAOException {
+		log.info("selectStudent 학생 조회");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setCurrPage(1);
+		cri.setAmount(5);
+		cri.setPagesPerPage(5);
+		List<UserVO> list = this.mapper.selectStudent(cri);
 		list.forEach(log::info);
-		
 	}//selectAllUser
 	
+	@Test
+	void selectTutor() throws DAOException {
+		log.info("selectTutor 튜터 조회");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setCurrPage(1);
+		cri.setAmount(5);
+		cri.setPagesPerPage(5);
+		List<UserVO> list = this.mapper.selectTutor(cri);
+		list.forEach(log::info);
+	}//selectAllUser
+	@Test
+	void selectStop() throws DAOException {
+		log.info("selectStop 정지 회원 조회");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setCurrPage(1);
+		cri.setAmount(5);
+		cri.setPagesPerPage(5);
+		List<UserVO> list = this.mapper.selectStopUser(cri);
+		list.forEach(log::info);
+	}//selectAllUser
+	
+	@Test
+	@DisplayName(" AllUserCount ")
+	void testAllUserCount() throws DAOException {
+		String userGroup = "Student";
+		int result = this.mapper.userCount(null,"STOP");
+		log.info("\t+ result: {}", result );
+	}
 	@Test
 	@Order(2)
 	@DisplayName("  selectUser  ")
@@ -205,10 +231,40 @@ public class UserMapperTests {
 	void testupdatePW() throws DAOException {
 		log.trace("updatePW()invoked.");
 		UserDTO dto = new UserDTO();
-		dto.setUser_email("TTemail_1");
-		dto.setUser_pw("qewqqrqw");
+		dto.setUser_email("test@gmail.com");
+		dto.setUser_pw("1111111q");
 		int result = this.mapper.updatePW(dto);
 		log.info("\t + result : {}", result);
 		
 	}//updatePW
+
+	@Test
+	@DisplayName("findKakao 카카오톡 유저찾기")
+	void findKakao() {
+		
+		HashMap<String, String> userInfo = new HashMap<String, String>();
+		userInfo.put("userEmail", "stu0830@han.net");
+		
+//		UserDTO dto = this.mapper.findKakao(userInfo);
+//		log.info("\t + dto : {}", dto);
+	}
+	
+	@Test
+	@DisplayName("승인 대기 튜터 리스트")
+	void selectWaitTutor() throws DAOException {
+		log.trace("selectWaitTutor");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(20);
+		cri.setCurrPage(3);
+		List<UserVO> list = this.mapper.selectWaitTutor(cri);
+		list.forEach(log::info);
+	}//selectWaitTutor
+	
+	@Test
+	@DisplayName("승인 대기 튜터 인원수")
+	void waitTutorCount() throws DAOException {
+		log.trace("waitTutorCount 승인대기 회원수");
+		int result = this.mapper.waitTutorCount();
+		log.info("\t + result : {}", result);
+	}//waitTutorCount
 }//end class

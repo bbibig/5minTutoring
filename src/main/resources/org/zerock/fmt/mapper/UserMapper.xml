@@ -48,12 +48,12 @@
         WHERE user_email = #{user_email}
     </update>
 
+    <!-- 비밀번호 찾기 -->
     <update id="updatePW">
         UPDATE tbl_user  
         SET user_pw = #{user_pw}
         WHERE user_email = #{user_email}
     </update>
-
 
     <!-- 유저활동정지 -->
     <update id="updateUserStop">
@@ -77,6 +77,54 @@
         WHERE user_email= #{user_email}
     </update>
 
+    <!-- 카카오톡 -->
+<!--     <select id="findKakao" parameterType="java.util.HashMap" resultType="org.zerock.fmt.domain.UserDTO"> -->
+<!--         SELECT * FROM tbl_user WHERE user_eamil = #{userEmail} -->
+<!--     </select> -->
+
+<!--     <insert id="kakaoInsert" parameterMap="java.util.HashMap"> -->
+<!--         INSERT INTO tbl_user(user_email) -->
+<!--         VALUES(#{user_email}) -->
+<!--     </insert> -->
+
+    <!-- 유저 조회 -->
+    <select id="selectStudent" resultType="org.zerock.fmt.domain.UserVO">
+        SELECT /*+index_desc(tbl_user)*/ * 
+        FROM tbl_user
+        WHERE user_group='Student'
+        OFFSET (#{currPage}-1) * #{amount} ROW 
+        FETCH NEXT #{amount} ROWS ONLY
+    </select>
+    <select id="selectTutor" resultType="org.zerock.fmt.domain.UserVO">
+        SELECT /*+index_desc(tbl_user)*/ * 
+        FROM tbl_user
+        WHERE user_group='Tutor'
+        OFFSET (#{currPage}-1) * #{amount} ROW 
+        FETCH NEXT #{amount} ROWS ONLY
+    </select>
+    <select id="selectStopUser" resultType="org.zerock.fmt.domain.UserVO">
+        SELECT /*+index_desc(tbl_user)*/ * 
+        FROM tbl_user
+        WHERE USER_STATUS='STOP'
+        OFFSET (#{currPage}-1) * #{amount} ROW 
+        FETCH NEXT #{amount} ROWS ONLY
+    </select>
+    <!-- 총 회원수  -->
+    <select id="userCount" resultType="int">
+        SELECT count(*) 
+        FROM tbl_user 
+        WHERE user_group=#{userGroup, jdbcType=VARCHAR} 
+        OR user_status=#{status, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 승인 대기 튜터 리스트 -->
+    <select id="selectWaitTutor" resultType="org.zerock.fmt.domain.UserVO">
+        SELECT /*+ index(tbl_user) asc */ * 
+        FROM TBL_USER 
+        WHERE PASS='Wait'
+        OFFSET (#{currPage}-1) * #{amount} ROW 
+        FETCH NEXT #{amount} ROWS ONLY
+    </select>
 
 
 </mapper>
