@@ -119,7 +119,7 @@
 
                 <div class="administrator">
                     <ul>
-                        <li><a href="#" onclick="logout()">${_ADMIN_.ad_name}???</a></li>
+                        <li><a href="#" onclick="logout()">${_ADMIN_.ad_name}</a></li>
                     </ul>
                 </div>
             </div>

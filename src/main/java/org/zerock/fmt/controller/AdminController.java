@@ -2,6 +2,8 @@ package org.zerock.fmt.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,19 +51,19 @@ public class AdminController {
 		log.info("어드민 Home");
 		return "admin/8-00_adminLogin";
 	}
-	@PostMapping
+	@PostMapping("/login")
 	public String adminLogin(String ad_id,String ad_pw, Model model,RedirectAttributes rttrs) throws ControllerException {
 		log.info("어드민 로그인");
 		try {
 			
 			AdminVO admin = adminService.Login(ad_id, ad_pw);
-			rttrs.addFlashAttribute("_ADMIN_", admin);
 			if(admin == null) {
-				rttrs.addFlashAttribute("_ADMIN_RESULT_","관리자 계정이 없습니다.");
+				rttrs.addFlashAttribute("_RESULT_","관리자 계정이 없습니다.");
 				return "redirect:/admin";
 			} else {
-				rttrs.addFlashAttribute("_ADMIN_RESULT_","님, 로그인 하였습니다.");
-				return "redirect:/admin/student";
+				model.addAttribute("_ADMIN_", admin);
+				model.addAttribute("_ADMIN_RESULT_","님, 로그인 하였습니다.");
+				return "admin/Loginpost";
 			}
 		} catch (Exception e) { throw new ControllerException(e); }//try-catch
 	}//adminLogin
@@ -73,7 +75,6 @@ public class AdminController {
 		try {
 			List<UserVO> list = this.userService.getStudent(cri);
 			model.addAttribute("_USERLIST_",list);
-			log.info("\t + 1. 여기까지");
 			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount("Student", null));
 			log.info("\t+ Adpage : {}", Adpage);
 			model.addAttribute("_ADMINPAGINATION_",Adpage);

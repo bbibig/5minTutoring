@@ -15,7 +15,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
             <title>ADMIN</title>
             <script>
-                let loginResult = '${_ADMIN_RESULT_}';
+                let loginResult = '${_RESULT_}';
                 if(loginResult!=null && loginResult.length>0){
                     alert(loginResult);
                 }
@@ -40,7 +40,7 @@
             <div class="container">
 
                 <section class="admin-login">
-                    <form action="/admin" method="post">
+                    <form action="/admin/login" method="post">
                         <div>
                             <img src="${path}/resources/img/5mtutoring_grey.png" alt="">
                         </div>
