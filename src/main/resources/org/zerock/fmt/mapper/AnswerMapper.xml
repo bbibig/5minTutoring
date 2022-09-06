@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="org.zerock.fmt.mapper.AnswerMapper">
+
+	<insert id="insertA">
+		INSERT INTO tbl_answer
+		(
+			a_number,
+			qb_number,
+			a_content,
+			regdate
+		) VALUES (
+			a_num.NEXTVAL,
+			#{qb_number},
+			#{a_content},
+			CURRENT_DATE
+		) 
+	</insert>
+	
+	<update id="updateA">
+		UPDATE tbl_answer
+		SET 
+			a_content = #{a_content},
+			updatedate = CURRENT_DATE
+		WHERE qb_number = #{qb_number}
+	</update>
+	
+	<select id="selectA" resultType="org.zerock.fmt.domain.AnswerVO">
+		SELECT 
+			a_content,
+			regdate
+		FROM tbl_answer
+		WHERE qb_number = #{qb_number}
+	</select>
+
+	<update id="updateAStatus">
+		UPDATE tbl_question_board
+		SET 
+			qb_answer = 1
+		WHERE qb_number = #{qb_number}
+	</update>
+	
+</mapper>
+

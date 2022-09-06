@@ -6,7 +6,7 @@
 
 	<!-- ============<<SELECT>>============ -->
 	<!-- 1. 나의 질문글 목록 조회 페이징 처리(내림차순으로) -->
-	<select id="selectAllMyQuestionList" resultType="org.zerock.fmt.domain.QuestionBardVO">
+	<select id="selectAllMyQuestionList" resultType="org.zerock.fmt.domain.QuestionBoardVO">
 		SELECT * 
 		FROM (SELECT /*+ index_desc(tbl_question_board)*/ * 
       		  FROM tbl_question_board

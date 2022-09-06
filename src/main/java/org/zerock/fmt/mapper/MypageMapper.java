@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.QuestionBardVO;
+import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
@@ -23,7 +23,7 @@ public interface MypageMapper {
 	
 	
 	//2-1. 나의 질문글 목록 조회 페이징 처리(내림차순으로)
-	public abstract List<QuestionBardVO> selectAllMyQuestionList(CriteriaMyPage cri) throws DAOException;
+	public abstract List<QuestionBoardVO> selectAllMyQuestionList(CriteriaMyPage cri) throws DAOException;
 	
 	//2-2. 나의 질문글 목록 총 개수 조회
 	@Select("SELECT count(qb_number) "

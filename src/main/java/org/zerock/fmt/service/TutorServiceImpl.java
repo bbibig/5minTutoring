@@ -20,8 +20,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @Service
-public class TutorServiceImpl 
-	implements TutorService {
+public class TutorServiceImpl implements TutorService {
 	
 	@Setter(onMethod_= @Autowired)
 	private TutorMapper tutorMapper;

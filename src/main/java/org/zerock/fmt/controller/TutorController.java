@@ -122,16 +122,34 @@ public class TutorController {
 	
 	
 	@GetMapping("/writeAnswer")
-	public String writeAnswer() {
+	public String writeAnswer(Model model, HttpServletRequest req) throws ControllerException {
 		log.trace("2-06_writeAnswer <<< 답변 작성하기 - 튜터");
+
+		String tp_number = req.getParameter("num");
+		
+		try {
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
+			log.info("tutorInfo: {}", tutorInfo);
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-06_writeAnswer";
 	} // writeAnswer
 	
 	
 	@GetMapping("/watchAnswer")
-	public String watchAnswer() {
+	public String watchAnswer(Model model, HttpServletRequest req) throws ControllerException {
 		log.trace("2-07_watchAnswer <<< 답변 보기 - 학생, 튜터");
+		
+		String tp_number = req.getParameter("num");
+		
+		try {
+			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
+			log.info("tutorInfo: {}", tutorInfo);
+			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-07_watchAnswer";
 	} // watchAnswer

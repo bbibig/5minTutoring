@@ -77,9 +77,9 @@ public class TutorMapperTests {
 		log.trace("튜터카드 최신순 조회");
 		
 		List<TutorPageVO> list = this.tutorMapper.selectRecentTCard();
-		
 		assertNotNull(list);
 		list.forEach(log::info);
+
 	} // testSelectRecentTCard
 	
 	

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.QuestionBardVO;
+import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
@@ -52,7 +52,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	//2-1. 나의 질문글 목록 조회 페이징 처리(내림차순으로)
 	@Override
-	public List<QuestionBardVO> getAllMyQuestionList(CriteriaMyPage cri) throws ServiceException {
+	public List<QuestionBoardVO> getAllMyQuestionList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("getAllMyQuestionList() 나의 질문글 목록 조회");
 		
 		try { return this.mapper.selectAllMyQuestionList(cri); }

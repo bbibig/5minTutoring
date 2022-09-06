@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.QuestionBardVO;
+import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ServiceException;
@@ -87,7 +87,7 @@ public class MypageServiceTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<QuestionBardVO> list = this.service.getAllMyQuestionList(cri);
+		List<QuestionBoardVO> list = this.service.getAllMyQuestionList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testGetAllMyQuestionList()

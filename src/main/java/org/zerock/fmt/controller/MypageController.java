@@ -17,7 +17,7 @@ import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.PageMyPageDTO;
-import org.zerock.fmt.domain.QuestionBardVO;
+import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -121,7 +121,7 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
-			List<QuestionBardVO> list = this.mypageService.getAllMyQuestionList(cri);
+			List<QuestionBoardVO> list = this.mypageService.getAllMyQuestionList(cri);
 			model.addAttribute("_MYQLIST_", list);
 			
 			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyQuestionTotalAmount(vo.getUser_email()));

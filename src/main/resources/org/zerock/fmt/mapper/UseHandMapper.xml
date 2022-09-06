@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.UseHandMapper">
+
+	<insert id="insertUseHand">
+		INSERT INTO tbl_usehand_student
+		(
+		    use_number, 
+		    qb_number,
+		    tb_number,
+		    use_date,
+		    user_email
+		) VALUES (
+		    use_num.NEXTVAL,
+		    #{qb_number},
+		    #{tb_number},
+		    CURRENT_DATE,
+		    #{user_email}
+		)
+	</insert>
+	
+</mapper>

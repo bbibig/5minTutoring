@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.AskMapper">
+
+	<insert id="insertQ">
+		INSERT INTO tbl_question_board
+		(
+			qb_number,
+			tp_number,
+			user_email,
+			qb_title,
+			qb_content,
+			qb_answer,
+			regdate,
+			updatedate
+		) VALUES (
+			qb_num.NEXTVAL,
+			#{tp_number},
+			#{user_email},
+			#{qb_title},
+			#{qb_content},
+			0,
+			CURRENT_DATE, 
+			null
+		)
+	</insert>
+	
+	<update id="updateQ">
+		UPDATE tbl_question_board
+		SET 
+			qb_title = #{qb_title},
+			qb_content  = #{qb_content},
+			updatedate = CURRENT_DATE
+		WHERE qb_number = #{qb_number}
+	</update>
+	
+	<delete id="deleteQ">
+		DELETE FROM tbl_question_board
+		WHERE qb_number = #{qb_number}	
+	</delete>
+	
+	<select id="selectQB" resultType="org.zerock.fmt.domain.QuestionBoardVO">
+		SELECT 
+		    u.user_name,
+		    qb_title,
+		    qb_content,
+		    regdate,
+		    qb_answer
+		FROM tbl_question_board q, tbl_user u
+		WHERE tp_number = #{tp_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user 
+							WHERE q.user_email = u.user_email)
+	</select>
+
+	
+</mapper>
