@@ -119,7 +119,7 @@
 
     <!-- 승인 대기 튜터 리스트 -->
     <select id="selectWaitTutor" resultType="org.zerock.fmt.domain.UserVO">
-        SELECT /*+ index(tbl_user) asc */ * 
+        SELECT /*+ index(tbl_user) DESC */ * 
         FROM TBL_USER 
         WHERE PASS='Wait'
         OFFSET (#{currPage}-1) * #{amount} ROW 

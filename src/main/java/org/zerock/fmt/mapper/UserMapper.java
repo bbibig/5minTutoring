@@ -39,7 +39,6 @@ public interface UserMapper {
 	//튜터 승인 총 인원수 
 	@Select("SELECT count(*) FROM tbl_user WHERE pass='Wait'")
 	public abstract int waitTutorCount() throws DAOException;
-		
 	
 	//-------------- INSERT 
 	//학생 가입

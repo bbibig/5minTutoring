@@ -47,9 +47,9 @@ public class FileServiceTests {
 		
 		FileDTO file = new FileDTO();
 
-		file.setFileName("FILE_NAME1");
-		file.setUploadPath("C://TEMP");
-		file.setUserEmail("tt@email");
+		file.setFileName("1.png");
+		file.setUploadPath("c://temp/upload/20220906/");
+		file.setUserEmail("ddf22@gmail.com");
 		file.setUuid("1010101");
 		int Result = this.fileService.createFiles(file);
 		log.info("\t + Result : {}", Result);
@@ -62,7 +62,7 @@ public class FileServiceTests {
 	void getFileTest () throws ServiceException {
 		log.trace("getFile Service Test");
 		
-		String userEmail = "tt@email";
+		String userEmail = "tutor1@han.net";
 		FileVO filevo = this.fileService.getFile(userEmail);
 		log.info("\t +_fileVO : {}", filevo);
 	}//getFile

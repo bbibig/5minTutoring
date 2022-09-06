@@ -34,14 +34,7 @@ import lombok.extern.log4j.Log4j2;
 public class FileMapperTests {
 
 	@Setter(onMethod_ = @Autowired)
-	private FileMapperTest fileMapper;
-	
-	@BeforeAll
-	void beforeAll() {
-		assertNotNull(this.fileMapper);
-		log.info("\t + this. FileMapper : {}", this.fileMapper);
-	}//before
-	
+	private FileMapper fileMapper;
 	
 	@Test
 	@Order(1)
@@ -68,7 +61,7 @@ public class FileMapperTests {
 	void selectFileTest() throws DAOException {
 		log.trace("selectFile test");
 
-		String user_email = "newTT";
+		String user_email = "tt0901@han.net";
 		FileVO filevo = this.fileMapper.selectFile(user_email);
 		log.info("\t + fileVO : {}", filevo);
 	}//selectFile

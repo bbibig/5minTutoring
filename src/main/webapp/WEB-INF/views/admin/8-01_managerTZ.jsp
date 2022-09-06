@@ -15,7 +15,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
         <title>Admin - 탈퇴회원</title>
+        <script>
+            //회원정보조회
+            let popup;
+            function openUserPop() {
+                let user_email = $('#email').text();
+                console.log("user_email"+user_email);
 
+                popup = window.open("/admin/UserInfo?user_email="+user_email, "이거뭐지?",
+                    "width=310, height=400, left=1000, top=100, status=0 location=0",
+                    scrollbars = "no");
+            }//openUserPop;
+        </script>
     </head>
 
     <body>
@@ -112,10 +123,9 @@
                             <c:forEach var="user" items="${_USERLIST_}">
                                 <tr>
                                     <td class="dropdown">
-                                        <a href="#" class="dropbtn">${user.user_email}</a>
+                                        <a href="#" class="dropbtn" id="email">${user.user_email}</a>
                                         <div class="dropdown-content" id="myDropdown1">
                                             <a href="#" onclick="openUserPop()">회원 정보 조회</a>
-                                            <!--<a href="/mypage/studentPage">마이페이지</a>  -->
                                         </div>
                                     </td>
                                     <td>${user.user_nick}</td>
@@ -137,18 +147,15 @@
                         <ul class="pagination justify-content-center p-5">
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/humenMember?currPage=${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
                                 <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/humenMember?currPage=${page}">${page}</a></li>
                             </c:forEach>
-                            <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li> -->
-                            <!-- <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a> </li> -->
-                            <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li> -->
-
+                            
                             <c:if test="${_ADMINPAGINATION_.next}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/humenMember?currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
                             </c:if>
 
                         </ul>

@@ -1,14 +1,18 @@
 package org.zerock.fmt.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,12 +22,14 @@ import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
+import org.zerock.fmt.domain.FileVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.AdminService;
 import org.zerock.fmt.service.FaqService;
+import org.zerock.fmt.service.FileService;
 import org.zerock.fmt.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -45,6 +51,9 @@ public class AdminController {
 		
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private FileService fileService;
 	//--------------------------------------------- 어드민로그인
 	@GetMapping
 	public String adminLogin() {
@@ -107,24 +116,28 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/UserInfo")
-	public String UserInfo() {
+	public String UserInfo(String user_email, Model model) throws ControllerException {
 		log.info("회원정보조회");
+		try {
+			UserVO userinfo = this.userService.getUserInfo(user_email);
+			model.addAttribute("_USERINFO_",userinfo);
+			return "admin/8-01_userInfo";
+		} catch( Exception e) {throw new ControllerException(e); }//try-catch
 		
-		return "admin/8-01_userInfo";
-	}
+	}//UserInfo
 	
 	@RequestMapping("/tutorInfo")
-	public String tutorInfo(Model model) {
-		log.info("회원정보조회");
+	public String tutorInfo(String user_email, Model model) throws ControllerException {
+		log.info("튜터승인정보조회");
 		
-//		TutorVO tutor = 
-//				new TutorVO("1234@email", "튜터닉네임", "000000", "11월11일", "대핟생", "수학", "이거는첨부파일");
-		
-//		model.addAttribute("tutor",tutor);
-		
-		
-		return "admin/8-01_tutorInfo";
-	}
+		try {
+			UserVO userInfo = this.userService.getUserInfo(user_email);
+			model.addAttribute("_USERINFO_", userInfo);
+			FileVO ttFile = this.fileService.getFile(user_email);
+			model.addAttribute("_TUTOR_FILE_",ttFile);
+			return "admin/8-01_tutorInfo";
+		} catch(Exception e) {throw new ControllerException(e); }//try-catch
+	}//tutorInfo
 	//--------------------------------------------- 관리자조회
 	@GetMapping("/stator")
 	public String adminStator(CriteriaAdmin cri, Model model) throws ControllerException {
@@ -244,13 +257,31 @@ public class AdminController {
 		return "admin/8-06_singUpConfim";
 	}
 	
-	@PostMapping("/signUp_comfim")
-	public String signUp_comfim(String user_email) {
-		log.trace("튜터가입승인");
-		log.info("\t+ user_eamil : {}", user_email);
-		
-		return "admin/8-06_singUpConfim";
+	@PostMapping("/signUpOK")
+	public String signUp_comfim(String user_email) throws ControllerException {
+		log.trace("튜터가입승인 {}", user_email);
+		try {
+			boolean result = this.userService.tutorPass(user_email);
+			log.info("\t + 튜터승인 result : {}", result);
+			return "redirect:/admin/signUp_comfim";
+		}catch(Exception e) { throw new ControllerException(e); }//try-catch
 	}//signUp_comfim
+	
+	@GetMapping("/display")
+	public ResponseEntity<byte[]> getImage (String fileName) {
+		log.trace("파일띄우기");
+		File file = new File(fileName); //*** 경로 겹치지 않게 설정해야함 ***
+		
+		ResponseEntity<byte[]> result = null;
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),headers,HttpStatus.OK);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}//uploadFile
 	
 	
 }//end class
