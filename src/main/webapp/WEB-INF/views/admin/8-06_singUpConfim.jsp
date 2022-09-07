@@ -27,85 +27,39 @@
                 let var3;
                 let checkList = [];
                 $('input[name=checkbox]').click(function(){
-
                     if( $('input[name=checkbox]:checked').length == 5){
                         $('#CheckAll').prop("checked",true);
                     } else {
                         $('#CheckAll').prop("checked",false);
                     }//if-else-전체체크해제
+                });//checkbox
 
-                    if( $('input[name=checkbox]:checked')){
+                let chk ;
+                $('input[name=checkbox]').click(function(){
+                    if( $(this).is(":checked")){
+                        chk = $(this).val();
+                    }//if checked 값만 
 
-                        checkList.push($(this).val());
-                        console.log("이거는요"+checkList);
-                        
+                    $('#signupOK').on('click', function(){
+                        alert(chk);
+                    let formObj = $('#checkTutor');
+                    formObj.attr('action','/admin/signUpOK?user_email='+chk);
+                    formObj.attr('method','POST');
+                    formObj.submit();
+                     });//signupOK
+                });//튜터승인보내기
+               
+                });//jq
 
-                        // let val = $(this).val();
-                        // console.log("왜뭔지안찍혀주냐"+val); 
-                        
-                        // var3 = $(this).val();
-                        // checkList.push($(this).val());
-                        // console.log("찍어주라좀"+var3);
-                        // console.log("찍어주라좀"+checkList);
-                        
-                    } else if($('input[name=checkbox]:unchecked')){
-                        checkList.pop($(this).val());
-                        console.log("이거는없애는거야."+checkList);
-                    }
-                   
-                });//checkbox-
+                //튜터승인 정보 조회
+                let popup;
+                function openTutorPop(user_email) {
+                    console.log("user_email"+user_email);
+                    popup = window.open("/admin/tutorInfo?user_email="+user_email, "이거뭐지?",
+                        "width=350, height=650, left=500, top=80, status=0 location=0",
+                        scrollbars = "no");
+                }//openUserPop;
 
-                // $('input[name=checkbox]:checked').each(function(){
-                //     checkList.push($(this).val());
-                //     console.log("yes:"+$(this).val());
-                //     console.log("이거는요"+checkList);
-                // })
-
-
-                // let val3 = $('input[name=checkbox]:checked').val();
-                // console.log(val3);
-
-                // if( $('input[name=checkbox]').is(":checked") ){
-                //     let checkList = [];
-
-                //     $('#chk input:checked').each(function(){
-                //         checkList.push(this.value);
-                //         console.log(checkList);
-                //     })
-                // }
-                // console.log(checkList);
-
-                
-
-                // function checkedArray(){
-                //     let checkval = $('input[name=checkbx]').each(function(){
-                //         checkList.push( $(this).val() );
-                //     })
-                //     return checkList;
-                //     console.log(checkList);
-                // };
-
-                // function testCheck(){
-                //     let falg = fasle;
-
-                //     let values = document.getElementsByName("checkbx");
-                //     alert(values.length);
-
-                //     for(let i=0; i<values.length; i++){
-                //         if( values[i].checked){
-                //             alert(values[i].values);
-                //         }
-                //     }
-                //     return falg;
-                // }
-
-                $('#signupOK').on('click', function(){
-                    let tutorOk = $('form');
-                    tutorOk.attr('action','/admin/signUp_comfim');
-                    tutorOk.attr('method','POST');
-                    tutorOk.submit();
-                });//signupOK
-            });//jq
         </script>
 
     </head>
@@ -184,17 +138,19 @@
                         <tbody>
                             <c:forEach var="user" items="${_USERLIST_}">
                                 <tr>
-                                    <form action="">
+                                    <form action="" id="checkTutor">
                                         <td><input type="checkbox" id="checkbox" name="checkbox" value="${user.user_email}"></td>
                                     </form>
                                         <td class="dropdown">
-                                            <a href="" class="dropbtn">${user.user_email}</a>
-                                            <div class="dropdown-content" id="myDropdown2"><a href="#" onclick="openTutorPop()">회원 정보 조회</a> </div>
+                                            <a href="#" class="dropbtn">${user.user_email}</a>
+                                            <div class="dropdown-content" id="myDropdown2">
+                                                <a href="#" onclick="openTutorPop('${user.user_email}')">회원 정보 조회</a> 
+                                            </div>
                                         </td>
                                         <td>${user.user_nick}</td>
                                         <td><fmt:formatDate pattern="yyyy/MM/dd" value="${user.user_join}" /></td>
-                                    </tr>
-                                  
+                                   
+                                </tr>
                                 </c:forEach>
                         </tbody>
                     </table>
@@ -210,18 +166,15 @@
                         <ul class="pagination justify-content-center p-5">
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/signUp_comfim?currPage=${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
                                 <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/signUp_comfim?currPage=${page}">${page}</a></li>
                             </c:forEach>
-                            <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li> -->
-                            <!-- <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a> </li> -->
-                            <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li> -->
 
                             <c:if test="${_ADMINPAGINATION_.next}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/signUp_comfim?currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
                             </c:if>
 
                         </ul>

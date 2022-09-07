@@ -11,19 +11,6 @@
             <link href="${path}/resources/css/admin_header_footer.css" rel="stylesheet">
             <link href="${path}/resources/css/8_admin_page.css" rel="stylesheet">
             <link href="${path}/resources/css/8-02-userInfo.css" rel="stylesheet" >
-
-<!--             <script> 
-                 //회원정보조회
-                 let popup;
-                 function openUserPop() {
-                     popup = window.open("8-02-04_admin_user_info.html", "이거뭐지?",
-                         "width=310, height=400, left=1000, top=100, status=0 location=0",
-                         scrollbars = "no");
-                 }//openUserPop;
-                 function closeUserPop() {
-                     popup = window.close();
-                 }//closeUserPop
-             </script> -->
             <!-- ========================================================= -->
 
             <title>ADMIN-회원상세정보</title>
@@ -34,18 +21,33 @@
                 <div class="user">
                     <ul>
                         <div id="user1">
-                            <label for="userInfo" class="userinfo">
-                                회원정보
-                            </label>
+                            <label for="userInfo" class="userinfo">회원정보</label>
                         </div>
-                        <li>김회원</li>
-                        <li>abcde@이메일</li>
-                        <li>잘웃는진도개</li>
-                        <li>010-0000-0000</li>
-                        <li>0000년 00월 00일</li>
+                        <li>${_USERINFO_.user_name}</li>
+                        <li>${_USERINFO_.user_email}</li>
+                        <li>${_USERINFO_.user_nick}</li>
+                        <li>${_USERINFO_.user_phone}</li>
+                        <li>${_USERINFO_.user_phone}</li>
                         <div class="school">
-                            <li>학교이름</li>
-                            <li>학년</li>
+                            <c:choose>
+                                <c:when test="${_USERINFO_.st_school != null}">
+                                    <li>${_USERINFO_.st_school}</li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li>${_USERINFO_.tt_school}</li>
+                                </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${_USERINFO_.st_grade != null}">
+                                    <li>${_USERINFO_.st_grade}</li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li>${_USERINFO_.tt_subject}</li>
+                                </c:otherwise>
+                            </c:choose>
+                            <c:if test="${_USERINFO_.tt_depart != null}">
+                                <li>${_USERINFO_.tt_depart != null}</li>
+                            </c:if>
                         </div>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="closeUserPop()">닫기</button>
                     </ul>

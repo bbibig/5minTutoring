@@ -18,4 +18,6 @@ public interface AdminMapper {
 	@Select("SELECT count(*) FROM tbl_admin")
 	public abstract int adminCount()throws DAOException;
 	
+	
+	
 }//end interface

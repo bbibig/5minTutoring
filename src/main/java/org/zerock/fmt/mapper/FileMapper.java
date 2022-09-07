@@ -7,7 +7,7 @@ import org.zerock.fmt.domain.FileVO;
 import org.zerock.fmt.exception.DAOException;
 
 
-public interface FileMapperTest {
+public interface FileMapper {
 
 	//파일등록
 	public abstract Integer insertFile(FileDTO file) throws DAOException;

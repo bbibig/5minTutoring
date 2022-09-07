@@ -22,23 +22,16 @@
             if (loginResult != null && loginResult.length > 0) {
                 alert(ADMIN + loginResult);
             }
+            // //회원정보조회
+            let popup;
+            function openUserPop(user_email) {
+                // let user_email = $('#email').text();
+                console.log("user_email"+user_email);
 
-            $('a.prev, a.next').click(function(e){
-                e.preventDefault();
-
-                let formObj = $('#adPaginationFrom');
-                formObj.attr('action','/admin/student');
-                formObj.attr('method','get');
-
-                console.clear();
-                console.log('1. this : ', this );
-                console.log('2. $(this) : ', $(this));
-                formObj.find('input[name=currPage]').val( $(this).attr('href') );
-                console.log('3. $(this).attr("href")', $(this).attr('href'));
-                formObj.submit();
-
-            });//prev,next
-
+                popup = window.open("/admin/UserInfo?user_email="+user_email, "이거뭐지?",
+                    "width=310, height=400, left=1000, top=100, status=0 location=0",
+                    scrollbars = "no");
+            }//openUserPop;
         </script>
 
     </head>
@@ -130,8 +123,7 @@
                                     <td class="dropdown">
                                         <a href="#" class="dropbtn">${user.user_email}</a>
                                         <div class="dropdown-content" id="myDropdown1">
-                                            <a href="#" onclick="openUserPop()">회원 정보 조회</a>
-                                            <!--<a href="/mypage/studentPage">마이페이지</a>  -->
+                                            <a href="#" onclick="openUserPop('${user.user_email}')">회원 정보 조회</a>
                                         </div>
                                     </td>
                                     <td>${user.user_nick}</td>
@@ -148,22 +140,20 @@
                     <form action="#" id="adPaginationFrom">
                         <input type="hidden" name="currPage">
                         <input type="hidden" name="amount">
+                        <input type="hidden" name="pagesPerPage">
 
                         <ul class="pagination justify-content-center p-5">
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
-                                <li class="page-item"><a class="page-link rounded-circle prev" href="${_ADMINPAGINATION_.startPage - 1}" id="prev">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/student?currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
                                 <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/student?currPage=${page}">${page}</a></li>
                             </c:forEach>
-                            <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li> -->
-                            <!-- <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a> </li> -->
-                            <!-- <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li> -->
 
                             <c:if test="${_ADMINPAGINATION_.next}">
-                                <li class="page-item"><a class="page-link rounded-circle next" href="${_ADMINPAGINATION_.endPage + 1}" id="next">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/student?currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
                             </c:if>
 
                         </ul>
