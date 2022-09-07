@@ -1,16 +1,21 @@
 package org.zerock.fmt.domain;
 
 import java.util.Date;
-import lombok.Value;
 
-@Value
-public class QuestionBoardVO {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Data
+public class QuestionBoardDTO {
 	
 	
 	private Integer qb_number;
 	private Integer tp_number;		// 튜터페이지번호
 	private String user_email;
-	private String user_name;
 	
 	private String qb_title;
 	private String qb_content;

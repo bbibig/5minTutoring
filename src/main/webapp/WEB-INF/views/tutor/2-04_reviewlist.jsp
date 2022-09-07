@@ -50,13 +50,13 @@
 	            <div class="left-nav" id="left-navigation">
 					<ul class="nav nav-pills nav-stacked flex-column">
 						<li class="nav-item mt-3"><a class="nav-link nav-tabs active" aria-current="page"
-								href="/tutor/info/?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
+								href="/tutor/info?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
 						<li class="nav-item nav-tabs mt-3"><a class="nav-link"
-								href="/tutor/writeReview/?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
+								href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
 						<li class="nav-item nav-tabs mt-3"><a class="nav-link" 
-								href="/tutor/ask/?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
+								href="/tutor/ask?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
 						<li class="nav-item nav-tabs  mt-3"><a class="nav-link"
-								href="/tutor/tutoring/?num=${_TUTOR_INFO_.tp_number}">튜터에게 과외받기</a></li>
+								href="/tutor/tutoring?num=${_TUTOR_INFO_.tp_number}">튜터에게 과외받기</a></li>
 					</ul>
 			   	</div>
 	          </div> 

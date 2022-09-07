@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="ko">
 	<head>
@@ -51,13 +52,13 @@
 	                    <div class="left-nav" id="left-navigation">
 							<ul class="nav nav-pills nav-stacked flex-column">
 								<li class="nav-item mt-3"><a class="nav-link nav-tabs active" aria-current="page"
-										href="/tutor/info/?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
+										href="/tutor/info?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
 								<li class="nav-item nav-tabs mt-3"><a class="nav-link"
-										href="/tutor/writeReview/?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
+										href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
 								<li class="nav-item nav-tabs mt-3"><a class="nav-link" 
-										href="/tutor/ask/?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
+										href="/tutor/ask?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
 								<li class="nav-item nav-tabs  mt-3"><a class="nav-link"
-										href="/tutor/tutoring/?num=${_TUTOR_INFO_.tp_number}">튜터에게 과외받기</a></li>
+										href="/tutor/tutoring?num=${_TUTOR_INFO_.tp_number}">튜터에게 과외받기</a></li>
 							</ul>
 						</div>
 	                </div>
@@ -111,36 +112,43 @@
 	                    <!--우측섹션 header end !!!!!!-->
 	
 	                    <div class="row">
+	                    
+	                    	<c:forEach var="Q" items="${_QB_VO_}">
+		                        <div class="col-lg-4 col-md-6 col-sm-12">
+		                            <div class="ask_card" onclick="location.href='watchAnswer?${Q.qb_number}';" style="cursor:pointer">
+		                                <div class="student_info">
+		                                    <div class="sPic">
+		                                        <img src="/resources/img/profile.png" alt="튜터프로필">
+		                                    </div>
+		                                    <div class="Sname">${Q.user_name}</div>
+		                                    <div>${Q.regdate}</div>
+		                                </div>
+		                                <div class="ask_title" style="height:100%;">
+		                                    ${Q.qb_title}
+		                                    <div class="answer_ok">
+			                                    <c:if test="${Q.qb_answer == '0'}">
+			                                    	<c:out value="답변미완료"/>
+			                                    </c:if>
+			                                    <c:if test="${Q.qb_answer == '1'}">
+			                                    	<c:out value="답변완료"/>
+			                                    </c:if>
+			                                </div>
+		                                </div>
+		                            </div>
+		                        </div>
+	                        </c:forEach>
+	                        
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
 	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
 	                                <div class="student_info">
 	                                    <div class="sPic">
 	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
 	                                    </div>
-	                                    <div class="Sname">홍길동</div>
+	                                    <div class="Sname">예시</div>
 	                                </div>
 	                                <div class="ask_title">
-	                                    질문제목입니다.
-	                                    몇 글자까지 될까요?
-	                                    일이삼사오육칠팔구십일이삼사오육칠
-	                                    일이삼사오육칠팔구십일이삼사오육칠
-	                                    일이삼사오육칠팔구십일이삼사오육칠
-	                                    <div class="answer_ok">답변 미완료</div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
-	                                <div class="student_info">
-	                                    <div class="sPic">
-	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
-	                                    </div>
-	                                    <div class="Sname">가나다라</div>
-	                                </div>
-	                                <div class="ask_title">
-	                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus minus laboriosam
-	                                    pariatur consectetur excepturi.
-	                                    <div class="answer_ok ex">답변 완료</div>
+	                                    ${Q.qb_title}
+	                                    <div class="answer_ok yes">답변 완료</div>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -155,57 +163,12 @@
 	                                <div class="ask_title">
 	                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus minus laboriosam
 	                                    pariatur consectetur excepturi.
-	                                    <div class="answer_ok">답변 미완료</div>
+	                                    <div class="answer_ok yes">답변 미완료</div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <div class="row">
-	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
-	                                <div class="student_info">
-	                                    <div class="sPic">
-	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
-	                                    </div>
-	                                    <div class="Sname">이름</div>
-	                                </div>
-	                                <div class="ask_title">
-	                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut, magnam necessitatibus
-	                                    totam ad eligendi iste.
-	                                    <div class="answer_ok">답변 미완료</div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
-	                                <div class="student_info">
-	                                    <div class="sPic">
-	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
-	                                    </div>
-	                                    <div class="Sname">이름</div>
-	                                </div>
-	                                <div class="ask_title">
-	                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto tempora nisi labore
-	                                    unde doloremque.
-	                                    <div class="answer_ok">답변 미완료</div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
-	                                <div class="student_info">
-	                                    <div class="sPic">
-	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
-	                                    </div>
-	                                    <div class="Sname">이름</div>
-	                                </div>
-	                                <div class="ask_title">
-	                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus minus laboriosam
-	                                    pariatur consectetur excepturi.
-	                                    <div class="answer_ok">답변 미완료</div>
-	                                </div>
-	                            </div>
-	                        </div>
+	                  
 	                    </div>
 	
 	                    <nav aria-label="Page navigation example">

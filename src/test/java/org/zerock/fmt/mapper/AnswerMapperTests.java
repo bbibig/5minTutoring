@@ -84,7 +84,7 @@ public class AnswerMapperTests {
 	void selectATest() throws DAOException {
 		log.trace("답변글 출력");
 		
-		int qb_number = 33;
+		String qb_number = "33";
 		
 		AnswerVO Avo = this.answerMapper.selectA(qb_number);
 		
@@ -99,7 +99,7 @@ public class AnswerMapperTests {
 	void updateAStatusTest() throws DAOException {
 		log.trace("답변 상태 변경");
 		
-		int qb_number = 36;
+		String qb_number = "36";
 		
 		int affectedLines = this.answerMapper.updateAStatus(qb_number);
 		log.info("affectedLines : {}", affectedLines);

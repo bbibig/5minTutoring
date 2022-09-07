@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UseHandVO;
 import org.zerock.fmt.exception.ServiceException;
@@ -60,9 +61,9 @@ public class AskServiceTests {
 //		QuestionBoardVO QBvo = new QuestionBoardVO(null, 63, "st@email_1", "이진법이 뭔가요?", "가르쳐주세요.", 0, null, null);
 		
 //		손들기가 3개 이상일 때
-		QuestionBoardVO QBvo = new QuestionBoardVO(null, 63, "hi@gmail.com", "이진법이 뭔가요?", "가르쳐주세요.", 0, null, null);
+		QuestionBoardDTO QBdto = new QuestionBoardDTO(null, 63, "hi@gmail.com", "이진법이 뭔가요?", "가르쳐주세요.", 0, null, null);
 		
-		boolean createSucceed = this.askService.createQ(QBvo);
+		boolean createSucceed = this.askService.createQ(QBdto);
 		log.info("createSucceed: {}", createSucceed);
 		
 	} // testcreateQ
@@ -75,7 +76,7 @@ public class AskServiceTests {
 	void testRegUseHand() throws ServiceException {
 		log.trace("손들기 사용 정보 등록");
 		
-		UseHandVO useHandVO = new UseHandVO(null, 41, null, null, "hi@gmail.com");
+		UseHandVO useHandVO = new UseHandVO(null, 42, null, null, "hi@gmail.com");
 		
 		boolean createSucceed = this.askService.regUseHand(useHandVO);
 		log.info("createSucceed: {}", createSucceed);
@@ -94,9 +95,9 @@ public class AskServiceTests {
 //		QuestionBoardVO QBvo = new QuestionBoardVO(33, null, null, "수정된 질문", "질문입니다.", null, null, null);
 
 		// 수정 가능한 경우
-		QuestionBoardVO QBvo = new QuestionBoardVO(23, null, null, "수정된 질문", "질문입니다.", null, null, null);
+		QuestionBoardDTO QBdto = new QuestionBoardDTO(42, null, null, "수정된 질문", "질문입니다.", null, null, null);
 		
-		boolean updateSuceed = this.askService.updateQ(QBvo);
+		boolean updateSuceed = this.askService.updateQ(QBdto);
 		log.info("updateSuceed: {}", updateSuceed);
 		
 	} // testUpdateQ
@@ -110,8 +111,8 @@ public class AskServiceTests {
 		log.trace("질문글 삭제");
 		
 		// 답변이 있는 경우 삭제 불가
-		int qb_number = 33;
-		String user_email = "hi@gmail.com";
+		String qb_number = "8";
+		String user_email = "test@gmail.com";
 		
 		boolean deleteSuceed = this.askService.deleteQ(qb_number, user_email);
 		log.info("deleteSuceed: {}", deleteSuceed);
@@ -126,7 +127,7 @@ public class AskServiceTests {
 	void testGetQB() throws ServiceException {
 		log.trace("해당 튜터가 받은 질문글 출력");
 		
-		int tp_number = 63;
+		String tp_number = "63";
 		List<QuestionBoardVO> list = this.askService.getQB(tp_number);
 
 		log.info("list: {}", list);

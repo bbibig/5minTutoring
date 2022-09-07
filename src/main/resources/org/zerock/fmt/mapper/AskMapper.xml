@@ -42,11 +42,15 @@
 	
 	<select id="selectQB" resultType="org.zerock.fmt.domain.QuestionBoardVO">
 		SELECT 
+		    qb_number,
+		    tp_number,
+		    q.user_email,
 		    u.user_name,
 		    qb_title,
 		    qb_content,
+		    qb_answer,
 		    regdate,
-		    qb_answer
+		    updatedate
 		FROM tbl_question_board q, tbl_user u
 		WHERE tp_number = #{tp_number}
 		AND u.user_name IN (SELECT user_name

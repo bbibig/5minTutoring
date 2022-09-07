@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.exception.DAOException;
 
@@ -58,7 +59,7 @@ public class AskMapperTests {
 	void insertQTest() throws DAOException {
 		log.trace("질문글 작성");
 		
-		QuestionBoardVO newQ  = new QuestionBoardVO(null, 42, "hi@gmail.com", "문법을 잘모르겠어요", "궁금합니다.", 0, null, null);
+		QuestionBoardDTO newQ = new QuestionBoardDTO(null, 42, "hi@gmail.com", "문법을 잘모르겠어요", "궁금합니다.", 0, null, null);
 
 		int result = this.askMapper.insertQ(newQ);
 		
@@ -75,7 +76,7 @@ public class AskMapperTests {
 	void updateQTest() throws DAOException {
 		log.trace("질문글 수정");
 		
-		QuestionBoardVO revisedQ  = new QuestionBoardVO(32, null, null, "미적분 질문합니다.", "미적분 고함수의 활용 그래프 개형 그릴 때 함수의 분모 분자를 로피탈해서 x를 무한대로 보낸다는게 이해가 안가요. 설명 부탁드립니다.", null, null, null);
+		QuestionBoardDTO revisedQ = new QuestionBoardDTO(32, null, null, "미적분 질문합니다.", "미적분 고함수의 활용 그래프 개형 그릴 때 함수의 분모 분자를 로피탈해서 x를 무한대로 보낸다는게 이해가 안가요. 설명 부탁드립니다.", null, null, null);
 		
 		int affectedLine = this.askMapper.updateQ(revisedQ);
 		
@@ -92,7 +93,7 @@ public class AskMapperTests {
 	void deleteQTest() throws DAOException {
 		log.trace("질문글 삭제");
 		
-		int qb_number = 35;
+		String qb_number = "35";
 		
 		int affectedLines = this.askMapper.deleteQ(qb_number);
 		log.info("affectedLines : {}", affectedLines);
@@ -109,7 +110,7 @@ public class AskMapperTests {
 	void selectQBTest() throws DAOException {
 		log.trace("질문글 출력");
 		
-		int tp_number = 63;
+		String tp_number = "63";
 		
 		List<QuestionBoardVO> list = this.askMapper.selectQB(tp_number);
 		assertNotNull(list);

@@ -82,7 +82,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring/?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
+													<a href="tutoring?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -109,7 +109,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring/?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
+													<a href="tutoring?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -137,7 +137,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring/?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
+													<a href="tutoring?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -207,7 +207,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring/?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
+													<a href="tutoring?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -235,7 +235,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring/?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
+													<a href="tutoring?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>
@@ -263,7 +263,7 @@
 													</span>
 												</div>
 												<div class="more">
-													<a href="tutoring/?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
+													<a href="tutoring?num=${sortedT.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>
 												</div>
 											</div>
 										</div>

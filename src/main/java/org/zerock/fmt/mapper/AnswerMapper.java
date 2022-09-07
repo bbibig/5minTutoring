@@ -15,10 +15,10 @@ public interface AnswerMapper {
 	public abstract Integer updateA(AnswerVO Avo) throws DAOException;
 	
 	// 해당 질문에 대한 답변글 출력
-	public abstract AnswerVO selectA(int qb_number) throws DAOException; 
+	public abstract AnswerVO selectA(String qb_number) throws DAOException; 
 	// 튜터 이름도 같이 출력할지 고민,,
 	
 	// 답변 상태 변경 - QB_ANSWER 컬럼의 값 1로 변경
-	public abstract Integer updateAStatus(int qb_number) throws DAOException;
+	public abstract Integer updateAStatus(String qb_number) throws DAOException;
 	
 } // end interface

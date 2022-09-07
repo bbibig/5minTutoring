@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.fmt.domain.AnswerVO;
+import org.zerock.fmt.domain.HandBackVO;
+import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UseHandVO;
 import org.zerock.fmt.exception.DAOException;
@@ -39,19 +41,19 @@ public class AskServiceImpl implements AskService {
 
 	@Transactional
 	@Override
-	public boolean createQ(QuestionBoardVO QBvo) throws ServiceException {
+	public boolean createQ(QuestionBoardDTO QBdto) throws ServiceException {
 		log.trace("질문글 등록 및 손들기 사용");
 		
 		try {
-			int remainingHand = this.useHandMapper.selectHandsWallet(QBvo.getUser_email());
+			int remainingHand = this.useHandMapper.selectHandsWallet(QBdto.getUser_email());
 
 			// 남은 손들기가 3개 이상이면 손들기 사용 (-3)
 			if (remainingHand >= 3) {
-				this.userMapper.updateHandUse(3, QBvo.getUser_email());
+				this.userMapper.updateHandUse(3, QBdto.getUser_email());
 				log.info("손들기 3개가 사용되었습니다.");
 				
 				// 질문글 등록
-				return this.askMapper.insertQ(QBvo) == 1;
+				return this.askMapper.insertQ(QBdto) == 1;
 				
 			} else { log.info("손들기가 부족합니다."); }
 			return false;
@@ -72,14 +74,14 @@ public class AskServiceImpl implements AskService {
 
 	@Transactional
 	@Override
-	public boolean updateQ(QuestionBoardVO QBvo) throws ServiceException {
+	public boolean updateQ(QuestionBoardDTO QBdto) throws ServiceException {
 		log.trace("질문글 수정");
 		
 		try {
-			AnswerVO answer = this.answerMapper.selectA(QBvo.getQb_number());
+			AnswerVO answer = this.answerMapper.selectA( Integer.toString(QBdto.getQb_number()) );
 			
 			// 답변글이 없을 때만 질문글 수정 가능
-			if(answer == null) { return this.askMapper.updateQ(QBvo) == 1; } 
+			if(answer == null) { return this.askMapper.updateQ(QBdto) == 1; } 
 			else { log.info("답변이 등록되어 질문을 수정할 수 없습니다."); }
 			return false;
 			
@@ -90,7 +92,7 @@ public class AskServiceImpl implements AskService {
 
 	@Transactional
 	@Override
-	public boolean deleteQ(int qb_number, String user_email) throws ServiceException {
+	public boolean deleteQ(String qb_number, String user_email) throws ServiceException {
 		log.trace("질문글 삭제");
 
 		try {
@@ -98,10 +100,19 @@ public class AskServiceImpl implements AskService {
 			
 			// 답변글이 없을 때만 손들기 반환 및 삭제 가능
 			if(answer == null) {
-				this.userMapper.updateHandGet(3, user_email); 
+				// 손들기 반환
+				this.userMapper.updateHandGet(3, user_email);
+				
+				// 손들기 반환 정보 저장
+				HandBackVO handBackVO = new HandBackVO(null, Integer.parseInt(qb_number), null, null, user_email);
+				this.useHandMapper.insertHandBack(handBackVO);
+
 				log.info("손들기 3개가 반환되었습니다.");
 				
+				// tbl_question_board와 tbl_usehand_student의 
+				// 질문글과 손들기 사용정보 연쇄삭제
 				return this.askMapper.deleteQ(qb_number) == 1;
+				
 			} else { log.info("답변이 등록되어 질문을 삭제할 수 없습니다."); }
 			
 			return false;
@@ -115,7 +126,7 @@ public class AskServiceImpl implements AskService {
 	} // deleteQ
 
 	@Override
-	public List<QuestionBoardVO> getQB(int tp_number) throws ServiceException {
+	public List<QuestionBoardVO> getQB(String tp_number) throws ServiceException {
 		log.trace("해당 튜터가 받은 질문글 출력");
 		
 		try { return this.askMapper.selectQB(tp_number); } 

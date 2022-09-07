@@ -1,21 +1,22 @@
 package org.zerock.fmt.controller;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.exception.ControllerException;
-import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.AskService;
 import org.zerock.fmt.service.TutorService;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -25,7 +26,11 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class TutorController {
 	
+	@Setter(onMethod_= @Autowired)
 	private TutorService tutorService;
+	
+	@Setter(onMethod_= @Autowired)
+	private AskService askService;
 	
 	@GetMapping("/main")
 	public String tpMain(Model model, HttpServletRequest req) throws ControllerException {
@@ -114,6 +119,10 @@ public class TutorController {
 			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
 			log.info("tutorInfo: {}", tutorInfo);
 			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+			List<QuestionBoardVO> QBvo = this.askService.getQB(tp_number);
+			log.info("QBvo :{}", QBvo);
+			model.addAttribute("_QB_VO_",QBvo);
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		

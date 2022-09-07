@@ -20,4 +20,21 @@
 		)
 	</insert>
 	
+	<insert id="insertHandBack">
+		INSERT INTO tbl_handback_student
+		(
+		    hb_number, 
+		    qb_number,
+		    tb_number,
+		    hback_date,
+		    user_email
+		) VALUES (
+		    hb_num.NEXTVAL,
+		    #{qb_number},
+		    #{tb_number},
+		    CURRENT_DATE,
+		    #{user_email}
+		)
+	</insert>
+	
 </mapper>
