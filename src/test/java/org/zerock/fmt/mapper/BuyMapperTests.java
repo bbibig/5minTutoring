@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.BuyDTO;
+import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaAdmin;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -40,19 +42,19 @@ public class BuyMapperTests {
 	@Setter(onMethod_= {@Autowired})
 	private BuyMapper buyMapper;
 	
-	@Test
-	@Order(1)
-	@Timeout(value=10, unit = TimeUnit.SECONDS)
-	void selectPayPage() throws DAOException {
-		log.trace("selectPayPage() invoked.");
-		
-		String user_email = "test@gmail.com";
-		Integer h_number = 3;
-		
-		BuyDTO payPage = this.buyMapper.selectPayPage(user_email, h_number);
-		
-		log.info("\t+ payPage : {}", payPage);
-	} // selectPayPage
+//	@Test
+//	@Order(1)
+//	@Timeout(value=10, unit = TimeUnit.SECONDS)
+//	void selectPayPage() throws DAOException {
+//		log.trace("selectPayPage() invoked.");
+//		
+//		String user_email = "test@gmail.com";
+//		Integer h_number = 3;
+//		
+//		BuyDTO payPage = this.buyMapper.selectPayPage(user_email, h_number);
+//		
+//		log.info("\t+ payPage : {}", payPage);
+//	} // selectPayPage
 	
 	@Test
 	@Order(2)
@@ -70,17 +72,38 @@ public class BuyMapperTests {
 		
 	} // insertBuyHands
 	
+
 	@Test
-	@Order(3)
-	@Timeout(value = 10, unit = TimeUnit.SECONDS)
-	void selectMyPayPage() throws DAOException {
-		log.trace("selectMyPayPage() invoked.");
-		
-		BuyDTO myPayPage = this.buyMapper.selectMyPayPage(5);
-		
-		log.info("\t+ myPayPage: {}", myPayPage);
-	} // selectMyPayPage
+	@DisplayName("myPageAllBuy")
+	void myPageAllBuy() throws DAOException {
+		log.trace("myPageAllBuy 마이페이지 구매내역");
+//		String user_email ="test@gmail.com";
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setAmount(6);
+		cri.setCurrPage(1);
+		cri.setPagesPerPage(1);
+		cri.setUser_email("test@gmail.com");
+		List<BuyVO> list = this.buyMapper.myPageAllBuy(cri);
+		list.forEach(log::info);
+	}//myPageAllBuy
 	
+	@Test
+	@DisplayName("myPageBuyCount")
+	void myPageBuyCount() throws DAOException {
+		log.trace("myPageBuyCount 마이페이지 총 구매 건수");
+		String user_email = "test@gmail.com";
+		int result = this.buyMapper.myPageBuyCount(user_email);
+		log.info("\t + result : {}", result);
+	}//myPageBuyCount
+	
+	@Test
+	@DisplayName("selectBuyDetail")
+	void selectBuyDetail() throws DAOException {
+		log.trace("selectBuyDetail 마이페이지 구매내역 상세조회");
+		int b_number = 10;
+		BuyInfoVO info = this.buyMapper.selectBuyDetail(b_number);
+		log.info("\t+ info : {}", info);
+	}//selectBuyDetail
 	
 	@Test
 	@DisplayName("selectAllBuy")

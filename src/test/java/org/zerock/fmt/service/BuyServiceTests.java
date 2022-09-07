@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.BuyDTO;
+import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaAdmin;
+import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -36,19 +39,6 @@ public class BuyServiceTests {
 	@Setter(onMethod_= {@Autowired})
 	private BuyService buyService;
 
-	@Test
-	@Timeout(value=5, unit = TimeUnit.SECONDS)
-	void getPayPage() throws ServiceException {
-		log.info("getPayPage() invoked.");
-		
-		String user_email = "test@gmail.com";
-		Integer h_number = 2;
-		
-		BuyDTO payPage = this.buyService.getPayPage(user_email, h_number);
-		
-		log.info("\t+ payPage: {}", payPage);
-		
-	} // getPayPage
 	
 	@Test
 	@Timeout(value=10, unit = TimeUnit.SECONDS)
@@ -64,17 +54,37 @@ public class BuyServiceTests {
 		log.info("\t+ affectedLines: {}", affectedLines);
 		
 	} // buyHands
+
+	@Test
+	@DisplayName("myPageBuyinfo")
+	void myPageBuy() throws ServiceException {
+		log.trace("myPageBuyinfo 마이페이지 - 구매내역정보");
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setAmount(6);
+		cri.setCurrPage(1);
+		cri.setPagesPerPage(1);
+		cri.setUser_email("test@gmail.com");
+		List<BuyVO> list = this.buyService.myPageBuy(cri);
+		list.forEach(log::info);
+	}//myPageBuyinfo
 	
 	@Test
-	@Timeout(value = 10, unit = TimeUnit.SECONDS)
-	void getMyPayPage() throws ServiceException {
-		log.trace("selectMyPayPage() invoked.");
-		
-		BuyDTO myPayPage = this.buyService.getMyPayPage(5);
-		
-		log.info("\t+ myPayPage: {}", myPayPage);
-	} // getMyPayPage
+	@DisplayName("myPageBuyCount")
+	void myPageBuyCount() throws ServiceException {
+		log.trace("myPageBuyCount 마이페이지 - 총 구매건수");
+		String user_email="test@gmail.com";
+		int result = this.buyService.myPageBuyCount(user_email);
+		log.info("\t+ result : {}", result);
+	}//myPageBuyCount
 	
+	@Test
+	@DisplayName("myPageBuyinfo")
+	void myPageBuyinfo() throws ServiceException {
+		log.trace("myPageBuyinfo 마이페이지 - 구매내역 상세조회");
+		int b_number = 8;
+		BuyInfoVO info = this.buyService.myPageBuyinfo(b_number);
+		log.info("\t + info : {}", info);
+	}//myPageBuyinfo
 	
 	@Test
 	@DisplayName("selectAllBuy")

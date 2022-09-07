@@ -6,8 +6,8 @@
 
 <mapper namespace="org.zerock.fmt.mapper.BuyMapper">
   
-    <!-- 구매하기 - 구매 정보 조회 -->
-      <select id="selectPayPage" resultType="org.zerock.fmt.domain.BuyVO">
+      <!-- 구매하기 - 구매 정보 조회 -->
+      <!-- <select id="selectPayPage" resultType="org.zerock.fmt.domain.BuyVO">
         SELECT 
             u.*,
             h.* 
@@ -16,20 +16,44 @@
             TBL_HAND h
         WHERE u.USER_EMAIL = #{user_email}
         AND h.H_NUMBER = #{h_number}
+      </select> -->
+
+      <!-- 마이페이지 - 구매내역조회 -->
+      <select id="myPageAllBuy" resultType="org.zerock.fmt.domain.BuyVO">
+        SELECT 
+            TBL_BUY.*, 
+            TBL_HAND.H_NAME
+        FROM TBL_BUY, TBL_HAND
+        WHERE TBL_BUY.H_NUMBER = TBL_HAND.H_NUMBER
+                AND USER_EMAIL= #{user_email}
+        ORDER BY TBL_BUY.B_DATE DESC
+
+        OFFSET (#{currPage}-1) * #{amount} ROW 
+        FETCH NEXT #{amount} ROWS ONLY
       </select>
 
-      <select id="">
-
+      <!-- 마이페이지 - 구매내역 상세조회 -->
+      <select id="selectBuyDetail" resultType="org.zerock.fmt.domain.BuyInfoVO">
+        SELECT 
+            TBL_BUY.*, 
+            TBL_HAND.H_NAME,
+            TBL_USER.USER_PHONE
+        FROM TBL_BUY , TBL_HAND , TBL_USER
+        WHERE TBL_BUY.H_NUMBER = TBL_HAND.H_NUMBER
+            AND TBL_BUY.USER_EMAIL = TBL_USER.USER_EMAIL
+            AND TBL_BUY.B_NUMBER = #{b_number}
+        ORDER BY TBL_BUY.B_DATE DESC
       </select>
 
+      <!-- 구매 내역 추가 -->
       <insert id="insertBuyHands" parameterType="org.zerock.fmt.domain.BuyDTO">
-     
         INSERT INTO tbl_buy
             (USER_EMAIL, H_NUMBER, B_COUNT, B_PRICE)
         VALUES
             ( #{user_email}, #{h_number}, #{b_count}, #{b_price} )
       </insert>
 
+      <!-- 어드민 구매내역 조회  -->
       <select id="selectAllBuy" resultType="org.zerock.fmt.domain.BuyVO">
         SELECT 
             TBL_BUY.*, 
