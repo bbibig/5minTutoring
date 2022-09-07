@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
     <!doctype html>
     <html lang="ko">
@@ -11,6 +12,9 @@
         <link href="${path}/resources/css/admin_header_footer.css" rel="stylesheet">
         <link href="${path}/resources/css/8_admin_page.css" rel="stylesheet">
         <!-- ========================================================= -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+
         <title>admin - 매출관리 </title>
 
     </head>
@@ -70,70 +74,35 @@
                         <li>
                             <div class="sales-info">
                                 <ul>
-                                    <li>
-                                        <p>매출액 : </p>
-                                    </li>
-                                    <li> <a href="#"> 999,999,999원</a></li>
+                                    <li><p>매출액 : </p></li>
+                                    <li><fmt:formatNumber value="${countSale}" pattern="###,###,### 원"/></li>
                                 </ul>
                             </div>
                         </li>
-
                     </ul>
-
                 </div>
-
-
-
 
                 <!-- Content List -->
                 <div class="container card p-4 bg-card">
                     <table class="table table-hover table-padding">
                         <thead>
                             <tr>
-                                <th>회원 번호</th>
-                                <th>학생 계정</th>
+                                <th>회원 계정</th>
                                 <th>상품</th>
-                                <th>매출액</th>
+                                <th>판매 금액</th>
                                 <th>판매 날짜</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>stu-0001</td>
-                                <td>abcde@gmail.com</td>
-                                <td>손들기 20개</td>
-                                <td>6,600원</td>
-                                <td>2022-08-01</td>
-                            </tr>
-
-                            <tr>
-                                <td>stu-0001</td>
-                                <td>abcde@gmail.com</td>
-                                <td>손들기 20개</td>
-                                <td>6,600원</td>
-                                <td>2022-08-01</td>
-                            </tr>
-                            <tr>
-                                <td>stu-0001</td>
-                                <td>abcde@gmail.com</td>
-                                <td>손들기 20개</td>
-                                <td>6,600원</td>
-                                <td>2022-08-01</td>
-                            </tr>
-                            <tr>
-                                <td>stu-0001</td>
-                                <td>abcde@gmail.com</td>
-                                <td>손들기 20개</td>
-                                <td>6,600원</td>
-                                <td>2022-08-01</td>
-                            </tr>
-                            <tr>
-                                <td>stu-0001</td>
-                                <td>abcde@gmail.com</td>
-                                <td>손들기 20개</td>
-                                <td>6,600원</td>
-                                <td>2022-08-01</td>
-                            </tr>
+                            <c:forEach var="buy" items="${_BUYLIST_}">
+                                <tr>
+                                    <td>${buy.user_email}</td>
+                                    <td>${buy.h_name}</td>
+                                    <td>${buy.b_price}</td>
+                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${buy.b_date}" /></td>
+                                </tr>
+                            </c:forEach>
+                            
                         </tbody>
                     </table>
 
@@ -141,16 +110,26 @@
                 <!--End main contents card(박스)-->
 
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center p-5">
-                        <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a>
-                        </li>
-                        <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-                        <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-                        <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a>
-                        </li>
-                    </ul>
+                    <form action="#" id="adPaginationFrom">
+                        <input type="hidden" name="currPage">
+                        <input type="hidden" name="amount">
+
+                        <ul class="pagination justify-content-center p-5">
+
+                            <c:if test="${_ADMINPAGINATION_.prev}">
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/sale/sell?currPage=${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
+                            </c:if>
+                        
+                            <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
+                                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/sale/sell?currPage=${page}">${page}</a></li>
+                            </c:forEach>
+
+                            <c:if test="${_ADMINPAGINATION_.next}">
+                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/sale/sell?currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
+                            </c:if>
+                            
+                        </ul>
+                    </form>
                 </nav>
 
                 <!-- TO -->

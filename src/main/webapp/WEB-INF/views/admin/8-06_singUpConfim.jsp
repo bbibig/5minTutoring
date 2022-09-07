@@ -53,8 +53,7 @@
 
                 //튜터승인 정보 조회
                 let popup;
-                function openTutorPop() {
-                    let user_email = $('#email').text();
+                function openTutorPop(user_email) {
                     console.log("user_email"+user_email);
                     popup = window.open("/admin/tutorInfo?user_email="+user_email, "이거뭐지?",
                         "width=350, height=650, left=500, top=80, status=0 location=0",
@@ -143,9 +142,9 @@
                                         <td><input type="checkbox" id="checkbox" name="checkbox" value="${user.user_email}"></td>
                                     </form>
                                         <td class="dropdown">
-                                            <a href="#" class="dropbtn" id="email">${user.user_email}</a>
+                                            <a href="#" class="dropbtn">${user.user_email}</a>
                                             <div class="dropdown-content" id="myDropdown2">
-                                                <a href="#" onclick="openTutorPop()">회원 정보 조회</a> 
+                                                <a href="#" onclick="openTutorPop('${user.user_email}')">회원 정보 조회</a> 
                                             </div>
                                         </td>
                                         <td>${user.user_nick}</td>

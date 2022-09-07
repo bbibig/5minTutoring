@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.domain.AdminPageDTO;
 import org.zerock.fmt.domain.AdminVO;
+import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
@@ -28,6 +29,7 @@ import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.AdminService;
+import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.FaqService;
 import org.zerock.fmt.service.FileService;
 import org.zerock.fmt.service.UserService;
@@ -54,6 +56,9 @@ public class AdminController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private FileService fileService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BuyService buyService;
 	//--------------------------------------------- 어드민로그인
 	@GetMapping
 	public String adminLogin() {
@@ -231,11 +236,18 @@ public class AdminController {
 //	===================================================================================================
 
 	@RequestMapping("/sale/sell")
-	public String adminSale() {
+	public String adminSale(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("매출관리 페이지");
-		//buy service
-		return "admin/8-05_sale_sell";
-	}
+		try {
+			List<BuyVO> buyList = this.buyService.selectAllBuy(cri);
+			model.addAttribute("_BUYLIST_",buyList);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.buyService.countBuy());
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+			int countSale = this.buyService.countSale();
+			model.addAttribute("countSale",countSale);
+			return "admin/8-05_sale_sell";			
+		} catch (Exception e) {throw new ControllerException(e); }//try-catch
+	}//adminSale
 	
 	@RequestMapping("/sale/withdrow")
 	public String adminWithDrow() {

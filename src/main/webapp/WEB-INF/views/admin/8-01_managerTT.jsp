@@ -18,8 +18,7 @@
         <script>
             //회원정보조회
             let popup;
-            function openUserPop() {
-                let user_email = $('#email').text();
+            function openUserPop(user_email) {
                 console.log("user_email"+user_email);
 
                 popup = window.open("/admin/UserInfo?user_email="+user_email, "이거뭐지?",
@@ -121,9 +120,9 @@
                             <c:forEach var="user" items="${_USERLIST_}">
                                 <tr>
                                     <td class="dropdown">
-                                        <a href="#" class="dropbtn" id="email">${user.user_email}</a>
+                                        <a href="#" class="dropbtn">${user.user_email}</a>
                                         <div class="dropdown-content" id="myDropdown1">
-                                            <a href="#" onclick="openUserPop()">회원 정보 조회</a>
+                                            <a href="#" onclick="openUserPop('${user.user_email}')">회원 정보 조회</a>
                                             <!--<a href="/mypage/studentPage">마이페이지</a>  -->
                                         </div>
                                     </td>
@@ -131,18 +130,6 @@
                                     <td><fmt:formatDate pattern="yyyy/MM/dd" value="${user.user_join}" /></td>
                                 </tr>
                             </c:forEach>
-                            <!-- <script>
-                            let popup;
-                            function openUserPop() {
-                                let user_email = $('#email').text();
-                                console.log("user_email"+user_email);
-                
-                                popup = window.open("/admin/UserInfo?user_email="+user_email, "이거뭐지?",
-                                    "width=310, height=450, left=1000, top=100, status=0 location=0",
-                                    scrollbars = "no");
-                            }//openUserPop;
-                             </script> -->
-
                         </tbody>
                     </table>
 

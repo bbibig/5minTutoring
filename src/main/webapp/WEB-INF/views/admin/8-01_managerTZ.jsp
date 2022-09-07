@@ -18,8 +18,8 @@
         <script>
             //회원정보조회
             let popup;
-            function openUserPop() {
-                let user_email = $('#email').text();
+            function openUserPop(user_email) {
+                // let user_email = $('#email').text();
                 console.log("user_email"+user_email);
 
                 popup = window.open("/admin/UserInfo?user_email="+user_email, "이거뭐지?",
@@ -123,9 +123,9 @@
                             <c:forEach var="user" items="${_USERLIST_}">
                                 <tr>
                                     <td class="dropdown">
-                                        <a href="#" class="dropbtn" id="email">${user.user_email}</a>
+                                        <a href="#" class="dropbtn">${user.user_email}</a>
                                         <div class="dropdown-content" id="myDropdown1">
-                                            <a href="#" onclick="openUserPop()">회원 정보 조회</a>
+                                            <a href="#" onclick="openUserPop('${user.user_email}')">회원 정보 조회</a>
                                         </div>
                                     </td>
                                     <td>${user.user_nick}</td>
