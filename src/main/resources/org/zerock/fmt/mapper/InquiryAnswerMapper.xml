@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="org.zerock.fmt.mapper.InquiryAnswerMapper">
+
+        <insert id="insertIA">
+            INSERT INTO tbl_individual_answer (iq_number, ad_id, ia_title, ia_content, ia_date)
+            VALUES (#{iq_number}, #{ad_id}, #{ia_title}, #{ia_content}, CURRENT_DATE)
+        </insert>
+    
+    	
+    	
+    </mapper>    

@@ -10,12 +10,10 @@ import org.zerock.fmt.exception.DAOException;
 
 public interface InquiryQuestionMapper {
 
-
-	
 	
 //	[C]  1:1 문의글 작성 
 	public abstract Integer insertIQ(InquiryQuestionDTO dto) throws DAOException; 
-	// 매퍼xml에 작성하기..
+
 	public abstract Integer insertSelectKey(InquiryQuestionDTO dto) throws DAOException;
 	
 	
@@ -28,13 +26,12 @@ public interface InquiryQuestionMapper {
 	public abstract List<InquiryQuestionVO> selectAllInquiryList() throws DAOException;
 	
 	
-//	[R] 특정 1:1 문의글 조회 (만약에 답변이 달렸다면 답변도 함께 조회)
-	// xml에 작성하기
-	public abstract InquiryQuestionDTO select(@Param("iq_number")Integer iq_number) throws DAOException;
+//	[R]  특정 1:1 문의글 조회 
+	@Select("SELECT * FROM tbl_individual_question WHERE iq_number = #{iq_number}")
+	public abstract InquiryQuestionVO select(@Param("iq_number")Integer iq_number) throws DAOException;
 	
 	
-//  [U] 답변 상태 수정 (미답변/답변완료) 
-	// XML에 작성
+//  [U]  답변 상태 수정 (미답변(1)/답변완료(0)) 
 	public abstract Integer updateInquiryState(InquiryQuestionDTO dto) throws DAOException;
 	
 	
