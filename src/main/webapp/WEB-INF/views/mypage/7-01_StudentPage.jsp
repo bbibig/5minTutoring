@@ -13,6 +13,21 @@
     <link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
     <title>기본 정보(학생)</title>
+
+    <script>
+        $(function() {
+            let modifyResult = '${_USERMODIFYRESULT_}';
+
+            if(modifyResult === '회원정보 수정 성공'){
+                Swal.fire({
+                    icon: 'success',
+                    text: '수정 완료!',
+                    confirmButtonText: '확인'
+                })
+            }
+        })// jq
+    </script>
+
 </head>
 
 <body>
@@ -54,7 +69,7 @@
 
                 <!-- FROM -->
                 <div class="container card p-4 bg-card">
-                    <form action="/mypage/studentPageModify" method="post" id="userInfo">
+                    <form action="/mypage/studentPageModify" method="post" id="userInfo" enctype="multipart/form-data" novalidate>
                         <div class="row">
 
                             <div class="col-4">

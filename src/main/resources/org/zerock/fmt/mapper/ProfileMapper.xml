@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.ProfileMapper">
+
+	<!-- 프로필 사진 등록 -->
+    <insert id="insertProfile">
+		INSERT INTO tbl_user_profile
+		VALUES(pro_num.NEXTVAL, #{user_email}, #{file_name}, #{file_path})
+    </insert>
+    
+    <!-- 프로필 사진 수정 -->
+    <update id="updateProfile">
+    	UPDATE tbl_user_profile
+		SET file_path = #{file_path}
+		WHERE user_email = #{user_email}
+    </update>
+
+
+</mapper>

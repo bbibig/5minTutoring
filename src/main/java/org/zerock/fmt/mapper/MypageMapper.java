@@ -57,7 +57,7 @@ public interface MypageMapper {
 
 	
 //	============<<UPDATE>>============
-	//1. 기본정보 수정 + 프로필사진 추가 예정(UserMapper에 동일 기능 있음)
+	//1. 기본정보 수정 + 프로필사진 추가 예정
 	public abstract boolean updateUserInfo(UserDTO dto) throws DAOException;
 	
 	

@@ -2,6 +2,7 @@
 /*      기본정보(7-01,7-02)      */
 /* ============================= */
 
+
 /* ============================= */
 /*      파일첨부 미리보기         */
 /* ============================= */
@@ -152,13 +153,14 @@ function pwCheck() {
                     }).then((result) => {
                         // 저장확인 누르면 저장완료 창!
                         if (result.isConfirmed) {
-                            Swal.fire({
-                                icon: 'success',
-                                text: '수정 완료!',
-                                confirmButtonText: '확인'
-                            }).then(function (e) {
-                                userForm.submit();
-                            })// Swal.fire-then
+                            userForm.submit();
+                            // Swal.fire({
+                            //     icon: 'success',
+                            //     text: '수정 완료!',
+                            //     confirmButtonText: '확인'
+                            // }).then(function (e) {
+                            //     userForm.submit();
+                            // })// Swal.fire-then
                         }// if
 
                     })// Swal.fire-then
