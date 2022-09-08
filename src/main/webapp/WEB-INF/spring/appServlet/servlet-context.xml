@@ -61,6 +61,9 @@
 		<!-- 임시폴더지정 -->
 	</beans:bean>	
 
+	<!-- 프로필사진 리소스 경로 -->
+	<resources mapping="/profile/*.png" location="file:///c:/temp/profile/" />
+
 	<!-- component-scan -->
 	<context:component-scan base-package="org.zerock.fmt.controller" />
 	<context:component-scan base-package="org.zerock.fmt.interceptor" />

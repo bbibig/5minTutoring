@@ -68,7 +68,7 @@
                 <tr>
                   <th scope="row"> ${myquestion.qb_number} </th>
                   <td colspan="2"><a href="/tutor/watchAnswer"> ${myquestion.qb_title} </a></td>
-                  <td class="text-center"> <fmt:formatDate value="${myquestion.qb_date}" pattern="yyyy-MM-dd" /> </td>
+                  <td class="text-center"> <fmt:formatDate value="${myquestion.regdate}" pattern="yyyy.MM.dd" /> </td>
                 </tr>
               </c:forEach>
             </tbody>
