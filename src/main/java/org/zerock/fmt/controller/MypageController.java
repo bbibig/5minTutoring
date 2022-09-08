@@ -10,22 +10,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.common.SharedScopeKeys;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.PageMyPageDTO;
+import org.zerock.fmt.domain.ProfileDTO;
+import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.MypageService;
+import org.zerock.fmt.service.ProfileService;
 import org.zerock.fmt.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -45,6 +48,12 @@ public class MypageController {
 	@Setter(onMethod_= @Autowired)
 	private MypageService mypageService;
 	
+	@Setter(onMethod_= @Autowired)
+	private ProfileLoad profileUpload;
+	
+	@Setter(onMethod_= @Autowired)
+	private ProfileService profileService;
+	
 //============================================================	
 	
 //=====기본정보===============================================	
@@ -54,11 +63,6 @@ public class MypageController {
 		
 		try {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
-//			//테스트=================================================================
-//			UserVO vo = new UserVO("test@gmail.com", "pw1234", "high03", "김이박", "20040101", "여자", "01012345678", "고등학생", "1학년",
-//					null, null, null, "Student", "Accept", "활동", 0, new Date(), null);
-//			session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
-//			//테스트=================================================================
 			log.info("1. session scope 정보: {}", vo);
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
@@ -84,30 +88,54 @@ public class MypageController {
 			if(encoder.matches(user_pw, dbPw)) { 
 				log.info("비밀번호 일치");
 				result = 1;
-			}	//DB 비밀번호와 parameter의 비밀번호가 같으면
-			else { 
-				log.info("비밀번호 불일치");
-				result = 0; 
-			}
-			
-			log.info("\t+ result: {}", result);
+			} else { log.info("비밀번호 불일치"); result = 0; }// if-else
+
 			return result;
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 	}// 비밀번호 유효성 체크(ajax로 처리)
 	
 	@PostMapping("/studentPageModify")
-	public String studentPage(UserDTO dto, RedirectAttributes rttrs) throws ControllerException{
+	public String studentPage(UserDTO dto, @RequestParam String user_newPw, MultipartFile file_name,
+			RedirectAttributes rttrs, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 수정(학생)");
+		log.info("\t+ 1. file_name: {}", file_name);
 		
-		return "redirect:/mypage/studentPage";
-		
-//		try {
-//			if(this.userService.updateUser(dto)) {
-//				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 성공");
-//			}// if
-//			return "redirect:/mypage/studentPage";
-//		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		try {
+			log.info("\t+ user_newPw: {}", user_newPw);
+			dto.setUser_pw(user_newPw);
+			
+			if(file_name.getSize() != 0) {	//input file에 파일 값이 있다면
+				//1-1. 프로필 사진 유무 조회
+				List<ProfileVO> profileVo = this.profileService.getProfile(dto.getUser_email());
+				
+				ProfileDTO profileDto = new ProfileDTO();
+				profileDto.setUser_email(dto.getUser_email());
+				profileDto.setFile_name(dto.getUser_nick() + "_profile");
+				
+				//1-2. DB에 정보 저장 또는 수정
+				if(profileVo.size() == 0) { //DB에 프로필 정보가 없다면, 
+					this.profileService.createProfile(profileDto); 
+					log.info("프로필 정보 DB 생성");
+				} else { 
+					this.profileService.modifyProfile(profileDto);
+					log.info("프로필 정보 DB 수정");
+				}// if- else
+				
+				//1-3. 로컬에 저장
+				profileUpload.uploadProfile(file_name, dto);
+				log.info("프로필 사진 로컬 저장소 업로드 완료");
+			}//if
+			
+			//2. 회원정보 수정
+			if(this.mypageService.modifyUserInfo(dto)) {
+				UserVO vo = this.userService.getUserInfo(dto.getUser_email());
+				session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
+				
+				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 성공");
+			}// if
+			return "redirect:/mypage/studentPage";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// 기본정보 수정(학생)
 	

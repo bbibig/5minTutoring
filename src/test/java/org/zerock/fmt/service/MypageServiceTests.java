@@ -83,7 +83,10 @@ public class MypageServiceTests {
 		
 		UserDTO dto = new UserDTO();
 		dto.setUser_email("test@gmail.com");
-		dto.setUser_pw("pw123456");
+		dto.setUser_pw("1111111q");
+		dto.setUser_name("서수정");
+		dto.setUser_nick("crystal003");
+		dto.setUser_phone("01050956053");
 		
 		boolean result = this.service.modifyUserInfo(dto);
 		log.info("\t+ 수정 결과: {}", result);

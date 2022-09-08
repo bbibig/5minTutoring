@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class WithdrawalDTO {
 
-	private Integer w_number;		// 출금 번호
+	private Integer w_num;		// 출금 번호
 	private String user_email;
 	private String bank_account;	
 	private Integer w_quantity;		// 출금 수량 (손들기)

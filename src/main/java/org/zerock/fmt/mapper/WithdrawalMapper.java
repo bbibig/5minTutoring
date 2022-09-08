@@ -14,23 +14,19 @@ public interface WithdrawalMapper {
 	// => 관리자페이지에서 목록 조회 & 승인여부 수정
 
 	
-//  [C] 출금 신청
+//  [C]  출금 신청
 	public abstract Integer insertWithdrawal(WithdrawalDTO dto) throws DAOException;
 	
 	
-//  [R] 출금 신청 내역 전체 조회 (이것도 내림차순으로 정렬헤야 하나)
-
+//  [R]  출금 신청 내역 전체 조회
 	@Select("SELECT \r\n"
 			+ "    w_num, user_email, bank_account, w_quantity, w_price, approval, w_date\r\n"
 			+ "FROM tbl_withdrawal")
 	public abstract List<WithdrawalVO> selectAllWithdrawalList() throws DAOException;
 	
 	
-//  [U] 승인 여부 수정
-	// xml 작성..
-	public abstract Integer update(WithdrawalDTO dto) throws DAOException;
+//  [U]  승인 여부 수정
+	public abstract Integer updateState(WithdrawalDTO dto) throws DAOException;
 	
 
-	
-	
 } // end interface

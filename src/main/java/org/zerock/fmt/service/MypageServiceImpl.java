@@ -3,6 +3,7 @@ package org.zerock.fmt.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
@@ -48,13 +49,16 @@ public class MypageServiceImpl implements MypageService {
 	}// 회원 DB 비밀번호 조회
 	
 	
-	//1-2 기본정보 수정 테스트
+	//1-2 기본정보 수정
 	@Override
 	public boolean modifyUserInfo(UserDTO dto) throws ServiceException {
 		log.trace("modifyUserInfo() 기본정보 수정");
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		try { return this.mapper.updateUserInfo(dto); } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		try { 
+			dto.setUser_pw(encoder.encode(dto.getUser_pw()));
+			return this.mapper.updateUserInfo(dto);
+		} catch (DAOException e) { throw new ServiceException(e); }// try-catch
 		
 	}// modifyUserInfo()
 	
