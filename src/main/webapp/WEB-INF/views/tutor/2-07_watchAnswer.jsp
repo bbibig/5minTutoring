@@ -109,16 +109,15 @@
 	                            </div>
 	                        </div>
 	
-	                        <!-- <h2 class="fas fa-q ask_title">. 일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠!</h2> -->
-	                        <h2 class="fas fa-q ask_title">. ㅁㅁ이 무엇인가요??</h2>
+	                        <h2 class="fas fa-q ask_title">. ${_ONE_Q_.qb_title}</h2>
 	                        <div class="student_info d-flex">
 	                            <div class="SPic">
 	                                <img src="/resources/img/profile.png" alt="튜터프로필">
 	                            </div>
-	                            <div class="Sname">가나다</div>
+	                            <div class="Sname">${_ONE_Q_.user_name}</div>
 	                            <div>&nbsp;학생</div>
 	                            <br>
-	                            <div class="date">&nbsp;2022-03-01</div>
+	                            <div class="date">&nbsp;${_ONE_Q_.regdate}</div>
 	                            <div class="hamburger-button col-8 d-flex justify-content-end">
 	                                <div class="dropdown">
 	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
@@ -137,10 +136,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="ask_content">
-	                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate qui totam sapiente.
-	                            Consectetur neque, vitae nemo impedit, numquam sit ex officia autem recusandae qui quia
-	                            temporibus non minima corrupti enim sequi quos porro eum omnis itaque velit veritatis est
-	                            debitis maiores. Similique saepe autem, rem doloribus tempora soluta quo quas!
+	                            ${_ONE_Q_.qb_content}
 	                        </div>
 	                    </div>
 	                </div>

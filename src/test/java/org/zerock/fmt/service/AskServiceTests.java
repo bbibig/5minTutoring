@@ -134,4 +134,19 @@ public class AskServiceTests {
 		
 	} // testGetQB
 	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. askService.getOneQ() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testGetOneQ() throws ServiceException {
+		log.trace("질문글 번호로 질문글 출력");
+		
+		String qb_number = "24";
+		QuestionBoardVO oneQ = this.askService.getOneQ(qb_number);
+		
+		log.info("oneQ: {}", oneQ);
+		
+	} // testGetOneQ
+	
 } // end class

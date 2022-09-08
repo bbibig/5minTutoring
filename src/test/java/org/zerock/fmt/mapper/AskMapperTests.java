@@ -108,7 +108,7 @@ public class AskMapperTests {
 	@DisplayName("4. AskMapper.selectQB() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void selectQBTest() throws DAOException {
-		log.trace("질문글 출력");
+		log.trace("해당 튜터의 질문글 출력");
 		
 		String tp_number = "63";
 		
@@ -117,6 +117,21 @@ public class AskMapperTests {
 		list.forEach(log::info);
 	
 	} // selectQBTest
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. AskMapper.selectOneQ() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void selectOneQTest() throws DAOException {
+		log.trace("질문글 출력");
+		
+		String qb_number = "24";
+		
+		QuestionBoardVO Qvo = this.askMapper.selectOneQ(qb_number);
+		log.info("Qvo: {}", Qvo);
+		
+	} // selectOneQTest
 	
 	
 } // end class

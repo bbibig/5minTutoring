@@ -26,4 +26,7 @@ public interface AskService {
 	// 해당 튜터페이지의 질문글 출력
 	public abstract List<QuestionBoardVO> getQB(String tp_number) throws ServiceException; 
 	
+	// 질문글 번호로 질문글 출력
+	public abstract QuestionBoardVO getOneQ(String qb_number) throws ServiceException;
+	
 } // end interface

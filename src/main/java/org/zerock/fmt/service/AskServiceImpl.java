@@ -31,10 +31,10 @@ public class AskServiceImpl implements AskService {
 	private AskMapper askMapper;
 	
 	@Setter(onMethod_ = @Autowired)
-	private UseHandMapper useHandMapper;
+	private AnswerMapper answerMapper;
 	
 	@Setter(onMethod_ = @Autowired)
-	private AnswerMapper answerMapper;
+	private UseHandMapper useHandMapper;
 	
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper userMapper;
@@ -58,9 +58,7 @@ public class AskServiceImpl implements AskService {
 			} else { log.info("손들기가 부족합니다."); }
 			return false;
 			
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		} // try-catch
+		} catch (DAOException e) { throw new ServiceException(e); }
 	} // createQ
 	
 	@Override
@@ -85,9 +83,7 @@ public class AskServiceImpl implements AskService {
 			else { log.info("답변이 등록되어 질문을 수정할 수 없습니다."); }
 			return false;
 			
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		} // try-catch
+		} catch (DAOException e) { throw new ServiceException(e); } 
 	} // updateQ
 
 	@Transactional
@@ -116,9 +112,7 @@ public class AskServiceImpl implements AskService {
 			} else { log.info("답변이 등록되어 질문을 삭제할 수 없습니다."); }
 			
 			return false;
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		} // try-catch
+		} catch (DAOException e) { throw new ServiceException(e); }
 
 		// 3일 이상 답변이 없었던 경우 반환 - 자동으로 삭제..
 		// tutoring에서 과외 취소 시에도 복구
@@ -133,5 +127,15 @@ public class AskServiceImpl implements AskService {
 		catch (DAOException e) { throw new ServiceException(e); }
 		
 	} // getQB
+
+
+	@Override
+	public QuestionBoardVO getOneQ(String qb_number) throws ServiceException {
+		log.trace("질문글 번호로 질문글 출력");
+		
+		try { return this.askMapper.selectOneQ(qb_number); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+		
+	} // getOneQ
 
 } // end class

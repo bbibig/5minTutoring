@@ -5,26 +5,21 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.BuyDTO;
-import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.exception.DAOException;
 
 public interface BuyMapper {
 
 	// SELECT
-	// 마이페이지 - 구매내역조회 
-	public abstract List<BuyVO> myPageAllBuy(CriteriaMyPage cri) throws DAOException;
-	
-	// 마이페이지 - 구매내역 총 수량
-	@Select("SELECT count(*) FROM tbl_buy where user_email=#{user_email}")
-	public abstract int myPageBuyCount(@Param("user_email")String user_email) throws DAOException;
-	
-	// 마이페이지 - 구매내역 상제 조회
-	public abstract BuyInfoVO selectBuyDetail(Integer b_number) throws DAOException;
-	
-	
+	// 구매하기 - 구매 정보 조회
+	public abstract BuyDTO selectPayPage(
+			@Param("user_email")String user_email, 
+			@Param("h_number") Integer h_number) throws DAOException;
+
+	// 마이페이지 - 구매내역 조회
+	@Select("SELECT * FROM tbl_buy WHERE b_number=#{b_number}")
+	public abstract BuyDTO selectMyPayPage(@Param("b_number") Integer bNum ) throws DAOException;
 	
 	// 어드민 - 구매내역조회
 	public abstract List<BuyVO> selectAllBuy(CriteriaAdmin cri) throws DAOException;
@@ -36,8 +31,6 @@ public interface BuyMapper {
 	// 어드민 - 총 판매 금액
 	@Select("SELECT SUM(B_PRICE) FROM TBL_BUY")
 	public abstract int selectAllSale() throws DAOException;
-	
-	
 	
 	// INSERT
 	// 구매하기

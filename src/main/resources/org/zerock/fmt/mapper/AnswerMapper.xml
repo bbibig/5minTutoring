@@ -8,13 +8,15 @@
 		(
 			a_number,
 			qb_number,
+			user_email,
 			a_content,
 			regdate
 		) VALUES (
 			a_num.NEXTVAL,
 			#{qb_number},
+			#{user_email},
 			#{a_content},
-			CURRENT_DATE
+			CURRENT_DATE		
 		) 
 	</insert>
 	
@@ -24,14 +26,19 @@
 			a_content = #{a_content},
 			updatedate = CURRENT_DATE
 		WHERE qb_number = #{qb_number}
+		AND user_email = #{user_email}
 	</update>
 	
 	<select id="selectA" resultType="org.zerock.fmt.domain.AnswerVO">
 		SELECT 
+			u.user_name,
 			a_content,
 			regdate
-		FROM tbl_answer
+		FROM tbl_answer a, tbl_user u
 		WHERE qb_number = #{qb_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user 
+							WHERE a.user_email = u.user_email)
 	</select>
 
 	<update id="updateAStatus">

@@ -137,9 +137,7 @@ public class TutorController {
 		String tp_number = req.getParameter("num");
 		
 		try {
-			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
-			log.info("tutorInfo: {}", tutorInfo);
-			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
@@ -151,12 +149,12 @@ public class TutorController {
 	public String watchAnswer(Model model, HttpServletRequest req) throws ControllerException {
 		log.trace("2-07_watchAnswer <<< 답변 보기 - 학생, 튜터");
 		
-		String tp_number = req.getParameter("num");
+		String qb_number = req.getParameter("num");
 		
 		try {
-			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
-			log.info("tutorInfo: {}", tutorInfo);
-			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			QuestionBoardVO oneQ = this.askService.getOneQ(qb_number);
+			log.info("oneQ: {}", oneQ);
+			model.addAttribute("_ONE_Q_", oneQ);
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		

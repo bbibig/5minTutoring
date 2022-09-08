@@ -58,5 +58,22 @@
 							WHERE q.user_email = u.user_email)
 	</select>
 
+	<select id="selectOneQ" resultType="org.zerock.fmt.domain.QuestionBoardVO">
+		SELECT 
+		    qb_number,
+		    tp_number,
+		    q.user_email,
+		    u.user_name,
+		    qb_title,
+		    qb_content,
+		    qb_answer,
+		    regdate,
+		    updatedate
+		FROM tbl_question_board q, tbl_user u
+		WHERE qb_number = #{qb_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user 
+							WHERE q.user_email = u.user_email)
+	</select>
 	
 </mapper>

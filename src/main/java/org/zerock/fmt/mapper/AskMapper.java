@@ -2,7 +2,7 @@ package org.zerock.fmt.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.exception.DAOException;
@@ -20,5 +20,8 @@ public interface AskMapper {
 	
 	// 해당 튜터페이지의 질문글 출력
 	public abstract List<QuestionBoardVO> selectQB(String tp_number) throws DAOException; 
+	
+	// 질문글 출력
+	public abstract QuestionBoardVO selectOneQ(String qb_number) throws DAOException;
 	
 } // end class

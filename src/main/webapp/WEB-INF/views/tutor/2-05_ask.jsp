@@ -115,7 +115,7 @@
 	                    
 	                    	<c:forEach var="Q" items="${_QB_VO_}">
 		                        <div class="col-lg-4 col-md-6 col-sm-12">
-		                            <div class="ask_card" onclick="location.href='watchAnswer?${Q.qb_number}';" style="cursor:pointer">
+		                            <div class="ask_card" onclick="location.href='watchAnswer?num=${Q.qb_number}';" style="cursor:pointer">
 		                                <div class="student_info">
 		                                    <div class="sPic">
 		                                        <img src="/resources/img/profile.png" alt="튜터프로필">

@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.AnswerDTO;
 import org.zerock.fmt.domain.AnswerVO;
 import org.zerock.fmt.exception.DAOException;
 
@@ -54,7 +55,7 @@ public class AnswerMapperTests {
 	void insertATest() throws DAOException {
 		log.trace("답변글 작성");
 		
-		AnswerVO newA = new AnswerVO(null, 33, "답변입니다.", null, null);
+		AnswerDTO newA = new AnswerDTO(9, "hi@gmail.com", "답변입니다.");
 		
 		int affectedLines = this.answerMapper.insertA(newA);
 		
@@ -69,7 +70,8 @@ public class AnswerMapperTests {
 	void updateATest() throws DAOException {
 		log.trace("답변글 수정");
 		
-		AnswerVO revisedA = new AnswerVO(null, 33, "안녕하세요, 답변입니다.", null, null);
+		// user_email 일치해야 수정 가능
+		AnswerDTO revisedA = new AnswerDTO(9, "hi@gmail.com", "안녕하세요, 답변입니다.");
 		
 		int affectedLines = this.answerMapper.updateA(revisedA);
 		
@@ -84,7 +86,7 @@ public class AnswerMapperTests {
 	void selectATest() throws DAOException {
 		log.trace("답변글 출력");
 		
-		String qb_number = "33";
+		String qb_number = "28";
 		
 		AnswerVO Avo = this.answerMapper.selectA(qb_number);
 		
@@ -99,7 +101,7 @@ public class AnswerMapperTests {
 	void updateAStatusTest() throws DAOException {
 		log.trace("답변 상태 변경");
 		
-		String qb_number = "36";
+		String qb_number = "33";
 		
 		int affectedLines = this.answerMapper.updateAStatus(qb_number);
 		log.info("affectedLines : {}", affectedLines);
