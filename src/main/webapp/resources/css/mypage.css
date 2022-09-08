@@ -34,9 +34,10 @@ a:hover{
 /*      기본정보(7-01,7-02)      */   
 /* ============================= */
 
-.profileImg img{
+.profileImg img {
     border-radius: 50%;
     background-size: contain;
+    cursor: pointer;
  }
  
  

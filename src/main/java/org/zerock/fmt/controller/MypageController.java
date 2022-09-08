@@ -62,11 +62,20 @@ public class MypageController {
 		log.trace("마이페이지 기본정보 조회(학생)");
 		
 		try {
+			//1. 기본정보 조회
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			log.info("1. session scope 정보: {}", vo);
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
 			model.addAttribute("_USERINFO_", userInfo);
+			
+			//2. 프로필 사진 유무 조회
+			List<ProfileVO> profileVo = this.profileService.getProfile(vo.getUser_email());
+			if(profileVo.size() == 0 ) {
+				model.addAttribute("_ISPROFILE_", "false");
+			} else {
+				model.addAttribute("_ISPROFILE_", "true");
+			}// if-else
 			
 			return "mypage/7-01_StudentPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch

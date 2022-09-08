@@ -86,7 +86,7 @@ public class MypageMapperTests {
 		
 		UserDTO dto = new UserDTO();
 		dto.setUser_email("test@gmail.com");
-		String paramPw = "pw1234";
+		String paramPw = "1111111q";
 		String bcPw = encoder.encode(paramPw);
 		dto.setUser_pw(bcPw);		
 		

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -15,10 +16,10 @@
     <title>기본 정보(학생)</title>
 
     <script>
-        $(function() {
+        $(function () {
             let modifyResult = '${_USERMODIFYRESULT_}';
 
-            if(modifyResult === '회원정보 수정 성공'){
+            if (modifyResult === '회원정보 수정 성공') {
                 Swal.fire({
                     icon: 'success',
                     text: '수정 완료!',
@@ -69,14 +70,18 @@
 
                 <!-- FROM -->
                 <div class="container card p-4 bg-card">
-                    <form action="/mypage/studentPageModify" method="post" id="userInfo" enctype="multipart/form-data" novalidate>
+                    <form action="/mypage/studentPageModify" method="post" id="userInfo" enctype="multipart/form-data"
+                        novalidate>
                         <div class="row">
 
                             <div class="col-4">
                                 <input type="file" name="file_name" id="file_name" class="d-none file_name"
                                     accept="image/*">
                                 <div id="profileImg" class="ratio ratio-1x1 rounded-circle profileImg">
-                                    <img src="${path}/resources/img/profile.png" alt="">
+                                    <c:if test="${_ISPROFILE_ eq 'false'}"> <img
+                                            src="${path}/resources/img/profile.png"> </c:if>
+                                    <c:if test="${_ISPROFILE_ eq 'true'}"> <img
+                                            src="<spring:url value='/profile/${_USERINFO_.user_nick}_profile.png'/>" /> </c:if>
                                 </div>
                             </div>
 
