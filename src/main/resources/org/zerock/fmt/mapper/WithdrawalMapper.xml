@@ -6,16 +6,18 @@
 
     <mapper namespace="org.zerock.fmt.mapper.WithdrawalMapper">
 
-      <insert id="insertWithdrawal">
-          INSERT INTO tbl_withdrawal
-          VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, #{approval}, CURRENT_DATE)
-      </insert>
+	  <!-- 출금신청 -->
+	  <insert id="insertWithdrawal">
+	     INSERT INTO tbl_withdrawal
+	     VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, #{approval}, CURRENT_DATE)
+	  </insert>
     
+      
       <!-- 승인여부 수정 -->
-    	<update id="updateState">
-        UPDATE tbl_withdrawal
-        SET approval = #{approval}
-        WHERE w_num = #{w_num}
+      <update id="updateState">
+	      UPDATE tbl_withdrawal
+	      SET approval = #{approval}
+	      WHERE w_num = #{w_num}
       </update>
     	
     </mapper>    

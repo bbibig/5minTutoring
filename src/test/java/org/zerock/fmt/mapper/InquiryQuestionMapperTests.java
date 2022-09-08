@@ -55,10 +55,10 @@ public class InquiryQuestionMapperTests {
 //	=== 1:1 문의하기 작성 === 
 	@Test
 	@Order(1)
-	@DisplayName("InquiryQuestionMapper_insert")
+	@DisplayName("1:1 문의 작성 테스트")
 	@Timeout(value=5000, unit = TimeUnit.SECONDS)
 	void testInsert() throws DAOException {
-		log.trace("일대일 문의하기");
+		log.trace("testInsert() invoked.");
 
 		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "tutor2@gmail.com", "문의합니다.", "출금신청을 했는데 언제 처리되나요?", null, 1);
 		log.info("\t + dto: {}", dto);
@@ -68,6 +68,7 @@ public class InquiryQuestionMapperTests {
 		
 		assert affectedLines == 1;
 	} // testInsert
+	
 	
 	
 // 	=== 1:1 문의 목록조회 ===

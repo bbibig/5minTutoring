@@ -40,7 +40,7 @@ public class InquiryAnswerMapperTests {
 //  === 1:1 문의 답변 작성 ===
 	@Test
 	@Order(1)
-	@DisplayName("InquiryAnswerMapper_insert")
+	@DisplayName("1:1 문의 답변 작성 테스트")
 	@Timeout(value=5000, unit = TimeUnit.SECONDS)
 	void testInsert() throws DAOException {
 		log.trace("testInsert() invoked.");
