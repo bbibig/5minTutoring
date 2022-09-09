@@ -73,7 +73,7 @@
                 <tr>
                   <th scope="row"> ${mycomment.cm_number} </th>
                   <td colspan="2"><a href="/tutor/watchAnswer"> ${mycomment.cm_content} </a></td>
-                  <td class="text-center"> <fmt:formatDate value="${mycomment.cm_date}" pattern="yyyy-MM-dd" /> </td>
+                  <td class="text-center"> <fmt:formatDate value="${mycomment.cm_date}" pattern="yyyy.MM.dd" /> </td>
                 </tr>
               </c:forEach>
             </tbody>

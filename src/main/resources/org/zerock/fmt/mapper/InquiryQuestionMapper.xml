@@ -11,6 +11,8 @@
           INSERT INTO tbl_individual_question (iq_number, user_email, iq_title, iq_content, iq_date ,iq_pass)
           VALUES (iq_num.NEXTVAL, #{user_email}, #{iq_title}, #{iq_content}, CURRENT_DATE, #{iq_pass})
       </insert>
+
+   
     
       <!-- 답변여부 수정 -->
       <update id="updateInquiryState">

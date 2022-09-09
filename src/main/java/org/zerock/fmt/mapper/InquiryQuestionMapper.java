@@ -14,8 +14,6 @@ public interface InquiryQuestionMapper {
 //	[C]  1:1 문의글 작성 
 	public abstract Integer insertIQ(InquiryQuestionDTO dto) throws DAOException; 
 
-	public abstract Integer insertSelectKey(InquiryQuestionDTO dto) throws DAOException;
-	
 	
 //	[R]  1:1 문의글 목록 조회 
 //       사용자 => 본인이 작성한 게시글만 조회 가능 (문의제목, 날짜, 답변유무)
