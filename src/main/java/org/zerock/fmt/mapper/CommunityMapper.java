@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.CommunityDTO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.exception.DAOException;
 
 public interface CommunityMapper {
@@ -17,7 +18,11 @@ public interface CommunityMapper {
 			+ "    *\r\n"
 			+ "FROM tbl_community"
 			)
-	public abstract List<CommunityDTO> selectAllList() throws DAOException;
+	public abstract List<CommunityVO> selectAllList() throws DAOException;
+	
+	//게시글 선택
+	@Select("SELECT fb_number, user_email, fb_title, fb_content, fb_comment_count, fb_like_count, fb_date FROM tbl_community WHERE fb_number = #{fb_number}")
+	public abstract CommunityVO select(@Param("fb_number")Integer bno) throws DAOException;
 	
 	//게시글 삭제
 	@Delete("DELETE FROM tbl_community WHERE fb_number = #{fb_number}")
@@ -25,14 +30,13 @@ public interface CommunityMapper {
 	
 	//새로운 게시글 등록
 	public abstract Integer insert(CommunityDTO dto) throws DAOException;
+	
 	public abstract Integer insertSelectKey(CommunityDTO dto) throws DAOException;
 
 	//게시글 수정
 	public abstract Integer update(CommunityDTO dto) throws DAOException;
 	
-	//게시글 선택
-	@Select("SELECT bno, title, content, writer, insert_ts FROM tbl_community WHERE fb_number = #{fb_number}")
-	public abstract CommunityDTO select(@Param("fb_number")Integer bno) throws DAOException;
+	
 	
 	
 	

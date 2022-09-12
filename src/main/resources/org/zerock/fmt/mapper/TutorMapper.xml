@@ -37,6 +37,7 @@
 		OFFSET 0 ROW
 		FETCH NEXT 12 ROWS ONLY
     </select>
+<<<<<<< HEAD
     
     <select id="selectHighStarTcard" resultType="org.zerock.fmt.domain.TutorPageVO">
     	 SELECT
@@ -75,6 +76,8 @@
 		OFFSET 0 ROW
 		FETCH NEXT 12 ROWS ONLY
     </select>
+=======
+>>>>>>> a094d81 (controller update)
     
 	<insert id="insertIntroInfo">
 		INSERT INTO tbl_tutor_page

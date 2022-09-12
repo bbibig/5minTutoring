@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommunityDTO;
+import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.exception.DAOException;
-import org.zerock.fmt.mapper.CommunityMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -56,26 +56,41 @@ public class CommuntyMapperTests {
 	@DisplayName("CommunityMapper.selectAllList() test")
 	@Order(1)
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
-	void SelectAllList() throws DAOException {
+	void testSelectAllList() throws DAOException {
 		log.trace("SelectAllList() invoked.");
 		
-		List<CommunityDTO> list = this.cMapper.selectAllList();
+		List<CommunityVO> list = this.cMapper.selectAllList();
 		assertNotNull(list);
 		
 		list.forEach(log::info);
 		
 	}// selectAllList
 	
+//	@Disabled
+	@Test
+	@DisplayName("CommunityMapper.select() test")
+	@Order(2)
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testSelect() throws DAOException {
+		log.trace("SelectAllList() invoked.");
+		
+		int bno = 1;
+		CommunityVO vo = this.cMapper.select(bno);
+		assertNotNull(vo);
+		
+		log.info("\t+vo: {}", vo);
+		
+	}// selectAllList
 	
 	@Disabled
 	@Test
 	@DisplayName("CommunityMapper.delete() test")
-	@Order(2)
+	@Order(3)
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void delete() throws DAOException {
 		log.trace(" delete() invoked.");
 		
-		int bno = 33;
+		int bno = 1;
 		
 		int affectedLines = this.cMapper.delete(bno);
 		
@@ -83,7 +98,7 @@ public class CommuntyMapperTests {
 		
 	}//delete
 	
-//	@Disabled
+	@Disabled
 	@Test
 	@DisplayName("CommunityMapper.insert() test")
 	@Order(4)
