@@ -25,5 +25,7 @@ public interface TutorService {
 	// 튜터페이지 소개 정보 수정 
 	public abstract boolean updateTInfo(TutorPageDTO tutorPagedto) throws ServiceException;
 	
+	// 해당 튜터인지 확인
+	public abstract String getTEmail(int tp_number) throws ServiceException;
 	
 } // end interface

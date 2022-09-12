@@ -61,7 +61,7 @@ public class AskServiceTests {
 //		QuestionBoardVO QBvo = new QuestionBoardVO(null, 63, "st@email_1", "이진법이 뭔가요?", "가르쳐주세요.", 0, null, null);
 		
 //		손들기가 3개 이상일 때
-		QuestionBoardDTO QBdto = new QuestionBoardDTO(null, 63, "hi@gmail.com", "이진법이 뭔가요?", "가르쳐주세요.", 0, null, null);
+		QuestionBoardDTO QBdto = new QuestionBoardDTO(null, 63, "hi@gmail.com", "근의 공식이 뭔가요?", "가르쳐주세요.", 0, null, null);
 		
 		boolean createSucceed = this.askService.createQ(QBdto);
 		log.info("createSucceed: {}", createSucceed);

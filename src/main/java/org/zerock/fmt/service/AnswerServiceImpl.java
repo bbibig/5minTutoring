@@ -45,11 +45,11 @@ public class AnswerServiceImpl implements AnswerService {
 
 	
 	@Override
-	public boolean updateA(AnswerDTO Avo) throws ServiceException {
+	public boolean updateA(AnswerDTO Adto) throws ServiceException {
 		log.trace("답변 수정");
 		
 		// 이메일이 일치하면 답변 수정 가능
-		try { return this.answerMapper.updateA(Avo) == 1; } 
+		try { return this.answerMapper.updateA(Adto) == 1; } 
 		catch (Exception e) { throw new ServiceException(e); }
 	} // updateA
 
@@ -59,7 +59,7 @@ public class AnswerServiceImpl implements AnswerService {
 		log.trace("해당 질문에 대한 답변 출력");
 		
 		try { return this.answerMapper.selectA(qb_number); } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 	} // getA
 	
 } // end class

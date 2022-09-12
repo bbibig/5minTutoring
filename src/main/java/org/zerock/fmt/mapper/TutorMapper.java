@@ -27,4 +27,7 @@ public interface TutorMapper {
 	// 튜터페이지 소개 정보 수정 
 	public abstract Integer updateTInfo(TutorPageDTO tutorPagedto) throws DAOException;
 	
+	// 해당 튜터인지 확인
+	public abstract String selectTEmail(int tp_number) throws DAOException;
+	
 } // end interface

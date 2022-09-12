@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="org.zerock.fmt.domain.TutorPageVO" 
+<%@ page import="org.zerock.fmt.domain.TutorPageVO" 
 		import="java.util.List"
 		import="java.util.ArrayList"
 %>

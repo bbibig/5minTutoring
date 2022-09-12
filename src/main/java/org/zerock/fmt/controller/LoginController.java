@@ -2,6 +2,9 @@ package org.zerock.fmt.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -51,7 +54,7 @@ public class LoginController{
 		return "login/1-02_login";
 	}
 	@PostMapping("/Loginpost")
-	public String login(String user_email, String user_pw, Model model, RedirectAttributes rttrs)
+	public String login(String user_email, String user_pw, Model model, RedirectAttributes rttrs, HttpServletRequest req)
 														throws ControllerException {
 		log.trace("loginPost Invoked.");
 		try{
@@ -62,9 +65,17 @@ public class LoginController{
 					rttrs.addFlashAttribute("_LOGIN_", "로그인에 실패하였습니다.");
 					return "redirect:/login";
 				}//if
+				
+			// 로그인 정보 session scope에 등록
+			HttpSession session = req.getSession();
+			session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
+			log.info("================================= {}", vo);
+				
 			return "login/Loginpost";
 		}catch (Exception e) { throw new ControllerException(e); }//try-catch
 	}//login
+	
+	
 	
 	//로그인 후 메인화면
 	@RequestMapping("/home")

@@ -18,6 +18,7 @@ section div img {
 .ask_card h2 {
     letter-spacing: 1px;
     line-height: 45px;
+    padding-top: 15px;
     padding-bottom: 50px;
 }
 .ask_content {
@@ -30,8 +31,8 @@ section div img {
 }
 
 /* Answer */
-.answer, .ask_card {
-    border: 2px solid rgb(177, 177, 177);
+.answer {
+    border: 1px solid rgb(177, 177, 177);
     border-radius: 20px;
     padding: 35px;
     margin: auto;

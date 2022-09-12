@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="ko">
 	<head>
@@ -21,39 +22,90 @@
 	    <section class="d-flex align-items-center">
 	        <div class="container">
 	            <!-- ask -->
-	            <!-- <div class="fas fa-chevron-left back_icon"></div> -->
 	            <div class="row">
 	                <div class="col-lg-9">
 	                    <div class="ask_card">
 	
-	                        <!-- 게시글 수정 modal -->
-	                        <div class="modal fade" id="community_revise">
+	                        <!-- 질문글 수정 modal -->
+	                        <div class="modal fade" id="reviseQ">
 	                            <div class="modal-dialog modal-lg">
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
 	                                        <h5 class="modal-title" id="exampleModalLabel"># 수정하기</h5>
-	                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-	                                            aria-label="Close"></button>
+	                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                                    </div>
-	                                    <div class="modal-body">
-	                                        <form>
+                                        <form action="modifyAsk?num=${_ONE_Q_.qb_number}" method="post">
+                                    		<div class="modal-body">
 	                                            <div class="mb-3">
 	                                                <label for="recipient-name" class="col-form-label">제목</label>
-	                                                <input type="text" class="form-control" id="askTitle"
+	                                                <input type="hidden" name="qb_number" value="${_ONE_Q_.qb_number}" class="form-control" id="askTitle"/>
+	                                                <input type="text" name="qb_title" value="${_ONE_Q_.qb_title}" class="form-control" id="askTitle"
 	                                                    placeholder="제목을 입력해주세요.">
 	                                            </div>
 	                                            <div class="mb-3">
 	                                                <label for="message-text" class="col-form-label">내용</label>
-	                                                <textarea class="form-control" id="askContent"
-	                                                    placeholder="내용을 입력해주세요."></textarea>
+	                                                <textarea class="form-control" name="qb_content" id="askContent"
+	                                                    placeholder="내용을 입력해주세요."> ${_ONE_Q_.qb_content} </textarea>
 	                                            </div>
-	                                        </form>
+                                    		</div>
+		                                    <div class="modal-footer">
+		                                        <button type="button" class="btn btn-secondary col-2"
+		                                            data-bs-dismiss="modal">취소</button>
+		                                        <button type="submit" class="btn btn-primary col-2">저장</button>
+		                                    </div>
+                                        </form>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        
+	                        <!-- 질문글 삭제 modal -->
+	                        <div class="modal fade" id="deleteQ" data-bs-backdrop="static">
+	                            <div class="modal-dialog modal-dialog-centered">
+	                                <div class="modal-content d-flex flex-column justify-content-center">
+	
+	                                    <div class="modal-body">
+	                                        <div class="pop-up-body d-flex flex-column align-items-center">
+	                                            <div class="warnning-img">
+	                                                <i class="bi bi-exclamation-circle" style="font-size: 5rem"></i>
+	                                            </div>
+	                                            <p class="my-3 "><strong class="fs-4">삭제하시겠습니까?</strong></p>
+	                                            
+	                                            <div class="pop-up-button-box d-flex flex-row align-self-center">
+	                                                <button type="button" class="btn btn-outline-primary"
+	                                                    data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
+	                                                <button type="button" onclick="location.href='deleteAsk?num=${_ONE_Q_.qb_number}&tp=${_ONE_Q_.tp_number}'" 
+	                                                	class="btn btn-outline-primary">확인</button>
+	                                            </div>
+	                                        </div>
 	                                    </div>
-	                                    <div class="modal-footer">
-	                                        <button type="button" class="btn btn-secondary col-2"
-	                                            data-bs-dismiss="modal">취소</button>
-	                                        <button type="button" class="btn btn-primary col-2">저장</button>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        
+	                        <!-- 답변글 수정 modal -->
+	                        <div class="modal fade" id="reviseA">
+	                            <div class="modal-dialog modal-lg">
+	                                <div class="modal-content">
+	                                    <div class="modal-header">
+	                                        <h5 class="modal-title" id="exampleModalLabel"># 수정하기</h5>
+	                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                                    </div>
+                                        <form action="modifyAnswer?num=${_ONE_Q_.qb_number}" method="post">
+                                    		<div class="modal-body">
+	                                            <div class="mb-3">
+	                                                <input type="hidden" name="qb_number" value="${_ONE_Q_.qb_number}" />
+	                                                <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" />
+	                                                <label for="message-text" class="col-form-label">답변</label>
+	                                                <textarea class="form-control" name="a_content"
+	                                                    placeholder="내용을 입력해주세요."> ${_A_.a_content} </textarea>
+	                                            </div>
+                                    		</div>
+		                                    <div class="modal-footer">
+		                                        <button type="button" class="btn btn-secondary col-2"
+		                                            data-bs-dismiss="modal">취소</button>
+		                                        <button type="submit" class="btn btn-primary col-2">저장</button>
+		                                    </div>
+                                        </form>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -109,6 +161,8 @@
 	                            </div>
 	                        </div>
 	
+							<!-- question -->
+							<hr>
 	                        <h2 class="fas fa-q ask_title">. ${_ONE_Q_.qb_title}</h2>
 	                        <div class="student_info d-flex">
 	                            <div class="SPic">
@@ -117,7 +171,8 @@
 	                            <div class="Sname">${_ONE_Q_.user_name}</div>
 	                            <div>&nbsp;학생</div>
 	                            <br>
-	                            <div class="date">&nbsp;${_ONE_Q_.regdate}</div>
+	                            <div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_ONE_Q_.regdate}"/></div>
+	                            
 	                            <div class="hamburger-button col-8 d-flex justify-content-end">
 	                                <div class="dropdown">
 	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
@@ -126,22 +181,20 @@
 	                                    </button>
 	                                    <ul class="dropdown-menu">
 	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#community_revise">수정</a>
+	                                                href="#reviseQ">수정</a>
 	                                        </li>
 	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#delete">삭제</a>
+	                                                href="#deleteQ">삭제</a>
 	                                        </li>
 	                                    </ul>
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div class="ask_content">
-	                            ${_ONE_Q_.qb_content}
-	                        </div>
+	                        <div class="ask_content">${_ONE_Q_.qb_content}</div>
 	                    </div>
 	                </div>
 	            </div>
-	
+	            
 	            <!-- answer -->
 	            <div class="row">
 	                <div class="col-lg-9 answer">
@@ -149,10 +202,10 @@
 	                        <div class="TPic">
 	                            <img src="/resources/img/profile.png" alt="튜터프로필">
 	                        </div>
-	                        <div class="Tname">김튜터</div>
+	                        <div class="Tname">${_A_.user_name}</div>
 	                        <div>&nbsp;튜터</div>
 	                        <br>
-	                        <div class="date">&nbsp;2022-03-01</div>
+	                        <div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_A_.regdate}"/></div>
 	                        <div class="hamburger-button col-8 d-flex justify-content-end">
 	                            <div class="dropdown">
 	                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -160,23 +213,16 @@
 	                                </button>
 	                                <ul class="dropdown-menu">
 	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                            href="#community_revise">수정</a>
-	                                    </li>
-	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                            href="#delete">삭제</a>
+	                                            href="#reviseA">수정</a>
 	                                    </li>
 	                                </ul>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <p class="answer_content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis quae
-	                        animi assumenda, obcaecati nobis totam ducimus! Atque odit, vitae, magni eaque esse laboriosam
-	                        ipsum earum nihil voluptates laborum iste voluptatibus corrupti labore. Quae, consequatur
-	                        aliquam voluptatibus necessitatibus sit commodi quis! Dolores repudiandae aperiam at error
-	                        nostrum. Odit nihil impedit tempore!</p>
+	                    <p class="answer_content">${_A_.a_content}</p>
 	
+						   
 	                    <!-- comment -->
-	                    <!-- <div class="fas fa-comment-dots comment_icon"> 2</div> -->
 	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span> 3</span></span>
 	                    <div class="comment_box">
 	                        <div class="comment d-flex">

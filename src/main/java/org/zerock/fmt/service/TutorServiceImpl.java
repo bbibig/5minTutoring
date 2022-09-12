@@ -30,7 +30,7 @@ public class TutorServiceImpl implements TutorService {
 		log.trace("튜터페이지 전체 정보 조회");
 		
 		try { return this.tutorMapper.selectAllTInfo(tp_number); } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 	} // getAllTInfo
 
 	@Override
@@ -38,7 +38,7 @@ public class TutorServiceImpl implements TutorService {
 		log.trace("튜터카드 최신순 조회");
 		
 		try { return this.tutorMapper.selectRecentTCard(); } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 	} // getTCardInfo
 	
 	@Override
@@ -47,7 +47,7 @@ public class TutorServiceImpl implements TutorService {
 		
 		List<TutorPageVO> result;
 		try { result = this.tutorMapper.selectHighAnswerTcard(subject); }
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 		
 		try {
 			if(searchType.equals("평점순")) {
@@ -55,7 +55,7 @@ public class TutorServiceImpl implements TutorService {
 			}
 			return result;
 			
-		} catch (DAOException e) { throw new ServiceException(e); }
+		} catch (Exception e) { throw new ServiceException(e); }
 		
 	} // getSortedTCard
 	
@@ -64,7 +64,7 @@ public class TutorServiceImpl implements TutorService {
 		log.trace("튜터 소개 입력", tutorPagedto);
 
 		try { return this.tutorMapper.insertIntroInfo(tutorPagedto) == 1; } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 	} // insertIntroInfo
 
 	@Override
@@ -72,7 +72,15 @@ public class TutorServiceImpl implements TutorService {
 		log.trace("튜터 소개 수정", tutorPagedto);
 		
 		try { return this.tutorMapper.updateTInfo(tutorPagedto) == 1; } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 	} // updateTInfo
+
+	@Override
+	public String getTEmail(int tp_number) throws ServiceException {
+		log.trace("해당 튜터인지 확인");
+		
+		try { return this.tutorMapper.selectTEmail(tp_number); } 
+		catch (Exception e) { throw new ServiceException(e); }
+	} // getTEmail
 
 } // end class

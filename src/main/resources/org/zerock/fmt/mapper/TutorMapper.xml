@@ -103,5 +103,11 @@
 			tp_comment = #{tp_comment}
 		WHERE tp_number = #{tp_number}
 	</update>
+	
+	<select id="selectTEmail" resultType="string">
+		SELECT user_email
+		FROM tbl_tutor_page
+		WHERE tp_number = #{tp_number}
+	</select>
 
 </mapper>

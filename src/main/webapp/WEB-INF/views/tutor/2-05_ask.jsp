@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="org.zerock.fmt.domain.UserVO" %>
 <!doctype html>
 <html lang="ko">
 	<head>
@@ -11,6 +13,19 @@
 		
 	    <!-- CSS 추가 -->
 	    <link rel="stylesheet" href="/resources/css/2-05_ask.css">
+
+		<script>
+		
+			String tutorName = ${_TUTOR_INFO_.user_name};
+			String userName = userVO.getUser_name;
+		
+			function checkTutor(tutorName, userName) {
+				
+				if( tutorName.equals(userName) ) { 
+				document.getElementById('askLink').setAttribute('onclick', "location.href='writeAnswer?num=${Q.qb_number}';");
+			}
+			let result = checkTutor();
+		</script>
 	
 	    <title>튜터페이지</title>
 	</head>
@@ -62,7 +77,6 @@
 							</ul>
 						</div>
 	                </div>
-	                <!--좌측섹션 end!!!-->
 	
 	                <div class="right-section col-9">
 	                    <div class="headers d-flex justify-content-between">
@@ -89,39 +103,39 @@
 	                                        <div class="red">자동 회수</div>
 	                                        <div>됩니다.</div>
 	                                    </div>
-	                                    <div class="modal-body">
-	                                        <form>
-	                                            <div class="mb-3">
-	                                                <label for="recipient-name" class="col-form-label">제목</label>
-	                                                <input type="text" class="form-control" id="askTitle" placeholder="제목을 입력해주세요.">
-	                                            </div>
-	                                            <div class="mb-3">
-	                                                <label for="message-text" class="col-form-label">내용</label>
-	                                                <textarea class="form-control" id="askContent" placeholder="내용을 입력해주세요."></textarea>
-	                                            </div>
-	                                        </form>
-	                                    </div>
-	                                    <div class="modal-footer">
-	                                        <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
-	                                        <button type="button" class="btn btn-primary col-2">저장</button>
-	                                    </div>
+	                                    <form action="createAsk?num=${_TUTOR_INFO_.tp_number}" method="post">
+		                                    <div class="modal-body">
+		                                            <div class="mb-3">
+		                                                <label for="recipient-name" class="col-form-label">제목</label>
+		                                                <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
+		                                                <input type="text" name="qb_title" class="form-control" id="askTitle" placeholder="제목을 입력해주세요.">
+		                                            </div>
+		                                            <div class="mb-3">
+		                                                <label for="message-text" class="col-form-label">내용</label>
+		                                                <textarea class="form-control" name="qb_content" id="askContent" placeholder="내용을 입력해주세요."></textarea>
+		                                            </div>
+		                                    </div>
+		                                    <div class="modal-footer">
+		                                        <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
+		                                        <button type="submit" class="btn btn-primary col-2">저장</button>
+		                                    </div>
+		                               </form>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <!--우측섹션 header end !!!!!!-->
-	
+
+	                    <!-- Ask Cards -->
 	                    <div class="row">
-	                    
 	                    	<c:forEach var="Q" items="${_QB_VO_}">
 		                        <div class="col-lg-4 col-md-6 col-sm-12">
-		                            <div class="ask_card" onclick="location.href='watchAnswer?num=${Q.qb_number}';" style="cursor:pointer">
+		                            <div class="ask_card" onclick="location.href='watchAnswer?num=${Q.qb_number}&tp=${Q.tp_number}';" id="askLink" style="cursor:pointer">
 		                                <div class="student_info">
 		                                    <div class="sPic">
 		                                        <img src="/resources/img/profile.png" alt="튜터프로필">
 		                                    </div>
 		                                    <div class="Sname">${Q.user_name}</div>
-		                                    <div>${Q.regdate}</div>
+		                                    <div class="date"><fmt:formatDate pattern="yyyy.MM.dd" value="${Q.regdate}"/></div>
 		                                </div>
 		                                <div class="ask_title" style="height:100%;">
 		                                    ${Q.qb_title}
@@ -138,20 +152,6 @@
 		                        </div>
 	                        </c:forEach>
 	                        
-	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
-	                                <div class="student_info">
-	                                    <div class="sPic">
-	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
-	                                    </div>
-	                                    <div class="Sname">예시</div>
-	                                </div>
-	                                <div class="ask_title">
-	                                    ${Q.qb_title}
-	                                    <div class="answer_ok yes">답변 완료</div>
-	                                </div>
-	                            </div>
-	                        </div>
 	                        <div class="col-lg-4 col-md-6 col-sm-12">
 	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
 	                                <div class="student_info">

@@ -44,6 +44,12 @@ h2 {
     border-bottom: 2px solid rgb(160, 160, 160);
 }
 
+.date {
+    font-size: 13px;
+    margin-left: 2%;
+    color: rgb(138, 138, 138);
+}
+
 .ask_title {
     position: relative;
     padding: 15px 15px;
