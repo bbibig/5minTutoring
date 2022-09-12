@@ -8,14 +8,14 @@
 <html lang="ko">
 
 <head>
-<!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
-<jsp:include page="../htmlHead.jsp" flush="true" />
-<!-- =======mypage 공통 CSS=================================== -->
-<link href="${path}/resources/css/mypage.css" rel="stylesheet">
-<!-- ======== 탈퇴하기 모달 ========= -->
-<script src="${path}/resources/js/7-08.js"></script>
+	<!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
+	<jsp:include page="../htmlHead.jsp" flush="true" />
+	<!-- =======mypage 공통 CSS=================================== -->
+	<link href="${path}/resources/css/mypage.css" rel="stylesheet">
+	<!-- ======== 탈퇴하기 모달 ========= -->
+	<script src="${path}/resources/js/7-08.js"></script>
 
-<title>탈퇴하기</title>
+	<title>탈퇴하기</title>
 </head>
 
 <body>
@@ -33,22 +33,35 @@
 				<ul class="list-group mb-2 bg-dark text-white">
 					<li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
 				</ul>
-             <div class="list-group">
-                    <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4">기본
-                        정보</a>
-                    <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4">손들기
-                        내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
-                        질문글</a>
-                    <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
-                        커뮤니티</a>
-                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
-                        문의하기</a>
-                    <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4 fw-bold">회원
-                        탈퇴</a>
-                </div>
-			</div>
-			<!-- End main nav -->
+				<div class="list-group">
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentPage"
+							class="list-group-item list-group-item-action px-lg-4">기본
+							정보</a></c:if>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorPage"
+							class="list-group-item list-group-item-action px-lg-4">기본
+							정보</a></c:if>
+
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+							class="list-group-item list-group-item-action px-lg-4">손들기
+							내역</a></c:if>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+							class="list-group-item list-group-item-action px-lg-4">손들기
+							내역</a></c:if>
+
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/myQuestion"
+							class="list-group-item list-group-item-action px-lg-4">나의
+							질문글</a></c:if>
+
+					<a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
+						커뮤니티</a>
+
+					<a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
+						문의하기</a>
+
+					<a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4 fw-bold">회원
+						탈퇴</a>
+				</div>
+			</div><!-- End main nav -->
 
 
 			<div id="contents" class="col-lg-9">
@@ -80,9 +93,8 @@
 					<form class="was-validated d-flex flex-row align-items-center">
 						<form class="row g-3 needs-validation" novalidate>
 							<div class="col-6 ms-4">
-								<input class="form-check-input" type="checkbox" value=""
-									id="invalidCheck" required> <label
-									class="form-check-label" for="invalidCheck"> 안내 사항을 모두
+								<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+								<label class="form-check-label" for="invalidCheck"> 안내 사항을 모두
 									확인하였으며, 이에 동의합니다. </label>
 								<div class="invalid-feedback">안내사항을 확인해주세요.</div>
 							</div>

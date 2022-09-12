@@ -48,16 +48,30 @@
                     <li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
                 </ul>
                 <div class="list-group">
-                    <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4 fw-bold">기본
-                        정보</a>
-                    <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4">손들기
-                        내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
-                        질문글</a>
+                    <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentPage"
+                            class="list-group-item list-group-item-action px-lg-4 fw-bold">기본
+                            정보</a></c:if>
+                    <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorPage"
+                            class="list-group-item list-group-item-action px-lg-4 fw-bold">기본
+                            정보</a></c:if>
+
+                    <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+                            class="list-group-item list-group-item-action px-lg-4">손들기
+                            내역</a></c:if>
+                    <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+                            class="list-group-item list-group-item-action px-lg-4">손들기
+                            내역</a></c:if>
+
+                    <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/myQuestion"
+                            class="list-group-item list-group-item-action px-lg-4">나의
+                            질문글</a></c:if>
+
                     <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
                         커뮤니티</a>
+
                     <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
                         문의하기</a>
+
                     <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
                         탈퇴</a>
                 </div>
@@ -81,7 +95,8 @@
                                     <c:if test="${_ISPROFILE_ eq 'false'}"> <img
                                             src="${path}/resources/img/profile.png"> </c:if>
                                     <c:if test="${_ISPROFILE_ eq 'true'}"> <img
-                                            src="<spring:url value='/profile/${_USERINFO_.user_nick}_profile.png'/>" /> </c:if>
+                                            src="<spring:url value='/profile/${_USERINFO_.user_nick}_profile.png'/>" />
+                                    </c:if>
                                 </div>
                             </div>
 

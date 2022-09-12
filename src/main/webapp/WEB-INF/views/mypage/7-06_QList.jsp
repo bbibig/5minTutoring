@@ -8,12 +8,12 @@
 <html lang="ko">
 
 <head>
-<!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
-<jsp:include page="../htmlHead.jsp" flush="true" />
-<!-- =======mypage 공통 CSS=================================== -->
-<link href="${path}/resources/css/mypage.css" rel="stylesheet">
+	<!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
+	<jsp:include page="../htmlHead.jsp" flush="true" />
+	<!-- =======mypage 공통 CSS=================================== -->
+	<link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
-<title>1:1 문의 목록</title>
+	<title>1:1 문의 목록</title>
 </head>
 
 <body>
@@ -31,22 +31,35 @@
 				<ul class="list-group mb-2 bg-dark text-white">
 					<li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
 				</ul>
-                <div class="list-group">
-                    <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4">기본
-                        정보</a>
-                    <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4">손들기
-                        내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
-                        질문글</a>
-                    <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
-                        커뮤니티</a>
-                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1
-                        문의하기</a>
-                    <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
-                        탈퇴</a>
-                </div>
-			</div>
-			<!-- End main nav -->
+				<div class="list-group">
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentPage"
+							class="list-group-item list-group-item-action px-lg-4">기본
+							정보</a></c:if>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorPage"
+							class="list-group-item list-group-item-action px-lg-4">기본
+							정보</a></c:if>
+
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+							class="list-group-item list-group-item-action px-lg-4">손들기
+							내역</a></c:if>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+							class="list-group-item list-group-item-action px-lg-4">손들기
+							내역</a></c:if>
+
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/myQuestion"
+							class="list-group-item list-group-item-action px-lg-4">나의
+							질문글</a></c:if>
+
+					<a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
+						커뮤니티</a>
+
+					<a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1
+						문의하기</a>
+
+					<a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
+						탈퇴</a>
+				</div>
+			</div><!-- End main nav -->
 
 
 			<div id="contents" class="col-lg-9">
@@ -64,8 +77,7 @@
 							안내해드리겠습니다.
 						</p>
 						<div class="d-grid col-2 mx-auto">
-							<a class="btn btn-dark btn-lg" href="/inquiry"
-								role="button">문의하기</a>
+							<a class="btn btn-dark btn-lg" href="/inquiry" role="button">문의하기</a>
 						</div>
 					</div>
 
@@ -73,8 +85,7 @@
 					<hr>
 					<div class="list">
 						<div class="row">
-							<i class="col-1 fas fa-q fa-2x"
-								style="color: rgb(56, 105, 239); text-align: center;"></i>
+							<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
 							<div class="col-9">
 								<a href="/mypage/question" class="fs-5 fw-bold">문의합니다.</a>
 								<div class="fs-6">2022-07-21</div>
@@ -84,8 +95,7 @@
 						<hr>
 
 						<div class="row">
-							<i class="col-1 fas fa-q fa-2x"
-								style="color: rgb(56, 105, 239); text-align: center;"></i>
+							<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
 							<div class="col-9">
 								<a href="/mypage/qAndA" class="fs-5 fw-bold">문의합니다.</a>
 								<div class="fs-6">2022-07-21</div>
@@ -95,8 +105,7 @@
 						<hr>
 
 						<div class="row">
-							<i class="col-1 fas fa-q fa-2x"
-								style="color: rgb(56, 105, 239); text-align: center;"></i>
+							<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
 							<div class="col-9">
 								<a href="/mypage/qAndA" class="fs-5 fw-bold">문의합니다.</a>
 								<div class="fs-6">2022-07-21</div>
