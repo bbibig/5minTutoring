@@ -27,16 +27,16 @@ public class CommunityController implements InitializingBean{
 private CommunityService communityService;
 	
 	@GetMapping
-	public String communityPage(Model model) throws ControllerException {
+	public String communityPage() throws ControllerException {
 		log.trace("communityPage()invoked");
 		
-		try {
-			List<CommunityVO> list = this.communityService.selectAllList();
-			
-			model.addAttribute("__LIST__", list);		
-		}catch(Exception e) {
-			throw new ControllerException(e);
-		}
+//		try {
+//			List<CommunityVO> list = this.communityService.selectAllList();
+//			
+//			model.addAttribute("__LIST__", list);		
+//		}catch(Exception e) {
+//			throw new ControllerException(e);
+//		}
 		
 		return "community/3-01_community";
 		

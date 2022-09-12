@@ -99,7 +99,7 @@
           <div class="board mt-5">
             
             <div class="row d-flex flex-column">  
-              <!-- <c:foreach var="communityBoard" items="${__LIST__}"> -->
+              <c:foreach var="communityBoard" items="${__LIST__}">
                 <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
                   <div class="board-box">
                   <div class="row">
@@ -152,7 +152,7 @@
                   
                   </div>
                 </a><!--===============================================커뮤니티 박스end============================================-->
-              <!-- </c:foreach> -->
+              </c:foreach>
               
 
               <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
