@@ -23,6 +23,7 @@ import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.ProfileDTO;
 import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
+import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -68,14 +69,6 @@ public class MypageController {
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
 			model.addAttribute("_USERINFO_", userInfo);
-			
-			//2. 프로필 사진 유무 조회
-			List<ProfileVO> profileVo = this.profileService.getProfile(vo.getUser_email());
-			if(profileVo.size() == 0 ) {
-				model.addAttribute("_ISPROFILE_", "false");
-			} else {
-				model.addAttribute("_ISPROFILE_", "true");
-			}// if-else
 			
 			return "mypage/7-01_StudentPage";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
@@ -124,7 +117,8 @@ public class MypageController {
 				
 				//1-2. DB에 정보 저장 또는 수정
 				if(profileVo.size() == 0) { //DB에 프로필 정보가 없다면, 
-					this.profileService.createProfile(profileDto); 
+					this.profileService.createProfile(profileDto);
+					session.setAttribute(SharedScopeKeys.USER_PROFILE, "true");
 					log.info("프로필 정보 DB 생성");
 				} else { 
 					this.profileService.modifyProfile(profileDto);
@@ -154,7 +148,9 @@ public class MypageController {
 		log.trace("마이페이지 기본정보 조회(튜터)");
 		
 		try {
+			//1. 기본정보 조회
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			log.info("1. session scope 정보: {}", vo);
 			
 			UserVO userInfo = this.userService.getUserInfo(vo.getUser_email());
 			model.addAttribute("_USERINFO_", userInfo);
@@ -165,18 +161,47 @@ public class MypageController {
 	}// 기본정보 조회(튜터)
 	
 	@PostMapping("/tutorPageModify")
-	public String tutorPageModify(UserDTO dto, RedirectAttributes rttrs) throws ControllerException{
+	public String tutorPageModify(UserDTO dto, @RequestParam String user_newPw, MultipartFile file_name,
+			RedirectAttributes rttrs, HttpSession session) throws ControllerException{
 		log.trace("마이페이지 기본정보 수정(튜터)");
+		log.info("\t+ 1. file_name: {}", file_name);
 		
-		return "redirect:/mypage/tutorPage";
-		
-//		try {
-//			if(this.userService.updateUser(dto)) {
-//				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 성공");
-//			} else {
-//				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 오류");
-//			}//if-else
-//		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		try {
+			log.info("\t+ user_newPw: {}", user_newPw);
+			dto.setUser_pw(user_newPw);
+			
+			if(file_name.getSize() != 0) {	//input file에 파일 값이 있다면
+				//1-1. 프로필 사진 유무 조회
+				List<ProfileVO> profileVo = this.profileService.getProfile(dto.getUser_email());
+				
+				ProfileDTO profileDto = new ProfileDTO();
+				profileDto.setUser_email(dto.getUser_email());
+				profileDto.setFile_name(dto.getUser_nick() + "_profile");
+				
+				//1-2. DB에 정보 저장 또는 수정
+				if(profileVo.size() == 0) { //DB에 프로필 정보가 없다면, 
+					this.profileService.createProfile(profileDto); 
+					session.setAttribute(SharedScopeKeys.USER_PROFILE, "true");
+					log.info("프로필 정보 DB 생성");
+				} else { 
+					this.profileService.modifyProfile(profileDto);
+					log.info("프로필 정보 DB 수정");
+				}// if- else
+				
+				//1-3. 로컬에 저장
+				profileUpload.uploadProfile(file_name, dto);
+				log.info("프로필 사진 로컬 저장소 업로드 완료");
+			}//if
+			
+			//2. 회원정보 수정
+			if(this.mypageService.modifyUserInfo(dto)) {
+				UserVO vo = this.userService.getUserInfo(dto.getUser_email());
+				session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
+				
+				rttrs.addFlashAttribute("_USERMODIFYRESULT_", "회원정보 수정 성공");
+			}// if
+			return "redirect:/mypage/tutorPage";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// 기본정보 수정(튜터)
 	
@@ -274,9 +299,23 @@ public class MypageController {
 		return "mypage/7-09_UnregisterCompleted";
 	}// unregisterCompleted
 	
+	
+//=====손들기 내역===============================================
 	@GetMapping("/studentHands/use")		//Get
-	public String studentHandsUse() {
-		log.trace("7-10_StudentHandsListUse");
+	public String studentHandsUse(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
+		log.trace("마이페이지 손들기 사용 목록 조회(학생)");
+		
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<UseHandVO2> list = this.mypageService.getAllMyUsehandtList(cri);
+			model.addAttribute("_MYUSEHAND_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyUsehandTotalAmount(vo.getUser_email()));
+			model.addAttribute("_MYUSEHANDPAGENATION_", pageDto);
+			
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
 		return "mypage/7-10_StudentHandsListUse";
 	}// studentHandsUse
@@ -301,6 +340,7 @@ public class MypageController {
 		
 		return "mypage/7-13_TutorHandsListGet";
 	}// tutorHandsGet
+	
 	
 	@GetMapping("/tutorHands/withdraw")		//GET
 	public String tutorHandsWithdraw() {

@@ -6,6 +6,7 @@ import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBoardVO;
+import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ServiceException;
@@ -40,5 +41,12 @@ public interface MypageService {
 	
 	//4-2. 나의 질문글 목록 총 개수 획득
 	public abstract int getMyCommentTotalAmount(String user_email) throws ServiceException;
+	
+	
+	//5-1. 손들기 사용 목록 조회 페이징 처리(학생)
+	public abstract List<UseHandVO2> getAllMyUsehandtList(CriteriaMyPage cri) throws ServiceException;
+	
+	//5-2. 손들기 사용 목록 총 횟수 조회
+	public abstract int getMyUsehandTotalAmount(String user_email) throws ServiceException;
 	
 }// end interface

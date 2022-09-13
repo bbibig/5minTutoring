@@ -92,9 +92,9 @@
                                 <input type="file" name="file_name" id="file_name" class="d-none file_name"
                                     accept="image/*">
                                 <div id="profileImg" class="ratio ratio-1x1 rounded-circle profileImg">
-                                    <c:if test="${_ISPROFILE_ eq 'false'}"> <img
+                                    <c:if test="${_USER_PROFILE_ eq 'false'}"> <img
                                             src="${path}/resources/img/profile.png"> </c:if>
-                                    <c:if test="${_ISPROFILE_ eq 'true'}"> <img
+                                    <c:if test="${_USER_PROFILE_ eq 'true'}"> <img
                                             src="<spring:url value='/profile/${_USERINFO_.user_nick}_profile.png'/>" />
                                     </c:if>
                                 </div>

@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}" /> -->
 
 
 <!doctype html>
@@ -95,36 +96,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
+              <c:forEach var="usehand" items="${_MYUSEHAND_}">
+                <tr>
+                  <td class="text-center"> <fmt:formatDate value="${usehand.use_date}" pattern="yyyy.MM.dd" /> </td>
+                  <td class="text-center">
+                    <c:if test="${not empty usehand.qb_number}"> 질문하기(3개) </c:if>
+                    <c:if test="${not empty usehand.tb_number}"> 과외받기(5개) </c:if>
+                  </td>
+                  <td class="text-center"> ${usehand.tutor_email} </td>
+                </tr>
+              </c:forEach>
             </tbody>
           </table>
 
@@ -133,11 +114,17 @@
 
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="/mypage/studentHands/use?currPage=1">&laquo;</a>
+            </li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}">&lt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+            </li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}">&raquo;</a></li>
           </ul>
         </nav>
 

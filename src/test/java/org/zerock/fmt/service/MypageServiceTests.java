@@ -19,6 +19,7 @@ import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBoardVO;
+import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ServiceException;
@@ -193,6 +194,38 @@ public class MypageServiceTests {
 		
 	}//testGetMyCommentTotalAmount()
 	
+	
+	//5-1. 손들기 사용 목록 조회 페이징 처리(학생)
+	@Test
+	@Order(9)
+	@DisplayName("9. getAllMyUsehandtList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getAllMyUsehandtList() throws ServiceException {
+		log.trace("손들기 사용 목록 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		
+		List<UseHandVO2> list = this.service.getAllMyUsehandtList(cri);
+		list.forEach(e -> log.info(e));
+		
+	}//getAllMyUsehandtList()
+	
+	//5-2. 손들기 사용 목록 총 횟수 조회
+	@Test
+	@Order(10)
+	@DisplayName("10. getMyUsehandTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getMyUsehandTotalAmount() throws ServiceException {
+		log.trace("손들기 사용 목록 총 횟수 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		int result = this.service.getMyUsehandTotalAmount(dto.getUser_email());
+		log.info("\t+ 손들기 사용 총 횟수: {}", result);
+		
+	}//getMyUsehandTotalAmount()
 
 }// end class
 
