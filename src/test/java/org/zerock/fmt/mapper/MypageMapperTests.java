@@ -21,6 +21,7 @@ import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -230,6 +231,19 @@ public class MypageMapperTests {
 	} // testSelectAllMyInquiryList
 	
 	// 12. 나의 1:1 문의글과 답변 조회
+	@Test
+	@Order(12)
+	@DisplayName("12.  testSelectMyInquiry")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testSelectMyInquiry() throws DAOException {
+		log.trace(" testSelectMyInquiry() invoked.");
+		
+		InquiryQuestionDTO dto = new InquiryQuestionDTO();
+		dto.setIq_number(10);		
+
+		InquiryVO vo = mapper.selectMyInquiry(dto.getIq_number());
+		log.info("\t+ 일대일 문의와 답변 {}", vo);
+	} // testSelectMyInquiry
 	
 	
 	// 13. 출금 신청 - 튜터

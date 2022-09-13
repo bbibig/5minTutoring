@@ -12,6 +12,14 @@
           VALUES (iq_num.NEXTVAL, #{user_email}, #{iq_title}, #{iq_content}, CURRENT_DATE, #{iq_pass})
       </insert>
 
+	  <!-- 출금 신청 내역 목록 조회 -->
+	  <select id="selectAllInquiryList" resultType="org.zerock.fmt.domain.InquiryQuestionVO">
+		  SELECT /*+ index_desc(tbl_individual_question)*/ * 
+		  FROM tbl_individual_question
+	      OFFSET (#{currPage} - 1) * #{amount} rows
+		  FETCH NEXT #{amount} ROWS ONLY
+	  </select>
+
       <!-- 답변여부 수정 -->
       <update id="updateInquiryState">
           UPDATE tbl_individual_question

@@ -9,6 +9,7 @@ import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -61,9 +62,8 @@ public interface MypageMapper {
 	// 5. 나의 1:1 문의글 목록 조회 페이징 처리(내림차순으로)
 	public abstract List<InquiryQuestionVO> selectAllMyInquiryList(CriteriaMyPage cri) throws DAOException;
 
-	// 5-1. ** 수정 해야함** 나의 1:1 문의 & 답변 조회 ( 매퍼 XML에 작성하기... )
-	@Select("SELECT * FROM tbl_individual_question WHERE user_email = #{user_email}")
-	public abstract InquiryQuestionVO select(@Param("user_email") String user_email) throws DAOException;
+	// 5-1. 나의 1:1 문의 & 답변 조회
+	public abstract InquiryVO selectMyInquiry(@Param("iq_number") Integer iq_number) throws DAOException;
 
 	// 6. 나의 손들기 출금 신청 목록 조회 페이징 처리(내림차순으로) 
 	public abstract List<WithdrawalVO> selectAllMyWithdrawalList(CriteriaMyPage cri) throws DAOException;
