@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<UserVO> getStudent(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllUser() invoked.");
-		
-		try{ return this.userMapper.selectStudent(cri);}
+		try{ cri.setUser_group("Student");
+			return this.userMapper.selectAllUser(cri);}
 		catch(Exception e) { throw new ServiceException(e); }
 	}//getStudent
 	
@@ -43,7 +43,8 @@ public class UserServiceImpl implements UserService{
 	public List<UserVO> getTutor(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllUser() invoked.");
 		
-		try{ return this.userMapper.selectTutor(cri);}
+		try{ cri.setUser_group("Tutor");
+			return this.userMapper.selectAllUser(cri);}
 		catch(Exception e) { throw new ServiceException(e); }
 	}//getTutor
 	
@@ -51,14 +52,15 @@ public class UserServiceImpl implements UserService{
 	public List<UserVO> getStopUser(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllUser() invoked.");
 		
-		try{ return this.userMapper.selectStopUser(cri);}
+		try{ cri.setUser_status("STOP");
+			return this.userMapper.selectAllUser(cri);}
 		catch(Exception e) { throw new ServiceException(e); }
 	}//getStopUser
 	
 	@Override
-	public int userCount(String userGroup, String status) throws ServiceException {
+	public int userCount(CriteriaAdmin cri) throws ServiceException {
 		log.trace(" userCount - 회원조회용" );
-		try { return this.userMapper.userCount(userGroup, status); }
+		try { return this.userMapper.userCount(cri); }
 		catch(Exception e) { throw new ServiceException(e); }//try-catch
 	}//userCount
 
@@ -127,11 +129,52 @@ public class UserServiceImpl implements UserService{
 	}//waitTutorCount
 	
 	@Override
-	public boolean tutorPass(String user_email) throws ServiceException {
+	public int tutorPass(String user_email) throws ServiceException {
 		log.trace("tutorPass() invoked.");
 		
-		try { return this.userMapper.updateTutorPass(user_email)==1;}
-		catch(Exception e) {throw new ServiceException(e);}
+		try { 
+			//-------------------------------------- 튜터승인메일 보내기
+			String charSet = "utf-8";
+			String hostSMTP = "smtp.naver.com"; 
+			String hostSMTPid = "childhopp";		//계정아이디
+			String hostSMTPpwd = "--------";		//계정비밀번호
+
+			// 보내는 사람 EMail, 제목, 내용
+			String fromEmail = "childhopp@naver.com";
+			String fromName = "5분과외";
+			String subject = "";
+			String msg = "";
+
+			subject = "5분과외 튜터 승인 되었습니다.입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += user_email + "님의 가입이 허가되었습니다.h3>";
+			msg += "</div>";
+
+			// 받는 사람 E-Mail 주소
+			String mail = user_email;
+			try {
+				HtmlEmail email = new HtmlEmail();
+				email.setDebug(true);
+				email.setCharset(charSet);
+				email.setSSL(true);
+				email.setHostName(hostSMTP);
+				email.setSmtpPort(465); //네이버 이용시 587
+
+				email.setAuthentication(hostSMTPid, hostSMTPpwd);
+				email.setTLS(true);
+				email.addTo(mail, charSet);
+				email.setFrom(fromEmail, fromName, charSet);
+				email.setSubject(subject);
+				email.setHtmlMsg(msg);
+				email.send();
+				log.info("임시비밀번호로 메일전송");
+			} catch (Exception e) {
+				log.info("메일발송 실패 : " + e);
+			}//try-catch 
+			
+			return this.userMapper.updateTutorPass(user_email);
+		} catch(Exception e) {throw new ServiceException(e);}
 	}//tutorPass
 	
 	//----------------------------------------------------------- 회원탈퇴 
@@ -301,6 +344,15 @@ public class UserServiceImpl implements UserService{
 	      }
 	    
 	}//certifiedPhoneNumber
+
+	@Override
+	public String findEmail(String user_phone) throws ServiceException {
+		log.trace("findEmail. 이메일 찾기" );
+		try { return this.userMapper.selectFindEmail(user_phone);
+		} catch (Exception e ) { throw new ServiceException(e); }
+	}//findEmail
+	
+	
 
 //------------------------------------------------------------
 }//end class

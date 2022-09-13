@@ -26,6 +26,7 @@ import org.zerock.fmt.service.UserService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @NoArgsConstructor
@@ -142,22 +143,33 @@ public class LoginController{
 		} catch( Exception e) { throw new ControllerException(e); }
 		
 	}//nickCheckPost
-
+	
+	//---------------------------------------비밀번호 찾기
+	
 	// 이메일 찾기
 	@GetMapping("/findMyEmail")
-	public String findMyEmail() {
-		log.trace("findMyEmail() invoked.");
-		
+	public String findMyEmail() throws ControllerException {
 		return "login/1-09_findMyEmail";
-	}
+	}//findMyEmail
 	
-	// 이메일 찾기 - 성공
-	@GetMapping("/foundEmail")
-	public String foundEmail() {
-		log.trace("signupReq() invoked.");
-		
-		return "login/1-10_foundEmail";
-	}
+	@PostMapping("/foundEmail")
+	@ResponseBody
+	public String foundEmail(String user_phone) throws ControllerException {
+		log.trace("findMyEmail() invoked.");
+		try {
+			String user_email = this.userService.findEmail(user_phone);
+			log.info("\t+ user_eamil : {}", user_email);
+			return user_email;
+		}catch (Exception e) { throw new ControllerException(e); }
+	}//findMyEmail
+	
+//	// 이메일 찾기 - 성공
+//	@GetMapping("/foundEmail")
+//	public String foundEmail() {
+//		log.trace("signupReq() invoked.");
+//		
+//		return "login/1-10_foundEmail";
+//	}
 	
 	// 이메일 찾기 - 실패
 	@GetMapping("/notFoundEmail")
@@ -206,6 +218,8 @@ public class LoginController{
 	public String sendSMS(@RequestParam("user_phone")String user_phone) { // 휴대폰 문자보내기
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
 
+		if(user_phone.length()<11) return null;
+		
 		this.userService.certifiedPhoneNumber(user_phone,randomNumber);
 		
 		return Integer.toString(randomNumber);

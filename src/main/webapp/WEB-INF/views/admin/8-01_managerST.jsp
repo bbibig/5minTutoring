@@ -16,6 +16,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
         <title>Admin - Student</title>
+
         <script>
             const ADMIN = '${_ADMIN_.ad_name}';
             const loginResult = '${_ADMIN_RESULT_}';
@@ -94,12 +95,16 @@
                         <li>
                             <div class="select-search">
                                 <ul>
-                                    <form action="">
-                                        <select class="select-box" name="ad-search">
-                                            <option>닉네임</option>
-                                            <option>계정</option>
+                                    <form action="" class="searchForm">
+                                        <select class="select-box" name="type">
+                                            <option value="N" value="${_ADMINPAGINATION_.cri.type eq 'N'?'selected':''}">닉네임</option>
+                                            <option value="E" value="${_ADMINPAGINATION_.cri.type eq 'E'?'selected':''}">계정</option>
                                         </select>
+                                        <input type="text" name="keyword" value="${_ADMINPAGINATION_.cri.keyword}" class="search">
                                         <button class="btn-search">검색</button>
+
+                                        <input type="hidden" name="currPage" value="${_ADMINPAGINATION_.cri.currPage}">
+                                        <input type="hidden" name="amount" value="${_ADMINPAGINATION_.cri.amount}">
                                     </form> 
                                 </ul>
                             </div>
@@ -145,15 +150,18 @@
                         <ul class="pagination justify-content-center p-5">
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/student?currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" 
+                                    href="/admin/student?type=${_ADMINPAGINATION_.cri.type}&keyword=${_ADMINPAGINATION_.cri.keyword}&currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
-                                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/student?currPage=${page}">${page}</a></li>
-                            </c:forEach>
+                                <li class="page-item"><a class="page-link rounded-circle ${page==_ADMINPAGINATION_.cri.currPage?'page':''}" 
+                                    href="/admin/student?type=${_ADMINPAGINATION_.cri.type}&keyword=${_ADMINPAGINATION_.cri.keyword}&currPage=${page}">${page}</a></li>
+                                </c:forEach>
 
                             <c:if test="${_ADMINPAGINATION_.next}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/student?currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" 
+                                    href="/admin/student?type=${_ADMINPAGINATION_.cri.type}&keyword=${_ADMINPAGINATION_.cri.keyword}&currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
                             </c:if>
 
                         </ul>

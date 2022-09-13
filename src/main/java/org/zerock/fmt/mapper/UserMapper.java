@@ -14,13 +14,11 @@ public interface UserMapper {
 
 	//-------------- SELECT 
 	//학생회원조회 - 어드민(회원관리용)
-	public abstract List<UserVO> selectStudent(CriteriaAdmin cri) throws DAOException;
-	public abstract List<UserVO> selectTutor(CriteriaAdmin cri) throws DAOException;
-	public abstract List<UserVO> selectStopUser(CriteriaAdmin cri) throws DAOException;
+	public abstract List<UserVO> selectAllUser(CriteriaAdmin cri) throws DAOException;
+
 	//총 회원 수 
-	public abstract int userCount(@Param("userGroup") String userGroup, 
-								  @Param("status") String status) throws DAOException; 
-	
+	public abstract int userCount(CriteriaAdmin cri) throws DAOException; 
+
 	//회원 정보조회 + 손들기 개수 조회
 	@Select("SELECT * FROM tbl_user WHERE user_email=#{user_email}")
 	public abstract UserVO selectUser(@Param("user_email") String user_email) throws DAOException;
@@ -39,6 +37,9 @@ public interface UserMapper {
 	//튜터 승인 총 인원수 
 	@Select("SELECT count(*) FROM tbl_user WHERE pass='Wait'")
 	public abstract int waitTutorCount() throws DAOException;
+	
+	//이메일찾기 
+	public abstract String selectFindEmail(String user_phone) throws DAOException;
 	
 	//-------------- INSERT 
 	//학생 가입

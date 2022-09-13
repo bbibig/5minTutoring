@@ -8,9 +8,6 @@ import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
-
-
-
 public interface UserService {
 
 	//========조회
@@ -18,7 +15,7 @@ public interface UserService {
 	public abstract List<UserVO> getStudent(CriteriaAdmin cri) throws ServiceException;
 	public abstract List<UserVO> getTutor(CriteriaAdmin cri) throws ServiceException;
 	public abstract List<UserVO> getStopUser(CriteriaAdmin cri) throws ServiceException;
-	public abstract int userCount(String userGroup, String status) throws ServiceException;
+	public abstract int userCount(CriteriaAdmin cri) throws ServiceException;
 	
 	//유저정보조회
 	public abstract UserVO getUserInfo(String user_email) throws ServiceException;
@@ -29,6 +26,9 @@ public interface UserService {
 	//로그인
 	public abstract UserVO loginEmail(String user_email) throws ServiceException;
 	public abstract UserVO gettLoginUser(String user_email,String user_pw) throws ServiceException;
+	
+	//이메일 찾기
+	public String findEmail(String user_phone) throws ServiceException;
 	
 	//비밀번호찾기
 	public String findPassword(UserDTO user) throws ServiceException;
@@ -49,7 +49,7 @@ public interface UserService {
 	public abstract boolean updateUser(UserDTO user) throws ServiceException;
 	
 	//튜터승인
-	public abstract boolean tutorPass(String user_email) throws ServiceException;
+	public abstract int tutorPass(String user_email) throws ServiceException;
 	
 	//회원탈퇴
 	public abstract boolean userStatus(String user_email) throws ServiceException;
