@@ -44,13 +44,16 @@ public class UserMapperTests {
 	@Order(1)
 	@DisplayName("selectAllUser")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void selectStudent() throws DAOException {
+	void selectAllUser() throws DAOException {
 		log.info("selectStudent 학생 조회");
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setCurrPage(1);
-		cri.setAmount(5);
+		cri.setAmount(10);
 		cri.setPagesPerPage(5);
-		List<UserVO> list = this.mapper.selectStudent(cri);
+		cri.setKeyword(null);
+		cri.setType("E");
+		cri.setUser_group("Student");
+		List<UserVO> list = this.mapper.selectAllUser(cri);
 		list.forEach(log::info);
 	}//selectAllUser
 	
@@ -61,7 +64,8 @@ public class UserMapperTests {
 		cri.setCurrPage(1);
 		cri.setAmount(5);
 		cri.setPagesPerPage(5);
-		List<UserVO> list = this.mapper.selectTutor(cri);
+		cri.setUser_group("Tutor");
+		List<UserVO> list = this.mapper.selectAllUser(cri);
 		list.forEach(log::info);
 	}//selectAllUser
 	@Test
@@ -71,15 +75,23 @@ public class UserMapperTests {
 		cri.setCurrPage(1);
 		cri.setAmount(5);
 		cri.setPagesPerPage(5);
-		List<UserVO> list = this.mapper.selectStopUser(cri);
+		cri.setUser_status("STOP");
+		List<UserVO> list = this.mapper.selectAllUser(cri);
 		list.forEach(log::info);
 	}//selectAllUser
 	
 	@Test
 	@DisplayName(" AllUserCount ")
 	void testAllUserCount() throws DAOException {
-		String userGroup = "Student";
-		int result = this.mapper.userCount(null,"STOP");
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(10);
+		cri.setCurrPage(1);
+		cri.setPagesPerPage(1);
+		cri.setKeyword("고구마");
+		cri.setType("N");
+		cri.setUser_group("Tutor");
+		cri.setUser_status(null);
+		int result = this.mapper.userCount(cri);
 		log.info("\t+ result: {}", result );
 	}
 	@Test
@@ -267,4 +279,12 @@ public class UserMapperTests {
 		int result = this.mapper.waitTutorCount();
 		log.info("\t + result : {}", result);
 	}//waitTutorCount
+	
+	@Test
+	@DisplayName("이메일찾기")
+	void selectFindEmail() throws DAOException {
+		log.trace("selectFindEmail 이메일 찾기");
+		String user_email = this.mapper.selectFindEmail("000-0000-0001");
+		log.info("\t+ user_email : {}", user_email);
+	}//selectFindEmail
 }//end class

@@ -78,43 +78,61 @@
     </update>
 
     <!-- 카카오톡 -->
-<!--     <select id="findKakao" parameterType="java.util.HashMap" resultType="org.zerock.fmt.domain.UserDTO"> -->
-<!--         SELECT * FROM tbl_user WHERE user_eamil = #{userEmail} -->
-<!--     </select> -->
+    <!--     <select id="findKakao" parameterType="java.util.HashMap" resultType="org.zerock.fmt.domain.UserDTO"> -->
+    <!--         SELECT * FROM tbl_user WHERE user_eamil = #{userEmail} -->
+    <!--     </select> -->
 
-<!--     <insert id="kakaoInsert" parameterMap="java.util.HashMap"> -->
-<!--         INSERT INTO tbl_user(user_email) -->
-<!--         VALUES(#{user_email}) -->
-<!--     </insert> -->
+    <!--     <insert id="kakaoInsert" parameterMap="java.util.HashMap"> -->
+    <!--         INSERT INTO tbl_user(user_email) -->
+    <!--         VALUES(#{user_email}) -->
+    <!--     </insert> -->
 
+    <!-- 검색쿼리 -->
+    <sql id="criteriaAdmin">
+       <choose>
+           <when test="type=='N'.toString()">
+               AND user_nick like '%'||#{keyword}||'%'
+           </when>
+           <when test="type=='E'.toString()">
+               AND user_email like '%'||#{keyword}||'%'
+           </when>
+       </choose>
+    </sql>
+    
     <!-- 유저 조회 -->
-    <select id="selectStudent" resultType="org.zerock.fmt.domain.UserVO">
+    <select id="selectAllUser" resultType="org.zerock.fmt.domain.UserVO">
         SELECT /*+index_desc(tbl_user)*/ * 
         FROM tbl_user
-        WHERE user_group='Student'
+        <where>
+            <if test="user_group != null">
+                USER_GROUP = #{user_group}
+            </if>
+            <if test="user_status != null">
+                user_status=#{user_status}
+            </if>
+            <if test="keyword != null">
+                <include refid="criteriaAdmin"/>
+            </if>
+        </where>
         OFFSET (#{currPage}-1) * #{amount} ROW 
         FETCH NEXT #{amount} ROWS ONLY
     </select>
-    <select id="selectTutor" resultType="org.zerock.fmt.domain.UserVO">
-        SELECT /*+index_desc(tbl_user)*/ * 
-        FROM tbl_user
-        WHERE user_group='Tutor'
-        OFFSET (#{currPage}-1) * #{amount} ROW 
-        FETCH NEXT #{amount} ROWS ONLY
-    </select>
-    <select id="selectStopUser" resultType="org.zerock.fmt.domain.UserVO">
-        SELECT /*+index_desc(tbl_user)*/ * 
-        FROM tbl_user
-        WHERE USER_STATUS='STOP'
-        OFFSET (#{currPage}-1) * #{amount} ROW 
-        FETCH NEXT #{amount} ROWS ONLY
-    </select>
+    
     <!-- 총 회원수  -->
     <select id="userCount" resultType="int">
         SELECT count(*) 
         FROM tbl_user 
-        WHERE user_group=#{userGroup, jdbcType=VARCHAR} 
-        OR user_status=#{status, jdbcType=VARCHAR}
+        <where>
+            <if test="user_group != null">
+                USER_GROUP = #{user_group}
+            </if>
+            <if test="user_status != null">
+                user_status=#{user_status}
+            </if>
+            <if test="keyword != null">
+                <include refid="criteriaAdmin"/>
+            </if>
+        </where>
     </select>
 
     <!-- 승인 대기 튜터 리스트 -->
@@ -126,5 +144,9 @@
         FETCH NEXT #{amount} ROWS ONLY
     </select>
 
-
+    <!-- 이메일찾기 -->
+    <select id="selectFindEmail" resultType="String">
+        SELECT user_email FROM tbl_user WHERE user_phone=#{user_phone}
+    </select>
+    
 </mapper>

@@ -87,21 +87,17 @@
                         <li>
                             <div class="select-search">
                                 <ul>
-                                    <li>
-                                        <form action=""></form>
-                                        <select class="select-box" name="ad-search">
-                                            <option>닉네임</option>
-                                            <option>계정</option>
+                                    <form action="" class="searchForm">
+                                        <select class="select-box" name="type">
+                                            <option value="N" value="${_ADMINPAGINATION_.cri.type eq 'N'?'selected':''}">닉네임</option>
+                                            <option value="E" value="${_ADMINPAGINATION_.cri.type eq 'E'?'selected':''}">계정</option>
                                         </select>
-                                        </form>
-                                    </li>
+                                        <input type="text" name="keyword" value="${_ADMINPAGINATION_.cri.keyword}" class="search">
+                                        <button class="btn-search">검색</button>
 
-                                    <li>
-                                        <a href="#">
-                                            <button class="btn-search">검색</button>
-                                        </a>
-                                    </li>
-
+                                        <input type="hidden" name="currPage" value="${_ADMINPAGINATION_.cri.currPage}">
+                                        <input type="hidden" name="amount" value="${_ADMINPAGINATION_.cri.amount}">
+                                    </form> 
                                 </ul>
                             </div>
                         </li>
@@ -147,15 +143,18 @@
                         <ul class="pagination justify-content-center p-5">
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/humenMember?currPage=${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" 
+                                    href="/admin/humenMember?type=${_ADMINPAGINATION_.cri.type}&keyword=${_ADMINPAGINATION_.cri.keyword}&currPage=${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
-                                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/humenMember?currPage=${page}">${page}</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle ${page==_ADMINPAGINATION_.cri.currPage?'page':''}" 
+                                    href="/admin/humenMember?type=${_ADMINPAGINATION_.cri.type}&keyword=${_ADMINPAGINATION_.cri.keyword}&currPage=${page}">${page}</a></li>
                             </c:forEach>
                             
                             <c:if test="${_ADMINPAGINATION_.next}">
-                                <li class="page-item"><a class="page-link rounded-circle" href="/admin/humenMember?currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link rounded-circle" 
+                                    href="/admin/humenMember?type=${_ADMINPAGINATION_.cri.type}&keyword=${_ADMINPAGINATION_.cri.keyword}&currPage=${_ADMINPAGINATION_.endPage+1}">&raquo;</a></li>
                             </c:if>
 
                         </ul>
