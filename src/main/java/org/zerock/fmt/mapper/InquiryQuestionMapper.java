@@ -15,7 +15,7 @@ public interface InquiryQuestionMapper {
 	public abstract Integer insertIQ(InquiryQuestionDTO dto) throws DAOException; 
 
 	
-//	[R]  1:1 문의글 목록 조회 
+//	[R]  1:1 문의글 목록 조회
 //       사용자 => 본인이 작성한 게시글만 조회 가능 (문의제목, 날짜, 답변유무)
 //       관리자 => 답변 여부로 나눠서 조회 가능 (문의번호, 제목, 작성자, 작성일, 상태)
 	@Select("SELECT \r\n"

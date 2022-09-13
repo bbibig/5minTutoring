@@ -19,9 +19,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.InquiryQuestionDTO;
+import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalDTO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -193,6 +197,89 @@ public class MypageMapperTests {
 	}//testGetMyQuestionTotalAmount()
 
 
+	// 10. 1:1 문의하기 작성
+	@Test
+	@Order(10)
+	@DisplayName("10. testInsertInquiry")
+	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	void testInsertInquiry() throws DAOException {
+		log.trace("testInsertInquiry() invoked.");
+
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "sd456@gmail.com", "문의합니다.", "출금신청을 했는데 언제 처리되나요?", null, 1);
+		log.info("\t + dto: {}", dto);
+	
+		int affectedLines = this.mapper.insertIQ(dto);
+		log.info("\t + affectedLines: {}", affectedLines);
+		
+		assert affectedLines == 1;
+	} // testInsertInquiry
+	
+	// 11. 나의 1:1 문의글 목록 조회 
+	@Test
+	@Order(11)
+	@DisplayName("11. testSelectAllMyInquiryList")
+	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	void testSelectAllMyInquiryList() throws DAOException {
+		log.trace("testSelectAllMyInquiryList() invoked.");
+
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("sd456@gmail.com");
+		
+		List<InquiryQuestionVO> list = mapper.selectAllMyInquiryList(cri);
+		list.forEach(e -> log.info(e));
+	} // testSelectAllMyInquiryList
+	
+	// 12. 나의 1:1 문의글과 답변 조회
+	
+	
+	// 13. 출금 신청 - 튜터
+	@Test
+	@Order(13)
+	@DisplayName("13. testInsertWithdrawal")
+	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	void testInsertWithdrawal() throws DAOException {
+		log.trace("testInsertWithdrawal() invoked.");
+
+		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 500, 77000, "승인 대기 중", null);
+		log.info("\t + dto: {}", dto);
+	
+		int affectedLines = this.mapper.insertWithdrawal(dto);
+		log.info("\t + affectedLines: {}", affectedLines);
+		
+		assert affectedLines == 1;
+	} // testInsertInquiry
+	
+	// 14. 나의 손들기 출금 신청 목록 조회
+	@Test
+	@Order(14)
+	@DisplayName("14. testSelectAllMyWithdrawalList")
+	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	void testSelectAllMyWithdrawalList() throws DAOException {
+		log.trace("testSelectAllMyWithdrawalList() invoked.");
+
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("tutor2@gmail.com");
+		
+		List<WithdrawalVO> list = mapper.selectAllMyWithdrawalList(cri);
+		list.forEach(e -> log.info(e));
+	} // testSelectAllMyWithdrawalList
+	
+	
+	// 15. 회원 탈퇴(정지) 상태 변경 
+	@Test
+	@Order(15)
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void stopUser() throws DAOException {
+
+		String user_email = "sd456@gmail.com";
+		Integer updateResult = this.mapper.updateUserStop(user_email);
+		
+		if(updateResult==1) {
+			log.info("\t updateResult : {}", updateResult);
+			log.info("활동정지 완료");
+		} else log.info("테스트실패"); 
+		
+	}//stopUser
 }// end class
 
 

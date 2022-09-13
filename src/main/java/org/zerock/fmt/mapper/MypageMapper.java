@@ -7,9 +7,13 @@ import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.InquiryQuestionDTO;
+import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalDTO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 
 //마이페이지
@@ -53,12 +57,30 @@ public interface MypageMapper {
 			+ "WHERE user_email = #{user_email}")
 	public abstract Integer getMyCommentTotalAmount(@Param("user_email") String user_email) throws DAOException;
 	
-//	============<<INSERT>>============
 
+	// 5. 나의 1:1 문의글 목록 조회 페이징 처리(내림차순으로)
+	public abstract List<InquiryQuestionVO> selectAllMyInquiryList(CriteriaMyPage cri) throws DAOException;
+
+	// 5-1. ** 수정 해야함** 나의 1:1 문의 & 답변 조회 ( 매퍼 XML에 작성하기... )
+	@Select("SELECT * FROM tbl_individual_question WHERE user_email = #{user_email}")
+	public abstract InquiryQuestionVO select(@Param("user_email") String user_email) throws DAOException;
+
+	// 6. 나의 손들기 출금 신청 목록 조회 페이징 처리(내림차순으로) 
+	public abstract List<WithdrawalVO> selectAllMyWithdrawalList(CriteriaMyPage cri) throws DAOException;
+	
+//	============<<INSERT>>============
+	// 1. 1:1 문의하기
+	public abstract Integer insertIQ(InquiryQuestionDTO dto) throws DAOException; 
+	
+	// 2. 손들기 출금 신청 하기 (튜터)
+	public abstract Integer insertWithdrawal(WithdrawalDTO dto) throws DAOException;
 	
 //	============<<UPDATE>>============
 	//1. 기본정보 수정 + 프로필사진 추가 예정
 	public abstract boolean updateUserInfo(UserDTO dto) throws DAOException;
+	
+	// 2. 회원탈퇴 - (정지)
+	public abstract int updateUserStop(@Param("user_email")String user_email) throws DAOException;
 	
 	
 //	============<<DELETE>>============
