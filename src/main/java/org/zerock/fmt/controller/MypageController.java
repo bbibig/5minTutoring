@@ -28,6 +28,7 @@ import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.MypageHandService;
 import org.zerock.fmt.service.MypageService;
 import org.zerock.fmt.service.ProfileService;
 import org.zerock.fmt.service.UserService;
@@ -48,6 +49,9 @@ public class MypageController {
 	
 	@Setter(onMethod_= @Autowired)
 	private MypageService mypageService;
+	
+	@Setter(onMethod_= @Autowired)
+	private MypageHandService mypageHandService;
 	
 	@Setter(onMethod_= @Autowired)
 	private ProfileLoad profileUpload;
@@ -309,10 +313,10 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
-			List<UseHandVO2> list = this.mypageService.getAllMyUsehandtList(cri);
+			List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtList(cri);
 			model.addAttribute("_MYUSEHAND_", list);
 			
-			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyUsehandTotalAmount(vo.getUser_email()));
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandTotalAmount(vo.getUser_email()));
 			model.addAttribute("_MYUSEHANDPAGENATION_", pageDto);
 			
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch

@@ -59,18 +59,6 @@ public interface MypageMapper {
 			+ "WHERE user_email = #{user_email}")
 	public abstract Integer getMyCommentTotalAmount(@Param("user_email") String user_email) throws DAOException;
 	
-	
-	//5-1. 손들기 사용 목록 조회 페이징 처리(학생)
-	public abstract List<UseHandVO2> selectAllmyUsehandList(CriteriaMyPage cri) throws DAOException;
-	
-	//5-2. 손들기 사용 목록 총 횟수 조회
-	@Select ("SELECT count(use_number) "
-			+ "FROM tbl_usehand_student "
-			+ "WHERE user_email = #{user_email}")
-	public abstract Integer getMyUsehandTotalAmount(@Param("user_email") String user_email) throws DAOException;
-	
-	
-//	============<<INSERT>>============
 
 	// 5. 나의 1:1 문의글 목록 조회 페이징 처리(내림차순으로)
 	public abstract List<InquiryQuestionVO> selectAllMyInquiryList(CriteriaMyPage cri) throws DAOException;

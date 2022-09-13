@@ -43,10 +43,4 @@ public interface MypageService {
 	public abstract int getMyCommentTotalAmount(String user_email) throws ServiceException;
 	
 	
-	//5-1. 손들기 사용 목록 조회 페이징 처리(학생)
-	public abstract List<UseHandVO2> getAllMyUsehandtList(CriteriaMyPage cri) throws ServiceException;
-	
-	//5-2. 손들기 사용 목록 총 횟수 조회
-	public abstract int getMyUsehandTotalAmount(String user_email) throws ServiceException;
-	
 }// end interface

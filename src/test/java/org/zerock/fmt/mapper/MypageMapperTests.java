@@ -198,38 +198,6 @@ public class MypageMapperTests {
 		
 	}//testGetMyQuestionTotalAmount()
 
-	
-	//9. 손들기 사용 목록 조회
-	@Test
-	@Order(9)
-	@DisplayName("9. selectAllmyUsehandList")
-	@Timeout(unit = TimeUnit.SECONDS, value = 10)
-	void selectAllmyUsehandList() throws DAOException {
-		log.trace("selectAllmyUsehandList(), 마이페이지 손들기 사용 목록 조회");
-		
-		CriteriaMyPage cri = new CriteriaMyPage();
-		cri.setUser_email("test@gmail.com");
-		
-		List<UseHandVO2> list = mapper.selectAllmyUsehandList(cri);
-		list.forEach(e -> log.info(e));
-
-	}//selectAllmyUsehandList()
-	
-	//10. 손들기 사용 목록 총 개수
-	@Test
-	@Order(10)
-	@DisplayName("10. getMyUsehandTotalAmount")
-	@Timeout(unit = TimeUnit.SECONDS, value = 10)
-	void getMyUsehandTotalAmount() throws DAOException {
-		log.trace("testGetMyCommentTotalAmount(), 마이페이지 손들기 사용 목록 총 개수 조회");
-		
-		UserDTO dto = new UserDTO();
-		dto.setUser_email("test@gmail.com");
-		
-		Integer amount = mapper.getMyUsehandTotalAmount(dto.getUser_email());
-		log.info("\t + 손들기 사용 총 횟수: {}", amount);
-		
-	}//getMyUsehandTotalAmount()
 
 	// 10. 1:1 문의하기 작성
 	@Test

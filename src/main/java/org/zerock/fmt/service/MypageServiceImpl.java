@@ -127,25 +127,6 @@ public class MypageServiceImpl implements MypageService {
 	}// getMyQuestionTotalAmount
 	
 	
-	//5-1. 손들기 사용 목록 조회 페이징 처리(학생)
-	@Override
-	public List<UseHandVO2> getAllMyUsehandtList(CriteriaMyPage cri) throws ServiceException {
-		log.trace("손들기 사용 목록 목록 조회");
-		
-		try { return this.mapper.selectAllmyUsehandList(cri); }
-		catch (DAOException e) { throw new ServiceException(e); }
-		
-	}// getAllMyCommentList
-
-	//5-2. 손들기 사용 목록 총 횟수 조회
-	@Override
-	public int getMyUsehandTotalAmount(String user_email) throws ServiceException {
-		log.trace("손들기 사용 목록 총 횟수 조회");
-		
-		try { return this.mapper.getMyUsehandTotalAmount(user_email); } 
-		catch (DAOException e) { throw new ServiceException(e); }
-		
-	}// getMyQuestionTotalAmount
 }// end class
 
 
