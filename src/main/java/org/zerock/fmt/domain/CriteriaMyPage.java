@@ -11,4 +11,8 @@ public class CriteriaMyPage {
 	
 	private String user_email;
 	
+	//기간조회
+	private String dateFrom;
+	private String dateTo;
+	
 }// end class

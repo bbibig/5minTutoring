@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.common.SharedScopeKeys;
+import org.zerock.fmt.domain.BuyInfoVO;
+import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
@@ -28,6 +30,7 @@ import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.MypageHandService;
 import org.zerock.fmt.service.MypageService;
 import org.zerock.fmt.service.ProfileService;
@@ -52,6 +55,9 @@ public class MypageController {
 	
 	@Setter(onMethod_= @Autowired)
 	private MypageHandService mypageHandService;
+	
+	@Setter(onMethod_= @Autowired)
+	private BuyService buyService;
 	
 	@Setter(onMethod_= @Autowired)
 	private ProfileLoad profileUpload;
@@ -305,7 +311,7 @@ public class MypageController {
 	
 	
 //=====손들기 내역===============================================
-	@GetMapping("/studentHands/use")		//Get
+	@GetMapping("/studentHands/use")
 	public String studentHandsUse(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 손들기 사용 목록 조회(학생)");
 		
@@ -316,26 +322,45 @@ public class MypageController {
 			List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtList(cri);
 			model.addAttribute("_MYUSEHAND_", list);
 			
-			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandTotalAmount(vo.getUser_email()));
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandTotalAmount(cri));
 			model.addAttribute("_MYUSEHANDPAGENATION_", pageDto);
 			
+			return "mypage/7-10_StudentHandsListUse";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 		
-		return "mypage/7-10_StudentHandsListUse";
 	}// studentHandsUse
 	
 	@GetMapping("/studentHands/buy")		//GET
-	public String studentHandsBuy() {
-		log.trace("7-11_StudentHandsListBuy");
+	public String studentHandsBuy(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
+		log.trace("마이페이지 손들기 구매 목록 조회(학생)");
 		
-		return "mypage/7-11_StudentHandsListBuy";
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<BuyVO> list = this.buyService.myPageBuy(cri);
+			model.addAttribute("_MYBUYHAND_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.buyService.myPageBuyCount(vo.getUser_email()));
+			model.addAttribute("_MYBUYHANDPAGENATION_", pageDto);
+			
+			return "mypage/7-11_StudentHandsListBuy";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
 	}// studentHandsBuy
 	
 	@GetMapping("/studentHands/buy/detail")		//GET
-	public String studentHandsBuyDetail() {
-		log.trace("7-12_StudentHandsListBuyD");
+	public String studentHandsBuyDetail(@RequestParam Integer b_number, @RequestParam String currPage, Model model) throws ControllerException {
+		log.trace("마이페이지 손들기 구매 상세 조회(학생)");
 		
-		return "mypage/7-12_StudentHandsListBuyD";
+		try {
+			BuyInfoVO vo = this.buyService.myPageBuyinfo(b_number);
+			model.addAttribute("_BUYINFO_", vo);
+			model.addAttribute("_CURRENTPAGE_", currPage);
+			
+			return "mypage/7-12_StudentHandsListBuyD";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
 	}// studentHandsBuyDetail
 	
 	@GetMapping("/tutorHands/get")		//GET

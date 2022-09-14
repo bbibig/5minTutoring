@@ -18,4 +18,5 @@ public class BuyInfoVO {
 	
 	private String h_name;			// 상품이름 
 	private String user_phone;		// 주문자 핸드폰번호 
+	private String user_name;		// 주문자 이름
 }//end class

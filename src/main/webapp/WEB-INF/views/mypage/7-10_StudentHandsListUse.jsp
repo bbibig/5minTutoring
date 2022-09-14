@@ -1,7 +1,7 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="path" value="${pageContext.request.contextPath}" /> -->
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
 
 <!doctype html>
@@ -67,7 +67,7 @@
 
         <div>
           <span class="h3 fw-bold">손들기 내역</span>
-          <span class="fw-bold float-end mx-3">보유중인 손들기 00개</span>
+          <span class="fw-bold float-end mx-3">보유중인 손들기 ${__LOGIN_USER__.hands_wallet}개</span>
         </div>
 
         <!-- FROM -->
@@ -77,9 +77,18 @@
 
           <span class="float-end">
             <form action="/mypage/studentHands/use" method="get" onsubmit="return dateCheck();">
-              <input type="date" name="dateFrom" id="dateFrom" required>
-              -
-              <input type="date" name="dateTo" id="dateTo" required>
+              <!-- 1. 기간조회 X -->
+              <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom eq null}">
+                <input type="date" name="dateFrom" id="dateFrom" required>
+                -
+                <input type="date" name="dateTo" id="dateTo" required>
+              </c:if>
+              <!-- 2. 기간조회 O -->
+              <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom ne null}">
+                <input type="date" name="dateFrom" id="dateFrom" required value="${_MYUSEHANDPAGENATION_.cri.dateFrom}">
+                -
+                <input type="date" name="dateTo" id="dateTo" required value="${_MYUSEHANDPAGENATION_.cri.dateTo}">
+              </c:if>
               <button type="submit" class="btn bg-blue mx-3">조회</button>
             </form>
           </span>
@@ -98,7 +107,9 @@
             <tbody>
               <c:forEach var="usehand" items="${_MYUSEHAND_}">
                 <tr>
-                  <td class="text-center"> <fmt:formatDate value="${usehand.use_date}" pattern="yyyy.MM.dd" /> </td>
+                  <td class="text-center">
+                    <fmt:formatDate value="${usehand.use_date}" pattern="yyyy.MM.dd" />
+                  </td>
                   <td class="text-center">
                     <c:if test="${not empty usehand.qb_number}"> 질문하기(3개) </c:if>
                     <c:if test="${not empty usehand.tb_number}"> 과외받기(5개) </c:if>
@@ -113,19 +124,54 @@
         <!--End main contents card(박스)-->
 
         <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle" href="/mypage/studentHands/use?currPage=1">&laquo;</a>
-            </li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue"
-                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
-            </li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}">&raquo;</a></li>
-          </ul>
+          <!-- 1. 기간 조회 안할때 페이징 -->
+          <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom eq null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=1">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
+          <!-- 2. 기간조회 할 때 페이징 -->
+          <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom ne null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=1&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
         </nav>
 
         <!-- TO -->

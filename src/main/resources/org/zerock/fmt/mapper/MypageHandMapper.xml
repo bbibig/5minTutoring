@@ -8,23 +8,30 @@
 
 	<!-- 1. 손들기 사용 목록 조회 페이징 처리(내림차순으로) -->
 	<select id="selectAllmyUsehandList" resultType="org.zerock.fmt.domain.UseHandVO2">
-		SELECT
-		    us.use_number,
-		    us.qb_number,
-		    us.tb_number,
-		    us.use_date,
-		    us.user_email,
+			SELECT 
+		    uh.*,
 		    tp.user_email as tutor_email
 		FROM (SELECT *
 		      FROM tbl_usehand_student
-		      WHERE user_email = #{user_email}) us,
+		      WHERE user_email = #{user_email}
+		      		<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		      ) uh,
 		      tbl_question_board qb,
+		      tbl_tutoring_board tb,
 		      tbl_tutor_page tp
-		WHERE us.qb_number = qb.qb_number
-		      AND qb.tp_number = tp.tp_number
-		ORDER BY us.use_number desc
+		WHERE uh.qb_number = qb.qb_number AND qb.tp_number = tp.tp_number
+		ORDER BY uh.use_number desc
+		
 		OFFSET (#{currPage} - 1) * #{amount} rows
 		FETCH NEXT #{amount} ROWS ONLY
+	</select>
+	
+	<!-- 2. 손들기 사용 목록 총 횟수 조회(내림차순으로) -->
+	<select id="getMyUsehandTotalAmount" resultType="Integer">
+		SELECT count(use_number)
+		FROM tbl_usehand_student
+		WHERE user_email = #{user_email}
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
 	</select>
 
 </mapper>

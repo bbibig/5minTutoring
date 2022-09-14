@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
@@ -37,6 +38,9 @@ public class MypageHandMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private MypageHandMapper mapper;
 	
+	@Setter(onMethod_= @Autowired)
+	private BuyMapper buymapper;
+	
 	//1. 손들기 사용 목록 조회
 	@Test
 	@Order(1)
@@ -47,6 +51,8 @@ public class MypageHandMapperTests {
 		
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
+		cri.setDateFrom("2022-09-05");
+		cri.setDateTo("2022-09-06");
 		
 		List<UseHandVO2> list = mapper.selectAllmyUsehandList(cri);
 		list.forEach(e -> log.info(e));
@@ -61,13 +67,48 @@ public class MypageHandMapperTests {
 	void getMyUsehandTotalAmount() throws DAOException {
 		log.trace("testGetMyCommentTotalAmount(), 마이페이지 손들기 사용 목록 총 개수 조회");
 		
-		UserDTO dto = new UserDTO();
-		dto.setUser_email("test@gmail.com");
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		cri.setDateFrom("2022-09-05");
+		cri.setDateTo("2022-09-06");
 		
-		Integer amount = mapper.getMyUsehandTotalAmount(dto.getUser_email());
+		Integer amount = mapper.getMyUsehandTotalAmount(cri);
 		log.info("\t + 손들기 사용 총 횟수: {}", amount);
 		
 	}//getMyUsehandTotalAmount()
+	
+	//3. 손들기 구매 목록 조회
+	@Test
+	@Order(3)
+	@DisplayName("3. myPageAllBuy")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void myPageAllBuy() throws DAOException {
+		log.trace("myPageAllBuy(), 마이페이지 손들기 구매 목록 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		
+		List<BuyVO> list = this.buymapper.myPageAllBuy(cri);
+		list.forEach(e -> log.info(e));
+
+	}//myPageAllBuy()
+	
+	//4. 손들기 구매 목록 총 개수
+	@Test
+	@Order(4)
+	@DisplayName("4. myPageBuyCount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void myPageBuyCount() throws DAOException {
+		log.trace("myPageBuyCount(), 마이페이지 손들기 구매 목록 총 개수 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("test@gmail.com");
+		
+		int amount = this.buymapper.myPageBuyCount(dto.getUser_email());
+		log.info("\t + 손들기 구매 총 횟수: {}", amount);
+		
+	}//myPageBuyCount()
+	
 
 }// end class
 

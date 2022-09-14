@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -85,15 +86,15 @@
                   </tr>
                   <tr>
                     <th class="text-center">이름</th>
-                    <td class="text-center">홍길동</td>
+                    <td class="text-center"> ${_BUYINFO_.user_name} </td>
                   </tr>
                   <tr>
                     <th class="text-center">구매 일자</th>
-                    <td class="text-center">2022-06-12</td>
+                    <td class="text-center"> <fmt:formatDate value="${_BUYINFO_.b_date}" pattern="yyyy.MM.dd" /> </td>
                   </tr>
                   <tr>
                     <th class="text-center">휴대폰 번호</th>
-                    <td class="text-center">010-0000-0000</td>
+                    <td class="text-center"> ${_BUYINFO_.user_phone} </td>
                   </tr>
                 </tbody>
               </table>
@@ -117,9 +118,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center">손들기 15개</td>
-                    <td class="text-center">2</td>
-                    <td class="text-center">6,600</td>
+                    <td class="text-center"> ${_BUYINFO_.h_name} </td>
+                    <td class="text-center"> ${_BUYINFO_.b_count} </td>
+                    <td class="text-center"> ${_BUYINFO_.b_price} </td>
                   </tr>
                 </tbody>
               </table>
@@ -140,14 +141,14 @@
                 <tbody>
                   <tr>
                     <td class="text-center">무통장 입금</td>
-                    <td class="text-center">결제 금액</td>
+                    <td class="text-center"> ${_BUYINFO_.b_price} </td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             <!-- 뒤로가기 -->
-            <a href="/mypage/studentHands/buy" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
+            <a href="/mypage/studentHands/buy?currPage=${_CURRENTPAGE_}" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
 
           </div>
           <!-- 상품 정보, 결제 정보-->

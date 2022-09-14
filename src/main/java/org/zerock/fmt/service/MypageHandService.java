@@ -18,6 +18,6 @@ public interface MypageHandService {
 	public abstract List<UseHandVO2> getAllMyUsehandtList(CriteriaMyPage cri) throws ServiceException;
 	
 	//1-2. 손들기 사용 목록 총 횟수 조회
-	public abstract int getMyUsehandTotalAmount(String user_email) throws ServiceException;
+	public abstract int getMyUsehandTotalAmount(CriteriaMyPage cri) throws ServiceException;
 	
 }// end interface

@@ -37,10 +37,10 @@ public class MypageHandServiceImpl implements MypageHandService {
 
 	//1-2. 손들기 사용 목록 총 횟수 조회
 	@Override
-	public int getMyUsehandTotalAmount(String user_email) throws ServiceException {
+	public int getMyUsehandTotalAmount(CriteriaMyPage cri) throws ServiceException {
 		log.trace("손들기 사용 목록 총 횟수 조회");
 		
-		try { return this.mapper.getMyUsehandTotalAmount(user_email); } 
+		try { return this.mapper.getMyUsehandTotalAmount(cri); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 		
 	}// getMyQuestionTotalAmount

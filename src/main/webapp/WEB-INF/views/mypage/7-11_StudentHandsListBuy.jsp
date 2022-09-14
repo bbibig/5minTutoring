@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -66,7 +67,7 @@
 
         <div>
           <span class="h3 fw-bold">손들기 내역</span>
-          <span class="fw-bold float-end mx-3">보유중인 손들기 00개</span>
+          <span class="fw-bold float-end mx-3">보유중인 손들기 ${__LOGIN_USER__.hands_wallet}개</span>
         </div>
 
         <!-- FROM -->
@@ -99,49 +100,26 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td class="text-center"><a href="/mypage/studentHands/buy/detail">220612-000001</a></td>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 15개</td>
-                <td class="text-center">14,000</td>
-                <td class="text-center">결제완료</td>
-              </tr>
-              <tr>
-                <td class="text-center"><a href="/mypage/studentHands/buy/detail"">220612-000001</a></td>
-                <td class=" text-center">2022-06-12</td>
-                <td class="text-center">손들기 15개</td>
-                <td class="text-center">14,000</td>
-                <td class="text-center">결제완료</td>
-              </tr>
-              <tr>
-                <td class="text-center"><a href="/mypage/studentHands/buy/detail"">220612-000001</a></td>
-                <td class=" text-center">2022-06-12</td>
-                <td class="text-center">손들기 15개</td>
-                <td class="text-center">14,000</td>
-                <td class="text-center">결제완료</td>
-              </tr>
-              <tr>
-                <td class="text-center"><a href="/mypage/studentHands/buy/detail"">220612-000001</a></td>
-                <td class=" text-center">2022-06-12</td>
-                <td class="text-center">손들기 15개</td>
-                <td class="text-center">14,000</td>
-                <td class="text-center">결제완료</td>
-              </tr>
-              <tr>
-                <td class="text-center"><a href="/mypage/studentHands/buy/detail"">220612-000001</a></td>
-                <td class=" text-center">2022-06-12</td>
-                <td class="text-center">손들기 15개</td>
-                <td class="text-center">14,000</td>
-                <td class="text-center">결제완료</td>
-              </tr>
-              <tr>
-                <td class="text-center"><a href="/mypage/studentHands/buy/detail"">220612-000001</a></td>
-                <td class=" text-center">2022-06-12</td>
-                <td class="text-center">손들기 15개</td>
-                <td class="text-center">14,000</td>
-                <td class="text-center">결제완료</td>
-              </tr>
-
+              <c:forEach var="buyHand" items="${_MYBUYHAND_}">
+                <tr>
+                  <td class="text-center"><a
+                      href="/mypage/studentHands/buy/detail?b_number=${buyHand.b_number}&currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">220612-000001</a>
+                  </td>
+                  <td class="text-center">
+                    <fmt:formatDate value="${buyHand.b_date}" pattern="yyyy.MM.dd" />
+                  </td>
+                  <td class="text-center">
+                    <c:if test="${buyHand.h_number eq '1'}"> 손들기 15개 </c:if>
+                    <c:if test="${buyHand.h_number eq '2'}"> 손들기 30개 </c:if>
+                    <c:if test="${buyHand.h_number eq '3'}"> 손들기 60개 </c:if>
+                    <c:if test="${buyHand.h_number eq '4'}"> 손들기 90개 </c:if>
+                    <c:if test="${buyHand.h_number eq '5'}"> 손들기 120개 </c:if>
+                    <c:if test="${buyHand.h_number eq '6'}"> 손들기 150개 </c:if>
+                  </td>
+                  <td class="text-center"> ${buyHand.b_price} </td>
+                  <td class="text-center"> ${buyHand.b_state} </td>
+                </tr>
+              </c:forEach>
             </tbody>
 
           </table>
@@ -151,11 +129,18 @@
 
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/buy?currPage=1">&laquo;</a>
+            </li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage - 1}">&lt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">${_MYBUYHANDPAGENATION_.cri.currPage}</a>
+            </li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.realEndPage}">&raquo;</a></li>
           </ul>
         </nav>
 

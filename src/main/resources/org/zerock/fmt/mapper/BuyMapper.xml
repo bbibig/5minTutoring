@@ -37,7 +37,8 @@
         SELECT 
             TBL_BUY.*, 
             TBL_HAND.H_NAME,
-            TBL_USER.USER_PHONE
+            TBL_USER.USER_PHONE,
+            TBL_USER.USER_NAME
         FROM TBL_BUY , TBL_HAND , TBL_USER
         WHERE TBL_BUY.H_NUMBER = TBL_HAND.H_NUMBER
             AND TBL_BUY.USER_EMAIL = TBL_USER.USER_EMAIL

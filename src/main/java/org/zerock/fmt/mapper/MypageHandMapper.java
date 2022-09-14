@@ -16,9 +16,6 @@ public interface MypageHandMapper {
 	public abstract List<UseHandVO2> selectAllmyUsehandList(CriteriaMyPage cri) throws DAOException;
 	
 	//1-2. 손들기 사용 목록 총 횟수 조회
-	@Select ("SELECT count(use_number) "
-			+ "FROM tbl_usehand_student "
-			+ "WHERE user_email = #{user_email}")
-	public abstract Integer getMyUsehandTotalAmount(@Param("user_email") String user_email) throws DAOException;
+	public abstract Integer getMyUsehandTotalAmount(CriteriaMyPage cri) throws DAOException;
 
 }// end interface
