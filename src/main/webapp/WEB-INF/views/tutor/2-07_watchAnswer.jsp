@@ -10,6 +10,9 @@
 
 	    <!-- css 추가 -->
 	    <link rel="stylesheet" href="/resources/css/2-07_watchAnswer.css">
+	    
+	    <!-- CKeditor -->
+		<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 	
 	    <title>튜터페이지</title>
 	</head>
@@ -44,8 +47,16 @@
 	                                            </div>
 	                                            <div class="mb-3">
 	                                                <label for="message-text" class="col-form-label">내용</label>
-	                                                <textarea class="form-control" name="qb_content" id="contents"
-	                                                    placeholder="내용을 입력해주세요."> ${_ONE_Q_.qb_content} </textarea>
+	                                           		<textarea class="form-control" name="qb_content" id="contentsQ" placeholder="내용을 입력해주세요.">${_ONE_Q_.qb_content}</textarea>
+		                                            <script>
+		                                            	var ckeditor_config = {
+															filebrowserUploadUrl: "upload/img",
+															font_defaultLabel : "맑은 고딕/Malgun Gothic",
+												            fontSize_defaultLabel : "12",
+												            language : "ko"
+												        };
+												        CKEDITOR.replace('contentsQ', ckeditor_config);
+													</script>
 	                                            </div>
                                     		</div>
 		                                    <div class="modal-footer">
@@ -93,16 +104,23 @@
                                         <form action="modifyAnswer?num=${_ONE_Q_.qb_number}" method="post">
                                     		<div class="modal-body">
 	                                            <div class="mb-3">
+	                                                <label for="message-text" class="col-form-label">내용</label>
 	                                                <input type="hidden" name="qb_number" value="${_ONE_Q_.qb_number}" />
 	                                                <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" />
-	                                                <label for="message-text" class="col-form-label">내용</label>
-	                                                <textarea class="form-control" name="a_content" id="contents"
-	                                                    placeholder="내용을 입력해주세요."> ${_A_.a_content} </textarea>
+	                                           		<textarea class="form-control" name="a_content" id="contentsA" placeholder="내용을 입력해주세요.">${_A_.a_content}</textarea>
+		                                            <script>
+														var ckeditor_config = {
+															filebrowserUploadUrl: "upload/img",
+															font_defaultLabel : "맑은 고딕/Malgun Gothic",
+												            fontSize_defaultLabel : "12",
+												            language : "ko"
+												        };
+												        CKEDITOR.replace('contentsA', ckeditor_config);
+													</script>
 	                                            </div>
                                     		</div>
 		                                    <div class="modal-footer">
-		                                        <button type="button" class="btn btn-secondary col-2"
-		                                            data-bs-dismiss="modal">취소</button>
+		                                        <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
 		                                        <button type="submit" class="btn btn-primary col-2">저장</button>
 		                                    </div>
                                         </form>
@@ -212,9 +230,9 @@
 	                                    <i class="bi bi-list fs-4"></i>
 	                                </button>
 	                                <ul class="dropdown-menu">
-	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                            href="#reviseA">수정</a>
-	                                    </li>
+                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
+                                                href="#reviseA">수정</a>
+                                        </li>
 	                                </ul>
 	                            </div>
 	                        </div>
@@ -294,30 +312,6 @@
 	    <!-- ============= 공통 footer + js =============== -->
 	    <jsp:include page="../footer.jsp" flush="true" />
 	    <!-- ============================================== -->
-	
-	    <!-- CKEditor5 CDN 연결 및 언어 설정 -->
-	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/full-all/ckeditor.js"></script>
-	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/ko.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.19.1/plugins/uploadfile/plugin.min.js" integrity="sha512-bMtwQjLw+2ZoXmx1kjaZF5ZHhixxPZzcUgm/sx81X+iOuxpn/TxtNXLXPuasnotjVuf92gg7seMGnbKvWKTpdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	    <script>
-	        ClassicEditor
-		        .create(document.querySelector('#contents'), 
-		        {
-		            language: "ko",
-		            simpleUpload:
-	                {
-	                    uploadUrl: "/upload/image",
-	                    withCredentials: true,
-	                }
-		        })
-		        .then(newEditor => {
-		            editor = newEditor;
-		        })
-		        .catch(error => {
-		            console.error(error);
-	        });
-	    </script>
 
 	</body>
 

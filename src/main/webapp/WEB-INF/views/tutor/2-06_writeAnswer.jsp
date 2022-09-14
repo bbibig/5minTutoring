@@ -11,6 +11,9 @@
 <!-- css 추가 -->
 <link rel="stylesheet" href="/resources/css/2-06_writeAnswer.css">
 
+<!-- CKeditor -->
+<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
+
 <title>튜터페이지</title>
 </head>
 
@@ -21,7 +24,6 @@
 
 	<section class="d-flex align-items-center">
 		<div class="container">
-			<!-- <div class="fas fa-chevron-left back_icon"></div> -->
 			<div class="row">
 				<div class="col-lg-9">
 					<div class="ask_card">
@@ -58,7 +60,17 @@
 					<form action="createAnswer?num=${_ONE_Q_.qb_number}" method="post">
 						<input type="hidden" name="qb_number" value="${_ONE_Q_.qb_number}" >
 						<input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" >
-						<textarea name="a_content" id="answerWrite"></textarea>
+						<textarea class="form-control" name="a_content" id="contentsA"></textarea>
+                            <script>
+                              	var ckeditor_config = {
+									filebrowserUploadUrl: "upload/img",
+									font_defaultLabel : "맑은 고딕/Malgun Gothic",
+						            fontSize_defaultLabel : "12",
+						            language : "ko",
+						            height : 350
+						        };
+						        CKEDITOR.replace('contentsA', ckeditor_config);
+							</script>
 						<p></p>
 						<input type="submit" value="답변등록" id="save">
 					</form>
@@ -66,19 +78,6 @@
 			</div>
 	</section>
 
-	<!-- CKEditor5 CDN 연결 및 언어 설정 -->
-	<script
-		src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-	<script
-		src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/ko.js"></script>
-	<script>
-		ClassicEditor.create(document.querySelector('#answerWrite'), {
-			language : "ko"
-		});
-		ClassicEditor.create(document.querySelector('#askContent'), {
-			language : "ko"
-		});
-	</script>
 	</div>
 
 	<!-- ============= 공통 footer + js =============== -->

@@ -16,8 +16,15 @@
 
 	    <!-- CKeditor -->
 		<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
-		
 		<script>
+	        $(function() {
+	            CKEDITOR.replace('contents',{
+	                font_defaultLabel : "맑은 고딕/Malgun Gothic",
+	                fontSize_defaultLabel : "12",
+	                language : "ko"
+	            });
+	        });
+		
 			String tutorName = ${_TUTOR_INFO_.user_name};
 			String userName = userVO.getUser_name;
 		</script>
@@ -100,21 +107,21 @@
 	                                    </div>
 	                                    <form action="createAsk?num=${_TUTOR_INFO_.tp_number}" enctype="multipart/form-data" method="post">
 		                                    <div class="modal-body">
-		                                            <div class="mb-3">
-		                                                <label for="recipient-name" class="col-form-label">제목</label>
-		                                                <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
-		                                                <input type="text" name="qb_title" class="form-control" id="askTitle" placeholder="제목을 입력해주세요.">
-		                                            </div>
-		                                            <div class="mb-3">
-		                                                <label for="message-text" class="col-form-label">내용</label>
-		                                                <textarea class="form-control" name="qb_content" id="contents" placeholder="내용을 입력해주세요."></textarea>
-		                                               <script>
-															var ckeditor_config = {
-																filebrowserUploadUrl: "upload/img"
-													        };
-													        CKEDITOR.replace("contents", ckeditor_config);
-														</script>
-		                                            </div>
+	                                            <div class="mb-3">
+	                                                <label for="recipient-name" class="col-form-label">제목</label>
+	                                                <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
+	                                                <input type="text" name="qb_title" class="form-control" id="askTitle" placeholder="제목을 입력해주세요.">
+	                                            </div>
+	                                            <div class="mb-3">
+	                                                <label for="message-text" class="col-form-label">내용</label>
+	                                                <textarea class="form-control" name="qb_content" id="contents" placeholder="내용을 입력해주세요."></textarea>
+	                                                <script>
+														var ckeditor_config = {
+															filebrowserUploadUrl: "upload/img"
+												        };
+												        CKEDITOR.replace("contents", ckeditor_config);
+													</script>
+	                                            </div>
 		                                    </div>
 		                                    <div class="modal-footer">
 		                                        <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
@@ -194,35 +201,6 @@
 	    <jsp:include page="../footer.jsp" flush="true" />
 	    <script src="/resources/js/1_01_login.js"></script>
 	    <!-- ============================================== -->
-	
-	    <!-- CKEditor5 CDN 연결 및 언어 설정 -->
-	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/ko.js"></script>
-	    <script>
-	        ClassicEditor.create(document.querySelector('#askContent'), {
-	            language: "ko"
-	        });
-	        
-	        $(function() {
-
-	            CKEDITOR.replace('contents',{
-	                // filebrowserUploadUrl: '/common/ckeditor/fileUpload',
-	                font_names : "맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;Arial/Arial;Comic Sans MS/Comic Sans MS;Courier New/Courier New;Georgia/Georgia;Lucida Sans Unicode/Lucida Sans Unicode;Tahoma/Tahoma;Times New Roman/Times New Roman;MS Mincho/MS Mincho;Trebuchet MS/Trebuchet MS;Verdana/Verdana",
-	                font_defaultLabel : "맑은 고딕/Malgun Gothic",
-	                fontSize_defaultLabel : "12",
-	                skin : "office2013",
-	                language : "ko"
-	            });
-
-	            // ...
-	        });
-	    </script>
-	
-	    <!-- Option 1: Bootstrap Bundle with Popper -->
-	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	        crossorigin="anonymous"></script>
-	
 	</body>
 
 </html>
