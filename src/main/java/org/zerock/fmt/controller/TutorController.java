@@ -3,6 +3,7 @@ package org.zerock.fmt.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.fmt.domain.AnswerDTO;
 import org.zerock.fmt.domain.AnswerVO;
 import org.zerock.fmt.domain.QuestionBoardDTO;
@@ -24,12 +26,12 @@ import org.zerock.fmt.service.AnswerService;
 import org.zerock.fmt.service.AskService;
 import org.zerock.fmt.service.TutorService;
 
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@AllArgsConstructor
+@NoArgsConstructor
 
 @RequestMapping("/tutor")
 @Controller
@@ -234,11 +236,14 @@ public class TutorController {
 		return "redirect:/tutor/watchAnswer?num=" + qb_number;
 	} // modifyAsk
 	
+	// 파일 업로드 처리
+	
 	
 	@PostMapping("/createAsk")
-	public String createAsk(@ModelAttribute("updateDTO") QuestionBoardDTO newDTO, HttpServletRequest req) throws ControllerException {
+	public String createAsk(@ModelAttribute("updateDTO") QuestionBoardDTO newDTO, HttpServletResponse res, HttpServletRequest req, List<MultipartFile> files) throws ControllerException {
 		log.trace("<<< 질문글 등록");
 		
+		// 튜터페이지의 튜터에게 질문글 등록
 		String tp_number = req.getParameter("num");
 		
 		HttpSession session = req.getSession();
@@ -318,5 +323,6 @@ public class TutorController {
 		
 		return "tutor/2-09_tutoringAsk";
 	} // tutoringAsk
+
 
 } // end class

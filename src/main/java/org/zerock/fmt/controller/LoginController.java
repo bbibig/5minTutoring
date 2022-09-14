@@ -67,9 +67,9 @@ public class LoginController{
 				}//if
 				
 			// 로그인 정보 session scope에 등록
-			HttpSession session = req.getSession();
-			session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
-			log.info("================================= {}", vo);
+//			HttpSession session = req.getSession();
+//			session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
+//			log.info("================================= {}", vo);
 				
 			return "login/Loginpost";
 		}catch (Exception e) { throw new ControllerException(e); }//try-catch

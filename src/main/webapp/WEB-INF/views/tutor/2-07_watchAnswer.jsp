@@ -44,7 +44,7 @@
 	                                            </div>
 	                                            <div class="mb-3">
 	                                                <label for="message-text" class="col-form-label">내용</label>
-	                                                <textarea class="form-control" name="qb_content" id="askContent"
+	                                                <textarea class="form-control" name="qb_content" id="contents"
 	                                                    placeholder="내용을 입력해주세요."> ${_ONE_Q_.qb_content} </textarea>
 	                                            </div>
                                     		</div>
@@ -95,8 +95,8 @@
 	                                            <div class="mb-3">
 	                                                <input type="hidden" name="qb_number" value="${_ONE_Q_.qb_number}" />
 	                                                <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" />
-	                                                <label for="message-text" class="col-form-label">답변</label>
-	                                                <textarea class="form-control" name="a_content"
+	                                                <label for="message-text" class="col-form-label">내용</label>
+	                                                <textarea class="form-control" name="a_content" id="contents"
 	                                                    placeholder="내용을 입력해주세요."> ${_A_.a_content} </textarea>
 	                                            </div>
                                     		</div>
@@ -297,10 +297,25 @@
 	
 	    <!-- CKEditor5 CDN 연결 및 언어 설정 -->
 	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/full-all/ckeditor.js"></script>
 	    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/ko.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.19.1/plugins/uploadfile/plugin.min.js" integrity="sha512-bMtwQjLw+2ZoXmx1kjaZF5ZHhixxPZzcUgm/sx81X+iOuxpn/TxtNXLXPuasnotjVuf92gg7seMGnbKvWKTpdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	    <script>
-	        ClassicEditor.create(document.querySelector('#askContent'), {
-	            language: "ko"
+	        ClassicEditor
+		        .create(document.querySelector('#contents'), 
+		        {
+		            language: "ko",
+		            simpleUpload:
+	                {
+	                    uploadUrl: "/upload/image",
+	                    withCredentials: true,
+	                }
+		        })
+		        .then(newEditor => {
+		            editor = newEditor;
+		        })
+		        .catch(error => {
+		            console.error(error);
 	        });
 	    </script>
 

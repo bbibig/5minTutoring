@@ -2,7 +2,6 @@ package org.zerock.fmt.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.exception.DAOException;

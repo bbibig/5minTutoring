@@ -14,17 +14,12 @@
 	    <!-- CSS 추가 -->
 	    <link rel="stylesheet" href="/resources/css/2-05_ask.css">
 
-		<script>
+	    <!-- CKeditor -->
+		<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 		
+		<script>
 			String tutorName = ${_TUTOR_INFO_.user_name};
 			String userName = userVO.getUser_name;
-		
-			function checkTutor(tutorName, userName) {
-				
-				if( tutorName.equals(userName) ) { 
-				document.getElementById('askLink').setAttribute('onclick', "location.href='writeAnswer?num=${Q.qb_number}';");
-			}
-			let result = checkTutor();
 		</script>
 	
 	    <title>튜터페이지</title>
@@ -103,7 +98,7 @@
 	                                        <div class="red">자동 회수</div>
 	                                        <div>됩니다.</div>
 	                                    </div>
-	                                    <form action="createAsk?num=${_TUTOR_INFO_.tp_number}" method="post">
+	                                    <form action="createAsk?num=${_TUTOR_INFO_.tp_number}" enctype="multipart/form-data" method="post">
 		                                    <div class="modal-body">
 		                                            <div class="mb-3">
 		                                                <label for="recipient-name" class="col-form-label">제목</label>
@@ -112,7 +107,13 @@
 		                                            </div>
 		                                            <div class="mb-3">
 		                                                <label for="message-text" class="col-form-label">내용</label>
-		                                                <textarea class="form-control" name="qb_content" id="askContent" placeholder="내용을 입력해주세요."></textarea>
+		                                                <textarea class="form-control" name="qb_content" id="contents" placeholder="내용을 입력해주세요."></textarea>
+		                                               <script>
+															var ckeditor_config = {
+																filebrowserUploadUrl: "upload/img"
+													        };
+													        CKEDITOR.replace("contents", ckeditor_config);
+														</script>
 		                                            </div>
 		                                    </div>
 		                                    <div class="modal-footer">
@@ -200,6 +201,20 @@
 	    <script>
 	        ClassicEditor.create(document.querySelector('#askContent'), {
 	            language: "ko"
+	        });
+	        
+	        $(function() {
+
+	            CKEDITOR.replace('contents',{
+	                // filebrowserUploadUrl: '/common/ckeditor/fileUpload',
+	                font_names : "맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;Arial/Arial;Comic Sans MS/Comic Sans MS;Courier New/Courier New;Georgia/Georgia;Lucida Sans Unicode/Lucida Sans Unicode;Tahoma/Tahoma;Times New Roman/Times New Roman;MS Mincho/MS Mincho;Trebuchet MS/Trebuchet MS;Verdana/Verdana",
+	                font_defaultLabel : "맑은 고딕/Malgun Gothic",
+	                fontSize_defaultLabel : "12",
+	                skin : "office2013",
+	                language : "ko"
+	            });
+
+	            // ...
 	        });
 	    </script>
 	
