@@ -89,8 +89,8 @@ public class MypageHandServiceTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<BuyVO> list = this.buyService.myPageBuy(cri);
-		list.forEach(e -> log.info(e));
+//		List<BuyVO> list = this.buyService.myPageBuy(cri);
+//		list.forEach(e -> log.info(e));
 		
 	}//myPageBuyinfo()
 	
@@ -105,8 +105,8 @@ public class MypageHandServiceTests {
 		UserDTO dto = new UserDTO();
 		dto.setUser_email("test@gmail.com");
 		
-		int result = this.buyService.myPageBuyCount(dto.getUser_email());
-		log.info("\t+ 손들기 구매 총 횟수: {}", result);
+//		int result = this.buyService.myPageBuyCount(dto.getUser_email());
+//		log.info("\t+ 손들기 구매 총 횟수: {}", result);
 		
 	}//myPageBuyCount()
 	

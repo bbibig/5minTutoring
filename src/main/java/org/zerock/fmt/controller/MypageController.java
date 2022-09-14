@@ -334,18 +334,18 @@ public class MypageController {
 	public String studentHandsBuy(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 손들기 구매 목록 조회(학생)");
 		
-		try {
-			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
-			cri.setUser_email(vo.getUser_email());
-			
-			List<BuyVO> list = this.buyService.myPageBuy(cri);
-			model.addAttribute("_MYBUYHAND_", list);
-			
-			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.buyService.myPageBuyCount(vo.getUser_email()));
-			model.addAttribute("_MYBUYHANDPAGENATION_", pageDto);
-			
+//		try {
+//			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+//			cri.setUser_email(vo.getUser_email());
+//			
+//			List<BuyVO> list = this.buyService.myPageBuy(cri);
+//			model.addAttribute("_MYBUYHAND_", list);
+//			
+//			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.buyService.myPageBuyCount(vo.getUser_email()));
+//			model.addAttribute("_MYBUYHANDPAGENATION_", pageDto);
+//			
 			return "mypage/7-11_StudentHandsListBuy";
-		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+//		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// studentHandsBuy
 	
@@ -353,13 +353,13 @@ public class MypageController {
 	public String studentHandsBuyDetail(@RequestParam Integer b_number, @RequestParam String currPage, Model model) throws ControllerException {
 		log.trace("마이페이지 손들기 구매 상세 조회(학생)");
 		
-		try {
-			BuyInfoVO vo = this.buyService.myPageBuyinfo(b_number);
-			model.addAttribute("_BUYINFO_", vo);
-			model.addAttribute("_CURRENTPAGE_", currPage);
-			
+//		try {
+//			BuyInfoVO vo = this.buyService.myPageBuyinfo(b_number);
+//			model.addAttribute("_BUYINFO_", vo);
+//			model.addAttribute("_CURRENTPAGE_", currPage);
+//			
 			return "mypage/7-12_StudentHandsListBuyD";
-		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+//		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// studentHandsBuyDetail
 	
