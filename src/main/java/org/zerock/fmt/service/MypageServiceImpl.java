@@ -9,6 +9,7 @@ import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.QuestionBoardVO;
+import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.DAOException;
@@ -124,6 +125,7 @@ public class MypageServiceImpl implements MypageService {
 		catch (DAOException e) { throw new ServiceException(e); }
 		
 	}// getMyQuestionTotalAmount
+	
 	
 }// end class
 

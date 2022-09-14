@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -7,45 +8,59 @@
 <html lang="ko">
 
 <head>
-    <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
-    <jsp:include page="../htmlHead.jsp" flush="true" />
-    <!-- =======mypage 공통 CSS=================================== -->
-	<link href="${path}/resources/css/mypage.css" rel="stylesheet">
-	
-    <title>손들기 내역(학생)_구매 상세 내역</title>
+  <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
+  <jsp:include page="../htmlHead.jsp" flush="true" />
+  <!-- =======mypage 공통 CSS=================================== -->
+  <link href="${path}/resources/css/mypage.css" rel="stylesheet">
+
+  <title>손들기 내역(학생)_구매 상세 내역</title>
 </head>
 
 <body>
-    <!-- ============= 공통 Header : 로그인 후 =================== -->
-    <jsp:include page="../header_login.jsp" flush="true" />
-    <!-- ========================================================= -->
+  <!-- ============= 공통 Header : 로그인 후 =================== -->
+  <jsp:include page="../header_login.jsp" flush="true" />
+  <!-- ========================================================= -->
 
-    <!-- ======= Hero Section ======= -->
+  <!-- ======= Hero Section ======= -->
 
-    <!-- ======= main Section ======= -->
-    <section id="main" class="container">
+  <!-- ======= main Section ======= -->
+  <section id="main" class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <div id="nav" class="col-lg-3">
-                <ul class="list-group mb-2 bg-dark text-white">
-                    <li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
-                </ul>
-                <div class="list-group">
-                    <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4">기본
-                        정보</a>
-                    <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
-                        내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
-                        질문글</a>
-                    <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
-                        커뮤니티</a>
-                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
-                        문의하기</a>
-                    <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
-                        탈퇴</a>
-                </div>
-            </div><!-- End main nav -->
+      <div id="nav" class="col-lg-3">
+        <ul class="list-group mb-2 bg-dark text-white">
+          <li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
+        </ul>
+        <div class="list-group">
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentPage"
+              class="list-group-item list-group-item-action px-lg-4">기본
+              정보</a></c:if>
+          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorPage"
+              class="list-group-item list-group-item-action px-lg-4">기본
+              정보</a></c:if>
+
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+              class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
+              내역</a></c:if>
+          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+              class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
+              내역</a></c:if>
+
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/myQuestion"
+              class="list-group-item list-group-item-action px-lg-4">나의
+              질문글</a></c:if>
+
+          <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
+            커뮤니티</a>
+
+          <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
+            문의하기</a>
+
+          <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
+            탈퇴</a>
+        </div>
+      </div><!-- End main nav -->
 
 
       <div id="contents" class="col-lg-9">
@@ -71,15 +86,15 @@
                   </tr>
                   <tr>
                     <th class="text-center">이름</th>
-                    <td class="text-center">홍길동</td>
+                    <td class="text-center"> ${_BUYINFO_.user_name} </td>
                   </tr>
                   <tr>
                     <th class="text-center">구매 일자</th>
-                    <td class="text-center">2022-06-12</td>
+                    <td class="text-center"> <fmt:formatDate value="${_BUYINFO_.b_date}" pattern="yyyy.MM.dd" /> </td>
                   </tr>
                   <tr>
                     <th class="text-center">휴대폰 번호</th>
-                    <td class="text-center">010-0000-0000</td>
+                    <td class="text-center"> ${_BUYINFO_.user_phone} </td>
                   </tr>
                 </tbody>
               </table>
@@ -103,9 +118,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center">손들기 15개</td>
-                    <td class="text-center">2</td>
-                    <td class="text-center">6,600</td>
+                    <td class="text-center"> ${_BUYINFO_.h_name} </td>
+                    <td class="text-center"> ${_BUYINFO_.b_count} </td>
+                    <td class="text-center"> ${_BUYINFO_.b_price} </td>
                   </tr>
                 </tbody>
               </table>
@@ -126,14 +141,14 @@
                 <tbody>
                   <tr>
                     <td class="text-center">무통장 입금</td>
-                    <td class="text-center">결제 금액</td>
+                    <td class="text-center"> ${_BUYINFO_.b_price} </td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             <!-- 뒤로가기 -->
-            <a href="/mypage/studentHands/buy" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
+            <a href="/mypage/studentHands/buy?currPage=${_CURRENTPAGE_}" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
 
           </div>
           <!-- 상품 정보, 결제 정보-->
@@ -151,9 +166,9 @@
 
 
 
-    <!-- ======= footer + js  ======= -->
-    <jsp:include page="../footer.jsp" flush="true" />
-    <!-- ============================= -->
+  <!-- ======= footer + js  ======= -->
+  <jsp:include page="../footer.jsp" flush="true" />
+  <!-- ============================= -->
 </body>
 
 </html>

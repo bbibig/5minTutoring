@@ -19,6 +19,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
@@ -79,7 +81,9 @@ public class WithdrawalMapperTests {
 	void testGetList() throws DAOException {
 		log.trace("testGetList() invoked.");
 		
-		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalList();
+		CriteriaMyPage cri = new CriteriaMyPage();
+		
+		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalList(cri);
 
 		Objects.requireNonNull(list);
 		list.forEach(log::info);

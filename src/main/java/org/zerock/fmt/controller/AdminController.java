@@ -3,6 +3,7 @@ package org.zerock.fmt.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.domain.AdminPageDTO;
 import org.zerock.fmt.domain.AdminVO;
@@ -34,6 +36,7 @@ import org.zerock.fmt.service.FaqService;
 import org.zerock.fmt.service.FileService;
 import org.zerock.fmt.service.UserService;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -89,7 +92,7 @@ public class AdminController {
 		try {
 			List<UserVO> list = this.userService.getStudent(cri);
 			model.addAttribute("_USERLIST_",list);
-			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount("Student", null));
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount(cri));
 			log.info("\t+ Adpage : {}", Adpage);
 			model.addAttribute("_ADMINPAGINATION_",Adpage);
 		} catch (Exception e) {throw new ControllerException(e); }//try-catch
@@ -102,7 +105,7 @@ public class AdminController {
 		try {
 			List<UserVO> list = this.userService.getTutor(cri);
 			model.addAttribute("_USERLIST_",list);
-			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount("Tutor", null));
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount(cri));
 			model.addAttribute("_ADMINPAGINATION_",Adpage);
 		}catch(Exception e) {throw new ControllerException(e); }//try-catch
 		return "admin/8-01_managerTT";
@@ -114,7 +117,7 @@ public class AdminController {
 		try {
 			List<UserVO> list = this.userService.getStopUser(cri);
 			model.addAttribute("_USERLIST_",list);
-			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount(null,"STOP"));
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.userService.userCount(cri));
 			model.addAttribute("_ADMINPAGINATION_",Adpage);
 		}catch(Exception e) {throw new ControllerException(e); }//try-catch
 		return "admin/8-01_managerTZ";
@@ -268,13 +271,22 @@ public class AdminController {
 		}catch(Exception e) {throw new ControllerException(e);}//try-catch
 		return "admin/8-06_singUpConfim";
 	}
-	
+
 	@PostMapping("/signUpOK")
-	public String signUp_comfim(String user_email) throws ControllerException {
-		log.trace("튜터가입승인 {}", user_email);
+	public String signUp_comfim(@RequestParam HashMap<String, Object> commandMap) throws ControllerException {
+		log.trace("튜터가입승인 페이지");
+
 		try {
-			boolean result = this.userService.tutorPass(user_email);
-			log.info("\t + 튜터승인 result : {}", result);
+			String getEmails = commandMap.get("arrayParam").toString();
+			String[] emails = null;
+			emails = getEmails.split(",");
+			
+			int result = 0;
+			for(String user_email : emails) {
+				result += this.userService.tutorPass(user_email);
+			}//for
+			log.info("\t + 튜터승인 List : {}, result : {}", Arrays.toString(emails), result);
+			
 			return "redirect:/admin/signUp_comfim";
 		}catch(Exception e) { throw new ControllerException(e); }//try-catch
 	}//signUp_comfim

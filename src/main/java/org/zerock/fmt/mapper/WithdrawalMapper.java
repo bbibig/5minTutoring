@@ -3,6 +3,7 @@ package org.zerock.fmt.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
@@ -18,11 +19,8 @@ public interface WithdrawalMapper {
 	public abstract Integer insertWithdrawal(WithdrawalDTO dto) throws DAOException;
 	
 	
-//  [R]  출금 신청 내역 전체 조회
-	@Select("SELECT \r\n"
-			+ "    w_num, user_email, bank_account, w_quantity, w_price, approval, w_date\r\n"
-			+ "FROM tbl_withdrawal")
-	public abstract List<WithdrawalVO> selectAllWithdrawalList() throws DAOException;
+//  [R]  출금 신청 내역 전체 조회 (내림차순) - 관리자
+	public abstract List<WithdrawalVO> selectAllWithdrawalList(CriteriaMyPage cri) throws DAOException;
 	
 	
 //  [U]  승인 여부 수정

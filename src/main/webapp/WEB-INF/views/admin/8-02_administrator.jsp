@@ -96,7 +96,7 @@
                             <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
                         </c:if>
                         <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
-                            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/student?currPage=${page}">${page}</a></li>
+                            <li class="page-item"><a class="page-link rounded-circle ${page==_ADMINPAGINATION_.cri.currPage?'page':''}" href="/admin/student?currPage=${page}">${page}</a></li>
                         </c:forEach>
                         <c:if test="${_ADMINPAGINATION_.next}">
                             <li class="page-item"><a class="page-link rounded-circle" href="${_ADMINPAGINATION_.endPage+1}" id="next">&raquo;</a></li>

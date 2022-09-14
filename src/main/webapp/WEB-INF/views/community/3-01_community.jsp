@@ -99,59 +99,61 @@
           <div class="board mt-5">
             
             <div class="row d-flex flex-column">  
-
-              <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
-                <div class="board-box">
-                <div class="row">
-                  
-                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
-
-                    <div class="title">
-                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
-                    </div>
-
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
-                    </div>
-
-                    <div class="user_date d-flex flex-row">
-                      <div class="user">
-                        <strong>홍길동</strong>
+              <c:foreach var="communityBoard" items="${__LIST__}">
+                <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+                  <div class="board-box">
+                  <div class="row">
+                    
+                    <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
+  
+                      <div class="title">
+                        <h4>${communityBoard.fb_title}</h4>
                       </div>
-                      <div class="date ms-4">
-                        2022-01-1
+  
+                      <div class="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
                       </div>
-                    </div>
-                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+  
+                      <div class="user_date d-flex flex-row">
+                        <div class="user">
+                          <strong>홍길동</strong>
+                        </div>
+                        <div class="date ms-4">
+                          2022-01-1
+                        </div>
+                      </div>
+                    </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
+                    
+  
+                    
+                    <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
+  
+                      <div class="question_comment">
+                        <span class="comment_count">0</span>
+                        <span class="comment_decription">답변</span>
+                      </div>
+  
+                      <div class="heart d-flex mt-4">
+                        <button class="heart-button">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                          </svg>
+  
+                          <span class="heart-count ms-1">0</span>
+  
+                        </button>
+  
+                      </div>
+  
+                    </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
+                    
+                    
+                  </div>
                   
-
-                  
-                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
-
-                    <div class="question_comment">
-                      <span class="comment_count">0</span>
-                      <span class="comment_decription">답변</span>
-                    </div>
-
-                    <div class="heart d-flex mt-4">
-                      <button class="heart-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-
-                        <span class="heart-count ms-1">0</span>
-
-                      </button>
-
-                    </div>
-
-                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
-                  
-                  
-                </div>
-                
-                </div>
-              </a><!--===============================================커뮤니티 박스end============================================-->
+                  </div>
+                </a><!--===============================================커뮤니티 박스end============================================-->
+              </c:foreach>
+              
 
               <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
                 <div class="board-box">

@@ -1,7 +1,10 @@
 /*--------------------------------------------------------------
 # 1-02. admin-login Section
 --------------------------------------------------------------*/
-
+.page{
+  background-color: #2b4fde;
+  color:white;
+}
 .container {
     display: block;
   }
@@ -133,7 +136,7 @@ h3 {
 
 /* Select/Search */
 .select-search ul{
-  margin-left: 550px;
+  margin-left: 600px;
   padding: 0;
   display: inline-block;
 }
@@ -154,6 +157,11 @@ select{
   border: none;
   border-radius: 3px;
 }
+.search{
+   height: 40px;  
+   width: 150px;
+}
+
 
 /* sales-info */
 .sales-info ul{
@@ -356,3 +364,4 @@ select{
 .ck-editor__main {
   padding: 0;
 }
+

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -7,52 +8,66 @@
 <html lang="ko">
 
 <head>
-    <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
-    <jsp:include page="../htmlHead.jsp" flush="true" />
-    <!-- =======mypage 공통 CSS=================================== -->
-	<link href="${path}/resources/css/mypage.css" rel="stylesheet">
-	
-    <title>손들기 내역(학생)_사용 내역</title>
+  <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
+  <jsp:include page="../htmlHead.jsp" flush="true" />
+  <!-- =======mypage 공통 CSS=================================== -->
+  <link href="${path}/resources/css/mypage.css" rel="stylesheet">
+
+  <title>손들기 내역(학생)_사용 내역</title>
 </head>
 
 <body>
-    <!-- ============= 공통 Header : 로그인 후 =================== -->
-    <jsp:include page="../header_login.jsp" flush="true" />
-    <!-- ========================================================= -->
+  <!-- ============= 공통 Header : 로그인 후 =================== -->
+  <jsp:include page="../header_login.jsp" flush="true" />
+  <!-- ========================================================= -->
 
-    <!-- ======= Hero Section ======= -->
+  <!-- ======= Hero Section ======= -->
 
-    <!-- ======= main Section ======= -->
-    <section id="main" class="container">
+  <!-- ======= main Section ======= -->
+  <section id="main" class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <div id="nav" class="col-lg-3">
-                <ul class="list-group mb-2 bg-dark text-white">
-                    <li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
-                </ul>
-                <div class="list-group">
-                    <a href="/mypage/studentPage" class="list-group-item list-group-item-action px-lg-4">기본
-                        정보</a>
-                    <a href="/mypage/studentHands/use" class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
-                        내역</a>
-                    <a href="/mypage/myQuestion" class="list-group-item list-group-item-action px-lg-4">나의
-                        질문글</a>
-                    <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
-                        커뮤니티</a>
-                    <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
-                        문의하기</a>
-                    <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
-                        탈퇴</a>
-                </div>
-            </div><!-- End main nav -->
+      <div id="nav" class="col-lg-3">
+        <ul class="list-group mb-2 bg-dark text-white">
+          <li class="list-group-item bg-blue fw-bold fs-5 px-lg-4">마이페이지</li>
+        </ul>
+        <div class="list-group">
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentPage"
+              class="list-group-item list-group-item-action px-lg-4">기본
+              정보</a></c:if>
+          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorPage"
+              class="list-group-item list-group-item-action px-lg-4">기본
+              정보</a></c:if>
+
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+              class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
+              내역</a></c:if>
+          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+              class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
+              내역</a></c:if>
+
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/myQuestion"
+              class="list-group-item list-group-item-action px-lg-4">나의
+              질문글</a></c:if>
+
+          <a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
+            커뮤니티</a>
+
+          <a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4">1:1
+            문의하기</a>
+
+          <a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
+            탈퇴</a>
+        </div>
+      </div><!-- End main nav -->
 
 
       <div id="contents" class="col-lg-9">
 
         <div>
           <span class="h3 fw-bold">손들기 내역</span>
-          <span class="fw-bold float-end mx-3">보유중인 손들기 00개</span>
+          <span class="fw-bold float-end mx-3">보유중인 손들기 ${__LOGIN_USER__.hands_wallet}개</span>
         </div>
 
         <!-- FROM -->
@@ -62,9 +77,18 @@
 
           <span class="float-end">
             <form action="/mypage/studentHands/use" method="get" onsubmit="return dateCheck();">
-              <input type="date" name="dateFrom" id="dateFrom" required>
-              -
-              <input type="date" name="dateTo" id="dateTo" required>
+              <!-- 1. 기간조회 X -->
+              <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom eq null}">
+                <input type="date" name="dateFrom" id="dateFrom" required>
+                -
+                <input type="date" name="dateTo" id="dateTo" required>
+              </c:if>
+              <!-- 2. 기간조회 O -->
+              <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom ne null}">
+                <input type="date" name="dateFrom" id="dateFrom" required value="${_MYUSEHANDPAGENATION_.cri.dateFrom}">
+                -
+                <input type="date" name="dateTo" id="dateTo" required value="${_MYUSEHANDPAGENATION_.cri.dateTo}">
+              </c:if>
               <button type="submit" class="btn bg-blue mx-3">조회</button>
             </form>
           </span>
@@ -81,36 +105,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-08-01</td>
-                <td class="text-center">질문하기(3개)</td>
-                <td class="text-center">홍길동 튜터</td>
-              </tr>
+              <c:forEach var="usehand" items="${_MYUSEHAND_}">
+                <tr>
+                  <td class="text-center">
+                    <fmt:formatDate value="${usehand.use_date}" pattern="yyyy.MM.dd" />
+                  </td>
+                  <td class="text-center">
+                    <c:if test="${not empty usehand.qb_number}"> 질문하기(3개) </c:if>
+                    <c:if test="${not empty usehand.tb_number}"> 과외받기(5개) </c:if>
+                  </td>
+                  <td class="text-center"> ${usehand.tutor_email} </td>
+                </tr>
+              </c:forEach>
             </tbody>
           </table>
 
@@ -118,13 +124,54 @@
         <!--End main contents card(박스)-->
 
         <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a></li>
-          </ul>
+          <!-- 1. 기간 조회 안할때 페이징 -->
+          <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom eq null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=1">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
+          <!-- 2. 기간조회 할 때 페이징 -->
+          <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom ne null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=1&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
         </nav>
 
         <!-- TO -->
@@ -137,10 +184,10 @@
 
 
 
-    <!-- ======= footer + js  ======= -->
-    <jsp:include page="../footer.jsp" flush="true" />
-    <!-- ========기간검색 유효성====== -->
-    <script src="${path}/resources/js/7-10_mypage_sohee.js"></script>
+  <!-- ======= footer + js  ======= -->
+  <jsp:include page="../footer.jsp" flush="true" />
+  <!-- ========기간검색 유효성====== -->
+  <script src="${path}/resources/js/7-10_mypage_sohee.js"></script>
 </body>
 
 </html>

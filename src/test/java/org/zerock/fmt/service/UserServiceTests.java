@@ -46,7 +46,7 @@ public class UserServiceTests {
 	
 	@Test
 	@Order(1)
-	@DisplayName("getAllUser 전체회원조회")
+	@DisplayName("getStudent 학생조회")
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void getStudent() throws ServiceException {
 		log.info("getAllUserTest");
@@ -88,7 +88,12 @@ public class UserServiceTests {
 	@Test
 	@DisplayName("userCount")
 	void userCount() throws DAOException {
-		int result = this.userMapper.userCount("Tutor", null);
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(1);
+		cri.setKeyword("test");
+		cri.setType("E");
+		cri.setUser_group("Student");
+		int result = this.userMapper.userCount(cri);
 		log.info("\t + result : {}", result);
 	}//userCount
 	
@@ -190,7 +195,7 @@ public class UserServiceTests {
 		log.trace("tutorPass");
 		
 		String user_email = "TTemail_1";
-		Boolean Result = this.userService.tutorPass(user_email);
+		int Result = this.userService.tutorPass(user_email);
 		log.info("\t + Result : {}", Result);
 		
 	}//tutorPass
@@ -333,4 +338,12 @@ public class UserServiceTests {
 		this.userService.certifiedPhoneNumber("01089814304", 1234);
 		log.info("\t+........");
 	}//certifiedPhoneNumber
+	
+	@Test
+	@DisplayName("findEmail")
+	void testfindEmail() throws DAOException {
+		log.trace("findEmail 이메일 찾기 테스트");
+		String user_email = this.userMapper.selectFindEmail("000-0000-0001");
+		log.info("\t + user_email : {}", user_email);
+	}//findEmail
 }//end class

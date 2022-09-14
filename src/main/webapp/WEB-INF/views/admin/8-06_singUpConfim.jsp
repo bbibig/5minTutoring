@@ -40,10 +40,24 @@
                         chk = $(this).val();
                     }//if checked 값만 
 
+                    // $('#signupOK').on('click', function(){
+                    //     // alert(chk);
+                    // let formObj = $('#checkTutor');
+                    // formObj.attr('action','/admin/signUpOK?user_email='+chk);
+                    // formObj.attr('method','POST');
+                    // formObj.submit();
+                    //  });//signupOK
+                    let array = new Array();
+                    $('input:checkbox[name=checkbox]:checked').each(function(){
+                        array.push(this.value);
+                        console.log(array);
+                    })
+
+                    $('#arrayParam').val(array);
+
                     $('#signupOK').on('click', function(){
-                        alert(chk);
                     let formObj = $('#checkTutor');
-                    formObj.attr('action','/admin/signUpOK?user_email='+chk);
+                    formObj.attr('action','/admin/signUpOK');
                     formObj.attr('method','POST');
                     formObj.submit();
                      });//signupOK
@@ -140,6 +154,7 @@
                                 <tr>
                                     <form action="" id="checkTutor">
                                         <td><input type="checkbox" id="checkbox" name="checkbox" value="${user.user_email}"></td>
+                                        <input type="hidden" id="arrayParam" name="arrayParam"/>
                                     </form>
                                         <td class="dropdown">
                                             <a href="#" class="dropbtn">${user.user_email}</a>
@@ -168,9 +183,11 @@
                             <c:if test="${_ADMINPAGINATION_.prev}">
                                 <li class="page-item"><a class="page-link rounded-circle" href="/admin/signUp_comfim?currPage=${_ADMINPAGINATION_.startPage-1}">&laquo;</a></li>
                             </c:if>
-
+                            
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
-                                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/admin/signUp_comfim?currPage=${page}">${page}</a></li>
+                                <!-- <li class="page-item"><a class="page-link rounded-circle" href="/admin/signUp_comfim?currPage=${page-1}">&lt;</a></li> -->
+                                <li class="page-item"><a class="page-link rounded-circle ${page==_ADMINPAGINATION_.cri.currPage?'page':''}" href="/admin/signUp_comfim?currPage=${page}">${page}</a></li>
+                                <!-- <li class="page-item"><a class="page-link rounded-circle" href="/admin/signUp_comfim?currPage=${page+1}">&gt;</a></li> -->
                             </c:forEach>
 
                             <c:if test="${_ADMINPAGINATION_.next}">

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.exception.DAOException;
@@ -79,7 +80,8 @@ public class InquiryQuestionMapperTests {
 	void testGetList() throws DAOException {
 		log.trace("testGetList() invoked.");
 		
-		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryList();
+		CriteriaMyPage cri = new CriteriaMyPage();
+		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryList(cri);
 
 		Objects.requireNonNull(list);
 		list.forEach(log::info);
