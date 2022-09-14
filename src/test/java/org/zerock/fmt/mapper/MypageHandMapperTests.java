@@ -88,8 +88,8 @@ public class MypageHandMapperTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<BuyVO> list = this.buymapper.myPageAllBuy(cri);
-		list.forEach(e -> log.info(e));
+//		List<BuyVO> list = this.buymapper.myPageAllBuy(cri);
+//		list.forEach(e -> log.info(e));
 
 	}//myPageAllBuy()
 	
@@ -104,8 +104,8 @@ public class MypageHandMapperTests {
 		UserDTO dto = new UserDTO();
 		dto.setUser_email("test@gmail.com");
 		
-		int amount = this.buymapper.myPageBuyCount(dto.getUser_email());
-		log.info("\t + 손들기 구매 총 횟수: {}", amount);
+//		int amount = this.buymapper.myPageBuyCount(dto.getUser_email());
+//		log.info("\t + 손들기 구매 총 횟수: {}", amount);
 		
 	}//myPageBuyCount()
 	
