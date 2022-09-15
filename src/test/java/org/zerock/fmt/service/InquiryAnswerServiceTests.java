@@ -43,7 +43,7 @@ public class InquiryAnswerServiceTests {
 	void testCreateIA() throws ServiceException {
 		log.trace("testCreateIA() invoked.");   
 
-		InquiryAnswerDTO dto = new InquiryAnswerDTO(40, "suin", "답변입니다.", "일대일 문의 답변 테스트", null, "Y");
+		InquiryAnswerDTO dto = new InquiryAnswerDTO(40, "suin", "답변입니다.", "일대일 문의 답변 테스트", null, null);
 		
 		boolean result = this.iaService.createIA(dto);
 		log.info("일대일 문의 답변 작성 결과: {}", result);

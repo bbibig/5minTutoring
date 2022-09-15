@@ -9,7 +9,7 @@
 	  <!-- 출금신청 -->
 	  <insert id="insertWithdrawal">
 	     INSERT INTO tbl_withdrawal
-	     VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, #{approval}, CURRENT_DATE)
+	     VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, '승인 대기 중', CURRENT_DATE)
 	  </insert>
     
       <!-- 출금 신청 내역 목록 조회 -->
