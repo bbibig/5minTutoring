@@ -266,7 +266,9 @@ public class UserServiceTests {
 		log.trace("selectLogin() invoked.");
 		
 		String user_email="test@email.net";
-		String user_pw = "bcpassword";
+//		String user_pw = "bcpassword";
+		String user_pw = "1";
+		
 		UserVO vo = this.userService.loginEmail(user_email);
 		log.info("\t+ vo : {}", vo );
 		
@@ -341,9 +343,20 @@ public class UserServiceTests {
 	
 	@Test
 	@DisplayName("findEmail")
-	void testfindEmail() throws DAOException {
+	void testfindEmail() throws ServiceException {
 		log.trace("findEmail 이메일 찾기 테스트");
-		String user_email = this.userMapper.selectFindEmail("000-0000-0001");
-		log.info("\t + user_email : {}", user_email);
+		String user_phone = "01089814300";
+//		String user_phone = "01089814300";
+		String result = this.userService.findEmail(user_phone);
+		log.info("\t + result : {}", result);
 	}//findEmail
+	
+	@Test
+	@DisplayName("findUserEmail")
+	void testfindUserEmail() throws ServiceException {
+		log.trace("findUserEmail 이메일 중복체크 테스트");
+		String userEmail = "abc11@han.com";
+		int result = this.userService.findUserEmail(userEmail);
+		log.info("\t + result : {}", result);
+	}//findUserEmail
 }//end class

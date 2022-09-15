@@ -5,7 +5,6 @@ import java.util.List;
 import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
-import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
 public interface UserService {
@@ -20,6 +19,8 @@ public interface UserService {
 	//유저정보조회
 	public abstract UserVO getUserInfo(String user_email) throws ServiceException;
 	
+	//이메일 중복 체크 
+	public abstract Integer findUserEmail(String userEmail) throws ServiceException;
 	//닉네임 중복 체크
 	public abstract Integer getNicCheck(String newNick) throws ServiceException;
 	

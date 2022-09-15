@@ -1,5 +1,4 @@
 
-
 $('#nickCheck').on('click',function(){
   let newNick = $("#user_nick").val();
   let data = {newNick : newNick}
@@ -97,6 +96,27 @@ let file_V = false;
 // 이메일 유효성
 let emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
 $("#user_email").on("input", function () {
+
+  let userEmail = $('#user_email').val();
+  let data = {userEmail : userEmail}
+  console.log(data);
+  $.ajax({
+      type : "POST",
+      url : "/login/emailCheck",
+      data : data,
+      success : function(result){
+        console.log("결과:"+result);
+          if(result != 'fail' & !vaildCheck){
+              $('.em_input_re_1').css("display","inline-block");
+              $('.em_input_re_2').css("display","none");
+          } else {
+              $('.em_input_re_2').css("display","inline-block");
+              $('.em_input_re_1').css("display","none");
+              Swal.fire('중복된 이메일 입니다.');
+          }//if-else
+      }//success
+  });//ajax
+
   let vaildCheck = emailRegExp.test(this.value);
   if (!vaildCheck) {
     this.classList.remove("is-valid");

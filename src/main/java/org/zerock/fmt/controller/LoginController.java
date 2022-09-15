@@ -54,29 +54,27 @@ public class LoginController{
 		log.trace("login() invoked.");
 		return "login/1-02_login";
 	}
+	
 	@PostMapping("/Loginpost")
 	public String login(String user_email, String user_pw, Model model, RedirectAttributes rttrs, HttpServletRequest req)
 														throws ControllerException {
 		log.trace("loginPost Invoked.");
 		try{
 			UserVO vo = this.userService.gettLoginUser(user_email, user_pw);
-			log.info("\t + post vo : {}", vo);
-			model.addAttribute(SharedScopeKeys.LOGIN_USER,vo);
-				if(vo==null) {
-					rttrs.addFlashAttribute("_LOGIN_", "로그인에 실패하였습니다.");
-					return "redirect:/login";
-				}//if
-				
-			// 로그인 정보 session scope에 등록
-//			HttpSession session = req.getSession();
-//			session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
-//			log.info("================================= {}", vo);
-				
-			return "login/Loginpost";
+			log.info("\t + Loginpost vo : {}", vo);
+			String returnURL;
+
+			if(vo==null) {
+				rttrs.addFlashAttribute("_LOGIN_", "이메일 또는 비밀번호가 일치하지 않습니다.");
+				returnURL = "redirect:/login";
+			} else {
+				model.addAttribute(SharedScopeKeys.LOGIN_USER,vo);
+				returnURL = "login/Loginpost";
+			}//if
+			
+			return returnURL;
 		}catch (Exception e) { throw new ControllerException(e); }//try-catch
 	}//login
-	
-	
 	
 	//로그인 후 메인화면
 	@RequestMapping("/home")
@@ -110,6 +108,19 @@ public class LoginController{
 		} catch(Exception e) { throw new ControllerException(e); }
 	}//signUpStudent---2
 	
+	@PostMapping("/emailCheck")
+	@ResponseBody
+	public String emailCheckPost(String userEmail) throws ControllerException{
+		log.info("emailCheckPost() invoked.");
+		try {
+			int result = this.userService.findUserEmail(userEmail);
+			if(result != 0) {
+				return "fail";
+			} else {
+				return "success";
+			}//if-else 
+		}catch(Exception e) {throw new ControllerException(e); }
+	}//emailCheckPost
 	
 	//---------------------------------------회원가입(튜터)
 	@GetMapping("/signUp_tutor")		
@@ -168,20 +179,10 @@ public class LoginController{
 	public String foundEmail(String user_phone) throws ControllerException {
 		log.trace("findMyEmail() invoked.");
 		try {
-			String user_email = this.userService.findEmail(user_phone);
-			log.info("\t+ user_eamil : {}", user_email);
-			return user_email;
+			return this.userService.findEmail(user_phone);
 		}catch (Exception e) { throw new ControllerException(e); }
 	}//findMyEmail
-	
-//	// 이메일 찾기 - 성공
-//	@GetMapping("/foundEmail")
-//	public String foundEmail() {
-//		log.trace("signupReq() invoked.");
-//		
-//		return "login/1-10_foundEmail";
-//	}
-	
+
 	// 이메일 찾기 - 실패
 	@GetMapping("/notFoundEmail")
 	public String notFoundEmail() {
