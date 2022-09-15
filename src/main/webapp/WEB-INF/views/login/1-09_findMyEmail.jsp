@@ -102,10 +102,16 @@
                                     url : "/login/foundEmail?user_phone="+phone,
                                     dataType : "text",
                                     success: function(result){
-                                        $('#m1').text(result);
-                                        $('#loginBTN').css("display","inline-block");
-                                        alert("회원님의 이메일 계정은 "+result+"입니다.");
-                                    }
+                                        if(result==""){
+                                            $('#m1').text("가입된 계정이 없습니다. 회원가입 해주세요.");
+                                            $('#loginBTN').css("display","inline-block"); 
+                                            alert("가입된 계정이 없습니다.");
+                                        } else {
+                                            $('#m1').text(result);
+                                            $('#loginBTN').css("display","inline-block");   
+                                            alert("회원님의 이메일 계정은 "+result+"입니다.");
+                                        }
+                                    },
                                 });//ajax
                             }else{
                                 $(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");

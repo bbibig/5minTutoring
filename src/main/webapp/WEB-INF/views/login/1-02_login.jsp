@@ -20,7 +20,7 @@
                 let loginResult = '${_LOGIN_}';
                 if (loginResult != null && loginResult.length > 0) {
                     Swal.fire({
-                        text: '아이디 또는 비밀번호가 일치하지 않습니다',
+                        text: loginResult,
                         icon: 'error',
                         showCloseButton: true
                     });

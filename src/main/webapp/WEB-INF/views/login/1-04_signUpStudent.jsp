@@ -56,6 +56,7 @@
                     }
                 });//인증번호체크하기
 
+
             });//jq
         </script>
     </head>
@@ -85,6 +86,8 @@
                                     <input type="email" class="form-control" name="user_email" id="user_email"
                                         placeholder="example@email.com" required>
                                     <div class="invalid-feedback">이메일을 입력해주세요.</div>
+                                    <div class="em_input_re_1">사용 가능한 이메일 입니다.</div>
+                                    <div class="em_input_re_2">중복된 이메일 입니다.</div>
                                 </div>
 
                                 <div class="form-group">

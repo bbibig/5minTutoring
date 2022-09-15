@@ -22,6 +22,10 @@ public interface UserMapper {
 	//회원 정보조회 + 손들기 개수 조회
 	@Select("SELECT * FROM tbl_user WHERE user_email=#{user_email}")
 	public abstract UserVO selectUser(@Param("user_email") String user_email) throws DAOException;
+
+	//이메일 중복체크 
+	@Select("SELECT COUNT(*) FROM tbl_user WHERE user_email = #{user_email}")
+	public abstract int findEmailCheck(@Param("user_email")String userEmail) throws DAOException;
 	
 	//닉네임 중복검사 
 	@Select("SELECT COUNT(*) FROM tbl_user WHERE USER_NICK = #{user_nick}")
@@ -39,7 +43,7 @@ public interface UserMapper {
 	public abstract int waitTutorCount() throws DAOException;
 	
 	//이메일찾기 
-	public abstract String selectFindEmail(String user_phone) throws DAOException;
+	public abstract String FindEmailreturnString(String user_phone) throws DAOException;
 	
 	//-------------- INSERT 
 	//학생 가입

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
-import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.UserMapper;
 
@@ -226,9 +225,18 @@ public class UserServiceImpl implements UserService{
 		
 		try {
 			UserVO vo = this.userMapper.loginEmail(user_email);
+//			boolean logPwAndHash = encoder.matches(user_pw, vo.getUser_pw());
+			if(vo==null) {
+				log.info("유저정보가 없을 때");
+				return null;
+			};
+			
 			if(encoder.matches(user_pw, vo.getUser_pw())) {
+				log.info("\t + 비밀번호 일치-로그인 vo : {}", vo);
 				return vo;
-			} else { return null; }
+			} else { 
+				log.info("\t + 비밀번호 불일치");
+				return null; }
 		} catch ( Exception e) {throw new ServiceException(e); }//try-catch
 	}//selectLogin
 	
@@ -348,9 +356,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String findEmail(String user_phone) throws ServiceException {
 		log.trace("findEmail. 이메일 찾기" );
-		try { return this.userMapper.selectFindEmail(user_phone);
+		try { 	
+			return this.userMapper.FindEmailreturnString(user_phone);
 		} catch (Exception e ) { throw new ServiceException(e); }
 	}//findEmail
+
+	@Override
+	public Integer findUserEmail(String userEmail) throws ServiceException {
+		log.trace("findUserEmail. 이메일 중복 체크");
+		try {
+			return this.userMapper.findEmailCheck(userEmail);
+		}catch(Exception e) {throw new ServiceException(e); }
+	}//findUserEmail
 	
 	
 
