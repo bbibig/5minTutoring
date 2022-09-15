@@ -128,9 +128,9 @@ public class AskServiceTests {
 		log.trace("해당 튜터가 받은 질문글 출력");
 		
 		String tp_number = "63";
+		
 		List<QuestionBoardVO> list = this.askService.getQB(tp_number);
-
-		log.info("list: {}", list);
+		list.forEach(log::info);
 		
 	} // testGetQB
 	

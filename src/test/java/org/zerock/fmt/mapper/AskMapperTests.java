@@ -61,10 +61,10 @@ public class AskMapperTests {
 		
 		QuestionBoardDTO newQ = new QuestionBoardDTO(null, 42, "hi@gmail.com", "문법을 잘모르겠어요", "궁금합니다.", 0, null, null);
 
-		int result = this.askMapper.insertQ(newQ);
+		int affectedLines = this.askMapper.insertQ(newQ);
 		
 		log.info("newQ : {}", newQ);
-		log.info("result : {}", result);
+		log.info("affectedLines : {}", affectedLines);
 
 	} // insertQTest
 	
@@ -78,10 +78,10 @@ public class AskMapperTests {
 		
 		QuestionBoardDTO revisedQ = new QuestionBoardDTO(32, null, null, "미적분 질문합니다.", "미적분 고함수의 활용 그래프 개형 그릴 때 함수의 분모 분자를 로피탈해서 x를 무한대로 보낸다는게 이해가 안가요. 설명 부탁드립니다.", null, null, null);
 		
-		int affectedLine = this.askMapper.updateQ(revisedQ);
+		int affectedLines = this.askMapper.updateQ(revisedQ);
 		
 		log.info("revisedQ : {}", revisedQ);
-		log.info("result : {}", affectedLine);
+		log.info("affectedLines : {}", affectedLines);
 		
 	} // updateQTest
 	

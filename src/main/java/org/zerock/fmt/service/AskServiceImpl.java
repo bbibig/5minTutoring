@@ -58,7 +58,7 @@ public class AskServiceImpl implements AskService {
 			} else { log.info("손들기가 부족합니다."); }
 			return false;
 			
-		} catch (DAOException e) { throw new ServiceException(e); }
+		} catch (Exception e) { throw new ServiceException(e); }
 	} // createQ
 	
 	@Override
@@ -66,7 +66,7 @@ public class AskServiceImpl implements AskService {
 		log.trace("손들기 사용정보 저장");
 		
 		try { return this.useHandMapper.insertUseHand(useHandVO) == 1; } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 		
 	} // regUseHand
 
@@ -83,7 +83,7 @@ public class AskServiceImpl implements AskService {
 			else { log.info("답변이 등록되어 질문을 수정할 수 없습니다."); }
 			return false;
 			
-		} catch (DAOException e) { throw new ServiceException(e); } 
+		} catch (Exception e) { throw new ServiceException(e); } 
 	} // updateQ
 
 	@Transactional
@@ -112,7 +112,7 @@ public class AskServiceImpl implements AskService {
 			} else { log.info("답변이 등록되어 질문을 삭제할 수 없습니다."); }
 			
 			return false;
-		} catch (DAOException e) { throw new ServiceException(e); }
+		} catch (Exception e) { throw new ServiceException(e); }
 
 		// 3일 이상 답변이 없었던 경우 반환 - 자동으로 삭제..
 		// tutoring에서 과외 취소 시에도 복구
@@ -124,7 +124,7 @@ public class AskServiceImpl implements AskService {
 		log.trace("해당 튜터가 받은 질문글 출력");
 		
 		try { return this.askMapper.selectQB(tp_number); } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 		
 	} // getQB
 
@@ -134,7 +134,7 @@ public class AskServiceImpl implements AskService {
 		log.trace("질문글 번호로 질문글 출력");
 		
 		try { return this.askMapper.selectOneQ(qb_number); } 
-		catch (DAOException e) { throw new ServiceException(e); }
+		catch (Exception e) { throw new ServiceException(e); }
 		
 	} // getOneQ
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.CommentMapper">
+
+	<insert id="insertComment">
+		INSERT INTO tbl_comment (
+			cm_number, 
+			a_number, 
+			user_email, 
+			cm_content, 
+			regdate
+		)
+		VALUES (
+			cm_num.NEXTVAL,
+			#{a_number},
+			#{user_email},
+			#{cm_content},
+			CURRENT_DATE
+		)
+	</insert>
+	
+	<update id="updateComment">
+		UPDATE tbl_comment
+		SET
+			cm_content = #{cm_content},
+			updatedate = CURRENT_DATE
+		WHERE cm_number = #{cm_number}
+	</update>
+	
+	<delete id="deleteComment">
+		DELETE FROM tbl_comment
+		WHERE cm_number = #{cm_number}
+	</delete>
+
+	<select id="selectComment" resultType="org.zerock.fmt.domain.CommentVO">
+		SELECT 
+			cm_number,
+			a_number,
+			fb_number,
+			u.user_email,
+			user_name,
+			cm_content,
+			regdate,
+			updatedate
+		FROM tbl_comment c, tbl_user u
+		WHERE a_number = #{a_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user 
+							WHERE c.user_email = u.user_email)
+		ORDER BY regdate ASC
+	</select>
+
+</mapper>
