@@ -57,9 +57,6 @@ public class MypageController {
 	private MypageHandService mypageHandService;
 	
 	@Setter(onMethod_= @Autowired)
-	private BuyService buyService;
-	
-	@Setter(onMethod_= @Autowired)
 	private ProfileLoad profileUpload;
 	
 	@Setter(onMethod_= @Autowired)
@@ -312,18 +309,31 @@ public class MypageController {
 	
 //=====손들기 내역===============================================
 	@GetMapping("/studentHands/use")
-	public String studentHandsUse(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
+	public String studentHandsUse(CriteriaMyPage cri, @RequestParam String group,
+			Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 손들기 사용 목록 조회(학생)");
 		
 		try {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
-			List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtList(cri);
-			model.addAttribute("_MYUSEHAND_", list);
-			
-			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandTotalAmount(cri));
-			model.addAttribute("_MYUSEHANDPAGENATION_", pageDto);
+			if(group.equals("1")) {
+				model.addAttribute("GROUP", group);
+				
+				List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtQList(cri);
+				model.addAttribute("_MYUSEHAND_", list);
+				
+				PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandQTotalAmount(cri));
+				model.addAttribute("_MYUSEHANDPAGENATION_", pageDto);
+			} else if (group.equals("2")){
+				model.addAttribute("GROUP", group);
+				
+				List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtTList(cri);
+				model.addAttribute("_MYUSEHAND_", list);
+				
+				PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandTTotalAmount(cri));
+				model.addAttribute("_MYUSEHANDPAGENATION_", pageDto);
+			} 
 			
 			return "mypage/7-10_StudentHandsListUse";
 		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
@@ -334,32 +344,32 @@ public class MypageController {
 	public String studentHandsBuy(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 손들기 구매 목록 조회(학생)");
 		
-//		try {
-//			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
-//			cri.setUser_email(vo.getUser_email());
-//			
-//			List<BuyVO> list = this.buyService.myPageBuy(cri);
-//			model.addAttribute("_MYBUYHAND_", list);
-//			
-//			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.buyService.myPageBuyCount(vo.getUser_email()));
-//			model.addAttribute("_MYBUYHANDPAGENATION_", pageDto);
-//			
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<BuyVO> list = this.mypageHandService.myPageBuy(cri);
+			model.addAttribute("_MYBUYHAND_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.myPageBuyCount(cri));
+			model.addAttribute("_MYBUYHANDPAGENATION_", pageDto);
+			
 			return "mypage/7-11_StudentHandsListBuy";
-//		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// studentHandsBuy
 	
 	@GetMapping("/studentHands/buy/detail")		//GET
-	public String studentHandsBuyDetail(@RequestParam Integer b_number, @RequestParam String currPage, Model model) throws ControllerException {
+	public String studentHandsBuyDetail(@RequestParam Integer b_number, CriteriaMyPage cri, Model model) throws ControllerException {
 		log.trace("마이페이지 손들기 구매 상세 조회(학생)");
 		
-//		try {
-//			BuyInfoVO vo = this.buyService.myPageBuyinfo(b_number);
-//			model.addAttribute("_BUYINFO_", vo);
-//			model.addAttribute("_CURRENTPAGE_", currPage);
-//			
+		try {
+			BuyInfoVO vo = this.mypageHandService.myPageBuyinfo(b_number);
+			model.addAttribute("_BUYINFO_", vo);
+			model.addAttribute("_CURRENTPAGE_", cri);
+			
 			return "mypage/7-12_StudentHandsListBuyD";
-//		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
 
 	}// studentHandsBuyDetail
 	

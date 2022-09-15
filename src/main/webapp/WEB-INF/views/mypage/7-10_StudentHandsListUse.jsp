@@ -14,6 +14,22 @@
   <link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
   <title>손들기 내역(학생)_사용 내역</title>
+
+  <script>
+    window.onload = function () {
+      // 오늘날짜
+      var date = new Date();
+      var today = date.toISOString().slice(0, 10);
+      var dateTo = document.getElementById("dateTo");
+      dateTo.value = today;
+
+      //오늘날짜 3개월 전
+      var month = date.getMonth();
+      var before = new Date(date.setMonth(month - 3)).toISOString().slice(0, 10);
+      var dateFrom = document.getElementById("dateFrom");
+      dateFrom.value = before;
+    }
+  </script>
 </head>
 
 <body>
@@ -40,7 +56,7 @@
               class="list-group-item list-group-item-action px-lg-4">기본
               정보</a></c:if>
 
-          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
           <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
@@ -72,11 +88,15 @@
 
         <!-- FROM -->
         <div class="my-3">
-          <a href="/mypage/studentHands/use" class="btn bg-blue">사용 내역</a>
+          <a href="/mypage/studentHands/use?group=1" class="btn bg-blue">사용 내역</a>
           <a href="/mypage/studentHands/buy" class="btn btn-dark">구매 내역</a>
 
           <span class="float-end">
             <form action="/mypage/studentHands/use" method="get" onsubmit="return dateCheck();">
+              <select name="group" id="group">
+                <option value="1" <c:if test="${GROUP eq 1}">selected</c:if> >질문하기</option>
+                <option value="2" <c:if test="${GROUP eq 2}">selected</c:if> >과외받기</option>
+              </select>
               <!-- 1. 기간조회 X -->
               <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom eq null}">
                 <input type="date" name="dateFrom" id="dateFrom" required>
@@ -85,9 +105,9 @@
               </c:if>
               <!-- 2. 기간조회 O -->
               <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom ne null}">
-                <input type="date" name="dateFrom" id="dateFrom" required value="${_MYUSEHANDPAGENATION_.cri.dateFrom}">
+                <input type="date" name="dateFrom" required value="${_MYUSEHANDPAGENATION_.cri.dateFrom}">
                 -
-                <input type="date" name="dateTo" id="dateTo" required value="${_MYUSEHANDPAGENATION_.cri.dateTo}">
+                <input type="date" name="dateTo" required value="${_MYUSEHANDPAGENATION_.cri.dateTo}">
               </c:if>
               <button type="submit" class="btn bg-blue mx-3">조회</button>
             </form>
@@ -128,23 +148,23 @@
           <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom eq null}">
             <ul class="pagination justify-content-center p-5">
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=1">&laquo;</a>
+                  href="/mypage/studentHands/use?currPage=1&group=${GROUP}">&laquo;</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}">&lt;</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}&group=${GROUP}">&lt;</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle bg-blue"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}&group=${GROUP}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}">&gt;</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}&group=${GROUP}">&gt;</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}">&raquo;</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}&group=${GROUP}">&raquo;</a>
               </li>
             </ul>
           </c:if>
@@ -152,23 +172,23 @@
           <c:if test="${_MYUSEHANDPAGENATION_.cri.dateFrom ne null}">
             <ul class="pagination justify-content-center p-5">
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=1&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&laquo;</a>
+                  href="/mypage/studentHands/use?currPage=1&group=${GROUP}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&laquo;</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&lt;</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage - 1}&group=${GROUP}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&lt;</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle bg-blue"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage}&group=${GROUP}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">${_MYUSEHANDPAGENATION_.cri.currPage}</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&gt;</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.cri.currPage + 1}&group=${GROUP}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&gt;</a>
               </li>
 
               <li class="page-item"><a class="page-link rounded-circle"
-                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&raquo;</a>
+                  href="/mypage/studentHands/use?currPage=${_MYUSEHANDPAGENATION_.realEndPage}&group=${GROUP}&dateFrom=${_MYUSEHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYUSEHANDPAGENATION_.cri.dateTo}">&raquo;</a>
               </li>
             </ul>
           </c:if>

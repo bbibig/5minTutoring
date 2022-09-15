@@ -40,7 +40,7 @@
               class="list-group-item list-group-item-action px-lg-4">기본
               정보</a></c:if>
 
-          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
           <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
@@ -82,7 +82,10 @@
                 <tbody>
                   <tr>
                     <th class="text-center">구매 번호</th>
-                    <td class="text-center">220612-000001</td>
+                    <td class="text-center">
+                      <fmt:formatDate value="${_BUYINFO_.b_date}" pattern="yyMMdd" />-
+                      <fmt:formatNumber minIntegerDigits="6" type="number" pattern="######" value="${_BUYINFO_.b_number}" />
+                    </td>
                   </tr>
                   <tr>
                     <th class="text-center">이름</th>
@@ -148,7 +151,14 @@
             </div>
 
             <!-- 뒤로가기 -->
-            <a href="/mypage/studentHands/buy?currPage=${_CURRENTPAGE_}" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
+            <!-- 1. 기간조회 X -->
+            <c:if test="${_CURRENTPAGE_.dateFrom eq null}">
+              <a href="/mypage/studentHands/buy?currPage=${_CURRENTPAGE_.currPage}" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
+            </c:if>
+            <!-- 2. 기간조회 O -->
+            <c:if test="${_CURRENTPAGE_.dateFrom ne null}">
+              <a href="/mypage/studentHands/buy?currPage=${_CURRENTPAGE_.currPage}&dateFrom=${_CURRENTPAGE_.dateFrom}&dateTo=${_CURRENTPAGE_.dateTo}" class="btn rounded-circle bg-blue mt-3 float-end">&lt;</a>
+            </c:if>
 
           </div>
           <!-- 상품 정보, 결제 정보-->

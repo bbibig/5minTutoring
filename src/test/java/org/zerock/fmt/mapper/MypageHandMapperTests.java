@@ -15,10 +15,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
-import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -38,9 +38,6 @@ public class MypageHandMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private MypageHandMapper mapper;
 	
-	@Setter(onMethod_= @Autowired)
-	private BuyMapper buymapper;
-	
 	//1. 손들기 사용 목록 조회
 	@Test
 	@Order(1)
@@ -54,7 +51,7 @@ public class MypageHandMapperTests {
 		cri.setDateFrom("2022-09-05");
 		cri.setDateTo("2022-09-06");
 		
-		List<UseHandVO2> list = mapper.selectAllmyUsehandList(cri);
+		List<UseHandVO2> list = mapper.selectAllmyUsehandQList(cri);
 		list.forEach(e -> log.info(e));
 
 	}//selectAllmyUsehandList()
@@ -72,7 +69,7 @@ public class MypageHandMapperTests {
 		cri.setDateFrom("2022-09-05");
 		cri.setDateTo("2022-09-06");
 		
-		Integer amount = mapper.getMyUsehandTotalAmount(cri);
+		Integer amount = mapper.getMyUsehandQTotalAmount(cri);
 		log.info("\t + 손들기 사용 총 횟수: {}", amount);
 		
 	}//getMyUsehandTotalAmount()
@@ -87,9 +84,11 @@ public class MypageHandMapperTests {
 		
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
+		cri.setDateFrom("2022-08-31");
+		cri.setDateTo("2022-09-07");
 		
-//		List<BuyVO> list = this.buymapper.myPageAllBuy(cri);
-//		list.forEach(e -> log.info(e));
+		List<BuyVO> list = this.mapper.myPageAllBuy(cri);
+		list.forEach(e -> log.info(e));
 
 	}//myPageAllBuy()
 	
@@ -101,13 +100,28 @@ public class MypageHandMapperTests {
 	void myPageBuyCount() throws DAOException {
 		log.trace("myPageBuyCount(), 마이페이지 손들기 구매 목록 총 개수 조회");
 		
-		UserDTO dto = new UserDTO();
-		dto.setUser_email("test@gmail.com");
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		cri.setDateFrom("2022-08-31");
+		cri.setDateTo("2022-09-07");
 		
-//		int amount = this.buymapper.myPageBuyCount(dto.getUser_email());
-//		log.info("\t + 손들기 구매 총 횟수: {}", amount);
+		Integer amount = this.mapper.myPageBuyCount(cri);
+		log.info("\t + 손들기 구매 총 횟수: {}", amount);
 		
 	}//myPageBuyCount()
+	
+	//5. 손들기 구매내역 상세조회
+	@Test
+	@Order(5)
+	@DisplayName("selectBuyDetail")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectBuyDetail() throws DAOException {
+		log.trace("selectBuyDetail(), 마이페이지 손들기 구매 상세내역 조회");
+		
+		BuyInfoVO vo = this.mapper.selectBuyDetail(12);
+		log.info("\t+ 구매 상세내역: {}", vo);
+		
+	}//selectBuyDetail()
 	
 
 }// end class

@@ -6,9 +6,9 @@
 
 	<!-- ============<<SELECT>>============ -->
 
-	<!-- 1. 손들기 사용 목록 조회 페이징 처리(내림차순으로) -->
-	<select id="selectAllmyUsehandList" resultType="org.zerock.fmt.domain.UseHandVO2">
-			SELECT 
+	<!-- 1-1. 손들기 사용 목록(질문하기) 조회 페이징 처리(내림차순으로) -->
+	<select id="selectAllmyUsehandQList" resultType="org.zerock.fmt.domain.UseHandVO2">
+		SELECT 
 		    uh.*,
 		    tp.user_email as tutor_email
 		FROM (SELECT *
@@ -17,7 +17,6 @@
 		      		<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
 		      ) uh,
 		      tbl_question_board qb,
-		      tbl_tutoring_board tb,
 		      tbl_tutor_page tp
 		WHERE uh.qb_number = qb.qb_number AND qb.tp_number = tp.tp_number
 		ORDER BY uh.use_number desc
@@ -26,12 +25,79 @@
 		FETCH NEXT #{amount} ROWS ONLY
 	</select>
 	
-	<!-- 2. 손들기 사용 목록 총 횟수 조회(내림차순으로) -->
-	<select id="getMyUsehandTotalAmount" resultType="Integer">
+	<!-- 1-2. 손들기 사용 목록(질문하기) 총 횟수 조회(내림차순으로) -->
+	<select id="getMyUsehandQTotalAmount" resultType="Integer">
 		SELECT count(use_number)
 		FROM tbl_usehand_student
 		WHERE user_email = #{user_email}
+			AND qb_number IS NOT NULL
 			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+	</select>
+	
+	<!-- 1-3. 손들기 사용 목록(과외받기) 조회 페이징 처리(내림차순으로) -->
+	<select id="selectAllmyUsehandTList" resultType="org.zerock.fmt.domain.UseHandVO2">
+		SELECT 
+		    uh.*,
+		    tp.user_email as tutor_email
+		FROM (SELECT *
+		      FROM tbl_usehand_student
+		      WHERE user_email = #{user_email}
+		            <if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		      ) uh,
+		      tbl_tutoring_board tb,
+		      tbl_tutor_page tp
+		WHERE uh.tb_number = tb.tb_number AND tb.tp_number = tp.tp_number
+		ORDER BY uh.use_number desc
+		
+		OFFSET (#{currPage} - 1) * #{amount} rows
+		FETCH NEXT #{amount} ROWS ONLY
+	</select>
+	
+	<!-- 1-4. 손들기 사용 목록(과외받기) 총 횟수 조회(내림차순으로) -->
+	<select id="getMyUsehandTTotalAmount" resultType="Integer">
+		SELECT count(use_number)
+		FROM tbl_usehand_student
+		WHERE user_email = #{user_email}
+			AND tb_number IS NOT NULL
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+	</select>
+	
+	
+	<!-- 2-1 손들기 구매 목록 조회 페이징처리(학생) -->
+	<select id="myPageAllBuy" resultType="org.zerock.fmt.domain.BuyVO">
+		SELECT 
+		    TBL_BUY.*, 
+		    TBL_HAND.H_NAME
+		FROM TBL_BUY, TBL_HAND
+		WHERE TBL_BUY.H_NUMBER = TBL_HAND.H_NUMBER
+		        AND USER_EMAIL= #{user_email}
+		        <if test="dateFrom != null and dateTo != null"> AND TO_CHAR(b_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		ORDER BY TBL_BUY.B_DATE DESC
+		
+		OFFSET (#{currPage}-1) * #{amount} ROW 
+		FETCH NEXT #{amount} ROWS ONLY
+	</select>
+	
+	<!-- 2-2 손들기 구매 내역 총 수량 -->
+	<select id="myPageBuyCount" resultType="Integer">
+		SELECT count(*) 
+		FROM tbl_buy 
+		WHERE user_email=#{user_email}
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(b_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+	</select>
+	
+	<!-- 2-3 손들기 구매내역 상세 조회 -->
+	<select id="selectBuyDetail" resultType="org.zerock.fmt.domain.BuyInfoVO">
+		SELECT 
+		    TBL_BUY.*, 
+		    TBL_HAND.H_NAME,
+		    TBL_USER.USER_PHONE,
+		    TBL_USER.USER_NAME
+		FROM TBL_BUY , TBL_HAND , TBL_USER
+		WHERE TBL_BUY.H_NUMBER = TBL_HAND.H_NUMBER
+		    AND TBL_BUY.USER_EMAIL = TBL_USER.USER_EMAIL
+		    AND TBL_BUY.B_NUMBER = #{b_number}
+		ORDER BY TBL_BUY.B_DATE DESC
 	</select>
 
 </mapper>

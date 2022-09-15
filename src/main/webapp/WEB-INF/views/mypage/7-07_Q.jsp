@@ -38,7 +38,7 @@
 							class="list-group-item list-group-item-action px-lg-4">기본
 							정보</a></c:if>
 
-					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
 							class="list-group-item list-group-item-action px-lg-4">손들기
 							내역</a></c:if>
 					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
