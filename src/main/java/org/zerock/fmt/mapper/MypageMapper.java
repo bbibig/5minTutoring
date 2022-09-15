@@ -61,13 +61,26 @@ public interface MypageMapper {
 	
 
 	// 5. 나의 1:1 문의글 목록 조회 페이징 처리(내림차순으로)
-	public abstract List<InquiryQuestionVO> selectAllMyInquiryList(CriteriaMyPage cri) throws DAOException;
+		public abstract List<InquiryQuestionVO> selectAllMyInquiryList(CriteriaMyPage cri) throws DAOException;
+		
+	// 5-1. 나의 1:1 문의글 목록 총 개수 조회
+	@Select("SELECT count(iq_number) "
+			+ "FROM tbl_individual_question "
+			+ "WHERE user_email = #{user_email}")
+	public abstract Integer getMyInquiryTotalAmount(@Param("user_email") String user_email) throws DAOException;
 
-	// 5-1. 나의 1:1 문의 & 답변 조회
+	// 5-2. 나의 1:1 문의 & 답변 조회
 	public abstract InquiryVO selectMyInquiry(@Param("iq_number") Integer iq_number) throws DAOException;
 
-	// 6. 나의 손들기 출금 신청 목록 조회 페이징 처리(내림차순으로) 
+	
+	// 6. 나의 출금 신청 목록 조회 페이징 처리(내림차순으로) 
 	public abstract List<WithdrawalVO> selectAllMyWithdrawalList(CriteriaMyPage cri) throws DAOException;
+	
+	// 6-1. 나의 출금 신청 목록 총 개수 조회
+	@Select("SELECT count(w_num) "
+			+ "FROM tbl_withdrawal "
+			+ "WHERE user_email = #{user_email}")
+	public abstract Integer getMyWithdrawalTotalAmount(@Param("user_email") String user_email) throws DAOException;
 	
 //	============<<INSERT>>============
 	// 1. 1:1 문의하기

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -39,7 +39,7 @@
 							class="list-group-item list-group-item-action px-lg-4">기본
 							정보</a></c:if>
 
-					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
 							class="list-group-item list-group-item-action px-lg-4">손들기
 							내역</a></c:if>
 					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
@@ -52,12 +52,16 @@
 
 					<a href="/mypage/community/write" class="list-group-item list-group-item-action px-lg-4">나의
 						커뮤니티</a>
+						
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/qList" 
+					 		class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1 문의하기</a></c:if>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/qList" 
+					 		class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1 문의하기</a></c:if>
 
-					<a href="/mypage/qList" class="list-group-item list-group-item-action px-lg-4 fw-bold">1:1
-						문의하기</a>
-
-					<a href="/mypage/unregister" class="list-group-item list-group-item-action px-lg-4">회원
-						탈퇴</a>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/unregister" 
+					class="list-group-item list-group-item-action px-lg-4">회원 탈퇴</a></c:if>
+					<c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/unregister" 
+					class="list-group-item list-group-item-action px-lg-4">회원 탈퇴</a></c:if>
 				</div>
 			</div><!-- End main nav -->
 
@@ -82,47 +86,53 @@
 					</div>
 
 					<!-- 문의내역 리스트 -->
-					<hr>
+					
 					<div class="list">
-						<div class="row">
-							<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
-							<div class="col-9">
-								<a href="/mypage/question" class="fs-5 fw-bold">문의합니다.</a>
-								<div class="fs-6">2022-07-21</div>
-							</div>
-							<div class="col-2 state1">답변대기</div>
-						</div>
+						<c:forEach var="myinquiry" items="${_MYINQUIRY_}">
 						<hr>
-
-						<div class="row">
-							<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
-							<div class="col-9">
-								<a href="/mypage/qAndA" class="fs-5 fw-bold">문의합니다.</a>
-								<div class="fs-6">2022-07-21</div>
+							<div class="row"> 
+								<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
+								<div class="col-9">
+									<a href="/mypage/question" id=qtitle> ${myinquiry.iq_title}</a>
+									<div class="fs-6">
+										<fmt:formatDate value="${myinquiry.iq_date}" pattern="yyyy.MM.dd" />
+									</div>
+								</div>
+								<c:set  var="iq_pass" value="답변완료" />
+								<c:choose>
+									<c:when test="${myinquiry.iq_pass eq 'Y'}">
+										<div class="col-2 state2">답변 완료</div>
+									</c:when>
+									<c:when test="${myinquiry.iq_pass eq 'N'}">
+										<div class="col-2 state1">답변 대기</div>
+									</c:when>
+								</c:choose>
 							</div>
-							<div class="col-2 state2">답변완료</div>
-						</div>
-						<hr>
-
-						<div class="row">
-							<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
-							<div class="col-9">
-								<a href="/mypage/qAndA" class="fs-5 fw-bold">문의합니다.</a>
-								<div class="fs-6">2022-07-21</div>
-							</div>
-							<div class="col-2 state2">답변완료</div>
-						</div>
-						<hr>
-
+						</c:forEach>
 					</div>
 					<!--문의리스트 end-->
 
-
 				</div>
+				<!-- FORM -->
 
 			</div>
 			<!--End main contents card(박스)-->
 
+  		<nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center p-5">
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/qList?currPage=1">&laquo;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage - 1}">&lt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                href="/mypage//qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage}">${_MYINQUIRYPAGENATION_.cri.currPage}</a>
+            </li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="/mypage//qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+            <li class="page-item"><a class="page-link rounded-circle"
+                href="mypage//qList?currPage=${_MYINQUIRYPAGENATION_.realEndPage}">&raquo;</a></li>
+          </ul>
+        </nav>
 
 
 		</div>

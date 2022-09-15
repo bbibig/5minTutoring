@@ -60,7 +60,7 @@ public class WithdrawalMapperTests {
 	@DisplayName("출금신청 테스트")
 	@Timeout(value=5000, unit = TimeUnit.SECONDS)
 	void testInsertWithdrawal() throws DAOException {
-		log.trace("testInsertWithdrawal() invoked.");
+		log.trace("testInsertWithdrawal() invoked."); 
 
 		WithdrawalDTO dto = new WithdrawalDTO(null, "tutor2@gmail.com", "오분은행 1111-2222", 600, 75000, "승인 대기 중", null);
 		log.info("\t + dto: {}", dto);
@@ -99,7 +99,7 @@ public class WithdrawalMapperTests {
 	void testUpdate() throws DAOException {
 		log.trace("testUpdate() invoked.");
 		
-		WithdrawalDTO dto = new WithdrawalDTO(1, null, null, null, null, "승인 완료", null);
+		WithdrawalDTO dto = new WithdrawalDTO(9, null, null, null, null, "승인 완료", null);
 		
 		int affectedLines =  this.withdrawalMapper.updateState(dto);
 		log.info("\t+ affectedLines: {}", affectedLines);

@@ -21,6 +21,7 @@ import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.ProfileDTO;
 import org.zerock.fmt.domain.ProfileVO;
@@ -271,12 +272,27 @@ public class MypageController {
 
 	}// 나의 댓글 조회
 	
+	
+//===== 나의 문의 목록 조회 ===============================================	
 	@GetMapping("/qList")	// GET
-	public String qList() {
-		log.trace("7-06_QList");
+	public String qList(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
+		log.trace("마이페이지 나의 문의 목록 조회");
 		
-		return "mypage/7-06_QList";
-	}// qList
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<InquiryQuestionVO> list = this.mypageService.getAllMyInquiryList(cri);
+			model.addAttribute("_MYINQUIRY_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyInquiryTotalAmount(vo.getUser_email()));
+			model.addAttribute("_MYINQUIRYPAGENATION_", pageDto);
+						
+			return "mypage/7-06_QList";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
+	}// 나의 문의 목록 조회	
+	
 	
 	@GetMapping("/question") // GET
 	public String question() {

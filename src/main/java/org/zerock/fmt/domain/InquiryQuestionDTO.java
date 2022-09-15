@@ -18,6 +18,6 @@ public class InquiryQuestionDTO {
 	private String iq_title;
 	private String iq_content;
 	private Date iq_date;			// 문의 날짜
-	private Integer iq_pass;		// 답변 유무 (답변완료:0 / 미답변:1)
+	private String iq_pass;			// 답변 유무 (답변 대기 / 답변 완료)
 
 } // end class

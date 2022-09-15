@@ -1,4 +1,4 @@
-package org.zerock.fmt.domain;
+package org.zerock.fmt.mapper;
 
 
 import java.util.Date;

@@ -7,8 +7,8 @@
     <mapper namespace="org.zerock.fmt.mapper.InquiryAnswerMapper">
 
         <insert id="insertIA">
-            INSERT INTO tbl_individual_answer (iq_number, ad_id, ia_title, ia_content, ia_date)
-            VALUES (#{iq_number}, #{ad_id}, #{ia_title}, #{ia_content}, CURRENT_DATE)
+            INSERT INTO tbl_individual_answer (iq_number, ad_id, ia_title, ia_content, ia_date, ia_pass)
+            VALUES (#{iq_number}, #{ad_id}, #{ia_title}, #{ia_content}, CURRENT_DATE, #{ia_pass})
         </insert>
     
     	

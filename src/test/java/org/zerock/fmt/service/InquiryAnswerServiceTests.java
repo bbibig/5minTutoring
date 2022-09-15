@@ -1,4 +1,4 @@
-package org.zerock.fmt.mapper;
+package org.zerock.fmt.service;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.InquiryAnswerDTO;
 import org.zerock.fmt.domain.InquiryAnswerVO;
-import org.zerock.fmt.exception.DAOException;
+import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,51 +27,44 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations= "file:src/main/webapp/**/spring/**/*-context.xml")
+@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*-context.xml")
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
+public class InquiryAnswerServiceTests {
 
-public class InquiryAnswerMapperTests {
-
-	@Setter(onMethod_=@Autowired)
-	private InquiryAnswerMapper iaMapper;
-
-//  === 1:1 문의 답변 작성 ===
+	@Setter(onMethod_= @Autowired) 
+	private InquiryAnswerService iaService;
+	
 	@Test
 	@Order(1)
 	@DisplayName("1:1 문의 답변 작성 테스트")
 	@Timeout(value=5000, unit = TimeUnit.SECONDS)
-	void testInsert() throws DAOException {
-		log.trace("testInsert() invoked.");
+	void testCreateIA() throws ServiceException {
+		log.trace("testCreateIA() invoked.");   
 
-		InquiryAnswerDTO dto = new InquiryAnswerDTO(50, "admin", "답변합니다.", "구매하신 손들기는 유효기간이 없습니다.", null, "Y");
-		log.info("\t + dto: {}", dto);
-	
-		int affectedLines = this.iaMapper.insertIA(dto);
-		log.info("\t + affectedLines: {}", affectedLines);
+		InquiryAnswerDTO dto = new InquiryAnswerDTO(40, "suin", "답변입니다.", "일대일 문의 답변 테스트", null, "Y");
 		
-		assert affectedLines == 1;
-		
-	} // testInsert
+		boolean result = this.iaService.createIA(dto);
+		log.info("일대일 문의 답변 작성 결과: {}", result);
+			
+	} // testCreateIA 
 	
-	
-//  === 특정 1:1 문의 답변 조회 ==== 
+
 	@Test
 	@Order(2)
-	@DisplayName("특정 1:1문의 답변 조회 테스트")
-	@Timeout(value=100, unit=TimeUnit.SECONDS)
-	void testSelect() throws DAOException {
-		log.trace("testSelect() invoked.");
+	@DisplayName("1:1 문의 답변 조회 테스트")
+	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	void testGetIA() throws ServiceException {
+		log.trace("testgetIA() invoked.");
 		
-		int iq_number = 5;
+		int iq_number = 13;
+		InquiryAnswerDTO dto = new 	InquiryAnswerDTO();
+		dto.setIq_number(iq_number);
 
-		InquiryAnswerVO vo = this.iaMapper.select(iq_number);
-
+		InquiryAnswerVO vo = this.iaService.getIA(iq_number);
 		Objects.requireNonNull(vo);
 		log.info("/t+ vo: {}", vo);
+	} // testGetIA
 	
-	} // testSelect
-	
-
 } // end class

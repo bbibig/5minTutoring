@@ -83,6 +83,12 @@ a:hover{
     padding-top: 5px;
 }
 
+/* 문의하기 제목 */
+#qtitle {
+    font-size: 13pt;
+    font-weight: bold;
+}
+
 /* 답변대기 상태 박스 */
 .state1 {
     background-color: #77797e;
