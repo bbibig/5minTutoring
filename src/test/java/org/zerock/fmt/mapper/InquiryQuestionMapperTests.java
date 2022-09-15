@@ -22,6 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -61,7 +62,7 @@ public class InquiryQuestionMapperTests {
 	void testInsert() throws DAOException {
 		log.trace("testInsert() invoked.");
 
-		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "tutor2@gmail.com", "문의합니다.", "출금신청을 했는데 언제 처리되나요?", null, 1);
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "test@gmail.com", "문의합니다.", "구매한 손들기도 환불이 되나요?", null, "N");
 		log.info("\t + dto: {}", dto);
 	
 		int affectedLines = this.iqMapper.insertIQ(dto);
@@ -72,48 +73,63 @@ public class InquiryQuestionMapperTests {
 	
 	
 	
-// 	=== 1:1 문의 목록조회 ===
+// 	=== 1:1 문의 목록조회 (답변 완료) ===
 	@Test
 	@Order(2)
 	@DisplayName("1:1문의 목록조회 테스트")
 	@Timeout(value=100, unit=TimeUnit.SECONDS)
-	void testGetList() throws DAOException {
-		log.trace("testGetList() invoked.");
+	void testGetYList() throws DAOException {
+		log.trace("testGetYList() invoked.");
 		
 		CriteriaMyPage cri = new CriteriaMyPage();
-		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryList(cri);
+		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryYList(cri);
 
 		Objects.requireNonNull(list);
 		list.forEach(log::info);
-	} // testGetList 
+	} // testGetYList 
+	
+	// 	=== 1:1 문의 목록조회 (답변 완료) ===
+	@Test
+	@Order(3)
+	@DisplayName("1:1문의 목록조회 테스트")
+	@Timeout(value=100, unit=TimeUnit.SECONDS)
+	void testGetNList() throws DAOException {
+		log.trace("testGetNList() invoked.");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryNList(cri);
+
+		Objects.requireNonNull(list);
+		list.forEach(log::info);
+	} // testGetNList 
 	
 	
 //  === 특정 1:1 문의 조회 ==== 
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("1:1문의 조회 테스트")
 	@Timeout(value=100, unit=TimeUnit.SECONDS)
-	void testSelect() throws DAOException {
-		log.trace("testSelect() invoked.");
+	void testSelectInquiry() throws DAOException {
+		log.trace("testSelectInquiry() invoked.");
 		
-		int iq_number = 5;
+		int iq_number = 50;		
 
-		InquiryQuestionVO vo = this.iqMapper.select(iq_number);
+		InquiryVO vo = this.iqMapper.selectInquiry(iq_number);
 
-		Objects.requireNonNull(vo);
+		Objects.requireNonNull(vo); 
 		log.info("/t+ vo: {}", vo);
-	} // testSelect
 	
+	} // testSelectInquiry
 	
 //  === 답변 상태 수정(미답변:1 / 답변완료:0) ==== 	
 	@Test
-	@Order(4)
+	@Order(5)
 	@DisplayName("1:1문의 답변상태 수정")
 	@Timeout(value=100, unit=TimeUnit.SECONDS)
 	void testUpdate() throws DAOException {
 		log.trace("testUpdate() invoked.");
 		
-		InquiryQuestionDTO dto = new InquiryQuestionDTO(9, null, null, null, null, 1);
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(53, null, null, null, null, "Y");
 		
 		int affectedLines =  this.iqMapper.updateInquiryState(dto);
 		log.info("\t+ affectedLines: {}", affectedLines);

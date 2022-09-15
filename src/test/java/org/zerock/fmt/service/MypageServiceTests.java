@@ -18,10 +18,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.InquiryQuestionDTO;
+import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalDTO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -194,7 +199,133 @@ public class MypageServiceTests {
 		
 	}//testGetMyCommentTotalAmount()
 	
+	// 5. 1:1 문의하기
+	@Test
+	@Order(10)
+	@DisplayName("10.testInquiryCreate") 
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testCreateIQ() throws ServiceException {
+		log.trace("testCreateIQ(), 일대일 문의 작성 테스트");
 
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "test@gmail.com", "문의합니다.", "일대일 문의 작성 테스트", null, "N");
+		
+		boolean result = this.service.createIQ(dto);
+		log.info("\t+ 일대일 문의 작성 결과: {}", result);
+		
+	} // testCreateIA
+	
+	// 5-1. 나의 1:1 문의글 목록 조회 페이징 처리(내림차순으로)
+	@Test
+	@Order(11)
+	@DisplayName("11. testGetAllInquiryList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetAllInquiryList() throws ServiceException {
+		log.trace("testGetAllInquiryList(), 나의 문의 목록 조회 테스트");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("test@gmail.com");
+		
+		List<InquiryQuestionVO> list = this.service.getAllMyInquiryList(cri);
+		list.forEach(e -> log.info(e));
+		
+	} // testGetAllInquiryList
+	
+	// 5-2. 나의 1:1 문의글 목록 총 개수 획득
+	@Test
+	@Order(12)
+	@DisplayName("12. testGetMyInquiryTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyInquiryTotalAmount() throws ServiceException {
+		log.trace("testGetMyInquiryTotalAmount(), 나의 문의글 목록 총 개수 획득 테스트");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("tutor2@gmail.com");
+		
+		int result = this.service.getMyInquiryTotalAmount(dto.getUser_email());
+		log.info("\t+ 나의 문의글 총 개수: {}", result);
+		
+	} // testGetMyInquiryTotalAmount
+	
+	// 5-3. 나의 1:1 문의 & 답변 조회
+	@Test
+	@Order(13)
+	@DisplayName("13. testGetMyInquiry")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyInquiry() throws ServiceException {
+		log.trace("testGetMyInquiry(), 나의 문의와 답변 조회 테스트");
+		
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(); 
+		dto.setIq_number(50);		
+
+		InquiryVO vo = service.getMyInquiry(dto.getIq_number());
+		log.info("\t+ 일대일 문의와 답변 {}", vo);
+		
+	} // testGetMyInquiry
+	
+	
+	// 6. 손들기 출금 신청 하기 (튜터)
+	@Test
+	@Order(14)
+	@DisplayName("14. testCreateWithdrawal")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testCreateWithdrawal() throws ServiceException {
+		log.trace("testCreateWithdrawal(), 튜터 손들기 출금 신청 테스트");
+
+		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 1000, 22000, "승인 대기 중", null);
+		log.info("\t + dto: {}", dto);
+	
+		boolean result = this.service.createWithdrawal(dto);
+		log.info("\t+ 튜터 출금 신청 결과: {}", result);
+		
+	} // testCreateWithdrawal
+	
+	// 6-1. 나의 손들기 출금 신청 목록 조회 페이징 처리(내림차순으로)
+	@Test
+	@Order(15)
+	@DisplayName("15. testGetAllMyWithdrawalList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetAllMyWithdrawalList() throws ServiceException {
+		log.trace("testGetAllMyWithdrawalList(), 나의 손들기 출금 신청 목록 조회 테스트");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("now@han.net");
+		
+		List<WithdrawalVO> list = this.service.getAllMyWithdrawalList(cri);
+		list.forEach(e -> log.info(e));
+		
+	} // testGetAllMyWithdrawalList
+	
+	// 6-2. 나의 출금 신청 목록 총 개수 조회
+	@Test
+	@Order(16)
+	@DisplayName("16. testGetMyWithdrawalTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyWithdrawalTotalAmount() throws ServiceException {
+		log.trace("testGetMyWithdrawalTotalAmount(), 나의 출금 신청 목록 총 개수 획득 테스트");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("tutor2@gmail.com");
+		
+		int result = this.service.getMyWithdrawalTotalAmount(dto.getUser_email());
+		log.info("\t+ 나의 출금 신청 목록 총 개수: {}", result);
+		
+	} // testGetMyWithdrawalTotalAmount
+	
+	
+	// 7. 탈퇴하기
+	@Test
+	@Order(17)
+	@DisplayName("17. testUserStatus")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testUserStatus() throws ServiceException {
+		log.trace("testUserStatus(), 회원 탈퇴(정지) 테스트");
+		
+		String user_email = "tutor1@han.net";
+		Boolean Result = this.service.userStatus(user_email);
+		log.info("\t+ 회원 탈퇴 결과 : {}", Result);
+		
+	} // testUserStatus
+	
 }// end class
 
 

@@ -284,7 +284,20 @@ public class UserMapperTests {
 	@DisplayName("이메일찾기")
 	void selectFindEmail() throws DAOException {
 		log.trace("selectFindEmail 이메일 찾기");
-		String user_email = this.mapper.selectFindEmail("000-0000-0001");
-		log.info("\t+ user_email : {}", user_email);
+		String user_phone = "01089814300";
+		String result1 = this.mapper.FindEmailreturnString(user_phone);
+		log.info("\t+ result1 : {}", result1);
+//		int result2 = this.mapper.FindEmailreturnInt(user_phone);
+//		log.info("\t + result2 : {}", result2);
+		
 	}//selectFindEmail
+	
+	@Test
+	@DisplayName("findEmailCheck")
+	void findEmailCheckTest() throws DAOException {
+		log.trace("findEmailCheck 이메일 중복체크");
+		String userEmail = "tutor2@gmail.com";
+		int result = this.mapper.findEmailCheck(userEmail);
+		log.info("\t + result : {}", result);
+	}//findEmailCheck
 }//end class

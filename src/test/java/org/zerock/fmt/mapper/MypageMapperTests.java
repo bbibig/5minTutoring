@@ -29,6 +29,7 @@ import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
+import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -203,24 +204,25 @@ public class MypageMapperTests {
 	@Test
 	@Order(10)
 	@DisplayName("10. testInsertInquiry")
-	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testInsertInquiry() throws DAOException {
 		log.trace("testInsertInquiry() invoked.");
 
-		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "sd456@gmail.com", "문의합니다.", "출금신청을 했는데 언제 처리되나요?", null, 1);
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "sd456@gmail.com", "문의합니다.", "출금신청을 했는데 언제 처리되나요?", null, "N");
 		log.info("\t + dto: {}", dto);
 	
 		int affectedLines = this.mapper.insertIQ(dto);
 		log.info("\t + affectedLines: {}", affectedLines);
 		
 		assert affectedLines == 1;
+	
 	} // testInsertInquiry
 	
 	// 11. 나의 1:1 문의글 목록 조회 
 	@Test
 	@Order(11)
 	@DisplayName("11. testSelectAllMyInquiryList")
-	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testSelectAllMyInquiryList() throws DAOException {
 		log.trace("testSelectAllMyInquiryList() invoked.");
 
@@ -229,46 +231,65 @@ public class MypageMapperTests {
 		
 		List<InquiryQuestionVO> list = mapper.selectAllMyInquiryList(cri);
 		list.forEach(e -> log.info(e));
+	
 	} // testSelectAllMyInquiryList
 	
-	// 12. 나의 1:1 문의글과 답변 조회
+	// 12. 나의 1:1 문의글 총 개수
 	@Test
 	@Order(12)
-	@DisplayName("12.  testSelectMyInquiry")
+	@DisplayName("12. testGetMyInquiryTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testGetMyInquiryTotalAmount() throws DAOException {
+		log.trace("testGetMyInquiryTotalAmount(), 마이페이지 나의 문의글 목록 총 개수 조회");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUser_email("tutor2@gmail.com");
+		
+		Integer amount = mapper.getMyInquiryTotalAmount(dto.getUser_email());
+		log.info("\t + 나의 문의글 총 개수: {}", amount);
+		
+	} // testGetMyInquiryTotalAmount
+	
+	// 13. 나의 1:1 문의글과 답변 조회
+	@Test
+	@Order(13)
+	@DisplayName("13. testSelectMyInquiry")
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testSelectMyInquiry() throws DAOException {
 		log.trace(" testSelectMyInquiry() invoked.");
 		
-		InquiryQuestionDTO dto = new InquiryQuestionDTO();
-		dto.setIq_number(10);		
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(); 
+		dto.setIq_number(50);		
 
 		InquiryVO vo = mapper.selectMyInquiry(dto.getIq_number());
 		log.info("\t+ 일대일 문의와 답변 {}", vo);
+	
 	} // testSelectMyInquiry
 	
-	
-	// 13. 출금 신청 - 튜터
+
+	// 14. 출금 신청 - 튜터
 	@Test
-	@Order(13)
-	@DisplayName("13. testInsertWithdrawal")
-	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	@Order(14)
+	@DisplayName("14. testInsertWithdrawal")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testInsertWithdrawal() throws DAOException {
 		log.trace("testInsertWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 500, 77000, "승인 대기 중", null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 500, 77000, "승인 대기", null);
 		log.info("\t + dto: {}", dto);
 	
 		int affectedLines = this.mapper.insertWithdrawal(dto);
 		log.info("\t + affectedLines: {}", affectedLines);
 		
 		assert affectedLines == 1;
+	
 	} // testInsertInquiry
 	
-	// 14. 나의 손들기 출금 신청 목록 조회
+	// 15. 나의 손들기 출금 신청 목록 조회
 	@Test
-	@Order(14)
-	@DisplayName("14. testSelectAllMyWithdrawalList")
-	@Timeout(value=5000, unit = TimeUnit.SECONDS)
+	@Order(15)
+	@DisplayName("15. testSelectAllMyWithdrawalList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testSelectAllMyWithdrawalList() throws DAOException {
 		log.trace("testSelectAllMyWithdrawalList() invoked.");
 
@@ -277,14 +298,32 @@ public class MypageMapperTests {
 		
 		List<WithdrawalVO> list = mapper.selectAllMyWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
+	
 	} // testSelectAllMyWithdrawalList
 	
+	// 16. 나의 출금 신청 목록 총 개수
+		@Test
+		@Order(16)
+		@DisplayName("16. testGetMyInquiryTotalAmount")
+		@Timeout(unit = TimeUnit.SECONDS, value = 10)
+		void testGetMyWithdrawalTotalAmount() throws DAOException {
+			log.trace("testGetMyWithdrawalTotalAmount(), 마이페이지 나의 출금 신청 목록 총 개수");
+			
+			UserDTO dto = new UserDTO();
+			dto.setUser_email("tutor2@gmail.com");
+			
+			Integer amount = mapper.getMyWithdrawalTotalAmount(dto.getUser_email());
+			log.info("\t + 나의 문의글 총 개수: {}", amount);
+			
+		} // testGetMyWithdrawalTotalAmount
 	
-	// 15. 회원 탈퇴(정지) 상태 변경 
+	
+	// 17. 회원 탈퇴(정지) 상태 변경 
 	@Test
-	@Order(15)
-	@Timeout(value = 5, unit = TimeUnit.SECONDS)
-	void stopUser() throws DAOException {
+	@Order(17)
+	@DisplayName("17. testStopUser")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void testStopUser() throws DAOException {
 
 		String user_email = "sd456@gmail.com";
 		Integer updateResult = this.mapper.updateUserStop(user_email);
@@ -294,7 +333,8 @@ public class MypageMapperTests {
 			log.info("활동정지 완료");
 		} else log.info("테스트실패"); 
 		
-	}//stopUser
+	} // testStopUser
+	
 }// end class
 
 

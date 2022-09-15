@@ -15,6 +15,7 @@ public class InquiryAnswerVO {
 	private String ia_title;
 	private String ia_content;
 	private Date ia_date; 			// 답변날짜
+	private String ia_pass; 
 
 	
 } // end class

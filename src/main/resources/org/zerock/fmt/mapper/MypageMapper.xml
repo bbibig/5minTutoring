@@ -50,6 +50,8 @@
 		FROM (SELECT /*+ index_desc(tbl_individual_question)*/ * 
       		  FROM tbl_individual_question
       		  WHERE user_email = #{user_email})
+      	OFFSET (#{currPage} - 1) * #{amount} rows
+		FETCH NEXT #{amount} ROWS ONLY
 	</select>
 	
 	<!-- 5. 나의 일대일 문의와 답변 조회 -->

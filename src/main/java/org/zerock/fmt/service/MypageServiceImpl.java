@@ -8,10 +8,15 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.InquiryQuestionDTO;
+import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalDTO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.MypageMapper;
@@ -126,6 +131,80 @@ public class MypageServiceImpl implements MypageService {
 		
 	}// getMyQuestionTotalAmount
 	
+	// 5. 1:1 문의하기
+	@Override
+	public boolean createIQ(InquiryQuestionDTO dto) throws ServiceException {
+		log.trace("createIQ() 문의하기");
+		
+		try { return mapper.insertIQ(dto) == 1; }
+		catch (DAOException e) { throw new ServiceException(e); }
+	} // createIQ
+
+	// 5-1. 나의 1:1 문의글 목록 조회 페이징 처리(내림차순으로)
+	@Override
+	public List<InquiryQuestionVO> getAllMyInquiryList(CriteriaMyPage cri) throws ServiceException {
+			log.trace("getAllMyInquiryList() 나의 문의글 목록 조회");
+			
+			try { return this.mapper.selectAllMyInquiryList(cri); }
+			catch (DAOException e) { throw new ServiceException(e); }
+	} // getAllMyInquiryList
+	
+	// 5-2. 나의 1:1 문의글 목록 총 개수 획득
+	@Override
+	public int getMyInquiryTotalAmount(String user_email) throws ServiceException {
+		log.trace("getMyInquiryTotalAmount() 나의 문의글 총 개수 조회");
+		
+		try { return this.mapper.getMyInquiryTotalAmount(user_email); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+	} // getMyInquiryTotalAmount
+	
+	// 5-3. 나의 1:1 문의 & 답변 조회
+	@Override
+	public InquiryVO getMyInquiry(Integer iq_number) throws ServiceException {
+		log.trace("getMyInquiry() 나의 문의글과 답변조회");
+		
+		try { return mapper.selectMyInquiry(iq_number);
+		} catch(Exception e) { throw new ServiceException(e); }
+			
+	} // getMyInquiry
+
+	
+	// 6. 손들기 출금 신청 하기 (튜터)
+	@Override
+	public boolean createWithdrawal(WithdrawalDTO dto) throws ServiceException {
+		log.trace("createWithdrawal() 출금 신청 하기");
+		
+		try { return mapper.insertWithdrawal(dto) == 1; }
+		catch (DAOException e) { throw new ServiceException(e); }
+	} // createWithdrawal
+
+	// 6-1. 나의 손들기 출금 신청 목록 조회 페이징 처리(내림차순으로)
+	@Override
+	public List<WithdrawalVO> getAllMyWithdrawalList(CriteriaMyPage cri) throws ServiceException {
+		log.trace("getAllMyWithdrawalList() 나의 출금 신청 목록 조회");
+		
+		try { return this.mapper.selectAllMyWithdrawalList(cri); }
+		catch (DAOException e) { throw new ServiceException(e); }
+	} // getAllMyWithdrawalList
+
+	// 6-2. 나의 출금 신청 목록 총 개수 조회
+	@Override
+	public int getMyWithdrawalTotalAmount(String user_email) throws ServiceException {
+		log.trace("getMyWithdrawalTotalAmount() 나의 출금 신청 목록 총 개수 조회");
+		
+		try { return this.mapper.getMyWithdrawalTotalAmount(user_email); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+	} // getMyWithdrawalTotalAmount
+	
+	
+	// 7. 탈퇴하기
+	@Override
+	public boolean userStatus(String user_email) throws ServiceException {
+		log.trace("userStatus() 회원 탈퇴하기");
+		
+		try { return this.mapper.updateUserStop(user_email)==1; }
+		catch(Exception e) { throw new ServiceException(e); }
+	} // userStatus
 	
 }// end class
 

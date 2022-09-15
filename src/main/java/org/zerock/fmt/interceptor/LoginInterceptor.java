@@ -51,18 +51,22 @@ public class LoginInterceptor implements HandlerInterceptor{
 		ModelMap modelMap = modelAndView.getModelMap();
 		UserVO loginVO = (UserVO) modelMap.getAttribute(SharedScopeKeys.LOGIN_USER);
 		log.info("\t+ loginVO for Session : {}", loginVO);
-		//로그인 된 유저 SessionScope에 바인딩 
-		req.getSession().setAttribute(SharedScopeKeys.LOGIN_USER, loginVO);
-//		res.sendRedirect("/login/home");
 		
-		//프로필 사진 유무 조회
-		List<ProfileVO> profileVo = this.profileService.getProfile(loginVO.getUser_email());
-		if(profileVo.size() == 0 ) {
-			req.getSession().setAttribute(SharedScopeKeys.USER_PROFILE, "false");
-		} else {
-			req.getSession().setAttribute(SharedScopeKeys.USER_PROFILE, "true");
-		}// if-else
-		
+		if( loginVO != null) {
+			//로그인 된 유저 SessionScope에 바인딩 
+			req.getSession().setAttribute(SharedScopeKeys.LOGIN_USER, loginVO);
+	//		res.sendRedirect("/login/home");
+			
+			//프로필 사진 유무 조회
+			List<ProfileVO> profileVo = this.profileService.getProfile(loginVO.getUser_email());
+			if(profileVo.size() == 0 ) {
+				req.getSession().setAttribute(SharedScopeKeys.USER_PROFILE, "false");
+			} else {
+				req.getSession().setAttribute(SharedScopeKeys.USER_PROFILE, "true");
+			}// if-else
+			
+		}//if 로그인된 회원있다면 프로필조회
+
 	}//postHandle
 
 	

@@ -145,8 +145,8 @@
     </select>
 
     <!-- 이메일찾기 -->
-    <select id="selectFindEmail" resultType="String">
+    <select id="FindEmailreturnString" resultType="String">
         SELECT user_email FROM tbl_user WHERE user_phone=#{user_phone}
     </select>
-    
+
 </mapper>

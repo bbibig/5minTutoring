@@ -40,7 +40,7 @@
               class="list-group-item list-group-item-action px-lg-4">기본
               정보</a></c:if>
 
-          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
           <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
@@ -72,14 +72,23 @@
 
         <!-- FROM -->
         <div class="my-3">
-          <a href="/mypage/studentHands/use" class="btn btn-dark">사용 내역</a>
+          <a href="/mypage/studentHands/use?group=1" class="btn btn-dark">사용 내역</a>
           <a href="/mypage/studentHands/buy" class="btn bg-blue">구매 내역</a>
 
           <span class="float-end">
             <form action="/mypage/studentHands/buy" method="get" onsubmit="return dateCheck();">
-              <input type="date" name="dateFrom" id="dateFrom" required>
-              -
-              <input type="date" name="dateTo" id="dateTo" required>
+              <!-- 1. 기간조회 X -->
+              <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom eq null}">
+                <input type="date" name="dateFrom" id="dateFrom" required>
+                -
+                <input type="date" name="dateTo" id="dateTo" required>
+              </c:if>
+              <!-- 2. 기간조회 O -->
+              <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom ne null}">
+                <input type="date" name="dateFrom" id="dateFrom" required value="${_MYBUYHANDPAGENATION_.cri.dateFrom}">
+                -
+                <input type="date" name="dateTo" id="dateTo" required value="${_MYBUYHANDPAGENATION_.cri.dateTo}">
+              </c:if>
               <button type="submit" class="btn bg-blue mx-3">조회</button>
             </form>
           </span>
@@ -102,8 +111,21 @@
             <tbody>
               <c:forEach var="buyHand" items="${_MYBUYHAND_}">
                 <tr>
-                  <td class="text-center"><a
-                      href="/mypage/studentHands/buy/detail?b_number=${buyHand.b_number}&currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">220612-000001</a>
+                  <td class="text-center">
+                    <!-- 1. 기간조회 X -->
+                    <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom eq null}">
+                      <a href="/mypage/studentHands/buy/detail?b_number=${buyHand.b_number}&currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">
+                        <fmt:formatDate value="${buyHand.b_date}" pattern="yyMMdd" />-
+                        <fmt:formatNumber minIntegerDigits="6" type="number" pattern="######" value="${buyHand.b_number}" />
+                      </a>
+                    </c:if>
+                    <!-- 2. 기간조회 O -->
+                    <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom ne null}">
+                      <a href="/mypage/studentHands/buy/detail?b_number=${buyHand.b_number}&currPage=${_MYBUYHANDPAGENATION_.cri.currPage}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">
+                        <fmt:formatDate value="${buyHand.b_date}" pattern="yyMMdd" />-
+                        <fmt:formatNumber minIntegerDigits="6" type="number" pattern="######" value="${buyHand.b_number}" />
+                      </a>
+                    </c:if>
                   </td>
                   <td class="text-center">
                     <fmt:formatDate value="${buyHand.b_date}" pattern="yyyy.MM.dd" />
@@ -128,20 +150,54 @@
         <!--End main contents card(박스)-->
 
         <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/buy?currPage=1">&laquo;</a>
-            </li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage - 1}">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue"
-                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">${_MYBUYHANDPAGENATION_.cri.currPage}</a>
-            </li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage + 1}">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.realEndPage}">&raquo;</a></li>
-          </ul>
+          <!-- 1. 기간 조회 안할때 페이징 -->
+          <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom eq null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=1">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage - 1}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">${_MYBUYHANDPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage + 1}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.realEndPage}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
+          <!-- 2. 기간조회 할 때 페이징 -->
+          <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom ne null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=1&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage - 1}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">${_MYBUYHANDPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage + 1}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.realEndPage}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
         </nav>
 
         <!-- TO -->

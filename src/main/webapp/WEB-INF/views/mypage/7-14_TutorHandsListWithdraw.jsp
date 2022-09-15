@@ -39,7 +39,7 @@
               class="list-group-item list-group-item-action px-lg-4">기본
               정보</a></c:if>
 
-          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use"
+          <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
           <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
@@ -93,44 +93,20 @@
 
             <thead>
               <tr>
-                <th scope="col" class="text-center">획득 일자</th>
-                <th scope="col" class="text-center">획득한 손들기</th>
-                <th scope="col" class="text-center">내역</th>
+                <th scope="col" class="text-center">거래일</th>
+                <th scope="col" class="text-center">수량</th>
+                <th scope="col" class="text-center">진행 상태</th>
+                <th scope="col" class="text-center">입금계좌</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
                 <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 3개</td>
-                <td class="text-center">답변하기</td>
+                <td class="text-center">300개</td>
+                <td class="text-center">입금 완료</td>
+                <td class="text-center">국민 11234-00-456789</td>
               </tr>
-              <tr>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 3개</td>
-                <td class="text-center">답변하기</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 5개</td>
-                <td class="text-center">과외하기</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 3개</td>
-                <td class="text-center">답변하기</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 3개</td>
-                <td class="text-center">답변하기</td>
-              </tr>
-              <tr>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">손들기 3개</td>
-                <td class="text-center">답변하기</td>
-              </tr>
-
             </tbody>
 
           </table>
