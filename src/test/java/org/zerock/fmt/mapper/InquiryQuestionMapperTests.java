@@ -22,6 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -108,17 +109,17 @@ public class InquiryQuestionMapperTests {
 	@Order(4)
 	@DisplayName("1:1문의 조회 테스트")
 	@Timeout(value=100, unit=TimeUnit.SECONDS)
-	void testSelect() throws DAOException {
-		log.trace("testSelect() invoked.");
+	void testSelectInquiry() throws DAOException {
+		log.trace("testSelectInquiry() invoked.");
 		
-		int iq_number = 5;
+		int iq_number = 50;		
 
-		InquiryQuestionVO vo = this.iqMapper.select(iq_number);
+		InquiryVO vo = this.iqMapper.selectInquiry(iq_number);
 
 		Objects.requireNonNull(vo); 
 		log.info("/t+ vo: {}", vo);
-	} // testSelect
 	
+	} // testSelectInquiry
 	
 //  === 답변 상태 수정(미답변:1 / 답변완료:0) ==== 	
 	@Test

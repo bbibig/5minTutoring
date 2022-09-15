@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.exception.DAOException;
 
 public interface InquiryQuestionMapper {
@@ -23,8 +24,7 @@ public interface InquiryQuestionMapper {
 		public abstract List<InquiryQuestionVO> selectAllInquiryNList(CriteriaMyPage cri) throws DAOException;
 		
 //		[R]  특정 1:1 문의글 조회 
-		@Select("SELECT * FROM tbl_individual_question WHERE iq_number = #{iq_number}")
-		public abstract InquiryQuestionVO select(@Param("iq_number")Integer iq_number) throws DAOException;
+		public abstract InquiryVO selectInquiry(@Param("iq_number")Integer iq_number) throws DAOException;
 		
 		
 	//  [U]  답변 상태 수정 (미답변(1)/답변완료(0)) 

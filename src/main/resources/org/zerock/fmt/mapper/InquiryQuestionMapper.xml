@@ -31,6 +31,16 @@
 	  </select>
 
 
+	<!-- 일대일 문의와 답변 조회 -->
+	<select id="selectInquiry" resultType="org.zerock.fmt.domain.InquiryVO">
+		SELECT q.iq_number, q.user_email, q.iq_title, q.iq_content, q.iq_date, a.ia_title, a.ia_content, a.ia_date
+		FROM tbl_individual_question q
+		LEFT OUTER JOIN tbl_individual_answer a
+		ON q.iq_number = a.iq_number
+		WHERE q.iq_number = #{iq_number}
+	</select>
+
+
       <!-- 답변 여부 수정 -->
       <update id="updateInquiryState">
           UPDATE tbl_individual_question

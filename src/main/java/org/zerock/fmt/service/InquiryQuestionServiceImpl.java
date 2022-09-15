@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.InquiryQuestionMapper;
@@ -58,10 +59,10 @@ public class InquiryQuestionServiceImpl implements InquiryQuestionService {
 	
 	// 특정 1:1 문의글 조회 
 	@Override
-	public InquiryQuestionVO getInquiry(Integer iq_number) throws ServiceException {
+	public InquiryVO getInquiry(Integer iq_number) throws ServiceException {
 		log.trace("getInquiry() invoked.");
 		
-		try { return iqMapper.select(iq_number); } 
+		try { return iqMapper.selectInquiry(iq_number); } 
 		catch(Exception e) { throw new ServiceException(e); }	
 	} // getInquiry 
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
+import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.exception.ServiceException;
 
 public interface InquiryQuestionService {
@@ -20,7 +21,7 @@ public interface InquiryQuestionService {
 	public abstract List<InquiryQuestionVO> getAllInquiryNList(CriteriaMyPage cri) throws ServiceException; 
 	
 //	특정 1:1 문의글 조회 
-	public abstract InquiryQuestionVO getInquiry(Integer iq_number) throws ServiceException; 
+	public abstract InquiryVO getInquiry(Integer iq_number) throws ServiceException; 
 	
 	
 //  답변 상태 수정 (답변 대기 / 답변 완료)

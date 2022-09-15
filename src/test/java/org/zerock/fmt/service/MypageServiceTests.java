@@ -255,7 +255,7 @@ public class MypageServiceTests {
 		log.trace("testGetMyInquiry(), 나의 문의와 답변 조회 테스트");
 		
 		InquiryQuestionDTO dto = new InquiryQuestionDTO(); 
-		dto.setIq_number(39);		
+		dto.setIq_number(50);		
 
 		InquiryVO vo = service.getMyInquiry(dto.getIq_number());
 		log.info("\t+ 일대일 문의와 답변 {}", vo);
