@@ -98,7 +98,7 @@
 										<fmt:formatDate value="${myinquiry.iq_date}" pattern="yyyy.MM.dd" />
 									</div>
 								</div>
-								<c:set  var="iq_pass" value="답변완료" />
+							<!-- <c:set  var="iq_pass" value="Y" /> -->	
 								<c:choose>
 									<c:when test="${myinquiry.iq_pass eq 'Y'}">
 										<div class="col-2 state2">답변 완료</div>
@@ -125,12 +125,12 @@
             <li class="page-item"><a class="page-link rounded-circle"
                 href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage - 1}">&lt;</a></li>
             <li class="page-item"><a class="page-link rounded-circle bg-blue"
-                href="/mypage//qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage}">${_MYINQUIRYPAGENATION_.cri.currPage}</a>
+                href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage}">${_MYINQUIRYPAGENATION_.cri.currPage}</a>
             </li>
             <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage//qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+                href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage + 1}">&gt;</a></li>
             <li class="page-item"><a class="page-link rounded-circle"
-                href="mypage//qList?currPage=${_MYINQUIRYPAGENATION_.realEndPage}">&raquo;</a></li>
+                href="mypage/qList?currPage=${_MYINQUIRYPAGENATION_.realEndPage}">&raquo;</a></li>
           </ul>
         </nav>
 

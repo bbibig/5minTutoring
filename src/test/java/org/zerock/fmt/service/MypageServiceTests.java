@@ -207,7 +207,7 @@ public class MypageServiceTests {
 	void testCreateIQ() throws ServiceException {
 		log.trace("testCreateIQ(), 일대일 문의 작성 테스트");
 
-		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "test@gmail.com", "문의합니다.", "일대일 문의 작성 테스트", null, "답변 대기");
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "test@gmail.com", "문의합니다.", "일대일 문의 작성 테스트", null, "N");
 		
 		boolean result = this.service.createIQ(dto);
 		log.info("\t+ 일대일 문의 작성 결과: {}", result);
