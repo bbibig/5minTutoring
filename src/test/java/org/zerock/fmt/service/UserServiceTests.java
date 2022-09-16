@@ -163,8 +163,8 @@ public class UserServiceTests {
 	void singUPTutor() throws ServiceException {
 		log.trace("singUPTutor");
 		
-		UserDTO newTutor = new UserDTO("tt@email_6","1111","nick2","name2","20020202","남자","11111111111",
-										null,null,"졸업생","수학","file:name");
+		UserDTO newTutor = new UserDTO();
+		newTutor.setUser_email("childhopp@hanmail.net");
 		Boolean Result = this.userService.singUPTutor(newTutor);
 		log.info("\t + Result : {}", Result);
 		
@@ -194,7 +194,7 @@ public class UserServiceTests {
 	void tutorPass() throws ServiceException {
 		log.trace("tutorPass");
 		
-		String user_email = "TTemail_1";
+		String user_email = "childhopp@hanmail.net";
 		int Result = this.userService.tutorPass(user_email);
 		log.info("\t + Result : {}", Result);
 		

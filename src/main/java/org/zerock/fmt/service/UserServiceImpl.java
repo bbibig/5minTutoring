@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService{
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.naver.com"; 
 			String hostSMTPid = "childhopp";		//계정아이디
-			String hostSMTPpwd = "--------";		//계정비밀번호
+			String hostSMTPpwd = "5tutoring";		//계정비밀번호
 
 			// 보내는 사람 EMail, 제목, 내용
 			String fromEmail = "childhopp@naver.com";
@@ -144,10 +144,10 @@ public class UserServiceImpl implements UserService{
 			String subject = "";
 			String msg = "";
 
-			subject = "5분과외 튜터 승인 되었습니다.입니다.";
+			subject = "<< 5분과외 튜터 승인 되었습니다 >>";
 			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
-			msg += user_email + "님의 가입이 허가되었습니다.h3>";
+			msg += user_email + "님의 가입이 허가되었습니다.";
 			msg += "</div>";
 
 			// 받는 사람 E-Mail 주소
@@ -167,7 +167,7 @@ public class UserServiceImpl implements UserService{
 				email.setSubject(subject);
 				email.setHtmlMsg(msg);
 				email.send();
-				log.info("임시비밀번호로 메일전송");
+				log.info("튜터승인 메일전송");
 			} catch (Exception e) {
 				log.info("메일발송 실패 : " + e);
 			}//try-catch 

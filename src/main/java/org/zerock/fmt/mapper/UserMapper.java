@@ -32,7 +32,7 @@ public interface UserMapper {
 	public abstract int selectNicCheck(@Param("user_nick")String newNick) throws DAOException;
 	
 	//로그인
-	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_eamil}")
+	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_eamil} AND pass='Accept'")
 	public abstract UserVO loginEmail(@Param("user_eamil")String user_email) throws DAOException;
 	
 	//튜터 승인 대기 리스트

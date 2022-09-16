@@ -16,6 +16,12 @@
         <title>admin - 튜터 가입 승인</title>
         <script>
             $(function(){
+
+                let tutorResult = '${TutorResult}';
+                if(tutorResult!=null & tutorResult.length>0){
+                    alert(tutorResult);
+                }
+
                 $('#CheckAll').click(function(){
                     if($('#CheckAll').prop("checked")){
                         $('input[type=checkbox]').prop("checked",true);
@@ -40,13 +46,6 @@
                         chk = $(this).val();
                     }//if checked 값만 
 
-                    // $('#signupOK').on('click', function(){
-                    //     // alert(chk);
-                    // let formObj = $('#checkTutor');
-                    // formObj.attr('action','/admin/signUpOK?user_email='+chk);
-                    // formObj.attr('method','POST');
-                    // formObj.submit();
-                    //  });//signupOK
                     let array = new Array();
                     $('input:checkbox[name=checkbox]:checked').each(function(){
                         array.push(this.value);

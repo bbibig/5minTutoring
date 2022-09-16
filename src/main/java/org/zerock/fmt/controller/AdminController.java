@@ -273,7 +273,8 @@ public class AdminController {
 	}
 
 	@PostMapping("/signUpOK")
-	public String signUp_comfim(@RequestParam HashMap<String, Object> commandMap) throws ControllerException {
+	public String signUp_comfim(@RequestParam HashMap<String, Object> commandMap, RedirectAttributes rttrs) 
+								throws ControllerException {
 		log.trace("튜터가입승인 페이지");
 
 		try {
@@ -285,6 +286,9 @@ public class AdminController {
 			for(String user_email : emails) {
 				result += this.userService.tutorPass(user_email);
 			}//for
+			if(result>0) {
+				rttrs.addFlashAttribute("TutorResult", "승인처리되었습니다.");
+			}
 			log.info("\t + 튜터승인 List : {}, result : {}", Arrays.toString(emails), result);
 			
 			return "redirect:/admin/signUp_comfim";

@@ -233,7 +233,8 @@ public class UserMapperTests {
 	void testselectLogin() throws DAOException{
 		log.trace("selectLogin() invoked.");
 		String user_email = "test@email.net";
-		UserVO vo = this.mapper.loginEmail(user_email);
+		String user_email1 = "now@han.net";
+		UserVO vo = this.mapper.loginEmail(user_email1);
 		log.info("\t + vo : {}", vo);
 	}//selectLogin
 	
