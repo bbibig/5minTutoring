@@ -80,7 +80,7 @@
               <c:forEach var="myquestion" items="${_MYQLIST_}">
                 <tr>
                   <th scope="row"> ${myquestion.qb_number} </th>
-                  <td colspan="2"><a href="/tutor/watchAnswer"> ${myquestion.qb_title} </a></td>
+                  <td colspan="2"><a href="/tutor/watchAnswer?num=${myquestion.qb_number}&tp=${myquestion.tp_number}"> ${myquestion.qb_title} </a></td>
                   <td class="text-center">
                     <fmt:formatDate value="${myquestion.regdate}" pattern="yyyy.MM.dd" />
                   </td>

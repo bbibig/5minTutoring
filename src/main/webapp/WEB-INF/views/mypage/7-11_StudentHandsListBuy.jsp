@@ -14,6 +14,22 @@
   <link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
   <title>손들기 내역(학생)_구매 내역</title>
+  
+	<script>
+		window.onload = function () {
+		  // 오늘날짜
+		  var date = new Date();
+		  var today = date.toISOString().slice(0, 10);
+		  var dateTo = document.getElementById("dateTo");
+		  dateTo.value = today;
+		
+		  //오늘날짜 3개월 전
+		  var month = date.getMonth();
+		  var before = new Date(date.setMonth(month - 3)).toISOString().slice(0, 10);
+		  var dateFrom = document.getElementById("dateFrom");
+		  dateFrom.value = before;
+	}
+	</script>
 </head>
 
 <body>
@@ -85,9 +101,9 @@
               </c:if>
               <!-- 2. 기간조회 O -->
               <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom ne null}">
-                <input type="date" name="dateFrom" id="dateFrom" required value="${_MYBUYHANDPAGENATION_.cri.dateFrom}">
+                <input type="date" name="dateFrom" required value="${_MYBUYHANDPAGENATION_.cri.dateFrom}">
                 -
-                <input type="date" name="dateTo" id="dateTo" required value="${_MYBUYHANDPAGENATION_.cri.dateTo}">
+                <input type="date" name="dateTo" required value="${_MYBUYHANDPAGENATION_.cri.dateTo}">
               </c:if>
               <button type="submit" class="btn bg-blue mx-3">조회</button>
             </form>

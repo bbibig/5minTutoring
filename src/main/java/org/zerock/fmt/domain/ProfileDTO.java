@@ -13,6 +13,6 @@ public class ProfileDTO {
 	private Integer profile_number;
 	private String user_email;
 	private String file_name;
-	private String file_path = "C://temp/profile/";
+	private String file_path = "C://5mTutoring/profile/";
 
 } // end class
