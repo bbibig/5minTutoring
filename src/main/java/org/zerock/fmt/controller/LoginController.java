@@ -65,7 +65,7 @@ public class LoginController{
 			String returnURL;
 
 			if(vo==null) {
-				rttrs.addFlashAttribute("_LOGIN_", "이메일 또는 비밀번호가 일치하지 않습니다.");
+				rttrs.addFlashAttribute("_LOGIN_", "승인된 정보가 없습니다.");
 				returnURL = "redirect:/login";
 			} else {
 				model.addAttribute(SharedScopeKeys.LOGIN_USER,vo);
