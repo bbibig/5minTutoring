@@ -7,6 +7,7 @@ import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 
 //마이페이지(손들기 조회)
@@ -35,5 +36,11 @@ public interface MypageHandMapper {
 	//2-3 손들기 구매내역 상세 조회
 	public abstract BuyInfoVO selectBuyDetail(Integer b_number) throws DAOException;
 	
+//	====================================
+	//3-1 손들기 출금 내역 목록 조회 페이징 처리(내림차순으로) 
+	public abstract List<WithdrawalVO> selectAllMyWithdrawalList(CriteriaMyPage cri) throws DAOException;
+	
+	//3-2 손들기 출금 내역 총 수량
+	public abstract Integer getMyWithdrawalTotalAmount(CriteriaMyPage cri) throws DAOException;
 	
 }// end interface

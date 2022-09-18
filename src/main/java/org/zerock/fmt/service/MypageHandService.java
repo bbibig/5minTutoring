@@ -6,6 +6,8 @@ import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
 //마이페이지(손들기 조회)
@@ -32,5 +34,12 @@ public interface MypageHandService {
 	
 	//2-3 손들기 구매내역 상세 조회
 	public abstract BuyInfoVO myPageBuyinfo(Integer b_number) throws ServiceException;
+	
+	
+	//3-1 손들기 출금 내역 목록 조회 페이징 처리(내림차순으로) 
+	public abstract List<WithdrawalVO> getAllMyWithdrawalList(CriteriaMyPage cri) throws ServiceException;
+	
+	//3-2 손들기 출금 내역 총 수량
+	public abstract int getMyWithdrawalTotalAmount(CriteriaMyPage cri) throws ServiceException;
 	
 }// end interface

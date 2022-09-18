@@ -8,6 +8,7 @@ import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.MypageHandMapper;
@@ -92,6 +93,23 @@ public class MypageHandServiceImpl implements MypageHandService {
 			return info;
 		}catch(Exception e) { throw new ServiceException(e); }//try-catch
 	}//myPageBuyinfo
+	
+	
+	//3-1 손들기 출금 내역 목록 조회 페이징 처리(내림차순으로) 
+	@Override
+	public List<WithdrawalVO> getAllMyWithdrawalList(CriteriaMyPage cri) throws ServiceException {
+		log.trace("손들기 출금 내역 목록 조회");	
+		try { return this.mapper.selectAllMyWithdrawalList(cri); }
+		catch (DAOException e) { throw new ServiceException(e); }
+	}// getAllMyWithdrawalList
+	
+	//3-2 손들기 출금 내역 총 수량
+	@Override
+	public int getMyWithdrawalTotalAmount(CriteriaMyPage cri) throws ServiceException {
+		log.trace("손들기 출금 내역 총 횟수 조회");		
+		try { return this.mapper.getMyWithdrawalTotalAmount(cri); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+	}// getMyWithdrawalTotalAmount
 	
 }// end class
 

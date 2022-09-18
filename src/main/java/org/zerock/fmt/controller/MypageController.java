@@ -29,9 +29,9 @@ import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
-import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.MypageHandService;
 import org.zerock.fmt.service.MypageService;
 import org.zerock.fmt.service.ProfileService;
@@ -398,10 +398,22 @@ public class MypageController {
 	
 	
 	@GetMapping("/tutorHands/withdraw")		//GET
-	public String tutorHandsWithdraw() {
-		log.trace("7-14_TutorHandsListWithdraw");
+	public String tutorHandsWithdraw(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
+		log.trace("마이페이지 손들기 출금내역(튜터)");
 		
-		return "mypage/7-14_TutorHandsListWithdraw";
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<WithdrawalVO> list = this.mypageHandService.getAllMyWithdrawalList(cri);
+			model.addAttribute("_MYWITHDRAWAL_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyWithdrawalTotalAmount(cri));
+			model.addAttribute("_MYWITHDRAWALPAGENATION_", pageDto);
+			
+			return "mypage/7-14_TutorHandsListWithdraw";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
 	}// tutorHandsWithdraw
 	
 	@RequestMapping("/withdraw")	// POST

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -13,6 +14,22 @@
   <link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
   <title>손들기 내역(튜터)_출금 내역</title>
+
+  <script>
+    window.onload = function () {
+      // 오늘날짜
+      var date = new Date();
+      var today = date.toISOString().slice(0, 10);
+      var dateTo = document.getElementById("dateTo");
+      dateTo.value = today;
+
+      //오늘날짜 3개월 전
+      var month = date.getMonth();
+      var before = new Date(date.setMonth(month - 3)).toISOString().slice(0, 10);
+      var dateFrom = document.getElementById("dateFrom");
+      dateFrom.value = before;
+    }
+  </script>
 </head>
 
 <body>
@@ -67,7 +84,7 @@
         <div>
           <span class="h3 fw-bold">손들기 내역</span>
           <span class="fw-bold float-end">
-            <span>보유중인 손들기 00개</span>
+            <span>보유중인 손들기 ${__LOGIN_USER__.hands_wallet}개</span>
             <a href="/mypage/withdraw" class="btn btn-dark mx-3">출금하기</a>
           </span>
         </div>
@@ -79,9 +96,18 @@
 
           <span class="float-end">
             <form action="/mypage/tutorHands/withdraw" method="get" onsubmit="return dateCheck();">
-              <input type="date" name="dateFrom" id="dateFrom" required>
-              -
-              <input type="date" name="dateTo" id="dateTo" required>
+              <!-- 1. 기간조회 X -->
+              <c:if test="${_MYWITHDRAWALPAGENATION_.cri.dateFrom eq null}">
+                <input type="date" name="dateFrom" id="dateFrom" required>
+                -
+                <input type="date" name="dateTo" id="dateTo" required>
+              </c:if>
+              <!-- 2. 기간조회 O -->
+              <c:if test="${_MYWITHDRAWALPAGENATION_.cri.dateFrom ne null}">
+                <input type="date" name="dateFrom" required value="${_MYWITHDRAWALPAGENATION_.cri.dateFrom}">
+                -
+                <input type="date" name="dateTo" required value="${_MYWITHDRAWALPAGENATION_.cri.dateTo}">
+              </c:if>
               <button type="submit" class="btn bg-blue mx-3">조회</button>
             </form>
           </span>
@@ -101,12 +127,16 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td class="text-center">2022-06-12</td>
-                <td class="text-center">300개</td>
-                <td class="text-center">입금 완료</td>
-                <td class="text-center">국민 11234-00-456789</td>
-              </tr>
+              <c:forEach var="withdrawal" items="${_MYWITHDRAWAL_}">
+                <tr>
+                  <td class="text-center">
+                    <fmt:formatDate value="${withdrawal.w_date}" pattern="yyyy.MM.dd" />
+                  </td>
+                  <td class="text-center"> ${withdrawal.w_quantity} </td>
+                  <td class="text-center"> ${withdrawal.approval} </td>
+                  <td class="text-center"> ${withdrawal.bank_account} </td>
+                </tr>
+              </c:forEach>
             </tbody>
 
           </table>
@@ -115,13 +145,54 @@
         <!--End main contents card(박스)-->
 
         <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a></li>
-          </ul>
+          <!-- 1. 기간 조회 안할때 페이징 -->
+          <c:if test="${_MYWITHDRAWALPAGENATION_.cri.dateFrom eq null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=1">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.cri.currPage - 1}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.cri.currPage}">${_MYWITHDRAWALPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.cri.currPage + 1}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.realEndPage}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
+          <!-- 2. 기간조회 할 때 페이징 -->
+          <c:if test="${_MYWITHDRAWALPAGENATION_.cri.dateFrom ne null}">
+            <ul class="pagination justify-content-center p-5">
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=1&dateFrom=${_MYWITHDRAWALPAGENATION_.cri.dateFrom}&dateTo=${_MYWITHDRAWALPAGENATION_.cri.dateTo}">&laquo;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.cri.currPage - 1}&dateFrom=${_MYWITHDRAWALPAGENATION_.cri.dateFrom}&dateTo=${_MYWITHDRAWALPAGENATION_.cri.dateTo}">&lt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle bg-blue"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.cri.currPage}&dateFrom=${_MYWITHDRAWALPAGENATION_.cri.dateFrom}&dateTo=${_MYWITHDRAWALPAGENATION_.cri.dateTo}">${_MYWITHDRAWALPAGENATION_.cri.currPage}</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.cri.currPage + 1}&dateFrom=${_MYWITHDRAWALPAGENATION_.cri.dateFrom}&dateTo=${_MYWITHDRAWALPAGENATION_.cri.dateTo}">&gt;</a>
+              </li>
+
+              <li class="page-item"><a class="page-link rounded-circle"
+                  href="/mypage/tutorHands/withdraw?currPage=${_MYWITHDRAWALPAGENATION_.realEndPage}&dateFrom=${_MYWITHDRAWALPAGENATION_.cri.dateFrom}&dateTo=${_MYWITHDRAWALPAGENATION_.cri.dateTo}">&raquo;</a>
+              </li>
+            </ul>
+          </c:if>
         </nav>
 
         <!-- TO -->
