@@ -2,7 +2,7 @@ package org.zerock.fmt.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
@@ -42,5 +42,17 @@ public interface MypageHandMapper {
 	
 	//3-2 손들기 출금 내역 총 수량
 	public abstract Integer getMyWithdrawalTotalAmount(CriteriaMyPage cri) throws DAOException;
+	
+//	====================================
+	//4-1 손들기 획득 내역 목록(질문하기) 조회 페이징 처리(튜터) 
+	public abstract List<AnswerVO2> selectAllmyGetHandQList(CriteriaMyPage cri) throws DAOException;
+	
+	//4-2 손들기 획득 내역(질문하기) 총 횟수
+	public abstract Integer getMyGetHandQTotalAmount(CriteriaMyPage cri) throws DAOException;
+	
+	
+//	====================================
+	//5. 튜터페이지 조회
+	public abstract Integer getTutorPageNum(String user_email) throws DAOException;
 	
 }// end interface

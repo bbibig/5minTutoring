@@ -59,7 +59,7 @@
           <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
-          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
 
@@ -91,7 +91,7 @@
 
         <!-- FROM -->
         <div class="my-3">
-          <a href="/mypage/tutorHands/get" class="btn btn-dark">획득 내역</a>
+          <a href="/mypage/tutorHands/get?group=1" class="btn btn-dark">획득 내역</a>
           <a href="/mypage/tutorHands/withdraw" class="btn bg-blue">출금 내역</a>
 
           <span class="float-end">

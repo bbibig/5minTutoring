@@ -15,11 +15,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
-import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ServiceException;
 
@@ -161,6 +161,43 @@ public class MypageHandServiceTests {
 		log.info("\t+ 손들기 출금 총 횟수: {}", result);
 		
 	}//getMyWithdrawalTotalAmount()
+	
+	
+	//4-1 손들기 출금 내역 목록 조회 페이징 처리
+	@Test
+	@Order(8)
+	@DisplayName("8. getAllmyGetHandQList")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getAllmyGetHandQList() throws ServiceException {
+		log.trace("손들기 획득 내역 목록 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("abc@han.net");
+		cri.setDateFrom("2022-09-12");
+		cri.setDateTo("2022-09-18");
+		
+		List<AnswerVO2> list = this.service.getAllmyGetHandQList(cri);
+		list.forEach(e -> log.info(e));
+		
+	}//getAllMyWithdrawalList()
+	
+	//4-2 손들기 출금 내역 총 수량
+	@Test
+	@Order(9)
+	@DisplayName("9. getMyGetHandQTotalAmount")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getMyGetHandQTotalAmount() throws ServiceException {
+		log.trace("손들기 출금 목록 총 횟수 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("abc@han.net");
+		cri.setDateFrom("2022-09-12");
+		cri.setDateTo("2022-09-18");
+		
+		int result = this.service.getMyGetHandQTotalAmount(cri);
+		log.info("\t+ 손들기 획득 총 횟수: {}", result);
+		
+	}//getMyGetHandQTotalAmount()
 	
 }// end class
 

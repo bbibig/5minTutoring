@@ -59,7 +59,7 @@
           <c:if test="${__LOGIN_USER__.user_group eq 'Student'}"><a href="/mypage/studentHands/use?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
-          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get"
+          <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}"><a href="/mypage/tutorHands/get?group=1"
               class="list-group-item list-group-item-action px-lg-4 fw-bold">손들기
               내역</a></c:if>
 
@@ -134,7 +134,7 @@
                     <c:if test="${not empty usehand.qb_number}"> 질문하기(3개) </c:if>
                     <c:if test="${not empty usehand.tb_number}"> 과외받기(5개) </c:if>
                   </td>
-                  <td class="text-center"> ${usehand.tutor_email} </td>
+                  <td class="text-center"> ${usehand.tutor_nick} </td>
                 </tr>
               </c:forEach>
             </tbody>
