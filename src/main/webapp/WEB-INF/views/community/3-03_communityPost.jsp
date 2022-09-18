@@ -15,7 +15,11 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
 	        integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
 	        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			
+
 	    <style>
 	        /* toggleHeart */
 	        .bi-suit-heart:hover,
@@ -23,7 +27,7 @@
 	            color: rgb(255, 70, 70);
 	        }
 	    </style>
-	
+
 	</head>
 	
 	<body>
@@ -43,28 +47,27 @@
 	                            <div class="modal-content">
 	                                <div class="modal-header">
 	                                    <h5 class="modal-title" id="exampleModalLabel"># 수정하기</h5>
-	                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-	                                        aria-label="Close"></button>
+	                                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
 	                                </div>
 	                                <div class="modal-body">
-	                                    <form>
+	                                    <form action="/community/modify?fb_number=${_BOARD_.fb_number}" method="post"> 
 	                                        <div class="mb-3">
 	                                            <label for="recipient-name" class="col-form-label">제목</label>
-	                                            <input type="text" class="form-control" id="askTitle"
-	                                                placeholder="제목을 입력해주세요.">
+	                                            <input type="text" class="form-control" name="fb_title" id="askTitle" value="${_BOARD_.fb_title}">
 	                                        </div>
 	                                        <div class="mb-3">
 	                                            <label for="message-text" class="col-form-label">내용</label>
-	                                            <textarea class="form-control" id="askContent"
-	                                                placeholder="내용을 입력해주세요."></textarea>
+	                                            <textarea class="form-control" name="fb_content" id="askContent">${_BOARD_.fb_content}</textarea>
 	                                        </div>
+																					
+																					<div class="modal-footer">
+																						<button type="button" class="btn btn-secondary col-2"
+																								data-bs-dismiss="modal">취소</button>
+																						<button type="submit" class="btn btn-primary col-2" id="updateBtn" >저장</button>
+																				</div>
 	                                    </form>
 	                                </div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-secondary col-2"
-	                                        data-bs-dismiss="modal">취소</button>
-	                                    <button type="button" class="btn btn-primary col-2">저장</button>
-	                                </div>
+	                               
 	                            </div>
 	                        </div>
 	                    </div>
@@ -96,8 +99,8 @@
 	                        </div>
 	                    </div>
 	
-	                    <!-- 댓글 삭제 modal -->
-	                    <div class="modal fade" id="delete" data-bs-backdrop="static">
+	                    <!-- post 삭제 modal -->
+	                    <div class="modal fade" id="postDelete" data-bs-backdrop="static">
 	                        <div class="modal-dialog modal-dialog-centered">
 	                            <div class="modal-content d-flex flex-column justify-content-center">
 	
@@ -112,44 +115,65 @@
 	                                        <div class="pop-up-button-box d-flex flex-row align-self-center">
 	                                            <button type="button" class="btn btn-outline-primary"
 	                                                data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-	                                            <button type="button" class="btn btn-outline-primary">확인</button>
+	                                            <button type="button" onclick="location.href='remove?num=${_BOARD_.fb_number}'"class="btn btn-outline-primary" id="removeBtn">확인</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
+											
+											<!-- 댓글 삭제 modal -->
+											<div class="modal fade" id="commentDelete" data-bs-backdrop="static">
+												<div class="modal-dialog modal-dialog-centered">
+														<div class="modal-content d-flex flex-column justify-content-center">
+
+																<div class="modal-body">
+																		<div class="pop-up-body d-flex flex-column align-items-center">
+																				<div class="warnning-img">
+																						<i class="bi bi-exclamation-circle" style="font-size: 5rem"></i>
+																				</div>
+
+																				<p class="my-3 "><strong class="fs-4">삭제하시겠습니까?</strong></p>
+
+																				<div class="pop-up-button-box d-flex flex-row align-self-center">
+																						<button type="button" class="btn btn-outline-primary"
+																								data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
+																						<button type="button" >확인</button>
+																				</div>
+																		</div>
+																</div>
+														</div>
+												</div>
+										</div>
+
 	
 	                    <!-- post -->
+											<form action="#" id="postBoard">
+											<h2 class="fas fa-q ask_title" name="fb_title">${_BOARD_.fb_title}</h2>
 	                    <div class="Tutor_info d-flex">
+												
 	                        <div class="TPic">
 	                            <img src="/resources/img/profile.png" alt="튜터프로필">
 	                        </div>
 	                        <div class="Tname">김튜터</div>
 	                        <div>&nbsp;튜터</div>
 	                        <br>
-	                        <div class="date">&nbsp;2022-03-01</div>
+	                        <div class="date" name="fb_date">&nbsp;${_BOARD_.fb_date}</div>
 	                        <div class="hamburger-button col-8 d-flex justify-content-end">
 	                            <div class="dropdown">
 	                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 	                                    <i class="bi bi-list fs-4"></i>
 	                                </button>
 	                                <ul class="dropdown-menu">
-	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                            href="#community_revise">수정</a>
-	                                    </li>
-	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                            href="#delete">삭제</a>
-	                                    </li>
+	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#community_revise">수정</a></li>
+	                                    <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#postDelete">삭제</a></li>
 	                                </ul>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <p class="answer_content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis quae
-	                        animi assumenda, obcaecati nobis totam ducimus! Atque odit, vitae, magni eaque esse laboriosam
-	                        ipsum earum nihil voluptates laborum iste voluptatibus corrupti labore. Quae, consequatur
-	                        aliquam voluptatibus necessitatibus sit commodi quis! Dolores repudiandae aperiam at error
-	                        nostrum. Odit nihil impedit tempore!</p>
+	                    <p class="answer_content" name="fb_content">${_BOARD_.fb_content}</p>
+											</form>
 	
 	                    <!-- comment -->
 	                    <!-- icon -->

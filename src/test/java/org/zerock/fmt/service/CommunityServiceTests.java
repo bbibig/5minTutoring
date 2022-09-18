@@ -71,7 +71,7 @@ public class CommunityServiceTests {
 //	@Disabled
 	@Test
 	@Order(2)
-	@DisplayName("1. CommunityService.get() test.")
+	@DisplayName("2. CommunityService.get() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void testRead() throws ServiceException {
 		log.trace("testGet() invoked.");
