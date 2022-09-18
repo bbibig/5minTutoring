@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -36,11 +37,13 @@
 
 						<!-- 튜터 보유자산 박스-->
 						<div class="withdrawInfo">
-							<h5 class="text-center" style="color: rgb(103, 102, 102);">(user_id)
+							<h5 class="text-center" style="color: rgb(103, 102, 102);">${__LOGIN_USER__.user_nick}
 								튜터님의 보유자산</h5>
 							<div class="d-flex flex-row justify-content-center">
-								<p class="ownHands fw-bold col-3">100개 손들기</p>
-								<p class="price col-2">= 20,000원</p>
+								<p class="ownHands fw-bold col-3">${__LOGIN_USER__.hands_wallet}개 손들기</p>
+								<p class="price col-2">
+									= <fmt:formatNumber value="${__LOGIN_USER__.hands_wallet*180}" type="number"/>원
+								<p>
 							</div>
 						</div>
 
@@ -50,7 +53,7 @@
 								<label for="address">출금 계좌</label>
 							</div>
 							<div class="col-10">
-								<input type="text" class="form-control" id="address"
+								<input type="text" class="form-control" id="address" name="bank_account"
 									placeholder="출금 계좌번호를 입력해주세요" required>
 							</div>
 						</div>
@@ -60,9 +63,11 @@
 								<label for="address">출금 수량</label>
 							</div>
 							<div class="col-10">
-								<input type="text" class="form-control" id="address"
+								<input type="text" class="form-control" id="address" name="w_quantity"
 									placeholder="최소 출금 수량: 손들기 50개" required>
 							</div>
+								<input type="hidden" name="w_price" value="w_quantity*180-2000">
+								<!-- 금액 = 수량*180 -2000 해야함 모르겠어....흑흑 -->
 						</div>
 						<hr>
 

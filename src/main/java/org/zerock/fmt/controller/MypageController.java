@@ -442,12 +442,32 @@ public class MypageController {
 
 	}// tutorHandsWithdraw
 	
-	@RequestMapping("/withdraw")	// POST
-	public String withdraw() {
-		log.trace("7-15_Withdraw");
+	// 출금 신청 페이지
+	@GetMapping("/withdraw")
+	public String withdraw(Model model, HttpSession session) throws ControllerException {
+		log.trace("withdraw() invoked.");
+		
+		try {
+			UserVO userVO = (UserVO) session.getAttribute("__LOGIN_USER__");
+			String user_email = userVO.getUser_email();
+			int hands_wallet = userVO.getHands_wallet();
+			log.info("user_email, hands_wallet: {},{}", user_email,hands_wallet);
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 		
 		return "mypage/7-15_Withdraw";
-	}// withdraw
+	} // 튜터 출금 신청 페이지
+	
+	// 출금 신청 (post)
+	@PostMapping("/withdraw/application")	
+	public String withdrawApplication() {
+		log.trace("withdrawApplication() invoked.");
+		
+		return "mypage/7-15_Withdraw";
+	} // 출금 신청 
+	
 	
 	@GetMapping("/withdraw/completed")	// GET
 	public String withdrawCompleted() {
