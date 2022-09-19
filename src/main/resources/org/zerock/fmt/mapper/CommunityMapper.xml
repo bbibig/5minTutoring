@@ -6,6 +6,30 @@
 
     <mapper namespace="org.zerock.fmt.mapper.CommunityMapper">
 
+
+        <select id="selectAllList" resultType="org.zerock.fmt.domain.CommunityVO">
+            SELECT
+            /*+ index_desc(t1) */ 
+				t1.*, t2.user_nick
+
+				FROM tbl_community T1, tbl_user T2
+
+				WHERE T1.user_email = T2.user_email
+				OFFSET (#{currPage} - 1) * #{amount} rows
+				FETCH NEXT #{amount} ROWS ONLY
+        </select>
+        
+        <select id="select" resultType="org.zerock.fmt.domain.CommunityVO">
+            SELECT t1.*, t2.user_nick
+            
+            FROM tbl_community t1, tbl_user t2
+            
+            WHERE t1.user_email = t2.user_email AND fb_number = #{fb_number}
+            
+        </select>
+        
+
+
         <insert id="insert">
             INSERT INTO tbl_community (fb_number, fb_title, fb_content, user_email)
             VALUES (FB_NUM.nextval, #{fb_title}, #{fb_content}, #{user_email})

@@ -133,7 +133,7 @@
   
                       <div class="user_date d-flex flex-row">
                         <div class="user">
-                          <strong>홍길동</strong>
+                          <strong>${communityBoard.user_nick}</strong>
                         </div>
                         <div class="date ms-4">
                           ${communityBoard.fb_date}
@@ -177,21 +177,12 @@
 
           <div class="page-button d-flex flex-row justify-content-center mt-3"> <!---======================페이지 버튼 end =======================-->
             <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
+              <ul class="pagination justify-content-center p-5">
+                <li class="page-item"><a class="page-link rounded-circle" href="/community?currPage=1">&laquo;</a></li>
+                <li class="page-item"><a class="page-link rounded-circle" href="/community?currPage=${_COMMUNITYPAGE_.cri.currPage - 1}">&lt;</a></li>
+                <li class="page-item"><a class="page-link rounded-circle bg-blue" href="/community?currPage=${_COMMUNITYPAGE__.cri.currPage}">${_COMMUNITYPAGE_.cri.currPage}</a></li>
+                <li class="page-item"><a class="page-link rounded-circle" href="/community?currPage=${_COMMUNITYPAGE_.cri.currPage + 1}">&gt;</a></li>
+                <li class="page-item"><a class="page-link rounded-circle" href="/community?currPage=${_COMMUNITYPAGE_.realEndPage}">&raquo;</a>
                 </li>
               </ul>
             </nav>

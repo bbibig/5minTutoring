@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CriteriaCommunity;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.CommunityMapper;
@@ -27,12 +28,12 @@ public class CommunityServiceImpl implements CommunityService, InitializingBean,
 	
 	
 	@Override
-	public List<CommunityVO> selectAllList() throws ServiceException {
+	public List<CommunityVO> selectAllList(CriteriaCommunity page) throws ServiceException {
 		log.trace("SelectAllList() invoked.");
 		try {
 			Objects.requireNonNull(this.communityMapper);
 			
-			return communityMapper.selectAllList();
+			return communityMapper.selectAllList(page);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}//try-catch
@@ -100,6 +101,16 @@ public class CommunityServiceImpl implements CommunityService, InitializingBean,
 		
 		log.info("\t+ this.mapper: {}", this.communityMapper);
 	}
+
+	@Override
+	public Integer allCount() throws ServiceException {
+		try {
+			return this.communityMapper.allCount();
+		}catch(DAOException e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	}// allcount
 
 
 

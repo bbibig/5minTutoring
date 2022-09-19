@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.fmt.domain.CommunityDTO;
+import org.zerock.fmt.domain.CommunityPageDTO;
 import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CriteriaCommunity;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.service.CommunityService;
 
@@ -35,13 +37,17 @@ public class CommunityController implements InitializingBean{
 	
 	//전체게시글 조회
 	@GetMapping
-	public String communityPage(Model model) throws ControllerException {
+	public String communityPage(Model model, CriteriaCommunity page) throws ControllerException {
 		log.trace("communityPage()invoked");
 		
 		try {
-			List<CommunityVO> list = this.communityService.selectAllList();
+			List<CommunityVO> list = this.communityService.selectAllList(page);
 			
-			model.addAttribute("_LIST_", list);		
+			model.addAttribute("_LIST_", list);	
+			
+			CommunityPageDTO pageDto = new CommunityPageDTO(page, this.communityService.allCount());
+			model.addAttribute("_COMMUNITYPAGE_", pageDto);
+			
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}
@@ -55,6 +61,7 @@ public class CommunityController implements InitializingBean{
 	@GetMapping("/post")
 	public String communityPost(CommunityDTO dto, Model model) throws ControllerException{
 		log.debug("post({},{})invoked.", dto, model);
+	
 		
 		try {
 			CommunityVO board = this.communityService.read(dto);

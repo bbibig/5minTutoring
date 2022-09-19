@@ -156,8 +156,8 @@
 	                        <div class="TPic">
 	                            <img src="/resources/img/profile.png" alt="튜터프로필">
 	                        </div>
-	                        <div class="Tname">김튜터</div>
-	                        <div>&nbsp;튜터</div>
+	                        <div class="Tname">${_BOARD_.user_nick}</div>
+	                        
 	                        <br>
 	                        <div class="date" name="fb_date">&nbsp;${_BOARD_.fb_date}</div>
 	                        <div class="hamburger-button col-8 d-flex justify-content-end">

@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CriteriaCommunity;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -51,7 +52,7 @@ public class CommuntyMapperTests {
 		log.info("cMapper: {}", cMapper);
 	}
 	
-	@Disabled
+//	@Disabled
 	@Test
 	@DisplayName("CommunityMapper.selectAllList() test")
 	@Order(1)
@@ -59,7 +60,8 @@ public class CommuntyMapperTests {
 	void testSelectAllList() throws DAOException {
 		log.trace("SelectAllList() invoked.");
 		
-		List<CommunityVO> list = this.cMapper.selectAllList();
+		CriteriaCommunity page = new CriteriaCommunity();
+		List<CommunityVO> list = this.cMapper.selectAllList(page);
 		assertNotNull(list);
 		
 		list.forEach(log::info);
@@ -74,7 +76,7 @@ public class CommuntyMapperTests {
 	void testSelect() throws DAOException {
 		log.trace("SelectAllList() invoked.");
 		
-		int bno = 1;
+		int bno = 31;
 		CommunityVO vo = this.cMapper.select(bno);
 		assertNotNull(vo);
 		

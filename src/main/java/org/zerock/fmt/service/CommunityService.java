@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CriteriaCommunity;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 
 
@@ -11,7 +13,7 @@ import org.zerock.fmt.exception.ServiceException;
 public interface CommunityService {
 
 	//1. 커뮤니티 게시판 전체 목록 조회
-	public abstract List<CommunityVO> selectAllList() throws ServiceException;
+	public abstract List<CommunityVO> selectAllList(CriteriaCommunity page) throws ServiceException;
 	
 	//2. 커뮤니티 게시글 조회
 	public abstract CommunityVO read(CommunityDTO dto) throws ServiceException;
@@ -24,4 +26,7 @@ public interface CommunityService {
 	
 	//5. 커뮤니티 게시글 수정
 	public abstract boolean update(CommunityDTO dto) throws ServiceException;
+	
+	//6. 커뮤니티 게시글 총 갯수
+	public abstract Integer allCount()throws ServiceException;
 }

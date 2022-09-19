@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CriteriaCommunity;
 import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -60,8 +61,8 @@ public class CommunityServiceTests {
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void testSelectAllList() throws ServiceException {
 		log.trace("testGetList() invoked.");
-		
-		List<CommunityVO> list = this.communityService.selectAllList();
+		CriteriaCommunity page = new CriteriaCommunity();
+		List<CommunityVO> list = this.communityService.selectAllList(page);
 		
 		list.forEach(log::info);
 		
@@ -76,7 +77,7 @@ public class CommunityServiceTests {
 	void testRead() throws ServiceException {
 		log.trace("testGet() invoked.");
 		
-		int fb_number = 1;
+		int fb_number = 32;
 		CommunityDTO dto = new CommunityDTO();
 		dto.setFb_number(fb_number);
 		
