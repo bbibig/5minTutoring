@@ -50,7 +50,7 @@ public class CKEditorController {
 		log.trace("이미지 업로드");
 		
 		// 파일 경로 설정
-		String path = "C:/temp/upload/img/";	
+		String path = "C:/5mTutoring/upload/img/";	
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd/");
@@ -127,7 +127,7 @@ public class CKEditorController {
     	log.trace("서버로 전송된 이미지 출력");
     	
     	// 저장된 이미지 경로
-    	String path = "C:/temp/upload/img/";
+    	String path = "C:/5mTutoring/upload/img/";
     	path += fileDate;
     	log.info("path:"+ path);
     	String sDirPath = path + uuid + "_" + fileName;

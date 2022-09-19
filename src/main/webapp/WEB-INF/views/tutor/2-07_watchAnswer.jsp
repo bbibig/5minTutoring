@@ -17,7 +17,6 @@
 
 	    <!-- comment.js -->
 		<script type="text/javascript" src="/resources/js/comment.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		
 		<script type="text/javascript">
 				
@@ -28,62 +27,60 @@
 			// commentService.add(
 			// 	{a_number:a_number, user_email:"test@gmail.com", cm_content:"create comment test."},
 			// 	function(result){
-			// 		alert("RESULT: " + "댓글 등록 성공");
+			// 		alert("RESULT: 댓글 등록 성공");
 			// 	}
 			// );
 
 			$(document).ready(function() {
 				var a_number = "${_A_.a_number}";
-				var replyUL = $(".chat");
+				var commentList = $(".commentList");
 				
-			
-				//function showList(currPage) {
-					// commentService.getList(
-					// 	{ a_number:20, currPage:1 }, 
-					// 	function(list) {
-					// 		var str = "";
-					// 		var commentDiv = $(".comment_box");
-							
-							
-					// 		if(list==null || list.length==0) {
-					// 			commentDiv.html("");
-					// 			return;
-					// 		} // if
-					// 		for( var i=0, len=list.length || 0; i<len; ++i ) {
-					// 			console.log(list[i]);
-					// 			str +=  '<div class="comment_info d-flex" data_cno="'+list[i].cm_number+'">';
-					// 			str += '<div class="sSPic">';
-					// 			str += '<img src="/resources/img/profile.png">';
-					// 			str += '</div>';
-					// 			str += '<div class="Sname">'+list[i].user_name+'</div>';
-					// 			str += '<div class="date">' +list[i].regdate+ '</div></div>';
-					// 			str += '<p>' +${element.cm_content}+ '</p>';
-					// 			commentDiv.append(str);
-					// 		}
-					// 		console.log(i);
-					// });
-				//}
-
 				showList(1);
-        
-       		function showList(currPage) {
-				commentService.getList({a_number:a_number, currPage:currPage||1}, function(list) {
-					var str = "";
-					if(list == null || list.length==0) {
-						replyUL.html("");
-						return;
-					}
-					for(var i=0, len=list.length || 0; i<len; i++) {
-						str+= "<li class='left cleafix' data-rno='"+list[i].cm_number+"'>";
-						str+= "    <div><div class='header'><string class='primary-font'>"+list[i].user_name+"</strong>";
-						str+= "        <small class='pull-right text-muted'>" + list[i].regdate+"</small></div>";
-						str+= "            <p>"+list[i].cm_content+"</p></div></li>";
-					}
-					
-					replyUL.html(str);
-				});
-        }
-    });
+		        
+				// 댓글 리스트 출력
+	       		function showList(currPage) {
+					commentService.getList({a_number:a_number, currPage:currPage||1}, function(list) {
+						var str = "";
+						if(list == null || list.length==0) {
+							commentList.html("");
+							return;
+						}
+						for(var i=0, len=list.length || 0; i<len; i++) {
+							str+= '<div class="comment_info d-flex" data-rno="'+list[i].cm_number+'">';
+							str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
+							str+= '		<div class="Sname">' +list[i].user_name+ '</div>';
+							str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div>';
+							str+= '		<div class="hamburger-button col-9 d-flex justify-content-end">';
+							str+= '			<div class="dropdown">';
+							str+= '				<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
+							str+= '					<i class="bi bi-list fs-4"></i></button>';
+							str+= '				<ul class="dropdown-menu">';
+							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise">수정</a></li>';
+							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
+							str+= '				</ul></div></div></div>';
+							str+= '	<p>' +list[i].cm_content+ '</p>';
+						}
+						commentList.html(str);
+					}); // getList
+				} // showList
+
+
+				// 댓글 등록 이벤트 처리
+				$("#commentSave").on("click", function(e) {
+					var comment = {
+						a_number : a_number,
+						user_email : $("#newComment").find("input[name='user_email']").val(),
+						cm_content : $("#newComment").find("input[name='cm_content']").val()
+					};
+					commentService.add(comment, function(result) {
+						alert("RESULT: 댓글 등록 성공");
+						showList(1);
+					}); // add
+				}); // onclick
+
+				
+
+			}); // .jq
 
 		</script>
 
@@ -314,114 +311,31 @@
 	                    <p class="answer_content">${_A_.a_content}</p>
 	
 						   
-	                    <!-- comment -->
+	                    <!-- comment Area -->
 	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span> 3</span></span>
 	                    <div class="comment_box">
 	                        <div class="comment d-flex">
 	                            <div class="sSPic">
 	                                <img src="/resources/img/profile.png">
 	                            </div>
-	                            <form action="/comment/new" method="post">
-	                            	<input type="hidden" name="a_number" value="${_A_.a_number}" />
-	                            	<input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" />
-	                                <input id="comment_write" name="cm_content" type="text" size="80" placeholder="댓글을 입력하세요.">
-	                                <input id="save" type="submit" value="등록">
-	                            </form>
+								<div id="newComment">
+									<input type="hidden" name="a_number" value="${_A_.a_number}" />
+									<input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" />
+									<input id="comment_write" name="cm_content" type="text" size="80" placeholder="댓글을 입력하세요.">
+									<input id="commentSave" type="button" value="등록">
+								</div>
 	                        </div>
-	                        
-	                        <!-- <div class="comment_info d-flex">
-	                            <div class="sSPic">
-	                                <img src="/resources/img/profile.png">
-	                            </div>
-	                            <div class="Sname">${_COMMENT_.user_name}</div>
-	                            <div class="date">${_COMMENT_.regdate}</div>
-	                            <div class="hamburger-button col-9 d-flex justify-content-end">
-	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
-	                                        aria-expanded="false">
-	                                        <i class="bi bi-list fs-4"></i>
-	                                    </button>
-	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#comment_revise">수정</a>
-	                                        </li>
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#delete">삭제</a>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <p>${_COMMENT_.cm_content}</p> -->
-	                        
 	                        <hr>
 	                        
-	                        
-	                        <div class="comment_info d-flex" data_cno="22">
-	                            <div class="sSPic">
-	                                <img src="/resources/img/profile.png">
-	                            </div>
-	                            <div class="Sname">박튜터</div>
-	                            <div class="date">2022-07-22</div>
-	                            <div class="hamburger-button col-9 d-flex justify-content-end">
-	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
-	                                        aria-expanded="false">
-	                                        <i class="bi bi-list fs-4"></i>
-	                                    </button>
-	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#comment_revise">수정</a>
-	                                        </li>
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#delete">삭제</a>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat, eveniet.</p>
-	                   
-	                   
+	                        <!-- comment List -->
+	                        <div class="commentList">
+
+
+							</div>
 	                    </div>
-	                    
-	                    
 	                </div>
 	            </div>
-
-				<!-- 댓글 테스트 -->
-				<div class="row">
-			    <div class="col-lg-12">
-			        <div class="panel panel-default">
-			                <div class="panel-heading">
-			                    <i claass="fa fa-comments fa-fw"></i> Reply
-			                </div>
-			                <!-- /.panel-heading -->
-			                <div class="panel-body">
-			                    <ul class="chat">
-			                        <!-- start reply -->
-			                        <li class="left clearfix" data-rno='12'>
-			                            <div>
-			                                <div class="header">
-			                                    <strong class="primary-font">user00</strong>
-			                                    <small class="pull-right text-muted">2021-03-18 18:13</small>
-			                                </div>
-			                                <p>Good job!</p>
-			                            </div>
-			                        </li>
-			                        <!--  end reply -->
-			                    </ul>
-			                    <!--  ./end ul -->
-			                </div>
-			                <!-- ./ end row -->
-			            </div>
-			        </div>            
-			<!-- /.row -->
 			</div>
-				
-
-
-	        </div>
 	    </section>
 	
 	    <!-- ============= 공통 footer + js =============== -->
