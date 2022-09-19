@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CriteriaComment;
 import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -97,16 +98,19 @@ public class CommentServiceTests {
 //	@Disabled
 	@Test
 	@Order(4)
-	@DisplayName("4. CommentService.selectComment() test.")
+	@DisplayName("4. CommentService.getComment() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
-	void selectCommentTest() throws ServiceException {
+	void getCommentTest() throws ServiceException {
 		log.trace("해당 게시글의 댓글을 출력");
 		
-		String a_number = "13";
+		CriteriaComment cri = new CriteriaComment();
+		cri.setA_number(20);
+		cri.setCurrPage(1);
+		cri.setAmount(5);
 		
-		List<CommentVO> list = this.commentService.selectComment(a_number);
+		List<CommentVO> list = this.commentService.getComment(cri);
 		list.forEach(log::info);
 
-	} // selectCommentTest
+	} // getCommentTest
 	
 } // end class

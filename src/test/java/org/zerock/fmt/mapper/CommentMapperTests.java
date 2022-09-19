@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CriteriaComment;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -111,9 +112,12 @@ public class CommentMapperTests {
 	void selectCommentTest() throws DAOException {
 		log.trace("댓글 출력");
 		
-		String a_number = "20";
+		CriteriaComment cri = new CriteriaComment();
+		cri.setA_number(20);
+		cri.setCurrPage(1);
+		cri.setAmount(5);
 		
-		List<CommentVO> list = this.commentMapper.selectComment(a_number);
+		List<CommentVO> list = this.commentMapper.selectComment(cri);
 		list.forEach(log::info);
 		
 	} // selectCommentTest

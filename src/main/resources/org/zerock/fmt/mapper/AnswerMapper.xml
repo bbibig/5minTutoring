@@ -31,9 +31,12 @@
 	
 	<select id="selectA" resultType="org.zerock.fmt.domain.AnswerVO">
 		SELECT 
+			a_number,
+			qb_number,
 			u.user_name,
 			a_content,
-			regdate
+			regdate,
+			updatedate
 		FROM tbl_answer a, tbl_user u
 		WHERE qb_number = #{qb_number}
 		AND u.user_name IN (SELECT user_name

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="ko">
@@ -13,6 +14,79 @@
 	    
 	    <!-- CKeditor -->
 		<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
+
+	    <!-- comment.js -->
+		<script type="text/javascript" src="/resources/js/comment.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+				
+			// 댓글 등록 테스트
+			// console.log("댓글 등록 Test");
+			// var a_number = '<c:out value="${_A_.a_number}"/>';
+			
+			// commentService.add(
+			// 	{a_number:a_number, user_email:"test@gmail.com", cm_content:"create comment test."},
+			// 	function(result){
+			// 		alert("RESULT: " + "댓글 등록 성공");
+			// 	}
+			// );
+
+			$(document).ready(function() {
+				var a_number = "${_A_.a_number}";
+				var replyUL = $(".chat");
+				
+			
+				//function showList(currPage) {
+					// commentService.getList(
+					// 	{ a_number:20, currPage:1 }, 
+					// 	function(list) {
+					// 		var str = "";
+					// 		var commentDiv = $(".comment_box");
+							
+							
+					// 		if(list==null || list.length==0) {
+					// 			commentDiv.html("");
+					// 			return;
+					// 		} // if
+					// 		for( var i=0, len=list.length || 0; i<len; ++i ) {
+					// 			console.log(list[i]);
+					// 			str +=  '<div class="comment_info d-flex" data_cno="'+list[i].cm_number+'">';
+					// 			str += '<div class="sSPic">';
+					// 			str += '<img src="/resources/img/profile.png">';
+					// 			str += '</div>';
+					// 			str += '<div class="Sname">'+list[i].user_name+'</div>';
+					// 			str += '<div class="date">' +list[i].regdate+ '</div></div>';
+					// 			str += '<p>' +${element.cm_content}+ '</p>';
+					// 			commentDiv.append(str);
+					// 		}
+					// 		console.log(i);
+					// });
+				//}
+
+				showList(1);
+        
+       		function showList(currPage) {
+				commentService.getList({a_number:a_number, currPage:currPage||1}, function(list) {
+					var str = "";
+					if(list == null || list.length==0) {
+						replyUL.html("");
+						return;
+					}
+					for(var i=0, len=list.length || 0; i<len; i++) {
+						str+= "<li class='left cleafix' data-rno='"+list[i].cm_number+"'>";
+						str+= "    <div><div class='header'><string class='primary-font'>"+list[i].user_name+"</strong>";
+						str+= "        <small class='pull-right text-muted'>" + list[i].regdate+"</small></div>";
+						str+= "            <p>"+list[i].cm_content+"</p></div></li>";
+					}
+					
+					replyUL.html(str);
+				});
+        }
+    });
+
+		</script>
+
 	
 	    <title>튜터페이지</title>
 	</head>
@@ -247,17 +321,20 @@
 	                            <div class="sSPic">
 	                                <img src="/resources/img/profile.png">
 	                            </div>
-	                            <form action="#">
-	                                <input id="comment_write" type="text" size="80" placeholder="댓글을 입력하세요.">
+	                            <form action="/comment/new" method="post">
+	                            	<input type="hidden" name="a_number" value="${_A_.a_number}" />
+	                            	<input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" />
+	                                <input id="comment_write" name="cm_content" type="text" size="80" placeholder="댓글을 입력하세요.">
 	                                <input id="save" type="submit" value="등록">
 	                            </form>
 	                        </div>
-	                        <div class="comment_info d-flex">
+	                        
+	                        <!-- <div class="comment_info d-flex">
 	                            <div class="sSPic">
 	                                <img src="/resources/img/profile.png">
 	                            </div>
-	                            <div class="Sname">질문자</div>
-	                            <div class="date">2022-03-01</div>
+	                            <div class="Sname">${_COMMENT_.user_name}</div>
+	                            <div class="date">${_COMMENT_.regdate}</div>
 	                            <div class="hamburger-button col-9 d-flex justify-content-end">
 	                                <div class="dropdown">
 	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
@@ -275,11 +352,12 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur, numquam asperiores culpa
-	                            molestias dolores non incidunt fugit distinctio alias labore et sunt saepe vero esse
-	                            cupiditate minima blanditiis voluptate a!</p>
+	                        <p>${_COMMENT_.cm_content}</p> -->
+	                        
 	                        <hr>
-	                        <div class="comment_info d-flex">
+	                        
+	                        
+	                        <div class="comment_info d-flex" data_cno="22">
 	                            <div class="sSPic">
 	                                <img src="/resources/img/profile.png">
 	                            </div>
@@ -303,9 +381,46 @@
 	                            </div>
 	                        </div>
 	                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat, eveniet.</p>
+	                   
+	                   
 	                    </div>
+	                    
+	                    
 	                </div>
 	            </div>
+
+				<!-- 댓글 테스트 -->
+				<div class="row">
+			    <div class="col-lg-12">
+			        <div class="panel panel-default">
+			                <div class="panel-heading">
+			                    <i claass="fa fa-comments fa-fw"></i> Reply
+			                </div>
+			                <!-- /.panel-heading -->
+			                <div class="panel-body">
+			                    <ul class="chat">
+			                        <!-- start reply -->
+			                        <li class="left clearfix" data-rno='12'>
+			                            <div>
+			                                <div class="header">
+			                                    <strong class="primary-font">user00</strong>
+			                                    <small class="pull-right text-muted">2021-03-18 18:13</small>
+			                                </div>
+			                                <p>Good job!</p>
+			                            </div>
+			                        </li>
+			                        <!--  end reply -->
+			                    </ul>
+			                    <!--  ./end ul -->
+			                </div>
+			                <!-- ./ end row -->
+			            </div>
+			        </div>            
+			<!-- /.row -->
+			</div>
+				
+
+
 	        </div>
 	    </section>
 	

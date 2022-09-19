@@ -34,13 +34,14 @@
 		WHERE cm_number = #{cm_number}
 	</delete>
 
-	<select id="selectComment" resultType="org.zerock.fmt.domain.CommentVO">
+	<select id="selectComment" parameterType="org.zerock.fmt.domain.CriteriaComment"
+							   resultType="org.zerock.fmt.domain.CommentVO">
 		SELECT 
 			cm_number,
 			a_number,
 			fb_number,
 			u.user_email,
-			user_name,
+			u.user_name,
 			cm_content,
 			regdate,
 			updatedate
@@ -50,6 +51,8 @@
 							FROM tbl_user 
 							WHERE c.user_email = u.user_email)
 		ORDER BY regdate ASC
+		OFFSET (#{currPage} - 1) * #{amount} ROWS
+		FETCH NEXT #{amount} ROWS ONLY
 	</select>
 
 </mapper>

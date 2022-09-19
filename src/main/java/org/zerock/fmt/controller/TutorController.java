@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.fmt.domain.AnswerDTO;
 import org.zerock.fmt.domain.AnswerVO;
+import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.TutorPageVO;
@@ -24,6 +25,7 @@ import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.AnswerService;
 import org.zerock.fmt.service.AskService;
+import org.zerock.fmt.service.CommentService;
 import org.zerock.fmt.service.TutorService;
 
 import lombok.NoArgsConstructor;
@@ -45,6 +47,9 @@ public class TutorController {
 	
 	@Setter(onMethod_= @Autowired)
 	private AnswerService answerService;
+	
+	@Setter(onMethod_= @Autowired)
+	private CommentService commentService;
 	
 	@GetMapping("/main")
 	public String tpMain(Model model, HttpServletRequest req) throws ControllerException {
@@ -211,9 +216,15 @@ public class TutorController {
 				return "redirect:/tutor/writeAnswer?num=" + qb_number + "&tp=" + tp_number;
 			}
 			
-			// 그렇지 않은 경우 답변 보기 페이지로 이동
+			// 답변의 댓글
+//			int a_number = Avo.getA_number();
+//			List<CommentVO> commentVO = this.commentService.getComment(a_number);
+//			log.info("a_number: {}", a_number);
+//			commentVO.forEach(log::trace);
+			
 			model.addAttribute("_ONE_Q_", oneQ);
 			model.addAttribute("_A_", Avo);
+//			model.addAttribute("_COMMENT_", commentVO);
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		

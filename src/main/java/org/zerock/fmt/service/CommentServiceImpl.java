@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO;
+import org.zerock.fmt.domain.CriteriaComment;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.CommentMapper;
 
@@ -51,10 +52,10 @@ public class CommentServiceImpl implements CommentService {
 	} // deleteComment
 
 	@Override
-	public List<CommentVO> selectComment(String a_number) throws ServiceException {
+	public List<CommentVO> getComment(CriteriaComment criteria) throws ServiceException {
 		log.trace("해당 게시글의 댓글을 출력");
 
-		try { return this.commentMapper.selectComment(a_number); } 
+		try { return this.commentMapper.selectComment(criteria); } 
 		catch (Exception e) { throw new ServiceException(e); }
 		
 	} // deleteComment
