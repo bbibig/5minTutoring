@@ -8,17 +8,18 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
@@ -81,14 +82,16 @@ public class InquiryQuestionMapperTests {
 	void testGetYList() throws DAOException {
 		log.trace("testGetYList() invoked.");
 		
-		CriteriaMyPage cri = new CriteriaMyPage();
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
 		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryYList(cri);
 
 		Objects.requireNonNull(list);
 		list.forEach(log::info);
 	} // testGetYList 
 	
-	// 	=== 1:1 문의 목록조회 (답변 완료) ===
+	// 	=== 1:1 문의 목록조회 (미답변) ===
 	@Test
 	@Order(3)
 	@DisplayName("1:1문의 목록조회 테스트")
@@ -96,13 +99,24 @@ public class InquiryQuestionMapperTests {
 	void testGetNList() throws DAOException {
 		log.trace("testGetNList() invoked.");
 		
-		CriteriaMyPage cri = new CriteriaMyPage();
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(2);
+		cri.setPagesPerPage(3);
 		List<InquiryQuestionVO> list = this.iqMapper.selectAllInquiryNList(cri);
 
 		Objects.requireNonNull(list);
 		list.forEach(log::info);
 	} // testGetNList 
 	
+	@Test
+	@DisplayName("어드민 페이지 총 개수")
+	void countList() throws DAOException {
+		log.info("countList : 어드민 페이징");
+		int result1 = this.iqMapper.countList("Y");
+		int result2 = this.iqMapper.countList("N");
+		log.info("\t + result : {}, {}", result1, result2);
+	}//countList
 	
 //  === 특정 1:1 문의 조회 ==== 
 	@Test
@@ -112,7 +126,7 @@ public class InquiryQuestionMapperTests {
 	void testSelectInquiry() throws DAOException {
 		log.trace("testSelectInquiry() invoked.");
 		
-		int iq_number = 50;		
+		int iq_number = 89;		
 
 		InquiryVO vo = this.iqMapper.selectInquiry(iq_number);
 

@@ -1,10 +1,10 @@
 package org.zerock.fmt.service;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
@@ -40,7 +40,7 @@ public class InquiryQuestionServiceImpl implements InquiryQuestionService {
 	
 	// 1:1 문의글 목록 조회 - 답변 완료
 	@Override
-	public List<InquiryQuestionVO> getAllInquiryYList(CriteriaMyPage cri) throws ServiceException {
+	public List<InquiryQuestionVO> getAllInquiryYList(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllInquiryYList() invoked.");
 		
 		try { return this.iqMapper.selectAllInquiryYList(cri); } 
@@ -49,13 +49,19 @@ public class InquiryQuestionServiceImpl implements InquiryQuestionService {
 	
 	// 1:1 문의글 목록 조회 - 미답변
 	@Override
-	public List<InquiryQuestionVO> getAllInquiryNList(CriteriaMyPage cri) throws ServiceException {
+	public List<InquiryQuestionVO> getAllInquiryNList(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllInquiryNList() invoked.");
 		
 		try { return this.iqMapper.selectAllInquiryNList(cri); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // getAllInquiryNList
 
+	@Override
+	public int countList(String iq_pass) throws ServiceException{
+		log.trace("countList() invoked.");
+		try { return this.iqMapper.countList(iq_pass);
+		}catch(Exception e){ throw new ServiceException(e);}
+	}//countList
 	
 	// 특정 1:1 문의글 조회 
 	@Override

@@ -8,20 +8,19 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.FaqVO;
-import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
@@ -81,8 +80,9 @@ public class WithdrawalMapperTests {
 	void testGetList() throws DAOException {
 		log.trace("testGetList() invoked.");
 		
-		CriteriaMyPage cri = new CriteriaMyPage();
-		
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
 		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalList(cri);
 
 		Objects.requireNonNull(list);
