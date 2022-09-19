@@ -56,6 +56,7 @@ public class InquiryQuestionServiceImpl implements InquiryQuestionService {
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // getAllInquiryNList
 
+	// 페이징 처리
 	@Override
 	public int countList(String iq_pass) throws ServiceException{
 		log.trace("countList() invoked.");

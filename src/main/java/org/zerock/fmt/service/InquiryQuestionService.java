@@ -3,7 +3,6 @@ package org.zerock.fmt.service;
 import java.util.List;
 
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.InquiryVO;

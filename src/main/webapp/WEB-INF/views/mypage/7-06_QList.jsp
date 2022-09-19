@@ -93,7 +93,7 @@
 							<div class="row"> 
 								<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
 								<div class="col-9">
-									<a href="/mypage/question" id=qtitle> ${myinquiry.iq_title}</a>
+									<a href="/mypage/question?iq_number=${myinquiry.iq_number}&currPage=${_MYINQUIRYPAGENATION_.cri.currPage}" id=qtitle> ${myinquiry.iq_title}</a>
 									<div class="fs-6">
 										<fmt:formatDate value="${myinquiry.iq_date}" pattern="yyyy.MM.dd" />
 									</div>

@@ -43,6 +43,15 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // getAllWithdrawalList
 
+	// 출금 신청 내역 개수 - 관리자
+	@Override
+	public int countList(Integer w_num) throws ServiceException {
+		log.trace("countList() invoked.");
+		try { return this.withdrawalMapper.countList(w_num); }
+		catch(Exception e) { throw new ServiceException(e); }
+	} // updateState
+	
+	
 	// 승인 여부 수정 (승인 완료 / 승인 대기)
 	@Override
 	public boolean updateState(WithdrawalDTO dto) throws ServiceException {
@@ -50,6 +59,9 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		
 		try { return withdrawalMapper.updateState(dto) == 1; }
 		catch (DAOException e) { throw new ServiceException(e); } 
-	} // updateState
+	}
+
+
+
 
 } // end class

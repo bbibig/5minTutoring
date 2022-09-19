@@ -135,7 +135,7 @@ public class InquiryQuestionMapperTests {
 	
 	} // testSelectInquiry
 	
-//  === 답변 상태 수정(미답변:1 / 답변완료:0) ==== 	
+//  === 답변 상태 수정(미답변:N/ 답변완료:Y) ==== 	
 	@Test
 	@Order(5)
 	@DisplayName("1:1문의 답변상태 수정")

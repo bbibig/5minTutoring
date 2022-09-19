@@ -21,6 +21,9 @@ public interface WithdrawalMapper {
 //  [R]  출금 신청 내역 전체 조회 (내림차순) - 관리자
 	public abstract List<WithdrawalVO> selectAllWithdrawalList(CriteriaAdmin cri) throws DAOException;
 	
+//	[R] 페이징 총 건수 - 관리자
+	public abstract int countList(Integer w_num) throws DAOException;
+	
 	
 //  [U]  승인 여부 수정
 	public abstract Integer updateState(WithdrawalDTO dto) throws DAOException;

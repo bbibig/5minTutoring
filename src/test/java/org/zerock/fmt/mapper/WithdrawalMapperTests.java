@@ -72,7 +72,7 @@ public class WithdrawalMapperTests {
 	} // testInsert
 	
 	
-//  [R] 출금 신청 내역 조회
+//  [R] 출금 신청 내역 조회 - 관리자 
 	@Test
 	@Order(2)
 	@DisplayName("출금 신청 내역조회 테스트")
@@ -90,10 +90,23 @@ public class WithdrawalMapperTests {
 	
 	} // testGetList 
 
+//	[R] 페이징 총 건수 - 관리자
+	@Test
+	@Order(3)
+	@DisplayName("어드민 페이지 총 개수")
+	void countList() throws DAOException {
+		log.info("countList : 어드민 페이징");
+		
+		int result = this.withdrawalMapper.countList(null);
+		
+		log.info("\t + result : {}", result);
+	} //countList
+	
+	
 	
 //  [U] 출금 신청 승인 여부 변경 (승인 대기 중 / 승인 완료)  	
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("출금 신청 승인 변경")
 	@Timeout(value=100, unit=TimeUnit.SECONDS)
 	void testUpdate() throws DAOException {

@@ -20,6 +20,12 @@
 		FETCH NEXT #{amount} ROWS ONLY
 	</select>
 
+	  <!-- 어드민 페이징 -->
+	  <select id="countList" resultType="int">
+			SELECT COUNT(*) FROM tbl_withdrawal
+	  </select>
+
+
       <!-- 승인여부 수정 -->
       <update id="updateState">
 	      UPDATE tbl_withdrawal
