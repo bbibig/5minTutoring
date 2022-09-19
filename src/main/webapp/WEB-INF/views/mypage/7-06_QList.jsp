@@ -93,7 +93,8 @@
 							<div class="row"> 
 								<i class="col-1 fas fa-q fa-2x" style="color: rgb(56, 105, 239); text-align: center;"></i>
 								<div class="col-9">
-									<a href="/mypage/question?iq_number=${myinquiry.iq_number}&currPage=${_MYINQUIRYPAGENATION_.cri.currPage}" id=qtitle> ${myinquiry.iq_title}</a>
+									<c:set  var="iq_number" value="${myinquiry.iq_number}" />
+									<a href="/mypage/qAndA?iq_number=${myinquiry.iq_number}&currPage=${_MYINQUIRYPAGENATION_.cri.currPage}" id=qtitle> ${myinquiry.iq_title}</a>
 									<div class="fs-6">
 										<fmt:formatDate value="${myinquiry.iq_date}" pattern="yyyy.MM.dd" />
 									</div>
@@ -118,28 +119,27 @@
 			</div>
 			<!--End main contents card(박스)-->
 
-  		<nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/qList?currPage=1">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage - 1}">&lt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle bg-blue"
-                href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage}">${_MYINQUIRYPAGENATION_.cri.currPage}</a>
-            </li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage + 1}">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle"
-                href="mypage/qList?currPage=${_MYINQUIRYPAGENATION_.realEndPage}">&raquo;</a></li>
-          </ul>
-        </nav>
+				<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center p-5">
+					<li class="page-item"><a class="page-link rounded-circle"
+						href="/mypage/qList?currPage=1">&laquo;</a></li>
+					<li class="page-item"><a class="page-link rounded-circle"
+						href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage - 1}">&lt;</a></li>
+					<li class="page-item"><a class="page-link rounded-circle bg-blue"
+						href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage}">${_MYINQUIRYPAGENATION_.cri.currPage}</a>
+					</li>
+					<li class="page-item"><a class="page-link rounded-circle"
+						href="/mypage/qList?currPage=${_MYINQUIRYPAGENATION_.cri.currPage + 1}">&gt;</a></li>
+					<li class="page-item"><a class="page-link rounded-circle"
+						href="mypage/qList?currPage=${_MYINQUIRYPAGENATION_.realEndPage}">&raquo;</a></li>
+				</ul>
+				</nav>
 
 
 		</div>
 		<!-- End main contents -->
 
-		</div>
-		<!--End section-->
+		
 
 	</section>
 	<!-- End main Section -->

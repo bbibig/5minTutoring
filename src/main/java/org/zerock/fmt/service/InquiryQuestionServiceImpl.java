@@ -66,7 +66,7 @@ public class InquiryQuestionServiceImpl implements InquiryQuestionService {
 	
 	// 특정 1:1 문의글 조회 
 	@Override
-	public InquiryVO getInquiry(Integer iq_number) throws ServiceException {
+	public InquiryQuestionVO getInquiry(Integer iq_number) throws ServiceException {
 		log.trace("getInquiry() invoked.");
 		
 		try { return iqMapper.selectInquiry(iq_number); } 

@@ -1,6 +1,5 @@
 package org.zerock.fmt.service;
 
-import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.InquiryVO;
@@ -100,11 +98,21 @@ public class InquiryQuestionServiceTests {
 		log.trace("testGetInquiry() invoked.");
 		
 		int iq_number = 15;
-		InquiryVO vo = this.iqService.getInquiry(iq_number);
+		InquiryQuestionVO vo = this.iqService.getInquiry(iq_number);
 		log.info("\t+ vo: {}", vo);
 
 	} // testGetInquiry
 
-	// 답변 업데이트 추가 해야함 
+	@Test
+	@Order(5)
+	@DisplayName("답변 여부 업데이트")
+	void testUpdateInquiryState() throws ServiceException {
+		log.trace("testUpdateInquiryState() invoked.");
+	
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(57, null, null, null, null, "Y");
+		
+		boolean result = this.iqService.updateInquiryState(dto);
+		log.info("result: {}", result);
+	} // testUpdateInquiryState
 	
 } // end class

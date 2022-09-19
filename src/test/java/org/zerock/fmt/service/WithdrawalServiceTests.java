@@ -16,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.InquiryQuestionDTO;
-import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ServiceException;
@@ -87,7 +85,7 @@ public class WithdrawalServiceTests {
 		
 		boolean result = this.wService.updateState(dto);
 		log.info("result: {}", result);
-	} //countList
+	} // testUpdateState
 	
 	
 } // end class

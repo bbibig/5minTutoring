@@ -140,7 +140,7 @@ a:hover{
 
 /* 문의/답변 내용 */
 .content {
-    margin: 25px;
+     margin: 10px 15px;
     display: inline-block;
     word-break: break-all;
 }

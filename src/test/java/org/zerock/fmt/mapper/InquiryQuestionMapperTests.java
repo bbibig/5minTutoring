@@ -128,14 +128,14 @@ public class InquiryQuestionMapperTests {
 		
 		int iq_number = 89;		
 
-		InquiryVO vo = this.iqMapper.selectInquiry(iq_number);
+		InquiryQuestionVO vo = this.iqMapper.selectInquiry(iq_number);
 
 		Objects.requireNonNull(vo); 
 		log.info("/t+ vo: {}", vo);
 	
 	} // testSelectInquiry
 	
-//  === 답변 상태 수정(미답변:N/ 답변완료:Y) ==== 	
+//  === 답변 상태 수정(미답변:N / 답변완료:Y) ==== 	
 	@Test
 	@Order(5)
 	@DisplayName("1:1문의 답변상태 수정")

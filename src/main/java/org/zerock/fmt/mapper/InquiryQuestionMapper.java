@@ -28,7 +28,7 @@ public interface InquiryQuestionMapper {
 		public abstract int countList(String iq_pass) throws DAOException;
 		
 //		[R]  특정 1:1 문의글 조회 
-		public abstract InquiryVO selectInquiry(@Param("iq_number")Integer iq_number) throws DAOException;
+		public abstract InquiryQuestionVO selectInquiry(@Param("iq_number")Integer iq_number) throws DAOException;
 		
 		
 	//  [U]  답변 상태 수정 (미 답변(N) / 답변 완료(Y) ) 

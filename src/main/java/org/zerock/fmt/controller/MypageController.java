@@ -22,6 +22,7 @@ import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.InquiryAnswerVO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.ProfileDTO;
@@ -33,6 +34,8 @@ import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.service.InquiryAnswerService;
+import org.zerock.fmt.service.InquiryQuestionService;
 import org.zerock.fmt.service.MypageHandService;
 import org.zerock.fmt.service.MypageService;
 import org.zerock.fmt.service.ProfileService;
@@ -63,6 +66,13 @@ public class MypageController {
 	
 	@Setter(onMethod_= @Autowired)
 	private ProfileService profileService;
+	
+	@Setter(onMethod_= @Autowired)
+	private InquiryQuestionService iqService;
+	
+	@Setter(onMethod_= @Autowired)
+	private InquiryAnswerService iaService;
+	
 	
 //============================================================	
 	
@@ -274,7 +284,7 @@ public class MypageController {
 	}// 나의 댓글 조회
 	
 	
-//===== 나의 문의 목록 조회 ===============================================	
+//===== 나의 1:1 문의 ===============================================	
 	@GetMapping("/qList")	// GET
 	public String qList(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
 		log.trace("마이페이지 나의 문의 목록 조회");
@@ -295,19 +305,38 @@ public class MypageController {
 	}// 나의 문의 목록 조회	
 	
 	
-	@GetMapping("/question") // GET
-	public String question() {
-		log.trace("7-07_Q");
-		
-		return "mypage/7-07_Q";
-	}// question
+	// 필요없지만 혹시나 해서 나중에 지우겠습니다!
+//	@GetMapping("/question") // GET
+//	public String question(InquiryQuestionDTO dto, Model model, HttpSession session) {
+//		log.trace("7-07_Q");
+//		
+//		return "mypage/7-07_Q";
+//	}// question
 	
 	@GetMapping("/qAndA")	// GET
-	public String qAndA() {
-		log.trace("7-07_QandA");
+	public String qAndA(@RequestParam Integer iq_number,CriteriaMyPage cri, Model model) throws ControllerException {
+		log.trace("마이페이지 일대일 문의와 답변 조회");
+		log.info(iq_number); 
+		
+		try {
+			InquiryQuestionVO Questionvo = this.iqService.getInquiry(iq_number);
+			InquiryAnswerVO Answervo = this.iaService.getIA(iq_number);
+			log.info("\t+ vo: " + Questionvo);
+			log.info("\t+ vo: " + Answervo);
+			
+			// 문의
+			model.addAttribute("_INQUIRYQUESTION_", Questionvo);	
+			model.addAttribute("_CURRENTPAGE_", cri);
+			
+			// 답변
+			model.addAttribute("_INQUIRYANSWER_",Answervo);
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 		
 		return "mypage/7-07_QandA";
-	}// qAndA
+	} // 일대일 문의&답변 조회
 	
 	@RequestMapping("/unregister")	// POST
 	public String unregister() {
