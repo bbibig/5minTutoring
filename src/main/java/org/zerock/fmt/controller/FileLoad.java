@@ -54,7 +54,7 @@ public class FileLoad {
 			} // if
 
 			// ------------- 파일경로 -> 날짜별로 폴더 생성
-			String uploadFolder = "c://temp/upload/";
+			String uploadFolder = "c://5mTutoring/tutorSubFile/";
 			SimpleDateFormat sfm = new SimpleDateFormat("yyyyMMdd/");
 			String today = sfm.format(new Date());
 

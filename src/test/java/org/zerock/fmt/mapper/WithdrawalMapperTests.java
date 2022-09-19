@@ -62,7 +62,7 @@ public class WithdrawalMapperTests {
 	void testInsertWithdrawal() throws DAOException {
 		log.trace("testInsertWithdrawal() invoked."); 
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "tutor2@gmail.com", "오분은행 1111-2222", 600, 75000, "승인 대기 중", null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "tutor2@gmail.com", "오분은행 1111-2222", 600, 75000, null, null);
 		log.info("\t + dto: {}", dto);
 	
 		int affectedLines = this.withdrawalMapper.insertWithdrawal(dto);

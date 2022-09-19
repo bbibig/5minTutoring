@@ -47,7 +47,7 @@ public class InquiryQuestionServiceTests {
 	void testCreateIQ() throws ServiceException {
 		log.trace("testCreateIQ() invoked.");
 
-		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "test@gmail.com", "문의합니다.", "일대일 문의 작성 테스트", null, "N");
+		InquiryQuestionDTO dto = new InquiryQuestionDTO(null, "test@gmail.com", "문의합니다.", "일대일 문의 작성 테스트", null, null);
 		
 		boolean result = this.iqService.createIQ(dto);
 		log.info("일대일 문의 작성 결과: {}", result);

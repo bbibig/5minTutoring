@@ -2,6 +2,7 @@ package org.zerock.fmt.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.DisplayName;
@@ -233,7 +234,8 @@ public class UserMapperTests {
 	void testselectLogin() throws DAOException{
 		log.trace("selectLogin() invoked.");
 		String user_email = "test@email.net";
-		UserVO vo = this.mapper.loginEmail(user_email);
+		String user_email1 = "now@han.net";
+		UserVO vo = this.mapper.loginEmail(user_email1);
 		log.info("\t + vo : {}", vo);
 	}//selectLogin
 	
@@ -300,4 +302,42 @@ public class UserMapperTests {
 		int result = this.mapper.findEmailCheck(userEmail);
 		log.info("\t + result : {}", result);
 	}//findEmailCheck
+	
+	@Test
+	@DisplayName("kakaoCheck")
+	void kakaoCheckTest() {
+//		String email = "tutor2@gmail.com";
+		
+		HashMap<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", "tutor2@gmail.com");
+		
+		HashMap<String,Object> kakao = this.mapper.kakaoCheck(paramMap);
+		log.info("\t + kakao: {}", kakao);
+	}//kakaoCheck
+	
+	@Test
+	@DisplayName("kakaoLogin")
+	void kakaoLoginTest () {
+//		String email ="tutor2@gmail.com";
+//		String id = "12134";
+		
+		HashMap<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", "tutor2@gmail.com");
+		paramMap.put("id", "12134");
+		Map<String, Object> kakao = this.mapper.kakaoLogin(paramMap);
+		log.info("\t + kakao : {}", kakao);
+	}//kakaoLogin
+	
+	@Test
+	@DisplayName("updateKakao")
+	void updateKakaoTest() {
+//		String email = "tutor2@gmail.com";
+//		String id = "12345";
+		
+		HashMap<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", "tutor2@gmail.com");
+		paramMap.put("id", "12333");
+		int result = this.mapper.updateKakao(paramMap);
+		log.info("\t + result : {}", result);
+	}//updateKakao
 }//end class

@@ -9,7 +9,7 @@
       <!-- 문의하기 -->
       <insert id="insertIQ">
           INSERT INTO tbl_individual_question (iq_number, user_email, iq_title, iq_content, iq_date ,iq_pass)
-          VALUES (iq_num.NEXTVAL, #{user_email}, #{iq_title}, #{iq_content}, CURRENT_DATE, #{iq_pass})
+          VALUES (iq_num.NEXTVAL, #{user_email}, #{iq_title}, #{iq_content}, CURRENT_DATE, 'N')
       </insert>
 
 	  <!-- 일대일 문의 목록 조회 (답변 완료) -->

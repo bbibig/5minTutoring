@@ -11,9 +11,22 @@
       <link href="${path}/resources/css/3-01_community.css" rel="stylesheet">
       <!-- ========================================================= -->
 
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script>
+        $(function(){
+          $('#regBtn').on('click',()=>{
+            self.location = "/community";
+          }); //onclick
+
+
+        });
+      </script> -->
+
     <title>튜터페이지-커뮤니티</title>
     
   </head>
+
   <body>
     <!-- ============= 공통 Header : 로그인 후 =================== -->
 	    <jsp:include page="../header_login.jsp" flush="true" />
@@ -66,22 +79,26 @@
                           </div>
                           
                           <div class="modal-body">
-                              <form>
+                              <form action="/community/register" method="post">
                                   <div class="mb-3">
                                       <label for="recipient-name" class="col-form-label">제목</label>
-                                      <input type="text" class="form-control" id="askTitle" placeholder="제목을 입력해주세요.">
+                                      <input type="hidden" name="user_email" value= "${__LOGIN_USER__.user_email}">
+                                      <input type="text" class="form-control" name="fb_title" id="askTitle" placeholder="제목을 입력해주세요.">
                                   </div>
                                   <div class="mb-3">
                                       <label for="message-text" class="col-form-label">내용</label>
-                                      <textarea class="form-control" id="askContent" placeholder="내용을 입력해주세요."></textarea>
+                                      <textarea class="form-control" id="askContent" name="fb_content" placeholder="내용을 입력해주세요."></textarea>
                                   </div>
+                                  
+
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
+                                    <button type="submit" class="btn btn-primary col-2" id="regBtn">저장</button>
+                                </div>
                               </form>
                           </div>
 
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
-                              <button type="button" class="btn btn-primary col-2">저장</button>
-                          </div>
+                          
 
                       </div>
 
@@ -99,8 +116,8 @@
           <div class="board mt-5">
             
             <div class="row d-flex flex-column">  
-              <c:foreach var="communityBoard" items="${__LIST__}">
-                <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
+              <c:forEach var="communityBoard" items="${_LIST_}">
+                <a href="/community/post?fb_number=${communityBoard.fb_number}" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
                   <div class="board-box">
                   <div class="row">
                     
@@ -111,7 +128,7 @@
                       </div>
   
                       <div class="content">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
+                        <p>${communityBoard.fb_content}</p>
                       </div>
   
                       <div class="user_date d-flex flex-row">
@@ -119,7 +136,8 @@
                           <strong>홍길동</strong>
                         </div>
                         <div class="date ms-4">
-                          2022-01-1
+                          ${communityBoard.fb_date}
+                          <!-- <fmt: formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${communityBoard.fb_date}"/> -->
                         </div>
                       </div>
                     </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
@@ -152,221 +170,7 @@
                   
                   </div>
                 </a><!--===============================================커뮤니티 박스end============================================-->
-              </c:foreach>
-              
-
-              <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
-                <div class="board-box">
-                <div class="row">
-                  
-                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
-
-                    <div class="title">
-                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
-                    </div>
-
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
-                    </div>
-
-                    <div class="user_date d-flex flex-row">
-                      <div class="user">
-                        <strong>홍길동</strong>
-                      </div>
-                      <div class="date ms-4">
-                        2022-01-1
-                      </div>
-                    </div>
-                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
-                  
-
-                  
-                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
-
-                    <div class="question_comment">
-                      <span class="comment_count">0</span>
-                      <span class="comment_decription">답변</span>
-                    </div>
-
-                    <div class="heart d-flex mt-4">
-                      <button class="heart-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-
-                        <span class="heart-count ms-1">0</span>
-
-                      </button>
-
-                    </div>
-
-                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
-                  
-                  
-                </div>
-                
-                </div>
-              </a><!--===============================================커뮤니티 박스end============================================-->
-
-              <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
-                <div class="board-box">
-                <div class="row">
-                  
-                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
-
-                    <div class="title">
-                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
-                    </div>
-
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
-                    </div>
-
-                    <div class="user_date d-flex flex-row">
-                      <div class="user">
-                        <strong>홍길동</strong>
-                      </div>
-                      <div class="date ms-4">
-                        2022-01-1
-                      </div>
-                    </div>
-                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
-                  
-
-                  
-                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
-
-                    <div class="question_comment">
-                      <span class="comment_count">0</span>
-                      <span class="comment_decription">답변</span>
-                    </div>
-
-                    <div class="heart d-flex mt-4">
-                      <button class="heart-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-
-                        <span class="heart-count ms-1">0</span>
-
-                      </button>
-
-                    </div>
-
-                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
-                  
-                  
-                </div>
-                
-                </div>
-              </a><!--===============================================커뮤니티 박스end============================================-->
-
-              <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
-                <div class="board-box">
-                <div class="row">
-                  
-                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
-
-                    <div class="title">
-                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
-                    </div>
-
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
-                    </div>
-
-                    <div class="user_date d-flex flex-row">
-                      <div class="user">
-                        <strong>홍길동</strong>
-                      </div>
-                      <div class="date ms-4">
-                        2022-01-1
-                      </div>
-                    </div>
-                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
-                  
-
-                  
-                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
-
-                    <div class="question_comment">
-                      <span class="comment_count">0</span>
-                      <span class="comment_decription">답변</span>
-                    </div>
-
-                    <div class="heart d-flex mt-4">
-                      <button class="heart-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-
-                        <span class="heart-count ms-1">0</span>
-
-                      </button>
-
-                    </div>
-
-                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
-                  
-                  
-                </div>
-                
-                </div>
-              </a><!--===============================================커뮤니티 박스end============================================-->
-
-              <a href="/community/post" id="coummunity-box" class="mt-4"><!--===============================================커뮤니티 박스============================================-->
-                <div class="board-box">
-                <div class="row">
-                  
-                  <div class="col-10 d-flex flex-column"><!--============================================게시판 제목/내용/작성자/날짜================================================-->
-
-                    <div class="title">
-                      <h4>Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
-                    </div>
-
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste culpa accusamus illo eos error. Est libero molestiae commodi alias distinctio minus cumque praesentium laborum placeat quasi repellat, debitis voluptates ut!</p>
-                    </div>
-
-                    <div class="user_date d-flex flex-row">
-                      <div class="user">
-                        <strong>홍길동</strong>
-                      </div>
-                      <div class="date ms-4">
-                        2022-01-1
-                      </div>
-                    </div>
-                  </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->
-                  
-
-                  
-                  <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
-
-                    <div class="question_comment">
-                      <span class="comment_count">0</span>
-                      <span class="comment_decription">답변</span>
-                    </div>
-
-                    <div class="heart d-flex mt-4">
-                      <button class="heart-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                        </svg>
-
-                        <span class="heart-count ms-1">0</span>
-
-                      </button>
-
-                    </div>
-
-                  </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
-                  
-                  
-                </div>
-                
-                </div>
-              </a><!--===============================================커뮤니티 박스end============================================-->
-           
+              </c:forEach>
             </div>
 
           </div><!--============================ 2.게시글 end========================================-->

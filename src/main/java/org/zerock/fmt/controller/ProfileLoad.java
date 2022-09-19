@@ -18,7 +18,7 @@ public class ProfileLoad {
 	public void uploadProfile(MultipartFile file, UserDTO user) {
 		
 		//파일 경로
-		String uploadFolder = "C://temp/profile/";
+		String uploadFolder = "C://5mTutoring/profile/";
 		File uploadPath = new File(uploadFolder);
 		if(!uploadPath.exists()) {uploadPath.mkdirs();} // if
 		

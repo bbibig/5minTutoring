@@ -62,7 +62,7 @@
 	</beans:bean>	
 
 	<!-- 프로필사진 리소스 경로 -->
-	<resources mapping="/profile/*.png" location="file:///c:/temp/profile/" />
+	<resources mapping="/profile/*.png" location="file:///c:/5mTutoring/profile/" />
 
 	<!-- component-scan -->
 	<context:component-scan base-package="org.zerock.fmt.controller" />

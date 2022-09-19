@@ -2,6 +2,7 @@ package org.zerock.fmt.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -163,8 +164,8 @@ public class UserServiceTests {
 	void singUPTutor() throws ServiceException {
 		log.trace("singUPTutor");
 		
-		UserDTO newTutor = new UserDTO("tt@email_6","1111","nick2","name2","20020202","남자","11111111111",
-										null,null,"졸업생","수학","file:name");
+		UserDTO newTutor = new UserDTO();
+		newTutor.setUser_email("childhopp@hanmail.net");
 		Boolean Result = this.userService.singUPTutor(newTutor);
 		log.info("\t + Result : {}", Result);
 		
@@ -194,7 +195,7 @@ public class UserServiceTests {
 	void tutorPass() throws ServiceException {
 		log.trace("tutorPass");
 		
-		String user_email = "TTemail_1";
+		String user_email = "childhopp@hanmail.net";
 		int Result = this.userService.tutorPass(user_email);
 		log.info("\t + Result : {}", Result);
 		
@@ -359,4 +360,36 @@ public class UserServiceTests {
 		int result = this.userService.findUserEmail(userEmail);
 		log.info("\t + result : {}", result);
 	}//findUserEmail
+	
+	@Test
+	@DisplayName("kakaoCheck")
+	void kakaoCheckTest() {
+		log.trace("kakaoCheck 카카오 정보 있는지 확인");
+		HashMap<String,Object> param = new HashMap<>();
+		param.put("email", "totor@han.net");
+		HashMap<String, Object> kakao = this.userService.kakaoCheck(param);
+		log.info("\t + kakao : {}", kakao);
+	}//kakaoCheckTest
+	
+	@Test
+	@DisplayName("kakaoLogin")
+	void kakaoLoginTest() {
+		log.trace("kakaoLogin 카카오 로그인하기");
+		HashMap<String,Object> param = new HashMap<String,Object>();
+		param.put("id", "12333");
+		param.put("email", "tutor2@gmail.com");
+		HashMap<String,Object> kakao = this.userService.kakaoLogin(param);
+		log.info("\t + kakao : {}", kakao);
+	}//kakaoLogin
+	
+	@Test
+	@DisplayName("updateKakao")
+	void updateKakaoTest() {
+		log.trace("updateKakao 카카오 정보 업데이트");
+		
+		HashMap<String,Object> param = new HashMap<String,Object>();
+		param.put("email", "totor@han.net");
+		int result = this.userService.updateKakao(param);
+		log.info("result : {}", result);
+	}//updateKakao
 }//end class

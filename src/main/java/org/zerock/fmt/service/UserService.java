@@ -1,5 +1,6 @@
 package org.zerock.fmt.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.zerock.fmt.domain.CriteriaAdmin;
@@ -38,12 +39,24 @@ public interface UserService {
 	public abstract List<UserVO> getWaitTutor(CriteriaAdmin cri) throws ServiceException;
 	public abstract int waitTutorCount() throws ServiceException;
 	
+	//========카카오
+	//정보확인
+	public abstract HashMap<String,Object> kakaoCheck(HashMap<String,Object> paramMap);
+	
+	//로그인
+	public abstract HashMap<String,Object> kakaoLogin(HashMap<String,Object> paramMap);
+	
+	//정보추가
+	public abstract int updateKakao(HashMap<String,Object> paramMap);
+	
+	
 	//========추가
 	//학생회원가입
 	public abstract boolean singUpStrudent(UserDTO newStudent) throws ServiceException;
 	
 	//튜터회원가입
 	public abstract boolean singUPTutor(UserDTO newTutor) throws ServiceException;
+	
 	
 	//========수정
 	//유저정보수정

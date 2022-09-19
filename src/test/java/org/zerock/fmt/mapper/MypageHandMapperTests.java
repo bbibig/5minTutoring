@@ -15,10 +15,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -123,7 +125,92 @@ public class MypageHandMapperTests {
 		
 	}//selectBuyDetail()
 	
+	//6. 손들기 출금 내역 목록 조회
+	@Test
+	@Order(6)
+	@DisplayName("손들기 출금 내역 목록 조회")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectAllMyWithdrawalList() throws DAOException {
+		log.trace("손들기 출금 내역 목록 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("abc@han.net");
+		cri.setDateFrom("2022-09-10");
+		cri.setDateTo("2022-09-18");
+		
+		List<WithdrawalVO> list = mapper.selectAllMyWithdrawalList(cri);
+		list.forEach(e -> log.info(e));
 
+	}//selectAllMyWithdrawalList()
+	
+	//7. 손들기 출금 내역 총 수량
+	@Test
+	@Order(7)
+	@DisplayName("손들기 출금 내역 총 수량")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getMyWithdrawalTotalAmount() throws DAOException {
+		log.trace("손들기 출금 내역 총 수량 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("abc@han.net");
+		cri.setDateFrom("2022-09-10");
+		cri.setDateTo("2022-09-18");
+		
+		Integer amount = mapper.getMyWithdrawalTotalAmount(cri);
+		log.info("\t + 손들기 출금 내역 총 횟수: {}", amount);
+		
+	}//getMyWithdrawalTotalAmount()
+	
+	
+	//8. 손들기 획득 내역 목록 조회
+	@Test
+	@Order(8)
+	@DisplayName("손들기 획득 내역 목록 조회")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectAllmyGetHandQList() throws DAOException {
+		log.trace("손들기 획득 내역 목록 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("abc@han.net");
+		cri.setDateFrom("2022-09-12");
+		cri.setDateTo("2022-09-18");
+		
+		List<AnswerVO2> list = mapper.selectAllmyGetHandQList(cri);
+		list.forEach(e -> log.info(e));
+
+	}//selectAllmyGetHandQList()
+	
+	//9. 손들기 획득 내역 총 수량
+	@Test
+	@Order(9)
+	@DisplayName("손들기 획득 내역 총 수량")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getMyGetHandQTotalAmount() throws DAOException {
+		log.trace("손들기 획득 내역 총 수량 조회");
+		
+		CriteriaMyPage cri = new CriteriaMyPage();
+		cri.setUser_email("abc@han.net");
+		cri.setDateFrom("2022-09-12");
+		cri.setDateTo("2022-09-18");
+		
+		Integer amount = mapper.getMyGetHandQTotalAmount(cri);
+		log.info("\t + 손들기 획득 내역 총 횟수: {}", amount);
+		
+	}//getMyGetHandQTotalAmount()
+
+	
+	//10. 튜터페이지 조회
+	@Test
+	@Order(10)
+	@DisplayName("튜터페이지 번호")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void getTutorPageNum() throws DAOException {
+		log.trace("튜터 페이지 번호");
+
+		Integer pageNum = this.mapper.getTutorPageNum("abc@han.net");
+		log.info("튜터페이지 번호: {}", pageNum);
+		
+	}//getMyGetHandQTotalAmount()
 }// end class
 
 

@@ -151,6 +151,7 @@
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=f242881542c06c438c6f81728a868bf9&redirect_uri=http://localhost:8080/test/kakao&response_type=code">
                             <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">                             
                         </a>
+                        <a href="javascript:kakaoLogin()">kakaologin</a>
 
                         
                     </span>
@@ -165,17 +166,19 @@
         <script>
             Kakao.init('de958c943b70794d33e58bbec3e2a1da'); //발급받은 키 중 javascript키를 사용해준다.
             console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
             function kakaoLogin() {
                 Kakao.Auth.login({
                 success: function (response) {
                     Kakao.API.request({
-                    url: '/v2/user/me',
-                    success: function (response) {
-                        console.log(response)
-                    },
-                    fail: function (error) {
-                        console.log(error)
-                    },
+                        url: '/v2/user/me',
+                        success: function (response) {
+                            kakaoLoginPro(response)
+                            console.log(response)
+                        },
+                        fail: function (error) {
+                            console.log(error)
+                        },
                     })
                 },
                 fail: function (error) {
@@ -183,6 +186,31 @@
                 },
                 })
             }
+            function kakaoLoginPro(response){
+            var data = {id:response.id,email:response.kakao_account.email}
+            $.ajax({
+                type : 'POST',
+                url : '/test/kakaoLoginPro',
+                data : data,
+                dataType : 'json',
+                success : function(data){
+                    console.log(data)
+                    if(data.JavaData == "YES"){
+                        alert("로그인되었습니다.");
+                        location.href = '/login/home'
+                    }else if(data.JavaData == "register"){
+                        $("#kakaoEmail").val(response.kakao_account.email);
+                        $("#kakaoId").val(response.id);
+                        $("#kakaoForm").submit();
+                    }else{
+                        alert("로그인에 실패했습니다");
+                    }
+                },
+                error: function(xhr, status, error){
+                    alert("로그인에 실패했습니다."+error);
+                }
+                });//ajax
+            }//kakaoLoginPro
         </script>
         
         <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>

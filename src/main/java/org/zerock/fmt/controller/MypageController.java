@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.common.SharedScopeKeys;
+import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CommentVO;
@@ -29,9 +30,9 @@ import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
-import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.MypageHandService;
 import org.zerock.fmt.service.MypageService;
 import org.zerock.fmt.service.ProfileService;
@@ -390,26 +391,83 @@ public class MypageController {
 	}// studentHandsBuyDetail
 	
 	@GetMapping("/tutorHands/get")		//GET
-	public String tutorHandsGet() {
-		log.trace("7-13_TutorHandsListGet");
+	public String tutorHandsGet(CriteriaMyPage cri, @RequestParam String group,
+			Model model, HttpSession session) throws ControllerException {
+		log.trace("마이페이지 손들기 획득내역(튜터)");
 		
-		return "mypage/7-13_TutorHandsListGet";
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			if(group.equals("1")) {
+				model.addAttribute("GROUP", group);
+				
+				List<AnswerVO2> list = this.mypageHandService.getAllmyGetHandQList(cri);
+				model.addAttribute("_MYGETHAND_", list);
+				
+				PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyGetHandQTotalAmount(cri));
+				model.addAttribute("_MYGETHANDPAGENATION_", pageDto);
+			} else if (group.equals("2")){
+				model.addAttribute("GROUP", group);
+				
+//				List<AnswerVO> list = this.mypageHandService.getAllmyGetHandQList(cri);
+//				model.addAttribute("_MYGETHAND_", list);
+				
+				PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyGetHandQTotalAmount(cri));
+				model.addAttribute("_MYGETHANDPAGENATION_", pageDto);
+			} 
+			
+			return "mypage/7-13_TutorHandsListGet";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+		
 	}// tutorHandsGet
 	
 	
 	@GetMapping("/tutorHands/withdraw")		//GET
-	public String tutorHandsWithdraw() {
-		log.trace("7-14_TutorHandsListWithdraw");
+	public String tutorHandsWithdraw(CriteriaMyPage cri, Model model, HttpSession session) throws ControllerException {
+		log.trace("마이페이지 손들기 출금내역(튜터)");
 		
-		return "mypage/7-14_TutorHandsListWithdraw";
+		try {
+			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+			cri.setUser_email(vo.getUser_email());
+			
+			List<WithdrawalVO> list = this.mypageHandService.getAllMyWithdrawalList(cri);
+			model.addAttribute("_MYWITHDRAWAL_", list);
+			
+			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyWithdrawalTotalAmount(cri));
+			model.addAttribute("_MYWITHDRAWALPAGENATION_", pageDto);
+			
+			return "mypage/7-14_TutorHandsListWithdraw";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+
 	}// tutorHandsWithdraw
 	
-	@RequestMapping("/withdraw")	// POST
-	public String withdraw() {
-		log.trace("7-15_Withdraw");
+	// 출금 신청 페이지
+	@GetMapping("/withdraw")
+	public String withdraw(Model model, HttpSession session) throws ControllerException {
+		log.trace("withdraw() invoked.");
+		
+		try {
+			UserVO userVO = (UserVO) session.getAttribute("__LOGIN_USER__");
+			String user_email = userVO.getUser_email();
+			int hands_wallet = userVO.getHands_wallet();
+			log.info("user_email, hands_wallet: {},{}", user_email,hands_wallet);
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 		
 		return "mypage/7-15_Withdraw";
-	}// withdraw
+	} // 튜터 출금 신청 페이지
+	
+	// 출금 신청 (post)
+	@PostMapping("/withdraw/application")	
+	public String withdrawApplication() {
+		log.trace("withdrawApplication() invoked.");
+		
+		return "mypage/7-15_Withdraw";
+	} // 출금 신청 
+	
 	
 	@GetMapping("/withdraw/completed")	// GET
 	public String withdrawCompleted() {

@@ -11,6 +11,7 @@ import lombok.Value;
 public class CommunityVO {
 	private Integer fb_number;
 	private String user_email;
+//	private String user_nick;
 	private String fb_title;
 	private String fb_content;
 	private String fb_comment_count;

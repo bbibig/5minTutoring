@@ -31,7 +31,7 @@ public interface CommunityMapper {
 	//새로운 게시글 등록
 	public abstract Integer insert(CommunityDTO dto) throws DAOException;
 	
-	public abstract Integer insertSelectKey(CommunityDTO dto) throws DAOException;
+//	public abstract Integer insertSelectKey(CommunityDTO dto) throws DAOException;
 
 	//게시글 수정
 	public abstract Integer update(CommunityDTO dto) throws DAOException;

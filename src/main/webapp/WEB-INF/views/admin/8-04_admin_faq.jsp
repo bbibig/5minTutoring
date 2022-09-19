@@ -13,6 +13,27 @@
     <link href="${path}/resources/css/8_admin_page.css" rel="stylesheet">
     <!-- ========================================================= -->
     <title>admin FAQ</title>
+    
+    <script>
+	    $(function () {
+	        let result = '${_FAQRESULT_}';
+	        if(result === 'FAQ생성 성공'){
+	            Swal.fire({
+	                    icon: 'success',
+	                    text: '자주 묻는 질문이 등록되었습니다.',
+	                    confirmButtonText: '확인'
+	            })
+	        }// if
+	        
+	        if(result === 'FAQ수정 성공'){
+	            Swal.fire({
+	                    icon: 'success',
+	                    text: '자주 묻는 질문이 수정되었습니다.',
+	                    confirmButtonText: '확인'
+	            })
+	        }
+	    })// jq
+    </script>
 
 </head>
 
@@ -337,8 +358,7 @@
                             <textarea name="faq_content" class="form-control" id="faq_content"
                                 style="height: 300px;">A. </textarea>
                         </div>
-                        <input type="hidden" name="ad_id" value="admin">
-                        <!--hidden으로 admin이 작성한것으로 제출-->
+                        <input type="hidden" name="ad_id" value="${_ADMIN_.ad_id}">
                     </div>
 
                     <div class="modal-footer">

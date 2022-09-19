@@ -18,6 +18,6 @@ public class UseHandVO2 {
 	private Date use_date;
 	private String user_email;	//학생 이메일
 	
-	private String tutor_email;	//튜터 이메일
+	private String tutor_nick;	//튜터 이메일
 
 } // end class

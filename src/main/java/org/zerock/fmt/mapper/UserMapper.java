@@ -1,6 +1,8 @@
 package org.zerock.fmt.mapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -32,7 +34,7 @@ public interface UserMapper {
 	public abstract int selectNicCheck(@Param("user_nick")String newNick) throws DAOException;
 	
 	//로그인
-	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_eamil}")
+	@Select("SELECT * FROM tbl_user WHERE user_email = #{user_eamil} AND pass='Accept'")
 	public abstract UserVO loginEmail(@Param("user_eamil")String user_email) throws DAOException;
 	
 	//튜터 승인 대기 리스트
@@ -44,6 +46,7 @@ public interface UserMapper {
 	
 	//이메일찾기 
 	public abstract String FindEmailreturnString(String user_phone) throws DAOException;
+
 	
 	//-------------- INSERT 
 	//학생 가입
@@ -52,11 +55,16 @@ public interface UserMapper {
 	//튜터 가입 
 	public abstract int insertTutor(UserDTO newTutor) throws DAOException;
 	
-	//++카카오 가입
-//	public UserDTO findKakao(HashMap<String, String> userInfo);
 	
-//	public void kakaoInsert(HashMap<String, String> userInfo);
-	//++네이버 가입
+	//-------------- KAKAO
+	// 카카오정보 있는지 확인
+	public abstract HashMap<String,Object> kakaoCheck(HashMap<String,Object> paramMap);
+	
+	// 카카오정보로 로그인
+	public abstract HashMap<String,Object> kakaoLogin(HashMap<String,Object> paramMap);
+	
+	// 카카오정보 추가 
+	public abstract int updateKakao(HashMap<String,Object> paramMap);
 	
 	
 	//-------------- UPDATE 

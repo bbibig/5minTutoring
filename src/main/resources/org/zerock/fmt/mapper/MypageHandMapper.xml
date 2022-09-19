@@ -10,14 +10,16 @@
 	<select id="selectAllmyUsehandQList" resultType="org.zerock.fmt.domain.UseHandVO2">
 		SELECT 
 		    uh.*,
-		    tp.user_email as tutor_email
+		    tp.user_nick as tutor_nick
 		FROM (SELECT *
 		      FROM tbl_usehand_student
 		      WHERE user_email = #{user_email}
 		      		<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
 		      ) uh,
 		      tbl_question_board qb,
-		      tbl_tutor_page tp
+		      (SELECT tp.*, u.user_nick
+		      FROM tbl_tutor_page tp, tbl_user u
+		      WHERE tp.user_email = u.user_email) tp
 		WHERE uh.qb_number = qb.qb_number AND qb.tp_number = tp.tp_number
 		ORDER BY uh.use_number desc
 		
@@ -38,14 +40,16 @@
 	<select id="selectAllmyUsehandTList" resultType="org.zerock.fmt.domain.UseHandVO2">
 		SELECT 
 		    uh.*,
-		    tp.user_email as tutor_email
+		    tp.user_nick as tutor_nick
 		FROM (SELECT *
 		      FROM tbl_usehand_student
 		      WHERE user_email = #{user_email}
 		            <if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
 		      ) uh,
 		      tbl_tutoring_board tb,
-		      tbl_tutor_page tp
+		      (SELECT tp.*, u.user_nick
+		      FROM tbl_tutor_page tp, tbl_user u
+		      WHERE tp.user_email = u.user_email) tp
 		WHERE uh.tb_number = tb.tb_number AND tb.tp_number = tp.tp_number
 		ORDER BY uh.use_number desc
 		
@@ -100,4 +104,59 @@
 		ORDER BY TBL_BUY.B_DATE DESC
 	</select>
 
+
+	<!-- 3-1 손들기 출금 내역 목록 조회 페이징 처리(내림차순으로)  -->
+	<select id="selectAllMyWithdrawalList" resultType="org.zerock.fmt.domain.WithdrawalVO">
+		SELECT /*+ index_desc(tbl_withdrawal)*/ * 
+		FROM tbl_withdrawal
+		WHERE user_email = #{user_email}
+				<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(w_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		
+		OFFSET (#{currPage}-1) * #{amount} ROW 
+		FETCH NEXT #{amount} ROWS ONLY
+	</select>
+	
+	<!-- 3-2 손들기 출금 내역 총 수량 -->
+	<select id="getMyWithdrawalTotalAmount" resultType="Integer">
+		SELECT count(w_num) 
+		FROM tbl_withdrawal
+		WHERE user_email = #{user_email}
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(w_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+	</select>
+
+
+	<!-- 4-1 손들기 획득 내역 목록(질문하기) 조회 페이징 처리(튜터)   -->
+	<select id="selectAllmyGetHandQList" resultType="org.zerock.fmt.domain.AnswerVO2">
+		SELECT /*+ index_desc(a)*/a.*, q.user_nick as student_nick
+		FROM (SELECT /*+ index_desc(a)*/*
+			FROM tbl_answer
+			WHERE user_email = #{user_email}) a,
+			(SELECT q.qb_number, u.user_nick
+			FROM tbl_question_board q, tbl_user u
+			WHERE q.user_email = u.user_email) q
+		WHERE a.qb_number = q.qb_number
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(a.regdate, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		
+		OFFSET (#{currPage}-1) * #{amount} ROW 
+		FETCH NEXT #{amount} ROWS ONLY
+	</select>
+	
+	<!-- 4-2 손들기 획득 내역(질문하기) 총 횟수 -->
+	<select id="getMyGetHandQTotalAmount" resultType="Integer">
+		SELECT count(a_number) 
+		FROM tbl_answer
+		WHERE user_email = #{user_email}
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(regdate, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+	</select>
+
+
+	<!-- 5. 튜터페이지 조회 -->
+	<select id="getTutorPageNum" resultType="Integer">
+		SELECT t.tp_number
+		FROM (SELECT user_email
+		      FROM tbl_user
+		      WHERE user_group = 'Tutor' AND user_email = #{user_email})u,
+		      tbl_tutor_page t
+		WHERE u.user_email = t.user_email
+	</select>
 </mapper>
