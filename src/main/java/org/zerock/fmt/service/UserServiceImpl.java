@@ -368,6 +368,24 @@ public class UserServiceImpl implements UserService{
 			return this.userMapper.findEmailCheck(userEmail);
 		}catch(Exception e) {throw new ServiceException(e); }
 	}//findUserEmail
+
+	@Override
+	public HashMap<String, Object> kakaoCheck(HashMap<String, Object> paramMap) {
+		log.trace("kakaoCheck. 카카오정보 확인");
+		return this.userMapper.kakaoCheck(paramMap);
+	}//kakaoCheck
+
+	@Override
+	public HashMap<String, Object> kakaoLogin(HashMap<String, Object> paramMap) {
+		log.trace("kakaoLogin. 카카오 로그인하기");
+		return this.userMapper.kakaoLogin(paramMap);
+	}//kakaoLogin
+
+	@Override
+	public int updateKakao(HashMap<String, Object> paramMap) {
+		log.trace("updateKakao. 카카오 정보 업데이트");
+		return this.userMapper.updateKakao(paramMap);
+	}//updateKakao
 	
 	
 
