@@ -15,14 +15,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.CommentVO;
-import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
-import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalDTO;
@@ -145,7 +144,7 @@ public class MypageServiceTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<CommunityVO> list = this.service.getAllMyCommunityList(cri);
+		List<CommunityVO2> list = this.service.getAllMyCommunityList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testGetAllMyCommunityList()
@@ -178,7 +177,7 @@ public class MypageServiceTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<CommentVO> list = this.service.getAllMyCommentList(cri);
+		List<CommentVO2> list = this.service.getAllMyCommentList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testGetAllMyCommentList()

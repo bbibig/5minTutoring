@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 @Data
-public class UseHandVO2 {
+public class UseHandVO2 {	//mypage에 사용
 	
 	private Integer use_number;
 	private Integer qb_number;	// 질문글 번호

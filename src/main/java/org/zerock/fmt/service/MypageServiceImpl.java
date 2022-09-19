@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.zerock.fmt.domain.CommentVO;
-import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
-import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalDTO;
@@ -92,7 +91,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	//3-1. 나의 커뮤니티 작성글 목록 조회 페이징 처리(내림차순으로)
 	@Override
-	public List<CommunityVO> getAllMyCommunityList(CriteriaMyPage cri) throws ServiceException {
+	public List<CommunityVO2> getAllMyCommunityList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("getAllMyQuestionList() 나의 커뮤니티 작성글 목록 조회");
 		
 		try { return this.mapper.selectAllMyCommunitytList(cri); }
@@ -113,7 +112,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
 	@Override
-	public List<CommentVO> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException {
+	public List<CommentVO2> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("getAllMyQuestionList() 나의 댓글 목록 조회");
 		
 		try { return this.mapper.selectAllMyCommentList(cri); }

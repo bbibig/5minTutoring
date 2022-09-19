@@ -19,8 +19,8 @@ import org.zerock.fmt.common.SharedScopeKeys;
 import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
-import org.zerock.fmt.domain.CommentVO;
-import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
@@ -243,7 +243,7 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
-			List<CommunityVO> list = this.mypageService.getAllMyCommunityList(cri);
+			List<CommunityVO2> list = this.mypageService.getAllMyCommunityList(cri);
 			model.addAttribute("_MYCOMMUNITY_", list);
 			
 			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyCommunityTotalAmount(vo.getUser_email()));
@@ -262,7 +262,7 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
-			List<CommentVO> list = this.mypageService.getAllMyCommentList(cri);
+			List<CommentVO2> list = this.mypageService.getAllMyCommentList(cri);
 			model.addAttribute("_MYCOMMENT_", list);
 			
 			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyCommentTotalAmount(vo.getUser_email()));

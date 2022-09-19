@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 @Data
-public class AnswerVO2 {
+public class AnswerVO2 {	//mypage에 사용
 
 	private Integer a_number;
 	private Integer qb_number;

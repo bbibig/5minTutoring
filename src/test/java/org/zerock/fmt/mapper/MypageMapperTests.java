@@ -16,20 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.CommentVO;
-import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
-import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
-import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -146,7 +144,7 @@ public class MypageMapperTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<CommunityVO> list = mapper.selectAllMyCommunitytList(cri);
+		List<CommunityVO2> list = mapper.selectAllMyCommunitytList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testSelectAllMyCommunitytList()
@@ -178,7 +176,7 @@ public class MypageMapperTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<CommentVO> list = mapper.selectAllMyCommentList(cri);
+		List<CommentVO2> list = mapper.selectAllMyCommentList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testSelectAllMyCommentList()

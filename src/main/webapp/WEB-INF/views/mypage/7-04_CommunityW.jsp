@@ -85,7 +85,7 @@
               <c:forEach var="mycommunity" items="${_MYCOMMUNITY_}">
                 <tr>
                   <th scope="row"> ${mycommunity.fb_number} </th>
-                  <td colspan="2"><a href="/tutor/watchAnswer"> ${mycommunity.fb_title} </a></td>
+                  <td colspan="2"><a href="/community/post?fb_number=${mycommunity.fb_number}"> ${mycommunity.fb_title} </a></td>
                   <td class="text-center">
                     <fmt:formatDate value="${mycommunity.fb_date}" pattern="yyyy.MM.dd" />
                   </td>

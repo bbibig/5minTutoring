@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.zerock.fmt.domain.CommentVO;
-import org.zerock.fmt.domain.CommunityVO;
+import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
-import org.zerock.fmt.domain.UseHandVO2;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalDTO;
@@ -41,7 +40,7 @@ public interface MypageMapper {
 	
 	
 	//3-1. 나의 커뮤니티 작성글 목록 조회 페이징 처리(내림차순으로)
-	public abstract List<CommunityVO> selectAllMyCommunitytList(CriteriaMyPage cri) throws DAOException;
+	public abstract List<CommunityVO2> selectAllMyCommunitytList(CriteriaMyPage cri) throws DAOException;
 	
 	//3-2. 나의 커뮤니티 작성글 목록 총 개수 조회
 	@Select("SELECT count(fb_number) "
@@ -51,12 +50,12 @@ public interface MypageMapper {
 	
 	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
-	public abstract List<CommentVO> selectAllMyCommentList(CriteriaMyPage cri) throws DAOException;
+	public abstract List<CommentVO2> selectAllMyCommentList(CriteriaMyPage cri) throws DAOException;
 	
 	//4-2. 나의 댓글 목록 총 개수 조회
 	@Select("SELECT count(cm_number) "
 			+ "FROM tbl_comment "
-			+ "WHERE user_email = #{user_email}")
+			+ "WHERE user_email = #{user_email} AND fb_number IS NOT NULL")
 	public abstract Integer getMyCommentTotalAmount(@Param("user_email") String user_email) throws DAOException;
 	
 

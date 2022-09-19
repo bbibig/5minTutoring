@@ -30,15 +30,12 @@
         </li>
 
         <li class="dropdown"><a href="#">
-
-            <img src="${path}/resources/img/profile.png" width="40px" height="40px">
-
-            <!-- 로컬에 프로필 사진이 존재해야 사진이 깨지지 않음
+            <!-- 로컬에 프로필 사진이 존재해야 사진이 깨지지 않음 -->
             <c:if test="${_USER_PROFILE_ eq 'false'}"> <img src="${path}/resources/img/profile.png" width="40px"
                 height="40px"> </c:if>
             <c:if test="${_USER_PROFILE_ eq 'true'}"> <img
                 src="<spring:url value='/profile/${__LOGIN_USER__.user_nick}_profile.png'/>" width="40px" height="40px"
-                class="rounded-circle"> </c:if> -->
+                class="rounded-circle"> </c:if>
                 
             <span class="ms-2">${__LOGIN_USER__.user_nick}</span>
             <i class="bi bi-chevron-down"></i>
