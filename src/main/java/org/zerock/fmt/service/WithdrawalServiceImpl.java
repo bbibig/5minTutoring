@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
-import org.zerock.fmt.mapper.FaqMapper;
 import org.zerock.fmt.mapper.WithdrawalMapper;
 
 import lombok.NoArgsConstructor;
@@ -37,7 +36,7 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 	
 	// 출금 신청 내역 전체 조회 (내림차순) - 관리자
 	@Override
-	public List<WithdrawalVO> getAllWithdrawalList(CriteriaMyPage cri) throws ServiceException {
+	public List<WithdrawalVO> getAllWithdrawalList(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllInquiryNList() invoked.");
 		
 		try { return this.withdrawalMapper.selectAllWithdrawalList(cri); } 

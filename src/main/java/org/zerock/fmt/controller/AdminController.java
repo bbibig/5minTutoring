@@ -26,6 +26,7 @@ import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.domain.FileVO;
+import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -34,6 +35,7 @@ import org.zerock.fmt.service.AdminService;
 import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.FaqService;
 import org.zerock.fmt.service.FileService;
+import org.zerock.fmt.service.InquiryQuestionService;
 import org.zerock.fmt.service.UserService;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
@@ -62,6 +64,9 @@ public class AdminController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BuyService buyService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private InquiryQuestionService questionService;
 	//--------------------------------------------- 어드민로그인
 	@GetMapping
 	public String adminLogin() {
@@ -163,24 +168,38 @@ public class AdminController {
 	
 	//--------------------------------------------- 문의게시판
 	@RequestMapping("/answerBoard_OK")
-	public String adminAnswerBoardOk() {
+	public String adminAnswerBoardOk(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("문의게시판(답변완료)");
 		
-		return "admin/8-03_answerBoard_OK";
-	}
+		try {
+			List<InquiryQuestionVO> list = this.questionService.getAllInquiryYList(cri);
+			model.addAttribute("_RESULT_",list);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.questionService.countList("Y"));
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+			return "admin/8-03_answerBoard_OK";
+		}catch(Exception e) {throw new ControllerException(e); }
+	}//adminAnswerBoardOk
 	
 	@RequestMapping("/answerBoard_NO")
-	public String adminAnswerBoardNo() {
+	public String adminAnswerBoardNo(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("문의게시판(미답변)");
-		
-		return "admin/8-03_answerBoard_NO";
-	}
+		try {
+			List<InquiryQuestionVO> list = this.questionService.getAllInquiryNList(cri);
+			model.addAttribute("_RESULT_",list);
+			AdminPageDTO Adpage = new AdminPageDTO(cri, this.questionService.countList("N"));
+			model.addAttribute("_ADMINPAGINATION_",Adpage);
+			return "admin/8-03_answerBoard_NO";
+		}catch( Exception e) {throw new ControllerException(e); }
+	}//adminAnswerBoardNo
 	
 	@RequestMapping("/answerBoard/comment")
-	public String adminAnswerBoard_comment() {
+	public String adminAnswerBoard_comment(Model model) throws ControllerException {
 		log.info("문의게시판(미답변)");
+		try {
+			
+			return "admin/8-03_answerBoard_comment";
+		}catch(Exception e) {throw new ControllerException(e); }
 		
-		return "admin/8-03_answerBoard_comment";
 	}
 	
 //	관리자 FAQ ========================================================================================

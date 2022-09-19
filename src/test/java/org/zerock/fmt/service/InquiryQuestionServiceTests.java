@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
@@ -61,8 +62,9 @@ public class InquiryQuestionServiceTests {
 	void testGetAllInquiryYList() throws ServiceException {
 		log.trace("testGetAllInquiryYList() invoked.");
 		
-		CriteriaMyPage cri = new CriteriaMyPage();
-		
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(2);
+		cri.setCurrPage(1);
 		List<InquiryQuestionVO> list = this.iqService.getAllInquiryYList(cri);
 		list.forEach(e -> log.info(e));
 	} // testGetAllInquiryYList
@@ -74,11 +76,21 @@ public class InquiryQuestionServiceTests {
 	void testGetAllInquiryNList() throws ServiceException {
 		log.trace("testGetAllInquiryNList() invoked.");
 		
-		CriteriaMyPage cri = new CriteriaMyPage();
-		
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(10);
+		cri.setCurrPage(1);
 		List<InquiryQuestionVO> list = this.iqService.getAllInquiryNList(cri);
 		list.forEach(e -> log.info(e));
 	} // testGetAllInquiryNList
+	
+	@Test
+	@DisplayName("페이징 - 어드민")
+	void countList() throws ServiceException {
+		log.trace("countList : 어드민 페이징");
+		int result1 = this.iqService.countList("Y");
+		int result2 = this.iqService.countList("N");
+		log.info("\t + result 1 : {}, result2 :{}" , result1, result2);
+	}//countList
 	
 	@Test 
 	@Order(4)
@@ -89,8 +101,6 @@ public class InquiryQuestionServiceTests {
 		
 		int iq_number = 15;
 		InquiryVO vo = this.iqService.getInquiry(iq_number);
-		
-		assertNotNull(vo);
 		log.info("\t+ vo: {}", vo);
 
 	} // testGetInquiry

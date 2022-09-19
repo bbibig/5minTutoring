@@ -30,6 +30,12 @@
 		  FETCH NEXT #{amount} ROWS ONLY
 	  </select>
 
+	  <!-- 어드민 페이징 -->
+	  <select id="countList" resultType="int">
+			SELECT COUNT(*) FROM tbl_individual_question 
+			WHERE iq_pass= #{iq_pass}
+	  </select>
+
 
 	<!-- 일대일 문의와 답변 조회 -->
 	<select id="selectInquiry" resultType="org.zerock.fmt.domain.InquiryVO">
