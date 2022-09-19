@@ -94,10 +94,13 @@ public class CommunityController implements InitializingBean{
 	@PostMapping("/register")
 	public String register(@ModelAttribute("reg")CommunityDTO dto, HttpServletRequest req) throws ControllerException{
 		
-		String fb_title= req.getParameter("fb_title");
-		String fb_content = req.getParameter("fb_content");
-		dto.setFb_title(fb_title);
-		dto.setFb_content(fb_content);
+//		String fb_title= req.getParameter("fb_title");
+//		String fb_content = req.getParameter("fb_content");
+//		String user_email = req.getParameter("user_email");
+		
+//		dto.setFb_title(fb_title);
+//		dto.setFb_content(fb_content);
+//		dto.setUser_email(user_email);
 		
 		log.trace("regiser({}) invoked.", dto);
 			
@@ -106,7 +109,7 @@ public class CommunityController implements InitializingBean{
 			log.info("{}",  isResult);
 	
 			
-			return "redirect:/commnunity";
+			return "redirect:/community";
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}//try-catch

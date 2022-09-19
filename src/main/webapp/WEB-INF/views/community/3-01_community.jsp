@@ -82,12 +82,14 @@
                               <form action="/community/register" method="post">
                                   <div class="mb-3">
                                       <label for="recipient-name" class="col-form-label">제목</label>
+                                      <input type="hidden" name="user_email" value= "${__LOGIN_USER__.user_email}">
                                       <input type="text" class="form-control" name="fb_title" id="askTitle" placeholder="제목을 입력해주세요.">
                                   </div>
                                   <div class="mb-3">
                                       <label for="message-text" class="col-form-label">내용</label>
                                       <textarea class="form-control" id="askContent" name="fb_content" placeholder="내용을 입력해주세요."></textarea>
                                   </div>
+                                  
 
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary col-2" data-bs-dismiss="modal">취소</button>
