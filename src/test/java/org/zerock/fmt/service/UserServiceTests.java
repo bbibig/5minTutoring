@@ -2,6 +2,7 @@ package org.zerock.fmt.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -359,4 +360,36 @@ public class UserServiceTests {
 		int result = this.userService.findUserEmail(userEmail);
 		log.info("\t + result : {}", result);
 	}//findUserEmail
+	
+	@Test
+	@DisplayName("kakaoCheck")
+	void kakaoCheckTest() {
+		log.trace("kakaoCheck 카카오 정보 있는지 확인");
+		HashMap<String,Object> param = new HashMap<>();
+		param.put("email", "totor@han.net");
+		HashMap<String, Object> kakao = this.userService.kakaoCheck(param);
+		log.info("\t + kakao : {}", kakao);
+	}//kakaoCheckTest
+	
+	@Test
+	@DisplayName("kakaoLogin")
+	void kakaoLoginTest() {
+		log.trace("kakaoLogin 카카오 로그인하기");
+		HashMap<String,Object> param = new HashMap<String,Object>();
+		param.put("id", "12333");
+		param.put("email", "tutor2@gmail.com");
+		HashMap<String,Object> kakao = this.userService.kakaoLogin(param);
+		log.info("\t + kakao : {}", kakao);
+	}//kakaoLogin
+	
+	@Test
+	@DisplayName("updateKakao")
+	void updateKakaoTest() {
+		log.trace("updateKakao 카카오 정보 업데이트");
+		
+		HashMap<String,Object> param = new HashMap<String,Object>();
+		param.put("email", "totor@han.net");
+		int result = this.userService.updateKakao(param);
+		log.info("result : {}", result);
+	}//updateKakao
 }//end class

@@ -77,16 +77,6 @@
         WHERE user_email= #{user_email}
     </update>
 
-    <!-- 카카오톡 -->
-    <!--     <select id="findKakao" parameterType="java.util.HashMap" resultType="org.zerock.fmt.domain.UserDTO"> -->
-    <!--         SELECT * FROM tbl_user WHERE user_eamil = #{userEmail} -->
-    <!--     </select> -->
-
-    <!--     <insert id="kakaoInsert" parameterMap="java.util.HashMap"> -->
-    <!--         INSERT INTO tbl_user(user_email) -->
-    <!--         VALUES(#{user_email}) -->
-    <!--     </insert> -->
-
     <!-- 검색쿼리 -->
     <sql id="criteriaAdmin">
        <choose>
@@ -149,4 +139,25 @@
         SELECT user_email FROM tbl_user WHERE user_phone=#{user_phone}
     </select>
 
+
+    <!-- 카카오톡 정보확인 -->
+    <select id="kakaoCheck" parameterType="hashMap" resultType="hashMap">
+        SELECT user_email, kakaoLogin 
+        FROM tbl_user
+        WHERE user_email = #{email}
+    </select>
+    <!-- 카카오톡 로그인 -->
+    <select id="kakaoLogin" parameterType="hashMap" resultType="hashMap">
+        SELECT user_email 
+        FROM tbl_user
+        WHERE user_email = #{email}
+        AND kakaoLogin = #{id}
+    </select>
+
+    <!-- 카카오톡 정보 업데이트 -->
+    <update id="updateKakao" parameterType="hashMap">
+        UPDATE tbl_user
+        SET kakaoLogin = #{id} 
+        WHERE user_email = #{email}
+    </update>
 </mapper>
