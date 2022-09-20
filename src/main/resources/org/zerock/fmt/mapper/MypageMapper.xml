@@ -84,7 +84,7 @@
             <if test="user_name !=null">    user_name=#{user_name},</if>
             <if test="user_gender !=null">  user_gender=#{user_gender},</if>
             <if test="user_birth !=null">   user_birth=#{user_birth},</if>
-            <if test="user_phone !=null">   user_phone=#{user_phone},</if>
+            <!-- <if test="user_phone !=null">   user_phone=#{user_phone},</if> -->
             <if test="st_school !=null">    st_school=#{st_school},</if>
             <if test="st_grade !=null">     st_grade=#{st_grade},</if>
             <if test="tt_school !=null">    tt_school=#{tt_school},</if>

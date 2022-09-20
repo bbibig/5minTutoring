@@ -26,6 +26,19 @@
           confirmButtonText: '확인'
         })
       }
+      
+      //휴대전화 *처리
+      let phone = '${_USERINFO_.user_phone}';
+      
+      let front = phone.substr(0, 3);
+      let hiden = phone.substr(3, 4);
+      let star = hiden.replaceAll(hiden, '****');
+      let back = phone.substr(7, 4);
+
+      let hidenPhone = front + '-' + star + '-' + back;
+      
+      let user_phone = document.querySelector("#user_phone");
+      user_phone.value = hidenPhone;
     })// jq
   </script>
 
