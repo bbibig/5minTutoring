@@ -99,7 +99,7 @@
                                     <td>${buy.user_email}</td>
                                     <td>${buy.h_name}</td>
                                     <td>${buy.b_price}</td>
-                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${buy.b_date}" /></td>
+                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${buy.b_date}" /></td>
                                 </tr>
                             </c:forEach>
                             

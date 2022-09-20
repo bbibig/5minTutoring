@@ -158,4 +158,15 @@ public class WithdrawalMapperTests {
 		
 	} // testUpdateHands
 	
+	@Test
+	@Order(5)
+	@DisplayName("승인별 금액")
+	void totalDrowal() throws DAOException {
+		log.trace("totalDrowal : 승인 여부 별 총 금액");
+		
+		int result1 = this.withdrawalMapper.totalDrowal("승인 완료");
+		int result2 = this.withdrawalMapper.totalDrowal("승인 대기");
+		int result3 = this.withdrawalMapper.totalDrowal(null);
+		log.info("\t + result : {}, {}, {}", result1, result2, result3);
+	}//totalDrowal
 } // end class

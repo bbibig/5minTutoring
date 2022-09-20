@@ -26,6 +26,9 @@ public interface WithdrawalService {
 	
 //  승인 여부 수정 (승인 대기 / 승인 완료)
 	public abstract boolean updateState(WithdrawalDTO dto) throws ServiceException;
+	
+//	승인 여부 금액 
+	public abstract int totalDrawal(String approval) throws ServiceException;
 
 //	손들기 개수 차감 (사용자 - 튜터)
 	public abstract boolean updateHands(String user_email) throws ServiceException;

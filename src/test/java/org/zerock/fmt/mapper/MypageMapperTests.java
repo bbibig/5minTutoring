@@ -90,7 +90,7 @@ public class MypageMapperTests {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		UserDTO dto = new UserDTO();
-		dto.setUser_email("now@han.net");
+		dto.setUser_email("test1@gmail.com");
 		String paramPw = "1111111q";
 		String bcPw = encoder.encode(paramPw);
 		dto.setUser_pw(bcPw);		

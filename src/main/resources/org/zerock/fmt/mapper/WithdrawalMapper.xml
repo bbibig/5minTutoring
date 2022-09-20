@@ -51,4 +51,11 @@
 			WHERE user_email = #{user_email}
       </update>
     	
+	  <select id="totalDrowal" resultType="int">
+		  SELECT SUM(w_price) 
+		  FROM tbl_withdrawal
+		  <if test="approval!=null">
+			  WHERE approval = #{approval}
+		  </if>
+	  </select>
     </mapper>    

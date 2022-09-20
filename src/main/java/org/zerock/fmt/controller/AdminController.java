@@ -29,6 +29,7 @@ import org.zerock.fmt.domain.FileVO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.AdminService;
@@ -37,6 +38,7 @@ import org.zerock.fmt.service.FaqService;
 import org.zerock.fmt.service.FileService;
 import org.zerock.fmt.service.InquiryQuestionService;
 import org.zerock.fmt.service.UserService;
+import org.zerock.fmt.service.WithdrawalService;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 import lombok.NoArgsConstructor;
@@ -67,6 +69,9 @@ public class AdminController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private InquiryQuestionService questionService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private WithdrawalService withdrawalService;
 	//--------------------------------------------- 어드민로그인
 	@GetMapping
 	public String adminLogin() {
@@ -272,10 +277,18 @@ public class AdminController {
 	}//adminSale
 	
 	@RequestMapping("/sale/withdrow")
-	public String adminWithDrow() {
+	public String adminWithDrow(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("출금 페이지");
-		//Withdrawal sevice 
-		return "admin/8-05_sale_withdrow";
+		try {
+			List<WithdrawalVO> list = this.withdrawalService.getAllWithdrawalList(cri);
+			model.addAttribute("_DRAWLIST_", list);
+			
+			AdminPageDTO adpage = new AdminPageDTO(cri, this.withdrawalService.countList(null));
+			model.addAttribute("_ADMINPAGINATION_",adpage);
+			
+			model.addAttribute("totalDrawal",this.withdrawalService.totalDrawal(null));
+			return "admin/8-05_sale_withdrow";
+		}catch(Exception e) {throw new ControllerException(e); }
 	}
 	
 	//--------------------------------------------- 튜터가입승인

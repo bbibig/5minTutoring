@@ -26,7 +26,7 @@ public interface WithdrawalMapper {
 //	[R] 페이징 총 건수 
 	public abstract int countList(Integer w_num) throws DAOException;
 	
-	
+
 //  [U]  승인 여부 수정
 	public abstract Integer updateState(WithdrawalDTO dto) throws DAOException;
 	
@@ -34,4 +34,7 @@ public interface WithdrawalMapper {
 	public abstract Integer updateHands(@Param("user_email") String user_email) throws DAOException;
 	
 
+//	[R] 승인 여부 별 금액
+	public abstract int totalDrowal(String approval) throws DAOException;
+	
 } // end interface

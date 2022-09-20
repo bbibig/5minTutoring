@@ -84,7 +84,7 @@
                                     </td>
 
                                     <td>${board.user_email}</td>
-                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.iq_date}"/></td>
+                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${board.iq_date}"/></td>
                                     <td>${board.iq_pass}</td>
                                 </tr>
                             </c:forEach>

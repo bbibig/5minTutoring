@@ -80,6 +80,15 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 	} // updateHands
 
 
+	@Override
+	public int totalDrawal(String approval) throws ServiceException {
+		log.trace("totalDrawal() invoked.");
+		try {
+			return this.withdrawalMapper.totalDrowal(approval);			
+		}catch(Exception e) {throw new ServiceException(e); }
+	}//totalDrawal
+
+
 
 
 } // end class
