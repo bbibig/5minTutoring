@@ -498,6 +498,7 @@ public class MypageController {
 	public String withdrawApplication() {
 		log.trace("withdrawApplication() invoked.");
 		
+		
 		return "mypage/7-15_Withdraw";
 	} // 출금 신청 
 	

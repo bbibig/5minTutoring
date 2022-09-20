@@ -76,7 +76,7 @@
 
                         <!-- sales management card -->
                         <li>
-                            <div class="sales-info">
+                            <div class="withdrawal-info">
                                 <ul>
                                     <li>출금내역 :</li>
                                     <li><fmt:formatNumber value="${totalDrawal}" pattern="###,###,### 원"/></li>

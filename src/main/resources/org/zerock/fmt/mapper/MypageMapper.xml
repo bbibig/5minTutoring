@@ -113,7 +113,7 @@
 	 <!-- 출금신청 -->
 	 <insert id="insertWithdrawal">
 		INSERT INTO tbl_withdrawal
-		VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, #{approval}, CURRENT_DATE)
+		VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, #{approval}, CURRENT_DATE, null)
 	 </insert>
 
 </mapper>

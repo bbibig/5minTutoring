@@ -176,6 +176,18 @@ select{
   color: #333333;
 }
 
+/* withdrawal-info */
+.withdrawal-info ul{
+  margin-left: 480px;
+  padding: 0;
+  display: inline-block;
+}
+.sales-info li{
+  display: inline-block;
+}
+.sales-info a{
+  color: #333333;
+}
 
 /* content list */
 .bg-card{
