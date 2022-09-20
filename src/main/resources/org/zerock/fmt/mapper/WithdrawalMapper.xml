@@ -33,4 +33,11 @@
 	      WHERE w_num = #{w_num}
       </update>
     	
+	  <select id="totalDrowal" resultType="int">
+		  SELECT SUM(w_price) 
+		  FROM tbl_withdrawal
+		  <if test="approval!=null">
+			  WHERE approval = #{approval}
+		  </if>
+	  </select>
     </mapper>    

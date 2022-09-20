@@ -125,8 +125,8 @@
                                         </div>
                                     </td>
                                     <td>${user.user_nick}</td>
-                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${user.user_join}" /></td>
-                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${user.withdrawal_date}" /></td>
+                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${user.user_join}" /></td>
+                                    <td><fmt:formatDate pattern="yyyy.MM.dd" value="${user.withdrawal_date}" /></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

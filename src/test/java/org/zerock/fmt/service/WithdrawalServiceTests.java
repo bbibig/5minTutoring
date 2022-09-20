@@ -58,8 +58,8 @@ public class WithdrawalServiceTests {
 		log.trace("testGetAllWithdrawalList() invoked.");
 
 		CriteriaAdmin cri = new CriteriaAdmin();
-		cri.setAmount(22);
-		cri.setCurrPage(1);
+//		cri.setAmount(22);
+//		cri.setCurrPage(1);
 		List<WithdrawalVO> list = this.wService.getAllWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
 
@@ -87,5 +87,16 @@ public class WithdrawalServiceTests {
 		log.info("result: {}", result);
 	} // testUpdateState
 	
+	@Test
+	@Order(5)
+	@DisplayName("승인 여부 총 금액")
+	void totalDrawal() throws ServiceException {
+		log.trace("totalDrawal : 승인 여부 별 총 금액");
+		
+		int result1 = this.wService.totalDrawal("승인 완료");
+		int result2 = this.wService.totalDrawal("승인 대기");
+		int result3 = this.wService.totalDrawal(null);
+		log.trace("result : {}, {}, {}", result1, result2, result3);
+	}//totalDrawal
 	
 } // end class
