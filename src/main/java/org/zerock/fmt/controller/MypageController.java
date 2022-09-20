@@ -428,6 +428,10 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
+			//튜터페이지 번호
+			int tpNum = this.mypageHandService.getTutorPageNum(vo.getUser_email());
+			model.addAttribute("TpNum", tpNum);
+			
 			if(group.equals("1")) {
 				model.addAttribute("GROUP", group);
 				

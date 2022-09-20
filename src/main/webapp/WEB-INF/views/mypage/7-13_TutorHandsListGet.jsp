@@ -136,7 +136,11 @@
                     <fmt:formatDate value="${gethand.regdate}" pattern="yyyy.MM.dd" />
                   </td>
                   <td class="text-center"> 손들기 3개 </td>
-                  <td class="text-center"> ${gethand.student_nick} </td>
+                  <td class="text-center">
+                    <c:if test="${GROUP eq 1}"><a href="/tutor/watchAnswer?num=${gethand.qb_number}&tp=${TpNum}"></c:if>
+                    <c:if test="${GROUP eq 2}"><a href="#"></c:if>
+                     ${gethand.student_nick} </a>
+                  </td>
                 </tr>
               </c:forEach>
             </tbody>
