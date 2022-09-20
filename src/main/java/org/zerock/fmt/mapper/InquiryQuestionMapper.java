@@ -3,12 +3,9 @@ package org.zerock.fmt.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
-import org.zerock.fmt.domain.InquiryVO;
 import org.zerock.fmt.exception.DAOException;
 
 public interface InquiryQuestionMapper {

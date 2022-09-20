@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaAdmin;
+import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ServiceException;
@@ -43,7 +44,7 @@ public class WithdrawalServiceTests {
 	void testCreateWithdrawal() throws ServiceException {
 		log.trace("testCreateWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "test@gmail.com", "오분은행 1234-55-6789", 100, 1800, null, null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "test@gmail.com", "오분은행 1234-55-6789", 100, 1800, null, null, null);
 		
 		boolean result = this.wService.createWithdrawal(dto);
 		log.info("일대일 문의 작성 결과: {}", result);
@@ -52,18 +53,33 @@ public class WithdrawalServiceTests {
 	
 	@Test
 	@Order(2)
-	@DisplayName("출금 신청 내역 목록 조회 - 관리자") 
+	@DisplayName("관리자 출금 신청 내역 목록 조회 - 승인 대기") 
 	@Timeout(value = 5, unit = TimeUnit.SECONDS)
 	void testGetAllWithdrawalList() throws ServiceException {
 		log.trace("testGetAllWithdrawalList() invoked.");
 
 		CriteriaAdmin cri = new CriteriaAdmin();
-		cri.setAmount(22);
+		cri.setAmount(5);
 		cri.setCurrPage(1);
 		List<WithdrawalVO> list = this.wService.getAllWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
 
 	} // testGetAllWithdrawalList
+	
+	@Test
+	@Order(6)
+	@DisplayName("관리자 출금 신청 내역 목록 조회 - 승인 완료") 
+	@Timeout(value = 5, unit = TimeUnit.SECONDS)
+	void testGetAllWithdrawalOkList() throws ServiceException {
+		log.trace("testGetAllWithdrawalList() invoked.");
+
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
+		List<WithdrawalVO> list = this.wService.getAllWithdrawalOkList(cri);
+		list.forEach(e -> log.info(e));
+
+	} // testGetAllWithdrawalOkList
 	
 	@Test
 	@Order(3)
@@ -81,11 +97,22 @@ public class WithdrawalServiceTests {
 	void testUpdateState() throws ServiceException {
 		log.trace("testUpdateState() invoked.");
 	
-		WithdrawalDTO dto = new WithdrawalDTO(14, null, null, null, null, "승인 완료", null);
+		WithdrawalDTO dto = new WithdrawalDTO(41, null, null, null, null, "승인 완료", null, null);
 		
 		boolean result = this.wService.updateState(dto);
 		log.info("result: {}", result);
 	} // testUpdateState
 	
+	@Test
+	@Order(5)
+	@DisplayName("출금 신청 손들기 개수 차감")
+	void testUpdateHands() throws ServiceException {
+		log.trace("testUpdateHands() invoked.");
 	
+		UserDTO dto = new UserDTO();
+		log.info("\t + dto: {}", dto);
+		
+		boolean result = this.wService.updateHands("now@han.net");
+		log.info("result: {}", result);
+	} // testUpdateHands
 } // end class

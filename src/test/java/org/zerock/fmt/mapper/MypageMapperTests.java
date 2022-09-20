@@ -273,7 +273,7 @@ public class MypageMapperTests {
 	void testInsertWithdrawal() throws DAOException {
 		log.trace("testInsertWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 500, 77000, "승인 대기", null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 500, 77000, "승인 대기", null, null);
 		log.info("\t + dto: {}", dto);
 	
 		int affectedLines = this.mapper.insertWithdrawal(dto);

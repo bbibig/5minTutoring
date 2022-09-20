@@ -38,7 +38,7 @@
 					<h3 class="fw-bold">1:1 문의하기</h3>
 					<br>
 
-										<!-- FROM -->
+					<!-- FROM -->
 					<form action="/inquiry/inquiryCreate" method="post">
 						<div class="container card p-4" id="inquiry_form" bg-card>
 							<div class="mb-3">
@@ -68,11 +68,9 @@
 								<!--  <button class="btn btn-dark ms-1" type="submit" href="/mypage/qList">문의하기</button>-->	
 								</div>
 							</div>
-
-
-					</div>
-					<!--End main contents card(박스)-->
-
+						</div>
+						<!--End main contents card(박스)-->
+					</form>
 				</div>
 				<!-- End main contents -->
 			</div>

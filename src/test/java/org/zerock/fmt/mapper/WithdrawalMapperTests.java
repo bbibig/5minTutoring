@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.CriteriaMyPage;
+import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
@@ -61,7 +61,7 @@ public class WithdrawalMapperTests {
 	void testInsertWithdrawal() throws DAOException {
 		log.trace("testInsertWithdrawal() invoked."); 
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "tutor2@gmail.com", "오분은행 1111-2222", 600, 75000, null, null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "now@han.net", "오분은행 1111-2222", 600, 75000, null, null, null);
 		log.info("\t + dto: {}", dto);
 	
 		int affectedLines = this.withdrawalMapper.insertWithdrawal(dto);
@@ -72,7 +72,7 @@ public class WithdrawalMapperTests {
 	} // testInsert
 	
 	
-//  [R] 출금 신청 내역 조회 - 관리자 
+//  [R] 출금 신청 내역 조회(승인 대기) - 관리자 
 	@Test
 	@Order(2)
 	@DisplayName("출금 신청 내역조회 테스트")
@@ -89,10 +89,29 @@ public class WithdrawalMapperTests {
 		list.forEach(log::info);
 	
 	} // testGetList 
+	
+//  [R] 출금 신청 내역 조회(승인 완료) - 관리자
+	@Test
+	@Order(3)
+	@DisplayName("출금 신청 내역조회 테스트")
+	@Timeout(value=100, unit=TimeUnit.SECONDS)
+	void testGetOkList() throws DAOException {
+		log.trace("testGetList() invoked.");
+		
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setAmount(5);
+		cri.setCurrPage(1);
+		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalOkList(cri);
+
+		Objects.requireNonNull(list);
+		list.forEach(log::info);
+	
+	} // testGetOkList 
+	
 
 //	[R] 페이징 총 건수 - 관리자
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("어드민 페이지 총 개수")
 	void countList() throws DAOException {
 		log.info("countList : 어드민 페이징");
@@ -104,15 +123,15 @@ public class WithdrawalMapperTests {
 	
 	
 	
-//  [U] 출금 신청 승인 여부 변경 (승인 대기 중 / 승인 완료)  	
+//  [U] 출금 신청 승인 여부 변경 (승인 대기 / 승인 완료)  	
 	@Test
-	@Order(4)
+	@Order(5)
 	@DisplayName("출금 신청 승인 변경")
 	@Timeout(value=100, unit=TimeUnit.SECONDS)
 	void testUpdate() throws DAOException {
 		log.trace("testUpdate() invoked.");
 		
-		WithdrawalDTO dto = new WithdrawalDTO(9, null, null, null, null, "승인 완료", null);
+		WithdrawalDTO dto = new WithdrawalDTO(35, null, null, null, null, "승인 완료", null, null);
 		
 		int affectedLines =  this.withdrawalMapper.updateState(dto);
 		log.info("\t+ affectedLines: {}", affectedLines);
@@ -120,4 +139,23 @@ public class WithdrawalMapperTests {
 		assert affectedLines == 1;
 		
 	} // testUpdate
+	
+//  [U] 손들기 개수 차감
+	@Test
+	@Order(6)
+	@DisplayName("손들기 개수 차감")
+	@Timeout(value=100, unit=TimeUnit.SECONDS)
+	void testUpdateHands() throws DAOException {
+		log.trace("testUpdateHands() invoked.");
+			
+		UserDTO dto = new UserDTO();
+		log.info("\t + dto: {}", dto);
+			
+		int affectedLines =  this.withdrawalMapper.updateHands("now@han.net");
+		log.info("\t+ affectedLines: {}", affectedLines);
+		
+		assert affectedLines == 1;
+		
+	} // testUpdateHands
+	
 } // end class

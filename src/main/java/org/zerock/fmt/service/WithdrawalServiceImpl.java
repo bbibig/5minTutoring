@@ -34,7 +34,7 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 	} // createWithdrawal
 
 	
-	// 출금 신청 내역 전체 조회 (내림차순) - 관리자
+	// 출금 신청 내역 전체 조회 (승인 대기) - 관리자
 	@Override
 	public List<WithdrawalVO> getAllWithdrawalList(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllInquiryNList() invoked.");
@@ -42,6 +42,15 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		try { return this.withdrawalMapper.selectAllWithdrawalList(cri); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // getAllWithdrawalList
+	
+	// 출금 신청 내역 전체 조회 (승인 완료) - 관리자
+	@Override
+	public List<WithdrawalVO> getAllWithdrawalOkList(CriteriaAdmin cri) throws ServiceException {
+		log.trace("getAllInquiryNList() invoked.");
+		
+		try { return this.withdrawalMapper.selectAllWithdrawalOkList(cri); } 
+		catch (DAOException e) { throw new ServiceException(e); }
+	} // getAllWithdrawalOkList
 
 	// 출금 신청 내역 개수 - 관리자
 	@Override
@@ -49,17 +58,26 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		log.trace("countList() invoked.");
 		try { return this.withdrawalMapper.countList(w_num); }
 		catch(Exception e) { throw new ServiceException(e); }
-	} // updateState
+	} // countList
 	
 	
-	// 승인 여부 수정 (승인 완료 / 승인 대기)
+	// 승인 여부 수정 (승인 대기 / 승인 완료)
 	@Override
 	public boolean updateState(WithdrawalDTO dto) throws ServiceException {
 		log.trace("updateState() invoked.");
 		
 		try { return withdrawalMapper.updateState(dto) == 1; }
 		catch (DAOException e) { throw new ServiceException(e); } 
-	}
+	}  // updateState
+
+	// 출금 신청으로 보유 손들기 차감 
+	@Override
+	public boolean updateHands(String user_email) throws ServiceException {
+		log.trace("updateState() invoked.");
+		
+		try { return withdrawalMapper.updateHands(user_email) == 1; }
+		catch (DAOException e) { throw new ServiceException(e); } 
+	} // updateHands
 
 
 

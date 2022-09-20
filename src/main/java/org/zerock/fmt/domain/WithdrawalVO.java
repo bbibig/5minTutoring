@@ -14,5 +14,6 @@ public class WithdrawalVO {
 	private Integer w_price;		// 출금액
 	private String approval;		// 승인여부 (승인 대기 / 승인 완료)
 	private Date w_date;
+	private Date w_okdate;	
 	
 } // end class

@@ -76,12 +76,12 @@
 
 					<!--문의하기 안내-->
 					<div class="info">
-						<p class="fs-5">
+						<p class="fs-6">
 							안녕하세요 오분과외입니다.<br> 도움이 필요하신가요?<br> 문의를 남겨주시면 자세히
 							안내해드리겠습니다.
 						</p>
 						<div class="d-grid col-2 mx-auto">
-							<a class="btn btn-dark btn-lg" href="/inquiry" role="button">문의하기</a>
+							<a class="btn btn-dark btn-md" href="/inquiry" role="button">문의하기</a>
 						</div>
 					</div>
 

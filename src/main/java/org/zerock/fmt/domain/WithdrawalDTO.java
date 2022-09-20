@@ -20,5 +20,6 @@ public class WithdrawalDTO {
 	private Integer w_price;		// 출금액
 	private String approval;		// 승인여부 (승인 대기 / 승인 완료)
 	private Date w_date;			// 출금신청 날짜
+	private Date w_okdate;			// 승인 완료 날짜
 	
 } // end class

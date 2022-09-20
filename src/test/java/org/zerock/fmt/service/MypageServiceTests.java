@@ -270,7 +270,7 @@ public class MypageServiceTests {
 	void testCreateWithdrawal() throws ServiceException {
 		log.trace("testCreateWithdrawal(), 튜터 손들기 출금 신청 테스트");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 1000, 22000, "승인 대기 중", null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 1000, 22000, "승인 대기 중", null, null);
 		log.info("\t + dto: {}", dto);
 	
 		boolean result = this.service.createWithdrawal(dto);
