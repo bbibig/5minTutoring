@@ -60,7 +60,10 @@ public class CommuntyMapperTests {
 	void testSelectAllList() throws DAOException {
 		log.trace("SelectAllList() invoked.");
 		
+		
 		CriteriaCommunity page = new CriteriaCommunity();
+		page.setKeyword("새글");
+		
 		List<CommunityVO> list = this.cMapper.selectAllList(page);
 		assertNotNull(list);
 		
@@ -147,5 +150,25 @@ public class CommuntyMapperTests {
 		assert affectedLines == 1;
 		
 	}//insert
+	
+	@Test
+	@DisplayName("CommunityMapper.allCount() test")
+	@Order(6)
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testAllCount() throws DAOException {
+		log.trace("testAllCount() invoked.");
+		
+		CriteriaCommunity cri = new CriteriaCommunity();
+		
+		cri.setKeyword("새글");
+		
+		int result = this.cMapper.allCount(cri);
+		
+		log.info("resultp{}", result);
+		
+		
+		
+		
+	}// allcount
 	
 }//end class

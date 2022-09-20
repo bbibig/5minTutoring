@@ -15,6 +15,11 @@
 				FROM tbl_community T1, tbl_user T2
 
 				WHERE T1.user_email = T2.user_email
+				
+				<if test="keyword != null">
+                    and fb_title like '%'||#{keyword}||'%' 
+                </if>
+                
 				OFFSET (#{currPage} - 1) * #{amount} rows
 				FETCH NEXT #{amount} ROWS ONLY
         </select>
@@ -55,5 +60,16 @@
             VALUES (#{bno}, #{title}, #{content}, #{writer})
         </insert>
     	
+    	<select id="allCount" resultType="int">
+        SELECT count(fb_number) 
+        FROM tbl_community
+        
+        <where>
+       		<if test="keyword != null">
+        	fb_title like '%'||#{keyword}||'%' 
+        	</if>
+        </where>
+        
+    	</select>
     	
     </mapper>    

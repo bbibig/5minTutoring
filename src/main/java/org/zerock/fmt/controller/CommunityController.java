@@ -45,8 +45,10 @@ public class CommunityController implements InitializingBean{
 			
 			model.addAttribute("_LIST_", list);	
 			
-			CommunityPageDTO pageDto = new CommunityPageDTO(page, this.communityService.allCount());
+			CommunityPageDTO pageDto = new CommunityPageDTO(page, this.communityService.allCount(page));
 			model.addAttribute("_COMMUNITYPAGE_", pageDto);
+			
+			
 			
 		}catch(Exception e) {
 			throw new ControllerException(e);

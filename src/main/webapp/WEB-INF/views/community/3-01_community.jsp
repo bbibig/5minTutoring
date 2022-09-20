@@ -60,7 +60,7 @@
             <div class="col-7">
               <div class="row d-flex flex-row justify-content-end">
                 <form class="d-flex col-5"> 
-                  <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search"> 
+                  <input class="form-control mr-2" type="search" name=keyword value="${_COMMUNITYPAGE_.cri.keyword}" placeholder="Search" aria-label="Search"> 
                   <button class="btn btn-primary" type="submit" id="search-button">검색</button> 
                 </form>
   
@@ -148,7 +148,7 @@
   
                       <div class="question_comment">
                         <span class="comment_count">0</span>
-                        <span class="comment_decription">답변</span>
+                        <span class="comment_decription">댓글</span>
                       </div>
   
                       <div class="heart d-flex mt-4">

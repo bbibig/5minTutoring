@@ -28,5 +28,5 @@ public interface CommunityService {
 	public abstract boolean update(CommunityDTO dto) throws ServiceException;
 	
 	//6. 커뮤니티 게시글 총 갯수
-	public abstract Integer allCount()throws ServiceException;
+	public abstract Integer allCount(CriteriaCommunity page)throws ServiceException;
 }

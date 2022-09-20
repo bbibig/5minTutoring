@@ -103,9 +103,9 @@ public class CommunityServiceImpl implements CommunityService, InitializingBean,
 	}
 
 	@Override
-	public Integer allCount() throws ServiceException {
+	public Integer allCount(CriteriaCommunity page) throws ServiceException {
 		try {
-			return this.communityMapper.allCount();
+			return this.communityMapper.allCount(page);
 		}catch(DAOException e) {
 			throw new ServiceException(e);
 		} // try-catch

@@ -33,7 +33,6 @@ public interface CommunityMapper {
 	
 	
 	//게시글 총 갯수 
-	@Select("SELECT count(fb_number) FROM tbl_community")
-	public abstract Integer allCount()throws DAOException;
+	public abstract Integer allCount(CriteriaCommunity page)throws DAOException;
 	
 }
