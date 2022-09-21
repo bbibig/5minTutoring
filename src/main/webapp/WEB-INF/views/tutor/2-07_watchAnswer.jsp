@@ -63,17 +63,36 @@
 			$(document).ready(function() {
 				var a_number = "${_A_.a_number}";
 				var commentList = $(".commentList");
+				var currPage = 1; // 현재 댓글 페이지 번호
 				
-				showList(1);
+				showList(1, true);
 		        
 				// 댓글 리스트 출력
-	       		function showList(currPage) {
-					commentService.getList({a_number:a_number, currPage:currPage||1}, function(list) {
+	       		function showList(currPage, reset) {
+					commentService.getList({a_number:a_number, currPage:currPage||1}, function(data) {
+						
+						var commentCnt = data.commentCnt;
+						var list = data.list;
 						var str = "";
+						
+						// 현재 표시된 페이지의 댓글이 5개 이하면 더보기 버튼 숨기기
+						if(currPage * 5 >= commentCnt) {
+							$("#moreComment").css("display", "none");
+						} else {
+							$("#moreComment").css("display", "inline");
+						}
+						
+						// 댓글 모달 처리 후 1 페이지로 돌아오기 위한 처리
+						if(reset) {
+							commentList.html("");
+							currPage = 1;
+						}
+						
 						if(list == null || list.length==0) {
 							commentList.html("");
 							return;
 						}
+						
 						for(var i=0, len=list.length || 0; i<len; i++) {
 							str+= '<div class="commentDiv" data-cm_number="'+list[i].cm_number+'"><div class="comment_info d-flex">';
 							str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
@@ -89,9 +108,14 @@
 							str+= '				</ul></div></div></div>';
 							str+= '	<p>' +list[i].cm_content+ '</p></div><hr>';
 						}
-						commentList.html(str);
+						commentList.append(str);
 					}); // getList
 				} // showList
+				
+				// 댓글 더보기 버튼
+		        $("#moreComment").click(function() {
+		        	showList(++currPage, false);
+		        });
 
 				// 댓글 등록 
 				$("#commentSave").on("click", function(e) {
@@ -102,7 +126,7 @@
 					};
 					commentService.add(comment, function(result) {
 						alert("RESULT: 댓글 등록 성공");
-						showList(1);
+						showList(1, true);
 					}); // add
 				}); // onclick
 
@@ -127,7 +151,7 @@
 						if(result !== "undefined") {
 							alert("댓글 수정 완료");
 							$("#comment_revise").modal("hide");
-							showList(1);
+							showList(1, true);
 						}
 					}, function(err) {
 						alert("ERROR");
@@ -141,20 +165,12 @@
 						if(result !== "undefined") {
 							alert("댓글 삭제 완료");
 							$("#delete").modal("hide");
-							showList(1);
+							showList(1, true);
 						}
 					}, function(err) {
 						alert("ERROR");
 					});
 				}); // onclick
-					
-			
-				
-				
-
-
-
-				
 
 			}); // .jq
 
@@ -388,7 +404,7 @@
 	
 						   
 	                    <!-- comment Area -->
-	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span> 3</span></span>
+	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span id="commentTotal"> ${_COMMENT_CNT_}</span></span>
 	                    <div class="comment_box">
 	                        <div class="comment d-flex">
 	                            <div class="sSPic">

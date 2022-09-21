@@ -23,5 +23,8 @@ public interface CommentService {
 	
 	// 해당 댓글 조회
 	public abstract CommentVO getOneComment(String cm_number) throws ServiceException;
+
+	// 해당 게시글의 댓글 개수 조회
+	public abstract Integer commentCount(int a_number) throws ServiceException;
 	
 } // end interface

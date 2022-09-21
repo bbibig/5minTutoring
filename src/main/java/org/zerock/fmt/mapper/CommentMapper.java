@@ -25,8 +25,7 @@ public interface CommentMapper {
 	// 해당 댓글 조회
 	public abstract CommentVO selectOneComment(String cm_number) throws DAOException;
 	
-	// 댓글 개수 카운트
-	
-	
+	// 댓글 개수 조회
+	public abstract Integer commentCount(int a_number) throws DAOException;
 	
 } // end interface

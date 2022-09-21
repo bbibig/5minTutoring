@@ -1,6 +1,8 @@
 package org.zerock.fmt.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,7 +56,7 @@ public class CommentController {
 	
 	
 	@GetMapping(value="/list/{a_number}/{currPage}", produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<CommentVO>> commentList(@PathVariable("a_number") int a_number,
+	public Map<String, Object> commentList(@PathVariable("a_number") int a_number,
 													@PathVariable("currPage") int currPage) throws ControllerException {
 		log.trace("해당 답변글의 댓글 목록 출력");
 		
@@ -62,9 +64,15 @@ public class CommentController {
 		
 		try {
 			List<CommentVO> commentList = this.commentService.getComment(criteria);
-			// 댓글 총 개수 구하는 mapper 만들고 추가해야할까? (size메소드로 가능한지 확인하기)
 			
-			return new ResponseEntity<>(commentList, HttpStatus.OK);
+			int commentCnt = this.commentService.commentCount(a_number);
+			log.info("commentCnt: {}", commentCnt);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", commentList); // 페이징된 댓글 목록 (5개)
+			map.put("commentCnt", commentCnt); // 댓글의 총 개수
+			
+			return map;
 			
 		} catch (ServiceException e) { throw new ControllerException(e); }
 	} // commentList

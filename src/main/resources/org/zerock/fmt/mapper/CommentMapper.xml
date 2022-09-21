@@ -50,7 +50,7 @@
 		AND u.user_name IN (SELECT user_name
 							FROM tbl_user 
 							WHERE c.user_email = u.user_email)
-		ORDER BY regdate ASC
+		ORDER BY regdate DESC
 		OFFSET (#{currPage} - 1) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
 	</select>
@@ -70,6 +70,12 @@
 		AND u.user_name IN (SELECT user_name
 							FROM tbl_user 
 							WHERE c.user_email = u.user_email)
+	</select>
+	
+	<select id="commentCount" resultType="Integer">
+		SELECT COUNT (*) AS comment_cnt
+		FROM tbl_comment
+		WHERE a_number = #{a_number}
 	</select>
 
 </mapper>

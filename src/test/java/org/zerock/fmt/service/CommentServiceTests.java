@@ -128,4 +128,19 @@ public class CommentServiceTests {
 		
 	} // getOneCommentTest
 	
+//	@Disabled
+	@Test
+	@Order(6)
+	@DisplayName("6. CommentService.commentCount() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void commentCountTest() throws ServiceException {
+		log.trace("해당 게시글의 댓글 개수 출력");
+		
+		int a_number = 20;
+		
+		int comment_cnt = this.commentService.commentCount(a_number);
+		log.info("comment_cnt: {}", comment_cnt);
+		
+	} // commentCountTest
+	
 } // end class

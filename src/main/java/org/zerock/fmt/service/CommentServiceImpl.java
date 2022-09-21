@@ -68,4 +68,12 @@ public class CommentServiceImpl implements CommentService {
 		catch (Exception e) { throw new ServiceException(e); }
 	} // getOneComment
 
+	@Override
+	public Integer commentCount(int a_number) throws ServiceException {
+		log.trace("해당 댓글을 출력");
+
+		try { return this.commentMapper.commentCount(a_number); } 
+		catch (Exception e) { throw new ServiceException(e); }
+	} // commentCount
+
 } // end class
