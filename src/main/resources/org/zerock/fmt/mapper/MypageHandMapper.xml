@@ -146,13 +146,4 @@
 	</select>
 
 
-	<!-- 5. 튜터페이지 조회 -->
-	<select id="getTutorPageNum" resultType="Integer">
-		SELECT t.tp_number
-		FROM (SELECT user_email
-		      FROM tbl_user
-		      WHERE user_group = 'Tutor' AND user_email = #{user_email})u,
-		      tbl_tutor_page t
-		WHERE u.user_email = t.user_email
-	</select>
 </mapper>

@@ -2,6 +2,7 @@ package org.zerock.fmt.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
@@ -54,6 +55,9 @@ public interface MypageHandMapper {
 	
 //	====================================
 	//5. 튜터페이지 조회
+	@Select("SELECT tp_number "
+			+ "FROM tbl_tutor_page "
+			+ "WHERE user_email = #{user_email}")
 	public abstract Integer getTutorPageNum(String user_email) throws DAOException;
 	
 }// end interface
