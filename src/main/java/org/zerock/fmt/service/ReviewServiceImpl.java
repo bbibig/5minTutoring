@@ -62,9 +62,41 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public double avgReview(int tp_number) throws ServiceException {
 		log.trace("avgReview invoked.");
+		
 		try {
-			return this.reviewMapper.avgReview(tp_number);			
+			if(this.reviewMapper.avgReview(tp_number)==null) {
+				this.reviewMapper.updateAve(0.0, tp_number);
+				//별점없으면 튜터페이지 별점 0 으로 업데이트
+				return 0.0;
+			} else {
+				double star = this.reviewMapper.avgReview(tp_number);
+				int avgResult = this.reviewMapper.updateAve(star, tp_number);
+				//튜터페이지 별점 평균별점으로 업데이트
+					if(avgResult==0){
+						log.info("tutorPage average update fail");
+					};
+			 return star;
+			}//if-else
+			
 		}catch(Exception e) { throw new ServiceException(e);}
 	}//avgReview
+
+
+	@Override
+	public ReviewVO getRevirwDetail(int rv_number) throws ServiceException {
+		log.trace("getRevirwDetail.");
+		try {
+			return this.reviewMapper.selectRVone(rv_number);
+		}catch(Exception e) {throw new ServiceException(e); }
+	}//getRevirwDetail
+
+
+	@Override
+	public int removeReview(int rv_number) throws ServiceException {
+		log.trace("removeReview. ");
+		try {
+			return this.reviewMapper.deleteReview(rv_number);
+		}catch (Exception e) {throw new ServiceException(e);}
+	}//removeReview
 	
 }//end interface

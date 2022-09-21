@@ -42,10 +42,10 @@ public class ReviewMapperTest {
 		log.trace("InsertReview : 리뷰등록 테스트");
 		
 		ReviewDTO dto = new ReviewDTO();
-		dto.setTp_number(64);
-		dto.setUser_email("학생가입");
-		dto.setRv_star(5.0);
-		dto.setRv_content("시간을 예약 할 수 있었으면 좋겠습니다~~");
+		dto.setTp_number(65);
+		dto.setUser_email("now@han.net");
+		dto.setRv_star(2.0);
+		dto.setRv_content("너무 건성으로 가르쳐 주는 것 같아여");
 		int result = this.reviewMapper.InsertReview(dto);
 		log.info("\t + result : {}", result);	
 	}//insertReview
@@ -99,4 +99,38 @@ public class ReviewMapperTest {
 		double result2 = this.reviewMapper.avgReview(63);
 		log.info("\t + result : {}, {}", result1, result2);
 	}//avgReview
+	
+	@Test
+	@Order(6)
+	@DisplayName("selectRVone")
+	void testSelectRVone() throws DAOException {
+		log.trace("selectRVone : 리뷰 정보 가져오기");
+		
+		ReviewVO rvOne1 = this.reviewMapper.selectRVone(2);
+		ReviewVO rvOne2 = this.reviewMapper.selectRVone(100);
+		log.info(" Review : {}, {}", rvOne1, rvOne2);
+		
+	}//selectRVone
+	
+	@Test
+	@Order(7)
+	@DisplayName("updateAve")
+	void testUpdateAge() throws DAOException {
+		log.trace("updateAve : 튜터 페이지 평균 업데이트");
+		
+		int result1 = this.reviewMapper.updateAve(3.0, 61);
+		int result2 = this.reviewMapper.updateAve(3.0, 100);
+		log.info("\t + result : {}, {}",result1, result2);
+	}//updateAve
+	
+	@Test
+	@Order(8)
+	@DisplayName("deleteReview")
+	void testDeleteReview() throws DAOException {
+		log.trace("deleteReview : 리뷰 삭제 테스트");
+
+		int result1 = this.reviewMapper.deleteReview(23);
+		int result2 = this.reviewMapper.deleteReview(300);
+		log.info("\t + result : {}, {}", result1, result2);
+	}//deleteReview
 }//end class

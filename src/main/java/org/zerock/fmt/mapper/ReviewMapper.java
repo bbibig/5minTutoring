@@ -2,6 +2,7 @@ package org.zerock.fmt.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.fmt.domain.CriteriaReview;
 import org.zerock.fmt.domain.ReviewDTO;
 import org.zerock.fmt.domain.ReviewVO;
@@ -24,7 +25,17 @@ public interface ReviewMapper {
 	//리뷰 수정
 	public abstract int updateReview(ReviewDTO dto) throws DAOException;
 	
+	//리뷰 조회(1)
+	public abstract ReviewVO selectRVone(Integer rv_number) throws DAOException;
+	
 	//리뷰 평균
 	public abstract Double avgReview(Integer tp_number) throws DAOException;
+	
+	//튜터테이블 평균 업데이트
+	public abstract int updateAve(@Param("tp_average")Double tp_average,
+								  @Param("tp_number")Integer tp_number) throws DAOException;
+	//리뷰 삭제 
+	public abstract int deleteReview(Integer rv_number) throws DAOException;
+	
 	
 }//end 

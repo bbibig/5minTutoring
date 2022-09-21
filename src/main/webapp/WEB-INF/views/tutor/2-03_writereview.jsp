@@ -14,21 +14,76 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
     <!-- ========================================================= -->
+    <style>
+      #RVcount{
+        font-weight: bold;
+        margin-right: 10px;
+      }
+    </style>
     <script>
       $(function () {
-        let reviewForm = $('#reviewForm');
-        $('#Review_btn').on('click', function () {
-          let rv_content = $('#floatingTextarea1').val();
-          reviewForm.attr("action", "/tutor/createReview");
-          reviewForm.submit();
-        });//리뷰 등록
-
+        
         let resultReview = '${_RESULT_REVIEW_}';
         if (resultReview != "") {
           alert(resultReview);
         }//리뷰 결과
 
+        let reviewForm = $('#reviewForm');
+        $('#Review_btn').on('click', function () {
+          reviewForm.attr("action", "/tutor/createReview");
+          reviewForm.submit();
+        });//리뷰 등록
+
+        let removeForm = $('#removeForm')
+        $('#removeReview').on('click', function(){          
+          let tp_number = '${_TUTOR_INFO_.tp_number}';
+          let rv_number = $('#rv_number').val();
+
+          $.ajax({
+            data : { 
+              tp_number : tp_number,
+              rv_number : rv_number 
+            },
+            url : "/tutor/removeReview",
+            type : "GET",
+            dataType : "text",
+            success : function(result){
+              if(result!="fail"){
+                alert(result);
+              }
+              self.location="/tutor/writeReview?num="+tp_number;
+            }//success
+          })//ajax
+        })//리뷰삭제
         
+        $('#form1btn').on('click', function(){
+          let array = new Array();
+          let test1 = document.querySelectorAll("#modi");
+          console.log(test1);
+
+          $('#modi').each(function(){
+            array.push(this.value);
+            console.log(array);
+          })
+
+          let test = $('#rv_number').val();
+          console.log(test);
+          alert(test)
+          
+          
+          // let rv_number = $('#rv_number').val();
+          
+          // $.ajax({
+          //   data : { rv_number : rv_number },
+          //   url : "/tutor/modify",
+          //   type : "GET",
+          //   success : function(result){
+          //     console.log(result);
+          //   }//success
+          // })//ajax
+
+        })//리뷰 수정
+           
       });//jq
     </script>
 
@@ -67,7 +122,7 @@
                   <br>누적답변<br> ${_TUTOR_INFO_.tp_accu_answer}
                 </div>
                 <div class="emblem-circle rounded-circle ">
-                  <br>평점<br> ${avgReview}
+                  <br>평점<br> ${_TUTOR_INFO_.tp_average}
                 </div>
               </div>
             </div>
@@ -92,7 +147,7 @@
               <div class="head-line">
                 <h2>학생리뷰</h2>
               </div>
-              <div class="review-count text-end">후기 총??개</div>
+                <div class="review-count text-end"><span id="RVcount">후기 ${RVCOUNT} 개</span></div>
             </div>
 
             <div class="star-rating row d-flex flex-row justify-content-center">
@@ -157,12 +212,12 @@
             <!-- Student 일때 리뷰 등록 가능 -->
             <c:if test="${__LOGIN_USER__.user_group eq 'Student'}">
               <!-- 리뷰 작성 박스-->
-              <form id="reviewForm" method="post">
+              <form method="post" id="reviewForm">
                 <div class="comment-box d-flex flex-column align-items-center">
-                  <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}">
-                  <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
+                  <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" id="modi">
+                  <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}" id="modi">
 
-                  <div class="rating">
+                  <div class="rating" id="modi">
                     <!-- <fieldset id="star_rating"> -->
                     <input type="radio" name="rv_star" value="5.0" id="5"><label for="5">☆</label>
                     <input type="radio" name="rv_star" value="4.0" id="4"><label for="4">☆</label>
@@ -174,12 +229,12 @@
                   <p class="my-3">별점을 선택해주세요.</p>
 
                   <div class="text-box col-12">
-                    <textarea name="rv_content" class="form-control" placeholder="후기를 남겨주세요!" id="floatingTextarea1"
+                    <textarea name="rv_content" class="form-control" placeholder="후기를 남겨주세요!" id="floatingTextarea1 modi"
                       style="height: 150px"></textarea>
                   </div>
 
                   <div class="write-button align-self-end">
-                    <a class="btn btn-dark my-2 col-push-4" id="Review_btn">등록</a>
+                    <a class="btn btn-dark my-2 col-push-4" id="Review_btn" type="button">등록</a>
                   </div>
 
                 </div>
@@ -189,6 +244,9 @@
 
 
             <!-- 유저리뷰 전체-->
+            <!-- 리뷰가 있어야 리스트 보임 -->
+          <c:if test="${RVCOUNT != 0 }">
+
             <div class="review-block ">
               <!--최신순 / 낮은평점순 / 높은평점순 전체 필터-->
               <div class="filter">
@@ -261,12 +319,21 @@
                           <i class="bi bi-list fs-2"></i>
                         </button>
 
+                        <c:if test="javascript:loginReview">
+                          111111111
+                        </c:if>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li class="list-unstyled"><a class="dropdown-item" href="#form1"
-                              data-bs-toggle="modal">수정</a></li>
-                          <li class="list-unstyled"><a class="dropdown-item" href="#form2"
-                              data-bs-toggle="modal">삭제</a></li>
+                          <li class="list-unstyled">
+                            <a class="dropdown-item" id="form1btn" data-bs-toggle="modal">수정</a>
+                          </li>
+                          <li class="list-unstyled">
+                            <a class="dropdown-item" id="removeReview" data-bs-toggle="modal">삭제</a>
+                          </li>
                         </ul>
+                        <form id="removeForm">
+                          <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
+                          <input type="hidden" name="rv_number" value="${review.rv_number}" id="rv_number">
+                        </form>
                       </div>
 
                     </div><!-- 수정/삭제 버튼-->
@@ -283,6 +350,8 @@
               </div>
 
             </div> <!-- 유저리뷰 전체 블락 end-->
+            
+          </c:if>
 
             <div class="page-number d-flex flex-row justify-content-center">
 
@@ -354,7 +423,7 @@
                   <form class="was-validated col-12 d-flex flex-column">
                     <div class="text-box">
                       <textarea class="form-control" placeholder="" id="floatingTextarea1" style="height: 150px"
-                        required></textarea>
+                        required value="${review.rv_content}"></textarea>
                     </div>
 
                     <div class="pop-up-button-box align-self-end">
@@ -389,9 +458,8 @@
                   <p class="my-3 "><strong class="fs-4">삭제하시겠습니까?</strong></p>
 
                   <div class="pop-up-button-box d-flex flex-row align-self-center">
-                    <button type="button" class="btn btn-outline-primary"
-                      data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-outline-primary">확인</button>
+                    <button type="button" class="btn btn-outline-primary"data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-outline-primary" >확인</button>
                   </div>
 
                 </div>

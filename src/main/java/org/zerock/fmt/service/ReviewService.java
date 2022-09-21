@@ -17,5 +17,10 @@ public interface ReviewService {
 	
 	public abstract int modifyReview(ReviewDTO dto) throws ServiceException;
 	
+	public abstract ReviewVO getRevirwDetail(int rv_number)throws ServiceException;
+	
 	public abstract double avgReview(int tp_number) throws ServiceException;
+	
+	public abstract int removeReview(int rv_number) throws ServiceException;
+	
 }//end interface
