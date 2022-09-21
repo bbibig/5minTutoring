@@ -248,6 +248,17 @@ public class TutorController {
 			boolean result = this.answerService.createA(newA);
 			log.info("result: {}", result);
 			
+			HttpSession session = req.getSession();
+			UserVO userVO = (UserVO) session.getAttribute("__LOGIN_USER__");
+			
+			// session 손들기 정보 업데이트
+			int hands = (int) userVO.getHands_wallet();
+			log.info("============= session hands: {}", hands);
+			
+			userVO.setHands_wallet(hands + 3);
+			session.setAttribute("__LOGIN_USER__", userVO);
+			log.info("============= after hands: {}", userVO.getHands_wallet());
+			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "redirect:/tutor/watchAnswer?num=" + qb_number;
@@ -282,15 +293,8 @@ public class TutorController {
 				return "redirect:/tutor/writeAnswer?num=" + qb_number + "&tp=" + tp_number;
 			}
 			
-			// 답변의 댓글
-//			int a_number = Avo.getA_number();
-//			List<CommentVO> commentVO = this.commentService.getComment(a_number);
-//			log.info("a_number: {}", a_number);
-//			commentVO.forEach(log::trace);
-			
 			model.addAttribute("_ONE_Q_", oneQ);
 			model.addAttribute("_A_", Avo);
-//			model.addAttribute("_COMMENT_", commentVO);
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
@@ -333,6 +337,14 @@ public class TutorController {
 			boolean result = this.askService.createQ(newDTO);
 			log.info("result: {}", result);
 			
+			// session 손들기 정보 업데이트
+			int hands = (int) userVO.getHands_wallet();
+			log.info("============= session hands: {}", hands);
+			
+			userVO.setHands_wallet(hands - 3);
+			session.setAttribute("__LOGIN_USER__", userVO);
+			log.info("============= after hands: {}", userVO.getHands_wallet());
+			
 		} catch (ServiceException e) { throw new ControllerException(e); }
 		
 		return "redirect:/tutor/ask?num=" + tp_number;
@@ -354,6 +366,14 @@ public class TutorController {
 		try {
 			boolean result = this.askService.deleteQ(qb_number, user_email);
 			log.info("result: {}", result);
+			
+			// session 손들기 정보 업데이트
+			int hands = (int) userVO.getHands_wallet();
+			log.info("============= session hands: {}", hands);
+			
+			userVO.setHands_wallet(hands + 3);
+			session.setAttribute("__LOGIN_USER__", userVO);
+			log.info("============= after hands: {}", userVO.getHands_wallet());
 			
 		} catch (ServiceException e) { throw new ControllerException(e); }
 		

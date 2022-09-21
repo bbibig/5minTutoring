@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.fmt.domain.AnswerDTO;
 import org.zerock.fmt.domain.AnswerVO;
-import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.AnswerMapper;
+import org.zerock.fmt.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +22,9 @@ public class AnswerServiceImpl implements AnswerService {
 	@Setter(onMethod_ = @Autowired)
 	private AnswerMapper answerMapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private UserMapper userMapper;
+	
 	@Transactional
 	@Override
 	public boolean createA(AnswerDTO newA) throws ServiceException {
@@ -35,6 +38,9 @@ public class AnswerServiceImpl implements AnswerService {
 			// 답변이 등록되면 답변 등록 여부 업데이트
 			if(createResult == 1) { 
 				this.answerMapper.updateAStatus(qb_number); 
+				
+				// 튜터의 손들기 획득 (+3)
+				this.userMapper.updateHandGet(3, newA.getUser_email());
 				return true;
 				
 			} else { log.info("답변이 등록되지 않았습니다."); }

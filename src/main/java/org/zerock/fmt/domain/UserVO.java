@@ -2,9 +2,14 @@ package org.zerock.fmt.domain;
 
 import java.util.Date;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Data
 public class UserVO {
 
 	private String user_email;
