@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +40,7 @@ import org.zerock.fmt.service.TutorService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @NoArgsConstructor
@@ -150,16 +152,28 @@ public class TutorController {
 		}catch(Exception e) {throw new ControllerException(e); }
 	}//writeReviewStudent
 	
-	//리뷰수정
-	@GetMapping("/modify")
+	//리뷰조회
+	@GetMapping("/getReview")
 	@ResponseBody
-	public ReviewVO modify(Integer rv_number, Model model) throws ControllerException {
+	public ReviewVO getReview(Integer rv_number) throws ControllerException {
 		log.trace("modityReview invoked.");
 			try{
-				ReviewVO review =this.reviewService.getRevirwDetail(rv_number);
-				model.addAttribute("ReviewVO", review);
-				
-				return review;
+				return this.reviewService.getRevirwDetail(rv_number);
+			}catch(Exception e) { throw new ControllerException(e); }
+	}//getReview
+	
+	//리뷰수정
+	@PostMapping(value="/modifyReview",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String modify(@RequestBody ReviewDTO dto) throws ControllerException {
+		log.trace("modityReview invoked.");
+		log.info("dto: {}",dto);
+			try{
+//				int result =this.reviewService.modifyReview(dto);
+//				if(result==1) {
+//					return "리뷰가 수정되었습니다.";
+//				}//if : 성공시 return result 
+				return "fail";
 			}catch(Exception e) { throw new ControllerException(e); }
 	}//modityReview
 	

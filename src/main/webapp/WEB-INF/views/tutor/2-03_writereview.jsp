@@ -22,7 +22,9 @@
     </style>
     <script>
       $(function () {
-        
+        const tp_number = '${_TUTOR_INFO_.tp_number}';
+        //해당 페이지 튜터 넘버
+
         let resultReview = '${_RESULT_REVIEW_}';
         if (resultReview != "") {
           alert(resultReview);
@@ -36,14 +38,10 @@
 
         let removeForm = $('#removeForm')
         $('#removeReview').on('click', function(){          
-          let tp_number = '${_TUTOR_INFO_.tp_number}';
           let rv_number = $('#rv_number').val();
 
           $.ajax({
-            data : { 
-              tp_number : tp_number,
-              rv_number : rv_number 
-            },
+            data : {rv_number : rv_number},
             url : "/tutor/removeReview",
             type : "GET",
             dataType : "text",
@@ -55,33 +53,54 @@
             }//success
           })//ajax
         })//리뷰삭제
-        
-        $('#form1btn').on('click', function(){
-          let array = new Array();
-          let test1 = document.querySelectorAll("#modi");
-          console.log(test1);
 
-          $('#modi').each(function(){
-            array.push(this.value);
-            console.log(array);
-          })
+        //개별리뷰조회
+        let review_box = $('.review-box');
 
-          let test = $('#rv_number').val();
-          console.log(test);
-          alert(test)
+        review_box.on('click','.modify',function(e){
+          let rv_number = $(this).find('#rv_number').val();
+          console.log("rv_number->",rv_number);
           
-          
-          // let rv_number = $('#rv_number').val();
-          
-          // $.ajax({
-          //   data : { rv_number : rv_number },
-          //   url : "/tutor/modify",
-          //   type : "GET",
-          //   success : function(result){
-          //     console.log(result);
-          //   }//success
-          // })//ajax
+          //리뷰가져와서 ajax
+          $.ajax({
+            type : 'get',
+            data : { rv_number : rv_number },
+            url : "/tutor/getReview",
+            success : function(result){
+              getReview(result);
+            }//success
+          });//ajax
 
+        })//리뷰조회
+
+        function getReview(review){
+          console.log(review);
+          $('.modal').find('input[name="rv_number"]').val(review.rv_number);
+          $('.modal').find('textarea[name="rv_content"]').val(review.rv_content);
+          $('.modal').find('input[name="rv_newstar"]').val(review.rv_star);
+          // starchange.attr('input[name="rv_star_1"]:checked').val(review.rv_star);
+        };//수정모달에 전달
+
+        $('#mofifyBtn').on('click', function(){
+
+          let data = {
+            rv_number : $('.modal').find('input[name="rv_number"]').val(),
+            rv_star : $('.modal').find('input[name="rv_star_1"]:checked').val(),
+            rv_content : $('.modal').find('textarea[name="rv_content"]').val(),
+          }
+          $.ajax({
+            data : JSON.stringify(data),
+            url : "/tutor/modifyReview",
+            type : "POST",
+            dataType : "text",
+            contentType: "application/json;charset=utf-8",
+            success : function(result){
+              if(result!="fail"){
+                alert(result);
+              }
+              self.location="/tutor/writeReview?num="+tp_number;
+            }//success
+          })//ajax
         })//리뷰 수정
            
       });//jq
@@ -214,10 +233,10 @@
               <!-- 리뷰 작성 박스-->
               <form method="post" id="reviewForm">
                 <div class="comment-box d-flex flex-column align-items-center">
-                  <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}" id="modi">
-                  <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}" id="modi">
+                  <input type="hidden" name="user_email" value="${__LOGIN_USER__.user_email}">
+                  <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
 
-                  <div class="rating" id="modi">
+                  <div class="rating">
                     <!-- <fieldset id="star_rating"> -->
                     <input type="radio" name="rv_star" value="5.0" id="5"><label for="5">☆</label>
                     <input type="radio" name="rv_star" value="4.0" id="4"><label for="4">☆</label>
@@ -229,7 +248,7 @@
                   <p class="my-3">별점을 선택해주세요.</p>
 
                   <div class="text-box col-12">
-                    <textarea name="rv_content" class="form-control" placeholder="후기를 남겨주세요!" id="floatingTextarea1 modi"
+                    <textarea name="rv_content" class="form-control" placeholder="후기를 남겨주세요!" id="floatingTextarea1"
                       style="height: 150px"></textarea>
                   </div>
 
@@ -270,11 +289,10 @@
               </div>
               <!--최신순 / 낮은평점순 / 높은평점순 전체 필터 end-->
 
+              <c:forEach var="review" items="${_RIVIEWLIST_}">
               <div class="review-box">
                 <!-- 리뷰 박스!!!!-->
-                <c:forEach var="review" items="${_RIVIEWLIST_}">
-                  <div class="test" value="${review.rv_star}"></div>
-                  <div class="row d-flex flex-row">
+                  <div class="row d-flex flex-row modify">
                     <!--댓글 박스 첫번째 row -->
                     <div class="col-1 d-flex justify-content-center">
                       <!---댓글 프로필 사진-->
@@ -323,12 +341,9 @@
                           111111111
                         </c:if>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li class="list-unstyled">
-                            <a class="dropdown-item" id="form1btn" data-bs-toggle="modal">수정</a>
-                          </li>
-                          <li class="list-unstyled">
-                            <a class="dropdown-item" id="removeReview" data-bs-toggle="modal">삭제</a>
-                          </li>
+                          <li class="list-unstyled"><a class="dropdown-item" href="#form1" data-bs-toggle="modal">수정</a></li> 
+                          <li class="list-unstyled"><a class="dropdown-item" id="removeReview" data-bs-toggle="modal">삭제</a></li>
+
                         </ul>
                         <form id="removeForm">
                           <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
@@ -346,8 +361,8 @@
                   </div>
                   <hr>
                   <!--리뷰 나누는 줄-->
-                </c:forEach>
-              </div>
+                </div>
+              </c:forEach>
 
             </div> <!-- 유저리뷰 전체 블락 end-->
             
@@ -402,39 +417,38 @@
         <!--------------------------=====================================모달 창=======================================------------------------------------------->
 
         <!--수정모달-->
-        <div class="modal fade" id="form1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="form1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content d-flex flex-column justify-content-center">
 
               <div class="modal-body">
-                <div class="pop-up-body d-flex flex-column align-items-center">
+                  <form method="post" id="modifyform">
+                    <div class="pop-up-body d-flex flex-column align-items-center">
+                      <input type="hidden" name="rv_number">
 
-                  <div class="rating">
-                    <input type="radio" name="rv_star" value="5.0" id="5"><label for="5">☆</label>
-                    <input type="radio" name="rv_star" value="4.0" id="4"><label for="4">☆</label>
-                    <input type="radio" name="rv_star" value="3.0" id="3"><label for="3">☆</label>
-                    <input type="radio" name="rv_star" value="2.0" id="2"><label for="2">☆</label>
-                    <input type="radio" name="rv_star" value="1.0" id="1"><label for="1">☆</label>
-                  </div>
+                      <div class="rating">
+                        <input type="radio" name="rv_newstar" value="5.0" id="5"><label for="5">☆</label>
+                        <input type="radio" name="rv_newstar" value="4.0" id="4"><label for="4">☆</label>
+                        <input type="radio" name="rv_newstar" value="3.0" id="3"><label for="3">☆</label>
+                        <input type="radio" name="rv_newstar" value="2.0" id="2"><label for="2">☆</label>
+                        <input type="radio" name="rv_newstar" value="1.0" id="1"><label for="1">☆</label>
+                      </div>
 
-                  <p class="my-3">별점을 선택해주세요.</p>
+                      <p class="my-3">별점을 선택해주세요.</p>
 
-                  <form class="was-validated col-12 d-flex flex-column">
-                    <div class="text-box">
-                      <textarea class="form-control" placeholder="" id="floatingTextarea1" style="height: 150px"
-                        required value="${review.rv_content}"></textarea>
-                    </div>
+                      <div class="was-validated col-12 d-flex flex-column">
+                        <div class="text-box">
+                          <textarea name="rv_content" class="form-control" placeholder="" id="floatingTextarea1" style="height: 150px" required></textarea>
+                        </div>
 
-                    <div class="pop-up-button-box align-self-end">
-                      <button type="button" class="btn btn-outline-primary"
-                        data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-                      <button type="submit" class="btn btn-outline-primary">확인</button>
+                        <div class="pop-up-button-box align-self-end">
+                          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
+                          <button type="button" class="btn btn-outline-primary" id="mofifyBtn"  >확인</button>
+                        </div>
+                      </div>
+
                     </div>
                   </form>
-
-                </div>
-
               </div>
 
             </div>

@@ -34,7 +34,7 @@
     <update id="updateReview">
         UPDATE tbl_review
         SET rv_content = #{rv_content}, rv_star = #{rv_star}
-        WHERE tp_number = #{tp_number} AND rv_number = #{rv_number}
+        WHERE rv_number = #{rv_number}
     </update>
 
     <!-- 리뷰 평균 -->
@@ -43,7 +43,7 @@
         FROM tbl_review
         WHERE TP_NUMBER = #{tp_number}
     </select>
-    <!-- 리뷰 평균 -> 튜터테이블 평균 업데이트 -->
+    <!-- 튜터테이블 평균 업데이트 -->
     <update id="updateAve">
         UPDATE tbl_tutor_page
         SET TP_AVERAGE = #{tp_average}
