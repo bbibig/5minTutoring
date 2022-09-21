@@ -19,7 +19,7 @@ import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.UseHandQVO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 
@@ -49,11 +49,11 @@ public class MypageHandMapperTests {
 		log.trace("selectAllmyUsehandList(), 마이페이지 손들기 사용 목록 조회");
 		
 		CriteriaMyPage cri = new CriteriaMyPage();
-		cri.setUser_email("test@gmail.com");
+		cri.setUser_email("seosujung0@gmail.com");
 		cri.setDateFrom("2022-09-05");
 		cri.setDateTo("2022-09-06");
 		
-		List<UseHandVO2> list = mapper.selectAllmyUsehandQList(cri);
+		List<UseHandQVO> list = mapper.selectAllmyUsehandQList(cri);
 		list.forEach(e -> log.info(e));
 
 	}//selectAllmyUsehandList()
@@ -67,7 +67,7 @@ public class MypageHandMapperTests {
 		log.trace("testGetMyCommentTotalAmount(), 마이페이지 손들기 사용 목록 총 개수 조회");
 		
 		CriteriaMyPage cri = new CriteriaMyPage();
-		cri.setUser_email("test@gmail.com");
+		cri.setUser_email("seosujung0@gmail.com");
 		cri.setDateFrom("2022-09-05");
 		cri.setDateTo("2022-09-06");
 		

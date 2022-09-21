@@ -28,7 +28,8 @@ import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.ProfileDTO;
 import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.domain.QuestionBoardVO;
-import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.UseHandQVO;
+import org.zerock.fmt.domain.UseHandTVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.domain.WithdrawalVO;
@@ -366,7 +367,7 @@ public class MypageController {
 			if(group.equals("1")) {
 				model.addAttribute("GROUP", group);
 				
-				List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtQList(cri);
+				List<UseHandQVO> list = this.mypageHandService.getAllMyUsehandtQList(cri);
 				model.addAttribute("_MYUSEHAND_", list);
 				
 				PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandQTotalAmount(cri));
@@ -374,7 +375,7 @@ public class MypageController {
 			} else if (group.equals("2")){
 				model.addAttribute("GROUP", group);
 				
-				List<UseHandVO2> list = this.mypageHandService.getAllMyUsehandtTList(cri);
+				List<UseHandTVO> list = this.mypageHandService.getAllMyUsehandtTList(cri);
 				model.addAttribute("_MYUSEHAND_", list);
 				
 				PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageHandService.getMyUsehandTTotalAmount(cri));

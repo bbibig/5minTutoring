@@ -7,21 +7,20 @@
 	<!-- ============<<SELECT>>============ -->
 
 	<!-- 1-1. 손들기 사용 목록(질문하기) 조회 페이징 처리(내림차순으로) -->
-	<select id="selectAllmyUsehandQList" resultType="org.zerock.fmt.domain.UseHandVO2">
+	<select id="selectAllmyUsehandQList" resultType="org.zerock.fmt.domain.UseHandQVO">
 		SELECT 
-		    uh.*,
+		    qb.*,
 		    tp.user_nick as tutor_nick
 		FROM (SELECT *
-		      FROM tbl_usehand_student
+		      FROM tbl_question_board
 		      WHERE user_email = #{user_email}
-		      		<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
-		      ) uh,
-		      tbl_question_board qb,
+		            <if test="dateFrom != null and dateTo != null"> AND TO_CHAR(regdate, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		      ) qb,
 		      (SELECT tp.*, u.user_nick
 		      FROM tbl_tutor_page tp, tbl_user u
 		      WHERE tp.user_email = u.user_email) tp
-		WHERE uh.qb_number = qb.qb_number AND qb.tp_number = tp.tp_number
-		ORDER BY uh.use_number desc
+		WHERE qb.tp_number = tp.tp_number
+		ORDER BY qb.qb_number desc
 		
 		OFFSET (#{currPage} - 1) * #{amount} rows
 		FETCH NEXT #{amount} ROWS ONLY
@@ -29,29 +28,27 @@
 	
 	<!-- 1-2. 손들기 사용 목록(질문하기) 총 횟수 조회(내림차순으로) -->
 	<select id="getMyUsehandQTotalAmount" resultType="Integer">
-		SELECT count(use_number)
-		FROM tbl_usehand_student
+		SELECT count(qb_number)
+		FROM tbl_question_board
 		WHERE user_email = #{user_email}
-			AND qb_number IS NOT NULL
-			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(regdate, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
 	</select>
 	
 	<!-- 1-3. 손들기 사용 목록(과외받기) 조회 페이징 처리(내림차순으로) -->
-	<select id="selectAllmyUsehandTList" resultType="org.zerock.fmt.domain.UseHandVO2">
+	<select id="selectAllmyUsehandTList" resultType="org.zerock.fmt.domain.UseHandTVO">
 		SELECT 
-		    uh.*,
+		    tb.*,
 		    tp.user_nick as tutor_nick
 		FROM (SELECT *
-		      FROM tbl_usehand_student
+		      FROM tbl_tutoring_board
 		      WHERE user_email = #{user_email}
-		            <if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
-		      ) uh,
-		      tbl_tutoring_board tb,
+		            <if test="dateFrom != null and dateTo != null"> AND TO_CHAR(tb_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+		      ) tb,
 		      (SELECT tp.*, u.user_nick
 		      FROM tbl_tutor_page tp, tbl_user u
 		      WHERE tp.user_email = u.user_email) tp
-		WHERE uh.tb_number = tb.tb_number AND tb.tp_number = tp.tp_number
-		ORDER BY uh.use_number desc
+		WHERE tb.tp_number = tp.tp_number
+		ORDER BY tb.tb_number desc
 		
 		OFFSET (#{currPage} - 1) * #{amount} rows
 		FETCH NEXT #{amount} ROWS ONLY
@@ -59,11 +56,10 @@
 	
 	<!-- 1-4. 손들기 사용 목록(과외받기) 총 횟수 조회(내림차순으로) -->
 	<select id="getMyUsehandTTotalAmount" resultType="Integer">
-		SELECT count(use_number)
-		FROM tbl_usehand_student
+		SELECT count(tb_number)
+		FROM tbl_tutoring_board
 		WHERE user_email = #{user_email}
-			AND tb_number IS NOT NULL
-			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(use_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
+			<if test="dateFrom != null and dateTo != null"> AND TO_CHAR(tb_date, 'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} </if>
 	</select>
 	
 	

@@ -127,14 +127,21 @@
             <tbody>
               <c:forEach var="usehand" items="${_MYUSEHAND_}">
                 <tr>
-                  <td class="text-center">
-                    <fmt:formatDate value="${usehand.use_date}" pattern="yyyy.MM.dd" />
-                  </td>
-                  <td class="text-center">
-                    <c:if test="${not empty usehand.qb_number}"> 질문하기(3개) </c:if>
-                    <c:if test="${not empty usehand.tb_number}"> 과외받기(5개) </c:if>
-                  </td>
-                  <td class="text-center"> ${usehand.tutor_nick} </td>
+                  <c:if test="${GROUP eq 1}">
+                    <td class="text-center">
+                      <fmt:formatDate value="${usehand.regdate}" pattern="yyyy.MM.dd" />
+                    </td>
+                    <td class="text-center"> 질문하기(3개) </td>
+                    <td class="text-center"> ${usehand.tutor_nick} </td>
+                  </c:if>
+
+                  <c:if test="${GROUP eq 2}">
+                    <td class="text-center">
+                      <fmt:formatDate value="${usehand.tb_date}" pattern="yyyy.MM.dd" />
+                    </td>
+                    <td class="text-center"> 과외받기(5개) </td>
+                    <td class="text-center"> ${usehand.tutor_nick} </td>
+                  </c:if>
                 </tr>
               </c:forEach>
             </tbody>

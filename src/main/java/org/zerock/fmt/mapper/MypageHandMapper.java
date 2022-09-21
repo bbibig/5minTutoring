@@ -6,7 +6,8 @@ import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.UseHandQVO;
+import org.zerock.fmt.domain.UseHandTVO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 
@@ -15,13 +16,13 @@ public interface MypageHandMapper {
 	
 //	============<<SELECT>>============
 	//1-1. 손들기 사용 목록(질문하기) 조회 페이징 처리(학생)
-	public abstract List<UseHandVO2> selectAllmyUsehandQList(CriteriaMyPage cri) throws DAOException;
+	public abstract List<UseHandQVO> selectAllmyUsehandQList(CriteriaMyPage cri) throws DAOException;
 	
 	//1-2. 손들기 사용 목록(질문하기) 총 횟수 조회
 	public abstract Integer getMyUsehandQTotalAmount(CriteriaMyPage cri) throws DAOException;
 	
 	//1-3. 손들기 사용 목록(과외받기) 조회 페이징 처리(학생)
-	public abstract List<UseHandVO2> selectAllmyUsehandTList(CriteriaMyPage cri) throws DAOException;
+	public abstract List<UseHandTVO> selectAllmyUsehandTList(CriteriaMyPage cri) throws DAOException;
 	
 	//1-4. 손들기 사용 목록(과외받기) 총 횟수 조회
 	public abstract Integer getMyUsehandTTotalAmount(CriteriaMyPage cri) throws DAOException;

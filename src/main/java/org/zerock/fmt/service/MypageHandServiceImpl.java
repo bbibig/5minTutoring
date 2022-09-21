@@ -8,7 +8,8 @@ import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.UseHandQVO;
+import org.zerock.fmt.domain.UseHandTVO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
@@ -31,7 +32,7 @@ public class MypageHandServiceImpl implements MypageHandService {
 	
 	//1-1. 손들기 사용 목록 조회 페이징 처리(학생) - 질문하기
 	@Override
-	public List<UseHandVO2> getAllMyUsehandtQList(CriteriaMyPage cri) throws ServiceException {
+	public List<UseHandQVO> getAllMyUsehandtQList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("손들기 사용 목록 목록 조회 - 질문하기");	
 		try { return this.mapper.selectAllmyUsehandQList(cri); }
 		catch (DAOException e) { throw new ServiceException(e); }
@@ -49,7 +50,7 @@ public class MypageHandServiceImpl implements MypageHandService {
 	
 	//1-3. 손들기 사용 목록 조회 페이징 처리(학생) - 과외받기
 	@Override
-	public List<UseHandVO2> getAllMyUsehandtTList(CriteriaMyPage cri) throws ServiceException {
+	public List<UseHandTVO> getAllMyUsehandtTList(CriteriaMyPage cri) throws ServiceException {
 		log.trace("손들기 사용 목록 목록 조회 - 과외받기");	
 		try { return this.mapper.selectAllmyUsehandTList(cri); }
 		catch (DAOException e) { throw new ServiceException(e); }

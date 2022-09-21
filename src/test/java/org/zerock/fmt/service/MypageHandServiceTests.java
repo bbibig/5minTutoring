@@ -19,7 +19,7 @@ import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
 import org.zerock.fmt.domain.CriteriaMyPage;
-import org.zerock.fmt.domain.UseHandVO2;
+import org.zerock.fmt.domain.UseHandQVO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ServiceException;
 
@@ -53,7 +53,7 @@ public class MypageHandServiceTests {
 		cri.setDateFrom("2022-09-06");
 		cri.setDateTo("2022-09-14");
 		
-		List<UseHandVO2> list = this.service.getAllMyUsehandtQList(cri);
+		List<UseHandQVO> list = this.service.getAllMyUsehandtQList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//getAllMyUsehandtList()
