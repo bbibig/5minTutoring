@@ -1,6 +1,8 @@
 package org.zerock.fmt.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaCommunity;
+import org.zerock.fmt.domain.LikeDTO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.CommunityMapper;
@@ -110,7 +113,8 @@ public class CommunityServiceImpl implements CommunityService, InitializingBean,
 			throw new ServiceException(e);
 		} // try-catch
 		
-	}// allcount
+	}
+
 
 
 

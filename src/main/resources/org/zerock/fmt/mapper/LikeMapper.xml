@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="org.zerock.fmt.mapper.LikeMapper">
+	
+	
+	<!-- 좋아요 눌렀는지 안눌렀는지 확인-->
+	<select id="findLike" resultType="org.zerock.fmt.domain.LikeDTO">
+	
+		SELECT count(*) 
+		
+		FROM tbl_like
+		
+		WHERE fb_number=#{fb_number} and user_email=#{user_email}
+		
+	</select>
+
+      
+    <insert id="insertLike">
+		INSERT INTO tbl_like(fb_number, user_email, likeCount)
+		VALUES(#{fb_number}, #{user_email}, 1)
+	</insert>  
+	
+	<delete id="deleteHeart">
+		DELETE FROM tbl_like 
+		WHERE fb_number=#{fb_number} and user_email=#{user_email}
+	</delete>
+	
+    </mapper>    
