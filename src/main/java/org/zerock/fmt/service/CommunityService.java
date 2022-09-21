@@ -5,7 +5,7 @@ import java.util.List;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaCommunity;
-import org.zerock.fmt.exception.DAOException;
+import org.zerock.fmt.domain.LikeDTO;
 import org.zerock.fmt.exception.ServiceException;
 
 
@@ -29,4 +29,7 @@ public interface CommunityService {
 	
 	//6. 커뮤니티 게시글 총 갯수
 	public abstract Integer allCount(CriteriaCommunity page)throws ServiceException;
+	
+	//7. 좋아요 확인
+//	public abstract LikeDTO findHeart(int fb_number, String user_email)throws ServiceException;
 }
