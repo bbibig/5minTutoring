@@ -2,6 +2,7 @@ package org.zerock.fmt.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CriteriaComment;
@@ -21,6 +22,11 @@ public interface CommentMapper {
 	// 해당 게시글의 댓글들을 출력 (등록시간순으로 5개씩 페이징 처리) 
 	public abstract List<CommentVO> selectComment(CriteriaComment criteria) throws DAOException;
 	
+	// 해당 댓글 조회
+	public abstract CommentVO selectOneComment(String cm_number) throws DAOException;
+	
 	// 댓글 개수 카운트
+	
+	
 	
 } // end interface

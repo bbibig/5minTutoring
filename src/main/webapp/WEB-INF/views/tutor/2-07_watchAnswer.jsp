@@ -31,6 +31,35 @@
 			// 	}
 			// );
 
+			// 댓글 조회 테스트
+			// console.log("댓글 조회 Test");
+			// commentService.get(49, function(data) {
+			// 	console.log("data: " + data);
+			// 	alert("data: " + data.cm_number +", "+ data.cm_content);
+			// });
+
+			// 댓글 수정 테스트
+			// commentService.update({
+			// 	cm_number: 39,
+			// 	cm_content: "수정 테스트"
+			// }, function(result) {
+			// 	console.log("result: " + result);
+			// 	alert("수정 완료");
+			// });
+
+			// 댓글 삭제 테스트
+			// console.log("댓글 삭제 Test");
+			// commentService.remove(56, function(result) {
+			// 	console.log("result: " + result);
+
+			// 	if(result !== "undefined") {
+			// 		alert("댓글 삭제 완료");
+			// 	}
+			// }, function(err) {
+			// 	alert("ERROR");
+			// });
+			
+
 			$(document).ready(function() {
 				var a_number = "${_A_.a_number}";
 				var commentList = $(".commentList");
@@ -46,7 +75,7 @@
 							return;
 						}
 						for(var i=0, len=list.length || 0; i<len; i++) {
-							str+= '<div class="comment_info d-flex" data-rno="'+list[i].cm_number+'">';
+							str+= '<div class="commentDiv" data-cm_number="'+list[i].cm_number+'"><div class="comment_info d-flex">';
 							str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
 							str+= '		<div class="Sname">' +list[i].user_name+ '</div>';
 							str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div>';
@@ -55,17 +84,16 @@
 							str+= '				<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
 							str+= '					<i class="bi bi-list fs-4"></i></button>';
 							str+= '				<ul class="dropdown-menu">';
-							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise">수정</a></li>';
+							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
 							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
 							str+= '				</ul></div></div></div>';
-							str+= '	<p>' +list[i].cm_content+ '</p>';
+							str+= '	<p>' +list[i].cm_content+ '</p></div>';
 						}
 						commentList.html(str);
 					}); // getList
 				} // showList
 
-
-				// 댓글 등록 이벤트 처리
+				// 댓글 등록 
 				$("#commentSave").on("click", function(e) {
 					var comment = {
 						a_number : a_number,
@@ -77,6 +105,54 @@
 						showList(1);
 					}); // add
 				}); // onclick
+
+				// 댓글 모달에 데이터 전달 
+				commentList.on("click", ".commentDiv", function(e) {
+					var cno = $(this).data("cm_number");
+
+					commentService.get(cno, function(comment) {
+
+						$(".modal").find("input[name='cm_number']").val(comment.cm_number);
+						$(".modal").find("textarea[name='cm_content']").val(comment.cm_content);
+					});
+				}); // onclick
+
+				// 댓글 수정 
+				$("#cmModifyBtn").on("click", function(e) {
+					var comment = {
+						cm_number: $(".modal").find("input[name='cm_number']").val(),
+						cm_content: $(".modal").find("textarea[name='cm_content']").val()
+					};
+					commentService.update(comment, function(result) {
+						if(result !== "undefined") {
+							alert("댓글 수정 완료");
+							$("#comment_revise").modal("hide");
+							showList(1);
+						}
+					}, function(err) {
+						alert("ERROR");
+					});
+				}); // onclick
+				
+				// 댓글 삭제 
+				$("#cmRemoveBtn").on("click", function(e) {
+					var cno = $(".modal").find("input[name='cm_number']").val();
+					commentService.remove(cno, function(result) {
+						if(result !== "undefined") {
+							alert("댓글 삭제 완료");
+							$("#delete").modal("hide");
+							showList(1);
+						}
+					}, function(err) {
+						alert("ERROR");
+					});
+				}); // onclick
+					
+			
+				
+				
+
+
 
 				
 
@@ -208,18 +284,18 @@
 	
 	                                            <p class="my-3 fs-5"># 수정할 댓글을 입력하세요.</p>
 	
-	                                            <form class="was-validated col-12 d-flex flex-column">
+	                                            <div id="cmModifyForm" class="was-validated col-12 d-flex flex-column">
 	                                                <div class="text-box">
-	                                                    <textarea class="form-control" placeholder="" id="floatingTextarea1"
+														<input type="hidden" id="modalCno" name="cm_number">
+	                                                    <textarea name="cm_content" class="form-control" placeholder="" id="floatingTextarea1 modalContent"
 	                                                        style="height: 150px" required></textarea>
 	                                                </div>
-	
 	                                                <div class="pop-up-button-box align-self-end">
 	                                                    <button type="button" class="btn btn-outline-primary"
 	                                                        data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-	                                                    <button type="submit" class="btn btn-outline-primary">확인</button>
+	                                                    <button id="cmModifyBtn" type="button" class="btn btn-outline-primary">확인</button>
 	                                                </div>
-	                                            </form>
+	                                            </div>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -242,7 +318,7 @@
 	                                            <div class="pop-up-button-box d-flex flex-row align-self-center">
 	                                                <button type="button" class="btn btn-outline-primary"
 	                                                    data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-	                                                <button type="button" class="btn btn-outline-primary">확인</button>
+	                                                <button id="cmRemoveBtn" type="button" class="btn btn-outline-primary">확인</button>
 	                                            </div>
 	                                        </div>
 	                                    </div>

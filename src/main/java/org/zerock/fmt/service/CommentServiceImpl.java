@@ -58,6 +58,14 @@ public class CommentServiceImpl implements CommentService {
 		try { return this.commentMapper.selectComment(criteria); } 
 		catch (Exception e) { throw new ServiceException(e); }
 		
-	} // deleteComment
+	} // getComment
+
+	@Override
+	public CommentVO getOneComment(String cm_number) throws ServiceException {
+		log.trace("해당 댓글을 출력");
+
+		try { return this.commentMapper.selectOneComment(cm_number); } 
+		catch (Exception e) { throw new ServiceException(e); }
+	} // getOneComment
 
 } // end class

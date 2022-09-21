@@ -54,5 +54,22 @@
 		OFFSET (#{currPage} - 1) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
 	</select>
+	
+	<select id="selectOneComment" resultType="org.zerock.fmt.domain.CommentVO">
+		SELECT 
+			cm_number,
+			a_number,
+			fb_number,
+			u.user_email,
+			u.user_name,
+			cm_content,
+			regdate,
+			updatedate
+		FROM tbl_comment c, tbl_user u
+		WHERE cm_number = #{cm_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user 
+							WHERE c.user_email = u.user_email)
+	</select>
 
 </mapper>

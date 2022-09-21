@@ -21,4 +21,7 @@ public interface CommentService {
 	// 해당 게시글의 댓글들을 출력 (등록시간순으로 5개씩 페이징 처리)
 	public abstract List<CommentVO> getComment(CriteriaComment criteria) throws ServiceException;
 	
+	// 해당 댓글 조회
+	public abstract CommentVO getOneComment(String cm_number) throws ServiceException;
+	
 } // end interface

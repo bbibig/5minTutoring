@@ -17,11 +17,12 @@ var commentService = (function() {
             success: function(result, status, xhr) {
                 if(callback) { callback(result); }
             }, 
-            error: function(xhr, status, e) {
-                if(error) { error(e); }
+            error: function(xhr, status, er) {
+                if(error) { error(er); }
             }
         }) // ajax
     } // add
+    
     
     // 댓글 리스트 출력
     function getList(param, callback, error) {
@@ -32,9 +33,10 @@ var commentService = (function() {
             "/comment/list/" + a_number + "/" + currPage,
             function(data) { if(callback) { callback(data); }}
         ).fail(
-            function(xhr, status, err) { if(error) { error(); }}
+            function(xhr, status, er) { if(error) { error(er); }}
         );
     } // getList
+
 
     // 시간 처리
     // 해당일은 '시/분/초', 전날부터는 '년/월/일'을 출력
@@ -55,16 +57,79 @@ var commentService = (function() {
             var mm = dateObj.getMonth() + 1; // getMonth는 zero-based이므로 +1 해줌
             var dd = dateObj.getDate();
             return [yy, '/', (mm>9 ? '': '0') + mm, '/', (dd>9? '':'0') + dd].join('');
-        }
-    };
+        } 
+    }; // displayTime
 
+    
+    // 댓글 조회
+    function get(cno, callback, error) {
+        console.log("조회 댓글번호: " + cno);
+
+        $.get("/comment/" + cno, function(result) {
+            if(callback) {
+                callback(result);
+            }
+        }).fail(function(xhr, status, err) {
+            if(error) {
+                error();
+            }
+        }); 
+    } // get
+
+
+	// 댓글 수정
+    function update(comment, callback, error) {
+        console.log("수정 댓글번호: " + comment.cm_number);
+
+        $.ajax({
+            type: 'put',
+            url: '/comment/modify/' + comment.cm_number,
+            data: JSON.stringify(comment),
+            contentType: "application/json;charset=utf-8",
+            success: function(result, status, xhr) {
+                if(callback) {
+                    callback(result);
+                }
+            },
+            error: function(xhr, status, er) {
+                if(error) {
+                    error(er);
+                }
+            }
+        }); // ajax
+    } // update
+    
+    
+    // 댓글 삭제 
+    function remove(cno, callback, error) {
+		console.log("삭제 댓글번호: " + cno);
+	
+		$.ajax({
+			type: 'delete',
+			url: '/comment/delete/' + cno, 
+			success: function(deleteResult, status, xhr) {
+				if(callback) {
+					callback(deleteResult);
+				}
+			},
+			error: function(xhr, status, er) {
+				if(error) {
+					error(er);
+				}
+			}  
+		}); // ajax
+	} // remove
+    
+	
     return { 
         add : add, 
         getList : getList,
-        displayTime : displayTime
+        displayTime : displayTime,
+        get : get,
+        update : update,
+        remove: remove
     };
     
-
 })(); // commentService
 
 

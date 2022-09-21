@@ -113,4 +113,19 @@ public class CommentServiceTests {
 
 	} // getCommentTest
 	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. CommentService.getOneComment() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void getOneCommentTest() throws ServiceException {
+		log.trace("해당 댓글을 출력");
+		
+		String cm_number = "50";
+		
+		CommentVO vo = this.commentService.getOneComment(cm_number);
+		log.info("vo: {}", vo);
+		
+	} // getOneCommentTest
+	
 } // end class
