@@ -94,4 +94,26 @@ public class ReviewServiceTest {
 		double result = this.revireService.avgReview(tp_number);
 		log.info("\t + result : {}", result);
 	}//avgReview
+	
+	@Test
+	@Order(6)
+	@DisplayName("getReviewDetail")
+	void getReviewDetail() throws ServiceException {
+		log.trace("getReviewDetail : 리뷰 상세 정보");
+
+		ReviewVO review1 = this.revireService.getRevirwDetail(1);
+		ReviewVO review2 = this.revireService.getRevirwDetail(100);
+		log.info("reviews : {}, {}", review1, review2);
+	}//getReviewDetail
+	
+	@Test
+	@Order(7)
+	@DisplayName("removeReview")
+	void testremoveReview() throws ServiceException {
+		log.trace("removeReview : 리뷰 삭제 테스트");
+		
+		int result1 = this.revireService.removeReview(22);
+		int result2 = this.revireService.removeReview(300);		
+		log.info("result : {}, {}", result1, result2);
+	}//removeReview
 }//end class

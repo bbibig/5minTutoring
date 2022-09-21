@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.domain.AnswerDTO;
 import org.zerock.fmt.domain.AnswerVO;
 import org.zerock.fmt.domain.CriteriaReview;
@@ -123,37 +127,56 @@ public class TutorController {
 			model.addAttribute("avgReview",avgReview);
 			
 			//-----------------------------------리뷰페이징
-			ReviewPageDTO rvPage = new ReviewPageDTO(cri, this.reviewService.countList(cri.getTp_number()));
+			int totalReview = this.reviewService.countList(cri.getTp_number());
+			ReviewPageDTO rvPage = new ReviewPageDTO(cri, totalReview);
 			model.addAttribute("_REVIEWPAGINATION_",rvPage);
+			model.addAttribute("RVCOUNT", totalReview);
 						
 		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-03_writereview";
 	} // writeReview
 	
+	//리뷰등록
 	@PostMapping("/createReview")
-	public String writeReviewStudent(ReviewDTO dto, Model model) throws ControllerException {
+	public String writeReviewStudent(ReviewDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("writeReviewStudent invoked.");
 		try {
 			int result = this.reviewService.createReview(dto);
 			if(result==1) {
-				model.addAttribute("_RESULT_REVIEW_","리뷰가 등록되었습니다.");
+				rttrs.addFlashAttribute("_RESULT_REVIEW_","리뷰가 등록되었습니다.");
 			}//if : 성공시 return result 
-			
-			return "tutor/2-03_writereview";
+			return "redirect:/tutor/writeReview?num="+dto.getTp_number();
 		}catch(Exception e) {throw new ControllerException(e); }
 	}//writeReviewStudent
 	
-	@PostMapping("modifyReview")
-	public void modityReview(ReviewDTO dto, Model model) throws ControllerException {
+	//리뷰수정
+	@GetMapping("/modify")
+	@ResponseBody
+	public ReviewVO modify(Integer rv_number, Model model) throws ControllerException {
 		log.trace("modityReview invoked.");
-		try {
-			int result = this.reviewService.modifyReview(dto);
-			if(result==1) {
-				model.addAttribute("_RESULT_REVIEW_","리뷰가 수정되었습니다.");
-			}//if : 성공시 return result 
-		}catch(Exception e) { throw new ControllerException(e); }
+			try{
+				ReviewVO review =this.reviewService.getRevirwDetail(rv_number);
+				model.addAttribute("ReviewVO", review);
+				
+				return review;
+			}catch(Exception e) { throw new ControllerException(e); }
 	}//modityReview
+	
+	//리뷰삭제
+	@GetMapping(value="/removeReview", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String removeReview(Integer tp_number,Integer rv_number) throws ControllerException {
+		log.trace("modityReview invoked.");
+			try{
+				int result = this.reviewService.removeReview(rv_number);
+				if(result==1) {
+					return "리뷰가 삭제되었습니다.";
+				}//if : 성공시 return result 
+				return "fail";
+			}catch(Exception e) { throw new ControllerException(e); }
+	}//modityReview
+	
 	
 	@GetMapping("/reviewList")
 	public String reviewList(Model model,  HttpServletRequest req) throws ControllerException {

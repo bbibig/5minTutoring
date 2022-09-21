@@ -43,4 +43,24 @@
         FROM tbl_review
         WHERE TP_NUMBER = #{tp_number}
     </select>
+    <!-- 리뷰 평균 -> 튜터테이블 평균 업데이트 -->
+    <update id="updateAve">
+        UPDATE tbl_tutor_page
+        SET TP_AVERAGE = #{tp_average}
+        WHERE TP_NUMBER = #{tp_number}
+    </update>
+
+    <!-- 리뷰 개별 조회 -->
+    <select id="selectRVone" resultType="org.zerock.fmt.domain.ReviewVO">
+        SELECT r.*, u.user_nick
+        FROM tbl_review r, tbl_user u
+        WHERE r.user_email = u.user_email
+        AND rv_number = #{rv_number}
+    </select>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview">
+        DELETE FROM tbl_review
+        WHERE rv_number = #{rv_number}
+    </delete>
 </mapper>
