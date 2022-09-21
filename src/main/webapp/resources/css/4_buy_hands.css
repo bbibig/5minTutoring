@@ -158,7 +158,7 @@
   font-weight: 400;
 }
 .payBtn {
-  margin-top: 25px;
+  margin: 25px auto;
   width: 330px;
   height: 50px;
   color: white;

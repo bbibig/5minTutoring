@@ -35,7 +35,7 @@
                 <!-- 손들기 구매하기 -->
                 <section class="pay-page">
 
-                    <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
+                    <form name="orderform" id="orderform" method="post" class="orderform" action="/Order" onsubmit="return false;">
                 
                         <input type="hidden" name="cmd" value="order">
 
@@ -47,9 +47,9 @@
                             <thead class="table-head">
                             <tr>
                                 <td class="buyer-info-title">이름</td>
-                                <td class="buyer-info-txt">${_UserDTO_.user_name}</td>
+                                <td class="buyer-info-txt">${__LOGIN_USER__.user_name}</td>
                                 <td class="buyer-info-title">전화번호</td>
-                                <td class="buyer-info-txt">${_UserDTO_.user_phone}</td>
+                                <td class="buyer-info-txt">${__LOGIN_USER__.user_phone}</td>
                             </tr>
                             </thead>
 
@@ -105,9 +105,15 @@
                                         </span>
                                     </td>
 
+                                    <!-- <p>
+                                        ${_HandVO_}
+                                    </p>
+                                    <p>
+                                        ${_UserDTO_}
+                                    </p> -->
                                     <!-- <td class="product-info-data">
                                         <span id="sum_p_price" class="sum" value="javascript:basket.total();">
-                                            ${_HandVO_.h_price}원
+                                            ${'${_HandVO_.h_price}'}원
                                         </span>
                                     </td>    -->
 

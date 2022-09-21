@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.fmt.domain.BuyDTO;
 import org.zerock.fmt.domain.HandVO;
-import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.HandService;
@@ -54,26 +53,15 @@ public class HandController {
 	
 
 	@GetMapping("/payPage")
-	public String payPage(UserDTO dto, Integer h_number, Model model) throws ServiceException {
+	public String payPage(Integer h_number, Model model) throws ServiceException {
 		log.trace("payPage() invoked.");
 		
 		try {
 			HandVO vo = this.handService.getHand(h_number);
 			
-			UserDTO user = new UserDTO();
-			
-//			user.setUser_email("yune@naver.com");
-//			user.setUser_name("이윤정");
-//			user.setUser_phone("010-3333-3333");
-			
-			
 			model.addAttribute("_HandVO_", vo);
-			model.addAttribute("_UserDTO_", user);
-			model.addAttribute("_USER_", dto);
 			
 			log.info("\t+ _HandVO_: {}", vo);
-			log.info("\t+ _UserDTO_: {}", user);
-			log.info("\t+ USER:{}", dto);
 			
 			return "hand/4-02_payPage";
 		} catch(Exception e) {

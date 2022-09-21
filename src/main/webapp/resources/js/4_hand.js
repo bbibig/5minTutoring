@@ -3,7 +3,7 @@ var IMP = window.IMP; // 생략 가능
 IMP.init("imp88781134"); // 예: imp00000000
 
 function requestPay() {
-    let user_name = '${_UserDTO_.user_name}';
+    let user_name = '${__LOGIN_USER__.user_name}';
     let h_name = '${_HandVO_.h_name}';
 
     // IMP.request_pay(param, callback) 결제창 호출
