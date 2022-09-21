@@ -104,10 +104,15 @@
 		WHERE tp_number = #{tp_number}
 	</update>
 	
-	<select id="selectTEmail" resultType="string">
+	<select id="selectTEmail" resultType="String">
 		SELECT user_email
 		FROM tbl_tutor_page
 		WHERE tp_number = #{tp_number}
 	</select>
 
+	<select id="selectTpNumber" resultType="Integer">
+		SELECT tp_number
+		FROM tbl_tutor_page
+		WHERE user_email = #{user_email}
+	</select>
 </mapper>

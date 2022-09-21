@@ -52,10 +52,16 @@ public class LoginInterceptor implements HandlerInterceptor{
 		UserVO loginVO = (UserVO) modelMap.getAttribute(SharedScopeKeys.LOGIN_USER);
 		log.info("\t+ loginVO for Session : {}", loginVO);
 		
+		String tpNumber = (String) modelMap.getAttribute(SharedScopeKeys.TP_NUMBER);
+		log.info("\t+ tpNumber: {}", tpNumber);
+		
 		if( loginVO != null) {
 			//로그인 된 유저 SessionScope에 바인딩 
 			req.getSession().setAttribute(SharedScopeKeys.LOGIN_USER, loginVO);
 	//		res.sendRedirect("/login/home");
+			
+			// 튜터페이지 번호 SessionScope에 바인딩
+			req.getSession().setAttribute(SharedScopeKeys.TP_NUMBER, tpNumber);
 			
 			//프로필 사진 유무 조회
 			List<ProfileVO> profileVo = this.profileService.getProfile(loginVO.getUser_email());

@@ -28,4 +28,7 @@ public interface TutorService {
 	// 해당 튜터인지 확인
 	public abstract String getTEmail(int tp_number) throws ServiceException;
 	
+	// 튜터 페이지 번호 조회
+	public abstract Integer getTpNumber(String user_email) throws ServiceException;
+	
 } // end interface

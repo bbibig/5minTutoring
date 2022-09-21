@@ -101,7 +101,7 @@ public class TutorServiceTests {
 	@DisplayName("4. TutorServie.updateTInfo() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void testUpdateTInfo() throws ServiceException {
-		log.trace("튜터 소개 입력");
+		log.trace("튜터 소개 수정");
 		
 		TutorPageDTO newDTO = new TutorPageDTO(26, null, "수학과외 4년", "안녕하세요.", "수학은 기초부터");
 		
@@ -109,5 +109,20 @@ public class TutorServiceTests {
 		log.info("updateSucceed: {}", updateSucceed);
 		
 	} // testupdateTInfo
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. TutorServie.getTpNumber() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testGetTpNumber() throws ServiceException {
+		log.trace("튜터페이지 번호 조회");
+		
+		String user_email = "junwook843@gmail.com";
+		
+		Integer tpNumber = this.tutorService.getTpNumber(user_email);
+		log.info("tpNumber: {}", tpNumber);
+		
+	} // testGetTpNumber
 	
 } // end class

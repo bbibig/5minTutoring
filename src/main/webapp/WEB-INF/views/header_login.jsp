@@ -42,7 +42,7 @@
           </a>
           <ul>
             <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}">
-              <li><a href="/tutor/info">튜터페이지</a></li>
+              <li><a href="/tutor/info?num=${_TP_NUMBER_}">튜터페이지</a></li>
             </c:if>
 
             <c:if test="${__LOGIN_USER__.user_group eq 'Student'}">

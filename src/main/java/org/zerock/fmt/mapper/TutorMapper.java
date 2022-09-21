@@ -30,4 +30,7 @@ public interface TutorMapper {
 	// 해당 튜터인지 확인
 	public abstract String selectTEmail(int tp_number) throws DAOException;
 	
+	// 튜터페이지 번호 출력
+	public abstract Integer selectTpNumber(String user_email) throws DAOException;
+	
 } // end interface

@@ -3,7 +3,6 @@ package org.zerock.fmt.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,16 +19,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.common.SharedScopeKeys;
 import org.zerock.fmt.domain.FileDTO;
+import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.service.FileService;
+import org.zerock.fmt.service.TutorService;
 import org.zerock.fmt.service.UserService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @NoArgsConstructor
@@ -43,6 +43,9 @@ public class LoginController{
 
 	@Setter(onMethod_ = @Autowired)
 	private FileLoad fileupload;		//---- File관련 
+	
+	@Setter(onMethod_ = @Autowired)
+	private TutorService tutorService;
 	
 	@Setter(onMethod_ = @Autowired)
 	private FileService fileservice;	//---- FileService
@@ -63,12 +66,20 @@ public class LoginController{
 			UserVO vo = this.userService.gettLoginUser(user_email, user_pw);
 			log.info("\t + Loginpost vo : {}", vo);
 			String returnURL;
-
+			
+//			--------------------------------- 튜터페이지 번호 추가
+			String tp_number = Integer.toString(this.tutorService.getTpNumber(user_email));
+			log.info("\t + tp_number: {}", tp_number);
+			
+//			---------------------------------
+			
 			if(vo==null) {
 				rttrs.addFlashAttribute("_LOGIN_", "승인된 정보가 없습니다.");
 				returnURL = "redirect:/login";
 			} else {
 				model.addAttribute(SharedScopeKeys.LOGIN_USER,vo);
+				// ------ 튜터 페이지 번호 session scope에 올리기 위해 view로 전달
+				model.addAttribute(SharedScopeKeys.TP_NUMBER, tp_number);
 				returnURL = "login/Loginpost";
 			}//if
 			

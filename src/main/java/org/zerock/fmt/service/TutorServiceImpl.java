@@ -83,4 +83,12 @@ public class TutorServiceImpl implements TutorService {
 		catch (Exception e) { throw new ServiceException(e); }
 	} // getTEmail
 
+	@Override
+	public Integer getTpNumber(String user_email) throws ServiceException {
+		log.trace("튜터페이지 번호 조회");
+		
+		try { return this.tutorMapper.selectTpNumber(user_email); } 
+		catch (Exception e) { throw new ServiceException(e); }
+	} // getTpNumber
+
 } // end class
