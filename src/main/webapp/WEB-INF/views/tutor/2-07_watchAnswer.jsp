@@ -87,7 +87,7 @@
 							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
 							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
 							str+= '				</ul></div></div></div>';
-							str+= '	<p>' +list[i].cm_content+ '</p></div>';
+							str+= '	<p>' +list[i].cm_content+ '</p></div><hr>';
 						}
 						commentList.html(str);
 					}); // getList
@@ -407,6 +407,9 @@
 	                        <div class="commentList">
 
 
+							</div>
+							<div class="col text-center">
+								<button type="button" class="btn btn-default btn-block" id="moreComment">▽ 댓글 더보기</button>
 							</div>
 	                    </div>
 	                </div>

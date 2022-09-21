@@ -67,19 +67,23 @@ public class LoginController{
 			log.info("\t + Loginpost vo : {}", vo);
 			String returnURL;
 			
-//			--------------------------------- 튜터페이지 번호 추가
-			String tp_number = Integer.toString(this.tutorService.getTpNumber(user_email));
-			log.info("\t + tp_number: {}", tp_number);
-			
-//			---------------------------------
 			
 			if(vo==null) {
 				rttrs.addFlashAttribute("_LOGIN_", "승인된 정보가 없습니다.");
 				returnURL = "redirect:/login";
 			} else {
+				
+//				--------------------------- 튜터일 경우 튜터페이지 번호 얻기
+				if(vo.getUser_group() == "Tutor") {
+					
+					String tp_number = Integer.toString(this.tutorService.getTpNumber(user_email));
+					log.info("\t + tp_number: {}", tp_number);
+					
+					// ------ 튜터 페이지 번호 session scope에 올리기 위해 view로 전달
+					model.addAttribute(SharedScopeKeys.TP_NUMBER, tp_number);
+				}
+				
 				model.addAttribute(SharedScopeKeys.LOGIN_USER,vo);
-				// ------ 튜터 페이지 번호 session scope에 올리기 위해 view로 전달
-				model.addAttribute(SharedScopeKeys.TP_NUMBER, tp_number);
 				returnURL = "login/Loginpost";
 			}//if
 			
