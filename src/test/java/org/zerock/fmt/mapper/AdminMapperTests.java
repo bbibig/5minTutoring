@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.AdminVO;
 import org.zerock.fmt.domain.CriteriaAdmin;
+import org.zerock.fmt.domain.TutorPageDTO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -61,4 +62,6 @@ public class AdminMapperTests {
 		int result = this.adminMapper.adminCount();
 		log.info("\t + result : {}", result);
 	}//countAdmin
+	
+
 }//end class

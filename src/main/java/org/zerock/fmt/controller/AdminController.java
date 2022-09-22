@@ -37,6 +37,7 @@ import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.FaqService;
 import org.zerock.fmt.service.FileService;
 import org.zerock.fmt.service.InquiryQuestionService;
+import org.zerock.fmt.service.TutorService;
 import org.zerock.fmt.service.UserService;
 import org.zerock.fmt.service.WithdrawalService;
 
@@ -72,6 +73,9 @@ public class AdminController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private WithdrawalService withdrawalService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private TutorService tutorService;
 	//--------------------------------------------- 어드민로그인
 	@GetMapping
 	public String adminLogin() {
@@ -316,11 +320,20 @@ public class AdminController {
 			
 			int result = 0;
 			for(String user_email : emails) {
-				result += this.userService.tutorPass(user_email);
+				if( this.userService.tutorPass(user_email) == 1) {
+					//튜터승인 결과가 true일때
+					this.tutorService.createIntroInfo(user_email);
+					//튜터페이지에 추가
+					result += this.userService.tutorPass(user_email);
+					//로직결과를 result에 반영
+				}//if
 			}//for
-			if(result>0) {
+			if(result==emails.length) {
+				//수행결과값이 리스트의 개수와 같으면 
 				rttrs.addFlashAttribute("TutorResult", "승인처리되었습니다.");
-			}
+			} else {
+				rttrs.addFlashAttribute("tutorResult", "승인오류발생. 확인바랍니다.");
+			}//if-else
 			log.info("\t + 튜터승인 List : {}, result : {}", Arrays.toString(emails), result);
 			
 			return "redirect:/admin/signUp_comfim";

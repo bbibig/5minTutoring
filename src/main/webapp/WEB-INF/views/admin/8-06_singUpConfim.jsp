@@ -53,6 +53,7 @@
                     })
 
                     $('#arrayParam').val(array);
+                    console.log( $('#arrayParam').val(array));
 
                     $('#signupOK').on('click', function(){
                     let formObj = $('#checkTutor');
@@ -152,7 +153,8 @@
                             <c:forEach var="user" items="${_USERLIST_}">
                                 <tr>
                                     <form action="" id="checkTutor">
-                                        <td><input type="checkbox" id="checkbox" name="checkbox" value="${user.user_email}"></td>
+                                        <td>
+                                        <input type="checkbox" id="checkbox" name="checkbox" value="${user.user_email}"></td>
                                         <input type="hidden" id="arrayParam" name="arrayParam"/>
                                     </form>
                                         <td class="dropdown">

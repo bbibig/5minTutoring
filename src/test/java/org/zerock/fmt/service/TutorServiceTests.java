@@ -87,10 +87,8 @@ public class TutorServiceTests {
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void testCreateIntroInfo() throws ServiceException {
 		log.trace("튜터 소개 입력");
-		
-		TutorPageDTO newDTO = new TutorPageDTO(null, "test1", "수학강사 13년 경력", "안녕하세요.", "수학은 기초부터");
-		
-		boolean createSucceed = this.tutorService.createIntroInfo(newDTO);
+	
+		boolean createSucceed = this.tutorService.createIntroInfo("erttt22@gmail.com");
 		log.info("updateSucceed: {}", createSucceed);
 		
 	} // testupdateTInfo
