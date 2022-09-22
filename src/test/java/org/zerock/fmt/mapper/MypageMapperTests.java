@@ -93,7 +93,7 @@ public class MypageMapperTests {
 		dto.setUser_email("test1@gmail.com");
 		String paramPw = "1111111q";
 		String bcPw = encoder.encode(paramPw);
-		dto.setUser_pw(bcPw);		
+		dto.setUser_pw(bcPw);			
 		
 		boolean result = mapper.updateUserInfo(dto);
 		log.info("\t+ 기본정보 수정결과: {}", result);
