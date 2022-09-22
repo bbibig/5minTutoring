@@ -75,6 +75,9 @@
 						var list = data.list;
 						var str = "";
 						
+						// 댓글 개수 출력
+						$("#commentTotal").html(commentCnt);
+						
 						// 현재 표시된 페이지의 댓글이 5개 이하면 더보기 버튼 숨기기
 						if(currPage * 5 >= commentCnt) {
 							$("#moreComment").css("display", "none");
@@ -404,7 +407,7 @@
 	
 						   
 	                    <!-- comment Area -->
-	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span id="commentTotal"> ${_COMMENT_CNT_}</span></span>
+	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span id="commentTotal"> </span></span>
 	                    <div class="comment_box">
 	                        <div class="comment d-flex">
 	                            <div class="sSPic">

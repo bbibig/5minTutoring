@@ -306,13 +306,8 @@ public class TutorController {
 				return "redirect:/tutor/writeAnswer?num=" + qb_number + "&tp=" + tp_number;
 			}
 			
-			// 해당 답변의 댓글 개수 정보
-			int a_number = Avo.getA_number();
-			int commentCnt = this.commentService.commentCount(a_number);
-			
 			model.addAttribute("_ONE_Q_", oneQ);
 			model.addAttribute("_A_", Avo);
-			model.addAttribute("_COMMENT_CNT_", commentCnt);
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
