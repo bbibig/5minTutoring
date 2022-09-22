@@ -55,6 +55,27 @@ public class ProfileServiceImpl implements ProfileService {
 		catch (DAOException e) { throw new ServiceException(e); }// try-catch
 	}// modifyProfile
 	
+	//4. 유저 닉네임 조회
+	@Override
+	public String getUserNick(String user_email) throws ServiceException {		
+		try { return this.mapper.selectUserNick(user_email); } 
+		catch (DAOException e) { throw new ServiceException(e); }// try-catch
+	}// getUserNick
+	
+	//5. 튜터 닉네임 조회
+	@Override
+	public String getTutorNick(Integer tp_number) throws ServiceException {
+		try { return this.mapper.selectTutorNick(tp_number); } 
+		catch (DAOException e) { throw new ServiceException(e); }// try-catch
+	}// getTutorNick
+	
+	//5. 튜터 이메일 조회
+	@Override
+	public String getTutorEmail(Integer tp_number) throws ServiceException {
+		try { return this.mapper.selectTutorEmail(tp_number); } 
+		catch (DAOException e) { throw new ServiceException(e); }// try-catch
+	}// getTutorEmail
+	
 }// end class
 
 
