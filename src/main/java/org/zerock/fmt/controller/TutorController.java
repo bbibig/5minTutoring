@@ -316,6 +316,17 @@ public class TutorController {
 			else { model.addAttribute("_PROFILE_", "true"); }
 			//-----------------------------------------------
 			
+			//--------------------------프로필 사진 가져오기2
+			List<List> QList = new ArrayList<List>();
+			QBvo.forEach(e -> {
+				try {
+					List<UserProfileVO> profile = this.profileService.getUserNaP(e.getUser_email());
+					QList.add(profile);
+				} catch (ServiceException e1) { ;; }
+			});
+			model.addAttribute("QList", QList);
+			//-----------------------------------------------
+			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-05_ask";
@@ -338,6 +349,14 @@ public class TutorController {
 			String Tname = Tvo.getUser_name();
 			log.info("Tname: {}", Tname);
 			model.addAttribute("_T_NAME_", Tname);
+			
+			//--------------------------프로필 사진 가져오기(질문자)
+			String QNick = this.profileService.getUserNick(oneQ.getUser_email());
+			model.addAttribute("QNick", QNick);
+			List<ProfileVO> QProfile = this.profileService.getProfile(oneQ.getUser_email());
+			if(QProfile.size() == 0) { model.addAttribute("QProfile", "false"); }
+			else { model.addAttribute("QProfile", "true"); }
+			//-----------------------------------------------
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
@@ -401,6 +420,23 @@ public class TutorController {
 			
 			model.addAttribute("_ONE_Q_", oneQ);
 			model.addAttribute("_A_", Avo);
+			
+			//--------------------------프로필 사진 가져오기(질문자)
+			String QNick = this.profileService.getUserNick(oneQ.getUser_email());
+			model.addAttribute("QNick", QNick);
+			List<ProfileVO> QProfile = this.profileService.getProfile(oneQ.getUser_email());
+			if(QProfile.size() == 0) { model.addAttribute("QProfile", "false"); }
+			else { model.addAttribute("QProfile", "true"); }
+			//-----------------------------------------------
+			//--------------------------프로필 사진 가져오기(답변자)
+			String AUserEmail = this.profileService.getTutorEmail(tpNum);
+			String ANick = this.profileService.getUserNick(AUserEmail);
+			model.addAttribute("ANick", ANick);
+			List<ProfileVO> AProfile = this.profileService.getProfile(AUserEmail);
+			if(AProfile.size() == 0) { model.addAttribute("AProfile", "false"); }
+			else { model.addAttribute("AProfile", "true"); }
+			//-----------------------------------------------
+			
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		

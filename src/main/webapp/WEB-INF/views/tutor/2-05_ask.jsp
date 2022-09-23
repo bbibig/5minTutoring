@@ -142,12 +142,19 @@
 
 	                    <!-- Ask Cards -->
 	                    <div class="row">
-	                    	<c:forEach var="Q" items="${_QB_VO_}">
+	                    	<c:forEach var="Q" items="${_QB_VO_}" varStatus="statusNm">
 		                        <div class="col-lg-4 col-md-6 col-sm-12">
 		                            <div class="ask_card" onclick="location.href='watchAnswer?num=${Q.qb_number}&tp=${Q.tp_number}';" id="askLink" style="cursor:pointer">
 		                                <div class="student_info">
 		                                    <div class="sPic">
-		                                        <img src="/resources/img/profile.png" alt="튜터프로필">
+		                                        <c:forEach var="QList" items="${QList[statusNm.index]}" varStatus="status">
+													<c:if test="${QList.profile_number == 0}">
+														<img src="/resources/img/profile.png">
+													</c:if>
+													<c:if test="${QList.profile_number != 0}">
+														<img src="<spring:url value='/profile/${QList.user_nick}_profile.png'/>" class="rounded-circle">
+													</c:if>			
+												</c:forEach>
 		                                    </div>
 		                                    <div class="Sname">${Q.user_name}</div>
 		                                    <div class="date"><fmt:formatDate pattern="yyyy.MM.dd" value="${Q.regdate}"/></div>
