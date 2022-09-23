@@ -126,17 +126,17 @@
 						<div class="modal-content d-flex flex-column justify-content-center">
 
 							<div class="modal-body">
-								<form class="was-validated d-flex flex-column">
-									<label for="validationDefault01" class="form-label mb-0">학력</label>
-									<input type="text" class="form-control" id="validationDefault01" required>
-									<label for="validationDefault02" class="form-label mb-0">경력</label> <input
-										type="text" class="form-control" id="validationDefault02" required>
+								<form action="modifyInfo?num=${_TUTOR_INFO_.tp_number}" method="post" class="was-validated d-flex flex-column">
+									<label for="validationDefault01" class="form-label mb-0">학력</label> 
+									<input type="text" disabled placeholder="${_TUTOR_INFO_.tt_school}" class="form-control" id="validationDefault01" required>
+									<label for="validationDefault02" class="form-label mb-0">경력</label> 
+									<input type="text" name="tp_career" value="${_TUTOR_INFO_.tp_career}" class="form-control" id="validationDefault02" required>
 
 									<label for="validationDefault03" class="form-label mb-0">제목</label>
-									<input type="text" class="form-control" id="validationDefault03" required>
+									<input type="text" name="tp_title" value="${_TUTOR_INFO_.tp_title}" class="form-control" id="validationDefault03" required>
 									<label for="validationDefault04" class="form-label mb-0">내용</label>
-									<textarea class="form-control" placeholder="" id="validationDefault04"
-										style="height: 150px" required></textarea>
+									<textarea class="form-control" name="tp_comment" placeholder="" id="validationDefault04"
+										style="height: 150px" required>${_TUTOR_INFO_.tp_comment}</textarea>
 
 									<div class="pop-up-button-box align-self-end mt-3">
 										<button type="button" class="btn btn-outline-primary"
