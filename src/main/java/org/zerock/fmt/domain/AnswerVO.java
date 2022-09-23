@@ -16,6 +16,7 @@ public class AnswerVO {
 	private Integer qb_number;
 	private String a_content;
 	
+	private String user_email;
 	private String user_name;
 
 	private Date regdate;

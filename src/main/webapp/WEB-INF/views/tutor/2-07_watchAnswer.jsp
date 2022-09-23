@@ -61,12 +61,21 @@
 			
 
 			$(document).ready(function() {
+				var userEmail = "${__LOGIN_USER__.user_email}";
 				var a_number = "${_A_.a_number}";
 				var commentList = $(".commentList");
 				var currPage = 1; // 현재 댓글 페이지 번호
+
 				
+				// 댓글 리스트 출력
 				showList(1, true);
-		        
+				
+				// 답변이 없을 경우 답변 영역 없애기
+				console.log(a_number);
+				if(a_number === "") {
+					$("#answerArea").css("display", "none");
+				}
+				
 				// 댓글 리스트 출력
 	       		function showList(currPage, reset) {
 					commentService.getList({a_number:a_number, currPage:currPage||1}, function(data) {
@@ -101,19 +110,28 @@
 							str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
 							str+= '		<div class="Sname">' +list[i].user_name+ '</div>';
 							str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div>';
-							str+= '		<div class="hamburger-button col-9 d-flex justify-content-end">';
-							str+= '			<div class="dropdown">';
-							str+= '				<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
-							str+= '					<i class="bi bi-list fs-4"></i></button>';
-							str+= '				<ul class="dropdown-menu">';
-							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
-							str+= '					<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
-							str+= '				</ul></div></div></div>';
+							
+							console.log("userEmail: "+userEmail);
+							console.log(list[i].user_email);
+							
+							// 본인이 쓴 댓글에만 수정/삭제 버튼 나타남
+							if(userEmail === list[i].user_email) {
+								str+= '			<div class="hamburger-button col-9 d-flex justify-content-end">';
+								str+= '				<div class="dropdown">';
+								str+= '					<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
+								str+= '						<i class="bi bi-list fs-4"></i></button>';
+								str+= '					<ul class="dropdown-menu">';
+								str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
+								str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
+								str+= '					</ul></div></div></div>';
+							}
+							
 							str+= '	<p>' +list[i].cm_content+ '</p></div><hr>';
 						}
 						commentList.append(str);
 					}); // getList
 				} // showList
+
 				
 				// 댓글 더보기 버튼
 		        $("#moreComment").click(function() {
@@ -357,22 +375,24 @@
 	                            <br>
 	                            <div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_ONE_Q_.regdate}"/></div>
 	                            
-	                            <div class="hamburger-button col-8 d-flex justify-content-end">
-	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
-	                                        aria-expanded="false">
-	                                        <i class="bi bi-list fs-4"></i>
-	                                    </button>
-	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#reviseQ">수정</a>
-	                                        </li>
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#deleteQ">삭제</a>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
+	                            <c:if test="${userEmail eq _ONE_Q_.user_email}">
+		                            <div class="hamburger-button col-8 d-flex justify-content-end">
+		                                <div class="dropdown">
+		                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
+		                                        aria-expanded="false">
+		                                        <i class="bi bi-list fs-4"></i>
+		                                    </button>
+		                                    <ul class="dropdown-menu">
+		                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
+		                                                href="#reviseQ">수정</a>
+		                                        </li>
+		                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
+		                                                href="#deleteQ">삭제</a>
+		                                        </li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+								</c:if>	
 	                        </div>
 	                        <div class="ask_content">${_ONE_Q_.qb_content}</div>
 	                    </div>
@@ -380,7 +400,7 @@
 	            </div>
 	            
 	            <!-- answer -->
-	            <div class="row">
+	            <div class="row" id="answerArea">
 	                <div class="col-lg-9 answer">
 	                    <div class="Tutor_info d-flex">
 	                        <div class="TPic">
@@ -390,18 +410,21 @@
 	                        <div>&nbsp;튜터</div>
 	                        <br>
 	                        <div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_A_.regdate}"/></div>
-	                        <div class="hamburger-button col-8 d-flex justify-content-end">
-	                            <div class="dropdown">
-	                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                                    <i class="bi bi-list fs-4"></i>
-	                                </button>
-	                                <ul class="dropdown-menu">
-                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-                                                href="#reviseA">수정</a>
-                                        </li>
-	                                </ul>
-	                            </div>
-	                        </div>
+	                        
+	                        <c:if test="${userEmail eq _A_.user_email}">
+		                        <div class="hamburger-button col-8 d-flex justify-content-end">
+		                            <div class="dropdown">
+		                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+		                                    <i class="bi bi-list fs-4"></i>
+		                                </button>
+		                                <ul class="dropdown-menu">
+	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
+	                                                href="#reviseA">수정</a>
+	                                        </li>
+		                                </ul>
+		                            </div>
+		                        </div>
+		                    </c:if>
 	                    </div>
 	                    <p class="answer_content">${_A_.a_content}</p>
 	

@@ -33,6 +33,7 @@
 		SELECT 
 			a_number,
 			qb_number,
+			a.user_email,
 			u.user_name,
 			a_content,
 			regdate,
