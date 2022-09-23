@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommentVO3;
 import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
@@ -176,7 +176,7 @@ public class MypageMapperTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<CommentVO2> list = mapper.selectAllMyCommentList(cri);
+		List<CommentVO3> list = mapper.selectAllMyCommentList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testSelectAllMyCommentList()

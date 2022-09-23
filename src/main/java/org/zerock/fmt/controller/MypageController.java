@@ -19,7 +19,7 @@ import org.zerock.fmt.common.SharedScopeKeys;
 import org.zerock.fmt.domain.AnswerVO2;
 import org.zerock.fmt.domain.BuyInfoVO;
 import org.zerock.fmt.domain.BuyVO;
-import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommentVO3;
 import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryAnswerVO;
@@ -273,7 +273,7 @@ public class MypageController {
 			UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
 			cri.setUser_email(vo.getUser_email());
 			
-			List<CommentVO2> list = this.mypageService.getAllMyCommentList(cri);
+			List<CommentVO3> list = this.mypageService.getAllMyCommentList(cri);
 			model.addAttribute("_MYCOMMENT_", list);
 			
 			PageMyPageDTO pageDto = new PageMyPageDTO(cri, this.mypageService.getMyCommentTotalAmount(vo.getUser_email()));

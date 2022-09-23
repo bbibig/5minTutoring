@@ -35,7 +35,7 @@
 	</select>
 	
 	<!-- 3. 나의 댓글 목록 조회 페이징 처리(내림차순으로) -->
-	<select id="selectAllMyCommentList" resultType="org.zerock.fmt.domain.CommentVO2">
+	<select id="selectAllMyCommentList" resultType="org.zerock.fmt.domain.CommentVO3">
 		SELECT * 
 		FROM (SELECT /*+ index_desc(tbl_comment)*/ * 
       		  FROM tbl_comment

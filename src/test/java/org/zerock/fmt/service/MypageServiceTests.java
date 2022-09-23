@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommentVO3;
 import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
@@ -177,7 +177,7 @@ public class MypageServiceTests {
 		CriteriaMyPage cri = new CriteriaMyPage();
 		cri.setUser_email("test@gmail.com");
 		
-		List<CommentVO2> list = this.service.getAllMyCommentList(cri);
+		List<CommentVO3> list = this.service.getAllMyCommentList(cri);
 		list.forEach(e -> log.info(e));
 		
 	}//testGetAllMyCommentList()

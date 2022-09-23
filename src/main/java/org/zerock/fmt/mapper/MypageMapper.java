@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommentVO3;
 import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
@@ -50,7 +50,7 @@ public interface MypageMapper {
 	
 	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
-	public abstract List<CommentVO2> selectAllMyCommentList(CriteriaMyPage cri) throws DAOException;
+	public abstract List<CommentVO3> selectAllMyCommentList(CriteriaMyPage cri) throws DAOException;
 	
 	//4-2. 나의 댓글 목록 총 개수 조회
 	@Select("SELECT count(cm_number) "

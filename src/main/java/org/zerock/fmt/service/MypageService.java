@@ -2,7 +2,7 @@ package org.zerock.fmt.service;
 
 import java.util.List;
 
-import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommentVO3;
 import org.zerock.fmt.domain.CommunityVO2;
 import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.InquiryQuestionDTO;
@@ -41,7 +41,7 @@ public interface MypageService {
 	
 	
 	//4-1. 나의 댓글 목록 조회 페이징 처리(내림차순으로)
-	public abstract List<CommentVO2> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException;
+	public abstract List<CommentVO3> getAllMyCommentList(CriteriaMyPage cri) throws ServiceException;
 	
 	//4-2. 나의 질문글 목록 총 개수 획득
 	public abstract int getMyCommentTotalAmount(String user_email) throws ServiceException;
