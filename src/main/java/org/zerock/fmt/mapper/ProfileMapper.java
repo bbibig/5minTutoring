@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.ProfileDTO;
 import org.zerock.fmt.domain.ProfileVO;
+import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.exception.DAOException;
 
 //프로필 사진
@@ -28,6 +29,10 @@ public interface ProfileMapper {
 	@Select("SELECT u.user_email FROM tbl_user u, tbl_tutor_page t "
 			+ "WHERE u.user_email = t.user_email AND t.tp_number = #{tp_number}")
 	public abstract String selectTutorEmail(Integer tp_number) throws DAOException;
+	
+	//5. 유저 닉네임, 사진정보 조회
+	public abstract List<UserProfileVO> selectUserNaP(String user_email) throws DAOException;
+	
 	
 //	============<<INSERT>>============
 	//1. 프로필 사진 등록(조회해서 없으면 등록하기)

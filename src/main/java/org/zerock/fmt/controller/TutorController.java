@@ -1,5 +1,6 @@
 package org.zerock.fmt.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import org.zerock.fmt.domain.ReviewPageDTO;
 import org.zerock.fmt.domain.ReviewVO;
 import org.zerock.fmt.domain.TutorPageDTO;
 import org.zerock.fmt.domain.TutorPageVO;
+import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
@@ -78,6 +80,18 @@ public class TutorController {
 			recentList.forEach(log::trace);
 			model.addAttribute("_RECENT_LIST_", recentList);
 			
+			//--------------------------프로필 사진 가져오기
+			List<List> tutorPList = new ArrayList<List>();
+			recentList.forEach(e -> {
+				try {
+					String tutorEmail = this.profileService.getTutorEmail(e.getTp_number());
+					List<UserProfileVO> profile = this.profileService.getUserNaP(tutorEmail);
+					tutorPList.add(profile);
+				} catch (ServiceException e1) { ;; }
+			});
+			model.addAttribute("tutorPList", tutorPList);
+			//-----------------------------------------------
+			
 			// 추천 튜터
 			String subject = "국어";
 			String searchType = "누적답변순";
@@ -88,6 +102,18 @@ public class TutorController {
 			List<TutorPageVO> tutorVO = this.tutorService.getSortedTCard(subject, searchType);
 			tutorVO.forEach(log::trace);
 			model.addAttribute("_SORTED_TUTOR_", tutorVO);
+			
+			//--------------------------프로필 사진 가져오기
+			List<List> tutorSList = new ArrayList<List>();
+			tutorVO.forEach(e -> {
+				try {
+					String tutorEmail = this.profileService.getTutorEmail(e.getTp_number());
+					List<UserProfileVO> profile = this.profileService.getUserNaP(tutorEmail);
+					tutorSList.add(profile);
+				} catch (ServiceException e1) { ;; }
+			});
+			model.addAttribute("tutorSList", tutorSList);
+			//-----------------------------------------------
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 

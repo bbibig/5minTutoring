@@ -8,6 +8,7 @@ import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.domain.ProfileDTO;
 import org.zerock.fmt.domain.ProfileVO;
+import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.FaqMapper;
@@ -69,12 +70,19 @@ public class ProfileServiceImpl implements ProfileService {
 		catch (DAOException e) { throw new ServiceException(e); }// try-catch
 	}// getTutorNick
 	
-	//5. 튜터 이메일 조회
+	//6. 튜터 이메일 조회
 	@Override
 	public String getTutorEmail(Integer tp_number) throws ServiceException {
 		try { return this.mapper.selectTutorEmail(tp_number); } 
 		catch (DAOException e) { throw new ServiceException(e); }// try-catch
 	}// getTutorEmail
+	
+	//7. 유저 닉네임, 사진정보 조회
+	@Override
+	public List<UserProfileVO> getUserNaP(String user_email) throws ServiceException {
+		try { return this.mapper.selectUserNaP(user_email); } 
+		catch (DAOException e) { throw new ServiceException(e); }// try-catch
+	}//getUserNaP
 	
 }// end class
 

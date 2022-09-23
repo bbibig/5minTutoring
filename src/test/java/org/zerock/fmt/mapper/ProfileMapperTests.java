@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.ProfileDTO;
 import org.zerock.fmt.domain.ProfileVO;
+import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -130,6 +131,17 @@ public class ProfileMapperTests {
 		log.info("\t+ 튜터이메일: {}", userEmail);
 		
 	}//selectTutorEmail()
+	
+	//7. 유저 닉네임, 사진정보 조회
+	@Test
+	@Order(7)
+	@DisplayName("7. 유저 닉네임, 사진정보 조회")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectUserNaP() throws DAOException {
+		List<UserProfileVO> list = this.mapper.selectUserNaP("sdfdhh45899@gmail.com");
+		list.forEach(e -> log.info(">>>>{}", e));
+		
+	}//유저 닉네임, 사진정보 조회()
 	
 }// end class
 

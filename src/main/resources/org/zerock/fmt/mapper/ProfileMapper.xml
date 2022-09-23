@@ -16,6 +16,13 @@
 		SET file_path = #{file_path}
 		WHERE user_email = #{user_email}
     </update>
+    
+    <!-- 유저 닉네임, 사진정보 조회 -->
+    <select id="selectUserNaP" resultType="org.zerock.fmt.domain.UserProfileVO">
+		SELECT u.user_nick, NVL(p.profile_number, 0) AS profile_number
+		FROM tbl_user u, tbl_user_profile p
+		WHERE u.user_email = p.user_email(+) AND u.user_email = #{user_email}
+	</select>
 
 
 </mapper>

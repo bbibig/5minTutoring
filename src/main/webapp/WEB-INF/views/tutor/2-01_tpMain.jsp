@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <%@ page import="org.zerock.fmt.domain.TutorPageVO" 
 		import="java.util.List"
 		import="java.util.ArrayList"
@@ -66,11 +68,18 @@
 
 							<div class="carousel-item active">
 								<div class="row">
-									<c:forEach var="recent" items="${_RECENT_LIST_}" begin="0" end="3" step="1">
+									<c:forEach var="recent" items="${_RECENT_LIST_}" begin="0" end="3" step="1" varStatus="statusNm">
 										<div class="col-lg-3 col-md-6 col-sm-6">
 											<div class="tutorProfile">
 												<div class="tPic">
-													<img src="https://picsum.photos/600/400">
+													<c:forEach var="tutorP" items="${tutorPList[statusNm.index]}" varStatus="status">
+														<c:if test="${tutorP.profile_number == 0}">
+															<img src="/resources/img/profile.png" width="600px" height="400px">
+														</c:if>
+														<c:if test="${tutorP.profile_number != 0}">
+															<img src="<spring:url value='/profile/${tutorP.user_nick}_profile.png'/>" width="600px" height="400px">
+														</c:if>			
+													</c:forEach>
 												</div>
 												<div class="tutorInfo">
 													<h3 class="Tname"> ${recent.user_name} </h3>
@@ -92,11 +101,18 @@
 
 							<div class="carousel-item">
 								<div class="row">
-									<c:forEach var="recent" items="${_RECENT_LIST_}" begin="4" end="7" step="1">
+									<c:forEach var="recent" items="${_RECENT_LIST_}" begin="4" end="7" step="1" varStatus="statusNm">
 										<div class="col-lg-3 col-md-6 col-sm-6">
 											<div class="tutorProfile">
 												<div class="tPic">
-													<img src="https://picsum.photos/600/400">
+													<c:forEach var="tutorP" items="${tutorPList[statusNm.index]}" varStatus="status">
+														<c:if test="${tutorP.profile_number == 0}">
+															<img src="/resources/img/profile.png" width="600px" height="400px">
+														</c:if>
+														<c:if test="${tutorP.profile_number != 0}">
+															<img src="<spring:url value='/profile/${tutorP.user_nick}_profile.png'/>" width="600px" height="400px">
+														</c:if>			
+													</c:forEach>
 												</div>
 												<div class="tutorInfo">
 													<h3 class="Tname"> ${recent.user_name} </h3>
@@ -120,11 +136,18 @@
 							<div class="carousel-item">
 								<div class="row">
 									<c:forEach var="recent" items="${_RECENT_LIST_}" begin="8" end="11"
-										step="1">
+										step="1" varStatus="statusNm">
 										<div class="col-lg-3 col-md-6 col-sm-6">
 											<div class="tutorProfile">
 												<div class="tPic">
-													<img src="https://picsum.photos/600/400">
+													<c:forEach var="tutorP" items="${tutorPList[statusNm.index]}" varStatus="status">
+														<c:if test="${tutorP.profile_number == 0}">
+															<img src="/resources/img/profile.png" width="600px" height="400px">
+														</c:if>
+														<c:if test="${tutorP.profile_number != 0}">
+															<img src="<spring:url value='/profile/${tutorP.user_nick}_profile.png'/>" width="600px" height="400px">
+														</c:if>			
+													</c:forEach>
 												</div>
 												<div class="tutorInfo">
 													<h3 class="Tname"> ${recent.user_name} </h3>
@@ -190,11 +213,18 @@
 							<div class="carousel-item active">
 								<div class="row">
 									<c:forEach var="sortedT" items="${_SORTED_TUTOR_}" begin="0" end="3"
-										step="1">
+										step="1" varStatus="statusNm">
 										<div class="col-lg-3 col-md-6 col-sm-6">
 											<div class="tutorProfile">
 												<div class="tPic">
-													<img src="https://picsum.photos/600/400">
+													<c:forEach var="tutorS" items="${tutorSList[statusNm.index]}" varStatus="status">
+														<c:if test="${tutorS.profile_number == 0}">
+															<img src="/resources/img/profile.png" width="600px" height="400px">
+														</c:if>
+														<c:if test="${tutorS.profile_number != 0}">
+															<img src="<spring:url value='/profile/${tutorS.user_nick}_profile.png'/>" width="600px" height="400px">
+														</c:if>			
+													</c:forEach>
 												</div>
 												<div class="tutorInfo">
 													<h3 class="Tname"> ${sortedT.user_name} </h3>
@@ -218,11 +248,18 @@
 							<div class="carousel-item">
 								<div class="row">
 									<c:forEach var="sortedT" items="${_SORTED_TUTOR_}" begin="4" end="7"
-										step="1">
+										step="1" varStatus="statusNm">
 										<div class="col-lg-3 col-md-6 col-sm-6">
 											<div class="tutorProfile">
 												<div class="tPic">
-													<img src="https://picsum.photos/600/400">
+													<c:forEach var="tutorS" items="${tutorSList[statusNm.index]}" varStatus="status">
+														<c:if test="${tutorS.profile_number == 0}">
+															<img src="/resources/img/profile.png" width="600px" height="400px">
+														</c:if>
+														<c:if test="${tutorS.profile_number != 0}">
+															<img src="<spring:url value='/profile/${tutorS.user_nick}_profile.png'/>" width="600px" height="400px">
+														</c:if>			
+													</c:forEach>
 												</div>
 												<div class="tutorInfo">
 													<h3 class="Tname"> ${sortedT.user_name} </h3>
@@ -246,11 +283,18 @@
 							<div class="carousel-item">
 								<div class="row">
 									<c:forEach var="sortedT" items="${_SORTED_TUTOR_}" begin="8" end="11"
-										step="1">
+										step="1" varStatus="statusNm">
 										<div class="col-lg-3 col-md-6 col-sm-6">
 											<div class="tutorProfile">
 												<div class="tPic">
-													<img src="https://picsum.photos/600/400">
+													<c:forEach var="tutorS" items="${tutorSList[statusNm.index]}" varStatus="status">
+														<c:if test="${tutorS.profile_number == 0}">
+															<img src="/resources/img/profile.png" width="600px" height="400px">
+														</c:if>
+														<c:if test="${tutorS.profile_number != 0}">
+															<img src="<spring:url value='/profile/${tutorS.user_nick}_profile.png'/>" width="600px" height="400px">
+														</c:if>			
+													</c:forEach>
 												</div>
 												<div class="tutorInfo">
 													<h3 class="Tname"> ${sortedT.user_name} </h3>
