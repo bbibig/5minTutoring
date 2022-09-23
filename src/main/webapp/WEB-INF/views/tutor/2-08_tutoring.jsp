@@ -106,69 +106,37 @@
               </div>
             </div>
 
-             <!--======================과외 리스트=========================== -->
+            <!-- 과외하기 질문 리스트 -->
             <div class="tutoring-list d-flex flex-column ms-5 mt-3">
-              <div class="list-box">
+            
+	            <c:forEach var="TQ" items="${_TB_VO_}" varStatus="statusNm">
+	              <div class="list-box">
+	                <div class="row mt-3 d-flex flex-row align-items-center">
+	                  <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
+	                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk?num=${TQ.tb_number}" style="color:black" class="fs-4">${TQ.tb_title}</a></div>
+	                  <div class="col-1"><span>${TQ.user_name}</span></div>
+	                  
+	                  <c:if test="${_TP_NUMBER_ eq _TUTOR_INFO_.tp_number}">
+	                 	 <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
+	                  </c:if>
+	                </div>
+	                <hr>
+	              </div> 
+				</c:forEach>
+			
+			<!-- 과외중 참고 -->
+              <div class="list-box"> 
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-primary">과외중</span></div>
                   <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
-                  <c:if test="${_TP_NUMBER_ eq _TUTOR_INFO_.tp_number}">
-                 	 <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
-                  </c:if>
                 </div>
-
                 <hr>
               </div> 
+            </div>
 
-              <div class="list-box"> <!--===========================리스트박스===============================-->
-                <div class="row mt-3 d-flex flex-row align-items-center">
-                  <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
-                  <div class="col-1"><span>홍길동</span></div>
-                  <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
-                </div>
-
-                <hr>
-              </div> 
-
-              <div class="list-box"> <!--===========================리스트박스===============================-->
-                <div class="row mt-3 d-flex flex-row align-items-center">
-                  <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
-                  <div class="col-1"><span>홍길동</span></div>
-                  <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
-                </div>
-
-                <hr>
-              </div> 
-
-              <div class="list-box"> <!--===========================리스트박스===============================-->
-                <div class="row mt-3 d-flex flex-row align-items-center">
-                  <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
-                  <div class="col-1"><span>홍길동</span></div>
-                  <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
-                </div>
-
-                <hr>
-              </div> 
-
-              <div class="list-box"> <!--===========================리스트박스===============================-->
-                <div class="row mt-3 d-flex flex-row align-items-center">
-                  <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
-                  <div class="col-1"><span>홍길동</span></div>
-                  <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
-                </div>
-
-                <hr>
-              </div> 
-
-            </div> <!--======================과외 리스트 end=========================== -->
-
-            <div class="page-number d-flex flex-row justify-content-center">   <!--페이지 넘버-->
-             
+			<!-- 페이지 넘버 -->
+            <div class="page-number d-flex flex-row justify-content-center">   
               <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center p-5">
                   <li class="page-item"><a class="page-link rounded-circle" href="#">&laquo;</a></li>
@@ -178,21 +146,11 @@
                   <li class="page-item"><a class="page-link rounded-circle" href="#">&raquo;</a></li>
                 </ul>
               </nav>
-            </div> <!--페이지 넘버end-->
+            </div>
 
-            
-
-          </div> <!--우측섹션 end!!!!!!-->
-
-
-
-        </div> <!--전체 row end-->
-          
-       
-          
-        
-      </div> <!--섹션 전체 컨테이너 end-->
-    
+          </div> 
+        </div> 
+      </div> 
     </section>
     <!-- End section -->  
     
