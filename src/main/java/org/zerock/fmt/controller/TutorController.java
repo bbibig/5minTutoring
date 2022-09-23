@@ -1,13 +1,13 @@
 package org.zerock.fmt.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.domain.AnswerDTO;
 import org.zerock.fmt.domain.AnswerVO;
 import org.zerock.fmt.domain.CriteriaReview;
+import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.domain.QuestionBoardDTO;
 import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.ReviewDTO;
@@ -34,13 +34,13 @@ import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.AnswerService;
 import org.zerock.fmt.service.AskService;
 import org.zerock.fmt.service.CommentService;
+import org.zerock.fmt.service.ProfileService;
 import org.zerock.fmt.service.ReviewService;
 import org.zerock.fmt.service.TutorService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Log4j2
 @NoArgsConstructor
@@ -63,6 +63,9 @@ public class TutorController {
 	
 	@Setter(onMethod_ =@Autowired)
 	private ReviewService reviewService;
+	
+	@Setter(onMethod_= @Autowired)
+	private ProfileService profileService;
 	
 	@GetMapping("/main")
 	public String tpMain(Model model, HttpServletRequest req) throws ControllerException {
@@ -102,6 +105,16 @@ public class TutorController {
 			log.info("tutorInfo: {}", tutorInfo);
 			model.addAttribute("_TUTOR_INFO_", tutorInfo);
 			
+			//--------------------------프로필 사진 가져오기
+			String tutorEmail = this.profileService.getTutorEmail(tutorInfo.getTp_number());
+			String tutorNick = this.profileService.getTutorNick(tutorInfo.getTp_number());
+			model.addAttribute("_TUTORNICK_", tutorNick);
+			
+			List<ProfileVO> profileInfo = this.profileService.getProfile(tutorEmail);
+			if(profileInfo.size() == 0) { model.addAttribute("_PROFILE_", "false"); }
+			else { model.addAttribute("_PROFILE_", "true"); }
+			//-----------------------------------------------
+			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-02_tutorpage_info";
@@ -126,12 +139,24 @@ public class TutorController {
 			
 			double avgReview = this.reviewService.avgReview(tutorInfo.getTp_number());
 			model.addAttribute("avgReview",avgReview);
+			Map<String,Object> avgStar = this.reviewService.countReview(tutorInfo.getTp_number());
+			model.addAttribute("avgStar", avgStar);
 			
 			//-----------------------------------리뷰페이징
 			int totalReview = this.reviewService.countList(cri.getTp_number());
 			ReviewPageDTO rvPage = new ReviewPageDTO(cri, totalReview);
 			model.addAttribute("_REVIEWPAGINATION_",rvPage);
 			model.addAttribute("RVCOUNT", totalReview);
+			
+			//--------------------------프로필 사진 가져오기
+			String tutorEmail = this.profileService.getTutorEmail(tutorInfo.getTp_number());
+			String tutorNick = this.profileService.getTutorNick(tutorInfo.getTp_number());
+			model.addAttribute("_TUTORNICK_", tutorNick);
+			
+			List<ProfileVO> profileInfo = this.profileService.getProfile(tutorEmail);
+			if(profileInfo.size() == 0) { model.addAttribute("_PROFILE_", "false"); }
+			else { model.addAttribute("_PROFILE_", "true"); }
+			//-----------------------------------------------
 						
 		} catch (Exception e) { throw new ControllerException(e); }
 		
@@ -202,6 +227,16 @@ public class TutorController {
 			log.info("tutorInfo: {}", tutorInfo);
 			model.addAttribute("_TUTOR_INFO_", tutorInfo);
 			
+			//--------------------------프로필 사진 가져오기
+			String tutorEmail = this.profileService.getTutorEmail(tutorInfo.getTp_number());
+			String tutorNick = this.profileService.getTutorNick(tutorInfo.getTp_number());
+			model.addAttribute("_TUTORNICK_", tutorNick);
+			
+			List<ProfileVO> profileInfo = this.profileService.getProfile(tutorEmail);
+			if(profileInfo.size() == 0) { model.addAttribute("_PROFILE_", "false"); }
+			else { model.addAttribute("_PROFILE_", "true"); }
+			//-----------------------------------------------
+			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-04_reviewlist";
@@ -222,6 +257,16 @@ public class TutorController {
 			List<QuestionBoardVO> QBvo = this.askService.getQB(tp_number);
 			log.info("QBvo :{}", QBvo);
 			model.addAttribute("_QB_VO_",QBvo);
+			
+			//--------------------------프로필 사진 가져오기
+			String tutorEmail = this.profileService.getTutorEmail(tutorInfo.getTp_number());
+			String tutorNick = this.profileService.getTutorNick(tutorInfo.getTp_number());
+			model.addAttribute("_TUTORNICK_", tutorNick);
+			
+			List<ProfileVO> profileInfo = this.profileService.getProfile(tutorEmail);
+			if(profileInfo.size() == 0) { model.addAttribute("_PROFILE_", "false"); }
+			else { model.addAttribute("_PROFILE_", "true"); }
+			//-----------------------------------------------
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		
@@ -420,6 +465,16 @@ public class TutorController {
 			TutorPageVO tutorInfo = this.tutorService.getAllTInfo(tp_number);
 			log.info("tutorInfo: {}", tutorInfo);
 			model.addAttribute("_TUTOR_INFO_", tutorInfo);
+			
+			//--------------------------프로필 사진 가져오기
+			String tutorEmail = this.profileService.getTutorEmail(tutorInfo.getTp_number());
+			String tutorNick = this.profileService.getTutorNick(tutorInfo.getTp_number());
+			model.addAttribute("_TUTORNICK_", tutorNick);
+			
+			List<ProfileVO> profileInfo = this.profileService.getProfile(tutorEmail);
+			if(profileInfo.size() == 0) { model.addAttribute("_PROFILE_", "false"); }
+			else { model.addAttribute("_PROFILE_", "true"); }
+			//-----------------------------------------------
 			
 		} catch (Exception e) { throw new ControllerException(e); }
 		

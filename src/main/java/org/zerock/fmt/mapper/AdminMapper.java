@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.fmt.domain.AdminVO;
 import org.zerock.fmt.domain.CriteriaAdmin;
+import org.zerock.fmt.domain.TutorPageDTO;
 import org.zerock.fmt.exception.DAOException;
 
 public interface AdminMapper {
@@ -15,9 +16,10 @@ public interface AdminMapper {
 	
 	//관리자 전체조회 
 	public abstract List<AdminVO> selectAdmin(CriteriaAdmin cri) throws DAOException;
+	
 	@Select("SELECT count(*) FROM tbl_admin")
 	public abstract int adminCount()throws DAOException;
 	
-	
+
 	
 }//end interface

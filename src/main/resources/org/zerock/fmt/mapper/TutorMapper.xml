@@ -77,22 +77,11 @@
     </select>
     
 	<insert id="insertIntroInfo">
-		INSERT INTO tbl_tutor_page
-		(
-			tp_number,
-			user_email,
-		    tp_career,
-		    tp_title,	
-		    tp_comment
-		)
-		VALUES
-		(
-			tPage_sequence.NEXTVAL,
-			#{user_email},
-			#{tp_career},
-			#{tp_title},
-			#{tp_comment}
-		)
+		INSERT INTO tbl_tutor_page(tp_number, user_email, tp_career, tp_title, tp_comment)
+		VALUES( TPAGE_SEQUENCE.NEXTVAL,#{user_email}, 
+		'경력을 작성해주세요.', 
+		'나를 소개합니다.', 
+		'나의 자신있는 한마디!')
 	</insert>
 
 	<update id="updateTInfo">

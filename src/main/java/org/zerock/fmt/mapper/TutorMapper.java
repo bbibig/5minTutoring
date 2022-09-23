@@ -21,8 +21,8 @@ public interface TutorMapper {
 	// 추천 튜터 카드 정보 (과목 + 평점순 12개행 정렬)
 	public abstract List<TutorPageVO> selectHighStarTcard(String subject) throws DAOException;
 	
-	// 튜터페이지 소개 정보 입력 (경력, 소개제목, 소개내용)
-	public abstract Integer insertIntroInfo(TutorPageDTO tutorPagedto) throws DAOException;
+	// 튜터승인시 튜터페이지 추가
+	public abstract Integer insertIntroInfo(String user_email) throws DAOException;
 	
 	// 튜터페이지 소개 정보 수정 
 	public abstract Integer updateTInfo(TutorPageDTO tutorPagedto) throws DAOException;

@@ -60,10 +60,10 @@ public class TutorServiceImpl implements TutorService {
 	} // getSortedTCard
 	
 	@Override
-	public boolean createIntroInfo(TutorPageDTO tutorPagedto) throws ServiceException {
-		log.trace("튜터 소개 입력", tutorPagedto);
+	public boolean createIntroInfo(String user_email) throws ServiceException {
+		log.trace("튜터 소개 입력", user_email);
 
-		try { return this.tutorMapper.insertIntroInfo(tutorPagedto) == 1; } 
+		try { return this.tutorMapper.insertIntroInfo(user_email) == 1; } 
 		catch (Exception e) { throw new ServiceException(e); }
 	} // insertIntroInfo
 

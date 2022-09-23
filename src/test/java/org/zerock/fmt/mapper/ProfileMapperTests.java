@@ -96,6 +96,41 @@ public class ProfileMapperTests {
 		
 	}//insertProfile()
 	
+	//4. 프로필 사진 정보 조회 (닉네임)
+	@Test
+	@Order(4)
+	@DisplayName("4. selectUserNick")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectUserNick() throws DAOException {
+		log.trace("유저 닉네임 조회");
+		
+		String userNick = this.mapper.selectUserNick("seosujung0@gmail.com");
+		log.info("\t+ 유저닉네임: {}", userNick);
+		
+	}//selectProfile()
+	
+	//5. 튜터 닉네임 조회
+	@Test
+	@Order(5)
+	@DisplayName("5. selectTutorNick")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectTutorNick() throws DAOException {
+		String userNick = this.mapper.selectTutorNick(65);
+		log.info("\t+ 튜터닉네임: {}", userNick);
+		
+	}//selectTutorNick()
+	
+	//6. 튜터 이메일 조회
+	@Test
+	@Order(6)
+	@DisplayName("6. selectTutorEmail")
+	@Timeout(unit = TimeUnit.SECONDS, value = 10)
+	void selectTutorEmail() throws DAOException {
+		String userEmail = this.mapper.selectTutorEmail(65);
+		log.info("\t+ 튜터이메일: {}", userEmail);
+		
+	}//selectTutorEmail()
+	
 }// end class
 
 

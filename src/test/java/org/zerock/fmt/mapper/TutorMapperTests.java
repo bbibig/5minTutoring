@@ -89,12 +89,8 @@ public class TutorMapperTests {
 	@DisplayName("3. TutorMapper.insertIntroInfo() test.")
 	void testInsertIntroInfo() throws DAOException {
 		log.trace("튜터 소개 입력");
-		
-		TutorPageDTO newInfo = new TutorPageDTO(
-			null, "test@gmail.com", "수학강사 3년 경력", "안녕하세요.", "진심을 다해 가르칩니다.");
-		log.info("\t + newInfo: {}", newInfo);
-		
-		int affectedLines = this.tutorMapper.insertIntroInfo(newInfo);
+
+		int affectedLines = this.tutorMapper.insertIntroInfo("erttt22@gmail.com");
 		log.info("\t + affectedLines: {}", affectedLines);
 		
 		assert affectedLines == 1;

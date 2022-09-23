@@ -1,6 +1,7 @@
 package org.zerock.fmt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -17,6 +18,7 @@ import org.zerock.fmt.domain.CriteriaReview;
 import org.zerock.fmt.domain.ReviewDTO;
 import org.zerock.fmt.domain.ReviewVO;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.mapper.ReviewMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +35,9 @@ public class ReviewServiceTest {
 	@Setter(onMethod_ = @Autowired)
 	private ReviewService revireService;
 	
+	@Setter(onMethod_ = @Autowired)
+	private ReviewMapper mapper;
+	
 	@Test
 	@Order(1)
 	@DisplayName("createReview")
@@ -42,7 +47,7 @@ public class ReviewServiceTest {
 		ReviewDTO dto = new ReviewDTO();
 		dto.setTp_number(64);
 		dto.setUser_email("hi@gmail.com");
-		dto.setRv_star(3.5);
+		dto.setRv_star(3);
 		dto.setRv_content("답변을 너무 늦게 줍니다... ");
 		int result = this.revireService.createReview(dto);
 		log.info("\t + result : {}", result);
@@ -78,7 +83,7 @@ public class ReviewServiceTest {
 		ReviewDTO dto = new ReviewDTO();
 		dto.setRv_content("수정합니다... 엄청 잘 가르쳐 줍니다.^0^");
 		dto.setRv_number(1);
-		dto.setRv_star(4.0);
+		dto.setRv_star(4);
 		dto.setTp_number(64);
 		int result = this.revireService.modifyReview(dto);
 		log.info("\t + result : {}", result);
@@ -115,5 +120,16 @@ public class ReviewServiceTest {
 		int result1 = this.revireService.removeReview(22);
 		int result2 = this.revireService.removeReview(300);		
 		log.info("result : {}, {}", result1, result2);
+	}//removeReview
+	
+	@Test
+	@Order(8)
+	@DisplayName("countReview")
+	void countReview() throws ServiceException{
+		log.trace("countReview : 리뷰 개수 테스트");
+				
+		Map<String,Object> starAvg = this.revireService.countReview(65);
+		log.info("\t + starAvg : {}", starAvg);
+						
 	}//removeReview
 }//end class

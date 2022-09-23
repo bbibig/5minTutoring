@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
   <!doctype html>
@@ -103,6 +104,8 @@
           })//ajax
         })//리뷰 수정
            
+        let avgStras = '${avgStar}';
+        console.log("avgStar->",avgStras);
       });//jq
     </script>
 
@@ -125,7 +128,10 @@
             <div class="card d-flex flex-column align-items-center text-center">
 
               <div class="profile-image">
-                <img src="/resources/img/profile.png" alt="Admin" class="rounded-circle" width="150">
+                <c:if test="${_PROFILE_ eq false}"> <img src="/resources/img/profile.png" alt="Admin" class="rounded-circle"
+								width="150"> </c:if>
+								<c:if test="${_PROFILE_ eq true}"> <img src="<spring:url value='/profile/${_TUTORNICK_}_profile.png'/>" alt="Admin" class="rounded-circle"
+								width="150" height="150"> </c:if>
               </div>
 
               <div class="tutorname_introduction">
@@ -148,9 +154,9 @@
 
             <div class="left-nav" id="left-navigation">
               <ul class="nav nav-pills nav-stacked flex-column">
-                <li class="nav-item mt-3"><a class="nav-link nav-tabs active" aria-current="page"
-                    href="/tutor/info?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
                 <li class="nav-item nav-tabs mt-3"><a class="nav-link"
+                    href="/tutor/info?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
+                <li class="nav-item nav-tabs mt-3"><a class="nav-link nav-tabs active" aria-current="page"
                     href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
                 <li class="nav-item nav-tabs mt-3"><a class="nav-link"
                     href="/tutor/ask?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
@@ -169,23 +175,29 @@
                 <div class="review-count text-end"><span id="RVcount">후기 ${RVCOUNT} 개</span></div>
             </div>
 
+            <!-- start : 평균별점+프로그래스 바 -->
             <div class="star-rating row d-flex flex-row justify-content-center">
-              <!--우측섹션 평균별점 & 프로그래스 바 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
+              <!-- 평균별점 -->
               <div class="rating-block col-4 d-flex flex-column justify-content-center align-items-center">
-                <!-- 평균별점 -->
                 <h2 class="average pb-5">${avgReview}</h2>
                 <div class="stars">
-                  <i class="fa fa-star star-color"></i>
-                  <i class="fa fa-star star-color"></i>
-                  <i class="fa fa-star star-color"></i>
-                  <i class="fa fa-star star-color"></i>
-                  <i class="fa fa-star"></i>
+                  <c:forEach begin="0" end="4" var="i">
+                        <c:choose>
+                              <c:when test="${Math.floor(avgReview) > i }">
+                                  <i class="fa fa-star star-color"></i>
+                              </c:when>
+                              <c:otherwise>
+                                  <i class="fa fa-star"></i>
+                              </c:otherwise>
+                        </c:choose>
+                  </c:forEach>
                 </div>
+                       
               </div> <!-- 평균별점 end-->
 
+              <!---프로그래스바 점수-->
               <div class="progress-number col-1 d-flex flex-column justify-content-around">
-                <!---프로그래스바 점수-->
                 <span class="badge bg-primary">5점</span>
                 <span class="badge bg-primary">4점</span>
                 <span class="badge bg-primary">3점</span>
@@ -197,31 +209,31 @@
               <div class="star-progressbar col-7 d-flex flex-column justify-content-around">
                 <!--프로그래스 바-->
                 <div class="progress">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100"
+                  <div class="progress-bar bg-warning" role="progressbar" style="width:${avgStar['star5']}%" aria-valuenow="100"
                     aria-valuemin="0" aria-valuemax="100">
                   </div>
                 </div>
                 <div class="progress">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80"
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: ${avgStar['star4']}%" aria-valuenow="80"
                     aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="progress">
-                  <div class="progress-bar bg-secondary" role="progressbar" style="width: 60%" aria-valuenow="60"
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: ${avgStar['star3']}%" aria-valuenow="60"
                     aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="progress">
-                  <div class="progress-bar bg-secondary" role="progressbar" style="width: 40%" aria-valuenow="40"
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: ${avgStar['star2']}%" aria-valuenow=""
                     aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="progress">
-                  <div class="progress-bar bg-dark" role="progressbar" style="width: 20%" aria-valuenow="20"
-                    aria-valuemin="" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: ${avgStar['star1']}%" aria-valuenow=""
+                    aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
               <!--프로그래스 바 end-->
 
             </div>
-            <!--우측 윗부분 평균별점 & 프로그래스 바 end !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <!-- end : 평균별점+프로그래스 바-->
             
             <!-- Tutor 는 리뷰 목록만 -->  
             <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}">
@@ -238,11 +250,11 @@
 
                   <div class="rating">
                     <!-- <fieldset id="star_rating"> -->
-                    <input type="radio" name="rv_star" value="5.0" id="5"><label for="5">☆</label>
-                    <input type="radio" name="rv_star" value="4.0" id="4"><label for="4">☆</label>
-                    <input type="radio" name="rv_star" value="3.0" id="3"><label for="3">☆</label>
-                    <input type="radio" name="rv_star" value="2.0" id="2"><label for="2">☆</label>
-                    <input type="radio" name="rv_star" value="1.0" id="1"><label for="1">☆</label>
+                    <input type="radio" name="rv_star" value="5" id="5"><label for="5">☆</label>
+                    <input type="radio" name="rv_star" value="4" id="4"><label for="4">☆</label>
+                    <input type="radio" name="rv_star" value="3" id="3"><label for="3">☆</label>
+                    <input type="radio" name="rv_star" value="2" id="2"><label for="2">☆</label>
+                    <input type="radio" name="rv_star" value="1" id="1"><label for="1">☆</label>
                     <!-- </fieldset> -->
                   </div>
                   <p class="my-3">별점을 선택해주세요.</p>
@@ -271,9 +283,6 @@
               <div class="filter">
 
                 <div class="row">
-                  <div class="col-1">
-                    <span class="badge text-dark fs-6">View&nbsp;&nbsp;|</span>
-                  </div>
 
                   <div class="col-4">
                     <ul class="d-flex flex-row justify-content-around mb-0 ps-0">
@@ -315,7 +324,7 @@
                                    </c:otherwise>
                              </c:choose>
                         </c:forEach>
-                    </div>
+                      </div>
 
                       <div class="review-block-name">
                         <span class="review-name"><strong>${review.user_nick}</strong></span>
@@ -337,9 +346,6 @@
                           <i class="bi bi-list fs-2"></i>
                         </button>
 
-                        <c:if test="javascript:loginReview">
-                          111111111
-                        </c:if>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                           <li class="list-unstyled"><a class="dropdown-item" href="#form1" data-bs-toggle="modal">수정</a></li> 
                           <li class="list-unstyled"><a class="dropdown-item" id="removeReview" data-bs-toggle="modal">삭제</a></li>
@@ -427,10 +433,10 @@
                       <input type="hidden" name="rv_number">
 
                       <div class="rating">
-                        <input type="radio" name="rv_newstar" value="5.0" id="5"><label for="5">☆</label>
-                        <input type="radio" name="rv_newstar" value="4.0" id="4"><label for="4">☆</label>
-                        <input type="radio" name="rv_newstar" value="3.0" id="3"><label for="3">☆</label>
-                        <input type="radio" name="rv_newstar" value="2.0" id="2"><label for="2">☆</label>
+                        <input type="radio" name="rv_newstar" value="5" id="5"><label for="5">☆</label>
+                        <input type="radio" name="rv_newstar" value="4" id="4"><label for="4">☆</label>
+                        <input type="radio" name="rv_newstar" value="3" id="3"><label for="3">☆</label>
+                        <input type="radio" name="rv_newstar" value="2" id="2"><label for="2">☆</label>
                         <input type="radio" name="rv_newstar" value="1.0" id="1"><label for="1">☆</label>
                       </div>
 
@@ -485,7 +491,7 @@
         </div>
 
 
-
+        
       </div>
       <!--섹션 전체 컨테이너 end-->
 

@@ -37,5 +37,9 @@ public interface ReviewMapper {
 	//리뷰 삭제 
 	public abstract int deleteReview(Integer rv_number) throws DAOException;
 	
+	//별점 개수 구하기
+//	public abstract Map<String,Object> countReview(Integer tp_number) throws DAOException;
+	public abstract int countReview(@Param("rv_star")Integer rv_star, @Param("tp_number")Integer tp_number) throws DAOException;
+	
 	
 }//end 

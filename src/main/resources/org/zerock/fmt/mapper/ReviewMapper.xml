@@ -63,4 +63,21 @@
         DELETE FROM tbl_review
         WHERE rv_number = #{rv_number}
     </delete>
+
+    <resultMap id="ReviewStarCount" type="map">
+        <result column="rv_star" javaType="Integer"/>
+    </resultMap>
+    <!-- 리뷰 점수 별 개수 -->
+    <!-- <select id="countReview" resultMap="ReviewStarCount">
+        SELECT count(*)
+        FROM TBL_REVIEW
+        WHERE TP_NUMBER = 65
+        GROUP BY RV_STAR
+    </select> -->
+
+    <select id="countReview" resultType="int">
+        SELECT count(*)
+        FROM TBL_REVIEW
+        WHERE RV_STAR = #{rv_star} AND TP_NUMBER = #{tp_number}
+    </select>
 </mapper>

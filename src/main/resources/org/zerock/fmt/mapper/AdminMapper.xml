@@ -19,4 +19,6 @@
       OFFSET (#{currPage}-1) * #{amount} ROW 
       FETCH NEXT #{amount} ROWS ONLY
   </select>
+
+ 
 </mapper>
