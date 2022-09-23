@@ -138,6 +138,7 @@ public class TutorController {
 		return "redirect:/tutor/info?num=" + tp_number;
 	} // modifyInfo
 	
+	
 	@GetMapping("/writeReview")
 	public String writeReview(CriteriaReview cri,  Model model,  HttpServletRequest req) throws ControllerException {
 		log.trace("2-03_writereview <<< 학생리뷰 작성 페이지");

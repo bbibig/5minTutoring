@@ -73,11 +73,12 @@
 									<strong>튜터정보</strong>
 								</h2>
 							</div>
-							<div class="edit-button d-flex flex-column">
-								<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-									data-bs-target="#tutor-info-edit">
-									수정</button>
-							</div>
+							
+							<c:if test="${_TP_NUMBER_ eq _TUTOR_INFO_.tp_number}">
+								<div class="edit-button d-flex flex-column">
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tutor-info-edit">수정</button>
+								</div>
+							</c:if>
 						</div>
 						<div class="tutor-info d-flex flex-column justify-content-center">
 							<div class="tutor-career flex-column ms-5">

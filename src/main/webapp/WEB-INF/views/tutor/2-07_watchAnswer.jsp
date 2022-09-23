@@ -374,8 +374,8 @@
 	                            <div>&nbsp;학생</div>
 	                            <br>
 	                            <div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_ONE_Q_.regdate}"/></div>
-	                            
-	                            <c:if test="${userEmail eq _ONE_Q_.user_email}">
+
+	                            <c:if test="${__LOGIN_USER__.user_email eq _ONE_Q_.user_email}">
 		                            <div class="hamburger-button col-8 d-flex justify-content-end">
 		                                <div class="dropdown">
 		                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
@@ -411,7 +411,7 @@
 	                        <br>
 	                        <div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_A_.regdate}"/></div>
 	                        
-	                        <c:if test="${userEmail eq _A_.user_email}">
+	                        <c:if test="${__LOGIN_USER__.user_email eq _A_.user_email}">
 		                        <div class="hamburger-button col-8 d-flex justify-content-end">
 		                            <div class="dropdown">
 		                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
