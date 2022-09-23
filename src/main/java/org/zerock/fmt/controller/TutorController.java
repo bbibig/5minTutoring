@@ -193,10 +193,10 @@ public class TutorController {
 		log.trace("modityReview invoked.");
 		log.info("dto: {}",dto);
 			try{
-//				int result =this.reviewService.modifyReview(dto);
-//				if(result==1) {
-//					return "리뷰가 수정되었습니다.";
-//				}//if : 성공시 return result 
+				int result =this.reviewService.modifyReview(dto);
+				if(result==1) {
+					return "리뷰가 수정되었습니다.";
+				}//if : 성공시 return result 
 				return "fail";
 			}catch(Exception e) { throw new ControllerException(e); }
 	}//modityReview

@@ -305,7 +305,7 @@
               <!--최신순 / 낮은평점순 / 높은평점순 전체 필터 end-->
 
               <c:forEach var="review" items="${_RIVIEWLIST_}">
-              <div class="review-box">
+                <div class="review-box">
                 <!-- 리뷰 박스!!!!-->
                   <div class="row d-flex flex-row modify">
                     <!--댓글 박스 첫번째 row -->
@@ -345,23 +345,26 @@
                     <div class="hamburger-button col-8 d-flex justify-content-end">
                       <!-- 수정/삭제 버튼-->
 
-                      <div class="dropdown">
+                      <c:if test="${__LOGIN_USER__.user_email eq review.user_email}">
+                        ㄹㄹㄹㄹ
+                      </c:if>
+                        <div class="dropdown">
 
-                        <button class="btn pt-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                          aria-expanded="false">
-                          <i class="bi bi-list fs-2"></i>
-                        </button>
+                          <button class="btn pt-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-list fs-2"></i>
+                          </button>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li class="list-unstyled"><a class="dropdown-item" href="#form1" data-bs-toggle="modal">수정</a></li> 
-                          <li class="list-unstyled"><a class="dropdown-item" id="removeReview" data-bs-toggle="modal">삭제</a></li>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li class="list-unstyled"><a class="dropdown-item" href="#form1" data-bs-toggle="modal">수정</a></li> 
+                            <li class="list-unstyled"><a class="dropdown-item" id="removeReview" data-bs-toggle="modal">삭제</a></li>
+                          </ul>
 
-                        </ul>
-                        <form id="removeForm">
-                          <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
-                          <input type="hidden" name="rv_number" value="${review.rv_number}" id="rv_number">
-                        </form>
-                      </div>
+                          <form id="removeForm">
+                            <input type="hidden" name="tp_number" value="${_TUTOR_INFO_.tp_number}">
+                            <input type="hidden" name="rv_number" value="${review.rv_number}" id="rv_number">
+                          </form>
+                        </div>
 
                     </div><!-- 수정/삭제 버튼-->
 
