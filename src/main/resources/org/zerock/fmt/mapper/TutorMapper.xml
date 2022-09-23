@@ -12,11 +12,11 @@
 			tp_comment,
 			tp_accu_answer,
 			tp_average,
-			tt_subject,
-			tt_school,
-			tbl_user.user_name
-		FROM tbl_user, tbl_tutor_page
-		WHERE tbl_user.user_email = tbl_tutor_page.user_email
+			u.tt_subject,
+			CONCAT(u.tt_depart, CONCAT(' ', u.tt_school)) AS tt_school,
+			u.user_name
+		FROM tbl_user u, tbl_tutor_page t
+		WHERE u.user_email = t.user_email
 		AND tp_number = #{num}
 	</select>
 

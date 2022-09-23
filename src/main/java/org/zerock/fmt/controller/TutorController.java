@@ -27,6 +27,7 @@ import org.zerock.fmt.domain.QuestionBoardVO;
 import org.zerock.fmt.domain.ReviewDTO;
 import org.zerock.fmt.domain.ReviewPageDTO;
 import org.zerock.fmt.domain.ReviewVO;
+import org.zerock.fmt.domain.TutorPageDTO;
 import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -120,6 +121,22 @@ public class TutorController {
 		return "tutor/2-02_tutorpage_info";
 	}// tutorInfo
 	
+	
+	@PostMapping("/modifyInfo")
+	public String modifyInfo(@ModelAttribute("updateDTO") TutorPageDTO updateDTO, HttpServletRequest req) throws ControllerException {
+		log.trace("<<< 튜터 정보 수정");
+		
+		String tp_number = req.getParameter("num");
+		updateDTO.setTp_number(Integer.parseInt(tp_number));
+		
+		try {
+			boolean result = this.tutorService.updateTInfo(updateDTO);
+			log.info("result: {}", result);
+			
+		} catch (ServiceException e) { throw new ControllerException(e); }
+		
+		return "redirect:/tutor/info?num=" + tp_number;
+	} // modifyInfo
 	
 	@GetMapping("/writeReview")
 	public String writeReview(CriteriaReview cri,  Model model,  HttpServletRequest req) throws ControllerException {
