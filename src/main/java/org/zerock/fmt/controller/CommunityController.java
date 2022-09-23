@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityPageDTO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaCommunity;
 import org.zerock.fmt.exception.ControllerException;
+import org.zerock.fmt.service.CommentService2;
 import org.zerock.fmt.service.CommunityService;
 
 import lombok.NoArgsConstructor;
@@ -33,6 +35,9 @@ public class CommunityController implements InitializingBean{
 	
 	@Setter(onMethod_ = @Autowired)
 	private CommunityService communityService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private CommentService2 commentService2;
 	
 	
 	//전체게시글 조회
@@ -70,6 +75,9 @@ public class CommunityController implements InitializingBean{
 			log.info("\t+board: "+board);
 			
 			model.addAttribute("_BOARD_", board);
+			
+			List<CommentVO2> commentList = commentService2.readComment(dto.getFb_number());
+			model.addAttribute("_COMMENTLIST_", commentList);
 			
 		}catch(Exception e) {
 			throw new ControllerException(e);

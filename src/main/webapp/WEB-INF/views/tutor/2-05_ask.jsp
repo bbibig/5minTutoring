@@ -89,11 +89,14 @@
 	                        <div>
 	                            <h2><strong>튜터에게 질문하기</strong></h2>
 	                        </div>
-	                        <div class="edit-button d-flex flex-column">
-	                            <button type="button" id="ask_bt" value="질문하기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ask_write">
-	                                질문하기
-	                            </button>
-	                        </div>
+	                        
+	                        <c:if test="${__LOGIN_USER__.user_group eq 'Student'}">
+		                        <div class="edit-button d-flex flex-column">
+		                            <button type="button" id="ask_bt" value="질문하기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ask_write">
+		                                질문하기
+		                            </button>
+		                        </div>
+							</c:if>
 	
 	                        <!-- 질문하기 modal -->
 	                        <div class="modal fade" id="ask_write">

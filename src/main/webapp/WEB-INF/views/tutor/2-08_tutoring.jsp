@@ -66,11 +66,13 @@
             <div class="headers d-flex flex-row align-items-center justify-content-between ms-5"> 
               <div class="head-line"><h2><strong>튜터에게 과외받기</strong></h2></div>
 
-              <div class="edit-button d-flex flex-column">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tutor-ask">
-                  과외요청하기
-                </button>
-              </div>
+			  <c:if test="${__LOGIN_USER__.user_group eq 'Student'}">
+	              <div class="edit-button d-flex flex-column">
+	                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tutor-ask">
+	                  과외요청하기
+	                </button>
+	              </div>
+              </c:if>
               
               <!-- 과외요청하기 modal -->
               <div class="modal fade" id="tutor-ask"> 
@@ -104,15 +106,16 @@
               </div>
             </div>
 
-            
-            <div class="tutoring-list d-flex flex-column ms-5 mt-3"> <!--======================과외 리스트=========================== -->
-              
-              <div class="list-box"> <!--===========================리스트박스===============================-->
+             <!--======================과외 리스트=========================== -->
+            <div class="tutoring-list d-flex flex-column ms-5 mt-3">
+              <div class="list-box">
                 <div class="row mt-3 d-flex flex-row align-items-center">
                   <div class="col-1"><span class="badge bg-primary">과외중</span></div>
                   <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
                   <div class="col-1"><span>홍길동</span></div>
-                  <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
+                  <c:if test="${_TP_NUMBER_ eq _TUTOR_INFO_.tp_number}">
+                 	 <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
+                  </c:if>
                 </div>
 
                 <hr>
