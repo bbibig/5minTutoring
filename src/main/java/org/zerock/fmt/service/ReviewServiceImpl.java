@@ -1,6 +1,8 @@
 package org.zerock.fmt.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,6 +99,46 @@ public class ReviewServiceImpl implements ReviewService{
 		try {
 			return this.reviewMapper.deleteReview(rv_number);
 		}catch (Exception e) {throw new ServiceException(e);}
+	}//removeReview
+
+
+	@Override
+	public Map<String,Object> countReview(Integer tp_number) throws ServiceException {
+		try {		
+			
+			HashMap<String,Object> starAvg = new HashMap<>();
+			
+			//각 별점마다 개수 획득
+			int star5 = this.reviewMapper.countReview(5,tp_number);
+			int star4 = this.reviewMapper.countReview(4,tp_number);
+			int star3 = this.reviewMapper.countReview(3,tp_number);
+			int star2 = this.reviewMapper.countReview(2,tp_number);
+			int star1 = this.reviewMapper.countReview(1,tp_number);
+			
+			//총 리뷰개수 획득
+			int totalStar = this.reviewMapper.countList(tp_number);
+			log.info("총리뷰개수: {}",totalStar);
+			
+			if(totalStar<=10) {
+				starAvg.put("star5", (double)star5/totalStar*100);
+				starAvg.put("star4", (double)star4/totalStar*100);
+				starAvg.put("star3", (double)star3/totalStar*100);
+				starAvg.put("star2", (double)star2/totalStar*100);
+				starAvg.put("star1", (double)star1/totalStar*100);
+				log.info("10개이하 : {}, ",starAvg);
+				
+			} else {
+				
+				starAvg.put("star5", (double)star5*totalStar);
+				starAvg.put("star4", (double)star4*totalStar);
+				starAvg.put("star3", (double)star3*totalStar);
+				starAvg.put("star2", (double)star2*totalStar);
+				starAvg.put("star1", (double)star1*totalStar);
+				log.info("10개이상: {}", starAvg);
+			}	
+
+			return starAvg;
+		}catch(Exception e) {throw new ServiceException(e); }
 	}//removeReview
 	
 }//end interface

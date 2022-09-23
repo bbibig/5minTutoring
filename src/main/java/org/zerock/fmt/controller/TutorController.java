@@ -1,6 +1,7 @@
 package org.zerock.fmt.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -138,6 +139,8 @@ public class TutorController {
 			
 			double avgReview = this.reviewService.avgReview(tutorInfo.getTp_number());
 			model.addAttribute("avgReview",avgReview);
+			Map<String,Object> avgStar = this.reviewService.countReview(tutorInfo.getTp_number());
+			model.addAttribute("avgStar", avgStar);
 			
 			//-----------------------------------리뷰페이징
 			int totalReview = this.reviewService.countList(cri.getTp_number());

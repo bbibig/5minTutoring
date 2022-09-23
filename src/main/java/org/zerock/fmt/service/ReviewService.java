@@ -1,6 +1,7 @@
 package org.zerock.fmt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.zerock.fmt.domain.CriteriaReview;
 import org.zerock.fmt.domain.ReviewDTO;
@@ -23,4 +24,5 @@ public interface ReviewService {
 	
 	public abstract int removeReview(int rv_number) throws ServiceException;
 	
+	public abstract Map<String,Object> countReview(Integer tp_number) throws ServiceException;
 }//end interface

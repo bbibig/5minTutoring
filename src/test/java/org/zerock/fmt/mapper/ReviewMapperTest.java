@@ -1,6 +1,7 @@
 package org.zerock.fmt.mapper;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -44,7 +45,7 @@ public class ReviewMapperTest {
 		ReviewDTO dto = new ReviewDTO();
 		dto.setTp_number(65);
 		dto.setUser_email("now@han.net");
-		dto.setRv_star(2.0);
+		dto.setRv_star(2);
 		dto.setRv_content("너무 건성으로 가르쳐 주는 것 같아여");
 		int result = this.reviewMapper.InsertReview(dto);
 		log.info("\t + result : {}", result);	
@@ -82,7 +83,7 @@ public class ReviewMapperTest {
 		log.trace("updateReview : 리뷰 수정 테스트");
 		ReviewDTO dto = new ReviewDTO();
 		dto.setRv_content("*** 리뷰 수정중 ***");
-		dto.setRv_star(5.0);
+		dto.setRv_star(5);
 		dto.setRv_number(6);
 		dto.setTp_number(64);
 		int result = this.reviewMapper.updateReview(dto);
@@ -133,4 +134,22 @@ public class ReviewMapperTest {
 		int result2 = this.reviewMapper.deleteReview(300);
 		log.info("\t + result : {}, {}", result1, result2);
 	}//deleteReview
+	
+	@Test
+	@Order(9)
+	@DisplayName("countReview")
+	void testcountReview() throws DAOException {
+		log.trace("countReview : 별점 개수 구하기");
+		
+		List<Integer> stars = new ArrayList<>();
+		
+		stars.add(this.reviewMapper.countReview(5,65));
+		stars.add(this.reviewMapper.countReview(4,65));
+		stars.add(this.reviewMapper.countReview(3,65));
+		stars.add(this.reviewMapper.countReview(2,65));
+		stars.add(this.reviewMapper.countReview(1,65));
+
+		stars.forEach(log::info);
+
+	}//countReview
 }//end class
