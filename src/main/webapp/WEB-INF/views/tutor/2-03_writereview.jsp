@@ -391,7 +391,7 @@
 
             </div> <!-- 유저리뷰 전체 블락 end-->
             
-          </c:if>
+          
 
             <div class="page-number d-flex flex-row justify-content-center">
 
@@ -434,7 +434,7 @@
 
           </div>
           <!--우측섹션 end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
+        </c:if>
         </div>
         <!--전체 row end-->
 

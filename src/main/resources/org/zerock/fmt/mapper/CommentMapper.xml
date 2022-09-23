@@ -72,14 +72,11 @@
 							WHERE c.user_email = u.user_email)
 	</select>
 	
-<<<<<<< HEAD
 	<select id="commentCount" resultType="Integer">
 		SELECT COUNT (*) AS comment_cnt
 		FROM tbl_comment
 		WHERE a_number = #{a_number}
 	</select>
-=======
-	
->>>>>>> 31ffaa4 (Community comment1)
+
 
 </mapper>
