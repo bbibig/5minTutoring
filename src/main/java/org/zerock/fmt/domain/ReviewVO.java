@@ -1,10 +1,12 @@
 package org.zerock.fmt.domain;
 
 import java.util.Date;
+import java.util.List;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
+//@Value
 public class ReviewVO {
 
 	private Integer rv_number;		//리뷰넘버
@@ -16,6 +18,7 @@ public class ReviewVO {
 	
 	private String user_nick;		//학생닉네임
 	
+	private List<ProfileVO> profile;
 
 
 }//end class

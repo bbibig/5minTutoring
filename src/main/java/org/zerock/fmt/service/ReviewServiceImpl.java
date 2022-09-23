@@ -7,9 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CriteriaReview;
+import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.domain.ReviewDTO;
 import org.zerock.fmt.domain.ReviewVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.mapper.ProfileMapper;
 import org.zerock.fmt.mapper.ReviewMapper;
 
 import lombok.NoArgsConstructor;
@@ -24,6 +27,9 @@ public class ReviewServiceImpl implements ReviewService{
 	@Setter(onMethod_ = @Autowired)
 	private ReviewMapper reviewMapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private ProfileMapper profileMapper;
+	
 	
 	@Override
 	public int createReview(ReviewDTO dto) throws ServiceException {
@@ -34,11 +40,33 @@ public class ReviewServiceImpl implements ReviewService{
 	}//createReview
 
 
+//	@Override
+//	public List<ReviewVO> getReview(CriteriaReview cri) throws ServiceException {
+//		log.trace("getReview invoked.");
+//		try {
+//			return this.reviewMapper.selectReview(cri);
+//		}catch(Exception e) {throw new ServiceException(e);}
+//	}//getReview
 	@Override
 	public List<ReviewVO> getReview(CriteriaReview cri) throws ServiceException {
 		log.trace("getReview invoked.");
 		try {
-			return this.reviewMapper.selectReview(cri);
+			List<ReviewVO> list = this.reviewMapper.selectReview(cri);
+			list.forEach( e ->{
+				
+				List<ProfileVO> proVO;
+				try {
+					proVO = this.profileMapper.selectProfile(e.getUser_email());
+					if(proVO != null) {
+						e.setProfile(proVO);
+					}//if
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				log.info("\t+ ReviewList for ProfileVO : {}", e);
+			});//for
+			return list;
 		}catch(Exception e) {throw new ServiceException(e);}
 	}//getReview
 

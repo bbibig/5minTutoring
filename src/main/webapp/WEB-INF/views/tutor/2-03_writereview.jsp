@@ -20,6 +20,9 @@
         font-weight: bold;
         margin-right: 10px;
       }
+      #rvDate{
+        float: right;
+      }
     </style>
     <script>
       $(function () {
@@ -311,7 +314,14 @@
                     <!--댓글 박스 첫번째 row -->
                     <div class="col-1 d-flex justify-content-center">
                       <!---댓글 프로필 사진-->
-                      <div><img src="${path}/resources/img/profile.png" class="img-rounded" width="50"></div>
+                      <div>
+                          <c:if test="${review.profile == null}"> 
+                            <img src="/resources/img/profile.png" alt="Admin" class="rounded-circle" width="150"> 
+                          </c:if>
+                          <c:if test="${review.profile != null}"> 
+                            <img src="<spring:url value='/profile/${review.user_nick}_profile.png'/>" alt="Admin" class="rounded-circle" width="40" height="40"> 
+                          </c:if>
+                      </div>
                     </div>
                     <!---댓글 프로필 사진 end-->
 
@@ -334,7 +344,7 @@
 
                       <div class="review-block-name">
                         <span class="review-name"><strong>${review.user_nick}</strong></span>
-                        <span class="review-block-date ms-3">
+                        <span class="review-block-date ms-3" id="rvDate">
                           <fmt:formatDate pattern="yyyy.MM.dd" value="${review.rv_date}" />
                         </span>
                       </div>

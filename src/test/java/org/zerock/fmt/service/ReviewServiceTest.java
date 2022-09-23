@@ -15,9 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaReview;
+import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.domain.ReviewDTO;
 import org.zerock.fmt.domain.ReviewVO;
+import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
+import org.zerock.fmt.mapper.ProfileMapper;
 import org.zerock.fmt.mapper.ReviewMapper;
 
 import lombok.NoArgsConstructor;
@@ -34,9 +37,9 @@ public class ReviewServiceTest {
 
 	@Setter(onMethod_ = @Autowired)
 	private ReviewService revireService;
-	
+		
 	@Setter(onMethod_ = @Autowired)
-	private ReviewMapper mapper;
+	private ProfileService profileService;
 	
 	@Test
 	@Order(1)
@@ -55,7 +58,7 @@ public class ReviewServiceTest {
 	
 	@Test
 	@Order(2)
-	@DisplayName("getReview")
+	@DisplayName("getReview + 프로필VO 포함")
 	void testGetReview() throws ServiceException {
 		log.trace("getReview : 리뷰 목록 테스트");
 		CriteriaReview	cri = new CriteriaReview();
@@ -132,4 +135,6 @@ public class ReviewServiceTest {
 		log.info("\t + starAvg : {}", starAvg);
 						
 	}//removeReview
+	
+
 }//end class

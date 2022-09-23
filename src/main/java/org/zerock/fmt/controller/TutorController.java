@@ -141,6 +141,10 @@ public class TutorController {
 			model.addAttribute("avgReview",avgReview);
 			Map<String,Object> avgStar = this.reviewService.countReview(tutorInfo.getTp_number());
 			model.addAttribute("avgStar", avgStar);
+			//-----------------------------------리뷰 프로필 
+
+//			this.profileService.getProfile(tp_number)
+//			
 			
 			//-----------------------------------리뷰페이징
 			int totalReview = this.reviewService.countList(cri.getTp_number());
