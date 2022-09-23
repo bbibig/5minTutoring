@@ -139,7 +139,7 @@ public class TutorController {
 	} // modifyInfo
 	
 	@GetMapping("/writeReview")
-	public String writeReview(CriteriaReview cri,  Model model,  HttpServletRequest req) throws ControllerException {
+	public String writeReview(String uMail, CriteriaReview cri,  Model model,  HttpServletRequest req) throws ControllerException {
 		log.trace("2-03_writereview <<< 학생리뷰 작성 페이지");
 		
 		String tp_number = req.getParameter("num");
@@ -158,11 +158,11 @@ public class TutorController {
 			model.addAttribute("avgReview",avgReview);
 			Map<String,Object> avgStar = this.reviewService.countReview(tutorInfo.getTp_number());
 			model.addAttribute("avgStar", avgStar);
-			//-----------------------------------리뷰 프로필 
-
-//			this.profileService.getProfile(tp_number)
-//			
-			
+			//---------------------------------- 리뷰작성유무
+			boolean rvWrite = this.askService.answerCountAndReview(tutorInfo.getTp_number(),uMail);
+			if(rvWrite) {
+				model.addAttribute("ReviewOK", rvWrite);
+			}//if 
 			//-----------------------------------리뷰페이징
 			int totalReview = this.reviewService.countList(cri.getTp_number());
 			ReviewPageDTO rvPage = new ReviewPageDTO(cri, totalReview);

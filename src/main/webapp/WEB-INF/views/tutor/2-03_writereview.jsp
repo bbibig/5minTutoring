@@ -160,7 +160,7 @@
                 <li class="nav-item nav-tabs mt-3"><a class="nav-link"
                     href="/tutor/info?num=${_TUTOR_INFO_.tp_number}">튜터정보</a></li>
                 <li class="nav-item nav-tabs mt-3"><a class="nav-link nav-tabs active" aria-current="page"
-                    href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}">학생리뷰</a></li>
+                    href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&uMail=${__LOGIN_USER__.user_email}">학생리뷰</a></li>
                 <li class="nav-item nav-tabs mt-3"><a class="nav-link"
                     href="/tutor/ask?num=${_TUTOR_INFO_.tp_number}">튜터에게 질문하기</a></li>
                 <li class="nav-item nav-tabs  mt-3"><a class="nav-link"
@@ -244,7 +244,7 @@
             </c:if> 
 
             <!-- Student 일때 리뷰 등록 가능 -->
-            <c:if test="${__LOGIN_USER__.user_group eq 'Student'}">
+            <c:if test="${ReviewOK eq 'true'}">
               <!-- 리뷰 작성 박스-->
               <form method="post" id="reviewForm">
                 <div class="comment-box d-flex flex-column align-items-center">

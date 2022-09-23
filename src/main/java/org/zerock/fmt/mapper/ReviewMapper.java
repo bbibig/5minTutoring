@@ -19,8 +19,9 @@ public interface ReviewMapper {
 	//페이징 
 	public abstract int countList(Integer tp_number) throws DAOException;
 	
-	//리뷰 존재 유무
-//	public abstract int checkReview(Integer tp_number) throws DAOException;
+	//본인이 작성한 리뷰개수
+	public abstract int countMyReivew(@Param("tp_number")Integer tp_number,
+									  @Param("user_email")String user_email) throws DAOException;
 	
 	//리뷰 수정
 	public abstract int updateReview(ReviewDTO dto) throws DAOException;

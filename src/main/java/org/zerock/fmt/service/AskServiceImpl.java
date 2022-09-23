@@ -14,6 +14,7 @@ import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.AnswerMapper;
 import org.zerock.fmt.mapper.AskMapper;
+import org.zerock.fmt.mapper.ReviewMapper;
 import org.zerock.fmt.mapper.UseHandMapper;
 import org.zerock.fmt.mapper.UserMapper;
 
@@ -38,6 +39,10 @@ public class AskServiceImpl implements AskService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private UserMapper userMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReviewMapper reviewMapper;
+	
 
 	@Transactional
 	@Override
@@ -136,6 +141,23 @@ public class AskServiceImpl implements AskService {
 		try { return this.askMapper.selectOneQ(qb_number); } 
 		catch (Exception e) { throw new ServiceException(e); }
 		
-	} // getOneQ
+	}//getOneQ
+
+	@Override
+	public boolean answerCountAndReview(Integer tp_number,String user_email) throws ServiceException {
+		log.trace("QeustionAndReview: 답변개수가 리뷰글보다 많을시 리뷰작성 가능 여부");
+		try{
+			int anwserCount = this.askMapper.countQeustion(tp_number,user_email);
+			int myRvCount = this.reviewMapper.countMyReivew(tp_number, user_email);
+			
+			// 답변글개수 > 리뷰개수 
+			if(anwserCount>myRvCount) {
+				return true;
+			} 
+			// 답변글만큼 리뷰가 적혀져있으면 리뷰적을수 없음 
+			return false;
+		}catch(Exception e) {throw new ServiceException(e);}
+		
+	} // countQeustion
 
 } // end class

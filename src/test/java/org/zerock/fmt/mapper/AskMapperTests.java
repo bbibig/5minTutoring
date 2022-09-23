@@ -133,5 +133,14 @@ public class AskMapperTests {
 		
 	} // selectOneQTest
 	
-	
+	@Test
+	@Order(6)
+	@DisplayName("countQeustion")
+	void countQeustion() throws DAOException {
+		log.trace("countQeustion : 총 질문글 개수");
+		 
+		int result1 = this.askMapper.countQeustion(65,"hi@gmail.com");
+		int result2 = this.askMapper.countQeustion(65,"seosujung0@gmail.com");
+		log.info("result 1: {}, result2 : {}", result1, result2);
+	}//countQeustion
 } // end class

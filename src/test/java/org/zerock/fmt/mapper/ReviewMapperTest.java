@@ -154,4 +154,13 @@ public class ReviewMapperTest {
 
 	}//countReview
 	
+	@Test
+	@Order(10)
+	@DisplayName("countMyReivew")
+	void countMyReivew() throws DAOException {
+		log.trace("countMyReivew : 내가 쓴 리뷰 개수");
+		int result1 = this.reviewMapper.countMyReivew(10, "seosujung0@gmail.com");
+		int result2 = this.reviewMapper.countMyReivew(42, "hi@gmail.com");
+		log.trace("\t + result1: {}, result2 : {}", result1, result2);
+	}//countMyReivew
 }//end class

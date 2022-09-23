@@ -77,4 +77,9 @@
 							WHERE q.user_email = u.user_email)
 	</select>
 	
+	<!-- 질문글 개수 (리뷰용) -->
+	<select id="countQeustion" resultType="int">
+		SELECT COUNT(*) FROM TBL_QUESTION_BOARD 
+		WHERE TP_NUMBER = #{tp_number} AND USER_EMAIL = #{user_email} AND QB_ANSWER = 1
+	</select>
 </mapper>

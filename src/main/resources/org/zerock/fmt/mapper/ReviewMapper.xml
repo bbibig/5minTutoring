@@ -77,17 +77,17 @@
     <resultMap id="ReviewStarCount" type="map">
         <result column="rv_star" javaType="Integer"/>
     </resultMap>
-    <!-- 리뷰 점수 별 개수 -->
-    <!-- <select id="countReview" resultMap="ReviewStarCount">
-        SELECT count(*)
-        FROM TBL_REVIEW
-        WHERE TP_NUMBER = 65
-        GROUP BY RV_STAR
-    </select> -->
 
+    <!-- 리뷰 점수 별 개수 -->
     <select id="countReview" resultType="int">
         SELECT count(*)
         FROM TBL_REVIEW
         WHERE RV_STAR = #{rv_star} AND TP_NUMBER = #{tp_number}
+    </select>
+
+    <!-- 내가 쓴 리뷰 개수 -->
+    <select id="countMyReivew" resultType="int">
+        SELECT COUNT(*) FROM tbl_review 
+        WHERE tp_number = #{tp_number} AND user_email = #{user_email}
     </select>
 </mapper>

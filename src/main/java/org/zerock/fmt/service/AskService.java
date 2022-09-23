@@ -29,4 +29,7 @@ public interface AskService {
 	// 질문글 번호로 질문글 출력
 	public abstract QuestionBoardVO getOneQ(String qb_number) throws ServiceException;
 	
+	// 질문글-리뷰글 개수 비교 
+	public abstract boolean answerCountAndReview(Integer tp_number, String user_email) throws ServiceException;
+	
 } // end interface
