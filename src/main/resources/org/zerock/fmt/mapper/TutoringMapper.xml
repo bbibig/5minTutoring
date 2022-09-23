@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.TutoringMapper">
+
+	<insert id="insertTutoring">
+		INSERT INTO tbl_tutoring_board
+		(
+			tb_number,
+			tp_number,
+			user_email,
+			tb_title,
+			tb_content,
+			tb_date,
+			tb_answer
+		) VALUES (
+			tb_num.NEXTVAL,
+			#{tp_number},
+			#{user_email},
+			#{tb_title},
+			#{tb_content},
+			CURRENT_DATE,
+			0
+		) 
+	</insert>
+
+	<update id="updateTutoring">
+		UPDATE tbl_tutoring_board
+		SET
+			tb_title = #{tb_title},
+			tb_content = #{tb_content}
+		WHERE tb_number = #{tb_number}
+	</update>
+	
+	<delete id="deleteTutoring">
+		DELETE FROM tbl_tutoring_board
+		WHERE tb_number = #{tb_number}
+	</delete>
+	
+	<update id="updateTBAnswer">
+		UPDATE tbl_tutoring_board
+		SET tb_answer = 1
+		WHERE tb_number = #{tb_number} 
+	</update>
+	
+	<select id="selectTBQ" resultType="org.zerock.fmt.domain.TutoringBoardVO">
+		SELECT 
+			tb_number,
+			tp_number,
+			tb.user_email,
+			u.user_name,
+			tb_title,
+			tb_content,
+			tb_date,
+			tb_answer
+		FROM tbl_tutoring_board tb, tbl_user u
+		WHERE tp_number = #{tp_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user
+							WHERE tb.user_email = u.user_email)
+		ORDER BY tb_date DESC
+	</select>
+	
+	<select id="selectOneTBQ" resultType="org.zerock.fmt.domain.TutoringBoardVO">
+		SELECT 
+			tb_number,
+			tp_number,
+			tb.user_email,
+			u.user_name,
+			tb_title,
+			tb_content,
+			tb_date,
+			tb_answer
+		FROM tbl_tutoring_board tb, tbl_user u
+		WHERE tb_number = #{tb_number}
+		AND u.user_name IN (SELECT user_name
+							FROM tbl_user
+							WHERE tb.user_email = u.user_email)
+	</select>
+
+</mapper>

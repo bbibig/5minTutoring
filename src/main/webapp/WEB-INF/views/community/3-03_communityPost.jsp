@@ -190,7 +190,7 @@
 	                            </div>
 	                            <form action="/community/commentWrite?fb_number=${_BOARD_.fb_number}" method="post">
 																	
-																	<input type="hidden" id="user_email" name="user_email" value= "${__LOGIN_USER__.user_email}">
+									<input type="hidden" id="user_email" name="user_email" value= "${__LOGIN_USER__.user_email}">
 	                                <input id="comment_write" type="text" size="80" name="cm_content" placeholder="댓글을 입력하세요." >
 	                                <button type="submit" id="save" type="submit">등록</button>
 	                            </form>

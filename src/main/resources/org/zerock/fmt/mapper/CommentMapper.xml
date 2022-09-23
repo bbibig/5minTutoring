@@ -77,9 +77,5 @@
 		FROM tbl_comment
 		WHERE a_number = #{a_number}
 	</select>
-<<<<<<< HEAD
-
-=======
->>>>>>> 7449038 (comment2)
 
 </mapper>
