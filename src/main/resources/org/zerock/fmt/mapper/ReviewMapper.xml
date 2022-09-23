@@ -18,7 +18,17 @@
         FROM tbl_review r, tbl_user u
         WHERE r.user_email = u.user_email
         AND tp_number = #{tp_number}
-        ORDER BY r.rv_number DESC
+        <choose>
+            <when test="sort==null">
+                ORDER BY r.rv_number DESC
+            </when>
+            <when test='sort=="highAvg"'>
+                ORDER BY r.rv_star DESC
+            </when>
+            <when test='sort=="rowAvg"'>
+                ORDER BY r.rv_star ASC
+            </when>
+        </choose>
         OFFSET (#{currPage}-1) * #{amount} ROW 
         FETCH NEXT #{amount} ROWS ONLY
     </select>

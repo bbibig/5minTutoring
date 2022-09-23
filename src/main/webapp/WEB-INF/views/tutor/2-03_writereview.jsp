@@ -286,9 +286,15 @@
 
                   <div class="col-4">
                     <ul class="d-flex flex-row justify-content-around mb-0 ps-0">
-                      <li class="list-unstyled text-dark"><a href="#"><span class="text-dark">최신순</span></a></li>
-                      <li class="list-unstyled"><a href="#"><span class="text-dark">낮은평점순</span></a></li>
-                      <li class="list-unstyled"><a href="#"><span class="text-dark">높은평점순</span></a></li>
+                      <li class="list-unstyled text-dark">
+                        <a href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage}&sort=">
+                          <span class="text-dark">최신순</span></a></li>
+                      <li class="list-unstyled">
+                        <a href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage}&sort=highAvg">
+                          <span class="text-dark">높은평점순</span></a></li>
+                      <li class="list-unstyled">
+                        <a href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage}&sort=rowAvg">
+                          <span class="text-dark">낮은평점순</span></a></li>
                     </ul>
                   </div>
 
@@ -381,27 +387,28 @@
                 <form action="#" id="PaginationFrom">
                     <input type="hidden" name="currPage">
                     <input type="hidden" name="amount">
+                    <input type="hidden" name="sort">
 
                     <ul class="pagination justify-content-center p-5">
 
                         <li class="page-item"><a class="page-link rounded-circle" 
-                            href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.startPage-1}" id="prev">&laquo;</a>
+                            href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.startPage-1}&sort=${_REVIEWPAGINATION_.cri.sort}" id="prev">&laquo;</a>
                         </li>
 
                         <li class="page-item"><a class="page-link rounded-circle" 
-                          href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage-1}">&lt;</a>
+                          href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage-1}&sort=${_REVIEWPAGINATION_.cri.sort}">&lt;</a>
                         </li>
 
                         <li class="page-item"><a class="page-link rounded-circle bg-blue" 
-                            href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage}">${_REVIEWPAGINATION_.cri.currPage}</a>
+                            href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage}&sort=${_REVIEWPAGINATION_.cri.sort}">${_REVIEWPAGINATION_.cri.currPage}</a>
                         </li>
 
                         <li class="page-item"><a class="page-link rounded-circle" 
-                          href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage+1}">&gt;</a>
+                          href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.cri.currPage+1}&sort=${_REVIEWPAGINATION_.cri.sort}">&gt;</a>
                         </li>
 
                         <li class="page-item"><a class="page-link rounded-circle" 
-                            href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.endPage+1}">&raquo;</a>
+                            href="/tutor/writeReview?num=${_TUTOR_INFO_.tp_number}&currPage=${_REVIEWPAGINATION_.endPage+1}&sort=${_REVIEWPAGINATION_.cri.sort}">&raquo;</a>
                         </li>
                         <!-- <c:forEach var="page" begin="${_REVIEWPAGINATION_.startPage}" end="${_REVIEWPAGINATION_.endPage}">
                           <li class="page-item"><a class="page-link rounded-circle ${page==_ADMINPAGINATION_.cri.currPage?'page':''}" 

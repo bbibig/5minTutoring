@@ -10,5 +10,6 @@ public class CriteriaReview {
 	private int pagesPerPage =1; 	//pagination의 길이 
 	
 	private Integer tp_number;
+	private String sort;
 
 }

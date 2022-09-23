@@ -13,7 +13,7 @@ public interface ReviewMapper {
 	//리뷰 등록
 	public abstract int InsertReview(ReviewDTO dto) throws DAOException;
 	
-	//리뷰 조회 
+	//리뷰 조회 + 정렬
 	public abstract List<ReviewVO> selectReview(CriteriaReview cri) throws DAOException;
 	
 	//페이징 

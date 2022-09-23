@@ -59,7 +59,8 @@ public class ReviewMapperTest {
 		CriteriaReview cri = new CriteriaReview();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
-		cri.setTp_number(64);
+		cri.setTp_number(65);
+		cri.setSort("rowAvg");
 		List<ReviewVO> list = this.reviewMapper.selectReview(cri);
 		list.forEach(e->log.info(e));
 	}//selectReview
@@ -152,4 +153,5 @@ public class ReviewMapperTest {
 		stars.forEach(log::info);
 
 	}//countReview
+	
 }//end class
