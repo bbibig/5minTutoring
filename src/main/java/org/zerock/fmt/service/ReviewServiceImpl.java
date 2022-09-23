@@ -59,7 +59,9 @@ public class ReviewServiceImpl implements ReviewService{
 					proVO = this.profileMapper.selectProfile(e.getUser_email());
 					if(proVO != null) {
 						e.setProfile(proVO);
-					}//if
+					} else {
+						e.setProfile(null);
+					}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

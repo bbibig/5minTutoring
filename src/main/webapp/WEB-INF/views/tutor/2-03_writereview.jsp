@@ -315,12 +315,13 @@
                     <div class="col-1 d-flex justify-content-center">
                       <!---댓글 프로필 사진-->
                       <div>
-                          <c:if test="${review.profile == null}"> 
-                            <img src="/resources/img/profile.png" alt="Admin" class="rounded-circle" width="150"> 
+                          <c:if test="${review.profile.size() == 0}"> 
+                            <img src="${path}/resources/img/profile.png" class="img-rounded" width="40" height="40"> 
                           </c:if>
-                          <c:if test="${review.profile != null}"> 
+                          <c:if test="${review.profile.size() != 0}"> 
                             <img src="<spring:url value='/profile/${review.user_nick}_profile.png'/>" alt="Admin" class="rounded-circle" width="40" height="40"> 
                           </c:if>
+                         
                       </div>
                     </div>
                     <!---댓글 프로필 사진 end-->
