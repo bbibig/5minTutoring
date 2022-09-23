@@ -66,16 +66,17 @@ public class LoginController{
 			log.info("\t + Loginpost vo : {}", vo);
 			String returnURL;
 			
-			String tp_number = Integer.toString(this.tutorService.getTpNumber(user_email));
-			log.info("\t + tp_number: {}", tp_number);
-			
 			if(vo==null) {
 				rttrs.addFlashAttribute("_LOGIN_", "승인된 정보가 없습니다.");
 				returnURL = "redirect:/login";
 			} else {
 				
 				// ------ tp_number와 vo를 session scope에 올리기 위해 전달
-				model.addAttribute(SharedScopeKeys.TP_NUMBER, tp_number);
+				if(vo.getUser_group().equals("Tutor")) {
+					String tp_number = Integer.toString(this.tutorService.getTpNumber(user_email));
+					log.info("\t + tp_number: {}", tp_number);
+					model.addAttribute(SharedScopeKeys.TP_NUMBER, tp_number);
+				}
 				model.addAttribute(SharedScopeKeys.LOGIN_USER,vo);
 				returnURL = "login/Loginpost";
 			}//if-else
