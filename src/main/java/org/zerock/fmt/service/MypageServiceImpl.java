@@ -19,6 +19,7 @@ import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.MypageMapper;
+import org.zerock.fmt.mapper.UserMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +35,9 @@ public class MypageServiceImpl implements MypageService {
 	@Setter(onMethod_= @Autowired)
 	private MypageMapper mapper;
 
-
+	@Setter(onMethod_= @Autowired)
+	private UserMapper userMapper;
+	
 	//1. 기본정보 조회
 	@Override
 	public UserVO getUserInfo(UserDTO dto) throws ServiceException {
@@ -173,7 +176,13 @@ public class MypageServiceImpl implements MypageService {
 	public boolean createWithdrawal(WithdrawalDTO dto) throws ServiceException {
 		log.trace("createWithdrawal() 출금 신청 하기");
 		
-		try { return mapper.insertWithdrawal(dto) == 1; }
+		try { 
+			mapper.insertWithdrawal(dto);
+			int hands = dto.getW_quantity();
+			String user = dto.getUser_email();
+			
+			return this.userMapper.updateHandUse(hands, user) == 1;
+		}
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // createWithdrawal
 
@@ -197,13 +206,13 @@ public class MypageServiceImpl implements MypageService {
 	
 	
 	// 7. 탈퇴하기
-	@Override
-	public boolean userStatus(String user_email) throws ServiceException {
-		log.trace("userStatus() 회원 탈퇴하기");
-		
-		try { return this.mapper.updateUserStop(user_email)==1; }
-		catch(Exception e) { throw new ServiceException(e); }
-	} // userStatus
+//	@Override
+//	public boolean userStatus(String user_email) throws ServiceException {
+//		log.trace("userStatus() 회원 탈퇴하기");
+//		
+//		try { return this.mapper.updateUserStop(user_email)==1; }
+//		catch(Exception e) { throw new ServiceException(e); }
+//	} // userStatus
 	
 }// end class
 

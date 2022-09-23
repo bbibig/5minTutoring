@@ -108,7 +108,7 @@
 							<!--제목상자-->
 							<div class="col-1 fs-2 fw-bold">A.</div>
 							<div class="col-9 fs-4 fw-bold">${_INQUIRYANSWER_.ia_title}</div>
-							<div class="col-2"><fmt:formatDate value="${_INQUIRYANSWER.ia_date}" pattern="yyyy.MM.dd" /></div>
+							<div class="col-2"><fmt:formatDate value="${_INQUIRYANSWER_.ia_date}" pattern="yyyy.MM.dd" /></div>
 						</div>
 						<div class="contentbox">
 							<!-- 문의 내용 글상자(회색) -->

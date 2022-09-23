@@ -31,6 +31,6 @@ public interface WithdrawalService {
 	public abstract int totalDrawal(String approval) throws ServiceException;
 
 //	손들기 개수 차감 (사용자 - 튜터)
-	public abstract boolean updateHands(String user_email) throws ServiceException;
+//	public abstract boolean updateHands(String user_email) throws ServiceException;
 
 } // end interface

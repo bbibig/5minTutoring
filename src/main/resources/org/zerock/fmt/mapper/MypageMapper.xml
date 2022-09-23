@@ -111,9 +111,10 @@
     </insert>
     
 	 <!-- 출금신청 -->
-	 <insert id="insertWithdrawal">
-		INSERT INTO tbl_withdrawal
-		VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_price}, #{approval}, CURRENT_DATE, null)
-	 </insert>
+	  <insert id="insertWithdrawal">
+	     INSERT INTO tbl_withdrawal
+	     VALUES (w_num.NEXTVAL, #{user_email}, #{bank_account}, #{w_quantity}, #{w_quantity}*180-2000, '승인 대기', CURRENT_DATE, null)
+	  </insert>
+
 
 </mapper>

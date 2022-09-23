@@ -141,22 +141,22 @@ public class WithdrawalMapperTests {
 	} // testUpdate
 	
 //  [U] 손들기 개수 차감
-	@Test
-	@Order(6)
-	@DisplayName("손들기 개수 차감")
-	@Timeout(value=100, unit=TimeUnit.SECONDS)
-	void testUpdateHands() throws DAOException {
-		log.trace("testUpdateHands() invoked.");
-			
-		UserDTO dto = new UserDTO();
-		log.info("\t + dto: {}", dto);
-			
-		int affectedLines =  this.withdrawalMapper.updateHands("now@han.net");
-		log.info("\t+ affectedLines: {}", affectedLines);
-		
-		assert affectedLines == 1;
-		
-	} // testUpdateHands
+//	@Test
+//	@Order(6)
+//	@DisplayName("손들기 개수 차감")
+//	@Timeout(value=100, unit=TimeUnit.SECONDS)
+//	void testUpdateHands() throws DAOException {
+//		log.trace("testUpdateHands() invoked.");
+//			
+//		UserDTO dto = new UserDTO();
+//		log.info("\t + dto: {}", dto);
+//			
+//		int affectedLines =  this.withdrawalMapper.updateHands("now@han.net");
+//		log.info("\t+ affectedLines: {}", affectedLines);
+//		
+//		assert affectedLines == 1;
+//		
+//	} // testUpdateHands
 	
 	@Test
 	@Order(5)

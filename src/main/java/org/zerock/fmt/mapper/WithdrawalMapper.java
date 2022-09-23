@@ -31,7 +31,7 @@ public interface WithdrawalMapper {
 	public abstract Integer updateState(WithdrawalDTO dto) throws DAOException;
 	
 //  [U]  손들기 개수 차감 (사용자 - 튜터)
-	public abstract Integer updateHands(@Param("user_email") String user_email) throws DAOException;
+//	public abstract Integer updateHands(@Param("user_email") String user_email) throws DAOException;
 	
 
 //	[R] 승인 여부 별 금액

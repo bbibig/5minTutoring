@@ -70,6 +70,6 @@ public interface MypageService {
 	
 	
 	// 7. 탈퇴하기
-	public abstract boolean userStatus(String user_email) throws ServiceException;
+//	public abstract boolean userStatus(String user_email) throws ServiceException;
 		
 }// end interface

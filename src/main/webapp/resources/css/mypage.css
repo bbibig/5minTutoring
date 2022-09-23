@@ -133,7 +133,7 @@ a:hover{
 
 /* 문의/답변 내용 글상자 */
 .question .contentbox, .answer .contentbox {
-    background-color: #e4e4e481;
+    background-color: #ece8e881;
     height: 200px;
     margin-bottom: 20px;
 }
@@ -261,7 +261,7 @@ a:hover{
 
 .won {
     text-align: end;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* 출금 유의사항 */

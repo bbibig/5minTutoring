@@ -13,7 +13,7 @@
 <!-- =======mypage 공통 CSS=================================== -->
 <link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
-<title>탈퇴하기</title>
+<title>출금신청 완료</title>
 </head>
 
 <body>
@@ -63,14 +63,6 @@
 	<!-- ============= 공통 footer + js ======================== -->
 	<jsp:include page="../footer.jsp" flush="true" />
 	<!-- ======================================================== -->
-</body>
-
-</html>
-
-<!-- ======= footer + js  ======= -->
-<jsp:include page="../footer.jsp" flush="true" />
-<!-- ============================= -->
-
 </body>
 
 </html>
