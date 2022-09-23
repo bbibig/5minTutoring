@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityPageDTO;
@@ -64,7 +66,7 @@ public class CommunityController implements InitializingBean{
 	}//communityPage
 	
 	
-	//특정 게시글 조회
+	//특정 게시글 조회 및 댓글조회
 	@GetMapping("/post")
 	public String communityPost(CommunityDTO dto, Model model) throws ControllerException{
 		log.debug("post({},{})invoked.", dto, model);
@@ -75,9 +77,12 @@ public class CommunityController implements InitializingBean{
 			log.info("\t+board: "+board);
 			
 			model.addAttribute("_BOARD_", board);
-			
-			List<CommentVO2> commentList = commentService2.readComment(dto.getFb_number());
+//			------------------------------------------------게시글
+			List<CommentVO2> commentList = commentService2.readComment(board.getFb_number());
 			model.addAttribute("_COMMENTLIST_", commentList);
+			
+//			------------------------------------------------댓글
+			
 			
 		}catch(Exception e) {
 			throw new ControllerException(e);
@@ -111,18 +116,10 @@ public class CommunityController implements InitializingBean{
 	@PostMapping("/register")
 	public String register(@ModelAttribute("reg")CommunityDTO dto, HttpServletRequest req) throws ControllerException{
 		
-//		String fb_title= req.getParameter("fb_title");
-//		String fb_content = req.getParameter("fb_content");
-//		String user_email = req.getParameter("user_email");
-		
-//		dto.setFb_title(fb_title);
-//		dto.setFb_content(fb_content);
-//		dto.setUser_email(user_email);
-		
 		log.trace("regiser({}) invoked.", dto);
 			
 		try {
-			Boolean isResult = this.communityService.create(dto); 
+			boolean isResult = this.communityService.create(dto); 
 			log.info("{}",  isResult);
 	
 			
@@ -143,6 +140,7 @@ public class CommunityController implements InitializingBean{
 		
 		try {
 			Boolean isResult = this.communityService.update(dto);
+			log.info("{}",  isResult);
 			
 		}catch(Exception e) {
 			throw new ControllerException(e);
@@ -152,6 +150,30 @@ public class CommunityController implements InitializingBean{
 		
 	} // modify
 			
+	
+	//댓글 등록
+	@PostMapping("/commentWrite")
+	public String commentWrite(@ModelAttribute("write")CommentDTO dto, HttpServletRequest req) throws ControllerException{
+		log.info("commentWrite() invoked");
+		
+		try {
+			int fb_number = Integer.parseInt(req.getParameter("fb_number"));
+			dto.setFb_number(fb_number);
+			
+			boolean isResult = commentService2.writeComment(dto);
+			log.info("{}",  isResult);
+				
+			
+			
+			return "redirect:/community/post";
+			
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		}//try-catch
+	
+		
+	}
+	
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

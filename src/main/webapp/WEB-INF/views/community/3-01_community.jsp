@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+        
 
 
 <!doctype html>
@@ -136,8 +138,8 @@
                           <strong>${communityBoard.user_nick}</strong>
                         </div>
                         <div class="date ms-4">
-                          ${communityBoard.fb_date}
-                          <!-- <fmt: formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${communityBoard.fb_date}"/> -->
+                      	<fmt:formatDate value="${communityBoard.fb_date}" pattern="yyyy.MM.dd" />
+                  
                         </div>
                       </div>
                     </div><!--============================================게시판 제목/내용/작성자/날짜 end================================================-->

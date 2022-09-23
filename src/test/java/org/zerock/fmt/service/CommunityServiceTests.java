@@ -126,6 +126,7 @@ public class CommunityServiceTests {
 		} else {
 			log.info("\t+ No board registered.");
 		} // if-else
+		
 	} // testCreate
 	
 //	@Disabled

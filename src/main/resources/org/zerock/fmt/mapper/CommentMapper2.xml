@@ -15,5 +15,11 @@
 
 		
 	</select>
+	
+	<!-- 댓글입력 -->
+	<insert id="writeComment">
+	INSERT INTO tbl_comment(cm_number, fb_number, user_email, cm_content)
+    VALUES(cm_num.nextval, #{fb_number}, #{user_email}, #{cm_content})
+    </insert>
 
 </mapper>

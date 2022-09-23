@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
 <!doctype html>
 <html lang="ko">
 	<head>
@@ -19,7 +22,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			
-
+			
 	    <style>
 	        /* toggleHeart */
 	        .bi-suit-heart:hover,
@@ -115,7 +118,7 @@
 	                                        <div class="pop-up-button-box d-flex flex-row align-self-center">
 	                                            <button type="button" class="btn btn-outline-primary"
 	                                                data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-	                                            <button type="button" onclick="location.href='remove?num=${_BOARD_.fb_number}'"class="btn btn-outline-primary" id="removeBtn">확인</button>
+	                                            <button type="button" onclick="location.href='remove?num=${_BOARD_.fb_number}' "class="btn btn-outline-primary" id="removeBtn">확인</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -159,7 +162,7 @@
 	                        <div class="Tname">${_BOARD_.user_nick}</div>
 	                        
 	                        <br>
-	                        <div class="date" name="fb_date">&nbsp;${_BOARD_.fb_date}</div>
+	                        <div class="date" name="fb_date">&nbsp;<fmt:formatDate value="${_BOARD_.fb_date}" pattern="yyyy.MM.dd" /></div>
 	                        <div class="hamburger-button col-8 d-flex justify-content-end">
 	                            <div class="dropdown">
 	                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -185,17 +188,23 @@
 	                            <div class="sSPic">
 	                                <img src="/resources/img/profile.png">
 	                            </div>
-	                            <form action="#">
-	                                <input id="comment_write" type="text" size="80" placeholder="댓글을 입력하세요.">
-	                                <input id="save" type="submit" value="등록">
+	                            <form action="/community/commentWrite?fb_number=${_BOARD_.fb_number}" method="post">
+																	
+																	<input type="hidden" id="user_email" name="user_email" value= "${__LOGIN_USER__.user_email}">
+	                                <input id="comment_write" type="text" size="80" name="cm_content" placeholder="댓글을 입력하세요." >
+	                                <button type="submit" id="save" type="submit">등록</button>
 	                            </form>
 	                        </div>
-	                        <div class="comment_info d-flex">
+													
+													<c:forEach items='${_COMMENTLIST_}' var="commentList">
+														
+														<div class="comment_info d-flex">
 	                            <div class="sSPic">
 	                                <img src="/resources/img/profile.png">
 	                            </div>
-	                            <div class="Sname">질문자</div>
-	                            <div class="date">2022-07-22</div>
+	                            <div class="Sname">${commentList.user_nick}</div>
+															<input type="hidden" name="user_email" value= "${__LOGIN_USER__.user_email}">
+	                            <div class="date"><fmt:formatDate value="${commentList.regdate}" pattern="yyyy.MM.dd" /></div>
 	
 	                            <div class="hamburger-button col-9 d-flex justify-content-end">
 	                                <div class="dropdown">
@@ -213,61 +222,16 @@
 	                                    </ul>
 	                                </div>
 	                            </div>
-	                        </div>
-	                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur, numquam asperiores culpa
-	                            molestias dolores non incidunt fugit distinctio alias labore et sunt saepe vero esse
-	                            cupiditate minima blanditiis voluptate a!</p>
-	                        <hr>
-	                        <div class="comment_info d-flex">
-	                            <div class="sSPic">
-	                                <img src="/resources/img/profile.png">
-	                            </div>
-	                            <div class="Sname">박튜터</div>
-	                            <div class="date">2022-07-22</div>
-	
-	                            <div class="hamburger-button col-9 d-flex justify-content-end">
-	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
-	                                        aria-expanded="false">
-	                                        <i class="bi bi-list fs-4"></i>
-	                                    </button>
-	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#comment_revise">수정</a>
-	                                        </li>
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#delete">삭제</a>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat, eveniet.</p>
-	                        <hr>
-	                        <div class="comment_info d-flex">
-	                            <div class="sSPic">
-	                                <img src="/resources/img/profile.png">
-	                            </div>
-	                            <div class="Sname">김튜터</div>
-	                            <div class="date">2022-07-22</div>
-	                            <div class="hamburger-button col-9 d-flex justify-content-end">
-	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
-	                                        aria-expanded="false">
-	                                        <i class="bi bi-list fs-4"></i>
-	                                    </button>
-	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#comment_revise">수정</a>
-	                                        </li>
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
-	                                                href="#delete">삭제</a>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat, eveniet.</p>
+	                        	</div>
+	                        	
+														<p>
+															${commentList.cm_content}
+														</p>
+	                        	
+														<hr>
+
+													</c:forEach>
+	                        
 	                    </div>
 	                </div>
 	            </div>

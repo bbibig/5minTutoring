@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.exception.ServiceException;
 
@@ -55,9 +56,36 @@ public class CommentServiceTests2 {
 	void testReadComment() throws ServiceException {
 		log.trace("testReadComment() invoked");
 				
-		int fb_nubmer = 38;
+		int fb_nubmer = 56;
 		List<CommentVO2> list = this.commentService2.readComment(fb_nubmer);
 		list.forEach(log::info);
 
-	} // getCommentTest
-}
+	} // ReadCommentTest
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("2. CommentService2.writeComment() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testwriteComment() throws ServiceException {
+		log.trace("testwriteComment() invoked");
+				
+		CommentDTO dto = new CommentDTO();
+		dto.setFb_number(56);
+		dto.setUser_email("seosujung0@gmail.com");
+		dto.setCm_content("댓글테스트4");
+		
+		if(commentService2.writeComment(dto)) {
+			log.info("\t+ New Comment registered.");
+			
+			log.info("\t+ dto: " + dto);
+		} else {
+			log.info("\t+ No board registered.");
+		} // if-else
+
+	} // ReadCommentTest
+	
+	
+	
+	
+}//end class

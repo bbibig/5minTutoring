@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.CommentMapper2;
@@ -23,7 +24,19 @@ public class CommentService2Impl implements CommentService2 {
 		try {
 			Objects.requireNonNull(this.CommentMapper2);
 			
-			return CommentMapper2.readComment(fb_number);
+			return this.CommentMapper2.readComment(fb_number);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
+		
+	}
+
+	@Override
+	public boolean writeComment(CommentDTO dto) throws ServiceException {
+		try {
+			Objects.requireNonNull(this.CommentMapper2);
+			
+			return this.CommentMapper2.writeComment(dto) == 1;
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}//try-catch

@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Value;
 
 @Value
-public class CommentVO2 {	//mypage에 사용
+public class CommentVO2 {	
 	
 	private Integer cm_number;		// 댓글 번호
 	private Integer a_number;		// 답변게시글 번호 (fk, null 허용)
