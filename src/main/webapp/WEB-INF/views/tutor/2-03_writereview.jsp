@@ -346,8 +346,7 @@
                       <!-- 수정/삭제 버튼-->
 
                       <c:if test="${__LOGIN_USER__.user_email eq review.user_email}">
-                        ㄹㄹㄹㄹ
-                      </c:if>
+                      
                         <div class="dropdown">
 
                           <button class="btn pt-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -365,7 +364,7 @@
                             <input type="hidden" name="rv_number" value="${review.rv_number}" id="rv_number">
                           </form>
                         </div>
-
+                      </c:if>
                     </div><!-- 수정/삭제 버튼-->
 
                   </div>
