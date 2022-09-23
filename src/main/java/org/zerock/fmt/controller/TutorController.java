@@ -162,7 +162,7 @@ public class TutorController {
 			//---------------------------------- 리뷰작성유무
 			boolean rvWrite = this.askService.answerCountAndReview(tutorInfo.getTp_number(),uMail);
 			if(rvWrite) {
-				model.addAttribute("ReviewOK", rvWrite);
+				model.addAttribute("ReviewOK", rvWrite); 
 			}//if 
 			//-----------------------------------리뷰페이징
 			int totalReview = this.reviewService.countList(cri.getTp_number());

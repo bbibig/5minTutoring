@@ -242,8 +242,11 @@
             <c:if test="${__LOGIN_USER__.user_group eq 'Tutor'}">
               <div class="div" style="height: 40px;"></div>
             </c:if> 
+            <c:if test="${ReviewOK != 'true'}">
+              <div class="div" style="height: 40px;"></div>
+            </c:if> 
 
-            <!-- Student 일때 리뷰 등록 가능 -->
+            <!-- 리뷰 등록 가능 여부-->
             <c:if test="${ReviewOK eq 'true'}">
               <!-- 리뷰 작성 박스-->
               <form method="post" id="reviewForm">
