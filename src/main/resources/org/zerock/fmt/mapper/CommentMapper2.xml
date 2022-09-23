@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.fmt.mapper.CommentMapper2">
+
+	<!-- 댓글 조회 -->
+	<select id="readComment" resultType="org.zerock.fmt.domain.CommentVO2">
+  	
+  	SELECT t1.*, t2.user_nick
+            
+    FROM tbl_comment t1, tbl_user t2
+            
+    WHERE t1.user_email = t2.user_email AND fb_number = #{fb_number}
+
+		
+	</select>
+
+</mapper>
