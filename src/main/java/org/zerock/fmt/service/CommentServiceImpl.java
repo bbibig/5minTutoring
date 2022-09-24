@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CriteriaComment;
+import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.CommentMapper;
+import org.zerock.fmt.mapper.ProfileMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +25,8 @@ public class CommentServiceImpl implements CommentService {
 	@Setter(onMethod_ = @Autowired)
 	private CommentMapper commentMapper;
 
+	@Setter(onMethod_ = @Autowired)
+	private ProfileMapper profileMapper;
 	
 	@Override
 	public boolean createComment(CommentDTO commentDTO) throws ServiceException {
