@@ -30,6 +30,7 @@ import org.zerock.fmt.domain.ReviewPageDTO;
 import org.zerock.fmt.domain.ReviewVO;
 import org.zerock.fmt.domain.TutorPageDTO;
 import org.zerock.fmt.domain.TutorPageVO;
+import org.zerock.fmt.domain.TutoringBoardVO;
 import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -40,6 +41,7 @@ import org.zerock.fmt.service.CommentService;
 import org.zerock.fmt.service.ProfileService;
 import org.zerock.fmt.service.ReviewService;
 import org.zerock.fmt.service.TutorService;
+import org.zerock.fmt.service.TutoringService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -62,6 +64,9 @@ public class TutorController {
 	private AnswerService answerService;
 	
 	@Setter(onMethod_= @Autowired)
+	private TutoringService tutoringService;
+	
+	@Setter(onMethod_= @Autowired)
 	private CommentService commentService;
 	
 	@Setter(onMethod_ =@Autowired)
@@ -69,6 +74,7 @@ public class TutorController {
 	
 	@Setter(onMethod_= @Autowired)
 	private ProfileService profileService;
+
 	
 	@GetMapping("/main")
 	public String tpMain(Model model, HttpServletRequest req) throws ControllerException {
@@ -550,6 +556,10 @@ public class TutorController {
 			log.info("tutorInfo: {}", tutorInfo);
 			model.addAttribute("_TUTOR_INFO_", tutorInfo);
 			
+			List<TutoringBoardVO> list = this.tutoringService.getTBQ(Integer.parseInt(tp_number));
+			list.forEach(log::info);
+			model.addAttribute("_TB_VO_", list);
+			
 			//--------------------------프로필 사진 가져오기
 			String tutorEmail = this.profileService.getTutorEmail(tutorInfo.getTp_number());
 			String tutorNick = this.profileService.getTutorNick(tutorInfo.getTp_number());
@@ -567,8 +577,17 @@ public class TutorController {
 	
 	
 	@GetMapping("/tutoringAsk")
-	public String tutoringAsk() {
+	public String tutoringAsk(Model model, HttpServletRequest req) throws ControllerException {
 		log.trace("2-09_tutoringAsk <<< 과외하기 질문");
+		
+		String tb_number = req.getParameter("num");
+		
+		try {
+			TutoringBoardVO tbVO = this.tutoringService.getOneTBQ(Integer.parseInt(tb_number));
+			log.info("tbVO: {}", tbVO);
+			model.addAttribute("_ONE_TB_VO_", tbVO);
+			
+		} catch (Exception e) { throw new ControllerException(e); }
 		
 		return "tutor/2-09_tutoringAsk";
 	} // tutoringAsk

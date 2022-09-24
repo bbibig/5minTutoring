@@ -32,6 +32,7 @@ import org.zerock.fmt.domain.UseHandQVO;
 import org.zerock.fmt.domain.UseHandTVO;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
@@ -306,14 +307,6 @@ public class MypageController {
 	}// 나의 문의 목록 조회	
 	
 	
-	// 필요없지만 혹시나 해서 나중에 지우겠습니다!
-//	@GetMapping("/question") // GET
-//	public String question(InquiryQuestionDTO dto, Model model, HttpSession session) {
-//		log.trace("7-07_Q");
-//		
-//		return "mypage/7-07_Q";
-//	}// question
-	
 	@GetMapping("/qAndA")	// GET
 	public String qAndA(@RequestParam Integer iq_number,CriteriaMyPage cri, Model model) throws ControllerException {
 		log.trace("마이페이지 일대일 문의와 답변 조회");
@@ -339,21 +332,50 @@ public class MypageController {
 		return "mypage/7-07_QandA";
 	} // 일대일 문의&답변 조회
 	
-	@RequestMapping("/unregister")	// POST
-	public String unregister() {
-		log.trace("7-08_Unregister");
+//===== 회원 탈퇴 ===============================================		
+	@GetMapping("/unregister")	
+	public String unregister(Model model, HttpSession session) throws ControllerException {
+		log.trace("회원 탈퇴 페이지");
 		
 		return "mypage/7-08_Unregister";
-	}// unregister
+		
+	} // 회원 탈퇴 페이지
+	
+	@PostMapping("/unregisterConfirm")	// POST
+	@ResponseBody
+	public int unregisterConfirm(@RequestParam String user_pw, Model model, HttpSession session) throws ControllerException {
+		log.trace("탈퇴 요청");
+		
+	    UserVO vo = (UserVO) session.getAttribute(SharedScopeKeys.LOGIN_USER);
+	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	     
+		 try {
+		      String dbPw = this.mypageService.getUserDbPw(vo.getUser_email());
+		      log.info("\t+ user_pw: {}", user_pw);
+		      int result;
+		          
+		  if(encoder.matches(user_pw, dbPw)) { 
+		      log.info("비밀번호 일치");
+		      result = 1;
+		  
+		      this.userService.userStatus(vo.getUser_email());
+		  } else { log.info("비밀번호 불일치"); result = 0; }// if-else
+
+		      return result;
+		  } catch (ServiceException e) { throw new ControllerException(e); }
+		
+	} // 회원 탈퇴 (모달과 연결)
 	
 	@GetMapping("/unregister/completed")	// GET
-	public String unregisterCompleted() {
-		log.trace("7-09_UnregisterCompleted");
-		
+	public String unregisterCompleted( ) throws ControllerException {
+		log.trace("마이페이지 탈퇴 완료");
+
 		return "mypage/7-09_UnregisterCompleted";
+
 	}// unregisterCompleted
-	
-	
+		
+
+
 //=====손들기 내역===============================================
 	@GetMapping("/studentHands/use")
 	public String studentHandsUse(CriteriaMyPage cri, @RequestParam String group,
@@ -476,10 +498,11 @@ public class MypageController {
 
 	}// tutorHandsWithdraw
 	
-	// 출금 신청 페이지
+//=====튜터 출금 신청===============================================	
+	// 출금하기 페이지 
 	@GetMapping("/withdraw")
-	public String withdraw(Model model, HttpSession session) throws ControllerException {
-		log.trace("withdraw() invoked.");
+	public String withdraw(HttpSession session) throws ControllerException {
+		log.trace("튜터 출금 신청 페이지");
 		
 		try {
 			UserVO userVO = (UserVO) session.getAttribute("__LOGIN_USER__");
@@ -487,11 +510,9 @@ public class MypageController {
 			int hands_wallet = userVO.getHands_wallet();
 			log.info("user_email, hands_wallet: {},{}", user_email,hands_wallet);
 			
-		} catch(Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
+			return "mypage/7-15_Withdraw";
+		} catch(Exception e) { throw new ControllerException(e); } // try-catch
 		
-		return "mypage/7-15_Withdraw";
 	} // 튜터 출금 신청 페이지
 	
 	// 출금 신청 (post)
@@ -504,11 +525,10 @@ public class MypageController {
 	} // 출금 신청 
 	
 	
-	@GetMapping("/withdraw/completed")	// GET
-	public String withdrawCompleted() {
-		log.trace("7-16_WithdrawCompleted");
+	@PostMapping("/withdraw/detail") 
+	public String withdrawalDetail(CriteriaMyPage cri, Model model, WithdrawalDTO dto ) throws ControllerException {
 		
-		return "mypage/7-16_WithdrawCompleted";
-	}// withdrawCompleted
+		return "redirect:/mypage/tutorHands/withdraw?currPage="+ cri.getCurrPage();
+	} // 출금 신청 상세내역 조회 (마이페이지로 출금 신청 내역으로 이동)
 
 }//end class

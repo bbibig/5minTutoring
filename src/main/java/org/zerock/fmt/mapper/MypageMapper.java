@@ -93,7 +93,7 @@ public interface MypageMapper {
 	public abstract boolean updateUserInfo(UserDTO dto) throws DAOException;
 	
 	// 2. 회원탈퇴 - (정지)
-	public abstract int updateUserStop(@Param("user_email")String user_email) throws DAOException;
+//	public abstract int updateUserStop(@Param("user_email")String user_email) throws DAOException;
 	
 	
 //	============<<DELETE>>============

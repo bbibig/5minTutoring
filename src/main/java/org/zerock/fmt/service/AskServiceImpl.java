@@ -119,8 +119,7 @@ public class AskServiceImpl implements AskService {
 			return false;
 		} catch (Exception e) { throw new ServiceException(e); }
 
-		// 3일 이상 답변이 없었던 경우 반환 - 자동으로 삭제..
-		// tutoring에서 과외 취소 시에도 복구
+		// 3일 이상 답변이 없었던 경우 반환 - 자동으로 삭제
 
 	} // deleteQ
 

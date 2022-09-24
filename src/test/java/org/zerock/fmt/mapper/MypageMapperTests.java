@@ -46,6 +46,8 @@ public class MypageMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private MypageMapper mapper;
 	
+	@Setter(onMethod_= @Autowired)
+	private UserMapper userMapper;
 	
 	//1. 기본정보 조회(특정 회원)
 	@Test
@@ -324,7 +326,7 @@ public class MypageMapperTests {
 	void testStopUser() throws DAOException {
 
 		String user_email = "sd456@gmail.com";
-		Integer updateResult = this.mapper.updateUserStop(user_email);
+		Integer updateResult = this.userMapper.updateUserStop(user_email);
 		
 		if(updateResult==1) {
 			log.info("\t updateResult : {}", updateResult);

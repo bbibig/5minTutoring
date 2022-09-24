@@ -193,11 +193,8 @@
 	                        </ul>
 	                    </nav>
 	
-	                    </main>
 	                </div>
 	            </div>
-	        </div>
-	        </div>
 	    </section>
 	    <!-- End section -->
 	

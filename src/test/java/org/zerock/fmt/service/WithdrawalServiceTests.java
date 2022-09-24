@@ -37,6 +37,10 @@ public class WithdrawalServiceTests {
 	@Setter(onMethod_= @Autowired)  
 	private WithdrawalService wService;
 	
+	@Setter(onMethod_= @Autowired)  
+	private UserService userService;
+	
+	// 출금 신청과 동시에 사용자가 보유한 손들기가 차감 되도록
 	@Test
 	@Order(1)
 	@DisplayName("튜터 출금신청 테스트") 
@@ -44,10 +48,15 @@ public class WithdrawalServiceTests {
 	void testCreateWithdrawal() throws ServiceException {
 		log.trace("testCreateWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "test@gmail.com", "오분은행 1234-55-6789", 100, 1800, null, null, null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "now@han.net", "오분은행 1234-55-6789", 140, null, null, null, null);
+		int h_count = dto.getW_quantity();
+		String user_email = dto.getUser_email();
 		
 		boolean result = this.wService.createWithdrawal(dto);
-		log.info("일대일 문의 작성 결과: {}", result);
+		log.info("손들기 신청 결과: {}", result);
+	
+		boolean result2 = this.userService.updateHandUse(h_count, user_email);
+		log.info("손들기 차감 결과: {}", result2); 
 		
 	} // testCreateWithdrawal
 	
@@ -105,18 +114,18 @@ public class WithdrawalServiceTests {
 		log.info("result: {}", result);
 	} // testUpdateState
 	
-	@Test
-	@Order(5)
-	@DisplayName("출금 신청 손들기 개수 차감")
-	void testUpdateHands() throws ServiceException {
-		log.trace("testUpdateHands() invoked.");
-	
-		UserDTO dto = new UserDTO();
-		log.info("\t + dto: {}", dto);
-		
-		boolean result = this.wService.updateHands("now@han.net");
-		log.info("result: {}", result);
-	} // testUpdateHands
+//	@Test
+//	@Order(5)
+//	@DisplayName("출금 신청 손들기 개수 차감")
+//	void testUpdateHands() throws ServiceException {
+//		log.trace("testUpdateHands() invoked.");
+//	
+//		UserDTO dto = new UserDTO();
+//		log.info("\t + dto: {}", dto);
+//		
+//		boolean result = this.wService.updateHands("now@han.net");
+//		log.info("result: {}", result);
+//	} // testUpdateHands
 
 	@Test
 	@Order(6)

@@ -201,9 +201,9 @@
 					</select>
 				</form>
 				
-				<button class="subject_bt <% if(subject.equals("국어")) out.println("selected"); %>">국어</button>
-				<button class="subject_bt <% if(subject.equals("영어")) out.println("selected"); %>">영어</button>
-				<button class="subject_bt <% if(subject.equals("수학")) out.println("selected"); %>">수학</button>
+				<button class="subject_bt <% if(subject.equals("국어")) out.println("selected"); %>" disabled>국어</button>
+				<button class="subject_bt <% if(subject.equals("영어")) out.println("selected"); %>" disabled>영어</button>
+				<button class="subject_bt <% if(subject.equals("수학")) out.println("selected"); %>" disabled>수학</button>
 
 				<div class="col-md-12">
 					<div id="tutorCarousel_2" class="carousel slide" data-ride="carousel">
