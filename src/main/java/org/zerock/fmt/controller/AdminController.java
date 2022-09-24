@@ -280,20 +280,21 @@ public class AdminController {
 		} catch (Exception e) {throw new ControllerException(e); }//try-catch
 	}//adminSale
 	
-	@RequestMapping("/sale/withdrow")
+	@GetMapping("/sale/withdrow")
 	public String adminWithDrow(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("출금 페이지");
 		try {
 			List<WithdrawalVO> list = this.withdrawalService.getAllWithdrawalList(cri);
 			model.addAttribute("_DRAWLIST_", list);
 			
-			AdminPageDTO adpage = new AdminPageDTO(cri, this.withdrawalService.countList(null));
+			AdminPageDTO adpage = new AdminPageDTO(cri, this.withdrawalService.countList(cri));
 			model.addAttribute("_ADMINPAGINATION_",adpage);
 			
-			model.addAttribute("totalDrawal",this.withdrawalService.totalDrawal(null));
+			model.addAttribute("totalDrawal",this.withdrawalService.totalDrawal(cri));
 			return "admin/8-05_sale_withdrow";
 		}catch(Exception e) {throw new ControllerException(e); }
 	}
+
 	
 	//--------------------------------------------- 튜터가입승인
 	@GetMapping("/signUp_comfim")

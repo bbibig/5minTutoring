@@ -64,7 +64,7 @@
             <!-- End Section -->
 
             <!-- ============= 공통 footer + js =============== -->
-            <jsp:include page="../footer.jsp" flush="true" />
+            <jsp:include page="../footerAdmin.jsp" flush="true" />
             <script src="${path}/resources/js/8_admin.js"></script>
             <!-- ============================================== -->
 

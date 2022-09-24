@@ -40,7 +40,7 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 	} // createWithdrawal
 
 	
-	// 출금 신청 내역 전체 조회 (승인 대기) - 관리자
+	// 출금 신청 내역 전체 조회 - 관리자
 	@Override
 	public List<WithdrawalVO> getAllWithdrawalList(CriteriaAdmin cri) throws ServiceException {
 		log.trace("getAllInquiryNList() invoked.");
@@ -48,21 +48,13 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		try { return this.withdrawalMapper.selectAllWithdrawalList(cri); } 
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // getAllWithdrawalList
-	
-	// 출금 신청 내역 전체 조회 (승인 완료) - 관리자
-	@Override
-	public List<WithdrawalVO> getAllWithdrawalOkList(CriteriaAdmin cri) throws ServiceException {
-		log.trace("getAllInquiryNList() invoked.");
-		
-		try { return this.withdrawalMapper.selectAllWithdrawalOkList(cri); } 
-		catch (DAOException e) { throw new ServiceException(e); }
-	} // getAllWithdrawalOkList
+
 
 	// 출금 신청 내역 개수 - 관리자
 	@Override
-	public int countList(Integer w_num) throws ServiceException {
+	public int countList(CriteriaAdmin Cri) throws ServiceException {
 		log.trace("countList() invoked.");
-		try { return this.withdrawalMapper.countList(w_num); }
+		try { return this.withdrawalMapper.countList(Cri); }
 		catch(Exception e) { throw new ServiceException(e); }
 	} // countList
 	
@@ -87,10 +79,10 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 
 
 	@Override
-	public int totalDrawal(String approval) throws ServiceException {
+	public int totalDrawal(CriteriaAdmin cri) throws ServiceException {
 		log.trace("totalDrawal() invoked.");
 		try {
-			return this.withdrawalMapper.totalDrowal(approval);			
+			return this.withdrawalMapper.totalDrowal(cri);			
 		}catch(Exception e) {throw new ServiceException(e); }
 	}//totalDrawal
 

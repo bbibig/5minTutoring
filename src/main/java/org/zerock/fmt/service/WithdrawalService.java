@@ -14,21 +14,17 @@ public interface WithdrawalService {
 // 	출금 신청
 	public abstract boolean createWithdrawal(WithdrawalDTO dto) throws ServiceException;
 	
-	
-//  출금 신청 내역 전체 조회 (승인 대기) - 관리자
+//  출금 신청 내역 전체 조회 - 관리자
 	public abstract List<WithdrawalVO> getAllWithdrawalList(CriteriaAdmin cri) throws ServiceException;
 	
-//  출금 신청 내역 전체 조회 (승인 대기) - 관리자
-	public abstract List<WithdrawalVO> getAllWithdrawalOkList(CriteriaAdmin cri) throws ServiceException;	
-	
 //	출금 신청 내역 페이징 총 건수 - 관리자	
-	public abstract int countList(Integer w_num) throws ServiceException;
+	public abstract int countList(CriteriaAdmin	cri) throws ServiceException;
 	
 //  승인 여부 수정 (승인 대기 / 승인 완료)
 	public abstract boolean updateState(WithdrawalDTO dto) throws ServiceException;
 	
-//	승인 여부 금액 
-	public abstract int totalDrawal(String approval) throws ServiceException;
+//	총 금액
+	public abstract int totalDrawal(CriteriaAdmin cri) throws ServiceException;
 
 //	손들기 개수 차감 (사용자 - 튜터)
 //	public abstract boolean updateHands(String user_email) throws ServiceException;

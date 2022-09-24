@@ -70,8 +70,7 @@ public class WithdrawalServiceTests {
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
-//		cri.setAmount(22);
-//		cri.setCurrPage(1);
+		cri.setApproval("대기");
 		List<WithdrawalVO> list = this.wService.getAllWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
 
@@ -87,7 +86,8 @@ public class WithdrawalServiceTests {
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
-		List<WithdrawalVO> list = this.wService.getAllWithdrawalOkList(cri);
+		cri.setApproval("완료");
+		List<WithdrawalVO> list = this.wService.getAllWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
 
 	} // testGetAllWithdrawalOkList
@@ -97,7 +97,9 @@ public class WithdrawalServiceTests {
 	@DisplayName("출금 내역 페이징 - 어드민")
 	void countList() throws ServiceException {
 		log.trace("countList : 어드민 페이징");
-		int result = this.wService.countList(null);
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setApproval("완료");
+		int result = this.wService.countList(cri);
 		log.info("\t + result : {}" , result);
 	} //countList
 	
@@ -132,10 +134,9 @@ public class WithdrawalServiceTests {
 	@DisplayName("승인 여부 총 금액")
 	void totalDrawal() throws ServiceException {
 		log.trace("totalDrawal : 승인 여부 별 총 금액");
-		
-		int result1 = this.wService.totalDrawal("승인 완료");
-		int result2 = this.wService.totalDrawal("승인 대기");
-		int result3 = this.wService.totalDrawal(null);
-		log.trace("result : {}, {}, {}", result1, result2, result3);
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setApproval("완료");
+		int result1 = this.wService.totalDrawal(cri);
+		log.trace("result : {}",result1);
 	}//totalDrawal
 } // end class

@@ -12,12 +12,41 @@
         <link href="${path}/resources/css/admin_header_footer.css" rel="stylesheet">
         <link href="${path}/resources/css/8_admin_page.css" rel="stylesheet">
         <!-- ========================================================= -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+
         <title>admin - 출금내역 </title>
         <style>
             #approval{
                 height: 35px;
             }
         </style>
+        <script>
+            $(function(){
+
+                $('#approval').on('change',function(){
+
+                    let currPage = $('#adPaginationFrom').find('input[name=currPage]').val();
+                    let amount = $('#adPaginationFrom').find('input[name=amount]').val();
+                    let approval = $(this).val();
+
+                    let data = { approval : approval }
+
+                    console.log(data)
+
+                    
+                    $.ajax({
+                        url : "/admin/sale/withdrow",
+                        data : data, 
+                        method : 'GET',
+                        success : function(result){
+                            self.location="/admin/sale/withdrow?approval="+approval;
+                        }
+                    })//ajax
+                });//approval
+
+            });
+        </script>
     </head>
 
 
@@ -68,8 +97,8 @@
                                 <a href="/admin/sale/withdrow" class="btn btn-dark">출금 내역</a>
                                 <select name="approval" id="approval">
                                     <option value="">승인상태</option>
-                                    <option value="승인 대기">승인 대기</option>
-                                    <option value="승인 완료">승인 완료</option>
+                                    <option value="대기">승인 대기</option>
+                                    <option value="완료">승인 완료</option>
                                 </select>
                             </div>
                         </li>
@@ -103,7 +132,7 @@
                                 <th>출금신청일자</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <c:forEach var="draw" items="${_DRAWLIST_}">
                                 <tr>
                                     <td>${draw.w_num}</td>
@@ -153,7 +182,7 @@
         <!-- End Section -->
 
         <!-- ============= 공통 footer + js =============== -->
-        <jsp:include page="../footer.jsp" flush="true" />
+        <jsp:include page="../footerAdmin.jsp" flush="true" />
         <script src="${path}/resources/js/8_admin.js"></script>
         <!-- ============================================== -->
     </body>
