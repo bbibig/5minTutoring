@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.domain.CommunityDTO;
@@ -68,7 +67,7 @@ public class CommunityController implements InitializingBean{
 	
 	//특정 게시글 조회 및 댓글조회
 	@GetMapping("/post")
-	public String communityPost(CommunityDTO dto, Model model) throws ControllerException{
+	public String communityPost(CommunityDTO dto, Model model, CommentDTO cdto) throws ControllerException{
 		log.debug("post({},{})invoked.", dto, model);
 	
 		
@@ -77,11 +76,12 @@ public class CommunityController implements InitializingBean{
 			log.info("\t+board: "+board);
 			
 			model.addAttribute("_BOARD_", board);
-//			------------------------------------------------게시글
+//			------------------------------------------------특정게시글
 			List<CommentVO2> commentList = commentService2.readComment(board.getFb_number());
 			model.addAttribute("_COMMENTLIST_", commentList);
 			
-//			------------------------------------------------댓글
+//			------------------------------------------------댓글리스트
+			
 			
 			
 		}catch(Exception e) {
@@ -155,8 +155,9 @@ public class CommunityController implements InitializingBean{
 	@PostMapping("/commentWrite")
 	public String commentWrite(@ModelAttribute("write")CommentDTO dto, HttpServletRequest req) throws ControllerException{
 		log.info("commentWrite() invoked");
-		
+			
 		try {
+			
 			int fb_number = Integer.parseInt(req.getParameter("fb_number"));
 			dto.setFb_number(fb_number);
 			
@@ -165,14 +166,37 @@ public class CommunityController implements InitializingBean{
 				
 			
 			
-			return "redirect:/community/post";
+			return "redirect:/community/post?fb_number="+fb_number;
 			
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}//try-catch
 	
 		
-	}
+	}// commentWrite
+	
+	//댓글 수정
+	@PostMapping("/commentUpdate")
+	public String commentUpdate(@ModelAttribute("update")CommentDTO dto, HttpServletRequest req, Model model) throws ControllerException{
+		
+		try {
+			
+			int fb_number = Integer.parseInt(req.getParameter("fb_number"));
+			dto.setFb_number(fb_number);
+			
+			
+			boolean isResult = commentService2.updateComment(dto);
+			log.info("{}",  isResult);
+			
+			return "redirect:/community/post?fb_number="+fb_number;
+			
+		}catch(Exception e) {
+			throw new ControllerException(e);
+			
+		}//try-catch
+	}//commentUpdate
+	
+	
 	
 
 	@Override

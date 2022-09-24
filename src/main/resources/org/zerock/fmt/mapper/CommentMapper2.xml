@@ -12,6 +12,8 @@
     FROM tbl_comment t1, tbl_user t2
             
     WHERE t1.user_email = t2.user_email AND fb_number = #{fb_number}
+    
+    ORDER BY regdate ASC
 
 		
 	</select>
@@ -22,4 +24,26 @@
     VALUES(cm_num.nextval, #{fb_number}, #{user_email}, #{cm_content})
     </insert>
 
+
+	<!-- 댓글수정 -->
+	<update id="updateComment" parameterType="org.zerock.fmt.domain.CommentVO2">
+		UPDATE tbl_comment SET cm_content = #{cm_content}
+		WHERE cm_number = #{cm_number}
+	</update>
+	
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteComment" parameterType="org.zerock.fmt.domain.CommentVO2">
+		DELETE FROM tbl_comment
+		WHERE cm_number = #{cm_number}
+	</delete>
+
+	<!-- 선택된 댓글 조회 -->
+	<select id="selectComment" resultType="org.zerock.fmt.domain.CommentVO2">
+		SELECT *
+		FROM tbl_comment t1, tbl_user t2
+		WHERE t1.user_email = t2.user_email AND cm_number = #{cm_number}
+	</select>
+	
+	
 </mapper>

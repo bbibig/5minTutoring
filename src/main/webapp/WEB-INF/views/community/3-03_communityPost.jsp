@@ -22,7 +22,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			
-			
+
 	    <style>
 	        /* toggleHeart */
 	        .bi-suit-heart:hover,
@@ -30,6 +30,8 @@
 	            color: rgb(255, 70, 70);
 	        }
 	    </style>
+
+
 
 	</head>
 	
@@ -84,16 +86,16 @@
 	
 	                                        <p class="my-3 fs-5"># 수정할 댓글을 입력하세요.</p>
 	
-	                                        <form class="was-validated col-12 d-flex flex-column">
+	                                        <form class="was-validated col-12 d-flex flex-column" id="commentUpdateForm" action="/community/commentUpdate" items="{_COMMENT_}" method="post">
 	                                            <div class="text-box">
-	                                                <textarea class="form-control" placeholder="" id="floatingTextarea1"
-	                                                    style="height: 150px" required></textarea>
+																									<input type="hidden" name="cm_number" value="${_COMMENT_.cm_number}">
+	                                                <textarea class="form-control" placeholder="" id="floatingTextarea1" name="cm_content" style="height: 150px" required></textarea>
 	                                            </div>
 	
 	                                            <div class="pop-up-button-box align-self-end">
 	                                                <button type="button" class="btn btn-outline-primary"
 	                                                    data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-	                                                <button type="submit" class="btn btn-outline-primary">확인</button>
+	                                                <button type="submit" class="btn btn-outline-primary" id="commentUpdateBtn">확인</button>
 	                                            </div>
 	                                        </form>
 	                                    </div>

@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO2;
+import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -67,8 +68,8 @@ public class CommentServiceTests2 {
 	@Order(2)
 	@DisplayName("2. CommentService2.writeComment() test.")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
-	void testwriteComment() throws ServiceException {
-		log.trace("testwriteComment() invoked");
+	void testWriteComment() throws ServiceException {
+		log.trace("writeComment() invoked");
 				
 		CommentDTO dto = new CommentDTO();
 		dto.setFb_number(56);
@@ -84,6 +85,62 @@ public class CommentServiceTests2 {
 		} // if-else
 
 	} // ReadCommentTest
+	
+	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("3. CommentService2.updateComment() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testUpdateComment() throws ServiceException {
+		log.trace("updateComment() invoked");
+				
+		CommentDTO dto = new CommentDTO();
+		dto.setCm_number(119);
+		dto.setCm_content("댓글 수정test");
+		
+		
+		if(commentService2.updateComment(dto)) {
+			log.info("\t+ board modified.");
+		} else {
+			log.info("\t+ No board modified.");
+		} // if-else
+
+	} // updateCommentTest
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("4. CommentService2.deleteComment() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testDeleteComment() throws ServiceException {
+		log.trace("deleteComment() invoked");
+				
+		CommentDTO dto = new CommentDTO();
+		dto.setCm_number(123);
+		
+		boolean isResult = commentService2.deleteComment(dto);
+		log.info("isResutl:{}",isResult);
+		
+	} // deleteCommentTest
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("5. CommentService2.selectComment() test.")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testSelectComment() throws ServiceException {
+		log.trace("selectComment() invoked");
+				
+		int cm_number = 124;
+		CommentDTO dto = new CommentDTO();
+		dto.setCm_number(cm_number);
+		
+		CommentVO2 vo2=this.commentService2.selectComment(dto);
+		log.info("vo2:{}", vo2);
+		
+	} // selectComment
+	
 	
 	
 	
