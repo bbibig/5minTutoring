@@ -177,11 +177,18 @@ public class MypageServiceImpl implements MypageService {
 		log.trace("createWithdrawal() 출금 신청 하기");
 		
 		try { 
+			// 손들기 신청 금액이 50개 이상이어야 한다.
+			if (dto.getW_quantity() >= 50) { 
+					
 			mapper.insertWithdrawal(dto);
 			int hands = dto.getW_quantity();
 			String user = dto.getUser_email();
 			
+			log.info("\t+ 출금 신청 손들기 개수: {}", hands);
 			return this.userMapper.updateHandUse(hands, user) == 1;
+			
+			} else { log.info("출금가능한 손들기 수량이 부족합니다."); }
+			return false;
 		}
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // createWithdrawal

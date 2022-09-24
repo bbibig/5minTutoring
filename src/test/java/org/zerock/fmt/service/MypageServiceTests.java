@@ -272,15 +272,10 @@ public class MypageServiceTests {
 	void testCreateWithdrawal() throws ServiceException {
 		log.trace("testCreateWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "now@han.net", "오분은행 1234-55-6789", 140, null, null, null, null);
-		int h_count = dto.getW_quantity();
-		String user_email = dto.getUser_email();
+		WithdrawalDTO dto = new WithdrawalDTO(null, "now@han.net", "오분은행 1234-55-6789", 100, null, null, null, null);
 		
 		boolean result = this.service.createWithdrawal(dto);
 		log.info("손들기 신청 결과: {}", result);
-	
-		boolean result2 = this.userService.updateHandUse(h_count, user_email);
-		log.info("손들기 차감 결과: {}", result2); 
 		
 	} // testCreateWithdrawal
 	

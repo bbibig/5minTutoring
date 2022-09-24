@@ -45,7 +45,7 @@
                 <div class="list-group">
                     <a href="/admin/student" class="list-group-item list-group-item-action px-lg-4 ">회원 관리</a>
                     <a href="/admin/stator" class="list-group-item list-group-item-action px-lg-4 ">관리자</a>
-                    <a href="/admin/answerBoard_OK" class="list-group-item list-group-item-action px-lg-4 fw-bold ">문의 게시판</a>
+                  	<a href="/admin/answerBoard_NO" class="list-group-item list-group-item-action px-lg-4">문의 게시판</a>
                     <a href="/admin/adminFAQ" class="list-group-item list-group-item-action px-lg-4 ">자주 묻는 질문</a>
                     <a href="/admin/sale/sell" class="list-group-item list-group-item-action px-lg-4">매출 관리</a>
                     <a href="/admin/signUp_comfim" class="list-group-item list-group-item-action px-lg-4">튜터 가입 승인</a>
@@ -58,8 +58,8 @@
 
 
                 <div class="manage-tap">
+                 	<a href="/admin/answerBoard_NO" class="btn btn-dark">미답변</a>
                     <a href="/admin/answerBoard_OK" class="btn bg-blue">답변 완료</a>
-                    <a href="/admin/answerBoard_NO" class="btn btn-dark">미 답변</a>
                 </div>
 
 
@@ -76,19 +76,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="board" items="${_RESULT_}">
+                          
+                           <c:forEach var="board" items="${_RESULT_}">
                                 <tr>
                                     <td>${board.iq_number}</td>
                                     <td class="inquiry-title">
-                                        <a href="/admin/answerBoard/comment">${board.iq_title}</a>
+                                     <c:set  var="iq_number" value="${board.iq_number}" />
+                                        <a href="/admin/answerBoard/comment?iq_number=${board.iq_number}">${board.iq_title}</a>
                                     </td>
 
                                     <td>${board.user_email}</td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${board.iq_date}"/></td>
-                                    <td>${board.iq_pass}</td>
+                                    <td>
+                                        <c:choose>
+											<c:when test="${board.iq_pass eq 'Y'}">
+												<div>답변 완료</div>
+											</c:when>
+										</c:choose>
+                                    </td>
                                 </tr>
                             </c:forEach>
-                            <tr>
+                          
                         </tbody>
                     </table>
 

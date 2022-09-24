@@ -313,23 +313,20 @@ public class MypageController {
 		log.info(iq_number); 
 		
 		try {
-			InquiryQuestionVO Questionvo = this.iqService.getInquiry(iq_number);
-			InquiryAnswerVO Answervo = this.iaService.getIA(iq_number);
-			log.info("\t+ vo: " + Questionvo);
-			log.info("\t+ vo: " + Answervo);
-			
 			// 문의
+			InquiryQuestionVO Questionvo = this.iqService.getInquiry(iq_number);
 			model.addAttribute("_INQUIRYQUESTION_", Questionvo);	
 			model.addAttribute("_CURRENTPAGE_", cri);
+			log.info("\t+ Questionvo: {} " + Questionvo);
 			
 			// 답변
+			InquiryAnswerVO Answervo = this.iaService.getIA(iq_number);
 			model.addAttribute("_INQUIRYANSWER_",Answervo);
+			log.info("\t+ Answervo: {}" + Answervo);
 			
-		} catch(Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
+			return "mypage/7-07_QandA";	
+		} catch(Exception e) { throw new ControllerException(e);} // try-catch
 		
-		return "mypage/7-07_QandA";
 	} // 일대일 문의&답변 조회
 	
 //===== 회원 탈퇴 ===============================================		
@@ -515,14 +512,21 @@ public class MypageController {
 		
 	} // 튜터 출금 신청 페이지
 	
-	// 출금 신청 (post)
-	@PostMapping("/withdraw/application")	
-	public String withdrawApplication() {
-		log.trace("withdrawApplication() invoked.");
+	// 출금하기 신청 (출금 신청 정보 보내기)
+	@PostMapping("/withdrawAppilcation")
+	public String withdrawAppilcation(WithdrawalDTO dto, HttpSession session) throws ControllerException {
+		log.trace("튜터 출금 신청");
 		
-		
-		return "mypage/7-15_Withdraw";
-	} // 출금 신청 
+		try { 
+			this.mypageService.createWithdrawal(dto);
+	
+			UserVO vo = this.userService.getUserInfo(dto.getUser_email());
+			session.setAttribute(SharedScopeKeys.LOGIN_USER, vo);
+			
+			return "mypage/7-16_WithdrawCompleted";
+		} catch (ServiceException e) { throw new ControllerException(e); }// try-catch
+	
+	} // 튜터 출금 신청 
 	
 	
 	@PostMapping("/withdraw/detail") 

@@ -26,6 +26,7 @@ import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.domain.FileVO;
+import org.zerock.fmt.domain.InquiryAnswerVO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.UserVO;
@@ -36,6 +37,7 @@ import org.zerock.fmt.service.AdminService;
 import org.zerock.fmt.service.BuyService;
 import org.zerock.fmt.service.FaqService;
 import org.zerock.fmt.service.FileService;
+import org.zerock.fmt.service.InquiryAnswerService;
 import org.zerock.fmt.service.InquiryQuestionService;
 import org.zerock.fmt.service.TutorService;
 import org.zerock.fmt.service.UserService;
@@ -70,6 +72,9 @@ public class AdminController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private InquiryQuestionService questionService;
+	
+	@Setter(onMethod_= @Autowired)
+	private InquiryAnswerService answerService;
 	
 	@Setter(onMethod_ = @Autowired)
 	private WithdrawalService withdrawalService;
@@ -202,11 +207,21 @@ public class AdminController {
 	}//adminAnswerBoardNo
 	
 	@RequestMapping("/answerBoard/comment")
-	public String adminAnswerBoard_comment(Model model) throws ControllerException {
+	public String adminAnswerBoard_comment(@RequestParam Integer iq_number, Model model) throws ControllerException {
 		log.info("문의게시판(미답변)");
-		try {
+		
+		// 조회 안에 답변하기도 있어서 조금 어렵..지만 제가 마무리 해보겠습니다..
+		// 답변 ok -> 문의,답변 조회
+		// 답변 no -> 문의 조회, 답변하기
+		try {	InquiryQuestionVO Questionvo = this.questionService.getInquiry(iq_number);
+		model.addAttribute("_QUESTION_", Questionvo);	
+		
+		// 답변
+		InquiryAnswerVO Answervo = this.answerService.getIA(iq_number);
+		model.addAttribute("_ANSWER_", Answervo);
+
+		return "admin/8-03_answerBoard_comment";
 			
-			return "admin/8-03_answerBoard_comment";
 		}catch(Exception e) {throw new ControllerException(e); }
 		
 	}
