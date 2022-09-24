@@ -9,8 +9,9 @@ a{
 	color: black;
 }
 
-a:hover{
-    font-weight: bold;
+a:hover { !important; 
+  font-weight: bold; 
+  color: #fff ;
 }
 
 
