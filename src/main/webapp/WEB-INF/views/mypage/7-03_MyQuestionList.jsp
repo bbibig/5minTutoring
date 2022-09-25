@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -80,7 +81,10 @@
               <c:forEach var="myquestion" items="${_MYQLIST_}">
                 <tr>
                   <th scope="row"> ${myquestion.qb_number} </th>
-                  <td colspan="2"><a href="/tutor/watchAnswer?num=${myquestion.qb_number}&tp=${myquestion.tp_number}"> ${myquestion.qb_title} </a></td>
+                  <td colspan="2"><a href="/tutor/watchAnswer?num=${myquestion.qb_number}&tp=${myquestion.tp_number}"> 
+                    <c:set var="title" value = "${myquestion.qb_title}" />
+                    ${fn:substring(title,0,35)}
+                  </a></td>
                   <td class="text-center">
                     <fmt:formatDate value="${myquestion.regdate}" pattern="yyyy.MM.dd" />
                   </td>
