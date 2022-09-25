@@ -23,9 +23,11 @@ import org.zerock.fmt.domain.CommunityDTO;
 import org.zerock.fmt.domain.CommunityPageDTO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaCommunity;
+import org.zerock.fmt.domain.ProfileVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.service.CommentService2;
 import org.zerock.fmt.service.CommunityService;
+import org.zerock.fmt.service.ProfileService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,6 +45,9 @@ public class CommunityController implements InitializingBean{
 	
 	@Setter(onMethod_ = @Autowired)
 	private CommentService2 commentService2;
+	
+	@Setter(onMethod_= @Autowired)
+	private ProfileService profileService;
 	
 	
 	//전체게시글 조회
@@ -89,6 +94,12 @@ public class CommunityController implements InitializingBean{
 			List<CommentVO2> commentList = commentService2.readComment(board.getFb_number());
 			model.addAttribute("_COMMENTLIST_", commentList);
 //			------------------------------------------------댓글리스트
+			
+//			------------------------------------------------게시글 프로필
+			//#1. 프로필 DB 유무 조회
+			List<ProfileVO> profileInfo = this.profileService.getProfile(board.getUser_email());
+			if(profileInfo.size() == 0) { model.addAttribute("profileResult", "false"); }
+			else { model.addAttribute("profileResult", "true"); } //if-else
 			
 			
 			

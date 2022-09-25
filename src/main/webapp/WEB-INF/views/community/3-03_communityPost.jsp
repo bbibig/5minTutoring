@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!doctype html>
 <html lang="ko">
@@ -159,7 +161,10 @@
 	                    <div class="Tutor_info d-flex">
 												
 	                        <div class="TPic">
-	                            <img src="/resources/img/profile.png" alt="튜터프로필">
+	                            <c:if test="${profileResult eq 'false'}"> <img src="/resources/img/profile.png"> </c:if>
+								<c:if test="${profileResult eq 'true'}">
+									<img src="<spring:url value='/profile/${_BOARD_.user_nick}_profile.png'/>" class="rounded-circle">
+								</c:if>
 	                        </div>
 	                        <div class="Tname">${_BOARD_.user_nick}</div>
 	                        
