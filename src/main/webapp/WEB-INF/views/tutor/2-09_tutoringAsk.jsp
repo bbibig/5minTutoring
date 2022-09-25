@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -68,21 +69,24 @@
 							<div class="Sname">${_ONE_TB_VO_.user_name}</div>
 							<div>&nbsp;학생</div>
 							<br>
-							<div class="date">&nbsp;${_ONE_TB_VO_.tb_date}</div>
-							<div class="hamburger-button col-8 d-flex justify-content-end">
-								<div class="dropdown">
-									<button class="btn pt-0" type="button"
-										data-bs-toggle="dropdown" aria-expanded="false">
-										<i class="bi bi-list fs-4"></i>
-									</button>
-									<ul class="dropdown-menu">
-										<li class="list-unstyled"><a class="dropdown-item"
-											data-bs-toggle="modal" href="#community_revise">수정</a></li>
-										<li class="list-unstyled"><a class="dropdown-item"
-											data-bs-toggle="modal" href="#delete">삭제</a></li>
-									</ul>
+							<div class="date">&nbsp;<fmt:formatDate pattern="yyyy.MM.dd HH:mm" value="${_ONE_TB_VO_.tb_date}"/></div>
+							
+							<c:if test="${__LOGIN_USER__.user_email eq _ONE_TB_VO_.user_email}">
+								<div class="hamburger-button col-8 d-flex justify-content-end">
+									<div class="dropdown">
+										<button class="btn pt-0" type="button"
+											data-bs-toggle="dropdown" aria-expanded="false">
+											<i class="bi bi-list fs-4"></i>
+										</button>
+										<ul class="dropdown-menu">
+											<li class="list-unstyled"><a class="dropdown-item"
+												data-bs-toggle="modal" href="#community_revise">수정</a></li>
+											<li class="list-unstyled"><a class="dropdown-item"
+												data-bs-toggle="modal" href="#delete">삭제</a></li>
+										</ul>
+									</div>
 								</div>
-							</div>
+							</c:if>
 						</div>
 						<div class="ask_content">${_ONE_TB_VO_.tb_content}</div>
 					</div>

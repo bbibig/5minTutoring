@@ -112,16 +112,27 @@
 	            <c:forEach var="TQ" items="${_TB_VO_}" varStatus="statusNm">
 	              <div class="list-box">
 	                <div class="row mt-3 d-flex flex-row align-items-center">
-	                  <div class="col-1"><span class="badge bg-secondary">대기중</span></div>
-	                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk?num=${TQ.tb_number}" style="color:black" class="fs-4">${TQ.tb_title}</a></div>
-	                  <div class="col-1"><span>${TQ.user_name}</span></div>
+	                
+		                <div class="tutoring_ok col-1">
+		                	<span class="badge bg-secondary">
+	                            <c:if test="${TQ.tb_answer == '0'}">
+	                            	<c:out value="대기중"/>
+	                            </c:if>
+	                            <c:if test="${TQ.tb_answer == '1'}">
+	                            	<c:out value="과외 완료"/>
+	                            </c:if>
+	                        </span>
+	                   	</div>
 	                  
-	                  <c:if test="${_TP_NUMBER_ eq _TUTOR_INFO_.tp_number}">
-	                 	 <div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
-	                  </c:if>
-	                </div>
-	                <hr>
-	              </div> 
+		                <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk?num=${TQ.tb_number}" style="color:black" class="fs-4">${TQ.tb_title}</a></div>
+		                <div class="col-1"><span>${TQ.user_name}</span></div>
+		                  
+		                <c:if test="${_TP_NUMBER_ eq _TUTOR_INFO_.tp_number}">
+		                 	<div class="col-2"><button class="btn btn-primary ms-5">취소</button></div>
+		                </c:if>
+		               </div>
+		               <hr>
+		           </div> 
 				</c:forEach>
 			
 			<!-- 과외중 참고 -->
