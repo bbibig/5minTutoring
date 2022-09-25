@@ -1,6 +1,7 @@
 package org.zerock.fmt.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,9 @@ import org.zerock.fmt.domain.CommunityPageDTO;
 import org.zerock.fmt.domain.CommunityVO;
 import org.zerock.fmt.domain.CriteriaCommunity;
 import org.zerock.fmt.domain.ProfileVO;
+import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.exception.ControllerException;
+import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.CommentService2;
 import org.zerock.fmt.service.CommunityService;
 import org.zerock.fmt.service.ProfileService;
@@ -96,10 +99,20 @@ public class CommunityController implements InitializingBean{
 //			------------------------------------------------댓글리스트
 			
 //			------------------------------------------------게시글 프로필
-			//#1. 프로필 DB 유무 조회
+			//#게시글 프로필
 			List<ProfileVO> profileInfo = this.profileService.getProfile(board.getUser_email());
 			if(profileInfo.size() == 0) { model.addAttribute("profileResult", "false"); }
 			else { model.addAttribute("profileResult", "true"); } //if-else
+//			------------------------------------------------댓글 프로필
+			//#게시글 프로필
+			List<List> profileCList = new ArrayList<List>();
+			commentList.forEach(e -> {
+				try {
+					List<UserProfileVO> profileComment = this.profileService.getUserNaP(e.getUser_email());
+					profileCList.add(profileComment);
+				} catch (ServiceException e1) { ;; }
+			});
+			model.addAttribute("profileCList", profileCList);
 			
 			
 			
