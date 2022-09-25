@@ -93,8 +93,8 @@
                         <!-- Tap -->
                         <li>
                             <div class="manage-tap">
-                                <a href="/admin/sale/sell" class="btn bg-blue">판매 내역</a>
-                                <a href="/admin/sale/withdrow" class="btn btn-dark">출금 내역</a>
+                                <a href="/admin/sale/sell" class="btn btn-dark">판매 내역</a>
+                                <a href="/admin/sale/withdrow" class="btn bg-blue">출금 내역</a>
                                 <select name="approval" id="approval">
                                     <option value="">승인상태</option>
                                     <option value="대기">승인 대기</option>

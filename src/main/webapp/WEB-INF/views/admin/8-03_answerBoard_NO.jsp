@@ -59,8 +59,8 @@
 
 
                 <div class="manage-tap">
-                  	<a href="/admin/answerBoard_NO" class="btn btn-dark">미답변</a>
-                    <a href="/admin/answerBoard_OK" class="btn bg-blue">답변 완료</a>
+                  	<a href="/admin/answerBoard_NO" class="btn bg-blue">미답변</a>
+                    <a href="/admin/answerBoard_OK" class="btn btn-dark">답변 완료</a>
                 </div>
 
 

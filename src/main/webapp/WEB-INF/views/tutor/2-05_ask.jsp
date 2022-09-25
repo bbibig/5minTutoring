@@ -167,14 +167,14 @@
 		                                </div>
 		                                <div class="ask_title" style="height:100%;">
 		                                    ${Q.qb_title}
-		                                    <div class="answer_ok">
-			                                    <c:if test="${Q.qb_answer == '0'}">
-			                                    	<c:out value="답변미완료"/>
-			                                    </c:if>
-			                                    <c:if test="${Q.qb_answer == '1'}">
-			                                    	<span id="answerOK"><c:out value="답변완료" /></span>
-			                                    </c:if>
-			                                </div>
+											<c:if test="${Q.qb_answer == '0'}">
+												<div class="answer_ok"> <c:out value="답변미완료"/> </div>
+											</c:if>
+											<c:if test="${Q.qb_answer == '1'}">
+												<div class="answer_ok yes">
+													<span id="answerOK"><c:out value="답변완료" /> </span>
+												</div>
+											</c:if>
 		                                </div>
 		                            </div>
 		                        </div>

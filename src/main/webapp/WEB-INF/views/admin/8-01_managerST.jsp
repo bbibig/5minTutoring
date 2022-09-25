@@ -85,9 +85,9 @@
                         <!-- Tap -->
                         <li>
                             <div class="manage-tap">
-                                <a href="/admin/student" class="btn btn-dark">학생</a>
+                                <a href="/admin/student" class="btn bg-blue">학생</a>
                                 <a href="/admin/tutor" class="btn btn-dark">튜터</a>
-                                <a href="/admin/humenMember" class="btn bg-blue">탈퇴 회원</a>
+                                <a href="/admin/humenMember" class="btn btn-dark">탈퇴 회원</a>
                             </div>
                         </li>
 

@@ -64,7 +64,7 @@
                 <div id="nav" class="col-lg-3">
 
                     <div class="list-group">
-                        <a href="/admin/student" class="list-group-item list-group-item-action px-lg-4 ">회원
+                        <a href="/admin/student" class="list-group-item list-group-item-action px-lg-4">회원
                             관리</a>
                         <a href="/admin/stator" class="list-group-item list-group-item-action px-lg-4">관리자</a>
                         <a href="/admin/answerBoard_OK" class="list-group-item list-group-item-action px-lg-4">문의
@@ -83,7 +83,7 @@
                         <h3 class="fw-bold" id="aside_title">자주 묻는 질문</h3>
 
                         <div class="faq_write">
-                            <button id="write-button" type="submit" class="btn btn-dark btn-sm col-1"
+                            <button id="write-button" type="submit" class="btn bg-blue btn-sm col-1"
                                 data-bs-toggle="modal" data-bs-target="#community-write">글쓰기
                             </button>
                         </div>
