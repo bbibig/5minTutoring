@@ -12,6 +12,91 @@
 <!-- css 추가 -->
 <link rel="stylesheet" href="/resources/css/2-07_watchAnswer.css">
 
+<!-- WebSocket CDN 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+		// 전송 버튼 이벤트
+		$("#button-send").on("click", function(e) {
+			sendMessage();
+		});
+	
+		var sock = new SockJS('http://localhost:8080/chatting');
+		sock.onmessage = onMessage;
+		sock.onclose = onClose;
+		sock.onopen = onOpen;
+		
+		// 현재 세션에 로그인 한 사람
+		var cur_session = '${__LOGIN_USER__.user_name}'; 
+	
+		function sendMessage() {
+			sock.send($("#msg").val());
+		}
+		
+		// 서버에서 메시지를 받았을 때
+		function onMessage(msg) {
+	
+			var data = msg.data;
+			var sessionId = null; // 데이터를 보낸 사람
+			var message = null;
+	
+			var arr = data.split(":");
+	
+			for (var i = 0; i < arr.length; i++) {
+				console.log('arr[' + i + ']: ' + arr[i]);
+			}
+	
+			
+			// var cur_nick = '${__LOGIN_USER__.user_nick}';
+			console.log("cur_session : " + cur_session);
+	
+			sessionId = arr[0];
+			message = arr[1];
+	
+			// 메시지 구분
+			// if (sessionId == cur_session) {
+	
+			// 	var str = "<div class='col-6'>";
+			// 	str += "<div class='alert alert-secondary'>";
+			// 	str += "<b>" + cur_nick + " : " + message + "</b>";
+			// 	str += "</div></div>";
+	
+			// 	$("#msgArea").append(str);
+			// } else {
+	
+				var str = "<div class='col-6'>";
+				str += "<div class='alert alert-warning'>";
+				str += "<b>" + sessionId + " : " + message + "</b>";
+				str += "</div></div>";
+	
+				$("#msgArea").append(str);
+			// }
+	
+			console.log("채팅 메시지 : " + data);
+	
+		}
+	
+		// 채팅창에서 나갔을 때
+		function onClose(evt) {
+			
+			var str = cur_session + " 님이 퇴장하셨습니다.";
+			$("#msgArea").append(str);
+		}
+		
+		// 채팅창에 들어왔을 때
+		function onOpen(evt) {
+			
+			var str = cur_session + "님이 입장하셨습니다.";
+			$("#msgArea").append(str);
+		}
+		
+	}); // .jq
+
+</script>
+
 <title>튜터페이지</title>
 </head>
 
@@ -90,11 +175,32 @@
 						</div>
 						<div class="ask_content">${_ONE_TB_VO_.tb_content}</div>
 					</div>
-
-					<form action="#">
+					
+					<p></p>
+					<p></p>
+					
+					<!-- <form action=#>
 						<p></p>
-						<input type="submit" value="과외하기" id="tutoring">
-					</form>
+						<button type="submit" id="tutoring">과외하기</button>
+					</form> -->
+					
+					<!-- 채팅 입력 -->
+					<div class="col-6">
+					<label><h3><b>Chatting</b></h3></label>
+					</div>
+					<div>
+						<div id="msgArea" class="col"></div>
+						<div class="col-6">
+							<div class="input-group mb-3">
+								<input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6"></div>
+
 				</div>
 			</div>
 
