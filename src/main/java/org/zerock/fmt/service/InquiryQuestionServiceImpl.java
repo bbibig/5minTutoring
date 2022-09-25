@@ -76,10 +76,10 @@ public class InquiryQuestionServiceImpl implements InquiryQuestionService {
 	
 	// 답변 상태 수정 (답변 대기 / 답변 완료)
 	@Override
-	public boolean updateInquiryState(InquiryQuestionDTO dto) throws ServiceException {
+	public boolean updateInquiryState(Integer iq_number) throws ServiceException {
 		log.trace("updateInquiryState() invoked.");
 		
-		try { return iqMapper.updateInquiryState(dto) == 1; }
+		try { return iqMapper.updateInquiryState(iq_number) == 1; }
 		catch (DAOException e) { throw new ServiceException(e); }
 	} // updateInquiryState
 

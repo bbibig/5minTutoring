@@ -115,7 +115,7 @@
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
                                 <li class="page-item"><a class="page-link rounded-circle" 
-                                    href="/admin/answerBoard_NO?currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
+                                    href="/admin/answerBoard/NOcomment?currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">

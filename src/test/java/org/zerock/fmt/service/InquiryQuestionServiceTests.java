@@ -111,7 +111,7 @@ public class InquiryQuestionServiceTests {
 	
 		InquiryQuestionDTO dto = new InquiryQuestionDTO(57, null, null, null, null, "Y");
 		
-		boolean result = this.iqService.updateInquiryState(dto);
+		boolean result = this.iqService.updateInquiryState(57);
 		log.info("result: {}", result);
 	} // testUpdateInquiryState
 	

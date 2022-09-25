@@ -28,6 +28,6 @@ public interface InquiryQuestionService {
 	
 	
 //  답변 상태 수정 (답변 대기 / 답변 완료)
-	public abstract boolean updateInquiryState(InquiryQuestionDTO dto) throws ServiceException; 
+	public abstract boolean updateInquiryState(Integer iq_number) throws ServiceException; 
 	
 }

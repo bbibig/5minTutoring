@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import org.zerock.fmt.domain.CriteriaMyPage;
 import org.zerock.fmt.domain.FaqDTO;
 import org.zerock.fmt.domain.FaqVO;
 import org.zerock.fmt.domain.FileVO;
+import org.zerock.fmt.domain.InquiryAnswerDTO;
 import org.zerock.fmt.domain.InquiryAnswerVO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
@@ -181,7 +184,7 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------- 문의게시판
-	@RequestMapping("/answerBoard_OK")
+	@GetMapping("/answerBoard_OK")
 	public String adminAnswerBoardOk(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("문의게시판(답변완료)");
 		
@@ -194,7 +197,8 @@ public class AdminController {
 		}catch(Exception e) {throw new ControllerException(e); }
 	}//adminAnswerBoardOk
 	
-	@RequestMapping("/answerBoard_NO")
+	
+	@GetMapping("/answerBoard_NO")
 	public String adminAnswerBoardNo(CriteriaAdmin cri, Model model) throws ControllerException {
 		log.info("문의게시판(미답변)");
 		try {
@@ -206,25 +210,49 @@ public class AdminController {
 		}catch( Exception e) {throw new ControllerException(e); }
 	}//adminAnswerBoardNo
 	
-	@RequestMapping("/answerBoard/comment")
-	public String adminAnswerBoard_comment(@RequestParam Integer iq_number, Model model) throws ControllerException {
+	
+	@PostMapping("/answerBoard/NOcomment") // 답변 없을 때
+	public String adminAnswerBoard_NOcomment(@RequestParam Integer iq_number,
+			InquiryAnswerDTO dto, Model model, CriteriaAdmin cri, RedirectAttributes rttrs, HttpSession session) throws ControllerException {
 		log.info("문의게시판(미답변)");
 		
-		// 조회 안에 답변하기도 있어서 조금 어렵..지만 제가 마무리 해보겠습니다..
-		// 답변 ok -> 문의,답변 조회
-		// 답변 no -> 문의 조회, 답변하기
-		try {	InquiryQuestionVO Questionvo = this.questionService.getInquiry(iq_number);
-		model.addAttribute("_QUESTION_", Questionvo);	
-		
-		// 답변
-		InquiryAnswerVO Answervo = this.answerService.getIA(iq_number);
-		model.addAttribute("_ANSWER_", Answervo);
+		try { 
+			 InquiryQuestionVO Questionvo = this.questionService.getInquiry(iq_number);				
 
-		return "admin/8-03_answerBoard_comment";
+			dto.setIq_number(iq_number);
+			this.answerService.createIA(dto);
+			// 문의 상태 업데이트
+			this.questionService.updateInquiryState(dto.getIq_number());
 			
-		}catch(Exception e) {throw new ControllerException(e); }
+			rttrs.addFlashAttribute("_ANSWER_"); 
+			
+			return "redirect:/admin/answerBoard_OK";
+				
+		} catch(Exception e) {throw new ControllerException(e); }
 		
-	}
+	} // 미답변 문의 조회
+	
+	@GetMapping("/answerBoard/comment")
+	public String adminAnswerBoard_comment(@RequestParam Integer iq_number,  Model model)throws ControllerException {
+		
+		try {
+			InquiryQuestionVO Questionvo = this.questionService.getInquiry(iq_number);
+			
+			if(answerService.getIA(iq_number) == null ) {	// 답변이 없으면
+				model.addAttribute("_QUESTION_", Questionvo);	
+				
+			} else {
+				model.addAttribute("_QUESTION_", Questionvo);	
+				
+				InquiryAnswerVO Answervo = this.answerService.getIA(iq_number);
+				model.addAttribute("_ANSWER_", Answervo);	
+			}
+			return "admin/8-03_answerBoard_comment";
+		}catch(Exception e) {throw new ControllerException(e); }
+
+	} // 답변완료 문의 조회
+	
+	
 	
 //	관리자 FAQ ========================================================================================
 	@GetMapping("/adminFAQ")

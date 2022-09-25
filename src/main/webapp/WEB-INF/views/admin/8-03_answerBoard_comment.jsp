@@ -83,9 +83,11 @@
                 <c:if test="${empty _ANSWER_}"> 
                     <div class="container answer">
                         <!--답변하기 전체박스-->
-                        <form action="/admin/answerBoard_OK" method="post" style="width: 100%">
+                        <form action="/admin/answerBoard/NOcomment" method="post" style="width: 100%">
                          <input type="hidden" name="ad_id" value="${_ADMIN_.ad_id}">
-                         <input type="hidden" name="ad_title" value="답변입니다.">
+                         <input type="hidden" name="iq_number" value="${_QUESTION_.iq_number}">
+                         <input type="hidden" name="iq_pass" value="Y">
+                         <input type="hidden" name="ia_title" value="답변입니다.">
                             <div class="titlebox row">
                                 <!--제목상자-->
                                 <div class="col-1 fs-2 fw-bold">A.</div>

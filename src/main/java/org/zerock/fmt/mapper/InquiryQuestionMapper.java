@@ -29,7 +29,7 @@ public interface InquiryQuestionMapper {
 		
 		
 	//  [U]  답변 상태 수정 (미 답변(N) / 답변 완료(Y) ) 
-		public abstract Integer updateInquiryState(InquiryQuestionDTO dto) throws DAOException;
+		public abstract Integer updateInquiryState(@Param("iq_number")Integer iq_number) throws DAOException;
 		
 		
 	} // end interface
