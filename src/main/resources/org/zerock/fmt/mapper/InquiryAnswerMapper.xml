@@ -5,10 +5,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
     <mapper namespace="org.zerock.fmt.mapper.InquiryAnswerMapper">
-
-        <insert id="insertIA">
+		
+		<insert id="insertIA">
             INSERT INTO tbl_individual_answer (iq_number, ad_id, ia_title, ia_content, ia_date, ia_pass)
-            VALUES (#{iq_number}, #{ad_id}, #{ia_title}, #{ia_content}, CURRENT_DATE, 'Y')
+            VALUES (#{iq_number}, #{ad_id},'답변입니다.', #{ia_content}, CURRENT_DATE, 'Y')
         </insert>
     
     	

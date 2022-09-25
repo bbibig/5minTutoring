@@ -322,10 +322,10 @@ public class UserMapperTests {
 //		String id = "12134";
 		
 		HashMap<String,Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("email", "tutor2@gmail.com");
-		paramMap.put("id", "12134");
-		Map<String, Object> kakao = this.mapper.kakaoLogin(paramMap);
-		log.info("\t + kakao : {}", kakao);
+		paramMap.put("email", "childhopp@hanmail.net");
+		paramMap.put("id", "2412927328");
+		UserVO vo= this.mapper.kakaoLogin(paramMap);
+		log.info("\t + kakaoLoginVO : {}", vo);
 	}//kakaoLogin
 	
 	@Test
@@ -340,4 +340,49 @@ public class UserMapperTests {
 		int result = this.mapper.updateKakao(paramMap);
 		log.info("\t + result : {}", result);
 	}//updateKakao
+	
+	@Test
+	@DisplayName("kakaoRegister")
+	void kakaoRegister() {
+		log.trace("kakaoRegister : 카카오 회원가입");
+		
+		HashMap<String,Object> paramMap = new HashMap<>();
+		paramMap.put("email", "111");
+		paramMap.put("user_pw", "111");
+		paramMap.put("user_nick", "111");
+		paramMap.put("user_name", "111");
+		paramMap.put("user_birth", "111");
+		paramMap.put("user_gender", "111");
+		paramMap.put("user_phone", "111");
+		paramMap.put("st_school", "111");
+		paramMap.put("st_grade", "111");
+		paramMap.put("kakaologin", "111111");
+		
+		
+		int result = this.mapper.kakaoRegister(paramMap);
+		log.info("\r + result : {}", result);
+	}//kakaoRegister
+	
+	@Test
+	@DisplayName("kakaoRegisterTu")
+	void kakaoRegisterTu() {
+		log.trace("kakaoRegisterTu : 튜터회원가입");
+		
+		HashMap<String,Object> paramMap = new HashMap<>();
+		paramMap.put("email", "111");
+		paramMap.put("user_pw", "111");
+		paramMap.put("user_nick", "111");
+		paramMap.put("user_name", "111");
+		paramMap.put("user_birth", "111");
+		paramMap.put("user_gender", "111");
+		paramMap.put("user_phone", "111");
+		paramMap.put("tt_school", "111");
+		paramMap.put("tt_subject", "111");
+		paramMap.put("tt_depart", "111");
+		paramMap.put("kakaologin", "111111");
+		
+		
+		int result = this.mapper.kakaoRegister(paramMap);
+		log.info("\r + result : {}", result);
+	}//kakaoRegisterTu
 }//end class

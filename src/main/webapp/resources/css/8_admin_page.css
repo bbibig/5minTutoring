@@ -99,8 +99,9 @@ h3 {
   font-size: 14px;
   font-weight: 400;
 }
-.manage-tap a:hover{
-  font-weight: bold;
+.manage-tap a:hover { !important; 
+ /* font-weight: bold; */
+  color: #fff ;
 }
 
 .bg-blue{

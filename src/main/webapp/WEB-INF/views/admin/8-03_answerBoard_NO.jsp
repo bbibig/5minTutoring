@@ -46,7 +46,7 @@
                 <div class="list-group">
                     <a href="/admin/student" class="list-group-item list-group-item-action px-lg-4 ">회원 관리</a>
                     <a href="/admin/stator" class="list-group-item list-group-item-action px-lg-4 ">관리자</a>
-                    <a href="/admin/answerBoard_OK" class="list-group-item list-group-item-action px-lg-4 fw-bold ">문의 게시판</a>
+                    <a href="/admin/answerBoard_NO" class="list-group-item list-group-item-action px-lg-4  fw-bold">문의 게시판</a>
                     <a href="/admin/adminFAQ" class="list-group-item list-group-item-action px-lg-4 ">자주 묻는 질문</a>
                     <a href="/admin/sale/sell" class="list-group-item list-group-item-action px-lg-4">매출 관리</a>
                     <a href="/admin/signUp_comfim" class="list-group-item list-group-item-action px-lg-4">튜터 가입 승인</a>
@@ -59,8 +59,8 @@
 
 
                 <div class="manage-tap">
-                    <a href="/admin/answerBoard_OK" class="btn bg-blue">답변 완료</a>
-                    <a href="/admin/answerBoard_NO" class="btn btn-dark">미 답변</a>
+                  	<a href="/admin/answerBoard_NO" class="btn bg-blue">미답변</a>
+                    <a href="/admin/answerBoard_OK" class="btn btn-dark">답변 완료</a>
                 </div>
 
 
@@ -76,20 +76,30 @@
                                 <th>처리상태</th>
                             </tr>
                         </thead>
+                       
                         <tbody>
-                            <c:forEach var="board" items="${_RESULT_}">
+                          <c:forEach var="board" items="${_RESULT_}">
                                 <tr>
                                     <td>${board.iq_number}</td>
                                     <td class="inquiry-title">
-                                        <a href="/admin/answerBoard/comment">${board.iq_title}</a>
+                                    <c:set  var="iq_number" value="${board.iq_number}" />
+                                        <a href="/admin/answerBoard/comment?iq_number=${board.iq_number}">${board.iq_title}</a>
                                     </td>
 
                                     <td>${board.user_email}</td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${board.iq_date}"/></td>
-                                    <td>${board.iq_pass}</td>
+                                    <td>
+	                                    <c:choose>
+											<c:when test="${board.iq_pass eq 'N'}">
+												<div>미답변</div>
+											</c:when>
+										</c:choose>
+                                    </td>
+                                    
                                 </tr>
                             </c:forEach>
                         </tbody>
+                        
                     </table>
 
                 </div>
@@ -105,7 +115,7 @@
 
                             <c:if test="${_ADMINPAGINATION_.prev}">
                                 <li class="page-item"><a class="page-link rounded-circle" 
-                                    href="/admin/answerBoard_NO?currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
+                                    href="/admin/answerBoard/NOcomment?currPage=${_ADMINPAGINATION_.startPage-1}" id="prev">&laquo;</a></li>
                             </c:if>
 
                             <c:forEach var="page" begin="${_ADMINPAGINATION_.startPage}" end="${_ADMINPAGINATION_.endPage}">
@@ -133,6 +143,6 @@
         <!-- End Section -->
 
         <!-- ============= 공통 footer + js =============== -->
-        <jsp:include page="../footer.jsp" flush="true" />
+        <jsp:include page="../footerAdmin.jsp" flush="true" />
         <script src="${path}/resources/js/8_admin.js"></script>
         <!-- ============================================== -->

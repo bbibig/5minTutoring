@@ -378,7 +378,7 @@ public class UserServiceTests {
 		HashMap<String,Object> param = new HashMap<String,Object>();
 		param.put("id", "12333");
 		param.put("email", "tutor2@gmail.com");
-		HashMap<String,Object> kakao = this.userService.kakaoLogin(param);
+		UserVO kakao = this.userService.kakaoLogin(param);
 		log.info("\t + kakao : {}", kakao);
 	}//kakaoLogin
 	
@@ -392,4 +392,49 @@ public class UserServiceTests {
 		int result = this.userService.updateKakao(param);
 		log.info("result : {}", result);
 	}//updateKakao
+	
+	@Test
+	@DisplayName("kakaoRegister")
+	void kakaoRegister() {
+		log.trace("kakaoRegister : 학생회원가입");
+		
+		HashMap<String,Object> paramMap = new HashMap<>();
+		paramMap.put("email", "111");
+		paramMap.put("user_pw", "111");
+		paramMap.put("user_nick", "111");
+		paramMap.put("user_name", "111");
+		paramMap.put("user_birth", "111");
+		paramMap.put("user_gender", "111");
+		paramMap.put("user_phone", "111");
+		paramMap.put("st_school", "111");
+		paramMap.put("st_grade", "111");
+		paramMap.put("kakaologin", "111111");
+		
+		
+		int result = this.userService.kakaoRegister(paramMap);
+		log.info("\r + result : {}", result);
+	}//kakaoRegister
+	
+	@Test
+	@DisplayName("kakaoRegisterTu")
+	void kakaoRegisterTu() {
+		log.trace("kakaoRegisterTu : 튜터회원가입");
+		
+		HashMap<String,Object> paramMap = new HashMap<>();
+		paramMap.put("email", "111");
+		paramMap.put("user_pw", "111");
+		paramMap.put("user_nick", "111");
+		paramMap.put("user_name", "111");
+		paramMap.put("user_birth", "111");
+		paramMap.put("user_gender", "111");
+		paramMap.put("user_phone", "111");
+		paramMap.put("tt_school", "111");
+		paramMap.put("tt_subject", "111");
+		paramMap.put("tt_depart", "111");
+		paramMap.put("kakaologin", "111111");
+		
+		
+		int result = this.userService.kakaoRegisterTu(paramMap);
+		log.info("\r + result : {}", result);
+	}//kakaoRegisterTu
 }//end class

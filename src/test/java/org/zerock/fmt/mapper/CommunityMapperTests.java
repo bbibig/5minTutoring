@@ -38,7 +38,7 @@ import lombok.extern.log4j.Log4j2;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CommuntyMapperTests {
+public class CommunityMapperTests {
 	
 	
 	@Setter(onMethod_= @Autowired)
@@ -127,7 +127,7 @@ public class CommuntyMapperTests {
 		
 	}//insert
 	
-
+//	@Disabled
 	@Test
 	@DisplayName("CommunityMapper.update() test")
 	@Order(5)
@@ -151,6 +151,7 @@ public class CommuntyMapperTests {
 		
 	}//insert
 	
+//	@Disabled
 	@Test
 	@DisplayName("CommunityMapper.allCount() test")
 	@Order(6)
@@ -166,9 +167,22 @@ public class CommuntyMapperTests {
 		
 		log.info("resultp{}", result);
 		
+	}// allcount
+	
+	
+//	@Disabled
+	@Test
+	@DisplayName("CommunityMapper.updateCommentCount() test")
+	@Order(7)
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testUpdateCommentCount() throws DAOException {
+		log.trace("updateCommentCount() invoked.");
 		
+		int fb_number = 56;
 		
-		
+		int affectedLines = this.cMapper.updateCommentCount(fb_number);
+		log.info("\t+ 2.affectedLines:{}", affectedLines);
+			
 	}// allcount
 	
 }//end class

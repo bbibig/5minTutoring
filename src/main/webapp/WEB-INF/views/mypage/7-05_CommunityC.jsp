@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -86,7 +87,10 @@
               <c:forEach var="mycomment" items="${_MYCOMMENT_}">
                 <tr>
                   <th scope="row"> ${mycomment.cm_number} </th>
-                  <td colspan="2"><a href="/community/post?fb_number=${mycomment.fb_number}"> ${mycomment.cm_content} </a></td>
+                  <td colspan="2"><a href="/community/post?fb_number=${mycomment.fb_number}"> 
+                  	<c:set var="content" value = "${mycomment.cm_content}" />
+                    ${fn:substring(content,0,35)}
+                  </a></td>
                   <td class="text-center">
                     <fmt:formatDate value="${mycomment.regdate}" pattern="yyyy.MM.dd" />
                   </td>

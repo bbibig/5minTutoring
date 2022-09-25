@@ -57,7 +57,7 @@
       <!-- 답변 여부 수정 -->
       <update id="updateInquiryState">
           UPDATE tbl_individual_question
-          SET iq_pass = #{iq_pass}
+          SET iq_pass = 'Y'
           WHERE iq_number = #{iq_number}
       </update>
     	

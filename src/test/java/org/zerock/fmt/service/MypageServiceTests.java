@@ -45,6 +45,8 @@ public class MypageServiceTests {
 	@Setter(onMethod_= @Autowired)
 	private MypageService service;
 	
+	@Setter(onMethod_= @Autowired)  
+	private UserService userService;
 	
 	//1. 기본정보 테스트
 	@Test
@@ -262,19 +264,18 @@ public class MypageServiceTests {
 	} // testGetMyInquiry
 	
 	
-	// 6. 손들기 출금 신청 하기 (튜터)
+	// 6. 손들기 출금 신청 하기 (튜터)  - 출금 신청과 동시에 사용자가 보유한 손들기가 차감
 	@Test
 	@Order(14)
-	@DisplayName("14. testCreateWithdrawal")
+	@DisplayName("튜터 출금신청 테스트") 
 	@Timeout(unit = TimeUnit.SECONDS, value = 10)
 	void testCreateWithdrawal() throws ServiceException {
-		log.trace("testCreateWithdrawal(), 튜터 손들기 출금 신청 테스트");
+		log.trace("testCreateWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "tt@han.net3", "오분은행 22222-44444-5555", 1000, 22000, "승인 대기 중", null, null);
-		log.info("\t + dto: {}", dto);
-	
+		WithdrawalDTO dto = new WithdrawalDTO(null, "now@han.net", "오분은행 1234-55-6789", 100, null, null, null, null);
+		
 		boolean result = this.service.createWithdrawal(dto);
-		log.info("\t+ 튜터 출금 신청 결과: {}", result);
+		log.info("손들기 신청 결과: {}", result);
 		
 	} // testCreateWithdrawal
 	
@@ -320,7 +321,7 @@ public class MypageServiceTests {
 		log.trace("testUserStatus(), 회원 탈퇴(정지) 테스트");
 		
 		String user_email = "tutor1@han.net";
-		Boolean Result = this.service.userStatus(user_email);
+		Boolean Result = this.userService.userStatus(user_email);
 		log.info("\t+ 회원 탈퇴 결과 : {}", Result);
 		
 	} // testUserStatus

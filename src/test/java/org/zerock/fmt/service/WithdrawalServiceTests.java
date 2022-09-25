@@ -37,6 +37,10 @@ public class WithdrawalServiceTests {
 	@Setter(onMethod_= @Autowired)  
 	private WithdrawalService wService;
 	
+	@Setter(onMethod_= @Autowired)  
+	private UserService userService;
+	
+	// 출금 신청과 동시에 사용자가 보유한 손들기가 차감 되도록
 	@Test
 	@Order(1)
 	@DisplayName("튜터 출금신청 테스트") 
@@ -44,10 +48,15 @@ public class WithdrawalServiceTests {
 	void testCreateWithdrawal() throws ServiceException {
 		log.trace("testCreateWithdrawal() invoked.");
 
-		WithdrawalDTO dto = new WithdrawalDTO(null, "test@gmail.com", "오분은행 1234-55-6789", 100, 1800, null, null, null);
+		WithdrawalDTO dto = new WithdrawalDTO(null, "now@han.net", "오분은행 1234-55-6789", 140, null, null, null, null);
+		int h_count = dto.getW_quantity();
+		String user_email = dto.getUser_email();
 		
 		boolean result = this.wService.createWithdrawal(dto);
-		log.info("일대일 문의 작성 결과: {}", result);
+		log.info("손들기 신청 결과: {}", result);
+	
+		boolean result2 = this.userService.updateHandUse(h_count, user_email);
+		log.info("손들기 차감 결과: {}", result2); 
 		
 	} // testCreateWithdrawal
 	
@@ -61,8 +70,7 @@ public class WithdrawalServiceTests {
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
-//		cri.setAmount(22);
-//		cri.setCurrPage(1);
+		cri.setApproval("대기");
 		List<WithdrawalVO> list = this.wService.getAllWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
 
@@ -78,7 +86,8 @@ public class WithdrawalServiceTests {
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
-		List<WithdrawalVO> list = this.wService.getAllWithdrawalOkList(cri);
+		cri.setApproval("완료");
+		List<WithdrawalVO> list = this.wService.getAllWithdrawalList(cri);
 		list.forEach(e -> log.info(e));
 
 	} // testGetAllWithdrawalOkList
@@ -88,7 +97,9 @@ public class WithdrawalServiceTests {
 	@DisplayName("출금 내역 페이징 - 어드민")
 	void countList() throws ServiceException {
 		log.trace("countList : 어드민 페이징");
-		int result = this.wService.countList(null);
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setApproval("완료");
+		int result = this.wService.countList(cri);
 		log.info("\t + result : {}" , result);
 	} //countList
 	
@@ -105,28 +116,27 @@ public class WithdrawalServiceTests {
 		log.info("result: {}", result);
 	} // testUpdateState
 	
-	@Test
-	@Order(5)
-	@DisplayName("출금 신청 손들기 개수 차감")
-	void testUpdateHands() throws ServiceException {
-		log.trace("testUpdateHands() invoked.");
-	
-		UserDTO dto = new UserDTO();
-		log.info("\t + dto: {}", dto);
-		
-		boolean result = this.wService.updateHands("now@han.net");
-		log.info("result: {}", result);
-	} // testUpdateHands
+//	@Test
+//	@Order(5)
+//	@DisplayName("출금 신청 손들기 개수 차감")
+//	void testUpdateHands() throws ServiceException {
+//		log.trace("testUpdateHands() invoked.");
+//	
+//		UserDTO dto = new UserDTO();
+//		log.info("\t + dto: {}", dto);
+//		
+//		boolean result = this.wService.updateHands("now@han.net");
+//		log.info("result: {}", result);
+//	} // testUpdateHands
 
 	@Test
 	@Order(6)
 	@DisplayName("승인 여부 총 금액")
 	void totalDrawal() throws ServiceException {
 		log.trace("totalDrawal : 승인 여부 별 총 금액");
-		
-		int result1 = this.wService.totalDrawal("승인 완료");
-		int result2 = this.wService.totalDrawal("승인 대기");
-		int result3 = this.wService.totalDrawal(null);
-		log.trace("result : {}, {}, {}", result1, result2, result3);
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setApproval("완료");
+		int result1 = this.wService.totalDrawal(cri);
+		log.trace("result : {}",result1);
 	}//totalDrawal
 } // end class

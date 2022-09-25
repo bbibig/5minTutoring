@@ -48,15 +48,12 @@
           <div class="row d-flex flex-row" id="filter-box"> <!--============================1.게시판 필터/검색/글쓰기========================================-->
 
             <div class="col-1 d-flex flex-row align-items-center">
-              <span class="badge text-dark fs-6">View&nbsp;&nbsp;</span>
+              
+
             </div>
             
             <div class="col-4 d-flex flex-row align-items-center">
-              <ul class="d-flex flex-row mb-0 ps-0 ">
-                <li class="list-unstyled text-dark ms-5"><a href="#"><span class="text-dark">최신순</span></a></li>
-                <li class="list-unstyled ms-5"><a href="#"><span class="text-dark">낮은평점순</span></a></li>
-                <li class="list-unstyled ms-5"><a href="#"><span class="text-dark">높은평점순</span></a></li>
-              </ul>
+             
             </div>
 
             <div class="col-7">
@@ -153,17 +150,7 @@
                         <span class="comment_decription">댓글</span>
                       </div>
   
-                      <div class="heart d-flex mt-4">
-                        <button class="heart-button">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                          </svg>
-  
-                          <span class="heart-count ms-1">0</span>
-  
-                        </button>
-  
-                      </div>
+                      
   
                     </div> <!--========================답변 카운트 및 heart 카운트end==========================-->
                     

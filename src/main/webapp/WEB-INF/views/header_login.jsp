@@ -5,10 +5,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
-<script>
-    let user = '${__LOGIN_KEY__}';
-    
-</script>
+<% String bbbsId = (String)request.getAttribute("bbsId"); %>
+
+</style>
 
 <header id="header" class="header fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center">
@@ -19,8 +18,8 @@
     <nav id="navbar" class="navbar">
       <ul>
 
-        <li><a class="nav-link scrollto active d-xs-none " style="margin-left:100px" href="/tutor/main">튜터</a></li>
-        <li><a class="nav-link scrollto d-xs-none" href="/community">커뮤니티</a></li>
+        <li><a class="nav-link scrollto d-xs-none" style="margin-left:100px" href="/tutor/main?">튜터</a></li>
+        <li><a class="nav-link scrollto d-xs-none" it="cpage" href="/community">커뮤니티</a></li>
         <li>
           <div class="hand" style="margin-left: 650px;">
             <a href="/hand/buyHands"><i class="fa-solid fa-hand fa-2x"></i>

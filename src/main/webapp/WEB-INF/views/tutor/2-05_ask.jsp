@@ -12,10 +12,14 @@
 			<link href="/resources/css/1-02_login.css" rel="stylesheet">
 			<link href="/resources/css/2-00_tutorpage_baseform.css" rel="stylesheet">
 		<!-- ========================================================= -->
-		
 	    <!-- CSS 추가 -->
 	    <link rel="stylesheet" href="/resources/css/2-05_ask.css">
-
+			<style>
+				.answerOK{
+					font-weight: bold;
+					background-color: blue;
+				}
+			</style>
 	    <!-- CKeditor -->
 		<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 		<script>
@@ -25,10 +29,12 @@
 	                fontSize_defaultLabel : "12",
 	                language : "ko"
 	            });
+
 	        });
+			let tutorName = '${_TUTOR_INFO_.user_name}';
+			// let userName = userVO.getUser_name;
 		
-			String tutorName = ${_TUTOR_INFO_.user_name};
-			String userName = userVO.getUser_name;
+
 		</script>
 	
 	    <title>튜터페이지</title>
@@ -161,34 +167,18 @@
 		                                </div>
 		                                <div class="ask_title" style="height:100%;">
 		                                    ${Q.qb_title}
-		                                    <div class="answer_ok">
-			                                    <c:if test="${Q.qb_answer == '0'}">
-			                                    	<c:out value="답변미완료"/>
-			                                    </c:if>
-			                                    <c:if test="${Q.qb_answer == '1'}">
-			                                    	<c:out value="답변완료"/>
-			                                    </c:if>
-			                                </div>
+											<c:if test="${Q.qb_answer == '0'}">
+												<div class="answer_ok"> <c:out value="답변미완료"/> </div>
+											</c:if>
+											<c:if test="${Q.qb_answer == '1'}">
+												<div class="answer_ok yes">
+													<span id="answerOK"><c:out value="답변완료" /> </span>
+												</div>
+											</c:if>
 		                                </div>
 		                            </div>
 		                        </div>
 	                        </c:forEach>
-	                        
-	                        <div class="col-lg-4 col-md-6 col-sm-12">
-	                            <div class="ask_card" onclick="location.href='watchAnswer';" style="cursor:pointer">
-	                                <div class="student_info">
-	                                    <div class="sPic">
-	                                        <img src="/resources/img/profile.png" alt="튜터프로필">
-	                                    </div>
-	                                    <div class="Sname">마바사</div>
-	                                </div>
-	                                <div class="ask_title">
-	                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus minus laboriosam
-	                                    pariatur consectetur excepturi.
-	                                    <div class="answer_ok yes">답변 미완료</div>
-	                                </div>
-	                            </div>
-	                        </div>
 	                    </div>
 	                  
 	                    </div>

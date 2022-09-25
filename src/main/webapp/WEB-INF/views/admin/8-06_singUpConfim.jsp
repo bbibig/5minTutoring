@@ -107,7 +107,7 @@
                 <div class="list-group">
                     <a href="/admin/student" class="list-group-item list-group-item-action px-lg-4 ">회원 관리</a>
                     <a href="/admin/stator" class="list-group-item list-group-item-action px-lg-4">관리자</a>
-                    <a href="/admin/answerBoard_OK" class="list-group-item list-group-item-action px-lg-4">문의 게시판</a>
+                    <a href="/admin/answerBoard_NO" class="list-group-item list-group-item-action px-lg-4">문의 게시판</a>
                     <a href="/admin/adminFAQ" class="list-group-item list-group-item-action px-lg-4 ">자주 묻는 질문</a>
                     <a href="/admin/sale/sell" class="list-group-item list-group-item-action px-lg-4 ">매출 관리</a>
                     <a href="/admin/signUp_comfim" class="list-group-item list-group-item-action px-lg-4 fw-bold ">튜터 가입 승인</a>
@@ -210,7 +210,7 @@
         <!-- End Section -->
 
         <!-- ============= 공통 footer + js =============== -->
-        <jsp:include page="../footer.jsp" flush="true" />
+        <jsp:include page="../footerAdmin.jsp" flush="true" />
         <script src="${path}/resources/js/8_admin.js"></script>
         <!-- ============================================== -->
     </body>

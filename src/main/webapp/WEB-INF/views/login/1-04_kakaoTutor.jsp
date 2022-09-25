@@ -6,13 +6,14 @@
     <html lang="ko">
 
     <head>
+    
         <!-- ======= HTML <head : CSS / Google Font / Favicons ======= -->
         <jsp:include page="../htmlHead.jsp" flush="true" />
         <link href="${path}/resources/css/1-04_signup.css" rel="stylesheet">
         <!-- ========================================================= -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
-        <title>카카오 회원가입(학생)</title>
+        <title>회원가입(튜터)</title>
         <style>
             .selectType{
                 text-align: center;
@@ -37,7 +38,7 @@
                     console.log(phone);
                     $.ajax({
                         type:"GET",
-                        url:"/login/phoneCheck?user_phone="+phone,
+                        url:"/login/phoneCheck?user_phone=" + phone,
                         cache : false,
                         success:function(data){
                             if(data == "error"){
@@ -75,7 +76,7 @@
                     let registerData = $('#kakaoRegisterForm').serialize();
                     $.ajax({
                         type:"post",
-                        url:"/kakao/KakaoRegisterStu",
+                        url:"/kakao/KakaoRegisterTu",
                         data : registerData,
                         dataType : "json",
                         success : function(data){
@@ -106,6 +107,7 @@
                     sendform.attr("method","post")
                     sendform.submit();
                 });//튜터버튼이동
+
             });//jq
         </script>
     </head>
@@ -115,7 +117,7 @@
         <jsp:include page="../header.jsp" flush="true" />
         <!-- =========== header=============== -->
 
-        <!-- ======= Hero Section / sign up Student ======= -->
+        <!-- ======= Hero Section / sign up tutor ======= -->
 
         <section id="hero" class="hero align-items-center">
             <div class="container">
@@ -125,24 +127,25 @@
                         <h1 class="display-4 text-center">kakao New singup</h1>
                     </div>
                     <div class="col-md-4 offset-md-4 mt-3">
-                        <div class="selectType">
+                       <div class="selectType">
                             <button class="btn btn-primary mt-2" type="button" id="stuBtn">Student</button>
                             <button class="btn btn-primary mt-2" type="button" id="ttBtn">Tutor</button>
                         </div>
-                        <div class="login_form">
 
+                        <div class="login_form">
                             <form action="#" id="sendform">
                                 <input type="hidden" value="${user_email}" name="user_email" id="user_email">
                                 <input type="hidden" value="${kakaologin}" name="kakaologin" id="kakaologin">
                             </form>
-                            <form action="#" method="post" class="needs-validation" name="kakaoRegisterForm" id="kakaoRegisterForm" novalidate>
+
+                            <form action="#" method="post" class="needs-validation" enctype="multipart/form-data" id="kakaoRegisterForm" novalidate>
 
                                 <input type="hidden" value="${user_email}" name="email" id="user_email">
                                 <input type="hidden" value="${kakaologin}" name="id" id="kakaologin">
 
                                 <div class="form-group">
                                     <label for="password">비밀번호</label>
-                                    <input type="password" class="form-control" name="user_pw" id="user_pw"placeholder="영문 숫자 포함8~15자로 입력하세요." required>
+                                    <input type="password" class="form-control mt-1" name="user_pw" id="user_pw" placeholder="영문 숫자 포함8~15자로 입력하세요." required>
                                     <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
                                 </div>
 
@@ -155,10 +158,9 @@
                                 <div class="form-group">
                                     <label for="nickName">닉네임</label>
                                     <div class="nick">
-                                        <input type="text" class="form-control" name="user_nick" id="user_nick" placeholder="한글 영문 숫자 2~10자" 
+                                        <input type="text" class="form-control" name="user_nick" id="user_nick" placeholder="영문 한글 숫자 2~10자"
                                             style="width:73%;float:left">
-                                        <button type="button" class="btn btn-outline-primary mt-2" style="float: right" id="nickCheck">
-                                            중복체크</button>
+                                        <button type="button" class="btn btn-outline-primary mt-2" style="float: right" id="nickCheck"> 중복체크</button>
                                         <div style="clear: both"></div>
                                         <div class="invalid-feedback" style="clear: both">올바른 닉네임이 아닙니다.</div>
                                         <div class="ni_input_re_1">사용 가능한 닉네임 입니다.</div>
@@ -176,16 +178,14 @@
                                     <label for="userbrith">생년월일</label>
                                     <div class="birth">
                                         <span class="birth_box">
-                                            <input type="text" class="form-control" name="user_birth" id="user_birth" placeholder="ex)20220815" maxlength="8" required value="${birth}">
+                                            <input type="text" class="form-control" name="user_birth" id="user_birth" placeholder="ex)20220815" maxlength="8" required>
                                         </span>
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="gender">성별 </label>
-                                    <select class="form-select" name="user_gender" id="user_gender" required>
-                                        <option selected> </option>
+                                    <select class="form-select" name="user_gender" id="user_gender">
                                         <option value="남자"> 남자 </option>
                                         <option value="여자"> 여자 </option>
                                     </select>
@@ -210,49 +210,63 @@
                                 <div class="form-group">
                                     <div class="school">
                                         <span class="ps_box">
-                                            <label for="schoolGrade"> 학교 </label>
-                                            <select class="form-select" name="st_school" id="st_school" required>
+                                            <label for="schoolGrade"> 대학교 </label>
+                                            <select class="form-select" name="tt_school" id="tt_school" required>
                                                 <option> </option>
-                                                <option value="중학생"> 중학교</option>
-                                                <option value="고등학생">고등학교</option>
+                                                <option value="재학">재학생</option>
+                                                <option value="졸업">졸업생</option>
                                             </select>
                                         </span>
                                     </div>
 
                                     <div class="grade">
                                         <span class="ps_box">
-                                            <label for="schoolGrade"> 학년</label>
-                                            <select class="form-select" name="st_grade" id="st_grade" required>
+                                            <label for="schoolGrade"> 대표과목</label>
+                                            <select class="form-select"name="tt_subject" id="tt_subject" required>
                                                 <option> </option>
-                                                <option value="1학년">1학년</option>
-                                                <option value="2학년">2학년</option>
-                                                <option value="3학년">3학년</option>
+                                                <option value="국어">국어</option>
+                                                <option value="영어">영어</option>
+                                                <option value="수학">수학</option>
                                             </select>
                                         </span>
                                     </div>
                                 </div>
-                                <!--학교/학년-->
-                            </form>
+
+                                <div class="form-group">
+                                    <label for="TTdepart">전공/학과</label>
+                                    <input type="text" class="form-control" name="tt_depart" id="tt_depart" required>
+                                    <div class="invalid-feedback">학과를 입력하세요.</div>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <!-- <form action="#" method="post" enctype="multipart/form-data"> -->
+                                        <label for="formFile" class="form-label">재학/졸업증명서 첨부</label>
+                                        <input class="form-control" type="file" name="file" id="file" multiple>
+                                        <div class="invalid-feedback">증명서를 첨부해주세요.</div>
+                                </div>
+
                                 <div class="d-grid gap-2 col-12 mx-auto">
                                     <br>
                                     <button class="btn btn-primary" id="kakaoregister" type="button">회원가입하기</button>
                                 </div>
-                            
-                            <!--button-->
-
+                                <!--button-->
+                            </form>
                         </div>
                         <!--login_form-->
                     </div>
 
                 </div>
                 <!--row-->
-                </div>
+            </div>   
         </section>
         <!-- End Hero -->
-        <!-- ============= 로그인 전 풋터 아 헷갈린다고요 지금... =============== -->
-            <jsp:include page="../footer_before.jsp" flush="true" />
-        <script src="${path}/resources/js/1-04_signUp.js"></script>
-        <!-- ============================================== -->
+
+
+                <!-- ============= 로그인 전 풋터 아 헷갈린다고요 지금... =============== -->
+                <jsp:include page="../footer_before.jsp" flush="true" />
+            <script src="${path}/resources/js/1-04_signUp.js"></script>
+                <!-- ============================================== -->
+
     </body>
 
     </html>

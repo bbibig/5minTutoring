@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaAdmin;
-import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
 import org.zerock.fmt.exception.DAOException;
@@ -83,6 +82,7 @@ public class WithdrawalMapperTests {
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
+		cri.setApproval("대기");
 		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalList(cri);
 
 		Objects.requireNonNull(list);
@@ -101,7 +101,8 @@ public class WithdrawalMapperTests {
 		CriteriaAdmin cri = new CriteriaAdmin();
 		cri.setAmount(5);
 		cri.setCurrPage(1);
-		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalOkList(cri);
+		cri.setApproval("완료");
+		List<WithdrawalVO> list = this.withdrawalMapper.selectAllWithdrawalList(cri);
 
 		Objects.requireNonNull(list);
 		list.forEach(log::info);
@@ -115,8 +116,9 @@ public class WithdrawalMapperTests {
 	@DisplayName("어드민 페이지 총 개수")
 	void countList() throws DAOException {
 		log.info("countList : 어드민 페이징");
-		
-		int result = this.withdrawalMapper.countList(null);
+		CriteriaAdmin cri = new CriteriaAdmin();
+		cri.setApproval("완료");
+		int result = this.withdrawalMapper.countList(cri);
 		
 		log.info("\t + result : {}", result);
 	} //countList
@@ -141,22 +143,22 @@ public class WithdrawalMapperTests {
 	} // testUpdate
 	
 //  [U] 손들기 개수 차감
-	@Test
-	@Order(6)
-	@DisplayName("손들기 개수 차감")
-	@Timeout(value=100, unit=TimeUnit.SECONDS)
-	void testUpdateHands() throws DAOException {
-		log.trace("testUpdateHands() invoked.");
-			
-		UserDTO dto = new UserDTO();
-		log.info("\t + dto: {}", dto);
-			
-		int affectedLines =  this.withdrawalMapper.updateHands("now@han.net");
-		log.info("\t+ affectedLines: {}", affectedLines);
-		
-		assert affectedLines == 1;
-		
-	} // testUpdateHands
+//	@Test
+//	@Order(6)
+//	@DisplayName("손들기 개수 차감")
+//	@Timeout(value=100, unit=TimeUnit.SECONDS)
+//	void testUpdateHands() throws DAOException {
+//		log.trace("testUpdateHands() invoked.");
+//			
+//		UserDTO dto = new UserDTO();
+//		log.info("\t + dto: {}", dto);
+//			
+//		int affectedLines =  this.withdrawalMapper.updateHands("now@han.net");
+//		log.info("\t+ affectedLines: {}", affectedLines);
+//		
+//		assert affectedLines == 1;
+//		
+//	} // testUpdateHands
 	
 	@Test
 	@Order(5)
@@ -164,9 +166,17 @@ public class WithdrawalMapperTests {
 	void totalDrowal() throws DAOException {
 		log.trace("totalDrowal : 승인 여부 별 총 금액");
 		
-		int result1 = this.withdrawalMapper.totalDrowal("승인 완료");
-		int result2 = this.withdrawalMapper.totalDrowal("승인 대기");
-		int result3 = this.withdrawalMapper.totalDrowal(null);
+		CriteriaAdmin cri1 = new CriteriaAdmin();
+		cri1.setApproval("대기");
+		int result1 = this.withdrawalMapper.totalDrowal(cri1);
+		
+		CriteriaAdmin cri2 = new CriteriaAdmin();
+		cri1.setApproval("완료");
+		int result2 = this.withdrawalMapper.totalDrowal(cri2);
+		
+		CriteriaAdmin cri3 = new CriteriaAdmin();
+		int result3 = this.withdrawalMapper.totalDrowal(cri3);
+		
 		log.info("\t + result : {}, {}, {}", result1, result2, result3);
 	}//totalDrowal
 } // end class

@@ -17,24 +17,20 @@ public interface WithdrawalMapper {
 	public abstract Integer insertWithdrawal(WithdrawalDTO dto) throws DAOException;
 	
 //	- 관리자
-//  [R]  출금 신청 내역 전체 조회 (승인 대기) 
+//  [R]  출금 신청 내역 전체 조회
 	public abstract List<WithdrawalVO> selectAllWithdrawalList(CriteriaAdmin cri) throws DAOException;
 	
-//  [R]  출금 신청 내역 전체 조회 (승인 완료) 
-	public abstract List<WithdrawalVO> selectAllWithdrawalOkList(CriteriaAdmin cri) throws DAOException;
-	
 //	[R] 페이징 총 건수 
-	public abstract int countList(Integer w_num) throws DAOException;
+	public abstract int countList(CriteriaAdmin Cri) throws DAOException;
 	
 
 //  [U]  승인 여부 수정
 	public abstract Integer updateState(WithdrawalDTO dto) throws DAOException;
 	
 //  [U]  손들기 개수 차감 (사용자 - 튜터)
-	public abstract Integer updateHands(@Param("user_email") String user_email) throws DAOException;
-	
+//	public abstract Integer updateHands(@Param("user_email") String user_email) throws DAOException;
 
 //	[R] 승인 여부 별 금액
-	public abstract int totalDrowal(String approval) throws DAOException;
+	public abstract int totalDrowal(CriteriaAdmin cri) throws DAOException;
 	
 } // end interface

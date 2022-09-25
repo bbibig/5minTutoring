@@ -214,7 +214,7 @@
   <!-- ======= footer + js  ======= -->
   <jsp:include page="../footer.jsp" flush="true" />
   <!-- ========기간검색 유효성====== -->
-  <script src="${path}/resources/js/7-10_mypage_sohee.js"></script>
+  <script src="${path}/resources/js/7-10_mypage.js"></script>
 </body>
 
 </html>

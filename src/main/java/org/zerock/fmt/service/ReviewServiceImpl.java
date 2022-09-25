@@ -40,16 +40,10 @@ public class ReviewServiceImpl implements ReviewService{
 	}//createReview
 
 
-//	@Override
-//	public List<ReviewVO> getReview(CriteriaReview cri) throws ServiceException {
-//		log.trace("getReview invoked.");
-//		try {
-//			return this.reviewMapper.selectReview(cri);
-//		}catch(Exception e) {throw new ServiceException(e);}
-//	}//getReview
 	@Override
 	public List<ReviewVO> getReview(CriteriaReview cri) throws ServiceException {
 		log.trace("getReview invoked.");
+		
 		try {
 			List<ReviewVO> list = this.reviewMapper.selectReview(cri);
 			list.forEach( e ->{

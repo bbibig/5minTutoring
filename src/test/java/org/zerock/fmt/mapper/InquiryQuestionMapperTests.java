@@ -145,7 +145,7 @@ public class InquiryQuestionMapperTests {
 		
 		InquiryQuestionDTO dto = new InquiryQuestionDTO(53, null, null, null, null, "Y");
 		
-		int affectedLines =  this.iqMapper.updateInquiryState(dto);
+		int affectedLines =  this.iqMapper.updateInquiryState(53);
 		log.info("\t+ affectedLines: {}", affectedLines);
 		
 		assert affectedLines == 1;

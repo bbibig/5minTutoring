@@ -60,6 +60,8 @@
             VALUES (#{bno}, #{title}, #{content}, #{writer})
         </insert>
     	
+    	
+    	<!-- 게시글검색 -->
     	<select id="allCount" resultType="int">
         SELECT count(fb_number) 
         FROM tbl_community
@@ -71,5 +73,18 @@
         </where>
         
     	</select>
+    	
+    	<!-- tbl_community의 fb_comment_count 컬럼에 댓글수 업데이트 -->
+    	<update id="updateCommentCount" parameterType="int">
+			update tbl_community c 
+			set c.fb_comment_count = 	(select count(cm_number)
+                            			from tbl_comment
+                            			where fb_number= #{fb_number})
+			where c.fb_number = #{fb_number}
+		</update>
+    	
+    	
+
+    	
     	
     </mapper>    
