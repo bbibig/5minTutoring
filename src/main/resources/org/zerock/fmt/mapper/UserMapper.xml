@@ -146,9 +146,10 @@
         FROM tbl_user
         WHERE user_email = #{email}
     </select>
+
     <!-- 카카오톡 로그인 -->
-    <select id="kakaoLogin" parameterType="hashMap" resultType="hashMap">
-        SELECT user_email 
+    <select id="kakaoLogin" parameterType="hashMap" resultType="org.zerock.fmt.domain.UserVO">
+        SELECT *
         FROM tbl_user
         WHERE user_email = #{email}
         AND kakaoLogin = #{id}
@@ -160,4 +161,24 @@
         SET kakaoLogin = #{id} 
         WHERE user_email = #{email}
     </update>
+
+    <!-- 카카오톡 회원가입(학생) -->
+    <insert id="kakaoRegister">
+        INSERT INTO tbl_user 
+            (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
+            st_school, st_grade, user_group, kakaologin)
+        VALUES(#{email},#{user_pw}, #{user_nick}, #{user_name}, #{user_birth},
+        #{user_gender}, #{user_phone}, #{st_school}, #{st_grade},'Student', #{id})
+    </insert>
+    
+    <!-- 카카오톡 회원가입(튜터) -->
+    <insert id="kakaoRegisterTu">
+        INSERT INTO tbl_user 
+            (user_email, user_pw, user_nick, user_name, user_birth, user_gender, user_phone, 
+            tt_school, tt_subject, tt_depart, user_group, pass, kakaologin)
+        VALUES (#{email},#{user_pw}, #{user_nick}, #{user_name}, #{user_birth},
+        #{user_gender}, #{user_phone}, 
+        #{tt_school}, #{tt_subject},#{tt_depart},'Tutor' ,'Wait',#{id})
+    </insert>
+
 </mapper>

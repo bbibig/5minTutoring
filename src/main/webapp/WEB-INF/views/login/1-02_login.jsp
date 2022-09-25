@@ -45,40 +45,14 @@
                         return false;
                     }//if-else
                     
-                    let formObj = $('form');
+                    let formObj = $('#loginForm');
                     formObj.attr('action','/login/Loginpost');
                     formObj.attr('method', 'POST');
                     formObj.submit();
                 });//LOGIN
 
             })//jq
-            // function saveToDos(token) { //item을 localStorage에 저장합니다. 
-            // typeof(Storage) !== 'undefined' && sessionStorage.setItem('AccessKEY', JSON.stringify(token)); 
-            // };
 
-            // Kakao.init('de958c943b70794d33e58bbec3e2a1da');
-            // console.log(Kakao.isInitialized());
-            // function kakaoLogin() {
-            //     window.Kakao.Auth.login({
-            //     scope: 'account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-            //     success: function(response) {
-            //         console.log(response) // 로그인 성공하면 받아오는 데이터
-            //         window.Kakao.API.request({ // 사용자 정보 가져오기 
-            //             url: '/v2/user/me',
-            //             success: (res) => {
-            //                 const kakao_account = res.kakao_account;
-            //                 console.log(kakao_account)
-            //             }
-            //         });
-            //         window.location.href='http://localhost:8080/test/getKakao' //리다이렉트 되는 코드
-            //     },
-            //     fail: function(error) {
-            //         console.log(error);
-            //     }
-            // });
-            // }
-            // const login = document.querySelector('#kakaoLogin');
-            // login.addEventListener('click', kakaoLogin);
         </script>
 
         <title>오분과외</title>
@@ -96,7 +70,7 @@
             <!-- 로그인 폼 -->
             <section class="form-signin">
 
-                <form action="/login/Loginpost" method="post">
+                <form action="/login/Loginpost" method="post" id="loginForm">
                     <!-- 로고 -->
                     <div>
                         <img src="${path}/resources/img/5mtutoring_grey.png">
@@ -145,18 +119,20 @@
 
                     <!-- 카카오 로그인 -->
                     <span class="ico-sns-loin-kakao">
-                        <!-- <a onclick="kakaoLogin()" href="javascript:void(0)">
-                            <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">        
-                        </a> -->
-                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=f242881542c06c438c6f81728a868bf9&redirect_uri=http://localhost:8080/test/kakao&response_type=code">
+                        <!-- REST API key 사용 -->
+                        <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=f242881542c06c438c6f81728a868bf9&redirect_uri=http://localhost:8080/test/kakao&response_type=code">
                             <img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo">                             
-                        </a>
-                        <a href="javascript:kakaoLogin()">kakaologin</a>
-
+                        </a> -->
+                        <!-- javaScript key 사용 -->
+                        <a href="javascript:kakaoLogin()"><img src="${path}/resources/img/kakao_logo.png" alt="kakao_logo"></a>
                         
                     </span>
-
+                    
                 </div>
+                <form name="kakaoForm" method="post" action="/kakao/setStudent" id="kakaoForm">
+                    <input type="hidden" name="user_email" id="kakaoEmail">
+                    <input type="hidden" name="kakaologin" id="kakaoId">
+                </form>
 
 
             </section>
@@ -174,6 +150,7 @@
                         url: '/v2/user/me',
                         success: function (response) {
                             kakaoLoginPro(response)
+                            //값들어왔는지 확인
                             console.log(response)
                         },
                         fail: function (error) {
@@ -186,28 +163,34 @@
                 },
                 })
             }
+            //카카오로그인
             function kakaoLoginPro(response){
-            var data = {id:response.id,email:response.kakao_account.email}
+            var data = {
+                id:response.id,
+                email:response.kakao_account.email
+            }
             $.ajax({
                 type : 'POST',
-                url : '/test/kakaoLoginPro',
+                url : '/kakao/kakaoLoginPro',
                 data : data,
-                dataType : 'json',
                 success : function(data){
                     console.log(data)
                     if(data.JavaData == "YES"){
                         alert("로그인되었습니다.");
                         location.href = '/login/home'
+
                     }else if(data.JavaData == "register"){
+                        alert("필수항목을 입력해주세요.");
+                        let kakaoform = $('#kakaoForm');
                         $("#kakaoEmail").val(response.kakao_account.email);
                         $("#kakaoId").val(response.id);
-                        $("#kakaoForm").submit();
+                        kakaoform.submit();
                     }else{
                         alert("로그인에 실패했습니다");
                     }
                 },
                 error: function(xhr, status, error){
-                    alert("로그인에 실패했습니다."+error);
+                    alert("오류가 발생했습니다. 확인해주세요."+error);
                 }
                 });//ajax
             }//kakaoLoginPro

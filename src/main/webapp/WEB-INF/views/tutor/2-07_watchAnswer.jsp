@@ -19,7 +19,6 @@
 
 	    <!-- comment.js -->
 		<script type="text/javascript" src="/resources/js/comment.js"></script>
-		
 		<script type="text/javascript">
 			
 				
@@ -126,6 +125,8 @@
 								str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
 								str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
 								str+= '					</ul></div></div></div>';
+							} else {
+								str+= '		<div class="empty" style=""></div>';
 							}
 							
 							str+= '	<p class=a>' +list[i].cm_content+ '</p></div><hr>';

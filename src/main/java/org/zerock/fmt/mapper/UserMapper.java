@@ -61,10 +61,16 @@ public interface UserMapper {
 	public abstract HashMap<String,Object> kakaoCheck(HashMap<String,Object> paramMap);
 	
 	// 카카오정보로 로그인
-	public abstract HashMap<String,Object> kakaoLogin(HashMap<String,Object> paramMap);
+	public abstract UserVO kakaoLogin(HashMap<String,Object> paramMap);
 	
-	// 카카오정보 추가 
+	// 카카오 정보 수정
 	public abstract int updateKakao(HashMap<String,Object> paramMap);
+	
+	// 카카오 회원가입(학생)
+	public abstract int kakaoRegister(HashMap<String,Object> paramMap);
+	
+	// 카카오 회원가입(튜터)
+	public abstract int kakaoRegisterTu(HashMap<String,Object> paramMap);
 	
 	
 	//-------------- UPDATE 

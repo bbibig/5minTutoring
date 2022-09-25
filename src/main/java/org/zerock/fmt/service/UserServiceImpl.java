@@ -220,7 +220,7 @@ public class UserServiceImpl implements UserService{
 	//----------------------------------------------------------- 로그인
 	@Override
 	public UserVO gettLoginUser(String user_email, String user_pw) throws ServiceException {
-		log.trace("selectLogin() 로그인 유저 조회2");
+		log.trace("selectLogin() 로그인 유저 조회2 : {}, {}",user_email, user_pw);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		try {
@@ -376,7 +376,7 @@ public class UserServiceImpl implements UserService{
 	}//kakaoCheck
 
 	@Override
-	public HashMap<String, Object> kakaoLogin(HashMap<String, Object> paramMap) {
+	public UserVO kakaoLogin(HashMap<String, Object> paramMap) {
 		log.trace("kakaoLogin. 카카오 로그인하기");
 		return this.userMapper.kakaoLogin(paramMap);
 	}//kakaoLogin
@@ -386,6 +386,18 @@ public class UserServiceImpl implements UserService{
 		log.trace("updateKakao. 카카오 정보 업데이트");
 		return this.userMapper.updateKakao(paramMap);
 	}//updateKakao
+
+	@Override
+	public int kakaoRegister(HashMap<String, Object> paramMap) {
+		log.trace("kakaoRegister. 카카오 회원가입(학생)");
+		return this.userMapper.kakaoRegister(paramMap);
+	}//kakaoRegister
+
+	@Override
+	public int kakaoRegisterTu(HashMap<String, Object> paramMap) {
+		log.trace("kakaoRegister. 카카오 회원가입(학생)");
+		return this.userMapper.kakaoRegisterTu(paramMap);
+	}//kakaoRegisterTu
 	
 	
 

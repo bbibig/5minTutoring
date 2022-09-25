@@ -1,14 +1,8 @@
-// const CLIENT_ID = "f242881542c06c438c6f81728a868bf9";
-// const REDIRECT_URI = "http://localhost:8080/test/getKakao";
-
-// export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-// import { KAKAO_AUTH_URL } from "../shared/OAuth";
 
 const naverLogin = new naver.LoginWithNaverId(
     {
         clientId: "m64F8j6rzmuQpJTdLytb", 
-        callbackUrl: "http://localhost:8080",
+        callbackUrl: "http://localhost:8080/naver/userNaverLoginPro",
         isPopup:false,
         callbackHandle:true
         }
@@ -30,7 +24,9 @@ if (status) {
         naverLogin.reprompt();
         return ;  
     }else{
-    console.log("callback 처리에 실패하였습니다.");
+        setLoginStatus();
+        //모든 필수 정보 제공 공의하면 실행
+        console.log("callback 처리에 실패하였습니다.");
     }
 }
 });
