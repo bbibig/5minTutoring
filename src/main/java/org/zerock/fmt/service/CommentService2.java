@@ -23,5 +23,5 @@ public interface CommentService2 {
 	public abstract boolean deleteComment(CommentDTO dto)throws ServiceException;
 	
 	//선택된 댓글조회
-	public abstract CommentVO2 selectComment(CommentDTO dto)throws ServiceException;
+	public abstract CommentVO2 selectComment(Integer cm_number)throws ServiceException;
 }

@@ -35,4 +35,8 @@ public interface CommunityMapper {
 	//게시글 총 갯수 
 	public abstract Integer allCount(CriteriaCommunity page)throws DAOException;
 	
-}
+	//해당 게시글에 댓글수 업데이트하기 
+	public abstract Integer updateCommentCount(int fb_number)throws DAOException;
+	
+	
+}//end interface

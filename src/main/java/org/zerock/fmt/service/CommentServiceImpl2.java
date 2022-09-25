@@ -15,7 +15,7 @@ import org.zerock.fmt.mapper.CommentMapper2;
 import lombok.Setter;
 
 @Service
-public class CommentService2Impl implements CommentService2 {
+public class CommentServiceImpl2 implements CommentService2 {
 
 	@Setter(onMethod_=@Autowired)
 	private CommentMapper2 CommentMapper2;
@@ -66,9 +66,9 @@ public class CommentService2Impl implements CommentService2 {
 	}//deleteComment
 
 	@Override
-	public CommentVO2 selectComment(CommentDTO dto) throws ServiceException {
+	public CommentVO2 selectComment(Integer cm_number) throws ServiceException {
 		try{ 
-			return this.CommentMapper2.selectComment(dto.getCm_number());
+			return this.CommentMapper2.selectComment(cm_number);
 		}catch(DAOException e) {
 			throw new ServiceException(e);
 		}//try-catch

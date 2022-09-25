@@ -133,10 +133,9 @@ public class CommentServiceTests2 {
 		log.trace("selectComment() invoked");
 				
 		int cm_number = 124;
-		CommentDTO dto = new CommentDTO();
-		dto.setCm_number(cm_number);
 		
-		CommentVO2 vo2=this.commentService2.selectComment(dto);
+		
+		CommentVO2 vo2=this.commentService2.selectComment(cm_number);
 		log.info("vo2:{}", vo2);
 		
 	} // selectComment

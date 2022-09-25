@@ -115,6 +115,16 @@ public class CommunityServiceImpl implements CommunityService, InitializingBean,
 		
 	}
 
+	@Override
+	public boolean updateCommentCount(int fb_number) throws ServiceException {
+		try {
+			return this.communityMapper.updateCommentCount(fb_number) ==1;
+		}catch(DAOException e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	}
+
 
 
 

@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.fmt.domain.CommentDTO;
@@ -47,12 +51,15 @@ public class CommunityController implements InitializingBean{
 		log.trace("communityPage()invoked");
 		
 		try {
+			
 			List<CommunityVO> list = this.communityService.selectAllList(page);
 			
 			model.addAttribute("_LIST_", list);	
-			
+//			----------------------------------------------------- 전체게시글 리스트
 			CommunityPageDTO pageDto = new CommunityPageDTO(page, this.communityService.allCount(page));
 			model.addAttribute("_COMMUNITYPAGE_", pageDto);
+			
+//			---------------------------------------------------- 페이징
 			
 			
 			
@@ -67,19 +74,20 @@ public class CommunityController implements InitializingBean{
 	
 	//특정 게시글 조회 및 댓글조회
 	@GetMapping("/post")
-	public String communityPost(CommunityDTO dto, Model model, CommentDTO cdto) throws ControllerException{
+	public String communityPost(CommunityDTO dto, Model model) throws ControllerException{
 		log.debug("post({},{})invoked.", dto, model);
 	
 		
 		try {
+			
 			CommunityVO board = this.communityService.read(dto);
+			
 			log.info("\t+board: "+board);
 			
 			model.addAttribute("_BOARD_", board);
 //			------------------------------------------------특정게시글
 			List<CommentVO2> commentList = commentService2.readComment(board.getFb_number());
 			model.addAttribute("_COMMENTLIST_", commentList);
-			
 //			------------------------------------------------댓글리스트
 			
 			
@@ -153,7 +161,7 @@ public class CommunityController implements InitializingBean{
 	
 	//댓글 등록
 	@PostMapping("/commentWrite")
-	public String commentWrite(@ModelAttribute("write")CommentDTO dto, HttpServletRequest req) throws ControllerException{
+	public String commentWrite(CommentDTO dto, HttpServletRequest req) throws ControllerException{
 		log.info("commentWrite() invoked");
 			
 		try {
@@ -177,25 +185,38 @@ public class CommunityController implements InitializingBean{
 	
 	//댓글 수정
 	@PostMapping("/commentUpdate")
-	public String commentUpdate(@ModelAttribute("update")CommentDTO dto, HttpServletRequest req, Model model) throws ControllerException{
+	public String commentUpdate(CommentDTO dto, String cm_content, String fb_number, String cm_number) throws ControllerException{
 		
 		try {
+			dto.setCm_content(cm_content);
+			dto.setFb_number(Integer.parseInt(fb_number));
+			dto.setCm_number(Integer.parseInt(cm_number));
+			this.commentService2.updateComment(dto);
 			
-			int fb_number = Integer.parseInt(req.getParameter("fb_number"));
-			dto.setFb_number(fb_number);
-			
-			
-			boolean isResult = commentService2.updateComment(dto);
-			log.info("{}",  isResult);
-			
-			return "redirect:/community/post?fb_number="+fb_number;
-			
+			return "redirect:/comment/post?fb_number="+fb_number+"&cm_number"+cm_number;
 		}catch(Exception e) {
 			throw new ControllerException(e);
 			
 		}//try-catch
 	}//commentUpdate
 	
+	
+	
+	//댓글 1개조회
+	@GetMapping(value="/{selectComment}", produces= {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<CommentVO2> getComment(@PathVariable("selectComment") String selectComment ) throws ControllerException {
+        log.trace("해당 댓글 조회");
+        log.info("댓글 번호 : " + selectComment);
+       
+        int selectComment2 = Integer.parseInt(selectComment);
+        try {
+        	CommentVO2 vo2 = this.commentService2.selectComment(selectComment2);
+        	log.info("vo: {}", vo2);
+        
+        	return new ResponseEntity<>(vo2, HttpStatus.OK);
+        	
+        } catch (Exception e) { throw new ControllerException(e); }
+    } // getComment
 	
 	
 

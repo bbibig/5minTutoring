@@ -30,6 +30,9 @@ public interface CommunityService {
 	//6. 커뮤니티 게시글 총 갯수
 	public abstract Integer allCount(CriteriaCommunity page)throws ServiceException;
 	
-	//7. 좋아요 확인
+	//7. 커뮤니티 댓글 총 갯 수
+	public abstract boolean updateCommentCount(int fb_number)throws ServiceException;
+	
+	//8. 좋아요 확인
 //	public abstract LikeDTO findHeart(int fb_number, String user_email)throws ServiceException;
 }
