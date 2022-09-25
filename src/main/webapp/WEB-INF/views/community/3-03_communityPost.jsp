@@ -22,62 +22,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			
-			<script>
-				$("#comment_list").on("click", ".cmUpdateBtn", function(){
-					let cm_content = $(this).parent().siblings()[0].innerText;
 
-					$("input[name=cm_content_modal]").val(cm_content);
-
-					let fm_no = $(this).data("fm_number");
-					let cm_no = $(this).data("cm_number");
-
-					$("#fb_number_modal").val(fm_no)
-					$("#cm_number_modal").val(cm_no);
-				});
-
-				$("#cmUpdateBtn_modal").on("click",function(){
-					updateComment2();
-				});
-
-				function updateComment2(){
-					let cm_content = $('input[name="cm_content_modal"]').val();
-					let fm_no = $("#fb_number_modal").val();
-					let cm_no = $("#cm_number_modal").val();
-
-					$(location).attr('href','${pageContext.request.contextPath}/community/post/updateComment?fb_number='+ fb_number+'cm_number'+cm_number+'cm_content'+cm_content);
-				}
-
-
-			
-				// var commentService = (function get(cm_number, callback, error) {
-        // console.log("조회 댓글번호: " + cm_number);
-
-        // $.get("/community/" + cm_number, function(result) {
-        //     if(callback) {
-        //         callback(result);
-        //     }
-        // }).fail(function(xhr, status, err) {
-        //     if(error) {
-        //         error();
-        //     }
-        // }); 
-
-				// return {get:get};
-    		// })() // get
-
-
-		// 댓글 모달에 데이터 전달 
-		// $('.commentList').on("click", '.commentDiv', function(e) {
-		// 			var cm_number = $(this).data("cm_number");
-
-		// 			commentService.get(cm_number, function(comment) {
-
-		// 				$(".modal").find("input[name='cm_number']").val(comment.cm_number);
-		// 				$(".modal").find("textarea[name='cm_content']").val(comment.cm_content);
-		// 			});
-		// 		}); // onclick
-
-			</script>
 	    <style>
 	        /* toggleHeart */
 	        .bi-suit-heart:hover,
@@ -110,22 +55,22 @@
 	                                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
 	                                </div>
 	                                <div class="modal-body">
-	                                     
-																		<div class="mb-3">
-																				<label for="recipient-name" class="col-form-label">제목</label>
-																				<input type="text" class="form-control" name="fb_title" id="askTitle" value="${_BOARD_.fb_title}">
-																		</div>
-																		<div class="mb-3">
-																				<label for="message-text" class="col-form-label">내용</label>
-																				<textarea class="form-control" name="fb_content" id="askContent">${_BOARD_.fb_content}</textarea>
-																		</div>
-																		
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary col-2"
-																					data-bs-dismiss="modal">취소</button>
-																			<button type="button" class="btn btn-primary col-2" id="updateBtn" >저장</button>
-																		</div>
-	                                    
+	                                    <form action="/community/modify?fb_number=${_BOARD_.fb_number}" method="post"> 
+	                                        <div class="mb-3">
+	                                            <label for="recipient-name" class="col-form-label">제목</label>
+	                                            <input type="text" class="form-control" name="fb_title" id="askTitle" value="${_BOARD_.fb_title}">
+	                                        </div>
+	                                        <div class="mb-3">
+	                                            <label for="message-text" class="col-form-label">내용</label>
+	                                            <textarea class="form-control" name="fb_content" id="askContent">${_BOARD_.fb_content}</textarea>
+	                                        </div>
+																					
+																					<div class="modal-footer">
+																						<button type="button" class="btn btn-secondary col-2"
+																								data-bs-dismiss="modal">취소</button>
+																						<button type="submit" class="btn btn-primary col-2" id="updateBtn" >저장</button>
+																				</div>
+	                                    </form>
 	                                </div>
 	                               
 	                            </div>
@@ -133,7 +78,7 @@
 	                    </div>
 	
 	                    <!-- 댓글 수정 modal -->
-	                    <div class="modal fade" id="comment_revise" data-bs-backdrop="static" name="">
+	                    <div class="modal fade" id="comment_revise" data-bs-backdrop="static">
 	                        <div class="modal-dialog modal-dialog-centered">
 	                            <div class="modal-content d-flex flex-column justify-content-center">
 	                                <div class="modal-body">
@@ -141,18 +86,16 @@
 	
 	                                        <p class="my-3 fs-5"># 수정할 댓글을 입력하세요.</p>
 	
-	                                        <form class="was-validated col-12 d-flex flex-column" id="commentUpdateForm" action="/community/commentUpdate"  method="post">
-
+	                                        <form class="was-validated col-12 d-flex flex-column" id="commentUpdateForm" action="/community/commentUpdate" items="{_COMMENT_}" method="post">
 	                                            <div class="text-box">
-																									<input type="hidden" id="cm_number_modal" >
-																									<input type="hidden" id="fb_number_modal">
-	                                                <textarea class="form-control" placeholder="" id="floatingTextarea1" name="cm_content_modal" value="" style="height: 150px" required></textarea>
+																									<input type="hidden" name="cm_number" value="${_COMMENT_.cm_number}">
+	                                                <textarea class="form-control" placeholder="" id="floatingTextarea1" name="cm_content" style="height: 150px" required></textarea>
 	                                            </div>
 	
 	                                            <div class="pop-up-button-box align-self-end">
 	                                                <button type="button" class="btn btn-outline-primary"
 	                                                    data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
-	                                                <button type="button" class="btn btn-outline-primary" id="cmUpdateBtn_modal">확인</button>
+	                                                <button type="submit" class="btn btn-outline-primary" id="commentUpdateBtn">확인</button>
 	                                            </div>
 	                                        </form>
 	                                    </div>
@@ -222,8 +165,10 @@
 	                        
 	                        <br>
 	                        <div class="date" name="fb_date">&nbsp;<fmt:formatDate value="${_BOARD_.fb_date}" pattern="yyyy.MM.dd" /></div>
-													<c:if test="${__LOGIN_USER__.user_email eq _BOARD_.user_email}">
-	                        <div class="hamburger-button col-8 d-flex justify-content-end">
+													
+	                        <c:if test="${__LOGIN_USER__.user_email eq _BOARD_.user_email}">
+													<div class="hamburger-button col-8 d-flex justify-content-end">
+														
 	                            <div class="dropdown">
 	                                <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 	                                    <i class="bi bi-list fs-4"></i>
@@ -241,7 +186,8 @@
 	
 	                    <!-- comment -->
 	                    <!-- icon -->
-	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span> 5</span></span>
+	                    <span id="heart" class="bi bi-suit-heart fs-3"></span><span class="fs-4"> 3</span>
+	                    <span class="bi bi-chat-right-dots fs-4 comment_icon"><span> 3</span></span>
 	
 	                    <div class="comment_box">
 	                        <div class="comment d-flex">
@@ -249,14 +195,14 @@
 	                                <img src="/resources/img/profile.png">
 	                            </div>
 	                            <form action="/community/commentWrite?fb_number=${_BOARD_.fb_number}" method="post">
-																<input type="hidden" id="user_email" name="user_email" value= "${__LOGIN_USER__.user_email}">
-																<input id="comment_write" type="text" size="80" name="cm_content" placeholder="댓글을 입력하세요." >
-																<button type="submit" id="save" type="submit">등록</button>
+																	
+									<input type="hidden" id="user_email" name="user_email" value= "${__LOGIN_USER__.user_email}">
+	                                <input id="comment_write" type="text" size="80" name="cm_content" placeholder="댓글을 입력하세요." >
+	                                <button type="submit" id="save" type="submit">등록</button>
 	                            </form>
 	                        </div>
 													
-												<div class="comment-list" id="comment_list">
-													<c:forEach items='${_COMMENTLIST_}' var="commentList" varStatus="status">
+													<c:forEach items='${_COMMENTLIST_}' var="commentList">
 														
 														<div class="comment_info d-flex">
 	                            <div class="sSPic">
@@ -264,29 +210,27 @@
 	                            </div>
 	                            <div class="Sname">${commentList.user_nick}</div>
 															<input type="hidden" name="user_email" value= "${__LOGIN_USER__.user_email}">
-															<input type="hidden" name="cm_number" value= "${commentList.cm_number}" id="cno">
 	                            <div class="date"><fmt:formatDate value="${commentList.regdate}" pattern="yyyy.MM.dd" /></div>
-															INDEX: [${status.index}]
 															
-	                            <div class="hamburger-button col-8 d-flex justify-content-end">
-																	<c:if test="${__LOGIN_USER__.user_email eq commentList.user_email}">
+															<c:if test="${__LOGIN_USER__.user_email eq commentList.user_email}">
+	                            <div class="hamburger-button col-9 d-flex justify-content-end">
+																
 	                                <div class="dropdown">
-	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                    <button class="btn pt-0" type="button" data-bs-toggle="dropdown"
+	                                        aria-expanded="false">
 	                                        <i class="bi bi-list fs-4"></i>
 	                                    </button>
 	                                    <ul class="dropdown-menu">
-	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" id="updateComment1" class="cmUpdateBtn"
-																						data-fb_number="${commentList.fb_number}" data-cm_number="${commentList.cm_number}" href="#comment_revise">수정</a>
+	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
+	                                                href="#comment_revise">수정</a>
 	                                        </li>
 	                                        <li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal"
 	                                                href="#delete">삭제</a>
 	                                        </li>
 	                                    </ul>
 	                                </div>
-																	</c:if>
-																
 	                            </div>
-															
+															</c:if>
 	                        	</div>
 	                        	
 														<p>
@@ -296,7 +240,7 @@
 														<hr>
 
 													</c:forEach>
-												</div>
+	                        
 	                    </div>
 	                </div>
 	            </div>

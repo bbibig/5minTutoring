@@ -182,9 +182,7 @@ public class CommunityMapperTests {
 		
 		int affectedLines = this.cMapper.updateCommentCount(fb_number);
 		log.info("\t+ 2.affectedLines:{}", affectedLines);
-		
-		
-		
+			
 	}// allcount
 	
 }//end class
