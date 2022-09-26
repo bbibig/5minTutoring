@@ -89,7 +89,7 @@ public class CommunityController implements InitializingBean{
 		try {
 			
 			CommunityVO board = this.communityService.read(dto);
-			
+			this.communityService.updateCommentCount(board.getFb_number());
 			log.info("\t+board: "+board);
 			
 			model.addAttribute("_BOARD_", board);
@@ -116,6 +116,8 @@ public class CommunityController implements InitializingBean{
 			
 			
 			
+			
+		
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}//try-catch
@@ -227,20 +229,38 @@ public class CommunityController implements InitializingBean{
 	
 	
 	//댓글 1개조회
-	@GetMapping(value="/{selectComment}", produces= {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<CommentVO2> getComment(@PathVariable("selectComment") String selectComment ) throws ControllerException {
-        log.trace("해당 댓글 조회");
-        log.info("댓글 번호 : " + selectComment);
-       
-        int selectComment2 = Integer.parseInt(selectComment);
-        try {
-        	CommentVO2 vo2 = this.commentService2.selectComment(selectComment2);
-        	log.info("vo: {}", vo2);
-        
-        	return new ResponseEntity<>(vo2, HttpStatus.OK);
-        	
-        } catch (Exception e) { throw new ControllerException(e); }
-    } // getComment
+//	@GetMapping(value="/{selectComment}", produces= {MediaType.APPLICATION_JSON_VALUE})
+//    public ResponseEntity<CommentVO2> getComment(@PathVariable("selectComment") String selectComment ) throws ControllerException {
+//        log.trace("해당 댓글 조회");
+//        log.info("댓글 번호 : " + selectComment);
+//       
+//        int selectComment2 = Integer.parseInt(selectComment);
+//        try {
+//        	CommentVO2 vo2 = this.commentService2.selectComment(selectComment2);
+//        	log.info("vo: {}", vo2);
+//        
+//        	return new ResponseEntity<>(vo2, HttpStatus.OK);
+//        	
+//        } catch (Exception e) { throw new ControllerException(e); }
+//    } // getComment
+	
+	@GetMapping(value="/{selectComment}")
+	public String getComment(@PathVariable("selectComment") String selectComment, Model model ) throws ControllerException {
+      log.trace("해당 댓글 조회");
+      log.info("댓글 번호 : " + selectComment);
+     
+      int selectComment2 = Integer.parseInt(selectComment);
+      try {
+      	CommentVO2 comment = this.commentService2.selectComment(selectComment2);
+      	log.info("vo: {}", comment);
+      
+      	model.addAttribute("_Comment_", comment);
+      	return "community/3-03_communityPost";
+      	
+      } catch (Exception e) { throw new ControllerException(e); }
+  } // getComment
+	
+	
 	
 	
 

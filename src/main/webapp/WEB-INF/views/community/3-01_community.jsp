@@ -146,8 +146,8 @@
                     <div class="col-2 d-flex flex-column align-items-center"><!--========================답변 카운트 및 heart 카운트==========================-->
   
                       <div class="question_comment">
-                        <span class="comment_count">0</span>
                         <span class="comment_decription">댓글</span>
+                        <span class="comment_count">${communityBoard.fb_comment_count}</span>
                       </div>
   
                       
