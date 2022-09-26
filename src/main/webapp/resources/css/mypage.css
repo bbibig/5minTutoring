@@ -119,6 +119,12 @@ a:hover { !important;
 /*          1:1문의 (7-7)        */ 
 /* ============================= */  
 
+a#qtitle:hover {
+    font-weight: bold;  
+    color: black ;
+}
+
+
 /* 제목&내용 전체박스 */
 .question, .answer{
     border: solid rgb(157, 157, 157);
