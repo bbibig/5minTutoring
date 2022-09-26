@@ -144,7 +144,7 @@ public class MypageMapperTests {
 		log.trace("testSelectAllMyCommentList(), 마이페이지 나의 작성글 목록 조회");
 
 		CriteriaMyPage cri = new CriteriaMyPage();
-		cri.setUser_email("test@gmail.com");
+		cri.setUser_email("seosujung0@gmail.com");
 		
 		List<CommunityVO2> list = mapper.selectAllMyCommunitytList(cri);
 		list.forEach(e -> log.info(e));
