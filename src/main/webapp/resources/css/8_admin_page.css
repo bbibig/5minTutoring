@@ -314,7 +314,16 @@ select{
 .buttonlist {
   clear: both;
   float: right;
+  margin-top: 30px;
+  margin-right: 0%;
 }
+
+.buttonlist2 {
+  margin-top: 210x;
+  float:right;
+  margin-right: 10%;
+}
+
 .buttonlist li {
   /* float: right; */
   display: inline-block;
