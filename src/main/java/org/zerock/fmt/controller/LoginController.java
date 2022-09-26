@@ -117,8 +117,8 @@ public class LoginController{
 		} catch(Exception e) { throw new ControllerException(e); }
 	}//signUpStudent---2
 	
-	@PostMapping("/emailCheck")
-	@ResponseBody
+//	@PostMapping("/emailCheck")
+//	@ResponseBody
 	public String emailCheckPost(String userEmail) throws ControllerException{
 		log.info("emailCheckPost() invoked.");
 		try {

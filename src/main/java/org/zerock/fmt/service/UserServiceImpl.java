@@ -291,7 +291,7 @@ public class UserServiceImpl implements UserService{
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com"; 
 		String hostSMTPid = "childhopp";		//계정아이디
-		String hostSMTPpwd = "--------";		//계정비밀번호
+		String hostSMTPpwd = "5tutoring";		//계정비밀번호
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "childhopp@naver.com";
@@ -302,7 +302,7 @@ public class UserServiceImpl implements UserService{
 		subject = "5분과외 임시 비밀번호 입니다.";
 		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 		msg += "<h3 style='color: blue;'>";
-		msg += dto.getUser_name() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+		msg += "임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 		msg += "<p>임시 비밀번호 : ";
 		msg += newPW + "</p></div>";
 

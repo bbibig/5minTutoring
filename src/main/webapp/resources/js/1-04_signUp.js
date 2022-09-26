@@ -112,7 +112,7 @@ $("#user_email").on("input", function () {
           } else {
               $('.em_input_re_2').css("display","inline-block");
               $('.em_input_re_1').css("display","none");
-              Swal.fire('중복된 이메일 입니다.');
+             
           }//if-else
       }//success
   });//ajax
