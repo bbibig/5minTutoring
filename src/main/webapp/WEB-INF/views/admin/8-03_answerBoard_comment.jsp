@@ -105,7 +105,7 @@
             
                             </div>
                             <!-- 목록으로 버튼 -->
-                            <div class="buttonlist d-flex flex-row justify-content-end">
+                            <div class="buttonlist">
                                 <ul>
                                 <li>
                                     <a class="btn btn-dark btn-md" href="/admin/answerBoard_NO" role="button">목록</a>
@@ -142,7 +142,7 @@
 						</div>
 					</div>
 
-                    <div class="buttonlist d-flex flex-row justify-content-end">
+                    <div class="buttonlist2">
                         <a class="btn btn-dark btn-md" href="/admin/answerBoard_OK" role="button">목록</a>
                     </div>
                 </c:if>
