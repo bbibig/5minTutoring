@@ -32,6 +32,17 @@
 	                    confirmButtonText: '확인'
 	            })
 	        }
+	        
+	        let p1 = document.querySelector("#bPrev1");
+	        let p2 = document.querySelector("#bPrev2");
+	        let n1 = document.querySelector("#bNext1");
+	        let n2 = document.querySelector("#bNext2");
+
+	        let bPrev = '${_FAQPAGENATION_.prev}';
+	        let bNext = '${_FAQPAGENATION_.next}';
+
+	        if(bPrev == 'false') { p1.classList.add("invisible"); p2.classList.add("invisible") };
+	        if(bNext == 'false') { n1.classList.add("invisible"); n2.classList.add("invisible") };
 	    })// jq
     </script>
 
@@ -307,19 +318,19 @@
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center p-5">
-                            <li class="page-item"><a class="page-link rounded-circle"
+                            <li class="page-item" id="bPrev1"><a class="page-link rounded-circle"
                                     href="/admin/adminFAQ?currPage=1">&laquo;</a>
                             </li>
-                            <li class="page-item"><a class="page-link rounded-circle"
+                            <li class="page-item" id="bPrev2"><a class="page-link rounded-circle"
                                     href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.cri.currPage - 1}">&lt;</a>
                             </li>
                             <li class="page-item"><a class="page-link rounded-circle bg-blue"
                                     href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.cri.currPage}">${_FAQPAGENATION_.cri.currPage}</a>
                             </li>
-                            <li class="page-item"><a class="page-link rounded-circle"
+                            <li class="page-item" id="bNext1"><a class="page-link rounded-circle"
                                     href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.cri.currPage + 1}">&gt;</a>
                             </li>
-                            <li class="page-item"><a class="page-link rounded-circle"
+                            <li class="page-item" id="bNext2"><a class="page-link rounded-circle"
                                     href="/admin/adminFAQ?currPage=${_FAQPAGENATION_.realEndPage}">&raquo;</a>
                             </li>
                         </ul>

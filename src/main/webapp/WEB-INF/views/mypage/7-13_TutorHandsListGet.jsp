@@ -29,6 +29,19 @@
       var dateFrom = document.getElementById("dateFrom");
       dateFrom.value = before;
     }
+    
+    $(document).ready(function () {
+        let p1 = document.querySelector("#bPrev1");
+        let p2 = document.querySelector("#bPrev2");
+        let n1 = document.querySelector("#bNext1");
+        let n2 = document.querySelector("#bNext2");
+
+        let bPrev = '${_MYGETHANDPAGENATION_.prev}';
+        let bNext = '${_MYGETHANDPAGENATION_.next}';
+
+        if(bPrev == 'false') { p1.classList.add("invisible"); p2.classList.add("invisible") };
+        if(bNext == 'false') { n1.classList.add("invisible"); n2.classList.add("invisible") };
+      });
   </script>
 </head>
 
@@ -154,11 +167,11 @@
           <!-- 1. 기간 조회 안할때 페이징 -->
           <c:if test="${_MYGETHANDPAGENATION_.cri.dateFrom eq null}">
             <ul class="pagination justify-content-center p-5">
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev1"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=1&group=${GROUP}">&laquo;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev2"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.cri.currPage - 1}&group=${GROUP}">&lt;</a>
               </li>
 
@@ -166,11 +179,11 @@
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.cri.currPage}&group=${GROUP}">${_MYGETHANDPAGENATION_.cri.currPage}</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext1"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.cri.currPage + 1}&group=${GROUP}">&gt;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext2"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.realEndPage}&group=${GROUP}">&raquo;</a>
               </li>
             </ul>
@@ -178,11 +191,11 @@
           <!-- 2. 기간조회 할 때 페이징 -->
           <c:if test="${_MYGETHANDPAGENATION_.cri.dateFrom ne null}">
             <ul class="pagination justify-content-center p-5">
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev1"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=1&group=${GROUP}&dateFrom=${_MYGETHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYGETHANDPAGENATION_.cri.dateTo}">&laquo;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev2"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.cri.currPage - 1}&group=${GROUP}&dateFrom=${_MYGETHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYGETHANDPAGENATION_.cri.dateTo}">&lt;</a>
               </li>
 
@@ -190,11 +203,11 @@
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.cri.currPage}&group=${GROUP}&dateFrom=${_MYGETHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYGETHANDPAGENATION_.cri.dateTo}">${_MYGETHANDPAGENATION_.cri.currPage}</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext1"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.cri.currPage + 1}&group=${GROUP}&dateFrom=${_MYGETHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYGETHANDPAGENATION_.cri.dateTo}">&gt;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext2"><a class="page-link rounded-circle"
                   href="/mypage/tutorHands/get?currPage=${_MYGETHANDPAGENATION_.realEndPage}&group=${GROUP}&dateFrom=${_MYGETHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYGETHANDPAGENATION_.cri.dateTo}">&raquo;</a>
               </li>
             </ul>
