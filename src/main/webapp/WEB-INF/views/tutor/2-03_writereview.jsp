@@ -78,10 +78,23 @@
         })//리뷰조회
 
         function getReview(review){
-          console.log(review);
+          console.debug("getReview(",review,") invoked.");
+          // console.log(review);
           $('.modal').find('input[name="rv_number"]').val(review.rv_number);
           $('.modal').find('textarea[name="rv_content"]').val(review.rv_content);
-          $('.modal').find('input[name="rv_newstar"]').val(review.rv_star);
+
+          let radioButtons = $('.modal').find('input[name="rv_star"]');
+          console.log(">>>>>> radioButtons:", radioButtons, radioButtons.constructor);
+
+          $.each(radioButtons, (_, radio) => {
+              console.log(`radio:`, radio.constructor);
+
+              let value = $(radio).attr("value");
+              if(value == review.rv_star) {
+                  console.log("\t+++++ value to be checked:", value);
+                  $(radio).attr("checked", "checked");
+              } // if
+          }); // .each
           // starchange.attr('input[name="rv_star_1"]:checked').val(review.rv_star);
         };//수정모달에 전달
 
@@ -89,7 +102,7 @@
 
           let data = {
             rv_number : $('.modal').find('input[name="rv_number"]').val(),
-            rv_star : $('.modal').find('input[name="rv_star_1"]:checked').val(),
+            rv_star : $('.modal').find('input[name="rv_star"]:checked').val(),
             rv_content : $('.modal').find('textarea[name="rv_content"]').val(),
           }
           $.ajax({
@@ -455,12 +468,14 @@
                     <div class="pop-up-body d-flex flex-column align-items-center">
                       <input type="hidden" name="rv_number">
 
+
+
                       <div class="rating">
-                        <input type="radio" name="rv_newstar" value="5" id="5"><label for="5">☆</label>
-                        <input type="radio" name="rv_newstar" value="4" id="4"><label for="4">☆</label>
-                        <input type="radio" name="rv_newstar" value="3" id="3"><label for="3">☆</label>
-                        <input type="radio" name="rv_newstar" value="2" id="2"><label for="2">☆</label>
-                        <input type="radio" name="rv_newstar" value="1.0" id="1"><label for="1">☆</label>
+                        <input type="radio" name="rv_star" value="5" id="5"><label for="5">☆</label>
+                        <input type="radio" name="rv_star" value="4" id="4"><label for="4">☆</label>
+                        <input type="radio" name="rv_star" value="3" id="3"><label for="3">☆</label>
+                        <input type="radio" name="rv_star" value="2" id="2"><label for="2">☆</label>
+                        <input type="radio" name="rv_star" value="1" id="1"><label for="1">☆</label>
                       </div>
 
                       <p class="my-3">별점을 선택해주세요.</p>
