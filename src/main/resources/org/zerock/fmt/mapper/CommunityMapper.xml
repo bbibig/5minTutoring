@@ -9,7 +9,6 @@
 
         <select id="selectAllList" resultType="org.zerock.fmt.domain.CommunityVO">
             SELECT
-            /*+ index_desc(t1) */ 
 				t1.*, t2.user_nick
 
 				FROM tbl_community T1, tbl_user T2
@@ -20,8 +19,11 @@
                     and fb_title like '%'||#{keyword}||'%' 
                 </if>
                 
+                ORDER BY t1.fb_date DESC
 				OFFSET (#{currPage} - 1) * #{amount} rows
 				FETCH NEXT #{amount} ROWS ONLY
+				
+				
         </select>
         
         <select id="select" resultType="org.zerock.fmt.domain.CommunityVO">

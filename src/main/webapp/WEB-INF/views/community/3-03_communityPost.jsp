@@ -29,6 +29,60 @@
 		integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+		<script>
+
+			var commentservice = (function() {
+
+				// 댓글 조회
+				function get(cno, callback, error) {
+        console.log("조회 댓글번호: " + cno);
+
+        $.get("/community/" + cno, function(result) {
+            if(callback) {
+                callback(result);
+            }
+        }).fail(function(xhr, status, err) {
+            if(error) {
+                error();
+            }
+        }); 
+
+				return { 
+					get : get
+    		}; // get
+
+				}
+
+			})(); // commentService
+
+
+			$('#comment_list').on("click", '.commentDiv', function(e) {
+			
+			var cm_number = $(this).data("cm_no");
+			console.log(cm_number);
+			commentservice(cm_number, function(comment) {
+					console.log(comment);
+					$("#comment_revise").find("input[name='cm_number']").val(comment.cm_number);
+					$("#comment_revise").find("textarea[name='cm_content']").val(comment.cm_content);
+				
+					});
+					
+			}); // onclick
+
+
+			// commentList.on("click", ".commentDiv", function(e) {
+			// 		var cno = $(this).data("cm_number");
+
+			// 		commentService.get(cno, function(comment) {
+
+			// 			$(".modal").find("input[name='cm_number']").val(comment.cm_number);
+			// 			$(".modal").find("textarea[name='cm_content']").val(comment.cm_content);
+			// 		});
+			// 	}); // onclick
+		
+
+		</script>
+
 
 	<style>
 		/* toggleHeart */
@@ -97,10 +151,9 @@
 
 										<p class="my-3 fs-5"># 수정할 댓글을 입력하세요.</p>
 
-										<form class="was-validated col-12 d-flex flex-column" id="commentUpdateForm"
-											action="/community/commentUpdate" items="{_COMMENT_}" method="post">
+										<form class="was-validated col-12 d-flex flex-column" id="commentUpdateForm">
 											<div class="text-box">
-												<input type="hidden" name="cm_number" value="${_COMMENT_.cm_number}">
+												<input type="hidden" name="cm_number">
 												<textarea class="form-control" placeholder="" id="floatingTextarea1"
 													name="cm_content" style="height: 150px" required></textarea>
 											</div>
@@ -211,8 +264,8 @@
 
 					<!-- comment -->
 					<!-- icon -->
-					<span id="heart" class="bi bi-suit-heart fs-3"></span><span class="fs-4"> 3</span>
-					<span class="bi bi-chat-right-dots fs-4 comment_icon"><span> 3</span></span>
+					
+					<span class="bi bi-chat-right-dots fs-4 comment_icon"><span>  ${_BOARD_.fb_comment_count}</span></span>
 
 					<div class="comment_box">
 						<div class="comment d-flex">
@@ -232,8 +285,9 @@
 							</form>
 						</div>
 
+						<div id="comment_list">
 						<c:forEach items='${_COMMENTLIST_}' var="commentList" varStatus="statusNm">
-
+							<div class="commentDiv" >
 							<div class="comment_info d-flex">
 								<div class="sSPic">
 									<c:forEach var="profileC" items="${profileCList[statusNm.index]}" varStatus="status">
@@ -260,7 +314,7 @@
 												<i class="bi bi-list fs-4"></i>
 											</button>
 											<ul class="dropdown-menu">
-												<li class="list-unstyled"><a class="dropdown-item"
+												<li class="list-unstyled"><a class="dropdown-item" data-cm_no="${commentList.cm_number}""
 														data-bs-toggle="modal" href="#comment_revise">수정</a>
 												</li>
 												<li class="list-unstyled"><a class="dropdown-item"
@@ -277,8 +331,9 @@
 							</p>
 
 							<hr>
-
+						</div>	
 						</c:forEach>
+						</div>
 
 					</div>
 				</div>
@@ -298,7 +353,6 @@
 		ClassicEditor.create(document.querySelector('#askContent'), {
 			language: "ko"
 		});
-
 		var i = 0;
 		$('#heart').on('click', function () {
 			if (i == 0) {

@@ -15,6 +15,21 @@
   <link href="${path}/resources/css/mypage.css" rel="stylesheet">
 
   <title>커뮤니티 작성글목록</title>
+  
+   <script>
+     $(document).ready(function () {
+      let p1 = document.querySelector("#bPrev1");
+      let p2 = document.querySelector("#bPrev2");
+      let n1 = document.querySelector("#bNext1");
+      let n2 = document.querySelector("#bNext2");
+
+      let bPrev = '${_MYCOMMUNITYPAGENATION_.prev}';
+      let bNext = '${_MYCOMMUNITYPAGENATION_.next}';
+
+      if(bPrev == 'false') { p1.classList.add("invisible"); p2.classList.add("invisible") };
+      if(bNext == 'false') { n1.classList.add("invisible"); n2.classList.add("invisible") };
+    });
+  </script>
 </head>
 
 <body>
@@ -103,16 +118,16 @@
 
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center p-5">
-            <li class="page-item"><a class="page-link rounded-circle"
+            <li class="page-item" id="bPrev1"><a class="page-link rounded-circle"
                 href="/mypage/community/write?currPage=1">&laquo;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle"
+            <li class="page-item" id="bPrev2"><a class="page-link rounded-circle"
                 href="/mypage/community/write?currPage=${_MYCOMMUNITYPAGENATION_.cri.currPage - 1}">&lt;</a></li>
             <li class="page-item"><a class="page-link rounded-circle bg-blue"
                 href="/mypage/community/write?currPage=${_MYCOMMUNITYPAGENATION_.cri.currPage}">${_MYCOMMUNITYPAGENATION_.cri.currPage}</a>
             </li>
-            <li class="page-item"><a class="page-link rounded-circle"
+            <li class="page-item" id="bNext1"><a class="page-link rounded-circle"
                 href="/mypage/community/write?currPage=${_MYCOMMUNITYPAGENATION_.cri.currPage + 1}">&gt;</a></li>
-            <li class="page-item"><a class="page-link rounded-circle"
+            <li class="page-item" id="bNext2"><a class="page-link rounded-circle"
                 href="/mypage/community/write?currPage=${_MYCOMMUNITYPAGENATION_.realEndPage}">&raquo;</a></li>
           </ul>
         </nav>

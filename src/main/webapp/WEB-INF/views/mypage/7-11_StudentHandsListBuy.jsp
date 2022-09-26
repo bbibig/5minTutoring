@@ -29,6 +29,18 @@
 		  var dateFrom = document.getElementById("dateFrom");
 		  dateFrom.value = before;
 	}
+	     $(document).ready(function () {
+	         let p1 = document.querySelector("#bPrev1");
+	         let p2 = document.querySelector("#bPrev2");
+	         let n1 = document.querySelector("#bNext1");
+	         let n2 = document.querySelector("#bNext2");
+
+	         let bPrev = '${_MYBUYHANDPAGENATION_.prev}';
+	         let bNext = '${_MYBUYHANDPAGENATION_.next}';
+
+	         if(bPrev == 'false') { p1.classList.add("invisible"); p2.classList.add("invisible") };
+	         if(bNext == 'false') { n1.classList.add("invisible"); n2.classList.add("invisible") };
+	       });
 	</script>
 </head>
 
@@ -169,11 +181,11 @@
           <!-- 1. 기간 조회 안할때 페이징 -->
           <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom eq null}">
             <ul class="pagination justify-content-center p-5">
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev1"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=1">&laquo;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev2"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage - 1}">&lt;</a>
               </li>
 
@@ -181,11 +193,11 @@
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage}">${_MYBUYHANDPAGENATION_.cri.currPage}</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext1"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage + 1}">&gt;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext2"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.realEndPage}">&raquo;</a>
               </li>
             </ul>
@@ -193,11 +205,11 @@
           <!-- 2. 기간조회 할 때 페이징 -->
           <c:if test="${_MYBUYHANDPAGENATION_.cri.dateFrom ne null}">
             <ul class="pagination justify-content-center p-5">
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev1"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=1&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&laquo;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bPrev2"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage - 1}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&lt;</a>
               </li>
 
@@ -205,11 +217,11 @@
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">${_MYBUYHANDPAGENATION_.cri.currPage}</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext1"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.cri.currPage + 1}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&gt;</a>
               </li>
 
-              <li class="page-item"><a class="page-link rounded-circle"
+              <li class="page-item" id="bNext2"><a class="page-link rounded-circle"
                   href="/mypage/studentHands/buy?currPage=${_MYBUYHANDPAGENATION_.realEndPage}&dateFrom=${_MYBUYHANDPAGENATION_.cri.dateFrom}&dateTo=${_MYBUYHANDPAGENATION_.cri.dateTo}">&raquo;</a>
               </li>
             </ul>

@@ -62,7 +62,7 @@ public class CommunityMapperTests {
 		
 		
 		CriteriaCommunity page = new CriteriaCommunity();
-		page.setKeyword("새글");
+//		page.setKeyword("새글");
 		
 		List<CommunityVO> list = this.cMapper.selectAllList(page);
 		assertNotNull(list);
@@ -178,7 +178,7 @@ public class CommunityMapperTests {
 	void testUpdateCommentCount() throws DAOException {
 		log.trace("updateCommentCount() invoked.");
 		
-		int fb_number = 56;
+		int fb_number = 57;
 		
 		int affectedLines = this.cMapper.updateCommentCount(fb_number);
 		log.info("\t+ 2.affectedLines:{}", affectedLines);
