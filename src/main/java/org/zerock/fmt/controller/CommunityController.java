@@ -8,16 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO2;
 import org.zerock.fmt.domain.CommunityDTO;
@@ -87,12 +84,14 @@ public class CommunityController implements InitializingBean{
 	
 		
 		try {
+			this.communityService.updateCommentCount(dto.getFb_number());
 			
 			CommunityVO board = this.communityService.read(dto);
-			this.communityService.updateCommentCount(board.getFb_number());
-			log.info("\t+board: "+board);
 			
+			log.info("\t+board: "+board);
 			model.addAttribute("_BOARD_", board);
+			
+			
 //			------------------------------------------------특정게시글
 			List<CommentVO2> commentList = commentService2.readComment(board.getFb_number());
 			model.addAttribute("_COMMENTLIST_", commentList);
@@ -116,8 +115,6 @@ public class CommunityController implements InitializingBean{
 			
 			
 			
-			
-		
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}//try-catch
@@ -211,15 +208,26 @@ public class CommunityController implements InitializingBean{
 	
 	//댓글 수정
 	@PostMapping("/commentUpdate")
-	public String commentUpdate(CommentDTO dto, String cm_content, String fb_number, String cm_number) throws ControllerException{
+	public String commentUpdate(CommentDTO dto) throws ControllerException{
 		
 		try {
-			dto.setCm_content(cm_content);
-			dto.setFb_number(Integer.parseInt(fb_number));
-			dto.setCm_number(Integer.parseInt(cm_number));
 			this.commentService2.updateComment(dto);
 			
-			return "redirect:/comment/post?fb_number="+fb_number+"&cm_number"+cm_number;
+			return "redirect:/community/post?fb_number="+dto.getFb_number();
+		}catch(Exception e) {
+			throw new ControllerException(e);
+			
+		}//try-catch
+	}//commentUpdate
+	
+	//댓글삭제
+	@PostMapping("/commentDelete")
+	public String commentDelete(CommentDTO dto,String fb_number) throws ControllerException{
+		
+		try {
+			this.commentService2.deleteComment(dto);
+			
+			return "redirect:/community/post?fb_number="+fb_number;
 		}catch(Exception e) {
 			throw new ControllerException(e);
 			
@@ -228,21 +236,7 @@ public class CommunityController implements InitializingBean{
 	
 	
 	
-//	댓글 1개조회
-	@GetMapping(value="/{selectComment}", produces= {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<CommentVO2> getComment(@PathVariable("selectComment") String selectComment ) throws ControllerException {
-        log.trace("해당 댓글 조회");
-        log.info("댓글 번호 : " + selectComment);
-       
-        int selectComment2 = Integer.parseInt(selectComment);
-        try {
-        	CommentVO2 vo2 = this.commentService2.selectComment(selectComment2);
-        	log.info("vo: {}", vo2);
-        
-        	return new ResponseEntity<>(vo2, HttpStatus.OK);
-        	
-        } catch (Exception e) { throw new ControllerException(e); }
-    } // getComment
+
 	
 	
 	
