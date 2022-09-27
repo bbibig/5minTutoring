@@ -85,7 +85,7 @@
 					<div class="content7-9">
 
                         <form action="/admin/sale/withdrowOK" method="post">
-
+							<input type="hidden" name="approval" value="승인 완료">
                             <ul>
                         
                                 <li>

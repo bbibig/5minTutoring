@@ -33,7 +33,9 @@ import org.zerock.fmt.domain.InquiryAnswerVO;
 import org.zerock.fmt.domain.InquiryQuestionVO;
 import org.zerock.fmt.domain.PageMyPageDTO;
 import org.zerock.fmt.domain.UserVO;
+import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.domain.WithdrawalVO2;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.AdminService;
@@ -338,6 +340,38 @@ public class AdminController {
 		}catch(Exception e) {throw new ControllerException(e); }
 	}
 
+	@GetMapping("/sale/withdrow/detail")
+	public String adminWithDrowDetail(@RequestParam Integer w_num, Model model) throws ControllerException {
+		log.info("출금 내역 상세 페이지");
+		try {
+			log.info(w_num);
+			WithdrawalVO2 vo = this.withdrawalService.getWithdrawal(w_num);
+			
+			model.addAttribute("_WITHDRAWALINFO_", vo);
+			
+			return "admin/8-06_sale_withdrowdetail";
+		}catch(Exception e) {throw new ControllerException(e); }
+	} // 출금 신청 내역 상세 페이지
+	
+	@PostMapping("/sale/withdrowOK")
+	public String adminWithDrowOK(@RequestParam Integer w_num, WithdrawalDTO dto, CriteriaAdmin cri, Model model) throws ControllerException {
+		log.info("출금 내역 완료 페이지");
+		try {
+		
+			dto.setW_num(w_num);
+			
+			withdrawalService.updateState(dto);
+			log.info("dto: {}", dto);
+			
+			AdminPageDTO adpage = new AdminPageDTO(cri, this.withdrawalService.countList(cri));
+			model.addAttribute("_ADMINPAGINATION_",adpage);
+			
+			model.addAttribute("totalDrawal",this.withdrawalService.totalDrawal(cri));
+			
+		
+			return "redirect:/admin/sale/withdrow?currPage="+ cri.getCurrPage();
+		}catch(Exception e) {throw new ControllerException(e); }
+	} // 출금 신청 승인 완료 페이지
 	
 	//--------------------------------------------- 튜터가입승인
 	@GetMapping("/signUp_comfim")

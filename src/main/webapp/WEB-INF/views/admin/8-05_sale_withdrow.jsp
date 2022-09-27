@@ -129,14 +129,17 @@
                                 <th>튜터 계정</th>
                                 <th>출금 금액</th>
                                 <th>승인 상태</th>
-                                <th>출금신청일자</th>
+								<th>출금신청일자</th>
                             </tr>
                         </thead>
                         <tbody id="tbody">
                             <c:forEach var="draw" items="${_DRAWLIST_}">
                                 <tr>
                                     <td>${draw.w_num}</td>
-                                    <td>${draw.user_email}</td>
+                                    <td>
+                                        <c:set  var="w_num" value="${draw.w_num}" />
+                                        <a href="/admin/sale/withdrow/detail?w_num=${draw.w_num}&currPage=${_ADMINPAGINATION_.cri.currPage}">${draw.user_email}</a>
+                                    </td>
                                     <td><fmt:formatNumber value="${draw.w_price}" pattern="###,###,### 원"/></td>
                                     <td>${draw.approval}</td>
                                     <td><fmt:formatDate pattern="yyyy.MM.dd" value="${draw.w_date}" /></td>
