@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.domain.WithdrawalVO2;
 import org.zerock.fmt.exception.DAOException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.mapper.UserMapper;
@@ -58,6 +59,16 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		catch(Exception e) { throw new ServiceException(e); }
 	} // countList
 	
+	// 출금 신청 내역 상세 조회
+	@Override
+	public WithdrawalVO2 getWithdrawal(Integer w_num) throws ServiceException {
+		log.trace("getWithdrawal() invoked.");
+		
+		try {
+			return withdrawalMapper.selectWithdrawal(w_num);
+		} catch (DAOException e) { throw new ServiceException(e); } 
+	
+	} // 특정 출금 신청 조회
 	
 	// 승인 여부 수정 (승인 대기 / 승인 완료)
 	@Override

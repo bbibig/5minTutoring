@@ -6,6 +6,7 @@ import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.domain.WithdrawalVO2;
 import org.zerock.fmt.exception.ServiceException;
 
 public interface WithdrawalService {
@@ -19,6 +20,9 @@ public interface WithdrawalService {
 	
 //	출금 신청 내역 페이징 총 건수 - 관리자	
 	public abstract int countList(CriteriaAdmin	cri) throws ServiceException;
+	
+//	출금 신청 내역 상세조회
+	public abstract WithdrawalVO2 getWithdrawal(Integer w_num) throws ServiceException;
 	
 //  승인 여부 수정 (승인 대기 / 승인 완료)
 	public abstract boolean updateState(WithdrawalDTO dto) throws ServiceException;

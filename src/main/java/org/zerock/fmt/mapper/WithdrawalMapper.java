@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.domain.WithdrawalVO2;
 import org.zerock.fmt.exception.DAOException;
 
 public interface WithdrawalMapper {
@@ -23,6 +24,8 @@ public interface WithdrawalMapper {
 //	[R] 페이징 총 건수 
 	public abstract int countList(CriteriaAdmin Cri) throws DAOException;
 	
+//	[R] 출금 신청 정보 조회
+	public abstract WithdrawalVO2 selectWithdrawal(Integer w_num) throws DAOException;
 
 //  [U]  승인 여부 수정
 	public abstract Integer updateState(WithdrawalDTO dto) throws DAOException;

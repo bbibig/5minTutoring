@@ -19,6 +19,7 @@ import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.UserDTO;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.domain.WithdrawalVO2;
 import org.zerock.fmt.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -139,4 +140,16 @@ public class WithdrawalServiceTests {
 		int result1 = this.wService.totalDrawal(cri);
 		log.trace("result : {}",result1);
 	}//totalDrawal
+	
+	@Test
+	@Order(7)
+	@DisplayName("출금 내역 상세 조회")
+	void testGetWithdrawal() throws ServiceException {
+		log.trace("testGetWithdrawal() invoked.");
+	
+		int w_num = 88;
+		WithdrawalVO2 vo = wService.getWithdrawal(w_num);
+		log.info("Withdrawalvo: {}", vo);
+	} // testGetWithdrawal
+	
 } // end class

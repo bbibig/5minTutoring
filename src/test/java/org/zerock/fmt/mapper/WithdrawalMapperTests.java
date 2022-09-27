@@ -22,6 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.fmt.domain.CriteriaAdmin;
 import org.zerock.fmt.domain.WithdrawalDTO;
 import org.zerock.fmt.domain.WithdrawalVO;
+import org.zerock.fmt.domain.WithdrawalVO2;
 import org.zerock.fmt.exception.DAOException;
 
 import lombok.NoArgsConstructor;
@@ -179,4 +180,19 @@ public class WithdrawalMapperTests {
 		
 		log.info("\t + result : {}, {}, {}", result1, result2, result3);
 	}//totalDrowal
+	
+	@Test
+	@Order(6)
+	@DisplayName("출금 신청 조회")
+	void testSelectWithdrawal() throws DAOException {
+		log.trace("testSelectWithdrawal : 특정 출금 신청 조회");
+		
+		int w_num = 88;		
+
+		WithdrawalVO2 vo = this.withdrawalMapper.selectWithdrawal(w_num);
+
+		Objects.requireNonNull(vo); 
+		log.info("/t+ vo: {}", vo);
+	}//totalDrowal
+	
 } // end class
