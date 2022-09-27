@@ -24,7 +24,7 @@
 
         <body>
             <!-- ======= header : 로그인 후 ======= -->
-			<jsp:include page="../header_login.jsp" flush="true" />
+         <jsp:include page="../header_login.jsp" flush="true" />
             <!-- ======= header ======= -->
             
             <!-- ======= Section ======= -->
@@ -76,6 +76,7 @@
                                         ${_HandVO_.h_name}
 
 
+                                        
                                     </td>
 
                                     <td class="product-info-data">   
@@ -102,15 +103,13 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp; ${_HandVO_.h_price}원
                                         </span>
                                     </td>
-                                        
+
                                 </tr>
                             </tbody>
 
                         </table>
 
-                        <div class="pBtn">
-                            <button onclick="requestPay()" type="submit" class="payBtn">결제하기</button>
-                        </div>
+                        <button onclick="requestPay()" type="submit" class="payBtn">결제하기</button>
 
                     </form>
                 </section>
