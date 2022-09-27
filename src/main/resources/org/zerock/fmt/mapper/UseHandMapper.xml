@@ -13,7 +13,7 @@
 		    user_email
 		) VALUES (
 		    use_num.NEXTVAL,
-		    #{qb_number},
+		    (SELECT MAX(qb_number) FROM tbl_question_board),
 		    #{tb_number},
 		    CURRENT_DATE,
 		    #{user_email}

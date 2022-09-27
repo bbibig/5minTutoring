@@ -42,12 +42,13 @@
 			fb_number,
 			u.user_email,
 			u.user_name,
+			u.user_nick,
 			cm_content,
 			regdate,
 			updatedate
 		FROM tbl_comment c, tbl_user u
 		WHERE a_number = #{a_number}
-		AND u.user_name IN (SELECT user_name
+		AND (u.user_name, u.user_nick) IN (SELECT user_name, user_nick
 							FROM tbl_user 
 							WHERE c.user_email = u.user_email)
 		ORDER BY regdate DESC
@@ -62,12 +63,13 @@
 			fb_number,
 			u.user_email,
 			u.user_name,
+			u.user_nick,
 			cm_content,
 			regdate,
 			updatedate
 		FROM tbl_comment c, tbl_user u
 		WHERE cm_number = #{cm_number}
-		AND u.user_name IN (SELECT user_name
+		AND (u.user_name, u.user_nick) IN (SELECT user_name, user_nick
 							FROM tbl_user 
 							WHERE c.user_email = u.user_email)
 	</select>

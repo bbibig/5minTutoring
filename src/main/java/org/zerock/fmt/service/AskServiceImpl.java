@@ -66,6 +66,7 @@ public class AskServiceImpl implements AskService {
 		} catch (Exception e) { throw new ServiceException(e); }
 	} // createQ
 	
+	@Transactional
 	@Override
 	public boolean regUseHand(UseHandVO useHandVO) throws ServiceException {
 		log.trace("손들기 사용정보 저장");
@@ -74,7 +75,30 @@ public class AskServiceImpl implements AskService {
 		catch (Exception e) { throw new ServiceException(e); }
 		
 	} // regUseHand
-
+	
+	
+	// 질문글 등록, 손들기 사용 / 손들기 사용정보 저장을 Transaction propagation 처리
+	@Transactional
+	public boolean questionTransaction(QuestionBoardDTO QBdto, UseHandVO useHandVO) throws ServiceException {
+		log.trace("questionTransaction invoked.");
+		
+		String studentEmail = QBdto.getUser_email();
+		useHandVO.setUser_email(studentEmail);
+		
+		boolean result_1 = createQ(QBdto);
+		boolean result_2 = regUseHand(useHandVO);
+		
+		if(result_1 && result_2) {
+			log.info("질문글 등록 & 손들기 정보 저장 완료!");
+			return true;
+		}
+		
+		return false;
+		
+	} // questionTransaction
+	
+	
+	
 	@Transactional
 	@Override
 	public boolean updateQ(QuestionBoardDTO QBdto) throws ServiceException {
@@ -91,6 +115,7 @@ public class AskServiceImpl implements AskService {
 		} catch (Exception e) { throw new ServiceException(e); } 
 	} // updateQ
 
+	
 	@Transactional
 	@Override
 	public boolean deleteQ(String qb_number, String user_email) throws ServiceException {

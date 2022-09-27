@@ -81,58 +81,70 @@
 				// 댓글 리스트 출력
 	       		function showList(currPage, reset) {
 					commentService.getList({a_number:a_number, currPage:currPage||1}, function(data) {
-						
-						var commentCnt = data.commentCnt;
-						var list = data.list;
-						var str = "";
-						
-						// 댓글 개수 출력
-						$("#commentTotal").html(commentCnt);
-						
-						// 현재 표시된 페이지의 댓글이 5개 이하면 더보기 버튼 숨기기
-						if(currPage * 5 >= commentCnt) {
-							$("#moreComment").css("display", "none");
-						} else {
-							$("#moreComment").css("display", "inline");
-						}
-						
-						// 댓글 모달 처리 후 1 페이지로 돌아오기 위한 처리
-						if(reset) {
-							commentList.html("");
-							currPage = 1;
-						}
-						
-						if(list == null || list.length==0) {
-							commentList.html("");
-							return;
-						}
-						for(var i=0, len=list.length || 0; i<len; i++) {
-							str+= '<div class="commentDiv" data-cm_number="'+list[i].cm_number+'"><div class="comment_info d-flex">';
-							str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
-							str+= '		<div class="Sname">' +list[i].user_name+ '</div>';
-							str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div>';
 							
-							console.log("userEmail: "+userEmail);
-							console.log(list[i].user_email);
+							var commentCnt = data.commentCnt;
+							var list = data.list;
+							var profile = data.profileList;
+							var str = "";
 							
-							// 본인이 쓴 댓글에만 수정/삭제 버튼 나타남
-							if(userEmail === list[i].user_email) {
-								str+= '			<div class="hamburger-button col-9 d-flex justify-content-end ham">';
-								str+= '				<div class="dropdown">';
-								str+= '					<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
-								str+= '						<i class="bi bi-list fs-4"></i></button>';
-								str+= '					<ul class="dropdown-menu">';
-								str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
-								str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
-								str+= '					</ul></div></div></div>';
+							
+							// 댓글 개수 출력
+							$("#commentTotal").html(commentCnt);
+							
+							// 현재 표시된 페이지의 댓글이 5개 이하면 더보기 버튼 숨기기
+							if(currPage * 5 >= commentCnt) {
+								$("#moreComment").css("display", "none");
 							} else {
-								str+= '		<div class="empty" style=""></div>';
+								$("#moreComment").css("display", "inline");
 							}
 							
-							str+= '	<p class=a>' +list[i].cm_content+ '</p></div><hr>';
-						}
+							// 댓글 모달 처리 후 1 페이지로 돌아오기 위한 처리
+							if(reset) {
+								commentList.html("");
+								currPage = 1;
+							}
+							
+							// 댓글 영역 출력
+							if(list == null || list.length==0) {
+								commentList.html("");
+								return;
+							}
+
+							
+							for(var i=0, len=list.length || 0; i<len; i++) {
+									str+= '<div class="commentDiv" data-cm_number="'+list[i].cm_number+'"><div class="comment_info d-flex">';
+									
+									str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
+									
+									str+= '		<div class="Sname">' +list[i].user_name+ '</div>';
+									str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div>';
+									
+									console.log("userEmail: "+userEmail);
+									console.log(list[i].user_email);
+									
+									// 본인이 쓴 댓글에만 수정/삭제 버튼 나타남
+									if(userEmail === list[i].user_email) {
+										str+= '			<div class="hamburger-button col-9 d-flex justify-content-end ham">';
+										str+= '				<div class="dropdown">';
+										str+= '					<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
+										str+= '						<i class="bi bi-list fs-4"></i></button>';
+										str+= '					<ul class="dropdown-menu">';
+										str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
+										str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
+										str+= '					</ul></div></div></div>';
+									} else {
+										str+= '		<div class="empty" style=""></div>';
+									}
+									
+									str+= '	<p class=a>' +list[i].cm_content+ '</p></div><hr>';
+
+							}
+						
 						commentList.append(str);
+
+					
 					}); // getList
+					
 				} // showList
 
 				
@@ -443,7 +455,7 @@
 	                    <div class="comment_box">
 	                        <div class="comment d-flex">
 	                            <div class="sSPic">
-	                                <img src="/resources/img/profile.png">
+	                                <img src="/profile/${__LOGIN_USER__.user_nick}_profile.png" class="rounded-circle" >
 	                            </div>
 								<div id="newComment">
 									<input type="hidden" name="a_number" value="${_A_.a_number}" />

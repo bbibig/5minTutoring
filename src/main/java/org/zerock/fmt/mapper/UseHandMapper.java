@@ -9,7 +9,7 @@ public interface UseHandMapper {
 
 	// 손들기 사용 정보 저장
 	public abstract Integer insertUseHand(UseHandVO useHandVO) throws DAOException;
-
+	
 	// 손들기 반환 정보 저장
 	public abstract Integer insertHandBack(HandBackVO handBackVO) throws DAOException;
 

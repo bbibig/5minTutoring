@@ -114,12 +114,14 @@
 	                <div class="row mt-3 d-flex flex-row align-items-center">
 	                
 		                <div class="tutoring_ok col-1">
-		                	<span class="badge bg-secondary">
+		                	<span>
 	                            <c:if test="${TQ.tb_answer == '0'}">
-	                            	<c:out value="대기중"/>
+	                            	<div class="badge bg-primary"><c:out value="대기중"/></div>
 	                            </c:if>
 	                            <c:if test="${TQ.tb_answer == '1'}">
-	                            	<c:out value="과외 완료"/>
+		                           	<div>
+		                            	<span class="badge bg-secondary"><c:out value="과외완료"/></span>
+		                            </div>
 	                            </c:if>
 	                        </span>
 	                   	</div>
@@ -134,16 +136,6 @@
 		               <hr>
 		           </div> 
 				</c:forEach>
-			
-			<!-- 과외중 참고 -->
-              <div class="list-box"> 
-                <div class="row mt-3 d-flex flex-row align-items-center">
-                  <div class="col-1"><span class="badge bg-primary">과외중</span></div>
-                  <div class="col-8" id="tutoring-title"><a href="/tutor/tutoringAsk" style="color:black" class="fs-4">Lorem ipsum dolor sit amet, consectetur adipisicing.</a></div>
-                  <div class="col-1"><span>홍길동</span></div>
-                </div>
-                <hr>
-              </div> 
             </div>
 
 			<!-- 페이지 넘버 -->

@@ -13,6 +13,7 @@ public class CommentVO {
 	
 	private String user_email;		
 	private String user_name; 
+	private String user_nick; 
 	
 	private String cm_content;		
 	private Date regdate;			

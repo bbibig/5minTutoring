@@ -69,7 +69,10 @@
 	<!-- Tutoring 채팅 -->
 	<websocket:handlers>
 		<websocket:mapping handler="ChattingService" path="/chatting"/>
-		<websocket:sockjs></websocket:sockjs>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs/>
 	</websocket:handlers>
 	<beans:bean id="ChattingService" class="org.zerock.fmt.service.ChattingService"/>
 

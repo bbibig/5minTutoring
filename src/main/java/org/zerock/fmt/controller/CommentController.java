@@ -1,5 +1,6 @@
 package org.zerock.fmt.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zerock.fmt.domain.CommentDTO;
 import org.zerock.fmt.domain.CommentVO;
 import org.zerock.fmt.domain.CriteriaComment;
+import org.zerock.fmt.domain.ProfileVO;
+import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.exception.ControllerException;
 import org.zerock.fmt.exception.ServiceException;
 import org.zerock.fmt.service.CommentService;
+import org.zerock.fmt.service.ProfileService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +41,9 @@ public class CommentController {
 	
 	@Setter(onMethod_= @Autowired)
 	private CommentService commentService; 
+	
+	@Setter(onMethod_= @Autowired)
+	private ProfileService profileService; 
 	
 	// JSON 데이터(댓글)를 전송하고 처리 결과 문자열로 출력
 	@PostMapping(value="/new", consumes="application/json", produces= {MediaType.TEXT_PLAIN_VALUE})
@@ -57,14 +65,30 @@ public class CommentController {
 	
 	@GetMapping(value="/list/{a_number}/{currPage}", produces= {MediaType.APPLICATION_JSON_VALUE})
 	public Map<String, Object> commentList(@PathVariable("a_number") int a_number,
-													@PathVariable("currPage") int currPage) throws ControllerException {
+											@PathVariable("currPage") int currPage, 
+											Model model) throws ControllerException {
 		log.trace("해당 답변글의 댓글 목록 출력");
 		
 		CriteriaComment criteria = new CriteriaComment(a_number, currPage, 5);
 		
 		try {
 			List<CommentVO> commentList = this.commentService.getComment(criteria);
+			//-------
 			
+			
+			//--------------------------프로필 사진 가져오기2
+//			List<List> profileList = new ArrayList<>();
+//			
+//			commentList.forEach(e -> {
+//				try {
+//					List<UserProfileVO> profile = this.profileService.getUserNaP(e.getUser_email());
+//					profileList.add(profile);
+//				} catch (ServiceException e1) { ;; }
+//			});
+//			model.addAttribute("profileList", profileList); // 프로필 추가해서 올린 댓글
+			//-----------------------------------------------
+			
+			//-------
 			int commentCnt = this.commentService.commentCount(a_number);
 			log.info("commentCnt: {}", commentCnt);
 			
@@ -72,6 +96,8 @@ public class CommentController {
 			map.put("list", commentList); // 페이징된 댓글 목록 (5개)
 			map.put("commentCnt", commentCnt); // 댓글의 총 개수
 			
+			//map.put("profileList", profileList); // 프로필 추가한 댓글 리스트
+
 			return map;
 			
 		} catch (ServiceException e) { throw new ControllerException(e); }

@@ -17,6 +17,9 @@ public interface AskService {
 	// 손들기 사용정보 저장
 	public abstract boolean regUseHand(UseHandVO useHandVO) throws ServiceException;
 	
+	// 질문글 작성과 손들기 사용정보 저장 트랜잭션 전파 처리
+	public boolean questionTransaction(QuestionBoardDTO QBdto, UseHandVO userHandVO) throws ServiceException;
+	
 	// 질문글 수정 - 튜터 답변 전까지만 가능
 	public abstract boolean updateQ(QuestionBoardDTO QBdto) throws ServiceException;
 	

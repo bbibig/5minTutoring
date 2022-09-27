@@ -29,8 +29,8 @@
 		sock.onclose = onClose;
 		sock.onopen = onOpen;
 		
-		// 현재 세션에 로그인 한 사람
-		var cur_session = '${__LOGIN_USER__.user_name}'; 
+		// 로그인한 유저
+		var user = '${__LOGIN_USER__.user_nick}'; 
 	
 		function sendMessage() {
 			sock.send($("#msg").val());
@@ -49,49 +49,42 @@
 				console.log('arr[' + i + ']: ' + arr[i]);
 			}
 	
-			
-			// var cur_nick = '${__LOGIN_USER__.user_nick}';
-			console.log("cur_session : " + cur_session);
+			console.log("user : " + user);
 	
 			sessionId = arr[0];
 			message = arr[1];
 	
 			// 메시지 구분
-			// if (sessionId == cur_session) {
+			if (user == sessionId) {
+				var str = "<div class='col-6'>";
+				str += "<div class='alert alert-secondary'>";
+				str += "<b>" + sessionId + " : " + message + "</b>";
+				str += "</div></div>";
 	
-			// 	var str = "<div class='col-6'>";
-			// 	str += "<div class='alert alert-secondary'>";
-			// 	str += "<b>" + cur_nick + " : " + message + "</b>";
-			// 	str += "</div></div>";
-	
-			// 	$("#msgArea").append(str);
-			// } else {
-	
+				$("#msgArea").append(str);
+
+			} else if(user != sessionId){
 				var str = "<div class='col-6'>";
 				str += "<div class='alert alert-warning'>";
 				str += "<b>" + sessionId + " : " + message + "</b>";
 				str += "</div></div>";
 	
 				$("#msgArea").append(str);
-			// }
-	
+			}
 			console.log("채팅 메시지 : " + data);
-	
-		}
+		} // onMessage
 	
 		// 채팅창에서 나갔을 때
 		function onClose(evt) {
-			
-			var str = cur_session + " 님이 퇴장하셨습니다.";
+			var str = user + " 님이 퇴장하셨습니다.";
 			$("#msgArea").append(str);
-		}
+		} // onClose
 		
 		// 채팅창에 들어왔을 때
 		function onOpen(evt) {
-			
-			var str = cur_session + "님이 입장하셨습니다.";
+			var str = user + "님이 입장하셨습니다.";
 			$("#msgArea").append(str);
-		}
+		} // onOpen
 		
 	}); // .jq
 
@@ -176,31 +169,31 @@
 						<div class="ask_content">${_ONE_TB_VO_.tb_content}</div>
 					</div>
 					
-					<p></p>
-					<p></p>
 					
-					<!-- <form action=#>
-						<p></p>
-						<button type="submit" id="tutoring">과외하기</button>
-					</form> -->
-					
-					<!-- 채팅 입력 -->
-					<div class="col-6">
-					<label><h3><b>Chatting</b></h3></label>
-					</div>
-					<div>
-						<div id="msgArea" class="col"></div>
-						<div class="col-6">
-							<div class="input-group mb-3">
-								<input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
-								</div>
+						<c:if test="${__LOGIN_USER__.user_email eq _ONE_TB_VO_.user_email}">
+						
+							<!-- 채팅 입력 -->
+							<div class="col-6">
+								<p style="height: 30px;"></p>
+								<label><h3><b>Chatting</b></h3></label>
 							</div>
-						</div>
-					</div>
+							<div>
+								<div id="msgArea" class="col"></div>
+								<div class="col-6">
+									<div class="input-group mb-3">
+										<input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
+										</div>
+									</div>
+								</div>
+									<p></p>
+									<button type="button" id="tutoring" onclick="location.href='tutoringEnd?num=${_ONE_TB_VO_.tb_number}&tp=${_ONE_TB_VO_.tp_number}'">
+										과외 종료하기</button>
+							</div>
+						</c:if>	
+						
 					<div class="col-6"></div>
-
 				</div>
 			</div>
 

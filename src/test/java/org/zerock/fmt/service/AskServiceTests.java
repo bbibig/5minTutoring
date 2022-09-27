@@ -76,7 +76,7 @@ public class AskServiceTests {
 	void testRegUseHand() throws ServiceException {
 		log.trace("손들기 사용 정보 등록");
 		
-		UseHandVO useHandVO = new UseHandVO(null, 42, null, null, "hi@gmail.com");
+		UseHandVO useHandVO = new UseHandVO(null, null, null, null, "hi@gmail.com");
 		
 		boolean createSucceed = this.askService.regUseHand(useHandVO);
 		log.info("createSucceed: {}", createSucceed);

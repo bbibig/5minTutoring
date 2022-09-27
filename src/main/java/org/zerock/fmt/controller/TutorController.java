@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +31,7 @@ import org.zerock.fmt.domain.ReviewVO;
 import org.zerock.fmt.domain.TutorPageDTO;
 import org.zerock.fmt.domain.TutorPageVO;
 import org.zerock.fmt.domain.TutoringBoardVO;
+import org.zerock.fmt.domain.UseHandVO;
 import org.zerock.fmt.domain.UserProfileVO;
 import org.zerock.fmt.domain.UserVO;
 import org.zerock.fmt.exception.ControllerException;
@@ -483,8 +483,13 @@ public class TutorController {
 		log.info("user_email: {}", user_email);
 		
 		newDTO.setUser_email(user_email);
+		UseHandVO useHandVO = new UseHandVO();
+		
 		try {
-			boolean result = this.askService.createQ(newDTO);
+			
+			// 질문글 등록 & 손들기 사용정보 저장
+//			boolean result = this.askService.createQ(newDTO);
+			boolean result = this.askService.questionTransaction(newDTO, useHandVO);
 			log.info("result: {}", result);
 			
 			// session 손들기 정보 업데이트
@@ -593,6 +598,23 @@ public class TutorController {
 		
 		return "tutor/2-09_tutoringAsk";
 	} // tutoringAsk
+	
+	
+	@GetMapping("/tutoringEnd")
+	public String tutoringEnd(Model model, HttpServletRequest req) throws ControllerException {
+		log.trace("과외하기 완료");
+		
+		String tb_number = req.getParameter("num");
+		String tp_number = req.getParameter("tp");
+		
+		try {
+			boolean result = this.tutoringService.updateTBAnswer(Integer.parseInt(tb_number));
+			log.info("result: {}", result);
+		
+		} catch (Exception e) { throw new ControllerException(e); }
+		
+		return "redirect:/tutor/tutoring?num=" + tp_number;
+	} // tutoringEnd
 
 
 } // end class
