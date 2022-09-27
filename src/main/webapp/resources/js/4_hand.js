@@ -4,20 +4,18 @@ IMP.init("imp88781134"); // 예: imp00000000
 
 function requestPay() {
     let user_name = '${__LOGIN_USER__.user_name}';
-    let user_email = '${__LOGIN_USER__.user_email}';
-    let user_tel = '${__LOGIN_USER__.user_phone}';
-    let h_name = '손들기 30개';
 
     // IMP.request_pay(param, callback) 결제창 호출
     IMP.request_pay({ // param
         pg: "html5_inicis",     // PG사 선택
         pay_method: "card",
         merchant_uid: "33",   // 주문번호
-        name: h_name, // 상품명
+        name: "손들기 30개", // 상품명
         amount: 6600,  // 결제금액
-        buyer_email: user_email,
+        buyer_email: "test@gmail.com",
+        // buyer_name: "이윤정",
         buyer_name: user_name,
-        buyer_tel: user_tel,
+        buyer_tel: "010-3333-3333"
     }, function (rsp) { // callback
         console.log(rsp);
         if (rsp.success) {
