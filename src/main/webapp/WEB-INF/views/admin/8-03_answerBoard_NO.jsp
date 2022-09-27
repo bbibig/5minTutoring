@@ -70,7 +70,7 @@
                         <thead>
                             <tr>
                                 <th>문의 번호</th>
-                                <th>계정</th>
+                                <th>제목</th>
                                 <th>작성자</th>
                                 <th>접수일</th>
                                 <th>처리상태</th>
