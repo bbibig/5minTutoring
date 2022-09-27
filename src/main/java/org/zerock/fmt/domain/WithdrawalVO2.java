@@ -7,9 +7,9 @@ import lombok.Value;
 @Value
 public class WithdrawalVO2 {
 
-
+	private Integer w_num;
 	private String user_name;		// 사용자명
-	private String user_phone;		// 핸드폰 번호
+	private String user_phone;
 	private String bank_account;	// 은행 계좌	
 	private Integer w_quantity;		// 출금 수량 (손들기)
 	private Integer w_price;		// 출금액

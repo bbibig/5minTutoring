@@ -41,14 +41,31 @@
 			</choose>
 	  </select>
 
+ 	<!-- 특정 출금 신청 조회 -->
+      <select id="selectWithdrawal" resultType="org.zerock.fmt.domain.WithdrawalVO2">
+      	SELECT w.w_num, u.user_name, u.user_phone, w.bank_account, w.w_quantity, w.w_price, w.w_date
+		FROM tbl_user u, tbl_withdrawal w
+		WHERE u.user_email = w.user_email
+		AND w.w_num = #{w_num}
+      </select> 	
+
       <!-- 승인여부 수정 -->
-      <update id="updateState">
+    <update id="updateState">
 	      UPDATE tbl_withdrawal 
 	      SET approval = #{approval}, w_okdate = CURRENT_DATE
 	      WHERE w_num = #{w_num}
       </update>
       
-  
+     <!-- 손들기 개수 차감 
+      <update id="updateHands">
+	      	UPDATE tbl_user
+			SET hands_wallet = hands_wallet - (SELECT w_quantity 
+											   FROM tbl_withdrawal 
+											   WHERE user_email = #{user_email} AND w_num = #{w_num}
+											   ORDER BY DESC)
+			WHERE user_email = #{user_email}
+      </update> -->
+    	
 	  <select id="totalDrowal" resultType="int">
 		  SELECT SUM(w_price) 
 		  FROM tbl_withdrawal
@@ -62,19 +79,4 @@
 		</choose>
 	  </select>
 	  
-	  <!-- 특정 출금 신청 조회 -->
-      <select id="selectWithdrawal" resultType="org.zerock.fmt.domain.WithdrawalVO2">
-      	SELECT w.w_num, u.user_name, u.user_phone, w.bank_account, w.w_quantity, w.w_price, w.w_date
-		FROM tbl_user u, tbl_withdrawal w
-		WHERE u.user_email = w.user_email
-		AND w.w_num = #{w_num}
-      </select> 	
-
-      <!-- 승인여부 수정 -->
-      <update id="updateState">
-	      UPDATE tbl_withdrawal 
-	      SET approval = '승인 완료', w_okdate = CURRENT_DATE
-	      WHERE w_num = #{w_num}
-      </update>
-      
     </mapper>    

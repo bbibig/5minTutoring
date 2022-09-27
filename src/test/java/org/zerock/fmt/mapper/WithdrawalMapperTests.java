@@ -134,7 +134,7 @@ public class WithdrawalMapperTests {
 	void testUpdate() throws DAOException {
 		log.trace("testUpdate() invoked.");
 		
-		WithdrawalDTO dto = new WithdrawalDTO(35, null, null, null, null, "승인 완료", null, null);
+		WithdrawalDTO dto = new WithdrawalDTO(61, null, null, null, null, "승인 완료", null, null);
 		
 		int affectedLines =  this.withdrawalMapper.updateState(dto);
 		log.info("\t+ affectedLines: {}", affectedLines);
