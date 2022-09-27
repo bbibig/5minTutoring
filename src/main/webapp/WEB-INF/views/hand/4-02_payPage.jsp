@@ -66,7 +66,6 @@
                                     <th class="product-info-title">구매상품</th>
                                     <th class="product-info-title">상품금액</th>
                                     <th class="product-info-title">수량 / 합계</th>
-                                    <!-- <th class="product-info-title">합계</th> -->
                                 </tr>
                             </thead>
                             
@@ -77,7 +76,6 @@
                                         ${_HandVO_.h_name}
 
 
-                                        
                                     </td>
 
                                     <td class="product-info-data">   
@@ -104,38 +102,15 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp; ${_HandVO_.h_price}원
                                         </span>
                                     </td>
-
-                                    <!-- <p>
-                                        ${_HandVO_}
-                                    </p>
-                                    <p>
-                                        ${_UserDTO_}
-                                    </p> -->
-                                    <!-- <td class="product-info-data">
-                                        <span id="sum_p_price" class="sum" value="javascript:basket.total();">
-                                            ${'${_HandVO_.h_price}'}원
-                                        </span>
-                                    </td>    -->
-
                                         
                                 </tr>
                             </tbody>
 
                         </table>
 
-
-                        <!-- total-amount -->
-                        <!-- <h3>총 금액</h3>
-                        <table id="total-amount" class="pay-table">
-                            <tbody class="table-body">
-                            <tr>
-                                <td class="total-amount-title">총 금액</td>
-                                <td class="sum" id="total" onclick="javascript:basket.total();">${_HandVO_.h_price} 원</td>
-                            </tr>
-                            </tbody>
-                        </table> -->
-
-                        <button onclick="requestPay()" type="submit" class="payBtn">결제하기</button>
+                        <div class="pBtn">
+                            <button onclick="requestPay()" type="submit" class="payBtn">결제하기</button>
+                        </div>
 
                     </form>
                 </section>

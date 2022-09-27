@@ -158,7 +158,8 @@
   font-weight: 400;
 }
 .payBtn {
-  margin: 25px auto;
+  display: block;
+  margin: auto;
   width: 330px;
   height: 50px;
   color: white;
@@ -166,4 +167,7 @@
   border-radius: 5px;
   border: 1px solid #333333;
   font-size: 18px;
+}
+.pBtn {
+  width: 880px;
 }
