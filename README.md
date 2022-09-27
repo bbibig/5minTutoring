@@ -6,11 +6,11 @@
 ## :pushpin:사용 기술
 
 - OS : Window
-- Back-End : Java, Spring Framework, Mybatis 
+- Back-End : Java(11), Spring Framework, Mybatis 
 - Front-End : HTML5, CSS3, JavaScript, Jquery
 - DB : Oracle Cloud
 - IDE : Ecilpse 2022-09, SQL Developer 
-- WAS : Apache Tomcat
+- WAS : Apache Tomcat9
 
 ## :pushpin: 프로젝트 내용 - 기능 
 
