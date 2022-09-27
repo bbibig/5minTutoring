@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <c:set var="path" value="${pageContext.request.contextPath}" />
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
         
 
 
@@ -12,18 +13,6 @@
       <jsp:include page="../htmlHead.jsp" flush="true" />
       <link href="${path}/resources/css/3-01_community.css" rel="stylesheet">
       <!-- ========================================================= -->
-
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js" integrity="sha512-QDsjSX1mStBIAnNXx31dyvw4wVdHjonOwrkaIhpiIlzqGUCdsI62MwQtHpJF+Npy2SmSlGSROoNWQCOFpqbsOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script>
-        $(function(){
-          $('#regBtn').on('click',()=>{
-            self.location = "/community";
-          }); //onclick
-
-
-        });
-      </script> -->
 
     <title>튜터페이지-커뮤니티</title>
     
@@ -127,9 +116,22 @@
                       </div>
   
                       <div class="content">
-                        <p>${communityBoard.fb_content}</p>
+                        
+                        <c:choose>
+
+                          <c:when test="${fn:length(communityBoard.fb_content) > 20}">
+                            <p>${fn:substring(communityBoard.fb_content,0,15)}...</p> 
+                          </c:when>
+
+                          <c:otherwise>
+                            <p>${communityBoard.fb_content}</p>    
+                          </c:otherwise>
+                          
+                        </c:choose>
+                        
+                        <!-- <p>${communityBoard.fb_content}</p> -->
+                        
                       </div>
-  
                       <div class="user_date d-flex flex-row">
                         <div class="user">
                           <strong>${communityBoard.user_nick}</strong>

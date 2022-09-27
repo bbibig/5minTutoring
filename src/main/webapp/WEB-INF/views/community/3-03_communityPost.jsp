@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
+
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!doctype html>
@@ -61,6 +63,11 @@
 		.bi-suit-heart-fill {
 			color: rgb(255, 70, 70);
 		}
+
+		.form-control{
+			resize: none;
+		}
+
 	</style>
 
 
@@ -122,7 +129,7 @@
 
 										<p class="my-3 fs-5"># 수정할 댓글을 입력하세요.</p>
 
-										<form class="was-validated col-12 d-flex flex-column" id="commentUpdateForm" action="/community/commentUpdate" method="post">
+										<form class=" col-12 d-flex flex-column" id="commentUpdateForm" action="/community/commentUpdate" method="post">
 											<div class="text-box">
 												<input type="hidden" name="cm_number">
 												<input type="hidden" name="fb_number">
@@ -179,14 +186,17 @@
 										<div class="warnning-img">
 											<i class="bi bi-exclamation-circle" style="font-size: 5rem"></i>
 										</div>
-										<form action="/community/commentDelete" method="post">
-										<p class="my-3 "><strong class="fs-4">삭제하시겠습니까?</strong></p>
+										<form action="/community/commentDelete" method="post" class="d-flex flex-column justify-content-center">
+										
+										<p class="my-3 align-self-center"><strong class="fs-4">삭제하시겠습니까?</strong></p>
 										<input type="hidden" name="cm_number">
 										<input type="hidden" name="fb_number">
+					
 										<div class="pop-up-button-box d-flex flex-row align-self-center">
 											<button type="button" class="btn btn-outline-primary"
 												data-bs-dismiss="modal">취소</button>&nbsp;&nbsp;&nbsp;
 											<button type="submit" class="btn btn-outline-primary">확인</button>
+					
 										</form>
 										</div>
 									</div>
@@ -198,20 +208,20 @@
 
 					<!-- post -->
 					<form action="#" id="postBoard">
-						<h2 class="fas fa-q ask_title" name="fb_title">${_BOARD_.fb_title}</h2>
+						<h2 class="ask_title" name="fb_title">${_BOARD_.fb_title}</h2>
 						<div class="Tutor_info d-flex">
 
-							<div class="TPic">
+							<div class="TPic mt-3">
 								<c:if test="${profileResult eq 'false'}"> <img src="/resources/img/profile.png"> </c:if>
 								<c:if test="${profileResult eq 'true'}">
 									<img src="<spring:url value='/profile/${_BOARD_.user_nick}_profile.png'/>"
-										class="rounded-circle">
+										class="rounded-circle ms-0">
 								</c:if>
 							</div>
-							<div class="Tname">${_BOARD_.user_nick}</div>
+							<div class="Tname mt-3">${_BOARD_.user_nick}</div>
 
 							<br>
-							<div class="date" name="fb_date">&nbsp;
+							<div class="date mt-3 ms-0" name="fb_date">&nbsp;
 								<fmt:formatDate value="${_BOARD_.fb_date}" pattern="yyyy.MM.dd" />
 							</div>
 
@@ -232,32 +242,34 @@
 									</div>
 								</div>
 							</c:if>
+							
 						</div>
-						<p class="answer_content" name="fb_content">${_BOARD_.fb_content}</p>
+						<p name="fb_content">${_BOARD_.fb_content}</p>
 					</form>
 
 					<!-- comment -->
 					<!-- icon -->
 					
-					<span class="bi bi-chat-right-dots fs-4 comment_icon"><span>  ${_BOARD_.fb_comment_count}</span></span>
+					<span class="bi bi-chat-right-dots fs-4 comment_icon ps-0"><span>  ${_BOARD_.fb_comment_count}</span></span>
 
 					<div class="comment_box">
-						<div class="comment d-flex">
+						<div class="comment d-flex mt-2">
 							<div class="sSPic">
 								<c:if test="${_USER_PROFILE_ eq 'false'}"> <img src="${path}/resources/img/profile.png"> </c:if>
             					<c:if test="${_USER_PROFILE_ eq 'true'}">
 									<img src="<spring:url value='/profile/${__LOGIN_USER__.user_nick}_profile.png'/>"class="rounded-circle">
 								</c:if>
 							</div>
-							<form action="/community/commentWrite?fb_number=${_BOARD_.fb_number}" method="post">
+							<form action="/community/commentWrite?fb_number=${_BOARD_.fb_number}" method="post" class="pb-0">
 
 								<input type="hidden" id="user_email" name="user_email"
 									value="${__LOGIN_USER__.user_email}">
-								<input id="comment_write" type="text" size="80" name="cm_content"
+								<input id="comment_write" type="text" size="83" name="cm_content" class="mt-1" 
 									placeholder="댓글을 입력하세요.">
-								<button type="submit" id="save" type="submit">등록</button>
+								<button type="submit" id="save" type="submit" class="ms-2">등록</button>
 							</form>
 						</div>
+						<hr>
 
 						<div id="comment_list">
 						<c:forEach items='${_COMMENTLIST_}' var="commentList" varStatus="statusNm">
