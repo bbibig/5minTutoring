@@ -117,27 +117,26 @@
 									str+= '		<div class="sSPic"><img src="/resources/img/profile.png"></div>';
 									
 									str+= '		<div class="Sname">' +list[i].user_name+ '</div>';
-									str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div>';
+									str+= '		<div class="date">' +commentService.displayTime(list[i].regdate)+ '</div></div>';
 									
 									console.log("userEmail: "+userEmail);
 									console.log(list[i].user_email);
 									
+									str+= '	<div class="d-flex"><p class="d-flex col-10">' +list[i].cm_content+ '</p>';
+									
 									// 본인이 쓴 댓글에만 수정/삭제 버튼 나타남
 									if(userEmail === list[i].user_email) {
-										str+= '			<div class="hamburger-button col-9 d-flex justify-content-end ham">';
+										str+= '			<div class="hamburger-button col-1 d-flex justify-content-end ham">';
 										str+= '				<div class="dropdown">';
 										str+= '					<button class="btn pt-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
 										str+= '						<i class="bi bi-list fs-4"></i></button>';
 										str+= '					<ul class="dropdown-menu">';
 										str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#comment_revise" id="cmModalBtn">수정</a></li>';
 										str+= '						<li class="list-unstyled"><a class="dropdown-item" data-bs-toggle="modal" href="#delete">삭제</a></li>';
-										str+= '					</ul></div></div></div>';
+										str+= '					</ul></div></div></div><hr>';
 									} else {
-										str+= '		<div class="empty" style=""></div>';
+										str+= '		<div class="empty" style=""></div></div><hr>';
 									}
-									
-									str+= '	<p class=a>' +list[i].cm_content+ '</p></div><hr>';
-
 							}
 						
 						commentList.append(str);

@@ -86,9 +86,8 @@
 													<span>튜터</span> <span class="post"> ${recent.tp_title}
 													</span>
 													<span class="fas fa-book"> ${recent.tt_subject} </span>
-													<span class="fas fa-comment-dots"> ${recent.tp_accu_answer}
-													</span> <span class="fas fa-star"> ${recent.tp_average}
-													</span>
+													<span class="fas fa-comment-dots"> ${recent.tp_accu_answer}</span> 
+													<span class="fas fa-star"> ${recent.tp_average}</span>
 												</div>
 												<div class="more">
 													<a href="tutoring?num=${recent.tp_number}" class="fas fa-arrow-pointer"> 과외신청 바로가기</a>

@@ -166,15 +166,17 @@
 								</div>
 							</c:if>
 						</div>
+						<p style="height: 20px;"></p>
 						<div class="ask_content">${_ONE_TB_VO_.tb_content}</div>
 					</div>
 					
 					
-						<c:if test="${__LOGIN_USER__.user_email eq _ONE_TB_VO_.user_email}">
+						<c:if test="${__LOGIN_USER__.user_email eq _ONE_TB_VO_.user_email || _TP_NUMBER_ eq _ONE_TB_VO_.tp_number}">
 						
 							<!-- 채팅 입력 -->
 							<div class="col-6">
-								<p style="height: 30px;"></p>
+								<p style="height: 50px;"></p>
+								<span class="bi bi-chat-right-dots fs-4 comment_icon"></span>
 								<label><h3><b>Chatting</b></h3></label>
 							</div>
 							<div>

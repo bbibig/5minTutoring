@@ -39,15 +39,9 @@
 								<p class="text-secondary mb-1">${_TUTOR_INFO_.tp_title}</p>
 							</div>
 							<div class="emblem d-flex flex-row">
-								<div class="emblem-circle rounded-circle ">
-									<br>대표과목<br> ${_TUTOR_INFO_.tt_subject}
-								</div>
-								<div class="emblem-circle rounded-circle ">
-									<br>누적답변<br> ${_TUTOR_INFO_.tp_accu_answer}
-								</div>
-								<div class="emblem-circle rounded-circle ">
-									<br>평점<br> ${_TUTOR_INFO_.tp_average}
-								</div>
+								<span class="fas fa-book"> ${_TUTOR_INFO_.tt_subject} &nbsp</span>
+								<span class="fas fa-comment-dots"> ${_TUTOR_INFO_.tp_accu_answer} &nbsp</span> 
+								<span class="fas fa-star">${_TUTOR_INFO_.tp_average} </span><br>
 							</div>
 						</div>
 						<!-- nav bar -->
