@@ -1,32 +1,46 @@
 
-## 프로젝트명
+# 과외 플랫폼 웹 애플리케이션 [5분과외]
 
 >5 MINTUTORING(5분과외)
 
+
+## :pushpin:서비스 개요
+
+>사교육은 부담스럽고 빠른 피드백이 필요한 학생, 다양한 선생님에게 과외 받고 싶은 학생과
+>재능을 나누고 수익도 얻고 싶은 멘토를 위한 과외 플랫폼.
+
+###'질문하기'
+질문과 답변, 댓글로 소통할 수 있습니다. 
+
+###'과외받기' 
+실시간 채팅을 통해 원하는 답을 얻을 수 있습니다.  
+
+
 ## :pushpin:사용 기술
 
-- OS : Window
-- Back-End : Java(11), Spring Framework, Mybatis 
-- Front-End : HTML5, CSS3, JavaScript, Jquery
-- DB : Oracle Cloud
-- IDE : Ecilpse 2022-09, SQL Developer 
-- WAS : Apache Tomcat9
+- OS : Windows
+- Language : Java(JDK 11), HTML5 / CSS3, JavaScript, JSP
+- Framework : Spring Framework 5.3.22, MyBatis 3.5.10, HikariCP 5.0.1, JUnit 5.8.2, Bootstrap 5.1.3
+- WAS : Apache Tomcat 9.0
+- DB : Oracle Cloud ATP 19c
+- IDE : Eclipse JEE (2021-12), Visual Studio Code 1.71.0, SQL Developer 21.4.3
+- Library : Jquery 3.6.0, JSTL 1.2, Jackson 2.13.3, Log4jdbc 1.16
+- API : RESTful API, CKEditor 4.19.1, Login API (KAKAO, NAVER), I'mport API (결제 API)
 
-## :pushpin: 프로젝트 내용 - 기능 
 
-### 1. 학생과 멘토들의 커뮤니티 
-사교육은 부담스럽고 빠른 피드백이 필요한 학생, 나만의 선생님에게 필요한 답만 듣고 싶은 학생,
+## :pushpin:Screenshots
+![image](https://user-images.githubusercontent.com/97965594/194355065-c0565dd3-ac0b-48a8-b44d-8416cf017122.png)
 
-재능을 나누고 수익도 얻고 싶은, 멘토가 되고 싶은 대학생이 
+![image](https://user-images.githubusercontent.com/97965594/194355271-4b5686ea-dd40-4392-945e-d54d1880c89f.png)
 
-커뮤니티 게시판과 질문게시판으로 원하는 질문과 답을 얻으며 소통
 
-### 2. 프로필과 마이페이지 기능 
 
-학생과 튜터의 프로필 기능, 
+## :pushpin:개선사항
+프로필 사진 로딩 속도 해결 필요
+채팅 내용 저장 방법 고려
+Quartz 이용해 '일정 시간 이후에도 답변 없는 질문' 삭제 작업 추가
 
-마이페이지의 결제내역과 나의 질문, 답변글을 확인 
 
-### 3. 관리자의 기능
 
-회원가입과 로그인, 회원관리와 등급, 게시판을 관리
+
+
