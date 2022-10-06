@@ -10,7 +10,6 @@
 >재능을 나누고 수익도 얻고 싶은 멘토를 위한 과외 플랫폼.
 
 <br>
-<br>
 
 - '질문하기'
 질문과 답변, 댓글로 소통할 수 있습니다. 
@@ -32,13 +31,14 @@
 - Library : Jquery 3.6.0, JSTL 1.2, Jackson 2.13.3, Log4jdbc 1.16
 - API : RESTful API, CKEditor 4.19.1, Login API (KAKAO, NAVER), I'mport API (결제 API)
 
+<br><br>
 
 ## :pushpin:Screenshots
 ![image](https://user-images.githubusercontent.com/97965594/194355065-c0565dd3-ac0b-48a8-b44d-8416cf017122.png)
 
 ![image](https://user-images.githubusercontent.com/97965594/194355271-4b5686ea-dd40-4392-945e-d54d1880c89f.png)
 
-
+<br><br>
 
 ## :pushpin:개선사항
 - 프로필 사진 로딩 속도 해결 필요
